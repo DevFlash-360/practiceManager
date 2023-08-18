@@ -11,7 +11,7 @@ class CaseWorkflowForm(FormBase):
         self.practice_area = LookupInput(name='practice_area', label='Practice Area', model='PracticeArea', 
                                          on_change=self.update_workflow_name)
         
-        workflow_item_view = {
+        workflow_items_view = {
             
         }
         self.items = SubformGrid(name='items', label='Items', model='CaseWorkflowItem')
