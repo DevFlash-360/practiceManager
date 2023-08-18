@@ -1,4 +1,5 @@
 from AnvilFusion.components.FormBase import FormBase, SubformGrid
+from AnvilFusion.components.SubformGrid import SubformGrid
 from AnvilFusion.components.FormInputs import *
 
 
