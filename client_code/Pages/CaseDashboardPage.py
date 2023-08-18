@@ -1,4 +1,5 @@
-from ..Pages import *
+from anvil.js.window import jQuery, ej
+import uuid
 
 
 class CaseDashboardPage:
