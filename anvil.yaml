@@ -17,7 +17,7 @@ services:
 - source: /runtime/services/anvil/secrets.yml
   client_config: {}
   server_config: {}
-startup: {type: module, module: dev}
+startup: {type: form, module: app.HomePage}
 package_name: practiceMANAGER
 allow_embedding: false
 name: practiceMANAGER
