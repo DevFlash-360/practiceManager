@@ -1,4 +1,4 @@
-from AnvilFusion.components.FormBase import FormBase
+from AnvilFusion.components.FormBase import FormBase, POPUP_WIDTH_COL3
 from AnvilFusion.components.SubformGrid import SubformGrid
 from AnvilFusion.components.FormInputs import *
 
@@ -10,15 +10,13 @@ class CaseWorkflowForm(FormBase):
         self.name = TextInput(name='name', label='Name')
         self.practice_area = LookupInput(name='practice_area', label='Practice Area', model='PracticeArea', 
                                          on_change=self.update_workflow_name)
-        
         workflow_items_view = {
             
         }
         self.items = SubformGrid(name='items', label='Items', model='CaseWorkflowItem')
         
         fields = [self.name, self.practice_area, self.items]
-        
-        super().__init__(model='CaseWorkflow', fields=fields, **kwargs)
+        super().__init__(model='CaseWorkflow', fields=fields, width=POPUP_WIDTH_COL3, **kwargs)
         
         
     def update_workflow_name(self, args):
