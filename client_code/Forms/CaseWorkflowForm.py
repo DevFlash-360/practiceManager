@@ -1,6 +1,5 @@
 from AnvilFusion.components.FormBase import FormBase, SubformGrid
 from AnvilFusion.components.FormInputs import *
-from .. import Forms
 
 
 class CaseWorkflowForm(FormBase):
@@ -15,8 +14,6 @@ class CaseWorkflowForm(FormBase):
             
         }
         self.items = SubformGrid(name='items', label='Items', model='CaseWorkflowItem')
-        
-        
         
         fields = [self.name, self.practice_area, self.items]
         
