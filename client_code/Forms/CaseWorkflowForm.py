@@ -13,7 +13,7 @@ class CaseWorkflowForm(FormBase):
         workflow_items_view = {
             
         }
-        self.items = SubformGrid(name='items', label='Items', model='CaseWorkflowItem')
+        self.items = SubformGrid(name='items', label='Items', model='CaseWorkflowItem', popup_container_id=kwargs.get('target'))
         
         fields = [self.name, self.practice_area, self.items]
         super().__init__(model='CaseWorkflow', fields=fields, width=POPUP_WIDTH_COL3, **kwargs)
