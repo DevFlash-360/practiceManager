@@ -2,3 +2,8 @@
 *.pyo
 __pycache__
 .anvil-data
+.vscode
+.env
+.DS_Store
+*/*.DS_Store
+```
