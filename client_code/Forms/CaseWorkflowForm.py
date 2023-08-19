@@ -22,7 +22,7 @@ class CaseWorkflowForm(FormBase):
         
         
     def update_workflow_name(self, args):
-        if args['value'] is None:
+        if args['value'] is None and sela.name.value == self.practice_area.value['name']:
             self.name.value = None
         else:
             self.name.value = self.practice_area.value['name']
