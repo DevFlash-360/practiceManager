@@ -18,6 +18,7 @@ class CaseWorkflowForm(FormBase):
         
         fields = [self.name, self.practice_area, self.items]
         super().__init__(model='CaseWorkflow', fields=fields, width=POPUP_WIDTH_COL3, **kwargs)
+        self.fullscreen = True
         
         
     def update_workflow_name(self, args):
