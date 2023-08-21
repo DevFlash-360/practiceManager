@@ -31,5 +31,7 @@ class CaseWorkflowForm(FormBase):
         if args['value'] is None:
             print(self.name.value, self.practice_area.value, args['value'])
             self.name.value = None
+            self.items.hide()
         else:
             self.name.value = self.practice_area.value['name']
+            self.items.show()
