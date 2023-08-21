@@ -21,6 +21,11 @@ class CaseWorkflowForm(FormBase):
         self.fullscreen = True
         
         
+    def form_open(self, args):
+        super().form_open(args)
+        self.items.hide()
+    
+    
     def update_workflow_name(self, args):
         # if args['value'] is None and self.name.value == self.practice_area.value['name']:
         if args['value'] is None:
