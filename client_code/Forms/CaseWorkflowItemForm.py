@@ -6,7 +6,7 @@ class CaseWorkflowItemForm(FormBase):
     def __init__(self, **kwargs):
         print('CaseWorkflowItemForm')
         
-        self.practice_area = LookupInput(name='practice_area', label='Practice Area', model='PracticeArea')
+        self.practice_area = LookupInput(name='practice_area', label='Practice Area', model='PracticeArea', enabled=False)
         self.type = RadioButtonInput(name='type', label='Type', options=['Task', 'Event'], value='Task')
         self.activity = LookupInput(name='activity', label='Activity', model='Activity')
         self.related_task = LookupInput(name='related_task', label='Related Task', model='CaseWorkflowItem', text_field='item_name')
