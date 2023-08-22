@@ -5,6 +5,7 @@ from AnvilFusion.components.FormInputs import *
 class CheckForm(FormBase):
     def __init__(self, **kwargs):
         print('CheckForm')
+        kwargs['model'] = 'Check'
         self.check_number = TextInput(name='check_number', label='Check Number')
         self.date = DateInput(name='date', label='Date')
         self.payee = LookupInput(name='payee', label='Payee', model='Contact', text_field='full_name')
@@ -33,4 +34,4 @@ class CheckForm(FormBase):
             }
         }
 
-        super().__init__(model='Check', fields=fields, width=POPUP_WIDTH_COL1, validation=validation, **kwargs)
+        super().__init__(fields=fields, width=POPUP_WIDTH_COL1, validation=validation, **kwargs)

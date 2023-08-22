@@ -5,6 +5,7 @@ from AnvilFusion.components.FormInputs import *
 class CaseWorkflowItemForm(FormBase):
     def __init__(self, **kwargs):
         print('CaseWorkflowItemForm')
+        kwargs['model'] = 'CaseWorkflowItem'
         
         self.practice_area = LookupInput(name='practice_area', label='Practice Area', model='PracticeArea', enabled=False)
         self.type = RadioButtonInput(name='type', label='Type', options=['Task', 'Event'], value='Task')
@@ -29,4 +30,4 @@ class CaseWorkflowItemForm(FormBase):
             }
         ]
         
-        super().__init__(model='CaseWorkflowItem', sections=sections, width=POPUP_WIDTH_COL2, **kwargs)
+        super().__init__(sections=sections, width=POPUP_WIDTH_COL2, **kwargs)

@@ -7,6 +7,7 @@ class TaskForm(FormBase):
     def __init__(self, **kwargs):
 
         print('TaskForm')
+        kwargs['model'] = 'Task'
 
         self.activity = LookupInput(model='Activity', name='activity', label='Task Name')
         self.notes = MultiLineInput(name='notes', label='Notes', rows=5)
@@ -40,7 +41,7 @@ class TaskForm(FormBase):
             ]}
         ]
 
-        super().__init__(model='Task', sections=sections, width=POPUP_WIDTH_COL2, **kwargs)
+        super().__init__(sections=sections, width=POPUP_WIDTH_COL2, **kwargs)
 
     def form_open(self, args):
         super().form_open(args)

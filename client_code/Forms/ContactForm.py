@@ -8,6 +8,7 @@ class ContactForm(FormBase):
 
     def __init__(self, **kwargs):
         print('ContactForm')
+        kwargs['model'] = 'Contact'
         self.first_name = TextInput(name='name', label='Contact Name', save=False)
         self.last_name = TextInput(name='last_name', label='Last Name', save=False)
         self.contact_group = LookupInput(model='ContactGroup', name='contact_group', label='Contact Group',
@@ -38,4 +39,4 @@ class ContactForm(FormBase):
             ]}
         ]
 
-        super().__init__(model='Contact', sections=sections, width=POPUP_WIDTH_COL3, **kwargs)
+        super().__init__(sections=sections, width=POPUP_WIDTH_COL3, **kwargs)

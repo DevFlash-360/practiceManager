@@ -6,6 +6,7 @@ from datetime import datetime, timedelta
 class TimesheetForm(FormBase):
     def __init__(self, **kwargs):
         print('TimesheetForm')
+        kwargs['model'] = 'Timesheet'
 
         self.staff = LookupInput(name='staff', label='Staff', model='Staff', text_field='full_name',
                                  value=constants.pm_logged_user['staff'])
@@ -27,7 +28,7 @@ class TimesheetForm(FormBase):
             ]}
         ]
 
-        super().__init__(model='Timesheet', sections=sections, width=POPUP_WIDTH_COL2, **kwargs)
+        super().__init__(sections=sections, width=POPUP_WIDTH_COL2, **kwargs)
 
     def form_open(self, args):
         super().form_open(args)

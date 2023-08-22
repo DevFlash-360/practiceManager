@@ -21,6 +21,7 @@ INVOICE_STATUS_OPTIONS = [
 class InvoiceForm(FormBase):
     def __init__(self, **kwargs):
         print('InvoiceForm')
+        kwargs['model'] = 'Invoice'
         self.invoice_number = NumberInput(name='invoice_number', label='Invoice Number')
         self.case = LookupInput(name='case', label='Case', midel='Case', text_field='case_name')
         self.bill_to = LookupInput(name='bill_to', label='Bill To', model='Contact', text_field='full_name')
@@ -92,5 +93,5 @@ class InvoiceForm(FormBase):
             {'name': 'payments', 'label': 'Payments', 'rows': [[self.payments]]},
         ]
 
-        super().__init__(model='Invoice', sections=sections, width=POPUP_WIDTH_COL3, **kwargs)
+        super().__init__(sections=sections, width=POPUP_WIDTH_COL3, **kwargs)
         self.fullscreen = True

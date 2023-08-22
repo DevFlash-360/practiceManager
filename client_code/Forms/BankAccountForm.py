@@ -4,6 +4,7 @@ from AnvilFusion.components.FormInputs import *
 class BankAccountForm(FormBase):
     def __init__(self, **kwargs):
         print('BankAccountForm')
+        kwargs['model'] = 'BankAccount'
         self.account_type = LookupInput(model='BankAccountType', name='account_type', label='Type', select='single')
         self.bank_name = TextInput(name='bank_name', label='Bank Name')
         self.routing_number = TextInput(name='routing_number', label='Routing Number')
@@ -26,7 +27,7 @@ class BankAccountForm(FormBase):
             self.check_start_number,
         ]
 
-        super().__init__(model='BankAccount', fields=fields, width=POPUP_WIDTH_COL1, **kwargs)
+        super().__init__(fields=fields, width=POPUP_WIDTH_COL1, **kwargs)
 
     def form_open(self, args):
         super().form_open(args)

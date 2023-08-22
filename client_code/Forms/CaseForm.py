@@ -12,6 +12,8 @@ class CaseForm(FormBase):
     def __init__(self, **kwargs):
 
         print('CaseForm')
+        kwargs['model'] = 'Case'
+        
         self.auto_generate_case_name = CheckboxInput(name='auto_generate_case_name', label='Auto Generate Case Name',
                                                      save=False)
         self.case_name = TextInput(name='case_name', label='Case Name')
@@ -106,7 +108,7 @@ class CaseForm(FormBase):
             ]},
         ]
 
-        super().__init__(model='Case', tabs=tabs, width=POPUP_WIDTH_COL3, **kwargs)
+        super().__init__(tabs=tabs, width=POPUP_WIDTH_COL3, **kwargs)
         self.fullscreen = True
 
     def form_open(self, args):

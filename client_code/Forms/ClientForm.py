@@ -4,6 +4,7 @@ from AnvilFusion.components.FormInputs import *
 
 class ClientForm(FormBase):
     def __init__(self, **kwargs):
+        kwargs['model'] = 'Client'
         self.is_individual = CheckboxInput(name='is_individual', label='Client is an individual', value=True,
                                            enabled=False, on_change=self.show_client_details)
         self.client_name = TextInput(name='client_name', label='Client Name')
@@ -20,7 +21,7 @@ class ClientForm(FormBase):
             ]},
         ]
 
-        super().__init__(model='Client', sections=sections, width=POPUP_WIDTH_COL3, **kwargs)
+        super().__init__(sections=sections, width=POPUP_WIDTH_COL3, **kwargs)
 
     def form_open(self, args):
         super().form_open(args)

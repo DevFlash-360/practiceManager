@@ -8,6 +8,7 @@ from datetime import datetime, date
 class TimeEntryForm(FormBase):
 
     def __init__(self, **kwargs):
+        kwargs['model'] = 'TimeEntry'
 
         logged_staff = Staff.get_by('work_email', AppEnv.logged_user.get('email')) if AppEnv.logged_user else None
         self.case = LookupInput(name='case', label='Case', model='Case', text_field='case_name')
@@ -36,7 +37,7 @@ class TimeEntryForm(FormBase):
             ]}
         ]
 
-        super().__init__(model='TimeEntry', sections=sections, width=POPUP_WIDTH_COL3, **kwargs)
+        super().__init__(sections=sections, width=POPUP_WIDTH_COL3, **kwargs)
 
     def form_open(self, args):
         super().form_open(args)

@@ -6,6 +6,7 @@ from .. import Forms
 class EntityForm(FormBase):
     def __init__(self, **kwargs):
         print('EntityForm')
+        kwargs['model'] = 'Entity'
         self.name = TextInput(name='name', label='Name')
         self.entity_type = LookupInput(model='EntityType', name='entity_type', label='Entity Type')
         self.phone = TextInput(name='phone', label='Phone')
@@ -26,4 +27,4 @@ class EntityForm(FormBase):
             self.primary_contact,
         ]
 
-        super().__init__(model='Entity', fields=fields, width=POPUP_WIDTH_COL2, **kwargs)
+        super().__init__(fields=fields, width=POPUP_WIDTH_COL2, **kwargs)

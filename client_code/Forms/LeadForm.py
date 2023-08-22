@@ -10,6 +10,7 @@ FEE_TYPE_LITIGATION = ('Contingency', 'Hybrid Flat/Contingency', 'Hybrid Hourly/
 class LeadForm(FormBase):
 
     def __init__(self, **kwargs):
+        kwargs['model'] = 'Lead'
 
         schedule_activity_fields = [
             TextInput(name='activity', label='Activity'),
@@ -149,7 +150,7 @@ class LeadForm(FormBase):
             ]},
         ]
 
-        super().__init__(model='Lead', tabs=tabs, subforms=subforms, width=POPUP_WIDTH_COL3, **kwargs)
+        super().__init__(tabs=tabs, subforms=subforms, width=POPUP_WIDTH_COL3, **kwargs)
         self.fullscreen = True
 
     def after_open(self):

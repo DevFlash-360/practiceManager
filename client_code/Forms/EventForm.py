@@ -9,6 +9,7 @@ class EventForm(FormBase):
     def __init__(self, **kwargs):
 
         print('EventForm')
+        kwargs['model'] = 'Event'
         self.case = LookupInput(name='case', label='Case', model='Case', text_field='case_name')
         self.no_case = CheckboxInput(name='no_case', label='Event is not linked to a Case',
                                      on_change=self.toggle_case)
@@ -56,7 +57,7 @@ class EventForm(FormBase):
             }
         ]
 
-        super().__init__(model='Event', sections=sections, width=POPUP_WIDTH_COL3, **kwargs)
+        super().__init__(sections=sections, width=POPUP_WIDTH_COL3, **kwargs)
 
     def toggle_case(self, args):
         if self.no_case.value is True:

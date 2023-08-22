@@ -30,6 +30,7 @@ PAYMENT_STATUS_OPTIONS = [
 class PaymentForm(FormBase):
     def __init__(self, **kwargs):
         print('PaymentForm')
+        kwargs['model'] = 'Payment'
         self.case = LookupInput(name='case', label='Case', model='Case', text_field='case_name')
         self.invoice = LookupInput(name='invoice', label='Invoice', model='Invoice', text_field='invoice_number')
         self.bank_account = LookupInput(model='BankAccount', name='bank_account', label='Bank Account')
@@ -48,4 +49,4 @@ class PaymentForm(FormBase):
             ]}
         ]
 
-        super().__init__(model='Payment', sections=sections, width=POPUP_WIDTH_COL2, **kwargs)
+        super().__init__(sections=sections, width=POPUP_WIDTH_COL2, **kwargs)

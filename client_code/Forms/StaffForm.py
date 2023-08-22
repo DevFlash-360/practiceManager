@@ -82,7 +82,8 @@ PM_EMPLOYMENT_STATUS_LIST = [
 class StaffForm(FormBase):
     def __init__(self, **kwargs):
         print('StaffForm')
-        # generale information
+        kwargs['model'] = 'Staff'
+        # general information
         self.branch = LookupInput(model='Branch', name='branch', label='Branch')
         self.first_name = TextInput(name='first_name', label='First Name')
         self.last_name = TextInput(name='last_name', label='Last Name')
@@ -206,7 +207,7 @@ class StaffForm(FormBase):
             ]},
         ]
 
-        super().__init__(model='Staff', tabs=tabs, width=POPUP_WIDTH_COL3, **kwargs)
+        super().__init__(tabs=tabs, width=POPUP_WIDTH_COL3, **kwargs)
         self.fullscreen = True
 
     def field_rules(self, args):

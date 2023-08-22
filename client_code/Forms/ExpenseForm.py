@@ -15,6 +15,7 @@ EXPENSE_STATUS_OPTIONS = [
 class ExpenseForm(FormBase):
     def __init__(self, **kwargs):
         print('ExpenseForm')
+        kwargs['model'] = 'Expense'
         self.date = DateInput(name='date', label='Date', value=datetime.date.today())
         self.activity = LookupInput(model='Activity', name='activity', label='Activity')
         self.description = MultiLineInput(name='description', label='Description')
@@ -42,7 +43,7 @@ class ExpenseForm(FormBase):
             ]}
         ]
 
-        super().__init__(model='Expense', sections=sections, width=POPUP_WIDTH_COL2, **kwargs)
+        super().__init__(sections=sections, width=POPUP_WIDTH_COL2, **kwargs)
 
     def form_open(self, args):
         super().form_open(args)
