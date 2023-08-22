@@ -6,7 +6,7 @@ from AnvilFusion.components.FormInputs import *
 class CaseWorkflowForm(FormBase):
     def __init__(self, **kwargs):
         print('CaseWorkflowForm')
-        print(kwargs)
+        kwargs['model'] = 'CaseWorkflow'
         
         self.name = TextInput(name='name', label='Name')
         self.practice_area = LookupInput(name='practice_area', label='Practice Area', model='PracticeArea', 
@@ -20,7 +20,7 @@ class CaseWorkflowForm(FormBase):
                                  )
         
         fields = [self.name, self.practice_area, self.items]
-        super().__init__(model='CaseWorkflow', fields=fields, width=POPUP_WIDTH_COL3, **kwargs)
+        super().__init__(fields=fields, width=POPUP_WIDTH_COL3, **kwargs)
         self.fullscreen = True
         
         
