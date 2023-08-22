@@ -15,8 +15,8 @@ class CaseWorkflowForm(FormBase):
             
         }
         self.items = SubformGrid(name='items', label='Items', model='CaseWorkflowItem', 
-                                 popup_container_id=kwargs.get('target'),
-                                 popup_data={'practice_area': self.practice_area.value},
+                                 form_container_id=kwargs.get('target'),
+                                 form_data={'practice_area': self.practice_area.value},
                                  )
         
         fields = [self.name, self.practice_area, self.items]
@@ -38,4 +38,4 @@ class CaseWorkflowForm(FormBase):
         else:
             self.name.value = self.practice_area.value['name']
             self.items.show()
-        self.items.popup_data={'practice_area': self.practice_area.value}
+        self.items.form_data={'practice_area': self.practice_area.value}
