@@ -226,7 +226,7 @@ class CaseWorkflowItem:
     
     @staticmethod
     def get_item_name(args):
-        return f"{args['case_workflow']} - {args['activity']}"
+        return f"{args['case_workflow']['name']} - {args['activity']['name']}"
     item_name = Computed(('case_workflow', 'activity'), 'get_item_name')
 
 
