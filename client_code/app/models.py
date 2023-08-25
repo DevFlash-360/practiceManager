@@ -205,7 +205,7 @@ class CaseWorkflow:
     
     name = Attribute(field_type=types.FieldTypes.SINGLE_LINE)
     practice_area = Relationship('PracticeArea')
-    items = Relationship('CaseWorkflowItem', with_many=True)
+    # items = Relationship('CaseWorkflowItem', with_many=True)
 
 
 @model_type
