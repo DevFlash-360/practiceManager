@@ -27,7 +27,7 @@ class CaseWorkflowForm(FormBase):
         
     def form_open(self, args):
         super().form_open(args)
-        self.items.hide()
+        # self.items.hide()
     
     
     def update_workflow_name(self, args):
