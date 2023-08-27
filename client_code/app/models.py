@@ -73,14 +73,14 @@ class appErrorLog:
 
 
 @model_type
-class appGridViews:
+class appGridView:
     name = Attribute(field_type=types.FieldTypes.SINGLE_LINE)
     config = Attribute(field_type=types.FieldTypes.OBJECT)
     permissions = Attribute(field_type=types.FieldTypes.OBJECT)
 
 
 @model_type
-class Files:
+class File:
     name = Attribute(field_type=types.FieldTypes.SINGLE_LINE)
     mime_type = Attribute(field_type=types.FieldTypes.SINGLE_LINE)
     size = Attribute(field_type=types.FieldTypes.NUMBER)
