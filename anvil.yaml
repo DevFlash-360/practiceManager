@@ -138,10 +138,6 @@ db_schema:
     - name: priority
       admin_ui: {}
       type: string
-    - name: practice_area
-      admin_ui: {}
-      type: link_single
-      target: practice_area
     - name: notes
       admin_ui: {}
       type: string
