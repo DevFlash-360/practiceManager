@@ -706,6 +706,38 @@ db_schema:
       admin_ui: {width: 200}
       type: link_single
       target: contact
+  app_grid_view:
+    title: app Grid View
+    client: none
+    server: full
+    columns:
+    - name: permissions
+      admin_ui: {width: 200}
+      type: simpleObject
+    - name: config
+      admin_ui: {width: 200}
+      type: simpleObject
+    - name: uid
+      admin_ui: {width: 200}
+      type: string
+    - name: name
+      admin_ui: {width: 200}
+      type: string
+    - name: created_time
+      admin_ui: {width: 200}
+      type: datetime
+    - name: updated_time
+      admin_ui: {width: 200}
+      type: datetime
+    - name: tenant_uid
+      admin_ui: {width: 200}
+      type: string
+    - name: updated_by
+      admin_ui: {width: 200}
+      type: string
+    - name: created_by
+      admin_ui: {width: 200}
+      type: string
   staff_group:
     title: Staff Group
     client: none
@@ -1506,38 +1538,6 @@ db_schema:
       type: link_single
       target: contact
     - name: email
-      admin_ui: {width: 200}
-      type: string
-  app_grid_views:
-    title: app Grid Views
-    client: none
-    server: full
-    columns:
-    - name: permissions
-      admin_ui: {width: 200}
-      type: simpleObject
-    - name: config
-      admin_ui: {width: 200}
-      type: simpleObject
-    - name: uid
-      admin_ui: {width: 200}
-      type: string
-    - name: name
-      admin_ui: {width: 200}
-      type: string
-    - name: created_time
-      admin_ui: {width: 200}
-      type: datetime
-    - name: updated_time
-      admin_ui: {width: 200}
-      type: datetime
-    - name: tenant_uid
-      admin_ui: {width: 200}
-      type: string
-    - name: updated_by
-      admin_ui: {width: 200}
-      type: string
-    - name: created_by
       admin_ui: {width: 200}
       type: string
   entity_type:
