@@ -212,7 +212,6 @@ class CaseWorkflowItem:
     _title = 'item_name'
     
     case_workflow = Relationship('CaseWorkflow')
-    practice_area = Relationship('PracticeArea')
     type = Attribute(field_type=types.FieldTypes.ENUM_SINGLE)
     activity = Relationship('Activity')
     related_task = Relationship('CaseWorkflowItem')

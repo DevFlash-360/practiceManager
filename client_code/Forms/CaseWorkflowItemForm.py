@@ -7,7 +7,7 @@ class CaseWorkflowItemForm(FormBase):
         print('CaseWorkflowItemForm')
         kwargs['model'] = 'CaseWorkflowItem'
         
-        self.practice_area = LookupInput(name='practice_area', label='Practice Area', model='PracticeArea', enabled=False)
+        # self.practice_area = LookupInput(name='practice_area', label='Practice Area', model='PracticeArea', enabled=False)
         self.type = RadioButtonInput(name='type', label='Type', options=['Task', 'Event'], value='Task')
         self.activity = LookupInput(name='activity', label='Activity', model='Activity')
         self.related_task = LookupInput(name='related_task', label='Related Task', model='CaseWorkflowItem', text_field='item_name')
@@ -24,7 +24,7 @@ class CaseWorkflowItemForm(FormBase):
             {
                 'name': 'task_details',
                 'cols': [
-                    [self.practice_area, self.type, self.activity, self.assigned_to, self.notes, self.documents],
+                    [self.type, self.activity, self.assigned_to, self.notes, self.documents],
                     [self.due_date_base, self.related_task, self.before_after, self.duration, self.priority],
                 ]
             }
