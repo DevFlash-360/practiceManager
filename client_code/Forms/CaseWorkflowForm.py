@@ -20,8 +20,15 @@ class CaseWorkflowForm(FormBase):
                                  form_data={'practice_area': self.practice_area.value},
                                  )
         
-        fields = [self.name, self.practice_area, self.items]
-        super().__init__(fields=fields, width=POPUP_WIDTH_COL3, **kwargs)
+        sections = [
+            {
+                'name': '_', 'rows': [
+                    [ self.practice_area, self.name],
+                    [self.items]
+                ]
+            }
+        ]
+        super().__init__(sections=sections, width=POPUP_WIDTH_COL3, **kwargs)
         self.fullscreen = True
         
         
