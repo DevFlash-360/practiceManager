@@ -12,18 +12,25 @@ class CaseWorkflowForm(FormBase):
         self.practice_area = LookupInput(name='practice_area', label='Practice Area', model='PracticeArea', 
                                          on_change=self.update_workflow_name)
         workflow_items_view = {
-            
+            'model': 'CaseWorkflowItem',
+            'columns': [
+                {'name': 'type', 'label': 'Type', 'width': '10%'},
+                {'name': 'activity', 'label': 'Activity', 'width': '25%'},
+                {'name': 'notes', 'label': 'Notes', 'width': '40%'},
+                {'name': 'assigned_to', 'label': 'Assigned To', 'width': '25%'},
+            ],
         }
         self.items = SubformGrid(name='items', label='Items', model='CaseWorkflowItem',
                                  link_model='CaseWorkflow', link_field='case_workflow', 
                                  form_container_id=kwargs.get('target'),
                                  form_data={'practice_area': self.practice_area.value},
+                                 view_config=workflow_items_view,
                                  )
         
         sections = [
             {
                 'name': '_', 'rows': [
-                    [ self.practice_area, self.name],
+                    [ self.practice_area, self.name, None],
                     [self.items]
                 ]
             }
