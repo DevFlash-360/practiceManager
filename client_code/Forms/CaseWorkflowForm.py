@@ -23,7 +23,7 @@ class CaseWorkflowForm(FormBase):
         self.items = SubformGrid(name='items', label='Items', model='CaseWorkflowItem',
                                  link_model='CaseWorkflow', link_field='case_workflow', 
                                  form_container_id=kwargs.get('target'),
-                                 form_data={'practice_area': self.practice_area.value},
+                                 # form_data={'practice_area': self.practice_area.value},
                                  view_config=workflow_items_view,
                                  )
         
