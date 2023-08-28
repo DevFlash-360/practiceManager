@@ -211,7 +211,7 @@ class CaseWorkflow:
         print('get_items', args)
         items = []
         if args.get('uid', None):
-            items = [item['activity']['name'] for item in CaseWorkflowItem.search({'case_workflow': args['uid']})]
+            items = [item['activity']['name'] for item in CaseWorkflowItem.search(case_workflow=args['uid'])]
         return items
     items = Computed(('uid',), 'get_items')
 
