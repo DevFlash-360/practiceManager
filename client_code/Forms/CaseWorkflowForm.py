@@ -53,4 +53,4 @@ class CaseWorkflowForm(FormBase):
         else:
             self.name.value = self.practice_area.value['name']
             self.items.show()
-        self.items.form_data={'practice_area': self.practice_area.value}
+        # self.items.form_data={'practice_area': self.practice_area.value}
