@@ -206,15 +206,15 @@ class CaseWorkflow:
     name = Attribute(field_type=types.FieldTypes.SINGLE_LINE)
     practice_area = Relationship('PracticeArea')
     
-    @staticmethod
-    def get_items(args):
-        print('get_items', args)
-        if args['uid']:
-            items = [item['activity']['name'] for item in CaseWorkflowItem.search(case_workflow=args['uid'])]
-        else:
-            items = []
-        return items
-    items = Computed(('uid',), 'get_items')
+    # @staticmethod
+    # def get_items(args):
+    #     print('get_items', args)
+    #     if args['uid']:
+    #         items = [item['activity']['name'] for item in CaseWorkflowItem.search(case_workflow=args['uid'])]
+    #     else:
+    #         items = []
+    #     return items
+    # items = Computed(('uid',), 'get_items')
 
 
 @model_type
