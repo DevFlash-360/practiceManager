@@ -224,6 +224,7 @@ class CaseWorkflowItem:
     
     @staticmethod
     def get_item_name(args):
+        print('get_item_name', args)
         workflow = args.get('case_workflow', {}).get('name', '')
         activity = args.get('activity', {}).get('name', '')
         return f"{workflow} - {activity}"
