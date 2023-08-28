@@ -210,11 +210,10 @@ class CaseWorkflow:
     def get_items(args):
         print('get_items', args)
         items = []
-        if args.get('uid', None):
-            case_workflow = CaseWorkflow.get(args['uid'])
-            items = [item['activity']['name'] for item in CaseWorkflowItem.search(case_workflow=case_workflow)]
+        if args.get('_row', None):
+            items = [item['activity']['name'] for item in CaseWorkflowItem.search(case_workflow=args['_row'])]
         return items
-    items = Computed(('uid',), 'get_items')
+    items = Computed(('_row',), 'get_items')
 
 
 @model_type
