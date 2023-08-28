@@ -209,11 +209,12 @@ class CaseWorkflow:
     @staticmethod
     def get_items(args):
         print('get_items', args)
-        items = []
-        if args.get('_row', None):
-            items = [item['activity']['name'] for item in CaseWorkflowItem.search(case_workflow=args['_row'])]
+        if args['uid']:
+            items = [item['activity']['name'] for item in CaseWorkflowItem.search(case_workflow=args['uid'])]
+        else:
+            items = []
         return items
-    items = Computed(('_row',), 'get_items')
+    items = Computed(('uid',), 'get_items')
 
 
 @model_type
