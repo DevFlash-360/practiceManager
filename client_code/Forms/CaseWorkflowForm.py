@@ -14,10 +14,10 @@ class CaseWorkflowForm(FormBase):
         workflow_items_view = {
             'model': 'CaseWorkflowItem',
             'columns': [
-                {'name': 'type', 'label': 'Type', 'width': '10%'},
+                {'name': 'type.name', 'label': 'Type', 'width': '10%'},
                 {'name': 'activity', 'label': 'Activity', 'width': '25%'},
                 {'name': 'notes', 'label': 'Notes', 'width': '40%'},
-                {'name': 'assigned_to', 'label': 'Assigned To', 'width': '25%'},
+                {'name': 'assigned_to.full_name', 'label': 'Assigned To', 'width': '25%'},
             ],
         }
         self.items = SubformGrid(name='items', label='Items', model='CaseWorkflowItem',
