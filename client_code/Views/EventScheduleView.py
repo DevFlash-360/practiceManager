@@ -1,17 +1,11 @@
-import anvil.server
 from anvil.tables import query as q
-import anvil.js
 from anvil.js.window import ej, jQuery, Date, XMLHttpRequest, Object
-
-from .. import app
-from ..app.constants import *
-from ..orm_client.model import *
-from .. import Forms
-
-import string
+from AnvilFusion.tools.utils import datetime_js_to_py
+from ..app.models import Event
+from ..Forms.EventForm import EventForm
+from datetime import datetime, timedelta
 import uuid
 import json
-from datetime import datetime, timedelta
 
 PM_SCHEDULE_HEIGHT_OFFSET = 35
 PM_SCHEDULE_DEFAULT_VIEWS = [
@@ -132,11 +126,11 @@ class EventScheduleView:
                     event = Event.get(event_uid)
                 else:
                     action = 'add'
-                    start_time = app.lib.datetime_js_to_py(args.data.start_time)
+                    start_time = datetime_js_to_py(args.data.start_time)
                     end_time = start_time + timedelta(hours=1)
                     event = Event(start_time=start_time, end_time=end_time)
-                editor = Forms.EventForm(data=event, action=action, target=self.container_id,
-                                         update_source=self.update_schedule)
+                editor = EventForm(data=event, action=action, target=self.container_id,
+                                   update_source=self.update_schedule)
                 editor.form_show()
         elif args.type == 'QuickInfo':
             # print('POPUP', args.data)
@@ -153,8 +147,8 @@ class EventScheduleView:
             changed_event = args.data
             # event = self.db_data[changed_event.uid]
             event = Event.get(changed_event.uid)
-            event['start_time'] = app.lib.datetime_js_to_py(changed_event.start_time)
-            event['end_time'] = app.lib.datetime_js_to_py(changed_event.end_time)
+            event['start_time'] = datetime_js_to_py(changed_event.start_time)
+            event['end_time'] = datetime_js_to_py(changed_event.end_time)
             event.save()
             self.schedule.refreshEvents()
 
