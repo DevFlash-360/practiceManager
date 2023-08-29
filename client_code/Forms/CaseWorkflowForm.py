@@ -23,7 +23,6 @@ class CaseWorkflowForm(FormBase):
         self.items = SubformGrid(name='items', label='Tasks and Activities', model='CaseWorkflowItem',
                                  link_model='CaseWorkflow', link_field='case_workflow', 
                                  form_container_id=kwargs.get('target'),
-                                 # form_data={'practice_area': self.practice_area.value},
                                  view_config=workflow_items_view,
                                  )
         
@@ -44,7 +43,6 @@ class CaseWorkflowForm(FormBase):
     
     
     def update_workflow_name(self, args):
-        # if args['value'] is None and self.name.value == self.practice_area.value['name']:
         print('update_workflow_name', args)
         if args['value'] is None:
             print(self.name.value, self.practice_area.value, args['value'])
@@ -53,4 +51,3 @@ class CaseWorkflowForm(FormBase):
         else:
             self.name.value = self.practice_area.value['name']
             self.items.show()
-        # self.items.form_data={'practice_area': self.practice_area.value}

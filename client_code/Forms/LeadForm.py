@@ -1,6 +1,7 @@
-from AnvilFusion.components.FormBase import FormBase, SubformBase, POPUP_WIDTH_COL3
+from AnvilFusion.components.FormBase import FormBase, POPUP_WIDTH_COL3
 from AnvilFusion.components.FormInputs import *
-from .. import Forms
+from AnvilFusion.components.SubformGrid import SubformGrid
+from ..Forms.ContactForm import ContactForm
 
 
 FEE_TYPE_RETAINER = ('Flat Fee', 'Hourly', 'Hybrid Flat/Hourly', 'Hybrid Flat/Contingency')
@@ -12,14 +13,27 @@ class LeadForm(FormBase):
     def __init__(self, **kwargs):
         kwargs['model'] = 'Lead'
 
-        schedule_activity_fields = [
-            TextInput(name='activity', label='Activity'),
-            DateTimeInput(name='due_time', label='Due Time'),
-            TextInput(name='status', label='Status'),
-            CheckboxInput(name='completed', label='Completed', save=False),
-        ]
-        self.schedule_activity = SubformBase(name='lead_activity', fields=schedule_activity_fields,
-                                             model='LeadActivity', link_model='Lead', link_field='lead', save=False)
+        # schedule_activity_fields = [
+        #     TextInput(name='activity', label='Activity'),
+        #     DateTimeInput(name='due_time', label='Due Time'),
+        #     TextInput(name='status', label='Status'),
+        #     CheckboxInput(name='completed', label='Completed', save=False),
+        # ]
+        # self.schedule_activity = SubformBase(name='lead_activity', fields=schedule_activity_fields,
+        #                                      model='LeadActivity', link_model='Lead', link_field='lead', save=False)
+        lead_activities_view = {
+            'model': 'LeadActivity',
+            'columns': [
+                {'name': 'activity', 'label': 'Activity', 'width': '25%'},
+                {'name': 'due_time', 'label': 'Due Time', 'width': '15%'},
+                {'name': 'status', 'label': 'Satus', 'width': '15%'},
+            ],
+        }
+        self.lead_activities = SubformGrid(name='lead_activity', label='Tasks and Activities', model='LeadActivity',
+                                           link_model='Lead', link_field='lead', 
+                                           form_container_id=kwargs.get('target'),
+                                           view_config=lead_activities_view,
+                                           )
 
         self.lead_source = LookupInput(model='LeadSource', name='lead_source', label='Lead Source',
                                        on_change=self.lead_source_referral)
@@ -27,10 +41,10 @@ class LeadForm(FormBase):
                                         text_field='full_name')
 
         self.referred_by = LookupInput(name='referred_by', label='Referred By', model='Contact', text_field='full_name',
-                                       add_item_label='Add new Contact', add_item_form=Forms.ContactForm)
+                                       add_item_label='Add new Contact', add_item_form=ContactForm)
         self.case_contacts = LookupInput(name='case_contacts', label='Contacts', model='Contact',
                                          text_field='full_name', select='multi',
-                                         add_item_label='Add new Contact', add_item_form=Forms.ContactForm)
+                                         add_item_label='Add new Contact', add_item_form=ContactForm)
         self.case_contacts.options = self.referred_by.options
 
         self.practice_area = LookupInput(model='PracticeArea', name='practice_area', label='Practice Area')
@@ -64,44 +78,6 @@ class LeadForm(FormBase):
         self.record_seal_expungement_included = CheckboxInput(name='record_seal_expungement_included',
                                                               label='Record Seal/Expungement Included')
 
-        sections = [
-            {'name': 'lead_info', 'label': 'Lead Information', 'rows': [
-                [self.lead_source, self.intake_staff],
-                [self.referred_by, None],
-            ]},
-            {'name': 'case_contacts', 'label': 'Case Contacts', 'rows': [
-                [self.case_contacts],
-            ]},
-            {'name': 'case_overview', 'label': 'Case Overview', 'rows': [
-                [self.practice_area, self.auto_generate_case_name],
-                [self.case_number, self.case_name],
-                [self.case_stage, self.add_statute_of_limitations],
-                [self.cause_of_action, self.statute_of_limitations],
-            ]},
-            {'name': 'case_details', 'label': 'Case Details', 'cols': [
-                [self.incident_date, self.incident_location],
-                [self.case_description],
-            ]},
-            {'name': 'billing_details', 'label': 'Billing Details', 'cols': [
-                [
-                    self.fee_type,
-                    self.retainer,
-                    self.pre_litigation_rate,
-                    self.litigation_rate,
-                ],
-                [
-                    self.trial_included,
-                    self.hours_limited_on_retainer,
-                    self.retainer_hour_limit,
-                    self.investigator_included,
-                    self.investigator_budget,
-                    self.record_seal_expungement_included,
-                ],
-            ]},
-            {'name': 'lead_activities', 'label': 'Schedule Activity', 'rows': [
-                [self.schedule_activity]
-            ]},
-        ]
 
         subforms = [self.schedule_activity]
 
@@ -143,14 +119,14 @@ class LeadForm(FormBase):
                     ],
                 ]},
             ]},
-            {'name': 'activities', 'label': 'Activities', 'sections': [
-                {'name': 'lead_activities', 'label': 'Schedule Activity', 'rows': [
-                    [self.schedule_activity]
+            {'name': 'lead_activities', 'label': 'Activities', 'sections': [
+                {'name': '_', 'label': '', 'rows': [
+                    [self.lead_activities]
                 ]},
             ]},
         ]
 
-        super().__init__(tabs=tabs, subforms=subforms, width=POPUP_WIDTH_COL3, **kwargs)
+        super().__init__(tabs=tabs, width=POPUP_WIDTH_COL3, **kwargs)
         self.fullscreen = True
 
     def after_open(self):
