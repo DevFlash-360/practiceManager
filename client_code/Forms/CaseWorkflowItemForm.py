@@ -1,5 +1,7 @@
+from warnings import filters
 from AnvilFusion.components.FormBase import FormBase, POPUP_WIDTH_COL3
 from AnvilFusion.components.FormInputs import *
+from ..app.models import CaseWorkflow, CaseWorkflowItem
 
 
 class CaseWorkflowItemForm(FormBase):
@@ -10,7 +12,9 @@ class CaseWorkflowItemForm(FormBase):
         # self.practice_area = LookupInput(name='practice_area', label='Practice Area', model='PracticeArea', enabled=False)
         self.type = RadioButtonInput(name='type', label='Type', options=['Task', 'Event'], value='Task')
         self.activity = LookupInput(name='activity', label='Activity', model='Activity')
-        self.related_task = LookupInput(name='related_task', label='Related Task', model='CaseWorkflowItem', text_field='item_name')
+        self.related_task = LookupInput(name='related_task', label='Related Task', 
+                                        model='CaseWorkflowItem', text_field='item_name',
+                                        get_data=False)
         self.due_date_base = RadioButtonInput(name='due_date_base', label='Due Date Based On', 
                                               options=[
                                                   'Case Open Date',
@@ -47,6 +51,16 @@ class CaseWorkflowItemForm(FormBase):
         if self.duration.value < 0:
             self.before_after.value = 'Before'
             self.duration.value = -self.duration.value
+        if self.data.case_workflow.uid:
+            case_workflow = CaseWorkflow.get(self.data.case_workflow.uid)
+            if case_workflow:
+                related_tasks = CaseWorkflowItem.get_grid_view(
+                    view_config={'columns': [{'name': 'item_name'}]},
+                    filters={'case_workflow': case_workflow},
+                )
+            related_tasks = [x for x in related_tasks if x['uid'] != self.data.uid]
+            self.related_task.options = related_tasks
+
 
     def from_validate(self):
         super().form_validate()
