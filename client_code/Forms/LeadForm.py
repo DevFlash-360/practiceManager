@@ -1,4 +1,4 @@
-from AnvilFusion.components.FormBase import FormBase, POPUP_WIDTH_COL3
+from AnvilFusion.components.FormBase import FormBase, POPUP_WIDTH_COL1, POPUP_WIDTH_COL3
 from AnvilFusion.components.FormInputs import *
 from AnvilFusion.components.SubformGrid import SubformGrid
 from ..Forms.ContactForm import ContactForm
@@ -24,16 +24,17 @@ class LeadForm(FormBase):
         lead_activities_view = {
             'model': 'LeadActivity',
             'columns': [
-                {'name': 'activity', 'label': 'Activity', 'width': '25%'},
-                {'name': 'due_time', 'label': 'Due Time', 'width': '15%'},
+                {'name': 'activity', 'label': 'Task / Activity', 'width': '25%'},
+                {'name': 'due_time', 'label': 'Due Time', 'width': '25%'},
                 {'name': 'status', 'label': 'Satus', 'width': '15%'},
-                {'name': '_spacer', 'label': '', 'width': '45%'},
+                {'name': '_spacer', 'label': '', 'width': '40%'},
             ],
         }
         self.lead_activities = SubformGrid(name='lead_activity', label='Tasks and Activities', model='LeadActivity',
                                            link_model='Lead', link_field='lead', 
                                            form_container_id=kwargs.get('target'),
                                            view_config=lead_activities_view,
+                                           add_edit_form=LeadActivityForm,
                                            )
 
         self.lead_source = LookupInput(model='LeadSource', name='lead_source', label='Lead Source',
@@ -212,3 +213,22 @@ class LeadForm(FormBase):
                 self.pre_litigation_rate.value = None
                 self.litigation_rate.hide()
                 self.litigation_rate.value = None
+
+
+class LeadActivityForm(FormBase):
+
+    def __init__(self, **kwargs):
+        kwargs['model'] = 'LeadActivity'
+
+        self.activity = TextInput(name='activity', label='Activity')
+        self.due_time = DateTimeInput(name='due_time', label='Due Time')
+        self.status = TextInput(name='status', label='Status')
+        self.completed = CheckboxInput(name='completed', label='Completed', save=False)
+
+        sections = [
+            {'name': '_', 'cols': [
+                [self.activity, self.due_time, self.status, self.completed],
+            ]}
+        ]
+
+        super().__init__(sections=sections, width=POPUP_WIDTH_COL1, **kwargs)
