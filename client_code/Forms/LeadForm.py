@@ -79,7 +79,7 @@ class LeadForm(FormBase):
                                                               label='Record Seal/Expungement Included')
 
 
-        subforms = [self.schedule_activity]
+        # subforms = [self.schedule_activity]
 
         tabs = [
             {'name': 'lead_details', 'label': 'Lead Details', 'sections': [
