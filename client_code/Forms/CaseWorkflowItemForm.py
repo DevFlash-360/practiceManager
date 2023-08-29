@@ -52,7 +52,7 @@ class CaseWorkflowItemForm(FormBase):
             self.duration.value = -self.duration.value
         print('cwi form open', self.source, self.source.grid.dataSource)
         if self.source and self.source.grid.dataSource:
-            self.related_task.options = [x for x in self.source.grid.dataSource if x['uid'] != self.data.uid]
+            self.related_task.data = [x for x in self.source.grid.dataSource if x['uid'] != self.data.uid]
 
 
     def from_validate(self):
