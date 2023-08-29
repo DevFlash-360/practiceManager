@@ -47,7 +47,7 @@ class CaseWorkflowItemForm(FormBase):
         
     def form_open(self, args):
         super().form_open(args)
-        if self.duration.value < 0:
+        if self.duration.value and self.duration.value < 0:
             self.before_after.value = 'Before'
             self.duration.value = -self.duration.value
         if self.data.case_workflow.uid:
