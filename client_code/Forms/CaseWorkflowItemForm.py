@@ -1,4 +1,4 @@
-from AnvilFusion.components.FormBase import FormBase, POPUP_WIDTH_COL2
+from AnvilFusion.components.FormBase import FormBase, POPUP_WIDTH_COL3
 from AnvilFusion.components.FormInputs import *
 
 
@@ -14,8 +14,8 @@ class CaseWorkflowItemForm(FormBase):
         self.due_date_base = RadioButtonInput(name='due_date_base', label='Due Date Based On', 
                                               options=[
                                                   'Case Open Date',
-                                                  'Completion of Previous Task',
                                                   'Case Activity',
+                                                  'Completion of Previous Task',
                                                   'No Due Date',
                                               ],
                                               value='Case Open Date',
@@ -39,7 +39,7 @@ class CaseWorkflowItemForm(FormBase):
             }
         ]
         
-        super().__init__(sections=sections, width=POPUP_WIDTH_COL2, **kwargs)
+        super().__init__(sections=sections, width=POPUP_WIDTH_COL3, **kwargs)
         
         
     def form_open(self, args):
