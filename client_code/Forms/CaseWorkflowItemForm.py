@@ -50,6 +50,7 @@ class CaseWorkflowItemForm(FormBase):
         if self.duration.value and self.duration.value < 0:
             self.before_after.value = 'Before'
             self.duration.value = -self.duration.value
+        print('cwi form open', self.source, self.source.grid.dataSource)
         if self.source and self.source.grid.dataSource:
             self.related_task.options = [x for x in self.source.grid.dataSource if x['uid'] != self.data.uid]
 
