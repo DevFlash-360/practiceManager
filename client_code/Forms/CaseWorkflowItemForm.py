@@ -50,15 +50,8 @@ class CaseWorkflowItemForm(FormBase):
         if self.duration.value and self.duration.value < 0:
             self.before_after.value = 'Before'
             self.duration.value = -self.duration.value
-        if self.data.case_workflow.uid:
-            case_workflow = CaseWorkflow.get(self.data.case_workflow.uid)
-            if case_workflow:
-                related_tasks = CaseWorkflowItem.get_grid_view(
-                    view_config={'columns': [{'name': 'item_name'}]},
-                    filters={'case_workflow': case_workflow},
-                )
-            related_tasks = [x for x in related_tasks if x['uid'] != self.data.uid]
-            self.related_task.options = related_tasks
+        if self.source and self.source.grid.dataSource:
+            self.related_task.options = [x for x in self.source.grid.dataSource if x['uid'] != self.data.uid]
 
 
     def from_validate(self):
