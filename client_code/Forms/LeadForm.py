@@ -158,7 +158,7 @@ class LeadForm(FormBase):
 
     # lead_source on_change handler
     def lead_source_referral(self, args):
-        if args.value is not None and args.value.name is 'Referral':
+        if args['value'] is not None and self.lead_source_referral.value == 'Referral':
             self.referred_by.show()
         else:
             self.referred_by.hide()
