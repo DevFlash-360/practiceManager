@@ -27,6 +27,7 @@ class LeadForm(FormBase):
                 {'name': 'activity', 'label': 'Activity', 'width': '25%'},
                 {'name': 'due_time', 'label': 'Due Time', 'width': '15%'},
                 {'name': 'status', 'label': 'Satus', 'width': '15%'},
+                {'name': '_spacer', 'label': '', 'width': '45%'},
             ],
         }
         self.lead_activities = SubformGrid(name='lead_activity', label='Tasks and Activities', model='LeadActivity',
