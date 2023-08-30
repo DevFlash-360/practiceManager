@@ -13,6 +13,7 @@ class CaseWorkflowItemForm(FormBase):
         self.activity = LookupInput(name='activity', label='Activity', model='Activity')
         self.related_task = LookupInput(name='related_task', label='Related Task', 
                                         model='CaseWorkflowItem', text_field='activity',
+                                        on_change=self.related_task_selected,
                                         get_data=False)
         self.due_date_base = RadioButtonInput(name='due_date_base', label='Due Date Based On', 
                                               options=[
@@ -74,3 +75,7 @@ class CaseWorkflowItemForm(FormBase):
             self.related_task.hide()
             self.before_after.show()
             self.duration.show()
+            
+            
+    def related_task_selected(self, args):
+        print('related_task_selected', args, self.related_task.value)
