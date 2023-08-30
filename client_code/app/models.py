@@ -28,13 +28,13 @@ ENUM_MODEL_LIST = {
 # --------------------------------
 @model_type
 class Tenant:
-    model_type = types.ModelTypes.SYSTEM
+    _model_type = types.ModelTypes.SYSTEM
     name = Attribute(field_type=types.FieldTypes.SINGLE_LINE)
 
 
 @model_type
 class Users:
-    model_type = types.ModelTypes.SYSTEM
+    _model_type = types.ModelTypes.SYSTEM
     email = Attribute(field_type=types.FieldTypes.EMAIL)
     enabled = Attribute(field_type=types.FieldTypes.BOOLEAN)
     last_login = Attribute(field_type=types.FieldTypes.DATETIME)
@@ -52,7 +52,7 @@ class UserProfile:
 
 @model_type
 class appAuditLog:
-    model_type = types.ModelTypes.SYSTEM
+    _model_type = types.ModelTypes.SYSTEM
     table_name = Attribute(field_type=types.FieldTypes.SINGLE_LINE)
     record_uid = Attribute(field_type=types.FieldTypes.UID)
     action_type = Attribute(field_type=types.FieldTypes.SINGLE_LINE)
@@ -64,7 +64,7 @@ class appAuditLog:
 
 @model_type
 class appErrorLog:
-    model_type = types.ModelTypes.SYSTEM
+    _model_type = types.ModelTypes.SYSTEM
     component = Attribute(field_type=types.FieldTypes.SINGLE_LINE)
     action = Attribute(field_type=types.FieldTypes.SINGLE_LINE)
     error_message = Attribute(field_type=types.FieldTypes.MULTI_LINE)
