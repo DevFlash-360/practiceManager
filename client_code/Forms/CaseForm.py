@@ -113,6 +113,7 @@ class CaseForm(FormBase):
 
     def form_open(self, args):
         super().form_open(args)
+        print('CaseForm.form_open start')
         try:
             if self.data is None or self.data == {}:
                 self.case_name.enabled = False
@@ -134,7 +135,8 @@ class CaseForm(FormBase):
             #     else:
             #         self.statute_of_limitations.hide()
         except Exception as e:
-            print(e.__traceback__)
+            print(e)
+        print('CaseForm.form_open end', self.data)
 
     # auto_generate_case_name on_change handler
     def generate_case_name(self, args):
