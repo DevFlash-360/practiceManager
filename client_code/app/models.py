@@ -51,7 +51,7 @@ class UserProfile:
 
 
 @model_type
-class appAuditLog:
+class AppAuditLog:
     _model_type = types.ModelTypes.SYSTEM
     table_name = Attribute(field_type=types.FieldTypes.SINGLE_LINE)
     record_uid = Attribute(field_type=types.FieldTypes.UID)
@@ -63,7 +63,7 @@ class appAuditLog:
 
 
 @model_type
-class appErrorLog:
+class AppErrorLog:
     _model_type = types.ModelTypes.SYSTEM
     component = Attribute(field_type=types.FieldTypes.SINGLE_LINE)
     action = Attribute(field_type=types.FieldTypes.SINGLE_LINE)
@@ -73,7 +73,7 @@ class appErrorLog:
 
 
 @model_type
-class appGridView:
+class AppGridView:
     name = Attribute(field_type=types.FieldTypes.SINGLE_LINE)
     config = Attribute(field_type=types.FieldTypes.OBJECT)
     permissions = Attribute(field_type=types.FieldTypes.OBJECT)
@@ -244,6 +244,7 @@ class CaseWorkflowItem:
 @model_type
 class CauseOfAction:
     _title = 'cause_of_action'
+    _table_name = 'causes_of_action'
 
     type_of_action = Relationship('TypeOfAction')
     statute_id = Attribute(field_type=types.FieldTypes.SINGLE_LINE)
@@ -484,6 +485,7 @@ class LeadSource:
 @model_type
 class Ledger:
     _title = 'transaction_time'
+    _table_name = 'ledger'
     transaction_time = Attribute(field_type=types.FieldTypes.DATETIME)
 
 
@@ -509,6 +511,7 @@ class PracticeArea:
 @model_type
 class Staff:
     _title = 'full_name'
+    _table_name = 'staff'
 
     branch = Relationship('Branch')
     first_name = Attribute(field_type=types.FieldTypes.SINGLE_LINE)
@@ -626,4 +629,5 @@ class Timesheet:
 @model_type
 class TypeOfAction:
     _title = 'name'
+    _table_name = 'types_of_action'
     name = Attribute(field_type=types.FieldTypes.SINGLE_LINE)
