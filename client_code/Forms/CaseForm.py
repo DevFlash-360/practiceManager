@@ -44,7 +44,9 @@ class CaseForm(FormBase):
                                                        label='Share case information with',
                                                        model='Contact', text_field='full_name')
         self.lead = LookupInput(name='lead', label='Lead', model='Lead', text_field='case_name')
-        self.fee_type = LookupInput(name='fee_type', label='Fee Type', model='FeeType', on_change=self.fee_type_change)
+        self.fee_type = LookupInput(name='fee_type', label='Fee Type', model='FeeType', 
+                                    # on_change=self.fee_type_change
+                                    )
         self.flat_fee_retainer = NumberInput(name='flat_fee_retainer', label='Flat Fee Retainer')
         self.hourly_retainer = NumberInput(name='hourly_retainer', label='Hourly Retainer')
         self.pre_litigation_rate = NumberInput(name='pre_litigation_rate', label='Pre Litigation Rate')
@@ -52,10 +54,13 @@ class CaseForm(FormBase):
         self.trial_included = CheckboxInput(name='trial_included', label='Trial Included')
         self.hours_limited_on_retainer = CheckboxInput(name='hours_limited_on_retainer',
                                                        label='Hours Limited on Retainer', save=False,
-                                                       on_change=self.limit_retainer)
+                                                       # on_change=self.limit_retainer
+                                                       )
         self.retainer_hours_limit = NumberInput(name='retainer_hours_limit', label='Retainer Hours Limit')
         self.investigator_included = CheckboxInput(name='investigator_included', label='Investigator Included',
-                                                   save=False, on_change=self.include_investigator)
+                                                   save=False, 
+                                                   # on_change=self.include_investigator
+                                                   )
         self.investigator_budget = NumberInput(name='investigator_budget', label='Investigator Budget')
         self.record_seal_expungement = CheckboxInput(name='record_seal_expungement',
                                                      label='Record Seal/Expungement Included')
