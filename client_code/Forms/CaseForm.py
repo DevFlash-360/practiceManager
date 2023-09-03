@@ -136,7 +136,7 @@ class CaseForm(FormBase):
             #         self.statute_of_limitations.hide()
         except Exception as e:
             print(e)
-        print('CaseForm.form_open end', self.data)
+        print('CaseForm.form_open end')
 
     # auto_generate_case_name on_change handler
     def generate_case_name(self, args):
