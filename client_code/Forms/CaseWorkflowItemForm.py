@@ -37,7 +37,7 @@ class CaseWorkflowItemForm(FormBase):
             {
                 'name': 'task_details',
                 'cols': [
-                    [self.type, self.activity, self.assigned_to, self.notes, self.documents],
+                    [self.type, self.activity, self.assigned_to, self.notes,],
                     [self.due_date_base, self.related_task, self.before_after, self.duration, self.priority],
                 ]
             }
