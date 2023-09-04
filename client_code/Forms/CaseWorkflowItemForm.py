@@ -28,7 +28,7 @@ class CaseWorkflowItemForm(FormBase):
                                              options=['Before', 'After'], value='After')
         self.duration = NumberInput(name='duration', label='Duration')
         self.assigned_to = LookupInput(name='assigned_to', label='Assigned To', model='Staff', select='multi',
-                                  text_field='full_name')
+                                       text_field='full_name')
         self.priority = RadioButtonInput(name='priority', label='Priority', options=['Normal', 'High'], value='Normal')
         self.notes = MultiLineInput(name='notes', label='Notes', rows=5)
         self.documents = FileUploadInput(name='documents', label='Documents', save=False)
@@ -51,7 +51,7 @@ class CaseWorkflowItemForm(FormBase):
         if self.duration.value and self.duration.value < 0:
             self.before_after.value = 'Before'
             self.duration.value = -self.duration.value
-        self.related_task.data = self.source.grid.dataSource if self.source and self.source.grid.dataSource else []
+        # self.related_task.data = self.source.grid.dataSource if self.source and self.source.grid.dataSource else []
 
 
     def from_validate(self):
