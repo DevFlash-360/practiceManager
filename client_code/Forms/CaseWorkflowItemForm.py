@@ -51,7 +51,7 @@ class CaseWorkflowItemForm(FormBase):
         if self.duration.value and self.duration.value < 0:
             self.before_after.value = 'Before'
             self.duration.value = -self.duration.value
-        self.related_task_data = self.source.grid.dataSource if self.source and self.source.grid.dataSource else []
+        self.related_task.data = self.source.grid.dataSource if self.source and self.source.grid.dataSource else []
 
 
     def from_validate(self):
