@@ -25,19 +25,22 @@ class TaskForm(FormBase):
 
         sections = [
             {'name': '_', 'rows': [
-                [self.no_due_date, self.no_case],
-                [self.due_date, self.case],
-                [self.documents]
+                [self.case],
+                [self.no_case],
             ]},
             {'name': '_', 'cols': [
                 [
                     self.activity,
-                    self.priority,
-                    self.assigned_staff
+                    self.priority
                 ],
                 [
                     self.notes
                 ]
+            ]},
+            {'name': '_', 'rows': [
+                [self.due_date, self.assigned_staff],
+                [self.no_due_date],
+                [self.documents]
             ]}
         ]
 

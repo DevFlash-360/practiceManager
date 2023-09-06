@@ -28,11 +28,12 @@ class TimeEntryForm(FormBase):
 
         sections = [
             {'name': '_', 'rows': [
-                [self.date, self.case],
+                [self.case],
                 [self.activity, self.staff],
+                # [self.activity],
                 [self.description],
-                [self.rate, self.duration],
-                [self.rate_type, self.billable],
+                [self.billable],
+                [self.date, self.rate, self.rate_type, self.duration],
                 [self.total],
             ]}
         ]
