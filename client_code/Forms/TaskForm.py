@@ -24,6 +24,11 @@ class TaskForm(FormBase):
                                      on_change=self.no_case_toggle)
 
         sections = [
+            {'name': '_', 'rows': [
+                [self.no_due_date, self.no_case],
+                [self.due_date, self.case],
+                [self.documents]
+            ]},
             {'name': '_', 'cols': [
                 [
                     self.activity,
@@ -33,11 +38,6 @@ class TaskForm(FormBase):
                 [
                     self.notes
                 ]
-            ]},
-            {'name': '_', 'rows': [
-                [self.no_due_date, self.no_case],
-                [self.due_date, self.case],
-                [self.documents]
             ]}
         ]
 
