@@ -9,6 +9,7 @@ import navigation as nav
 
 
 AppEnv.APP_ID = 'practiceMANAGER'
+AppEnv.content_container_id = 'pm_content'
 AppEnv.data_models = app.models
 AppEnv.forms = Forms
 AppEnv.views = Views
