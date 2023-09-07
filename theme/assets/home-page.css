@@ -98,17 +98,17 @@ input#pm-appbar-search.e-input {
 
 #pm-sidebar {
   overflow: auto;
-  width: 280px !important;
+  width: 210px !important;
   padding-top: 11px;
   transition: all 0.5s !important;
   z-index: 999 !important;
   position: fixed;
   left: 0;
   top: 35px;
-  padding-inline: 16px !important;
+  padding-inline: 0;
+  display: flex;
+  justify-content: flex-end;
 }
-
-.e-sidebar {}
 
 .e-list-item {
   padding: 0 !important;
@@ -188,6 +188,7 @@ li.e-list-item.e-level-1.e-hover {
   text-align: justify;
   padding-bottom: 1.8em;
   padding-top: 1em;
+  position: fixed;
 }
 
 #pm-footer {
@@ -269,6 +270,15 @@ label>span.e-label {
   position: relative;
 }
 
+ul#pm-sidebar-menu {
+  width: 150px;
+  margin: 0 !important;
+}
+.e-menu-wrapper.e-inherit.e-lib.e-keyboard {
+  position: relative;
+  z-index: 9999;
+  top: -20px;
+}
 /* Large Screen Styles */
 @media only screen and (min-width: 718px) {
   #pm-content {
