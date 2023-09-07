@@ -8,6 +8,7 @@ class CaseDashboardPage(DashboardPage):
         layout = {
             'cellSpacing': [10, 10],
             'columns': 3,
+            'cellAspectRatio': 50/100,
             'panels': [
                 {'sizeX': 2, 'sizeY': 1, 'row': 0, 'col': 0, 'id': 'case_details',
                  'content': '<div class="content" style="line-height:60px">Case</div>'},
