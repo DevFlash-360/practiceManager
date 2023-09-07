@@ -32,11 +32,11 @@ class ExpenseForm(FormBase):
 
         sections = [
             {'name': '_', 'rows': [
-                [self.date, self.case],
+                [self.case],
                 [self.activity, self.staff],
                 [self.description],
-                [self.amount, self.reduction],
-                [self.quantity, self.billable],
+                [self.billable],
+                [self.date, self.amount, self.quantity, self.reduction],
                 [self.receipt_invoice],
                 # hidden fields
                 [self.total, self.status],
