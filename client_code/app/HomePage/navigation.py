@@ -28,7 +28,8 @@ PMAPP_SIDEBAR_MENUS = {
     'case_menu': [
         {'nodeId': 'case_agenda', 'nodeText': 'Agenda', 'nodeChild': []},
         {'nodeId': 'case_tasks', 'nodeText': 'Tasks', 'nodeChild': []},
-        {'nodeId': 'case_dashboard', 'nodeText': 'Case Dashboard', 'nodeChild': [
+        {'nodeId': 'case_dashboard_new', 'nodeText': 'Case Dashboard', 'nodeChild': []},
+        {'nodeId': 'case_dashboard', 'nodeText': 'Case Dashboard (old)', 'nodeChild': [
             {'nodeId': 'case_dashboard_events', 'nodeText': 'Events', 'nodeChild': []},
             {'nodeId': 'case_dashboard_tasks', 'nodeText': 'Tasks', 'nodeChild': []},
             {'nodeId': 'case_dashboard_documents', 'nodeText': 'Documents', 'nodeChild': []},
@@ -113,6 +114,7 @@ PMAPP_NAV_ITEMS = {
     'case_tasks': {'model': 'Task', 'type': 'view', 'action': 'open', 'config': 'TaskView', 'props': {}},
     'case_dashboard': {'model': 'CaseDashboard', 'type': 'page', 'action': 'open',
                        'subcomponent': 'case_dashboard_events', 'props': {}},
+    'case_dashboard_new': {'name': 'CaseDashboardPage', 'type': 'page', 'action': 'open', 'config': '', 'props': {}},
     'case_dashboard_events': {'class': 'EventScheduleView', 'type': 'custom', 'action': 'open', 'props': {}},
     'case_dashboard_tasks': {'model': 'Task', 'type': 'view', 'action': 'open', 'config': 'TaskView', 'props': {}},
     # 'case_dashboard_documents': {'model': '', 'type': 'page|view|form', 'action': 'open|popup', 'props': {}},
@@ -318,8 +320,8 @@ class Sidebar:
 
         elif component['type'] == 'page':
             try:
-                page_class = getattr(AppEnv.pages, f"{component['model']}Page")
-                self.content_control = page_class(container_id=nav_container_id)
+                page_class = getattr(AppEnv.pages, f"{component['name']}")
+                self.content_control = page_class(container_id=nav_container_id, **component['props'])
             except Exception as e:
                 print(e.args)
                 # self.content_control = Pages.BaseForm(model=component['model'], target=self.content_id)
