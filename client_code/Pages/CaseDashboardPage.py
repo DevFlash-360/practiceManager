@@ -9,9 +9,9 @@ class CaseDashboardPage(DashboardPage):
             'cellSpacing': [10, 10],
             'columns': 3,
             'panels': [
-                {'sizeX': 1, 'sizeY': 2, 'row': 0, 'col': 0, 'id': 'case_details',
+                {'sizeX': 2, 'sizeY': 1, 'row': 0, 'col': 0, 'id': 'case_details',
                  'content': '<div class="content" style="line-height:60px">Case</div>'},
-                {'sizeX': 2, 'sizeY': 1, 'row': 1, 'col': 0, 'id': 'incident_date',
+                {'sizeX': 1, 'sizeY': 2, 'row': 1, 'col': 0, 'id': 'incident_date',
                  'content': '<div class="content" style="line-height:60px">Incident Date</div>'},
                 {'sizeX': 1, 'sizeY': 1, 'row': 3, 'col': 0, 'id': 'contacts',
                  'content': '<div class="content" style="line-height:60px">Contacts</div>'},
