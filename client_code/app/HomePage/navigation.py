@@ -108,7 +108,7 @@ PMAPP_SIDEBAR_MENUS = {
 }
 
 PMAPP_DEFAULT_NAV_ITEMS = {
-    'case_menu': 'case_dashboard_ new',
+    'case_menu': 'case_dashboard_new',
     'intake_menu': 'intake_leads',
     'tools_menu': 'tools_date_calculator',
     'staff_menu': 'staff_my_timesheets',
