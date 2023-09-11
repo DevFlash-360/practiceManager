@@ -273,18 +273,22 @@ class Sidebar:
             'nodeSelected': self.menu_select,
         })
 
+
     # Show sidebar menu
     def show(self):
         self.menu.appendTo(jQuery(f"#{self.container_el}-menu")[0])
         self.control.appendTo(jQuery(f"#{self.container_el}")[0])
 
+
     # Sidebar toggle
     def toggle(self, args):
         self.control.toggle()
 
+
     def show_menu(self, menu_id):
         self.menu.fields.dataSource = PMAPP_SIDEBAR_MENUS[menu_id]
-        self.menu_select()
+        self.menu_select(None, subcomponent=PMAPP_DEFAULT_NAV_ITEMS[menu_id])
+
 
     def menu_select(self, args, subcomponent=None):
         if subcomponent is None:
