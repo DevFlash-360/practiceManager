@@ -1,5 +1,5 @@
 # Application navigation
-from anvil.js.window import jQuery, ej
+from anvil.js.window import ej, jQuery
 import sys
 import time
 from AnvilFusion.tools.utils import AppEnv

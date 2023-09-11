@@ -1,5 +1,5 @@
 from ._anvil_designer import HomePageTemplate
-from anvil.js.window import jQuery, ej
+from anvil.js.window import ej, jQuery
 from AnvilFusion.tools.utils import AppEnv, init_user_session
 from ... import app
 from ... import Forms
@@ -14,16 +14,16 @@ AppEnv.data_models = app.models
 AppEnv.forms = Forms
 AppEnv.views = Views
 AppEnv.pages = Pages
-AppEnv.grid_settings  = {
-#   'toolbar_items': [
-#     {'text': 'Add', 'prefixIcon': 'e-add', 'cssClass': '', 'style': 'background-color:#87CEEB; color:white;'},
-#     {'text': 'Edit', 'prefixIcon': 'e-edit', 'cssClass': '', 'style': 'background-color:#98FB98; color:white;'},
-#     {'text': 'Delete', 'prefixIcon': 'e-delete', 'cssClass': '', 'style': 'background-color:#FF6347; color:white;'},
-#     {'text': 'Search'},
-#     {'text': '', 'prefixIcon': 'e-add', 'align': 'Right'},
-#     {'text': '', 'prefixIcon': 'e-search', 'align': 'Right'},
-#   ],
-#   'modes': ['Sort', 'Filter', 'InfiniteScroll', 'Edit', 'ForeignKey', 'Toolbar']
+AppEnv.grid_settings = {
+    #   'toolbar_items': [
+    #     {'text': 'Add', 'prefixIcon': 'e-add', 'cssClass': '', 'style': 'background-color:#87CEEB; color:white;'},
+    #     {'text': 'Edit', 'prefixIcon': 'e-edit', 'cssClass': '', 'style': 'background-color:#98FB98; color:white;'},
+    #     {'text': 'Delete', 'prefixIcon': 'e-delete', 'cssClass': '', 'style': 'background-color:#FF6347; color:white;'},
+    #     {'text': 'Search'},
+    #     {'text': '', 'prefixIcon': 'e-add', 'align': 'Right'},
+    #     {'text': '', 'prefixIcon': 'e-search', 'align': 'Right'},
+    #   ],
+    #   'modes': ['Sort', 'Filter', 'InfiniteScroll', 'Edit', 'ForeignKey', 'Toolbar']
 }
 
 

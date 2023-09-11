@@ -3,12 +3,12 @@ from AnvilFusion.components.DashboardPage import DashboardPage
 
 class CaseDashboardPage(DashboardPage):
     
-    def __init__(self, container_id=None, **kwargs):
+    def __init__(self, container_id, **kwargs):
         
         layout = {
             'cellSpacing': [10, 10],
             'columns': 3,
-            'cellAspectRatio': 50/100,
+            'cellAspectRatio': 100/50,
             'panels': [
                 {'sizeX': 2, 'sizeY': 1, 'row': 0, 'col': 0, 'id': 'case_details',
                  'content': '<div class="content" style="line-height:60px">Case</div>'},
