@@ -107,6 +107,13 @@ PMAPP_SIDEBAR_MENUS = {
     ],
 }
 
+PMAPP_DEFAULT_NAV_ITEMS = {
+    'case_menu': 'case_dashboard_ new',
+    'intake_menu': 'intake_leads',
+    'tools_menu': 'tools_date_calculator',
+    'staff_menu': 'staff_my_timesheets',
+    'finance_menu': 'finance_payments',
+}
 
 # Navigation items/actions
 PMAPP_NAV_ITEMS = {
@@ -230,10 +237,14 @@ class Sidebar:
                  container_el,
                  content_id,
                  sidebar_width=PMAPP_SIDEBAR_WIDTH,
-                 sections=PMAPP_SIDEBAR_MENUS,
-                 nav_items=PMAPP_NAV_ITEMS,
+                 sections=None,
+                 nav_items=None,
                  **properties):
 
+        if sections is None:
+            sections = PMAPP_SIDEBAR_MENUS
+        if nav_items is None:
+            nav_items = PMAPP_NAV_ITEMS
         self.target_el = target_el
         self.container_el = container_el
         self.content_id = content_id
@@ -273,6 +284,7 @@ class Sidebar:
 
     def show_menu(self, menu_id):
         self.menu.fields.dataSource = PMAPP_SIDEBAR_MENUS[menu_id]
+        self.menu_select()
 
     def menu_select(self, args, subcomponent=None):
         if subcomponent is None:
