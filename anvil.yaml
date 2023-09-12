@@ -1866,9 +1866,9 @@ secrets:
     value: {DD2SCIDO6VQPF3XB: mcSMJz5Dv3ZMA5080ZSHjPHMC8heLHKZLPMtDvk5hyN1VO7DbKCxL9NSRgf7Uo4BAjUWfgLoN41gJJCBAgnv9BMpfNlN2hd1fiV4Xd1o+wtyIA7qWMAnUhvWBTjmFGm1GuaJFIumuywAGgab2+kYeHDWzTEZ4is3cJR08eSrO50MP99wg0fA7m/Sz2Eh}
     type: secret
   aws_region:
-    value: {DD2SCIDO6VQPF3XB: 3se8wBX4d2G5CmBDttsKdpE5W0MYAPmJIrVw0B78lDnLqYC6CdUfGv58c0qTfF2T37OzUObrdIPeuMWn5M213T02GEJoHGHl1h3kXAKYWOcIxpAS9zEJ7cA4h8qgPi9uaBYlP8kIFPo=}
+    value: {DD2SCIDO6VQPF3XB: ZzmKTitB/rC0U3ahfWGOWw2iK3sNznkmbJsnf1Tgrhhnwsayu7PwOkyebkX1dRoXoRVkUolzx9TWEIJ2tsn6RDCxYnhb+b+sEm2hecLRDUUPOddrycdBSt2WoeZjfPTqZLTbIWx6MJc=}
     type: secret
   aws_s3_bucket:
-    value: {DD2SCIDO6VQPF3XB: LXqxItRC7YND4qJSrXFVplfkbyIxK24cbSVom+JbDOk4SQA21lbjVe4O4b0naUSfn2IlRsYzM4bapYhX8SsqDmkrwi7Od9X0XiBTRR2auTiL3GVTED2TZjuwCwM9Iox61vTqADs+l5/6AZUSLpw=}
+    value: {DD2SCIDO6VQPF3XB: 0qB4VYpgRavQ+F7ceOX8K+0LcptJsd8H0Okni22zP92tVB9hjHgWfYfQM48/87vMzfbbqrTRGvkBsZkqlEOijvCBfcQve/EOiR6rdkUDz58/kQkVJ0kFtUT+iSljnLigMfxk4BsbypepHriawp8ewCHF2aet00k=}
     type: secret
 uplink_visible: true
