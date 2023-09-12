@@ -61343,6 +61343,11 @@ var _S3ServiceException = require("./models/S3ServiceException");
 },{"./S3Client":"node_modules/@aws-sdk/client-s3/dist-es/S3Client.js","./S3":"node_modules/@aws-sdk/client-s3/dist-es/S3.js","./commands":"node_modules/@aws-sdk/client-s3/dist-es/commands/index.js","./pagination":"node_modules/@aws-sdk/client-s3/dist-es/pagination/index.js","./waiters":"node_modules/@aws-sdk/client-s3/dist-es/waiters/index.js","./models":"node_modules/@aws-sdk/client-s3/dist-es/models/index.js","./models/S3ServiceException":"node_modules/@aws-sdk/client-s3/dist-es/models/S3ServiceException.js"}],"index.js":[function(require,module,exports) {
 var CognitoIdentity = require("@aws-sdk/client-cognito-identity");
 var S3Client = require("@aws-sdk/client-s3");
+window.AWS = {
+  CognitoIdentity: require("@aws-sdk/client-cognito-identity"),
+  S3Client: require("@aws-sdk/client-s3")
+  // Add other AWS services as needed
+};
 },{"@aws-sdk/client-cognito-identity":"node_modules/@aws-sdk/client-cognito-identity/dist-es/index.js","@aws-sdk/client-s3":"node_modules/@aws-sdk/client-s3/dist-es/index.js"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
@@ -61368,7 +61373,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "55416" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "56295" + '/');
   ws.onmessage = function (event) {
     checkedAssets = {};
     assetsToAccept = [];
