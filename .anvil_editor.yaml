@@ -35,6 +35,7 @@ unique_ids:
   server_modules: {}
   assets:
     anvil-fusion.css: '169200579817455337229683.60322'
+    aws-sdk-bundle.js: '1694546552613369674367017.8241'
     case-dashboard-page.css: '1676744721062768784610375.0447'
     data-adaptor.json: '1676078793140897820711848.9384'
     home-page.css: '1676744689320947417861141.6251'
