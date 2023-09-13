@@ -1,6 +1,7 @@
 from ._anvil_designer import HomePageTemplate
 from anvil.js.window import ej, jQuery
 from AnvilFusion.tools.utils import AppEnv, init_user_session
+from AnvilFusion.tools.aws import initialize_aws
 from ... import app
 from ... import Forms
 from ... import Views
@@ -36,7 +37,7 @@ class HomePage(HomePageTemplate):
     def __init__(self, **properties):
         AppEnv.logged_user = init_user_session()
         AppEnv.init_enumerations(model_list=app.models.ENUM_MODEL_LIST)
-        # AppEnv.init_aws()
+        initialize_aws()
 
         self.content_id = 'pm-content'
         self.content_control = None
