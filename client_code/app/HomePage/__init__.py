@@ -111,7 +111,7 @@ class HomePage(HomePageTemplate):
 
     # Sidebar toggle event handler
     def sidebar_toggle(self, args):
-        self.sidebar.toggle()
+        self.sidebar.toggle(args)
 
     # Appbar menu popup window position adjustment
     @staticmethod
