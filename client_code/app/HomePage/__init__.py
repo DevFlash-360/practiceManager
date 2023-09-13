@@ -16,23 +16,28 @@ AppEnv.forms = Forms
 AppEnv.views = Views
 AppEnv.pages = Pages
 AppEnv.grid_settings = {
-    #   'toolbar_items': [
-    #     {'text': 'Add', 'prefixIcon': 'e-add', 'cssClass': '', 'style': 'background-color:#87CEEB; color:white;'},
-    #     {'text': 'Edit', 'prefixIcon': 'e-edit', 'cssClass': '', 'style': 'background-color:#98FB98; color:white;'},
-    #     {'text': 'Delete', 'prefixIcon': 'e-delete', 'cssClass': '', 'style': 'background-color:#FF6347; color:white;'},
-    #     {'text': 'Search'},
-    #     {'text': '', 'prefixIcon': 'e-add', 'align': 'Right'},
-    #     {'text': '', 'prefixIcon': 'e-search', 'align': 'Right'},
-    #   ],
-    #   'modes': ['Sort', 'Filter', 'InfiniteScroll', 'Edit', 'ForeignKey', 'Toolbar']
+    # 'toolbar_items': [ {'text': 'Add', 'prefixIcon': 'e-add', 'cssClass': '', 'style': 'background-color:#87CEEB;
+    # color:white;'}, {'text': 'Edit', 'prefixIcon': 'e-edit', 'cssClass': '', 'style': 'background-color:#98FB98;
+    # color:white;'}, {'text': 'Delete', 'prefixIcon': 'e-delete', 'cssClass': '', 'style':
+    # 'background-color:#FF6347; color:white;'}, {'text': 'Search'}, {'text': '', 'prefixIcon': 'e-add',
+    # 'align': 'Right'}, {'text': '', 'prefixIcon': 'e-search', 'align': 'Right'}, ], 'modes': ['Sort', 'Filter',
+    # 'InfiniteScroll', 'Edit', 'ForeignKey', 'Toolbar']
 }
+AppEnv.aws_config = {
+    'region': 'aws_region',
+    'cognito_identity_pool_id': 'aws_cognito_identity_pool_id',
+    's3_bucket': 'aws_s3_bucket',
+}
+# us-east-1
+# us-east-1:3fd6ffb9-92e0-4381-8354-4eb66d6c6141
+# practice-manager-storage
 
 
 class HomePage(HomePageTemplate):
     def __init__(self, **properties):
         AppEnv.logged_user = init_user_session()
-        AppEnv.add_enumerations(model_list=app.models.ENUM_MODEL_LIST)
-        initialize_aws()
+        AppEnv.init_enumerations(model_list=app.models.ENUM_MODEL_LIST)
+        AppEnv.init_aws()
 
         self.content_id = 'pm-content'
         self.content_control = None
