@@ -107,8 +107,6 @@ class HomePage(HomePageTemplate):
         # Show sidebar menu
         self.sidebar.show()
 
-        # Show start page
-
     # Sidebar toggle event handler
     def sidebar_toggle(self, args):
         self.sidebar.toggle(args)
