@@ -1,7 +1,6 @@
 from ._anvil_designer import HomePageTemplate
 from anvil.js.window import ej, jQuery
 from AnvilFusion.tools.utils import AppEnv, init_user_session
-from AnvilFusion.tools.aws import initialize_aws
 from ... import app
 from ... import Forms
 from ... import Views
