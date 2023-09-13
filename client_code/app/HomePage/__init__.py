@@ -32,6 +32,7 @@ class HomePage(HomePageTemplate):
     def __init__(self, **properties):
         AppEnv.logged_user = init_user_session()
         AppEnv.add_enumerations(model_list=app.models.ENUM_MODEL_LIST)
+        initialize_aws()
 
         self.content_id = 'pm-content'
         self.content_control = None
