@@ -28,6 +28,15 @@ AppEnv.aws_config = {
     'cognito_identity_pool_id': 'us-east-1:759bd02e-0d9f-49ff-8270-1b94a37af8a2',
     's3_bucket': 'practice-manager-storage',
 }
+AppEnv.aws_access = AmazonAccess(
+    region=AppEnv.aws_config['region'],
+    identity_pool_id=AppEnv.aws_config['cognito_identity_pool_id'],
+)
+AppEnv.aws_s3 = AmazonS3(
+    region=AppEnv.aws_config['region'],
+    credentials=AppEnv.aws_access.credentials,
+    bucket_name=AppEnv.aws_config['s3_bucket'],
+)
 # us-east-1
 # us-east-1:3fd6ffb9-92e0-4381-8354-4eb66d6c6141
 # practice-manager-storage
@@ -37,15 +46,6 @@ class HomePage(HomePageTemplate):
     def __init__(self, **properties):
         AppEnv.logged_user = init_user_session()
         AppEnv.init_enumerations(model_list=app.models.ENUM_MODEL_LIST)
-        AppEnv.aws_access = AmazonAccess(
-            region=AppEnv.aws_config['region'],
-            identity_pool_id=AppEnv.aws_config['cognito_identity_pool_id'],
-        )
-        AppEnv.aws_s3 = AmazonS3(
-            region=AppEnv.aws_config['region'],
-            credentials=AppEnv.aws_access.credentials,
-            bucket_name=AppEnv.aws_config['s3_bucket'],
-        )
 
         self.content_id = 'pm-content'
         self.content_control = None
