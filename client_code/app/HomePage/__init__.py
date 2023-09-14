@@ -1,7 +1,7 @@
 from ._anvil_designer import HomePageTemplate
 from anvil.js.window import ej, jQuery
 from AnvilFusion.tools.utils import AppEnv, init_user_session
-from AnvilFusion.tools.aws import initialize_aws
+from AnvilFusion.tools.aws import AmazonAccess, AmazonS3
 from ... import app
 from ... import Forms
 from ... import Views
@@ -24,9 +24,9 @@ AppEnv.grid_settings = {
     # 'InfiniteScroll', 'Edit', 'ForeignKey', 'Toolbar']
 }
 AppEnv.aws_config = {
-    'region': 'aws_region',
-    'cognito_identity_pool_id': 'aws_cognito_identity_pool_id',
-    's3_bucket': 'aws_s3_bucket',
+    'region': 'us-east-1',
+    'cognito_identity_pool_id': 'us-east-1:759bd02e-0d9f-49ff-8270-1b94a37af8a2',
+    's3_bucket': 'practice-manager-storage',
 }
 # us-east-1
 # us-east-1:3fd6ffb9-92e0-4381-8354-4eb66d6c6141
@@ -37,7 +37,15 @@ class HomePage(HomePageTemplate):
     def __init__(self, **properties):
         AppEnv.logged_user = init_user_session()
         AppEnv.init_enumerations(model_list=app.models.ENUM_MODEL_LIST)
-        initialize_aws()
+        AppEnv.aws_access = AmazonAccess(
+            region=AppEnv.aws_config['region'],
+            identity_pool_id=AppEnv.aws_config['cognito_identity_pool_id'],
+        )
+        AppEnv.aws_s3 = AmazonS3(
+            region=AppEnv.aws_config['region'],
+            credentials=AppEnv.aws_access.credentials,
+            bucket_name=AppEnv.aws_config['s3_bucket'],
+        )
 
         self.content_id = 'pm-content'
         self.content_control = None
