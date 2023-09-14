@@ -28,7 +28,6 @@ AppEnv.aws_config = {
     'cognito_identity_pool_id': 'us-east-1:759bd02e-0d9f-49ff-8270-1b94a37af8a2',
     's3_bucket': 'practice-manager-storage',
 }
-
 # us-east-1
 # us-east-1:3fd6ffb9-92e0-4381-8354-4eb66d6c6141
 # practice-manager-storage
