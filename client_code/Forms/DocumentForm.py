@@ -61,7 +61,7 @@ class DocumentForm(FormBase):
 
 
     def case_selected(self, args):
-        if self.case.value is None:
+        if self.case.value is None or args['value'] is None:
             self.folder.enabled = False
         else:
             self.folder.enabled = True
@@ -69,7 +69,7 @@ class DocumentForm(FormBase):
 
 
     def folder_selected(self, args):
-        if self.folder.value is None:
+        if self.folder.value is None or args['value'] is None:
             self.type.enabled = False
             self.discovery.enabled = False
             self.reviewed_by.enabled = False
