@@ -356,8 +356,8 @@ class ContactRole:
 
 @model_type
 class Document:
-    _title = 'name'
-    name = Attribute(field_type=types.FieldTypes.SINGLE_LINE)
+    _title = 'title'
+    title = Attribute(field_type=types.FieldTypes.SINGLE_LINE)
     case = Relationship('Case')
     folder = Relationship('DocumentFolder')
     type = Attribute(field_type=types.FieldTypes.ENUM_SINGLE)
