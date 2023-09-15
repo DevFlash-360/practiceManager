@@ -265,6 +265,11 @@ db_schema:
     - name: uid
       admin_ui: {}
       type: string
+  documentfolder:
+    client: none
+    server: full
+    columns: []
+    title: DocumentFolder
   tasks:
     title: Tasks
     client: none
@@ -646,6 +651,11 @@ db_schema:
     - name: tenant_uid
       admin_ui: {}
       type: string
+  document:
+    client: none
+    server: full
+    columns: []
+    title: Document
   clients:
     title: Clients
     client: none
