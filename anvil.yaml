@@ -17,7 +17,7 @@ services:
 - source: /runtime/services/anvil/secrets.yml
   client_config: {}
   server_config: {}
-startup: {type: form, module: app.HomePage}
+startup: {type: module, module: '@migrate'}
 package_name: practiceMANAGER
 allow_embedding: false
 name: practiceMANAGER
@@ -651,11 +651,6 @@ db_schema:
     - name: tenant_uid
       admin_ui: {}
       type: string
-  document:
-    client: none
-    server: full
-    columns: []
-    title: Document
   clients:
     title: Clients
     client: none
@@ -1218,6 +1213,11 @@ db_schema:
     - name: updated_by
       admin_ui: {width: 200}
       type: string
+  documents:
+    client: none
+    server: full
+    columns: []
+    title: Documents
   activities:
     title: Activities
     client: none
