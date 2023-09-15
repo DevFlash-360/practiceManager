@@ -265,11 +265,19 @@ db_schema:
     - name: uid
       admin_ui: {}
       type: string
-  documentfolder:
+  document_folders:
+    title: Document Folders
     client: none
     server: full
-    columns: []
-    title: DocumentFolder
+    columns:
+    - {name: uid, admin_ui: null, type: string}
+    - {name: case, admin_ui: null, type: link_single, target: cases}
+    - {name: created_by, admin_ui: null, type: string}
+    - {name: name, admin_ui: null, type: string}
+    - {name: tenant_uid, admin_ui: null, type: string}
+    - {name: updated_by, admin_ui: null, type: string}
+    - {name: created_time, admin_ui: null, type: datetime}
+    - {name: updated_time, admin_ui: null, type: datetime}
   tasks:
     title: Tasks
     client: none
@@ -651,11 +659,6 @@ db_schema:
     - name: tenant_uid
       admin_ui: {}
       type: string
-  document:
-    client: none
-    server: full
-    columns: []
-    title: Document
   clients:
     title: Clients
     client: none
@@ -1218,6 +1221,25 @@ db_schema:
     - name: updated_by
       admin_ui: {width: 200}
       type: string
+  documents:
+    client: none
+    server: full
+    columns:
+    - {name: case, admin_ui: null, type: link_single, target: cases}
+    - {name: created_by, admin_ui: null, type: string}
+    - {name: created_time, admin_ui: null, type: datetime}
+    - {name: discovery, admin_ui: null, type: bool}
+    - {name: file, admin_ui: null, type: simpleObject}
+    - {name: folder, admin_ui: null, type: link_single, target: document_folders}
+    - {name: name, admin_ui: null, type: string}
+    - {name: notes, admin_ui: null, type: string}
+    - {name: reviewed_by, admin_ui: null, type: link_single, target: staff}
+    - {name: tenant_uid, admin_ui: null, type: string}
+    - {name: type, admin_ui: null, type: string}
+    - {name: uid, admin_ui: null, type: string}
+    - {name: updated_by, admin_ui: null, type: string}
+    - {name: updated_time, admin_ui: null, type: datetime}
+    title: Documents
   activities:
     title: Activities
     client: none
@@ -1255,6 +1277,11 @@ db_schema:
     - name: uid
       admin_ui: {width: 200}
       type: string
+    - {name: created_by, admin_ui: null, type: string}
+    - {name: created_time, admin_ui: null, type: datetime}
+    - {name: tenant_uid, admin_ui: null, type: string}
+    - {name: updated_by, admin_ui: null, type: string}
+    - {name: updated_time, admin_ui: null, type: datetime}
   user_profiles:
     title: User Profiles
     client: none
@@ -1316,6 +1343,10 @@ db_schema:
     - name: tenant_uid
       admin_ui: {width: 200}
       type: string
+    - {name: created_by, admin_ui: null, type: string}
+    - {name: created_time, admin_ui: null, type: datetime}
+    - {name: updated_by, admin_ui: null, type: string}
+    - {name: updated_time, admin_ui: null, type: datetime}
   contact_groups:
     title: Contact Groups
     client: none
@@ -1604,6 +1635,11 @@ db_schema:
     - name: user_uid
       admin_ui: {width: 200}
       type: string
+    - {name: created_by, admin_ui: null, type: string}
+    - {name: created_time, admin_ui: null, type: datetime}
+    - {name: tenant_uid, admin_ui: null, type: string}
+    - {name: updated_by, admin_ui: null, type: string}
+    - {name: updated_time, admin_ui: null, type: datetime}
   invoices:
     title: Invoices
     client: none
