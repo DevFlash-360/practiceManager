@@ -23,7 +23,7 @@ class DocumentForm(FormBase):
         self.type = DropdownInput(name='type', label='Document Type', options=DOCUMENT_TYPES)
         self.discovery = CheckboxInput(name='discovery', label='Mark as Discovery')
         self.reviewed_by = LookupInput(name='reviewed_by', label='Reviewed By', model='Staff', text_field='full_name')
-        self.notes = MultiLineInput(name='notes', label='Notes')
+        self.notes = MultiLineInput(name='notes', label='Notes', rows=6)
         self.file = FileUploadInput(name='file', label='Upload File')
 
         sections = [
@@ -33,13 +33,15 @@ class DocumentForm(FormBase):
                     self.folder,
                     self.type,
                     self.name,
-                    self.file,
                 ],
                 [
                     self.discovery,
                     self.reviewed_by,
                     self.notes,
                 ]
+            ]},
+            {'name': 'File', 'rows': [
+                [self.file]
             ]}
         ]
 
