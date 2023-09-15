@@ -5,6 +5,7 @@ from .CaseWorkflowItemForm import CaseWorkflowItemForm
 from .CheckForm import CheckForm
 from .ClientForm import ClientForm
 from .ContactForm import ContactForm
+from .DocumentForm import DocumentForm
 from .EntityForm import EntityForm
 from .EventForm import EventForm
 from .ExpenseForm import ExpenseForm

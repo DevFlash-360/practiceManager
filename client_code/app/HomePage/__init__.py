@@ -47,13 +47,6 @@ class HomePage(HomePageTemplate):
         AppEnv.logged_user = init_user_session()
         AppEnv.init_enumerations(model_list=app.models.ENUM_MODEL_LIST)
 
-        if AppEnv.aws_s3.upload_file('test file', 'test.txt'):
-            print('Uploaded test.txt')
-            file = AppEnv.aws_s3.download_file('test.txt')
-            print('file', file)
-            url = AppEnv.aws_s3.get_presigned_url('test.txt')
-            print('url', url)
-
         self.content_id = 'pm-content'
         self.content_control = None
 
