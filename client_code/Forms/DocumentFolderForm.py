@@ -14,6 +14,8 @@ class DocumentFolderForm(FormBase):
 
         sections = [
             {'name': '_', 'rows': [
+                [self.case, self.name],
+                [self.documents],
             ]}
         ]
 
