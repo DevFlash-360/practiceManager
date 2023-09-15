@@ -44,3 +44,15 @@ class DocumentForm(FormBase):
         ]
 
         super().__init__(sections=sections, width=POPUP_WIDTH_COL3, **kwargs)
+
+
+    def form_open(self, args):
+        super().form_open(args)
+        if self.case.value is None:
+            self.folder.enabled = False
+        if not self.folder.enabled:
+            self.type.enabled = False
+            self.discovery.enabled = False
+            self.reviewed_by.enabled = False
+            self.notes.enabled = False
+            self.file.enabled = False
