@@ -9,4 +9,4 @@ AppEnv.APP_ID = 'practiceMANAGER'
 AppEnv.data_models = app.models
 
 init_user_session()
-# migrate.migrate_db_schema()
+migrate.migrate_db_schema()
