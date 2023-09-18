@@ -71,5 +71,6 @@ class DocumentForm(FormBase):
             self.file.enabled = True
 
     def file_selected(self, args):
-        print('file_selected', args)
+        pass
+        # print('file_selected', args)
         # print(self.file.value)
