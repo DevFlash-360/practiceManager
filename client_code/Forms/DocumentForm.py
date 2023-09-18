@@ -25,7 +25,8 @@ class DocumentForm(FormBase):
         self.discovery = CheckboxInput(name='discovery', label='Mark as Discovery')
         self.reviewed_by = LookupInput(name='reviewed_by', label='Reviewed By', model='Staff', text_field='full_name')
         self.notes = MultiLineInput(name='notes', label='Notes', rows=7)
-        self.files = FileUploadInput(name='file', label='Upload File', on_change=self.file_selected)
+        self.upload_files = FileUploadInput(name='upload_files', label='Upload File(s)', multiple=True,
+                                            storage='aws_s3', on_change=self.files_selected)
 
         sections = [
             {'name': '_', 'cols': [
@@ -41,7 +42,7 @@ class DocumentForm(FormBase):
                 ]
             ]},
             {'name': 'File', 'rows': [
-                [self.files]
+                [self.upload_files]
             ]}
         ]
 
@@ -62,13 +63,13 @@ class DocumentForm(FormBase):
             self.discovery.enabled = False
             self.reviewed_by.enabled = False
             self.notes.enabled = False
-            self.files.enabled = False
+            self.upload_files.enabled = False
         else:
             self.type.enabled = True
             self.discovery.enabled = True
             self.reviewed_by.enabled = True
             self.notes.enabled = True
-            self.files.enabled = True
+            self.upload_files.enabled = True
 
-    def file_selected(self, args):
-        print('file_selected', args, self.files.value)
+    def files_selected(self, args):
+        print('files_selected', args, self.upload_files.files)
