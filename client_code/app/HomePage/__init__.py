@@ -35,7 +35,7 @@ AppEnv.aws_access = AmazonAccess(
 AppEnv.aws_s3 = AmazonS3(
     region=AppEnv.aws_config['region'],
     credentials=AppEnv.aws_access.credentials,
-    bucket_name=AppEnv.aws_config['s3_bucket'],
+    bucket=AppEnv.aws_config['s3_bucket'],
 )
 # us-east-1
 # us-east-1:3fd6ffb9-92e0-4381-8354-4eb66d6c6141
