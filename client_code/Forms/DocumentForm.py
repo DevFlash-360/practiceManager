@@ -25,7 +25,7 @@ class DocumentForm(FormBase):
         self.discovery = CheckboxInput(name='discovery', label='Mark as Discovery')
         self.reviewed_by = LookupInput(name='reviewed_by', label='Reviewed By', model='Staff', text_field='full_name')
         self.notes = MultiLineInput(name='notes', label='Notes', rows=7)
-        self.file = FileUploadInput(name='file', label='Upload File')
+        self.file = FileUploadInput(name='file', label='Upload File', on_change=self.file_selected)
 
         sections = [
             {'name': '_', 'cols': [
@@ -69,3 +69,7 @@ class DocumentForm(FormBase):
             self.reviewed_by.enabled = True
             self.notes.enabled = True
             self.file.enabled = True
+
+    def file_selected(self, args):
+        print('file_selected', args)
+        print(self.file.value)
