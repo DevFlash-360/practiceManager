@@ -27,7 +27,7 @@ class DocumentForm(FormBase):
         self.notes = MultiLineInput(name='notes', label='Notes', rows=7)
         self.upload_files = FileUploadInput(
             name='upload_files', label='Upload File(s)', multiple=True,
-            storage_config={'bucket': 'practice-manager-storage', 'key_prefix': f"documents"},
+            storage_config={'type': 'aws_s3', 'key_prefix': f"documents"},
         )
 
         sections = [
