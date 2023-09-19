@@ -106,6 +106,7 @@ class DocumentForm(FormBase):
             }
             for file in self.upload_files.value:
                 document_data['file'] = file
+                document_data['title'] = file['name']
                 Document(**document_data).save()
             self.form_cancel(args)
         else:
