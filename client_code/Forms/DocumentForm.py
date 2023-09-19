@@ -25,8 +25,10 @@ class DocumentForm(FormBase):
         self.discovery = CheckboxInput(name='discovery', label='Mark as Discovery')
         self.reviewed_by = LookupInput(name='reviewed_by', label='Reviewed By', model='Staff', text_field='full_name')
         self.notes = MultiLineInput(name='notes', label='Notes', rows=7)
-        self.upload_files = FileUploadInput(name='upload_files', label='Upload File(s)', multiple=True,
-                                            storage='aws_s3', )
+        self.upload_files = FileUploadInput(
+            name='upload_files', label='Upload File(s)', multiple=True,
+            storage_config={'bucket': 'practice-manager-storage', 'key_prefix': f"documents"},
+        )
 
         sections = [
             {'name': '_', 'cols': [
