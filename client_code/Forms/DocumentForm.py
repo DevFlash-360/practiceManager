@@ -88,15 +88,17 @@ class DocumentForm(FormBase):
             self.notes.enabled = True
             self.upload_files.enabled = True
 
-    def form_validate(self):
-        if not self.upload_files.value:
-            self.upload_files.show_required()
-            return False
-        else:
-            return super().form_validate()
+    # def form_validate(self):
+    #     if not self.upload_files.value:
+    #         self.upload_files.show_required()
+    #         return False
+    #     else:
+    #         return super().form_validate()
 
     def form_save(self, args):
-        if self.form_validate():
+        if not self.upload_files.value:
+            self.upload_files.show_required()
+        else:
             self.form_fields.append(self.file)
             for file in self.upload_files.value:
                 self.file.value = file
