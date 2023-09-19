@@ -69,14 +69,14 @@ class DocumentForm(FormBase):
             self.folder.enabled = False
         else:
             self.folder.enabled = True
-            folder_list = {'model': 'DocumentFolder', 'columns': [{'name': 'name'}]}
             self.folder.data = DocumentFolder.get_grid_view(
-                folder_list,
+                {'model': 'DocumentFolder', 'columns': [{'name': 'name'}]},
                 search_queries=None,
                 filters={'case': Case.get(self.case.value['uid'])},
                 include_rows=False
             )
-            self.folder_selected({})
+            self.folder.value = self.data.get('folder')
+            self.folder_selected({'value': self.folder.value, 'name': 'folder'})
 
 
     def folder_selected(self, args):
