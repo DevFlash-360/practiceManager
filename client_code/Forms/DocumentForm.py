@@ -29,7 +29,7 @@ class DocumentForm(FormBase):
             name='upload_files', label='Upload File(s)', multiple=True, required=True, save=False,
             storage_config={'type': 'aws_s3', 'key_prefix': f"documents"},
         )
-        self.file = TextInput(name='file')
+        self.file = HiddenInput(name='file')
 
         sections = [
             {'name': '_', 'cols': [
