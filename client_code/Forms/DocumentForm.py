@@ -48,7 +48,16 @@ class DocumentForm(FormBase):
             ]}
         ]
 
-        super().__init__(sections=sections, width=POPUP_WIDTH_COL3, **kwargs)
+        validation = {
+            'rules': {
+                self.case.el_id: {'required': True},
+                self.folder.el_id: {'required': True, 'date': True},
+                self.type.el_id: {'required': True},
+                self.upload_files.el_id: {'required': True},
+            }
+        }
+
+        super().__init__(sections=sections, validation=validation, width=POPUP_WIDTH_COL3, **kwargs)
 
 
     def case_selected(self, args):
@@ -74,4 +83,4 @@ class DocumentForm(FormBase):
             self.upload_files.enabled = True
 
     def files_selected(self, args):
-        print('files_selected', args, self.upload_files.files)
+        print('files_selected', args, self.upload_files.value)
