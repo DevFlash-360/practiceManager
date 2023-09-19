@@ -1,6 +1,6 @@
 from AnvilFusion.components.FormBase import FormBase, POPUP_WIDTH_COL3
 from AnvilFusion.components.FormInputs import *
-from ..app.models import Document
+from ..app.models import Case, Document, DocumentFolder
 
 
 DOCUMENT_TYPES = [
@@ -30,7 +30,6 @@ class DocumentForm(FormBase):
             name='upload_files', label='Upload File(s)', multiple=True, required=True, save=False,
             storage_config={'type': 'aws_s3', 'key_prefix': f"documents"},
         )
-        self.file = HiddenInput(name='file')
 
         sections = [
             {'name': '_', 'cols': [
@@ -59,17 +58,22 @@ class DocumentForm(FormBase):
         }
 
         super().__init__(sections=sections, validation=validation, width=POPUP_WIDTH_COL3, **kwargs)
-        # self.form_fields.append(self.file)
 
 
     def form_open(self, args):
         super().form_open(args)
-        self.file.hide()
 
 
     def case_selected(self, args):
         if self.case.value is None or not args.get('value'):
             self.folder.enabled = False
+            folder_list = {'model': 'DocumentFolder', 'columns': [{'name': 'name'}]}
+            self.folder.data = DocumentFolder.get_grid_view(
+                folder_list,
+                search_queries=None,
+                filters={'case': Case.get(self.case.value)},
+                include_rows=False
+            )
         else:
             self.folder.enabled = True
             self.folder_selected({})
@@ -89,17 +93,9 @@ class DocumentForm(FormBase):
             self.notes.enabled = True
             self.upload_files.enabled = True
 
-    # def form_validate(self):
-    #     if not self.upload_files.value:
-    #         self.upload_files.show_required()
-    #         return False
-    #     else:
-    #         return super().form_validate()
 
     def form_save(self, args):
-        if not self.upload_files.value:
-            self.upload_files.show_required()
-        else:
+        if self.upload_files.value:
             document_data = {
                 'case': self.case.value,
                 'folder': self.folder.value,
@@ -112,3 +108,5 @@ class DocumentForm(FormBase):
                 document_data['file'] = file
                 Document(**document_data).save()
             self.form_cancel(args)
+        else:
+            self.upload_files.show_required()
