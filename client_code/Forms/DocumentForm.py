@@ -1,5 +1,6 @@
 from AnvilFusion.components.FormBase import FormBase, POPUP_WIDTH_COL3
 from AnvilFusion.components.FormInputs import *
+from ..app.models import Document
 
 
 DOCUMENT_TYPES = [
@@ -99,7 +100,15 @@ class DocumentForm(FormBase):
         if not self.upload_files.value:
             self.upload_files.show_required()
         else:
-            self.form_fields.append(self.file)
+            document_data = {
+                'case': self.case.value,
+                'folder': self.folder.value,
+                'type': self.type.value,
+                'discovery': self.discovery.value,
+                'reviewed_by': self.reviewed_by.value,
+                'notes': self.notes.value,
+            }
             for file in self.upload_files.value:
-                self.file.value = file
-                super().form_save(args)
+                document_data['file'] = file
+                Document(**document_data).save()
+            self.form_cancel(args)
