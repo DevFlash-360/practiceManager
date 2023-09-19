@@ -26,7 +26,7 @@ class DocumentForm(FormBase):
         self.reviewed_by = LookupInput(name='reviewed_by', label='Reviewed By', model='Staff', text_field='full_name')
         self.notes = MultiLineInput(name='notes', label='Notes', rows=7)
         self.upload_files = FileUploadInput(
-            name='upload_files', label='Upload File(s)', multiple=True, required=False,
+            name='upload_files', label='Upload File(s)', multiple=True, required=True,
             storage_config={'type': 'aws_s3', 'key_prefix': f"documents"},
         )
 
