@@ -62,7 +62,9 @@ class DocumentForm(FormBase):
 
 
     def form_open(self, args):
+        super().form_open(args)
         self.file.hide()
+
 
     def case_selected(self, args):
         if self.case.value is None or not args.get('value'):
