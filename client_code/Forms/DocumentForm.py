@@ -26,9 +26,10 @@ class DocumentForm(FormBase):
         self.reviewed_by = LookupInput(name='reviewed_by', label='Reviewed By', model='Staff', text_field='full_name')
         self.notes = MultiLineInput(name='notes', label='Notes', rows=7)
         self.upload_files = FileUploadInput(
-            name='upload_files', label='Upload File(s)', multiple=True, required=True,
+            name='upload_files', label='Upload File(s)', multiple=True, required=True, save=False,
             storage_config={'type': 'aws_s3', 'key_prefix': f"documents"},
         )
+        self.file = TextInput(name='file')
 
         sections = [
             {'name': '_', 'cols': [
@@ -57,7 +58,11 @@ class DocumentForm(FormBase):
         }
 
         super().__init__(sections=sections, validation=validation, width=POPUP_WIDTH_COL3, **kwargs)
+        self.form_fields.append(self.file)
 
+
+    def form_open(self, args):
+        self.file.hide()
 
     def case_selected(self, args):
         if self.case.value is None or not args.get('value'):
@@ -87,3 +92,8 @@ class DocumentForm(FormBase):
             return False
         else:
             return super().form_validate()
+
+    def form_save(self, args):
+        for file in self.upload_files.value:
+            self.file.value = file
+            super().form_save(args)
