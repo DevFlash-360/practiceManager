@@ -67,6 +67,8 @@ class DocumentForm(FormBase):
     def case_selected(self, args):
         if self.case.value is None or not args.get('value'):
             self.folder.enabled = False
+        else:
+            self.folder.enabled = True
             folder_list = {'model': 'DocumentFolder', 'columns': [{'name': 'name'}]}
             self.folder.data = DocumentFolder.get_grid_view(
                 folder_list,
@@ -74,8 +76,6 @@ class DocumentForm(FormBase):
                 filters={'case': Case.get(self.case.value)},
                 include_rows=False
             )
-        else:
-            self.folder.enabled = True
             self.folder_selected({})
 
 
