@@ -73,7 +73,7 @@ class DocumentForm(FormBase):
             self.folder.data = DocumentFolder.get_grid_view(
                 folder_list,
                 search_queries=None,
-                filters={'case': Case.get(self.case.value)},
+                filters={'case': Case.get(self.case.value['uid'])},
                 include_rows=False
             )
             self.folder_selected({})
