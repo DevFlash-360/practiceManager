@@ -58,7 +58,7 @@ class DocumentForm(FormBase):
         }
 
         super().__init__(sections=sections, validation=validation, width=POPUP_WIDTH_COL3, **kwargs)
-        self.form_fields.append(self.file)
+        # self.form_fields.append(self.file)
 
 
     def form_open(self, args):
@@ -94,6 +94,8 @@ class DocumentForm(FormBase):
             return super().form_validate()
 
     def form_save(self, args):
-        for file in self.upload_files.value:
-            self.file.value = file
-            super().form_save(args)
+        if self.form_validate():
+            self.form_fields.append(self.file)
+            for file in self.upload_files.value:
+                self.file.value = file
+                super().form_save(args)
