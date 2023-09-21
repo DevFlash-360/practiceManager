@@ -1,6 +1,6 @@
 $(document).on('click','#pm-appbar-sidebar-toggle',function() {
   if ($("#pm-sidebar").hasClass("e-close")) {
-    $("#pm-content").css("margin-left", "80px");
+    $("#pm-content").css("margin-left", "95px");
     $("#pm-content").removeClass("pm-custom-margin");
   } 
   if ($("#pm-sidebar").hasClass("e-open")) {

@@ -100,8 +100,8 @@ input#pm-appbar-search.e-input {
 
 #pm-sidebar {
   overflow: auto;
-  width: 210px !important;
-  padding-top: 11px;
+  width: 270px !important;
+  padding-top: 25px;
   transition: all 0.5s !important;
   z-index: 999 !important;
   position: fixed;
@@ -273,14 +273,14 @@ label>span.e-label {
 }
 
 ul#pm-sidebar-menu {
-  width: 150px;
+  width: 170px;
   margin: 0 !important;
 }
 .e-menu-wrapper.e-inherit.e-lib.e-keyboard {
 position: fixed;
     z-index: 9999;
-    top: 50px;
-    left: 5px;
+    top: 60px;
+    left: 20px;
 }
 /* Large Screen Styles */
 @media only screen and (min-width: 718px) {
