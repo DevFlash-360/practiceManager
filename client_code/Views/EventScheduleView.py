@@ -95,6 +95,7 @@ class EventScheduleView:
         self.schedule = ej.schedule.Schedule(schedule_config)
         # anvil.js.window.pmRenderCell = self.render_cell
 
+
     # get events and bind them to the view
     def form_show(self, **event_args):
         self.schedule_el_id = uuid.uuid4()
@@ -109,10 +110,12 @@ class EventScheduleView:
         # self.get_events()
         # self.schedule.eventSettings.dataSource = self.events
 
+
     def destroy(self):
         self.schedule.destroy()
         if self.container_el is not None:
             self.container_el.innerHTML = ''
+
 
     def popup_open(self, args):
         # print('popup', args.type)
@@ -136,8 +139,10 @@ class EventScheduleView:
             # print('POPUP', args.data)
             args.data['location'] = 'LOCATION'
 
+
     def update_schedule(self, event):
         self.schedule.refreshEvents()
+
 
     def action_begin(self, args):
         print('Begin', args.requestType)
@@ -160,8 +165,10 @@ class EventScheduleView:
                 event.delete()
             self.schedule.refreshEvents()
 
+
     def action_complete(self, args):
         print('Complete', args.requestType)
+
 
     def hover_event(self, args):
         if self.schedule.currentView not in PM_SCHEDULE_DETAIL_VIEWS:
@@ -174,6 +181,7 @@ class EventScheduleView:
             else:
                 self.schedule.closeQuickInfoPopup()
 
+
     def render_cell(self, args):
         # for k in args.keys():
         #   print(k, args[k])
@@ -184,6 +192,7 @@ class EventScheduleView:
             event = self.schedule.getEventDetails(args.element)
             # if event:
             # print('event', event)
+
 
     def get_events(self, start_time, end_time):
         query = {'start_time': q.all_of(q.greater_than(start_time), q.less_than(end_time))}
@@ -224,6 +233,7 @@ class EventScheduleView:
         for event in self.events:
             print(event['subject'], event['location'])
 
+
     def data_adaptor_get_data(self, query):
         print('getData')
         print(query)
@@ -242,6 +252,7 @@ class EventScheduleView:
 
         # call back to pass data back to adaptor
         query.onSuccess(self.events, query)
+
 
     def data_adaptor_record(self, query):
         print('record', query)

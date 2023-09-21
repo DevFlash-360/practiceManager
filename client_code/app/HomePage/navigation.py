@@ -137,7 +137,8 @@ PMAPP_NAV_ITEMS = {
     # 'case_dashboard_updates': {'model': '', 'type': 'page|view|form', 'action': 'open|popup', 'props': {}},
     # 'case_dashboard_requirements': {'model': '', 'type': 'page|view|form', 'action': 'open|popup', 'props': {}},
     'case_reports_cases': {'model': 'Case', 'type': 'view', 'action': 'open', 'config': 'CaseView', 'props': {}},
-    'case_reports_documents': {'model': 'Document', 'type': 'view', 'action': 'open', 'props': {}},
+    'case_reports_documents': {'model': 'CaseDocumentsView', 'type': 'custom', 'action': 'open',
+                               'props': {'case_uid': 'a31c356d-668c-4e62-b103-61869154adb1'}},
     'case_reports_time_entries': {'model': 'TimeEntry', 'type': 'view', 'action': 'open', 'config': 'TimeEntryView',
                                   'props': {}},
     'case_reports_expenses': {'model': 'Expense', 'type': 'view', 'action': 'open', 'config': 'ExpenseView',
@@ -313,7 +314,7 @@ class Sidebar:
         if component['type'] == 'custom':
             try:
                 view_class = getattr(AppEnv.views, component['class'])
-                self.content_control = view_class(container_id=nav_container_id)
+                self.content_control = view_class(container_id=nav_container_id, **component['props'])
             except Exception as e:
                 print(e)
 
