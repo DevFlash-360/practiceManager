@@ -17,7 +17,7 @@ class CaseDocumentsView(GridView):
             ],
             'filter': {'document_folder.case': kwargs.get('case_uid')},
         }
-        case_uid = kwargs.get('case_uid') or kwargs.get('case', {}).get('uid')
+        case_uid = case['uid'] if case else case_uid
         if case_uid:
             filters = {
                 'case': {'uid': case_uid}
@@ -25,8 +25,7 @@ class CaseDocumentsView(GridView):
         else:
             filters = None
 
-        # super().__init__(model='Document', view_config=view_config, filters=filters, **kwargs)
-        print(kwargs)
-        super().__init__(model='Document', **kwargs)
+        super().__init__(model='Document', view_config=view_config, filters=filters, **kwargs)
+        # super().__init__(model='Document', **kwargs)
         self.grid.allowGrouping = True
         self.grid.groupSettings = {'columns': ['folder'], 'showDropArea': False}
