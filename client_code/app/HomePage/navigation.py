@@ -347,6 +347,7 @@ class Sidebar:
             self.nav_target_id = self.content_control.target_id
 
         # try:
+        print(component)
         self.content_control.form_show()
         # except Exception as e:
         #     print(e)
