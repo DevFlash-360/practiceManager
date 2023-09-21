@@ -3,6 +3,7 @@ from AnvilFusion.components.GridView import GridView
 
 class CaseDocumentsView(GridView):
     def __init__(self, **kwargs):
+        print('CaseDocumentsView')
         view_config = {
             'model': 'Document',
             'columns': [
@@ -25,6 +26,7 @@ class CaseDocumentsView(GridView):
             filters = None
 
         # super().__init__(model='Document', view_config=view_config, filters=filters, **kwargs)
+        print(kwargs)
         super().__init__(model='Document', **kwargs)
         self.grid.allowGrouping = True
         self.grid.groupSettings = {'columns': ['folder'], 'showDropArea': False}
