@@ -1,7 +1,9 @@
 #loadingSpinner {
   opacity: 1 !important;
 }
-
+.pm-custom-margin{
+  margin-left:280px !important;
+}
 #pm-app-container {
   display: grid;
   grid-template-columns: 1fr;
