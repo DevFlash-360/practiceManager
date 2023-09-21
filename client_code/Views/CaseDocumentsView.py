@@ -2,7 +2,7 @@ from AnvilFusion.components.GridView import GridView
 
 
 class CaseDocumentsView(GridView):
-    def __init__(self, **kwargs):
+    def __init__(self, case=None, case_uid=None, **kwargs):
         print('CaseDocumentsView')
         view_config = {
             'model': 'Document',
