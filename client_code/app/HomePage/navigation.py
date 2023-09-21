@@ -137,7 +137,7 @@ PMAPP_NAV_ITEMS = {
     # 'case_dashboard_updates': {'model': '', 'type': 'page|view|form', 'action': 'open|popup', 'props': {}},
     # 'case_dashboard_requirements': {'model': '', 'type': 'page|view|form', 'action': 'open|popup', 'props': {}},
     'case_reports_cases': {'model': 'Case', 'type': 'view', 'action': 'open', 'config': 'CaseView', 'props': {}},
-    'case_reports_documents': {'model': 'CaseDocumentsView', 'type': 'custom', 'action': 'open',
+    'case_reports_documents': {'class': 'CaseDocumentsView', 'type': 'custom', 'action': 'open',
                                'props': {'case_uid': 'a31c356d-668c-4e62-b103-61869154adb1'}},
     'case_reports_time_entries': {'model': 'TimeEntry', 'type': 'view', 'action': 'open', 'config': 'TimeEntryView',
                                   'props': {}},
