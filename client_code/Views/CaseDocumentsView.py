@@ -47,5 +47,5 @@ class CaseDocumentsView(GridView):
 
     def form_show(self, get_data=True, **args):
         super().form_show(get_data=get_data, **args)
-        folder_header_el = anvil.js.window.createElement(self.caption_template)
+        folder_header_el = anvil.js.window.document.createElement(self.caption_template)
         self.grid.element.appendChild(folder_header_el)
