@@ -41,7 +41,7 @@ class DocumentForm(FormBase):
                 ],
                 [
                     self.discovery,
-                    # self.notes,
+                    self.notes,
                 ]
             ]},
             {'name': 'File', 'rows': [
