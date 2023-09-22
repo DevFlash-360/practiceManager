@@ -44,7 +44,7 @@ class CaseDocumentsView(GridView):
         self.grid.groupSettings = {
             'columns': ['folder'],
             'showDropArea': False,
-            'captionTemplate': f'#{self.caption_el_id}',
+            # 'captionTemplate': f'#{self.caption_el_id}',
         }
 
 
