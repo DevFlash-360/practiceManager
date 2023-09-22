@@ -41,12 +41,12 @@ class DocumentForm(FormBase):
                 ],
                 [
                     self.discovery,
-                    self.notes,
+                    # self.notes,
                 ]
             ]},
-            # {'name': 'File', 'rows': [
-            #     [self.upload_files]
-            # ]}
+            {'name': 'File', 'rows': [
+                [self.upload_files]
+            ]}
         ]
 
         validation = {
