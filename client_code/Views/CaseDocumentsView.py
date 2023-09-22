@@ -46,3 +46,8 @@ class CaseDocumentsView(GridView):
             'showDropArea': False,
             'captionTemplate': f'#{self.caption_el_id}',
         }
+
+
+    def form_show(self, get_data=True, **args):
+        super().form_show(get_data=get_data, **args)
+        print(self.grid.groupSettings)
