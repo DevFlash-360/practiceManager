@@ -33,8 +33,11 @@ class CaseDocumentsView(GridView):
             filters = None
 
         self.caption_el_id = uuid.uuid4()
-        self.caption_template = (f'<script id="{self.caption_el_id}" type="text/x-template"><div>'
-                                 f'${{folder_header(args)}}</div></script>')
+        script_el = anvil.js.window.document.createElement('script')
+        script_el.id = self.caption_el_id
+        script_el.type = 'text/x-template'
+        script_el.innerHTML = f'<div>${{folder_header(args)}}</div>'
+        anvil.js.window.document.head.appendChild(script_el)
 
         super().__init__(model='Document', view_config=view_config, filters=filters, **kwargs)
         self.grid.allowGrouping = True
@@ -43,12 +46,3 @@ class CaseDocumentsView(GridView):
             'showDropArea': False,
             'captionTemplate': f'#{self.caption_el_id}',
         }
-
-
-    def form_show(self, get_data=True, **args):
-        script_el = anvil.js.window.document.createElement('script')
-        script_el.id = self.caption_el_id
-        script_el.type = 'text/x-template'
-        script_el.innerHTML = f'<div>${{folder_header(args)}}</div>'
-        anvil.js.window.document.head.appendChild(script_el)
-        super().form_show(get_data=get_data, **args)
