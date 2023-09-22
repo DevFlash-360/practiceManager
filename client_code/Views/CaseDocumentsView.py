@@ -1,4 +1,10 @@
 from AnvilFusion.components.GridView import GridView
+import uuid
+
+
+def folder_header(args):
+    print('folder_header', args)
+    return f'{args["key"]} ({len(args["items"])} files)'
 
 
 class CaseDocumentsView(GridView):
@@ -25,7 +31,14 @@ class CaseDocumentsView(GridView):
         else:
             filters = None
 
+        caption_id = uuid.uuid4()
+        caption_template = (f'<script id="{caption_id}" type="text/x-template"><div>'
+                            f'${{folder_header(args)}}</div></script>')
+
         super().__init__(model='Document', view_config=view_config, filters=filters, **kwargs)
-        # super().__init__(model='Document', **kwargs)
         self.grid.allowGrouping = True
-        self.grid.groupSettings = {'columns': ['folder'], 'showDropArea': False}
+        self.grid.groupSettings = {
+            'columns': ['folder'],
+            'showDropArea': False,
+            'captionTemplate': f'{caption_template}',
+        }
