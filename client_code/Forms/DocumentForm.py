@@ -44,9 +44,9 @@ class DocumentForm(FormBase):
                     self.notes,
                 ]
             ]},
-            {'name': 'File', 'rows': [
-                [self.upload_files]
-            ]}
+            # {'name': 'File', 'rows': [
+            #     [self.upload_files]
+            # ]}
         ]
 
         validation = {
