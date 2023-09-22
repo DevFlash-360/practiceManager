@@ -50,4 +50,4 @@ class CaseDocumentsView(GridView):
 
     def form_show(self, get_data=True, **args):
         super().form_show(get_data=get_data, **args)
-        print(self.grid.groupSettings)
+        print(self.grid.groupSettings.captionTemplate)
