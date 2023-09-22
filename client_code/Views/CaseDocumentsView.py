@@ -1,4 +1,5 @@
 from AnvilFusion.components.GridView import GridView
+import anvil.js
 import uuid
 
 
@@ -32,13 +33,19 @@ class CaseDocumentsView(GridView):
             filters = None
 
         caption_id = uuid.uuid4()
-        caption_template = (f'<script id="{caption_id}" type="text/x-template"><div>'
-                            f'${{folder_header(args)}}</div></script>')
+        self.caption_template = (f'<script id="{caption_id}" type="text/x-template"><div>'
+                                 f'${{folder_header(args)}}</div></script>')
 
         super().__init__(model='Document', view_config=view_config, filters=filters, **kwargs)
         self.grid.allowGrouping = True
         self.grid.groupSettings = {
             'columns': ['folder'],
             'showDropArea': False,
-            # 'captionTemplate': f'{caption_template}',
+            'captionTemplate': f'#{caption_id}',
         }
+
+
+    def form_show(self, get_data=True, **args):
+        super().form_show(get_data=get_data, **args)
+        folder_header_el = anvil.js.window.createElement(self.caption_template)
+        self.grid.element.appendChild(folder_header_el)
