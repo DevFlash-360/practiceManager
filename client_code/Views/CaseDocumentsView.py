@@ -50,5 +50,5 @@ class CaseDocumentsView(GridView):
 
     def form_show(self, get_data=True, **args):
         super().form_show(get_data=get_data, **args)
-        self.grid.groupModule.collapseAll()
+        self.grid.collapseAll()
         print(self.grid.groupSettings.captionTemplate)
