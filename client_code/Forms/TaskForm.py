@@ -50,7 +50,7 @@ class TaskForm(FormBase):
 
     def form_open(self, args):
         super().form_open(args)
-        staff = Staff.get_by('email', AppEnv.logged_user.get('email'))
+        staff = Staff.get_by('work_email', AppEnv.logged_user.get('email'))
         self.assigned_staff.value = [staff]
         if self.priority.value is None:
             self.priority.value = 'Normal'
