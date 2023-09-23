@@ -27,19 +27,12 @@ class CaseDocumentsView(GridView):
         else:
             filters = None
 
-        self.caption_el_id = uuid.uuid4()
-        script_el = anvil.js.window.document.createElement('script')
-        script_el.id = self.caption_el_id
-        script_el.type = 'text/x-template'
-        script_el.innerHTML = f'<div>${{folder_header(args)}}</div>'
-        anvil.js.window.document.head.appendChild(script_el)
-
         super().__init__(model='Document', view_config=view_config, filters=filters, **kwargs)
         self.grid.allowGrouping = True
         self.grid.groupSettings = {
             'columns': ['folder'],
             'showDropArea': False,
-            # 'captionTemplate': f'<div>${{{self.folder_header}}}</div>',
+            'captionTemplate': '<div>${key} - ${count} files</div>',
         }
         self.grid.dataBound = self.collapse_all
         self.first_load = True
@@ -53,7 +46,7 @@ class CaseDocumentsView(GridView):
 
     def collapse_all(self, args):
         if self.first_load:
-            self.grid.groupSettings.captionTemplate = '<div>${key} - ${count} files</div>'
+            # self.grid.groupSettings.captionTemplate = '<div>${key} - ${count} files</div>'
             self.grid.groupModule.collapseAll()
             self.first_load = False
 
