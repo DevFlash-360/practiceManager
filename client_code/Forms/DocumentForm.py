@@ -77,7 +77,7 @@ class DocumentForm(FormBase):
                 include_rows=False
             )
             self.folder.value = self.data.get('folder')
-            self.folder.add_item_data = {'case': self.case.value['uid']}
+            self.folder.add_item_data = {'case': self.case.value}
             self.folder_selected({'value': self.folder.value, 'name': 'folder'})
 
 
