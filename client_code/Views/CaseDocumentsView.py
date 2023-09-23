@@ -34,25 +34,21 @@ class CaseDocumentsView(GridView):
             'showDropArea': False,
             'captionTemplate': '<div>${key} - ${count} files</div>',
         }
+        self.grid.editSettings = {
+            'allowEditing': True,
+            'allowAdding': False,
+            'allowDeleting': True,
+            'mode': 'Normal',
+        }
         self.grid.dataBound = self.collapse_all
         self.first_load = True
 
 
     def form_show(self, get_data=True, **args):
         super().form_show(get_data=get_data, **args)
-        # self.grid.groupModule.collapseAll()
-        # print(self.grid.groupSettings.captionTemplate)
 
 
     def collapse_all(self, args):
         if self.first_load:
-            # self.grid.groupSettings.captionTemplate = '<div>${key} - ${count} files</div>'
             self.grid.groupModule.collapseAll()
             self.first_load = False
-
-
-    def folder_header(self, args):
-        print('folder_header', args)
-        return f'{args["key"]} ({len(args["items"])} files)'
-
-
