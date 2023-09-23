@@ -39,7 +39,7 @@ class CaseDocumentsView(GridView):
         self.grid.groupSettings = {
             'columns': ['folder'],
             'showDropArea': False,
-            'captionTemplate': f'<div>${{{self.folder_header}}}</div>',
+            # 'captionTemplate': f'<div>${{{self.folder_header}}}</div>',
         }
         self.grid.dataBound = self.collapse_all
         self.first_load = True
@@ -53,6 +53,7 @@ class CaseDocumentsView(GridView):
 
     def collapse_all(self, args):
         if self.first_load:
+            self.grdi.groupSettings.captionTemplate = f'<div>${{{self.folder_header}}}</div>'
             self.grid.groupModule.collapseAll()
             self.first_load = False
 
