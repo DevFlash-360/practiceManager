@@ -34,12 +34,12 @@ class CaseDocumentsView(GridView):
             'showDropArea': False,
             'captionTemplate': '<div>${key} - ${count} files</div>',
         }
-        self.grid.editSettings = {
-            'allowEditing': True,
-            'allowAdding': False,
-            'allowDeleting': True,
-            'mode': 'Normal',
-        }
+        # self.grid.editSettings = {
+        #     'allowEditing': True,
+        #     'allowAdding': False,
+        #     'allowDeleting': True,
+        #     'mode': 'Normal',
+        # }
         self.grid.dataBound = self.collapse_all
         self.first_load = True
 
