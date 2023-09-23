@@ -46,9 +46,17 @@ class CaseDocumentsView(GridView):
             'showDropArea': False,
             # 'captionTemplate': f'#{self.caption_el_id}',
         }
+        self.grid.dataBound = self.collapse_all
+        self.first_load = True
 
 
     def form_show(self, get_data=True, **args):
         super().form_show(get_data=get_data, **args)
-        self.grid.groupModule.collapseAll()
+        # self.grid.groupModule.collapseAll()
         # print(self.grid.groupSettings.captionTemplate)
+
+
+    def collapse_all(self):
+        if self.first_load:
+            self.grid.groupModule.collapseAll()
+            self.first_load = False
