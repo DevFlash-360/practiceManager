@@ -53,7 +53,7 @@ class CaseDocumentsView(GridView):
 
     def collapse_all(self, args):
         if self.first_load:
-            self.grdi.groupSettings.captionTemplate = f'<div>${{{self.folder_header}}}</div>'
+            self.grid.groupSettings.captionTemplate = f'<div>${{{self.folder_header}}}</div>'
             self.grid.groupModule.collapseAll()
             self.first_load = False
 
