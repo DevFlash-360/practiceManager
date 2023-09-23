@@ -1,6 +1,7 @@
 from AnvilFusion.components.FormBase import FormBase, POPUP_WIDTH_COL3
 from AnvilFusion.components.FormInputs import *
 from ..app.models import Case, Document, DocumentFolder
+from .DocumentFolderForm import DocumentFolderForm
 
 
 DOCUMENT_TYPES = [
@@ -20,7 +21,7 @@ class DocumentForm(FormBase):
         self.case = LookupInput(name='case', label='Case', model='Case', text_field='case_name',
                                 on_change=self.case_selected)
         self.folder = LookupInput(name='folder', label='Folder', model='DocumentFolder', text_field='name',
-                                  add_item_label='Create Folder', add_item_form=FormBase,
+                                  add_item_label='Create Folder', add_item_form=DocumentFolderForm,
                                   on_change=self.folder_selected)
         self.type = DropdownInput(name='type', label='Document Type', options=DOCUMENT_TYPES)
         self.discovery = CheckboxInput(name='discovery', label='Mark as Discovery')
@@ -76,6 +77,7 @@ class DocumentForm(FormBase):
                 include_rows=False
             )
             self.folder.value = self.data.get('folder')
+            self.folder.add_item_data = {'case': self.case.value['uid']}
             self.folder_selected({'value': self.folder.value, 'name': 'folder'})
 
 

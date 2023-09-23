@@ -1,6 +1,5 @@
 from AnvilFusion.components.FormBase import FormBase, POPUP_WIDTH_COL1
 from AnvilFusion.components.FormInputs import *
-from AnvilFusion.components.SubformGrid import SubformGrid
 
 
 class DocumentFolderForm(FormBase):
@@ -9,14 +8,19 @@ class DocumentFolderForm(FormBase):
         print('DocumentFolderForm')
         kwargs['model'] = 'DocumentFolder'
         self.case = LookupInput(name='case', label='Case', model='Case', text_field='case_name')
-        self.name = TextInput(name='name', label='Name')
-        self.documents = SubformGrid(name='documents', label='Documents', model='Document', text_field='name')
+        self.name = TextInput(name='name', label='Folder Name')
 
-        sections = [
-            {'name': '_', 'rows': [
-                [self.case, self.name],
-                [self.documents],
-            ]}
-        ]
+        fields = [self.case, self.name]
 
-        super().__init__(sections=sections, width=POPUP_WIDTH_COL1, **kwargs)
+        validation = {
+            'rules': {
+                self.name.el_id: {'required': True},
+            }
+        }
+
+        super().__init__(fields=fields, header='New Folder', validation=validation, width=POPUP_WIDTH_COL1, **kwargs)
+
+
+    def form_open(self, args):
+        super().form_open(args)
+        self.case.enabled = False
