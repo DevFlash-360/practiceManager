@@ -56,7 +56,7 @@ class CaseDocumentsView(GridView):
         # print(self.grid.groupSettings.captionTemplate)
 
 
-    def collapse_all(self):
+    def collapse_all(self, args):
         if self.first_load:
             self.grid.groupModule.collapseAll()
             self.first_load = False
