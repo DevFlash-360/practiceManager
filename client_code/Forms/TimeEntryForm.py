@@ -10,10 +10,8 @@ class TimeEntryForm(FormBase):
     def __init__(self, **kwargs):
         kwargs['model'] = 'TimeEntry'
 
-        logged_staff = Staff.get_by('work_email', AppEnv.logged_user.get('email')) if AppEnv.logged_user else None
         self.case = LookupInput(name='case', label='Case', model='Case', text_field='case_name')
-        self.staff = LookupInput(name='staff', label='Staff', model='Staff', text_field='full_name',
-                                 value=logged_staff)
+        self.staff = LookupInput(name='staff', label='Staff', model='Staff', text_field='full_name')
         self.activity = LookupInput(model='Activity', name='activity', label='Activity')
         self.billable = CheckboxInput(name='billable', label='This time entry is billable', label_position='After',
                                       value=True)
@@ -42,6 +40,11 @@ class TimeEntryForm(FormBase):
 
     def form_open(self, args):
         super().form_open(args)
+        logged_staff = Staff.get_by('work_email', AppEnv.logged_user.get('email')) if AppEnv.logged_user else None
+        if logged_staff:
+            self.staff.value = logged_staff
+            self.rate.value = logged_staff.pay_rate
+            self.rate_type.value = logged_staff.pay_type
         self.total.hide()
 
     def total_calc(self, args):
