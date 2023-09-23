@@ -3,11 +3,6 @@ import anvil.js
 import uuid
 
 
-def folder_header(args):
-    print('folder_header', args)
-    return f'{args["key"]} ({len(args["items"])} files)'
-
-
 class CaseDocumentsView(GridView):
     def __init__(self, case=None, case_uid=None, **kwargs):
         print('CaseDocumentsView')
@@ -44,7 +39,7 @@ class CaseDocumentsView(GridView):
         self.grid.groupSettings = {
             'columns': ['folder'],
             'showDropArea': False,
-            # 'captionTemplate': f'#{self.caption_el_id}',
+            'captionTemplate': f'<div>${{{self.folder_header}}}</div>',
         }
         self.grid.dataBound = self.collapse_all
         self.first_load = True
@@ -60,3 +55,10 @@ class CaseDocumentsView(GridView):
         if self.first_load:
             self.grid.groupModule.collapseAll()
             self.first_load = False
+
+
+    def folder_header(self, args):
+        print('folder_header', args)
+        return f'{args["key"]} ({len(args["items"])} files)'
+
+
