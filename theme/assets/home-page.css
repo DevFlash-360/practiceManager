@@ -282,6 +282,9 @@ position: fixed;
     top: 60px;
     left: 20px;
 }
+div#pm-appbar-sidebar-toggle {
+    display: none;
+}
 /* Large Screen Styles */
 @media only screen and (min-width: 718px) {
   #pm-content {
