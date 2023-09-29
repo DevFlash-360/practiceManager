@@ -282,7 +282,14 @@ position: fixed;
     top: 60px;
     left: 20px;
 }
-
+div#pm-appbar-sidebar-toggle {
+    display: none;
+}
+.e-control.e-touch.e-sidebar.e-left.e-close {
+    transform: translateX(0%);
+    transition: transform .5s ease;
+    visibility: visible;
+}
 /* Large Screen Styles */
 @media only screen and (min-width: 718px) {
   #pm-content {
