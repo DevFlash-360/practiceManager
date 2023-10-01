@@ -278,6 +278,20 @@ label>span.e-label {
 .pm-sidebar-menu .e-ul {
     overflow: hidden;
 }
+.e-treeview .e-list-item {
+    position: relative;
+    margin-bottom: 2px;
+}
+#pm-sidebar .e-treeview .e-fullrow {
+    height: 100%;
+}
+.pm-sidebar-menu .e-list-item .e-list-text {
+    white-space: break-spaces;
+    line-height: 1.4;
+    padding: 5px;
+    min-height: auto;
+    width: 100%;
+}
 /* Large Screen Styles */
 @media only screen and (min-width: 718px) {
   #pm-content {
