@@ -314,24 +314,24 @@ div#pm-appbar-sidebar-toggle {
     padding: 7px 7px;
     width: 100%;
 }
-#pm-sidebar .pm-sidebar-menu .e-list-item .e-list-parent {
+/* #pm-sidebar .pm-sidebar-menu .e-list-item .e-list-parent {
     height: 195px;
     overflow-y: auto;
-}
+} */
 
-#pm-sidebar .pm-sidebar-menu .e-list-item .e-list-parent::-webkit-scrollbar {
+/* #pm-sidebar .pm-sidebar-menu .e-list-item .e-list-parent::-webkit-scrollbar {
     width: 5px;
-}
+} */
 
-#pm-sidebar .pm-sidebar-menu .e-list-item .e-list-parent::-webkit-scrollbar-track {
+/* #pm-sidebar .pm-sidebar-menu .e-list-item .e-list-parent::-webkit-scrollbar-track {
     background: #ececec;
     border-radius: 4px;
-}
+} */
 
-#pm-sidebar .pm-sidebar-menu .e-list-item .e-list-parent::-webkit-scrollbar-thumb {
+/* #pm-sidebar .pm-sidebar-menu .e-list-item .e-list-parent::-webkit-scrollbar-thumb {
     background: #272D83;
     border-radius: 4px;
-}
+} */
 .pm-content #pm-grid-container .e-grid {
     height: 90% !important;
 }
