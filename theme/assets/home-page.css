@@ -268,7 +268,13 @@ label>span.e-label {
 .pm-schedule-cell-width.e-schedule .e-month-view .e-work-cells {
   position: relative;
 }
-
+#pm-content {
+  padding-right: 15px;
+}
+#pm-sidebar {
+    padding-inline: 10px !important;
+    padding-right: 5px !important;
+}
 /* Large Screen Styles */
 @media only screen and (min-width: 718px) {
   #pm-content {

@@ -327,3 +327,7 @@ div#pm-appbar-add-item-popup ul {
 .top_menu li::before:hover {
     color: #272D83 !important;
 }
+
+ul#pm-sidebar-menu {
+    margin: 15px 0px 15px 15px !important;
+}
