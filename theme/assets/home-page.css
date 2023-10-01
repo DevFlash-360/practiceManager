@@ -135,6 +135,7 @@ input#pm-appbar-search.e-input {
 }*/
 .pm-sidebar-menu .e-ul {
   padding-left: 0 !important;
+  overflow: hidden;
 }
 
 .pm-sidebar-menu .e-list-item .e-list-text {
@@ -314,6 +315,7 @@ div#pm-appbar-sidebar-toggle {
     padding: 7px 7px;
     width: 100%;
 }
+
 /* #pm-sidebar .pm-sidebar-menu .e-list-item .e-list-parent {
     height: 195px;
     overflow-y: auto;
@@ -332,9 +334,13 @@ div#pm-appbar-sidebar-toggle {
     background: #272D83;
     border-radius: 4px;
 } */
+#pm-content {
+    padding-right: 15px;
+}
 .pm-content #pm-grid-container .e-grid {
     height: 90% !important;
 }
+
 /* Large Screen Styles */
 @media only screen and (min-width: 718px) {
   #pm-content {
