@@ -332,6 +332,9 @@ div#pm-appbar-sidebar-toggle {
     background: #272D83;
     border-radius: 4px;
 }
+.pm-content #pm-grid-container .e-grid {
+    height: 90% !important;
+}
 /* Large Screen Styles */
 @media only screen and (min-width: 718px) {
   #pm-content {
