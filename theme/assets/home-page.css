@@ -275,6 +275,9 @@ label>span.e-label {
     padding-inline: 10px !important;
     padding-right: 5px !important;
 }
+.pm-sidebar-menu .e-ul {
+    overflow: hidden;
+}
 /* Large Screen Styles */
 @media only screen and (min-width: 718px) {
   #pm-content {
