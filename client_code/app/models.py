@@ -664,4 +664,16 @@ class Update:
     todays_update = Attribute(field_type=types.FieldTypes.MULTI_LINE)
     client_attendance_required = Attribute(field_type=types.FieldTypes.BOOLEAN)
     client_update = Attribute(field_type=types.FieldTypes.BOOLEAN)
-  
+
+# Need to add these forms/reports
+# @model_type
+# class Statute:
+
+# @model_type
+# class ReimbursementRequest:
+
+# @model_type
+# class TimeOffRequest:
+
+# @model_type
+# class Payroll:
