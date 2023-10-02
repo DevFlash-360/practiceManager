@@ -360,11 +360,12 @@ div#pm-appbar-sidebar-toggle {
     border-radius: 4px;
 } */
 #pm-content {
-    padding-right: 15px;
+  padding-right: 15px;
+  position: unset;
 }
-.pm-content #pm-grid-container .e-grid {
-    height: 93% !important;
-}
+/* .pm-content #pm-grid-container .e-grid {
+    height: 100% !important;
+} */
 
 /* Large Screen Styles */
 @media only screen and (min-width: 718px) {
