@@ -1,60 +1,66 @@
-from anvil.js.window import jQuery, ej
-import uuid
+from AnvilFusion.components.DashboardPage import DashboardPage
 
 
-class CaseDashboardPage:
-    def __init__(self, container_id):
-        print('Case Dashboard')
-        self.container_id = container_id
-        self.container_el = jQuery(f"#{self.container_id}")[0]
-        self.content_id = str(uuid.uuid4()).replace('-', '')
-        self.css = '<link href="_/theme/case-dashboard-page.css" rel="stylesheet">'
-        self.html = f'<div id="pm-content-{self.content_id}-dashboard" class="pm-content-dashboard">\
-                    <div id="pm-content-{self.content_id}-dashboard-left" class="pm-content-dashboard-left"></div>\
-                    <div id="pm-content-{self.content_id}-dashboard-middle" class="pm-content-dashboard-middle"></div>\
-                    <div id="pm-content-{self.content_id}-dashboard-right" class="pm-content-dashboard-right"></div>\
-                  </div>'
-        self.content = self.css + self.html
-
-        self.left_panel_items = [
-            {'header': 'Last Update', 'content': ''},
-            {'header': 'Overview', 'content':
-                '<b>Case Name:</b> Doe.John (99HCL000001-0000)<br><br><b>Practice Area:</b> Criminal '
-                'Defense<be><br><b>Case Stage:</b> Lower Court<br><br>SOL: N/A<br><br> <b>Cause(s) of '
-                'Action:</b><br>-Kidnapping, first degree, no substantial bodily harm'},
-            {'header': 'Case Details', 'content': '<br>'},
-            {'header': 'Custody Status', 'content': '<br>'},
-            {'header': 'Staff & Contacts', 'content': '<br>'},
-            {'header': 'Record Data', 'content': '<br>'},
-        ]
-        self.right_panel_items = [
-            {'header': 'Payment Status', 'content': '<br>'},
-            {'header': 'Fee Details', 'content': '<br>'},
-            {'header': 'Retainer Details', 'content': '<br>'},
-            {'header': 'Time Entire', 'content': '<br>'},
-            {'header': 'Expenses', 'content': '<br>'},
-            {'header': 'Balances', 'content': '<br>'},
-        ]
-        self.left_panel = ej.navigations.Accordion({'items': self.left_panel_items})
-        self.right_panel = ej.navigations.Accordion({'items': self.right_panel_items})
-
-    @property
-    def target_id(self):
-        return f"pm-content-{self.content_id}-dashboard-middle"
-
-    @property
-    def target_el(self):
-        return jQuery(f"#{self.target_id}")[0]
-
-    def form_show(self):
-        self.container_el.innerHTML = self.content
-        self.left_panel.appendTo(f"#pm-content-{self.content_id}-dashboard-left")
-        self.right_panel.appendTo(f"#pm-content-{self.content_id}-dashboard-right")
-
-        self.left_panel.items[0].content = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod ' \
-                                            'tempor incididunt ut labore et dolore magna aliqua.'
-
-    def destroy(self):
-        jQuery(f"#{self.container_id}")[0].innerHtml = ''
-        self.left_panel.destroy()
-        self.right_panel.destroy()
+class CaseDashboardPage(DashboardPage):
+    
+    def __init__(self, container_id, **kwargs):
+        
+        layout = {
+            'cellSpacing': [10, 10],
+            'columns': 3,
+            'cellAspectRatio': 100/50,
+            'panels': [
+                {
+                    'sizeX': 2, 'sizeY': 1, 'row': 0, 'col': 0,
+                    'id': 'case_details', 'header': 'Case Details',
+                },
+                {
+                    'sizeX': 1, 'sizeY': 1, 'row': 1, 'col': 0,
+                    'id': 'incident_date', 'header': 'Incident Date'
+                },
+                {
+                    'sizeX': 1, 'sizeY': 1, 'row': 2, 'col': 0,
+                    'id': 'cause_of_action', 'header': 'Cause(s) of Action',
+                },
+                {
+                    'sizeX': 1, 'sizeY': 1, 'row': 1, 'col': 1,
+                    'id': 'case_status', 'header': 'Case Status',
+                },
+                {
+                    'sizeX': 1, 'sizeY': 1, 'row': 2, 'col': 1,
+                    'id': 'custody_status', 'header': 'Custody Status',
+                },
+                {
+                    'sizeX': 1, 'sizeY': 1, 'row': 0, 'col': 2,
+                    'id': 'assigned_attorney', 'header': 'Assigned Attorney(s)',
+                },
+                {
+                    'sizeX': 1, 'sizeY': 2, 'row': 1, 'col': 2,
+                    'id': 'contacts',   'header': 'Contacts',
+                },
+                {
+                    'sizeX': 1, 'sizeY': 1, 'row': 3, 'col': 0,
+                    'id': 'case_payments', 'header': 'Payment Status',
+                },
+                {
+                    'sizeX': 1, 'sizeY': 1, 'row': 4, 'col': 0,
+                    'id': 'case_balances', 'header': 'Balances',
+                },
+                {
+                    'sizeX': 2, 'sizeY': 1, 'row': 3, 'col': 1,
+                    'id': 'time_entries', 'header': 'Time Entries',
+                },
+                {
+                    'sizeX': 2, 'sizeY': 1, 'row': 4, 'col': 1,
+                    'id': 'case_expenses', 'header': 'Expenses',
+                },
+            ],
+        }
+        
+        super().__init__(
+            layout=layout,
+            container_id=container_id,
+            container_style='margin-top: 10px; margin-right: 10px;',
+            **kwargs
+        )
+    

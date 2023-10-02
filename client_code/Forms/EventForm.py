@@ -34,10 +34,17 @@ class EventForm(FormBase):
 
         sections = [
             {
+                'name': 'case_details',
+                'rows': [
+                    [self.case],
+                    [self.no_case]
+                ]
+            },
+            {
                 'name': 'event_details',
                 'cols': [
-                    [self.case, self.activity, self.location, self.department],
-                    [self.no_case, self.documents, self.notes],
+                    [self.activity, self.location, self.department],
+                    [self.documents, self.notes],
                 ]
             },
             {

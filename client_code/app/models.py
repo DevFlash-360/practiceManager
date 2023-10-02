@@ -355,6 +355,27 @@ class ContactRole:
 
 
 @model_type
+class Document:
+    _title = 'title'
+    title = Attribute(field_type=types.FieldTypes.SINGLE_LINE)
+    case = Relationship('Case')
+    folder = Relationship('DocumentFolder')
+    type = Attribute(field_type=types.FieldTypes.ENUM_SINGLE)
+    discovery = Attribute(field_type=types.FieldTypes.BOOLEAN)
+    reviewed_by = Relationship('Staff')
+    notes = Attribute(field_type=types.FieldTypes.MULTI_LINE)
+    file = Attribute(field_type=types.FieldTypes.FILE_UPLOAD)
+
+
+@model_type
+class DocumentFolder:
+    _title = 'name'
+    name = Attribute(field_type=types.FieldTypes.SINGLE_LINE)
+    case = Relationship('Case')
+    # parent_folder = Relationship('DocumentFolder')
+
+
+@model_type
 class Entity:
     _title = 'name'
 

@@ -1,5 +1,5 @@
 # Application navigation
-from anvil.js.window import jQuery, ej
+from anvil.js.window import ej, jQuery
 import sys
 import time
 from AnvilFusion.tools.utils import AppEnv
@@ -28,7 +28,8 @@ PMAPP_SIDEBAR_MENUS = {
     'case_menu': [
         {'nodeId': 'case_agenda', 'nodeText': 'Agenda', 'nodeChild': []},
         {'nodeId': 'case_tasks', 'nodeText': 'Tasks', 'nodeChild': []},
-        {'nodeId': 'case_dashboard', 'nodeText': 'Case Dashboard', 'nodeChild': [
+        {'nodeId': 'case_dashboard_new', 'nodeText': 'Case Dashboard', 'nodeChild': []},
+        {'nodeId': 'case_dashboard', 'nodeText': 'Case Dashboard (old)', 'nodeChild': [
             {'nodeId': 'case_dashboard_events', 'nodeText': 'Events', 'nodeChild': []},
             {'nodeId': 'case_dashboard_tasks', 'nodeText': 'Tasks', 'nodeChild': []},
             {'nodeId': 'case_dashboard_documents', 'nodeText': 'Documents', 'nodeChild': []},
@@ -106,6 +107,13 @@ PMAPP_SIDEBAR_MENUS = {
     ],
 }
 
+PMAPP_DEFAULT_NAV_ITEMS = {
+    'case_menu': 'case_dashboard_new',
+    'intake_menu': 'intake_leads',
+    'tools_menu': 'tools_date_calculator',
+    'staff_menu': 'staff_my_timesheets',
+    'finance_menu': 'finance_payments',
+}
 
 # Navigation items/actions
 PMAPP_NAV_ITEMS = {
@@ -113,6 +121,7 @@ PMAPP_NAV_ITEMS = {
     'case_tasks': {'model': 'Task', 'type': 'view', 'action': 'open', 'config': 'TaskView', 'props': {}},
     'case_dashboard': {'model': 'CaseDashboard', 'type': 'page', 'action': 'open',
                        'subcomponent': 'case_dashboard_events', 'props': {}},
+    'case_dashboard_new': {'name': 'CaseDashboardPage', 'type': 'page', 'action': 'open', 'config': '', 'props': {}},
     'case_dashboard_events': {'class': 'EventScheduleView', 'type': 'custom', 'action': 'open', 'props': {}},
     'case_dashboard_tasks': {'model': 'Task', 'type': 'view', 'action': 'open', 'config': 'TaskView', 'props': {}},
     # 'case_dashboard_documents': {'model': '', 'type': 'page|view|form', 'action': 'open|popup', 'props': {}},
@@ -128,7 +137,8 @@ PMAPP_NAV_ITEMS = {
     # 'case_dashboard_updates': {'model': '', 'type': 'page|view|form', 'action': 'open|popup', 'props': {}},
     # 'case_dashboard_requirements': {'model': '', 'type': 'page|view|form', 'action': 'open|popup', 'props': {}},
     'case_reports_cases': {'model': 'Case', 'type': 'view', 'action': 'open', 'config': 'CaseView', 'props': {}},
-    # 'case_reports_documents': {'model': '', 'type': 'view', 'action': 'open', 'props': {}},
+    'case_reports_documents': {'class': 'CaseDocumentsView', 'type': 'custom', 'action': 'open',
+                               'props': {'case_uid': 'a31c356d-668c-4e62-b103-61869154adb1'}},
     'case_reports_time_entries': {'model': 'TimeEntry', 'type': 'view', 'action': 'open', 'config': 'TimeEntryView',
                                   'props': {}},
     'case_reports_expenses': {'model': 'Expense', 'type': 'view', 'action': 'open', 'config': 'ExpenseView',
@@ -228,10 +238,14 @@ class Sidebar:
                  container_el,
                  content_id,
                  sidebar_width=PMAPP_SIDEBAR_WIDTH,
-                 sections=PMAPP_SIDEBAR_MENUS,
-                 nav_items=PMAPP_NAV_ITEMS,
+                 sections=None,
+                 nav_items=None,
                  **properties):
 
+        if sections is None:
+            sections = PMAPP_SIDEBAR_MENUS
+        if nav_items is None:
+            nav_items = PMAPP_NAV_ITEMS
         self.target_el = target_el
         self.container_el = container_el
         self.content_id = content_id
@@ -260,17 +274,22 @@ class Sidebar:
             'nodeSelected': self.menu_select,
         })
 
+
     # Show sidebar menu
     def show(self):
         self.menu.appendTo(jQuery(f"#{self.container_el}-menu")[0])
         self.control.appendTo(jQuery(f"#{self.container_el}")[0])
 
+
     # Sidebar toggle
     def toggle(self, args):
         self.control.toggle()
 
+
     def show_menu(self, menu_id):
         self.menu.fields.dataSource = PMAPP_SIDEBAR_MENUS[menu_id]
+        self.menu_select(None, subcomponent=PMAPP_DEFAULT_NAV_ITEMS[menu_id])
+
 
     def menu_select(self, args, subcomponent=None):
         if subcomponent is None:
@@ -295,7 +314,7 @@ class Sidebar:
         if component['type'] == 'custom':
             try:
                 view_class = getattr(AppEnv.views, component['class'])
-                self.content_control = view_class(container_id=nav_container_id)
+                self.content_control = view_class(container_id=nav_container_id, **component['props'])
             except Exception as e:
                 print(e)
 
@@ -318,8 +337,8 @@ class Sidebar:
 
         elif component['type'] == 'page':
             try:
-                page_class = getattr(AppEnv.pages, f"{component['model']}Page")
-                self.content_control = page_class(container_id=nav_container_id)
+                page_class = getattr(AppEnv.pages, f"{component['name']}")
+                self.content_control = page_class(container_id=nav_container_id, **component['props'])
             except Exception as e:
                 print(e.args)
                 # self.content_control = Pages.BaseForm(model=component['model'], target=self.content_id)
@@ -328,6 +347,7 @@ class Sidebar:
             self.nav_target_id = self.content_control.target_id
 
         # try:
+        print(component)
         self.content_control.form_show()
         # except Exception as e:
         #     print(e)

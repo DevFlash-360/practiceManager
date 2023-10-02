@@ -1,6 +1,7 @@
 from ._anvil_designer import HomePageTemplate
-from anvil.js.window import jQuery, ej
+from anvil.js.window import ej, jQuery
 from AnvilFusion.tools.utils import AppEnv, init_user_session
+from AnvilFusion.tools.aws import AmazonAccess, AmazonS3
 from ... import app
 from ... import Forms
 from ... import Views
@@ -9,21 +10,36 @@ import navigation as nav
 
 
 AppEnv.APP_ID = 'practiceMANAGER'
+AppEnv.content_container_id = 'pm_content'
 AppEnv.data_models = app.models
 AppEnv.forms = Forms
 AppEnv.views = Views
 AppEnv.pages = Pages
-AppEnv.grid_settings  = {
-#   'toolbar_items': [
-#     {'text': 'Add', 'prefixIcon': 'e-add', 'cssClass': '', 'style': 'background-color:#87CEEB; color:white;'},
-#     {'text': 'Edit', 'prefixIcon': 'e-edit', 'cssClass': '', 'style': 'background-color:#98FB98; color:white;'},
-#     {'text': 'Delete', 'prefixIcon': 'e-delete', 'cssClass': '', 'style': 'background-color:#FF6347; color:white;'},
-#     {'text': 'Search'},
-#     {'text': '', 'prefixIcon': 'e-add', 'align': 'Right'},
-#     {'text': '', 'prefixIcon': 'e-search', 'align': 'Right'},
-#   ],
-#   'modes': ['Sort', 'Filter', 'InfiniteScroll', 'Edit', 'ForeignKey', 'Toolbar']
+AppEnv.grid_settings = {
+    # 'toolbar_items': [ {'text': 'Add', 'prefixIcon': 'e-add', 'cssClass': '', 'style': 'background-color:#87CEEB;
+    # color:white;'}, {'text': 'Edit', 'prefixIcon': 'e-edit', 'cssClass': '', 'style': 'background-color:#98FB98;
+    # color:white;'}, {'text': 'Delete', 'prefixIcon': 'e-delete', 'cssClass': '', 'style':
+    # 'background-color:#FF6347; color:white;'}, {'text': 'Search'}, {'text': '', 'prefixIcon': 'e-add',
+    # 'align': 'Right'}, {'text': '', 'prefixIcon': 'e-search', 'align': 'Right'}, ], 'modes': ['Sort', 'Filter',
+    # 'InfiniteScroll', 'Edit', 'ForeignKey', 'Toolbar']
 }
+AppEnv.aws_config = {
+    'region': 'us-east-1',
+    'cognito_identity_pool_id': 'us-east-1:759bd02e-0d9f-49ff-8270-1b94a37af8a2',
+    's3_bucket': 'practice-manager-storage',
+}
+AppEnv.aws_access = AmazonAccess(
+    region=AppEnv.aws_config['region'],
+    identity_pool_id=AppEnv.aws_config['cognito_identity_pool_id'],
+)
+AppEnv.aws_s3 = AmazonS3(
+    region=AppEnv.aws_config['region'],
+    credentials=AppEnv.aws_access.credentials,
+    bucket=AppEnv.aws_config['s3_bucket'],
+)
+# us-east-1
+# us-east-1:3fd6ffb9-92e0-4381-8354-4eb66d6c6141
+# practice-manager-storage
 
 
 class HomePage(HomePageTemplate):
@@ -105,11 +121,9 @@ class HomePage(HomePageTemplate):
         # Show sidebar menu
         self.sidebar.show()
 
-        # Show start page
-
     # Sidebar toggle event handler
     def sidebar_toggle(self, args):
-        self.sidebar.toggle()
+        self.sidebar.toggle(args)
 
     # Appbar menu popup window position adjustment
     @staticmethod

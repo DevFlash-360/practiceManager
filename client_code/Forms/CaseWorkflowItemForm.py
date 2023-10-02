@@ -61,7 +61,7 @@ class CaseWorkflowItemForm(FormBase):
 
 
     def due_date_base_change(self, args):
-        print('due_date_base_chnage', args)
+        print('due_date_base_change', args)
         if self.due_date_base.value == 'Completion of Previous Task':
             self.related_task.show()
             if self.source and self.source.grid.dataSource:
