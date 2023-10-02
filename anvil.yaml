@@ -811,6 +811,9 @@ db_schema:
     - name: remembered_logins
       admin_ui: {width: 200}
       type: simpleObject
+    - name: permissions
+      admin_ui: {width: 200}
+      type: simpleObject
   case_workflows:
     client: none
     server: full
