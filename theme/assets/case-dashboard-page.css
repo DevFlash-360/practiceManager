@@ -11,17 +11,24 @@
   grid-area: left;
   padding: 5px;
   background-color: #fff;
+  border-radius: 8px;
+  height: calc(100% - 42px) !important;
+  box-shadow: 0 0 3px #3c485826 !important;
 }
+
 .pm-content-dashboard-middle {
   grid-area: middle;
 /*   width: auto!important; */
-  max-width: 60vw;
-  padding: 5px;
+  max-width: 66.5vw;
+  padding: 0 8px;
 }
 .pm-content-dashboard-right {
   grid-area: right;
   padding: 5px;
   background-color: #fff;
+  border-radius: 8px;
+  height: calc(100% - 42px) !important;
+  box-shadow: 0 0 3px #3c485826 !important;
 }
 .e-accordion {
   border: none!important;
@@ -36,4 +43,7 @@
 .e-accordion .e-acrdn-item.e-select.e-active>.e-acrdn-header .e-acrdn-header-content,
 .e-accordion .e-acrdn-item.e-select.e-item-focus>.e-acrdn-header .e-acrdn-header-content {
   border: none!important;
+}
+.pm-content .pm-content-dashboard #pm-grid-container .e-grid {
+    height: 98% !important;
 }

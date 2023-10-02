@@ -33,6 +33,10 @@ class EventForm(FormBase):
         self.client_update = CheckboxInput(name='client_update', label='Client Update')
 
         sections = [
+            {'name': '_', 'rows': [
+                [self.case],
+                [self.no_case],
+            ]},
             {
                 'name': 'case_details',
                 'rows': [
@@ -44,6 +48,7 @@ class EventForm(FormBase):
                 'name': 'event_details',
                 'cols': [
                     [self.activity, self.location, self.department],
+                    [self.case, self.activity, self.location, self.department],
                     [self.documents, self.notes],
                 ]
             },
