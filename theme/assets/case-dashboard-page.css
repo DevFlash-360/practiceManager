@@ -13,6 +13,7 @@
   background-color: #fff;
   border-radius: 8px;
   height: calc(100% - 42px) !important;
+  box-shadow: 0 0 3px #3c485826 !important;
 }
 
 .pm-content-dashboard-middle {
@@ -27,6 +28,7 @@
   background-color: #fff;
   border-radius: 8px;
   height: calc(100% - 42px) !important;
+  box-shadow: 0 0 3px #3c485826 !important;
 }
 .e-accordion {
   border: none!important;
