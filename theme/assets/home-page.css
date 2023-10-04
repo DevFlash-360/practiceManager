@@ -380,7 +380,7 @@ div#pm-appbar-sidebar-toggle {
 
   #pm-footer {
     display: block;
-    z-index: 1000 !important;
+    /*z-index: 1000 !important;*/
   }
 
   #pm-appbar-menu {
@@ -389,4 +389,12 @@ div#pm-appbar-sidebar-toggle {
     padding-bottom: 0;
     padding-block: unset;
   }
+}
+#pm-sidebar #pm-sidebar-menu{
+	overflow: auto;
+	margin-bottom: 30px !important;
+}
+#pm-sidebar-menu::-webkit-scrollbar{
+	width: 3px;
+	height: 3px;
 }
