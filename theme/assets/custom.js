@@ -1,5 +1,6 @@
 $(document).ready(function() {
   console.log('hello');
+});
 $(document).on('click','#pm-appbar-sidebar-toggle',function() {
   if ($("#pm-sidebar").hasClass("e-close")) {
     $("#pm-content").css("margin-left", "95px");
