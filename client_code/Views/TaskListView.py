@@ -5,7 +5,7 @@ class TaskListView(GridView):
     def __init__(self, case=None, case_uid=None, **kwargs):
         print('TaskListView')
         view_config = {
-            'model': 'Document',
+            'model': 'Task',
             'columns': [
                 {'name': 'due_date', 'label': 'Due Date'},
                 {'name': 'case.case_name', 'label': 'Case'},
@@ -24,7 +24,7 @@ class TaskListView(GridView):
         else:
             filters = None
 
-        super().__init__(model='Document', view_config=view_config, filters=filters, **kwargs)
+        super().__init__(model='Task', view_config=view_config, filters=filters, **kwargs)
         self.grid.allowGrouping = True
         self.grid.groupSettings = {
             'columns': ['due_date'],
