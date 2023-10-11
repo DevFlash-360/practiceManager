@@ -119,7 +119,7 @@ PMAPP_DEFAULT_NAV_ITEMS = {
 PMAPP_NAV_ITEMS = {
     # 'case_agenda': {'model': '', 'type': 'page|view|form', 'action': 'open|popup', 'props': {}},
     'case_tasks': {'model': 'Task', 'type': 'view', 'action': 'open', 'config': 'TaskView', 'props': {}},
-    'case_dashboard': {'model': 'CaseDashboardOld', 'type': 'page', 'action': 'open',
+    'case_dashboard': {'name': 'CaseDashboardOldPage', 'type': 'page', 'action': 'open',
                        'subcomponent': 'case_dashboard_events', 'props': {}},
     'case_dashboard_new': {'name': 'CaseDashboardPage', 'type': 'page', 'action': 'open', 'config': '', 'props': {}},
     'case_dashboard_events': {'class': 'EventScheduleView', 'type': 'custom', 'action': 'open', 'props': {}},
@@ -347,7 +347,7 @@ class Sidebar:
             self.nav_target_id = self.content_control.target_id
 
         # try:
-        print(component)
+        print(component, self.content_control)
         self.content_control.form_show()
         # except Exception as e:
         #     print(e)
