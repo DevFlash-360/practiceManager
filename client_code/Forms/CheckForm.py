@@ -1,13 +1,14 @@
 from AnvilFusion.components.FormBase import FormBase, POPUP_WIDTH_COL1
 from AnvilFusion.components.FormInputs import *
+from datetime import datetime
 
 
 class CheckForm(FormBase):
     def __init__(self, **kwargs):
         print('CheckForm')
         kwargs['model'] = 'Check'
-        self.check_number = TextInput(name='check_number', label='Check Number')
-        self.date = DateInput(name='date', label='Date')
+        self.check_number = NumberInput(name='check_number', label='Check Number')
+        self.date = DateInput(name='date', label='Date', value=datetime.now())
         self.payee = LookupInput(name='payee', label='Payee', model='Contact', text_field='full_name')
         self.amount = NumberInput(name='amount', label='Amount')
         self.memo = MultiLineInput(name='memo', label='Memo')

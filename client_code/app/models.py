@@ -42,6 +42,7 @@ class Users:
     n_password_failures = Attribute(field_type=types.FieldTypes.NUMBER)
     confirmed_email = Attribute(field_type=types.FieldTypes.BOOLEAN)
     signed_up = Attribute(field_type=types.FieldTypes.DATETIME)
+    permissions = Attribute(field_type=types.FieldTypes.OBJECT)
 
 
 @model_type
