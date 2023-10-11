@@ -51,7 +51,8 @@ class TaskListView(GridView):
 
     def due_date_caption(self, args):
         print('due_date_caption', args)
-        return args['due_date']
+        return 'test'
+        # return args['due_date']
 
 
     def form_show(self, get_data=True, **args):
