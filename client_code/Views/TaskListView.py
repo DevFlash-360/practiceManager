@@ -34,7 +34,7 @@ class TaskListView(GridView):
         self.grid.allowSorting = True
         self.grid.sortSettings = {
             'columns': [
-                {'field': 'due_date', 'direction': 'Ascending'},
+                {'field': 'due_date', 'direction': 'Descending'},
             ]
         }
         # self.grid.editSettings = {
