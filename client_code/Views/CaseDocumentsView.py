@@ -32,7 +32,7 @@ class CaseDocumentsView(GridView):
         self.grid.groupSettings = {
             'columns': ['folder'],
             'showDropArea': False,
-            'captionTemplate': '<div>${key} - ${count} files</div>',
+            # 'captionTemplate': '<div>${key} - ${count} files</div>',
         }
         # self.grid.editSettings = {
         #     'allowEditing': True,
