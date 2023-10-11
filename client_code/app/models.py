@@ -1,6 +1,6 @@
 from AnvilFusion.datamodel.particles import model_type, Attribute, Relationship, Computed
 from AnvilFusion.datamodel import types
-from datetime import datetime
+from datetime import date
 
 
 # Model list for enumerations
@@ -615,7 +615,7 @@ class Task:
 
     @staticmethod
     def get_due_date_view(args):
-        if args['due_date'] > datetime.now():
+        if args['due_date'] > date.today():
             due_date_view = 'Overdue'
         elif not args['due_date']:
             due_date_view = 'No Due Date'
