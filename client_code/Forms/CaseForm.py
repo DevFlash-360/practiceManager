@@ -29,7 +29,7 @@ class CaseForm(FormBase):
                                                         on_change=self.add_sol)
         self.court = LookupInput(name='court', label='Court', model='Entity', text_field='name',
                                  add_item_label='Add Court', add_item_form=Forms.EntityForm)
-        self.department = LookupInput(name='department', label='Department', model='Contact', text_field='entity.name',
+        self.department = LookupInput(name='department', label='Department', model='Contact', text_field='entity__name',
                                       add_item_label='Add Judge', add_item_form=Forms.ContactForm)
         self.case_number = TextInput(name='case_number', label='Case Number')
         self.incident_date = DateInput(name='incident_date', label='Incident Date')
