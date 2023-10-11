@@ -1,4 +1,5 @@
 from AnvilFusion.components.GridView import GridView
+import anvil.js
 
 
 class TaskListView(GridView):
@@ -26,12 +27,13 @@ class TaskListView(GridView):
             filters = None
 
         super().__init__(model='Task', view_config=view_config, filters=filters, **kwargs)
+        anvil.js.window['captionTemplateFormat'] = self.due_date_caption
         self.grid.allowGrouping = True
         self.grid.groupSettings = {
             'columns': ['due_date_view'],
             'showDropArea': False,
-            'captionTemplate': '<div>${key} - ${data}</div>',
-            # 'captionTemplate': self.due_date_caption,
+            # 'captionTemplate': '<div>${key} - ${data}</div>',
+            'captionTemplate': '<div>${captionTemplateFormat(data)}</div>',
         }
         self.grid.allowSorting = True
         self.grid.sortSettings = {
