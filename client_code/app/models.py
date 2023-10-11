@@ -615,12 +615,19 @@ class Task:
 
     @staticmethod
     def get_due_date_view(args):
-        if args['due_date'] > date.today():
+        if args['due_date'] < date.today():
             due_date_view = 'Overdue'
         elif not args['due_date']:
             due_date_view = 'No Due Date'
         else:
-            due_date_view = args['due_date'].strftime("%a, %b %d").replace(" 0", " ")
+            due_date = args['due_date'].strftime("%a, %b %d").replace(" 0", " ")
+            due_in = (args['due_date'] - date.today()).days
+            if due_in == 0:
+                due_date_view = f"Due {due_date} - today"
+            elif due_in == 1:
+                due_date_view = f"Due {due_date} - tomorrow"
+            else:
+                due_date_view = f"Due {due_date} in {(args['due_date'] - date.today()).days} days"
         return due_date_view
     due_date_view = Computed(['due_date'], 'get_due_date_view')
 
