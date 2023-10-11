@@ -11,7 +11,7 @@ class CaseDocumentsView(GridView):
             'columns': [
                 {'name': 'folder.name', 'label': 'Folder'},
                 {'name': 'title', 'label': 'Document Title'},
-                {'name': 'file.name', 'label': 'File Name'},
+                # {'name': 'file.name', 'label': 'File Name'},
                 {'name': 'type', 'label': 'Type'},
                 {'name': 'discovery', 'label': 'Discovery'},
                 {'name': 'reviewed_by.full_name', 'label': 'Reviewed By'},
