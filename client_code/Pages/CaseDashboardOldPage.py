@@ -2,7 +2,7 @@ from anvil.js.window import jQuery, ej
 import uuid
 
 
-class CaseDashboardPage:
+class CaseDashboardOldPage:
     def __init__(self, container_id):
         print('Case Dashboard')
         self.container_id = container_id

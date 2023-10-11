@@ -22,12 +22,10 @@ class EventForm(FormBase):
         self.contact = LookupInput(name='contact', label='Contact', model='Contact', text_field='full_name',
                                    select='multi')
         self.location = LookupInput(name='location', label='Location', model='Entity', text_field='name',
-                                    add_item_label='Add Entity', add_item_form=Forms.EntityForm,
                                     on_change=self.location_change)
         self.department = LookupInput(name='department', label='Department', model='Contact',
                                       text_field=['full_name', 'title_position'],
-                                      compute_option=self.contact_department,
-                                      add_item_label='Add Judge', add_item_form=Forms.ContactForm, enabled=False)
+                                      compute_option=self.contact_department, enabled=False)
         self.client_attendance_required = CheckboxInput(name='client_attendance_required',
                                                         label='Client attendance required')
         self.client_update = CheckboxInput(name='client_update', label='Client Update')

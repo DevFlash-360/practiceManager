@@ -1,5 +1,6 @@
 from AnvilFusion.datamodel.particles import model_type, Attribute, Relationship, Computed
 from AnvilFusion.datamodel import types
+from datetime import date
 
 
 # Model list for enumerations
@@ -42,6 +43,7 @@ class Users:
     n_password_failures = Attribute(field_type=types.FieldTypes.NUMBER)
     confirmed_email = Attribute(field_type=types.FieldTypes.BOOLEAN)
     signed_up = Attribute(field_type=types.FieldTypes.DATETIME)
+    permissions = Attribute(field_type=types.FieldTypes.OBJECT)
 
 
 @model_type
@@ -610,6 +612,35 @@ class Task:
     notes = Attribute(field_type=types.FieldTypes.MULTI_LINE)
     """Detail View"""
     documents = Attribute(field_type=types.FieldTypes.FILE_UPLOAD)
+
+    @staticmethod
+    def get_due_date_view(args):
+        if args['due_date'] < date.today():
+            due_date_view = 'OVERDUE'
+        elif not args['due_date']:
+            due_date_view = 'No Due Date'
+        else:
+            due_date = args['due_date'].strftime("%a, %b %d").replace(" 0", " ")
+            due_in = (args['due_date'] - date.today()).days
+            if due_in == 0:
+                due_date_view = f"Due {due_date} - today"
+            elif due_in == 1:
+                due_date_view = f"Due {due_date} - tomorrow"
+            else:
+                due_date_view = f"Due {due_date} in {(args['due_date'] - date.today()).days} days"
+        return due_date_view
+    due_date_view = Computed(['due_date'], 'get_due_date_view')
+
+    @staticmethod
+    def get_due_date_days(args):
+        if args['due_date']:
+            due_date_days = (args['due_date'] - date.today()).days
+        else:
+            due_date_days = -1
+        if due_date_days < 0:
+            due_date_days = -100
+        return due_date_days
+    due_date_days = Computed(['due_date'], 'get_due_date_days')
 
 
 @model_type

@@ -118,8 +118,9 @@ PMAPP_DEFAULT_NAV_ITEMS = {
 # Navigation items/actions
 PMAPP_NAV_ITEMS = {
     # 'case_agenda': {'model': '', 'type': 'page|view|form', 'action': 'open|popup', 'props': {}},
-    'case_tasks': {'model': 'Task', 'type': 'view', 'action': 'open', 'config': 'TaskView', 'props': {}},
-    'case_dashboard': {'model': 'CaseDashboard', 'type': 'page', 'action': 'open',
+    # 'case_tasks': {'model': 'Task', 'type': 'view', 'action': 'open', 'config': 'TaskView', 'props': {}},
+    'case_tasks': {'class': 'TaskListView', 'type': 'custom', 'action': 'open', 'props': {}},
+    'case_dashboard': {'name': 'CaseDashboardOldPage', 'type': 'page', 'action': 'open',
                        'subcomponent': 'case_dashboard_events', 'props': {}},
     'case_dashboard_new': {'name': 'CaseDashboardPage', 'type': 'page', 'action': 'open', 'config': '', 'props': {}},
     'case_dashboard_events': {'class': 'EventScheduleView', 'type': 'custom', 'action': 'open', 'props': {}},
@@ -137,6 +138,7 @@ PMAPP_NAV_ITEMS = {
     # 'case_dashboard_updates': {'model': '', 'type': 'page|view|form', 'action': 'open|popup', 'props': {}},
     # 'case_dashboard_requirements': {'model': '', 'type': 'page|view|form', 'action': 'open|popup', 'props': {}},
     'case_reports_cases': {'model': 'Case', 'type': 'view', 'action': 'open', 'config': 'CaseView', 'props': {}},
+    # 'case_reports_documents': {'model': 'Document', 'type': 'view', 'action': 'open', 'props': {}},
     'case_reports_documents': {'class': 'CaseDocumentsView', 'type': 'custom', 'action': 'open',
                                'props': {'case_uid': 'a31c356d-668c-4e62-b103-61869154adb1'}},
     'case_reports_time_entries': {'model': 'TimeEntry', 'type': 'view', 'action': 'open', 'config': 'TimeEntryView',
@@ -151,7 +153,7 @@ PMAPP_NAV_ITEMS = {
     'case_reports_contacts': {'model': 'Contact', 'type': 'view', 'action': 'open', 'config': 'ContactView',
                               'props': {}},
     'case_reports_entities': {'model': 'Entity', 'type': 'view', 'action': 'open', 'config': 'EntityView', 'props': {}},
-    # 'case_reports_updates': {'model': '', 'type': 'page', 'action': 'open', 'props': {}},
+    'case_reports_updates': {'model': 'Update', 'type': 'view', 'action': 'open', 'props': {}},
     # 'case_reports_requirements': {'model': '', 'type': 'page', 'action': 'open', 'props': {}},
 
     'intake_leads': {'model': 'Lead', 'type': 'view', 'action': 'open', 'props': {}},
@@ -347,7 +349,7 @@ class Sidebar:
             self.nav_target_id = self.content_control.target_id
 
         # try:
-        print(component)
+        print(component, self.content_control)
         self.content_control.form_show()
         # except Exception as e:
         #     print(e)
