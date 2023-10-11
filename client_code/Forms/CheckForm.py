@@ -17,12 +17,12 @@ class CheckForm(FormBase):
 
         fields = [
             self.check_number,
+            self.bank_account,
             self.date,
             self.payee,
             self.amount,
             self.memo,
-            self.reference,
-            self.bank_account,
+            self.reference,            
         ]
 
         validation = {

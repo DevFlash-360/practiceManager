@@ -653,3 +653,28 @@ class TypeOfAction:
     _title = 'name'
     _table_name = 'types_of_action'
     name = Attribute(field_type=types.FieldTypes.SINGLE_LINE)
+
+
+@model_type
+class Update:
+    _title = 'name'
+    
+    case = Relationship('Case')
+    next_activity = Relationship('Activity')
+    next_date = Attribute(field_type=types.FieldTypes.DATETIME)
+    todays_update = Attribute(field_type=types.FieldTypes.MULTI_LINE)
+    client_attendance_required = Attribute(field_type=types.FieldTypes.BOOLEAN)
+    client_update = Attribute(field_type=types.FieldTypes.BOOLEAN)
+
+# Need to add these forms/reports
+# @model_type
+# class Statute:
+
+# @model_type
+# class ReimbursementRequest:
+
+# @model_type
+# class TimeOffRequest:
+
+# @model_type
+# class Payroll:
