@@ -7,6 +7,7 @@ class TaskListView(GridView):
         view_config = {
             'model': 'Task',
             'columns': [
+                {'name': 'due_date_view', 'label': 'Due Date'},
                 {'name': 'due_date', 'label': 'Due Date'},
                 {'name': 'case.case_name', 'label': 'Case'},
                 {'name': 'activity.name', 'label': 'Activity'},
@@ -27,14 +28,14 @@ class TaskListView(GridView):
         super().__init__(model='Task', view_config=view_config, filters=filters, **kwargs)
         self.grid.allowGrouping = True
         self.grid.groupSettings = {
-            'columns': ['due_date'],
+            'columns': ['due_date_view'],
             'showDropArea': False,
             'captionTemplate': '<div>${key} - ${count} files</div>',
         }
         self.grid.allowSorting = True
         self.grid.sortSettings = {
             'columns': [
-                {'field': 'due_date', 'direction': 'Descending'},
+                {'field': 'due_date', 'direction': 'Ascending'},
             ]
         }
         # self.grid.editSettings = {

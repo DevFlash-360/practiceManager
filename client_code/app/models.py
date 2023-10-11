@@ -1,5 +1,6 @@
 from AnvilFusion.datamodel.particles import model_type, Attribute, Relationship, Computed
 from AnvilFusion.datamodel import types
+from datetime import datetime
 
 
 # Model list for enumerations
@@ -611,6 +612,17 @@ class Task:
     notes = Attribute(field_type=types.FieldTypes.MULTI_LINE)
     """Detail View"""
     documents = Attribute(field_type=types.FieldTypes.FILE_UPLOAD)
+
+    @staticmethod
+    def get_due_date_view(args):
+        if args['due_date'] > datetime.now():
+            due_date_view = 'Overdue'
+        elif not args['due_date']:
+            due_date_view = 'No Due Date'
+        else:
+            due_date_view = args['due_date'].strftime("%a, %b %d").replace(" 0", " ")
+        return due_date_view
+    due_date_view = Computed(['due_date'], 'get_due_date_view')
 
 
 @model_type
