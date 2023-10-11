@@ -54,8 +54,8 @@ class TaskListView(GridView):
 
     def due_date_caption(self, args):
         print('due_date_caption', args)
-        background_color = 'background-color:#ed9191;' if args['key'] == -100 else ''
-        return f'<div class="template" style="padding-left:-25px;{background_color}">{args.items[0].due_date_view}</div>'
+        caption_color = 'color:#a63333;' if args['key'] == -100 else ''
+        return f'<div class="template" style="padding-left:25px;{caption_color}">{args.items[0].due_date_view}</div>'
         # return args['due_date']
 
 
