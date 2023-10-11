@@ -631,6 +631,17 @@ class Task:
         return due_date_view
     due_date_view = Computed(['due_date'], 'get_due_date_view')
 
+    @staticmethod
+    def get_due_date_days(args):
+        if args['due_date']:
+            due_date_days = (args['due_date'] - date.today()).days
+        else:
+            due_date_days = -1
+        if due_date_days < 0:
+            due_date_days = -100
+        return due_date_days
+    due_date_days = Computed(['due_date'], 'get_due_date_days')
+
 
 @model_type
 class TimeEntry:

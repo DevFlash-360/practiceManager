@@ -8,7 +8,8 @@ class TaskListView(GridView):
         view_config = {
             'model': 'Task',
             'columns': [
-                {'name': 'due_date_view', 'label': 'Due Date'},
+                {'name': 'due_date_days', 'label': 'Due Date'},
+                {'name': 'due_date_view', 'label': 'Due Date', 'visible': False},
                 {'name': 'due_date', 'label': 'Due Date'},
                 {'name': 'case.case_name', 'label': 'Case'},
                 {'name': 'activity.name', 'label': 'Activity'},
@@ -30,7 +31,7 @@ class TaskListView(GridView):
         anvil.js.window['captionTemplateFormat'] = self.due_date_caption
         self.grid.allowGrouping = True
         self.grid.groupSettings = {
-            'columns': ['due_date_view'],
+            'columns': ['due_date_days'],
             'showDropArea': False,
             # 'captionTemplate': '<div>${key} - ${data}</div>',
             'captionTemplate': '<div>${captionTemplateFormat(data)}</div>',
@@ -38,7 +39,7 @@ class TaskListView(GridView):
         self.grid.allowSorting = True
         self.grid.sortSettings = {
             'columns': [
-                {'field': 'due_date', 'direction': 'Ascending'},
+                {'field': 'due_date_days', 'direction': 'Ascending'},
             ]
         }
         # self.grid.editSettings = {
@@ -53,7 +54,7 @@ class TaskListView(GridView):
 
     def due_date_caption(self, args):
         print('due_date_caption', args)
-        return '<div class="template">TEST</div>'
+        return f'<div class="template">{args.items[0].due_date_view}</div>'
         # return args['due_date']
 
 
