@@ -30,7 +30,7 @@ class TaskListView(GridView):
         self.grid.groupSettings = {
             'columns': ['due_date_view'],
             'showDropArea': False,
-            'captionTemplate': '<div>${due_date_view}</div>',
+            'captionTemplate': '<div>${key} - ${data}</div>',
             # 'captionTemplate': self.due_date_caption,
         }
         self.grid.allowSorting = True
