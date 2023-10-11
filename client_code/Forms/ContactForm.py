@@ -11,11 +11,8 @@ class ContactForm(FormBase):
         kwargs['model'] = 'Contact'
         self.first_name = TextInput(name='name', label='Contact Name', save=False)
         self.last_name = TextInput(name='last_name', label='Last Name', save=False)
-        self.contact_group = LookupInput(model='ContactGroup', name='contact_group', label='Contact Group',
-                                         add_item_label='Add Group', add_item_model='ContactGroup',
-                                         add_item_form=FormBase)
-        self.entity = LookupInput(name='entity', label='Entity', model='Entity', text_field='name',
-                                  add_item_label='Add Entity', add_item_form=Forms.EntityForm)
+        self.contact_group = LookupInput(model='ContactGroup', name='contact_group', label='Contact Group')
+        self.entity = LookupInput(name='entity', label='Entity', model='Entity', text_field='name')
         self.email = TextInput(name='email', label='Email')
         self.mobile_phone = TextInput(name='mobile_phone', label='Mobile Phone')
         self.work_phone = TextInput(name='work_phone', label='Work Phone')

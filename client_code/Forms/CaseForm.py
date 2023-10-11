@@ -27,18 +27,16 @@ class CaseForm(FormBase):
         self.add_statute_of_limitations = CheckboxInput(name='add_statute_of_limitations',
                                                         label='Add Statute of Limitations', save=False,
                                                         on_change=self.add_sol)
-        self.court = LookupInput(name='court', label='Court', model='Entity', text_field='name',
-                                 add_item_label='Add Court', add_item_form=Forms.EntityForm)
-        self.department = LookupInput(name='department', label='Department', model='Contact', text_field='entity.name',
-                                      add_item_label='Add Judge', add_item_form=Forms.ContactForm)
+        self.court = LookupInput(name='court', label='Court', model='Entity', text_field='name')
+        self.department = LookupInput(name='department', label='Department', model='Contact', text_field='entity.name')
         self.case_number = TextInput(name='case_number', label='Case Number')
         self.incident_date = DateInput(name='incident_date', label='Incident Date')
         self.incident_location = TextInput(name='incident_location', label='Incident Location')
         self.case_description = MultiLineInput(name='case_description', label='Case Description', rows=5)
         self.clients = LookupInput(name='clients', label='Client(s)', model='Client', text_field='client_name',
-                                   select='multi', add_item_label='Add Client', add_item_form=Forms.ClientForm)
+                                   select='multi')
         self.contacts = LookupInput(name='contacts', label='Contacts', model='Contact', text_field='full_name',
-                                    select='multi', add_item_label='Add Contact', add_item_form=Forms.ContactForm)
+                                    select='multi')
         self.staff = LookupInput(name='staff', label='Staff', model='Staff', text_field='full_name', select='multi')
         self.share_case_information_with = LookupInput(name='share_case_information_with',
                                                        label='Share case information with',

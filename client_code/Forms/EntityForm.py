@@ -14,8 +14,7 @@ class EntityForm(FormBase):
         self.address = TextInput(name='address', label='Address')
         self.website = TextInput(name='website', label='Website')
         self.primary_contact = LookupInput(name='primary_contact', label='Primary Contact', model='Contact',
-                                           text_field='full_name',  add_item_label='Add Contact',
-                                           add_item_form=Forms.ContactForm)
+                                           text_field='full_name')
 
         fields = [
             self.name,
