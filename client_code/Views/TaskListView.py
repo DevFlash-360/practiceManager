@@ -31,6 +31,12 @@ class TaskListView(GridView):
             'showDropArea': False,
             'captionTemplate': '<div>${key} - ${count} files</div>',
         }
+        self.grid.allowSorting = True
+        self.grid.sortSettings = {
+            'columns': [
+                {'field': 'due_date', 'direction': 'Ascending'},
+            ]
+        }
         # self.grid.editSettings = {
         #     'allowEditing': True,
         #     'allowAdding': False,
