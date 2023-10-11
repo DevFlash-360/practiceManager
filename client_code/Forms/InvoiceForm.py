@@ -87,10 +87,10 @@ class InvoiceForm(FormBase):
                 [self.bill_to, self.balance_due],
                 [None, self.status],
             ]},
-            {'name': 'time_entries', 'label': 'Time Entries', 'rows': [[self.time_entries]]},
-            {'name': 'expenses', 'label': 'Expenses', 'rows': [[self.expenses]]},
-            {'name': 'adjustments', 'label': 'Adjustments', 'rows': [[self.adjustments]]},
-            {'name': 'payments', 'label': 'Payments', 'rows': [[self.payments]]},
+            # {'name': 'time_entries', 'label': 'Time Entries', 'rows': [[self.time_entries]]},
+            # {'name': 'expenses', 'label': 'Expenses', 'rows': [[self.expenses]]},
+            # {'name': 'adjustments', 'label': 'Adjustments', 'rows': [[self.adjustments]]},
+            # {'name': 'payments', 'label': 'Payments', 'rows': [[self.payments]]},
         ]
 
         super().__init__(sections=sections, width=POPUP_WIDTH_COL3, **kwargs)

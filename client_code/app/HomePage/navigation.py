@@ -151,7 +151,7 @@ PMAPP_NAV_ITEMS = {
     'case_reports_contacts': {'model': 'Contact', 'type': 'view', 'action': 'open', 'config': 'ContactView',
                               'props': {}},
     'case_reports_entities': {'model': 'Entity', 'type': 'view', 'action': 'open', 'config': 'EntityView', 'props': {}},
-    # 'case_reports_updates': {'model': '', 'type': 'page', 'action': 'open', 'props': {}},
+    'case_reports_updates': {'model': 'Update', 'type': 'view', 'action': 'open', 'props': {}},
     # 'case_reports_requirements': {'model': '', 'type': 'page', 'action': 'open', 'props': {}},
 
     'intake_leads': {'model': 'Lead', 'type': 'view', 'action': 'open', 'props': {}},
