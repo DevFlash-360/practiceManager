@@ -30,7 +30,8 @@ class TaskListView(GridView):
         self.grid.groupSettings = {
             'columns': ['due_date_view'],
             'showDropArea': False,
-            'captionTemplate': '<div>${due_date}</div>',
+            # 'captionTemplate': '<div>${due_date}</div>',
+            'captionTemplate': self.due_date_caption,
         }
         self.grid.allowSorting = True
         self.grid.sortSettings = {
@@ -46,6 +47,11 @@ class TaskListView(GridView):
         # }
         # self.grid.dataBound = self.collapse_all
         self.first_load = True
+
+
+    def due_date_caption(self, args):
+        print('due_date_caption', args)
+        return args['due_date']
 
 
     def form_show(self, get_data=True, **args):
