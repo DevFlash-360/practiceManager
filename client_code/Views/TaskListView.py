@@ -51,7 +51,7 @@ class TaskListView(GridView):
 
     def due_date_caption(self, args):
         print('due_date_caption', args)
-        return '<div class="template">${due_date_view}</div>'
+        return '<div class="template">TEST</div>'
         # return args['due_date']
 
 
