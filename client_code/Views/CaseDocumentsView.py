@@ -29,11 +29,11 @@ class CaseDocumentsView(GridView):
 
         super().__init__(model='Document', view_config=view_config, filters=filters, **kwargs)
         self.grid.allowGrouping = True
-        # self.grid.groupSettings = {
-        #     'columns': ['folder'],
-        #     'showDropArea': False,
-        #     'captionTemplate': '<div>${key} - ${count} files</div>',
-        # }
+        self.grid.groupSettings = {
+            'columns': ['folder__name'],
+            'showDropArea': False,
+            'captionTemplate': '<div>${key} - ${count} files</div>',
+        }
         # self.grid.editSettings = {
         #     'allowEditing': True,
         #     'allowAdding': False,
