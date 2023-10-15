@@ -21,7 +21,7 @@ class UpdateForm(FormBase):
         sections = [
             {'name': '_', 'rows': [
                 [self.case],
-                [self.no_case],
+                # [self.no_case],
                 [self.next_activity],
                 [self.next_date],
                 [self.todays_update],
