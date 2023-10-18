@@ -190,6 +190,18 @@ class CaseContact:
 
 
 @model_type
+class CaseRequirement:
+    _title = 'name'
+
+    name = Attribute(field_type=types.FieldTypes.SINGLE_LINE)
+    case = Relationship('Case')
+    notes = Attribute(field_type=types.FieldTypes.MULTI_LINE)
+    url = Attribute(field_type=types.FieldTypes.HYPERLINK)
+    due_date = Attribute(field_type=types.FieldTypes.DATE)
+    completed = Attribute(field_type=types.FieldTypes.BOOLEAN)
+
+
+@model_type
 class CaseStage:
     _title = 'name'
     name = Attribute(field_type=types.FieldTypes.SINGLE_LINE)

@@ -135,7 +135,7 @@ PMAPP_NAV_ITEMS = {
                                 'props': {}},
     'case_dashboard_contacts': {'model': 'CaseContact', 'type': 'view', 'action': 'open', 'props': {}},
     'case_dashboard_updates': {'model': 'Update', 'type': 'view', 'action': 'open', 'props': {}},
-    # 'case_dashboard_requirements': {'model': 'Requirement', 'type': 'view', 'action': 'open', 'props': {}},
+    'case_dashboard_requirements': {'model': 'CaseRequirement', 'type': 'view', 'action': 'open', 'props': {}},
 
     'case_reports_events': {'class': 'EventScheduleView', 'type': 'custom', 'action': 'open', 'props': {}},
     'case_reports_cases': {'model': 'Case', 'type': 'view', 'action': 'open', 'config': 'CaseView', 'props': {}},
