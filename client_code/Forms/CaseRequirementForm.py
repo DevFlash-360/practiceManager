@@ -4,7 +4,7 @@ from AnvilFusion.components.MultiFieldInput import HyperlinkInput
 from datetime import datetime, timedelta
 
 
-class CaseUpdateForm(FormBase):
+class CaseRequirementForm(FormBase):
 
     def __init__(self, **kwargs):
 
