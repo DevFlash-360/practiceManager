@@ -76,11 +76,20 @@ class AppErrorLog:
     user_uid = Attribute(field_type=types.FieldTypes.SINGLE_LINE)
 
 
-@model_type
+# @model_type
+# class AppGridView:
+#     name = Attribute(field_type=types.FieldTypes.SINGLE_LINE)
+#     config = Attribute(field_type=types.FieldTypes.OBJECT)
+#     permissions = Attribute(field_type=types.FieldTypes.OBJECT)
 class AppGridView:
+    _title = "name"
+    model_type = types.ModelTypes.SYSTEM
     name = Attribute(field_type=types.FieldTypes.SINGLE_LINE)
+    model = Attribute(field_type=types.FieldTypes.SINGLE_LINE)
+    columns = Attribute(field_type=types.FieldTypes.OBJECT)
     config = Attribute(field_type=types.FieldTypes.OBJECT)
     permissions = Attribute(field_type=types.FieldTypes.OBJECT)
+    owner = Attribute(field_type=types.FieldTypes.SINGLE_LINE)
 
 
 @model_type
