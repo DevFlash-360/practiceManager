@@ -1498,7 +1498,9 @@ db_schema:
     - name: created_by
       admin_ui: {width: 200}
       type: string
-    - {name: columns, admin_ui: null, type: simpleObject}
+    - name: columns
+      admin_ui: {order: 0.5}
+      type: simpleObject
     - {name: model, admin_ui: null, type: string}
     - {name: owner, admin_ui: null, type: string}
   staff:
