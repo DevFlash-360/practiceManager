@@ -30,12 +30,14 @@ ENUM_MODEL_LIST = {
 @model_type
 class Tenant:
     _model_type = types.ModelTypes.SYSTEM
+    _title = 'name'
     name = Attribute(field_type=types.FieldTypes.SINGLE_LINE)
 
 
 @model_type
-class Users:
+class User:
     _model_type = types.ModelTypes.SYSTEM
+    _title = 'email'
     email = Attribute(field_type=types.FieldTypes.EMAIL)
     enabled = Attribute(field_type=types.FieldTypes.BOOLEAN)
     last_login = Attribute(field_type=types.FieldTypes.DATETIME)
@@ -83,6 +85,7 @@ class AppGridView:
 
 @model_type
 class File:
+    _title = 'name'
     name = Attribute(field_type=types.FieldTypes.SINGLE_LINE)
     mime_type = Attribute(field_type=types.FieldTypes.SINGLE_LINE)
     size = Attribute(field_type=types.FieldTypes.NUMBER)

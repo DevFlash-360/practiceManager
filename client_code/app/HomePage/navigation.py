@@ -25,8 +25,18 @@ PMAPP_SIDEBAR_MENUS = {
     'case_menu': [
         {'nodeId': 'case_agenda', 'nodeText': 'Agenda', 'nodeChild': []},
         {'nodeId': 'case_tasks', 'nodeText': 'Tasks', 'nodeChild': []},
-        {'nodeId': 'case_dashboard_new', 'nodeText': 'Case Dashboard', 'nodeChild': []},
-        {'nodeId': 'case_dashboard', 'nodeText': 'Case Dashboard (old)', 'nodeChild': [
+        {'nodeId': 'case_dashboard', 'nodeText': 'Case Dashboard', 'nodeChild': [
+            {'nodeId': 'case_dashboard_events', 'nodeText': 'Events', 'nodeChild': []},
+            {'nodeId': 'case_dashboard_tasks', 'nodeText': 'Tasks', 'nodeChild': []},
+            {'nodeId': 'case_dashboard_documents', 'nodeText': 'Documents', 'nodeChild': []},
+            {'nodeId': 'case_dashboard_time_entries', 'nodeText': 'Time Entries', 'nodeChild': []},
+            {'nodeId': 'case_dashboard_expenses', 'nodeText': 'Expenses', 'nodeChild': []},
+            {'nodeId': 'case_dashboard_invoices', 'nodeText': 'Invoices', 'nodeChild': []},
+            {'nodeId': 'case_dashboard_contacts', 'nodeText': 'Contacts', 'nodeChild': []},
+            {'nodeId': 'case_dashboard_updates', 'nodeText': 'Updates', 'nodeChild': []},
+            {'nodeId': 'case_dashboard_requirements', 'nodeText': 'Requirements', 'nodeChild': []},
+        ]},
+        {'nodeId': 'case_dashboard_old', 'nodeText': 'Case Dashboard (old)', 'nodeChild': [
             {'nodeId': 'case_dashboard_events', 'nodeText': 'Events', 'nodeChild': []},
             {'nodeId': 'case_dashboard_tasks', 'nodeText': 'Tasks', 'nodeChild': []},
             {'nodeId': 'case_dashboard_documents', 'nodeText': 'Documents', 'nodeChild': []},
@@ -120,9 +130,9 @@ PMAPP_NAV_ITEMS = {
     # 'case_tasks': {'model': 'Task', 'type': 'view', 'action': 'open', 'config': 'TaskView', 'props': {}},
     'case_tasks': {'class': 'TaskListView', 'type': 'custom', 'action': 'open', 'props': {}},
 
-    'case_dashboard': {'name': 'CaseDashboardOldPage', 'type': 'page', 'action': 'open',
-                       'subcomponent': 'case_dashboard_events', 'props': {}},
-    'case_dashboard_new': {'name': 'CaseDashboardPage', 'type': 'page', 'action': 'open', 'config': '', 'props': {}},
+    'case_dashboard_old': {'name': 'CaseDashboardOldPage', 'type': 'page', 'action': 'open',
+                           'subcomponent': 'case_dashboard_events', 'props': {}},
+    'case_dashboard': {'name': 'CaseDashboardPage', 'type': 'page', 'action': 'open', 'config': '', 'props': {}},
     'case_dashboard_events': {'class': 'EventScheduleView', 'type': 'custom', 'action': 'open', 'props': {}},
     'case_dashboard_tasks': {'model': 'Task', 'type': 'view', 'action': 'open', 'config': 'TaskView', 'props': {}},
     'case_dashboard_documents': {'class': 'CaseDocumentsView', 'type': 'custom', 'action': 'open',
