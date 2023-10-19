@@ -17,7 +17,7 @@ services:
 - source: /runtime/services/anvil/secrets.yml
   client_config: {}
   server_config: {}
-startup: {type: module, module: '@migrate'}
+startup: {type: form, module: app.HomePage}
 package_name: practiceMANAGER
 allow_embedding: false
 name: practiceMANAGER
@@ -1396,7 +1396,19 @@ db_schema:
   case_requirements:
     client: none
     server: full
-    columns: []
+    columns:
+    - {name: case, admin_ui: null, type: link_single, target: cases}
+    - {name: completed, admin_ui: null, type: bool}
+    - {name: created_by, admin_ui: null, type: string}
+    - {name: created_time, admin_ui: null, type: datetime}
+    - {name: due_date, admin_ui: null, type: date}
+    - {name: name, admin_ui: null, type: string}
+    - {name: notes, admin_ui: null, type: string}
+    - {name: tenant_uid, admin_ui: null, type: string}
+    - {name: uid, admin_ui: null, type: string}
+    - {name: updated_by, admin_ui: null, type: string}
+    - {name: updated_time, admin_ui: null, type: datetime}
+    - {name: url, admin_ui: null, type: simpleObject}
     title: Case Requirements
   contact_roles:
     title: Contact Roles
