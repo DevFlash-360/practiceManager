@@ -36,18 +36,6 @@ PMAPP_SIDEBAR_MENUS = {
             {'nodeId': 'case_dashboard_updates', 'nodeText': 'Updates', 'nodeChild': []},
             {'nodeId': 'case_dashboard_requirements', 'nodeText': 'Requirements', 'nodeChild': []},
         ]},
-        {'nodeId': 'case_dashboard_old', 'nodeText': 'Case Dashboard (old)', 'nodeChild': [
-            {'nodeId': 'case_dashboard_events', 'nodeText': 'Events', 'nodeChild': []},
-            {'nodeId': 'case_dashboard_tasks', 'nodeText': 'Tasks', 'nodeChild': []},
-            {'nodeId': 'case_dashboard_documents', 'nodeText': 'Documents', 'nodeChild': []},
-            {'nodeId': 'case_dashboard_time_entries', 'nodeText': 'Time Entries', 'nodeChild': []},
-            {'nodeId': 'case_dashboard_expenses', 'nodeText': 'Expenses', 'nodeChild': []},
-            {'nodeId': 'case_dashboard_invoices', 'nodeText': 'Invoices', 'nodeChild': []},
-            {'nodeId': 'case_dashboard_contacts', 'nodeText': 'Contacts', 'nodeChild': []},
-            # {'nodeId': 'case_dashboard_payments', 'nodeText': 'Payments', 'nodeChild': []},
-            {'nodeId': 'case_dashboard_updates', 'nodeText': 'Updates', 'nodeChild': []},
-            {'nodeId': 'case_dashboard_requirements', 'nodeText': 'Requirements', 'nodeChild': []},
-        ]},
         {'nodeId': 'case_reports', 'nodeText': 'Reports', 'nodeChild': [
             {'nodeId': 'case_reports_events', 'nodeText': 'Events', 'nodeChild': []},
             {'nodeId': 'case_reports_cases', 'nodeText': 'Cases', 'nodeChild': []},
