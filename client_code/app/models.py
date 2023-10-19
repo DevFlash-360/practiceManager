@@ -76,7 +76,7 @@ class AppErrorLog:
     user_uid = Attribute(field_type=types.FieldTypes.SINGLE_LINE)
 
 
-# @model_type
+@model_type
 # class AppGridView:
 #     name = Attribute(field_type=types.FieldTypes.SINGLE_LINE)
 #     config = Attribute(field_type=types.FieldTypes.OBJECT)
