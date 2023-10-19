@@ -214,6 +214,18 @@ class CaseStatus:
 
 
 @model_type
+class CaseUpdate:
+    _title = 'name'
+
+    case = Relationship('Case')
+    next_activity = Relationship('Activity')
+    next_date = Attribute(field_type=types.FieldTypes.DATETIME)
+    todays_update = Attribute(field_type=types.FieldTypes.MULTI_LINE)
+    client_attendance_required = Attribute(field_type=types.FieldTypes.BOOLEAN)
+    client_update = Attribute(field_type=types.FieldTypes.BOOLEAN)
+
+
+@model_type
 class CaseWorkflow:
     _title = 'name'
     
@@ -696,17 +708,6 @@ class TypeOfAction:
     _table_name = 'types_of_action'
     name = Attribute(field_type=types.FieldTypes.SINGLE_LINE)
 
-
-@model_type
-class Update:
-    _title = 'name'
-    
-    case = Relationship('Case')
-    next_activity = Relationship('Activity')
-    next_date = Attribute(field_type=types.FieldTypes.DATETIME)
-    todays_update = Attribute(field_type=types.FieldTypes.MULTI_LINE)
-    client_attendance_required = Attribute(field_type=types.FieldTypes.BOOLEAN)
-    client_update = Attribute(field_type=types.FieldTypes.BOOLEAN)
 
 # Need to add these forms/reports
 # @model_type
