@@ -17,7 +17,7 @@ services:
 - source: /runtime/services/anvil/secrets.yml
   client_config: {}
   server_config: {}
-startup: {type: module, module: '@migrate'}
+startup: {type: form, module: app.HomePage}
 package_name: practiceMANAGER
 allow_embedding: false
 name: practiceMANAGER
@@ -831,6 +831,10 @@ db_schema:
     - name: permissions
       admin_ui: {width: 200}
       type: simpleObject
+    - {name: created_by, admin_ui: null, type: string}
+    - {name: created_time, admin_ui: null, type: datetime}
+    - {name: updated_by, admin_ui: null, type: string}
+    - {name: updated_time, admin_ui: null, type: datetime}
   case_workflows:
     client: none
     server: full
@@ -1494,6 +1498,9 @@ db_schema:
     - name: created_by
       admin_ui: {width: 200}
       type: string
+    - {name: columns, admin_ui: null, type: simpleObject}
+    - {name: model, admin_ui: null, type: string}
+    - {name: owner, admin_ui: null, type: string}
   staff:
     title: Staff
     client: none
