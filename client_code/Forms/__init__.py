@@ -16,4 +16,5 @@ from .StaffForm import StaffForm
 from .TaskForm import TaskForm
 from .TimeEntryForm import TimeEntryForm
 from .TimesheetForm import TimesheetForm
-from .UpdateForm import UpdateForm
+from .CaseUpdateForm import CaseUpdateForm
+from .CaseRequirementForm import CaseRequirementForm

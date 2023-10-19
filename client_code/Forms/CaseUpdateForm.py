@@ -4,12 +4,12 @@ from .. import Forms
 from datetime import datetime, timedelta
 
 
-class UpdateForm(FormBase):
+class CaseUpdateForm(FormBase):
 
     def __init__(self, **kwargs):
 
-        print('UpdateForm')
-        kwargs['model'] = 'Update'
+        print('CaseUpdateForm')
+        kwargs['model'] = 'CaseUpdate'
         self.case = LookupInput(name='case', label='Case', model='Case', text_field='case_name')
         self.next_activity = LookupInput(model='Activity', name='activity', label='Next Activity')
         self.next_date = DateTimeInput(name='start_time', label='Next Date')

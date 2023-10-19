@@ -14,8 +14,8 @@ class ContactForm(FormBase):
         self.contact_group = LookupInput(model='ContactGroup', name='contact_group', label='Contact Group')
         self.entity = LookupInput(name='entity', label='Entity', model='Entity', text_field='name')
         self.email = TextInput(name='email', label='Email')
-        self.mobile_phone = TextInput(name='mobile_phone', label='Mobile Phone')
-        self.work_phone = TextInput(name='work_phone', label='Work Phone')
+        self.mobile_phone = TextInput(name='mobile_phone', label='Mobile Phone', input_type='tel')
+        self.work_phone = TextInput(name='work_phone', label='Work Phone', input_type='tel')
         self.title_position = TextInput(name='title_position', label='Title / Position')
 
         self.personal_details = MultiFieldInput(name='personal_details', model='Contact')

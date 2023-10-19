@@ -30,12 +30,14 @@ ENUM_MODEL_LIST = {
 @model_type
 class Tenant:
     _model_type = types.ModelTypes.SYSTEM
+    _title = 'name'
     name = Attribute(field_type=types.FieldTypes.SINGLE_LINE)
 
 
 @model_type
-class Users:
+class User:
     _model_type = types.ModelTypes.SYSTEM
+    _title = 'email'
     email = Attribute(field_type=types.FieldTypes.EMAIL)
     enabled = Attribute(field_type=types.FieldTypes.BOOLEAN)
     last_login = Attribute(field_type=types.FieldTypes.DATETIME)
@@ -75,14 +77,24 @@ class AppErrorLog:
 
 
 @model_type
+# class AppGridView:
+#     name = Attribute(field_type=types.FieldTypes.SINGLE_LINE)
+#     config = Attribute(field_type=types.FieldTypes.OBJECT)
+#     permissions = Attribute(field_type=types.FieldTypes.OBJECT)
 class AppGridView:
+    _title = "name"
+    model_type = types.ModelTypes.SYSTEM
     name = Attribute(field_type=types.FieldTypes.SINGLE_LINE)
+    model = Attribute(field_type=types.FieldTypes.SINGLE_LINE)
+    columns = Attribute(field_type=types.FieldTypes.OBJECT)
     config = Attribute(field_type=types.FieldTypes.OBJECT)
     permissions = Attribute(field_type=types.FieldTypes.OBJECT)
+    owner = Attribute(field_type=types.FieldTypes.SINGLE_LINE)
 
 
 @model_type
 class File:
+    _title = 'name'
     name = Attribute(field_type=types.FieldTypes.SINGLE_LINE)
     mime_type = Attribute(field_type=types.FieldTypes.SINGLE_LINE)
     size = Attribute(field_type=types.FieldTypes.NUMBER)
@@ -190,6 +202,18 @@ class CaseContact:
 
 
 @model_type
+class CaseRequirement:
+    _title = 'name'
+
+    name = Attribute(field_type=types.FieldTypes.SINGLE_LINE)
+    case = Relationship('Case')
+    notes = Attribute(field_type=types.FieldTypes.MULTI_LINE)
+    url = Attribute(field_type=types.FieldTypes.HYPERLINK)
+    due_date = Attribute(field_type=types.FieldTypes.DATE)
+    completed = Attribute(field_type=types.FieldTypes.BOOLEAN)
+
+
+@model_type
 class CaseStage:
     _title = 'name'
     name = Attribute(field_type=types.FieldTypes.SINGLE_LINE)
@@ -199,6 +223,18 @@ class CaseStage:
 class CaseStatus:
     _title = 'name'
     name = Attribute(field_type=types.FieldTypes.SINGLE_LINE)
+
+
+@model_type
+class CaseUpdate:
+    _title = 'name'
+
+    case = Relationship('Case')
+    next_activity = Relationship('Activity')
+    next_date = Attribute(field_type=types.FieldTypes.DATETIME)
+    todays_update = Attribute(field_type=types.FieldTypes.MULTI_LINE)
+    client_attendance_required = Attribute(field_type=types.FieldTypes.BOOLEAN)
+    client_update = Attribute(field_type=types.FieldTypes.BOOLEAN)
 
 
 @model_type
@@ -684,17 +720,6 @@ class TypeOfAction:
     _table_name = 'types_of_action'
     name = Attribute(field_type=types.FieldTypes.SINGLE_LINE)
 
-
-@model_type
-class Update:
-    _title = 'name'
-    
-    case = Relationship('Case')
-    next_activity = Relationship('Activity')
-    next_date = Attribute(field_type=types.FieldTypes.DATETIME)
-    todays_update = Attribute(field_type=types.FieldTypes.MULTI_LINE)
-    client_attendance_required = Attribute(field_type=types.FieldTypes.BOOLEAN)
-    client_update = Attribute(field_type=types.FieldTypes.BOOLEAN)
 
 # Need to add these forms/reports
 # @model_type

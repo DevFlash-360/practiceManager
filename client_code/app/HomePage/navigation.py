@@ -6,12 +6,10 @@ from AnvilFusion.tools.utils import AppEnv
 from AnvilFusion.components.GridView import GridView
 from AnvilFusion.components.FormBase import FormBase
 
-
 # Sidebar control CSS
 PMAPP_SIDEBAR_CSS = 'e-inherit e-caret-hide pm-sidebar-menu'
 PMAPP_SIDEBAR_WIDTH = 200
 PMAPP_SIDEBAR_POPUP_OFFSET = 1
-
 
 # Appbar menu item list
 PMAPP_APPBAR_MENU = [
@@ -22,37 +20,36 @@ PMAPP_APPBAR_MENU = [
     {'id': 'finance_menu', 'text': 'Finance', 'items': []},
 ]
 
-
 # Sidebar menu item list
 PMAPP_SIDEBAR_MENUS = {
     'case_menu': [
         {'nodeId': 'case_agenda', 'nodeText': 'Agenda', 'nodeChild': []},
         {'nodeId': 'case_tasks', 'nodeText': 'Tasks', 'nodeChild': []},
-        {'nodeId': 'case_dashboard_new', 'nodeText': 'Case Dashboard', 'nodeChild': []},
-        {'nodeId': 'case_dashboard', 'nodeText': 'Case Dashboard (old)', 'nodeChild': [
+        {'nodeId': 'case_dashboard', 'nodeText': 'Case Dashboard', 'nodeChild': [
             {'nodeId': 'case_dashboard_events', 'nodeText': 'Events', 'nodeChild': []},
             {'nodeId': 'case_dashboard_tasks', 'nodeText': 'Tasks', 'nodeChild': []},
             {'nodeId': 'case_dashboard_documents', 'nodeText': 'Documents', 'nodeChild': []},
             {'nodeId': 'case_dashboard_time_entries', 'nodeText': 'Time Entries', 'nodeChild': []},
             {'nodeId': 'case_dashboard_expenses', 'nodeText': 'Expenses', 'nodeChild': []},
             {'nodeId': 'case_dashboard_invoices', 'nodeText': 'Invoices', 'nodeChild': []},
-            {'nodeId': 'case_dashboard_payments', 'nodeText': 'Payments', 'nodeChild': []},
             {'nodeId': 'case_dashboard_contacts', 'nodeText': 'Contacts', 'nodeChild': []},
             {'nodeId': 'case_dashboard_updates', 'nodeText': 'Updates', 'nodeChild': []},
             {'nodeId': 'case_dashboard_requirements', 'nodeText': 'Requirements', 'nodeChild': []},
         ]},
         {'nodeId': 'case_reports', 'nodeText': 'Reports', 'nodeChild': [
+            {'nodeId': 'case_reports_events', 'nodeText': 'Events', 'nodeChild': []},
             {'nodeId': 'case_reports_cases', 'nodeText': 'Cases', 'nodeChild': []},
+            # {'nodeId': 'case_reports_tasks', 'nodeText': 'Tasks', 'nodeChild': []},
+            {'nodeId': 'case_reports_contacts', 'nodeText': 'Contacts', 'nodeChild': []},
             {'nodeId': 'case_reports_documents', 'nodeText': 'Documents', 'nodeChild': []},
             {'nodeId': 'case_reports_time_entries', 'nodeText': 'Time Entries', 'nodeChild': []},
             {'nodeId': 'case_reports_expenses', 'nodeText': 'Expenses', 'nodeChild': []},
             {'nodeId': 'case_reports_invoices', 'nodeText': 'Invoices', 'nodeChild': []},
-            {'nodeId': 'case_reports_payments', 'nodeText': 'Payments', 'nodeChild': []},
-            {'nodeId': 'case_reports_clients', 'nodeText': 'Clients', 'nodeChild': []},
-            {'nodeId': 'case_reports_contacts', 'nodeText': 'Contacs', 'nodeChild': []},
-            {'nodeId': 'case_reports_entities', 'nodeText': 'Entities', 'nodeChild': []},
-            {'nodeId': 'case_reports_updates', 'nodeText': 'Updates', 'nodeChild': []},
-            {'nodeId': 'case_reports_requirements', 'nodeText': 'Requirements', 'nodeChild': []},
+            # {'nodeId': 'case_reports_payments', 'nodeText': 'Payments', 'nodeChild': []},
+            # {'nodeId': 'case_reports_clients', 'nodeText': 'Clients', 'nodeChild': []},
+            # {'nodeId': 'case_reports_entities', 'nodeText': 'Entities', 'nodeChild': []},
+            # {'nodeId': 'case_reports_updates', 'nodeText': 'Updates', 'nodeChild': []},
+            # {'nodeId': 'case_reports_requirements', 'nodeText': 'Requirements', 'nodeChild': []},
         ]},
     ],
     'intake_menu': [
@@ -108,7 +105,7 @@ PMAPP_SIDEBAR_MENUS = {
 }
 
 PMAPP_DEFAULT_NAV_ITEMS = {
-    'case_menu': 'case_dashboard_new',
+    'case_menu': 'case_dashboard',
     'intake_menu': 'intake_leads',
     'tools_menu': 'tools_date_calculator',
     'staff_menu': 'staff_my_timesheets',
@@ -120,25 +117,28 @@ PMAPP_NAV_ITEMS = {
     # 'case_agenda': {'model': '', 'type': 'page|view|form', 'action': 'open|popup', 'props': {}},
     # 'case_tasks': {'model': 'Task', 'type': 'view', 'action': 'open', 'config': 'TaskView', 'props': {}},
     'case_tasks': {'class': 'TaskListView', 'type': 'custom', 'action': 'open', 'props': {}},
-    'case_dashboard': {'name': 'CaseDashboardOldPage', 'type': 'page', 'action': 'open',
-                       'subcomponent': 'case_dashboard_events', 'props': {}},
-    'case_dashboard_new': {'name': 'CaseDashboardPage', 'type': 'page', 'action': 'open', 'config': '', 'props': {}},
+
+    'case_dashboard_old': {'name': 'CaseDashboardOldPage', 'type': 'page', 'action': 'open',
+                           'subcomponent': 'case_dashboard_events', 'props': {}},
+    'case_dashboard': {'name': 'CaseDashboardPage', 'type': 'page', 'action': 'open', 'config': '', 'props': {}},
     'case_dashboard_events': {'class': 'EventScheduleView', 'type': 'custom', 'action': 'open', 'props': {}},
     'case_dashboard_tasks': {'model': 'Task', 'type': 'view', 'action': 'open', 'config': 'TaskView', 'props': {}},
-    # 'case_dashboard_documents': {'model': '', 'type': 'page|view|form', 'action': 'open|popup', 'props': {}},
+    'case_dashboard_documents': {'class': 'CaseDocumentsView', 'type': 'custom', 'action': 'open',
+                                 'props': {'case_uid': 'a31c356d-668c-4e62-b103-61869154adb1'}},
     'case_dashboard_time_entries': {'model': 'TimeEntry', 'type': 'view', 'action': 'open', 'config': 'TimeEntryView',
                                     'props': {}},
     'case_dashboard_expenses': {'model': 'Expense', 'type': 'view', 'action': 'open', 'config': 'ExpenseView',
                                 'props': {}},
     'case_dashboard_invoices': {'model': 'Invoice', 'type': 'view', 'action': 'open', 'config': 'InvoiceView',
                                 'props': {}},
-    'case_dashboard_payments': {'model': 'Payment', 'type': 'view', 'action': 'open', 'config': 'PaymentView',
-                                'props': {}},
     'case_dashboard_contacts': {'model': 'CaseContact', 'type': 'view', 'action': 'open', 'props': {}},
-    # 'case_dashboard_updates': {'model': '', 'type': 'page|view|form', 'action': 'open|popup', 'props': {}},
-    # 'case_dashboard_requirements': {'model': '', 'type': 'page|view|form', 'action': 'open|popup', 'props': {}},
+    'case_dashboard_updates': {'model': 'CaseUpdate', 'type': 'view', 'action': 'open', 'props': {}},
+    'case_dashboard_requirements': {'model': 'CaseRequirement', 'type': 'view', 'action': 'open', 'props': {}},
+
+    'case_reports_events': {'class': 'EventScheduleView', 'type': 'custom', 'action': 'open', 'props': {}},
     'case_reports_cases': {'model': 'Case', 'type': 'view', 'action': 'open', 'config': 'CaseView', 'props': {}},
-    # 'case_reports_documents': {'model': 'Document', 'type': 'view', 'action': 'open', 'props': {}},
+    'case_reports_contacts': {'model': 'Contact', 'type': 'view', 'action': 'open', 'config': 'ContactView',
+                              'props': {}},
     'case_reports_documents': {'class': 'CaseDocumentsView', 'type': 'custom', 'action': 'open',
                                'props': {'case_uid': 'a31c356d-668c-4e62-b103-61869154adb1'}},
     'case_reports_time_entries': {'model': 'TimeEntry', 'type': 'view', 'action': 'open', 'config': 'TimeEntryView',
@@ -147,14 +147,6 @@ PMAPP_NAV_ITEMS = {
                               'props': {}},
     'case_reports_invoices': {'model': 'Invoice', 'type': 'view', 'action': 'open', 'config': 'InvoiceView',
                               'props': {}},
-    'case_reports_payments': {'model': 'Payment', 'type': 'view', 'action': 'open', 'config': 'PaymentView',
-                              'props': {}},
-    'case_reports_clients': {'model': 'Client', 'type': 'view', 'action': 'open', 'config': 'ClientView', 'props': {}},
-    'case_reports_contacts': {'model': 'Contact', 'type': 'view', 'action': 'open', 'config': 'ContactView',
-                              'props': {}},
-    'case_reports_entities': {'model': 'Entity', 'type': 'view', 'action': 'open', 'config': 'EntityView', 'props': {}},
-    'case_reports_updates': {'model': 'Update', 'type': 'view', 'action': 'open', 'props': {}},
-    # 'case_reports_requirements': {'model': '', 'type': 'page', 'action': 'open', 'props': {}},
 
     'intake_leads': {'model': 'Lead', 'type': 'view', 'action': 'open', 'props': {}},
     # 'intake_lead_analytics': {'model': '', 'type': 'page|view|form', 'action': 'open|popup', 'props': {}},
@@ -276,22 +268,18 @@ class Sidebar:
             'nodeSelected': self.menu_select,
         })
 
-
     # Show sidebar menu
     def show(self):
         self.menu.appendTo(jQuery(f"#{self.container_el}-menu")[0])
         self.control.appendTo(jQuery(f"#{self.container_el}")[0])
 
-
     # Sidebar toggle
     def toggle(self, args):
         self.control.toggle()
 
-
     def show_menu(self, menu_id):
         self.menu.fields.dataSource = PMAPP_SIDEBAR_MENUS[menu_id]
         self.menu_select(None, subcomponent=PMAPP_DEFAULT_NAV_ITEMS[menu_id])
-
 
     def menu_select(self, args, subcomponent=None):
         if subcomponent is None:
@@ -360,7 +348,7 @@ class Sidebar:
         if 'subcomponent' in component:
             time.sleep(0.5)
             self.menu_select(None, subcomponent=component['subcomponent'])
-            
+
 
 PMAPP_APPBAR_ADD_ITEM = {
     'Add Time Entry': {'model': 'TimeEntry', 'type': 'form'},
@@ -375,7 +363,7 @@ PMAPP_APPBAR_ADD_ITEM = {
     'Add Update': {'model': 'Update', 'type': 'form'},
 }
 
-            
+
 def add_item_select(args, content_el_id):
     print('Add item selected')
     item = PMAPP_APPBAR_ADD_ITEM.get(args.item.text)

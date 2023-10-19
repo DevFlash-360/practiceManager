@@ -407,23 +407,6 @@ db_schema:
     - name: check_number
       admin_ui: {width: 200}
       type: string
-  updates:
-    title: Updates
-    client: none
-    server: full
-    columns:
-    - {name: created_time, admin_ui: null, type: datetime}
-    - {name: client_attendance_required, admin_ui: null, type: bool}
-    - {name: todays_update, admin_ui: null, type: string}
-    - {name: client_update, admin_ui: null, type: bool}
-    - {name: next_activity, admin_ui: null, type: link_single, target: activities}
-    - {name: tenant_uid, admin_ui: null, type: string}
-    - {name: next_date, admin_ui: null, type: datetime}
-    - {name: updated_time, admin_ui: null, type: datetime}
-    - {name: updated_by, admin_ui: null, type: string}
-    - {name: case, admin_ui: null, type: link_single, target: cases}
-    - {name: uid, admin_ui: null, type: string}
-    - {name: created_by, admin_ui: null, type: string}
   fee_types:
     title: Fee Types
     client: none
@@ -787,6 +770,23 @@ db_schema:
     - name: created_by
       admin_ui: {width: 200}
       type: string
+  case_updates:
+    title: Case Updates
+    client: none
+    server: full
+    columns:
+    - {name: created_time, admin_ui: null, type: datetime}
+    - {name: client_attendance_required, admin_ui: null, type: bool}
+    - {name: todays_update, admin_ui: null, type: string}
+    - {name: client_update, admin_ui: null, type: bool}
+    - {name: next_activity, admin_ui: null, type: link_single, target: activities}
+    - {name: tenant_uid, admin_ui: null, type: string}
+    - {name: next_date, admin_ui: null, type: datetime}
+    - {name: updated_time, admin_ui: null, type: datetime}
+    - {name: updated_by, admin_ui: null, type: string}
+    - {name: case, admin_ui: null, type: link_single, target: cases}
+    - {name: uid, admin_ui: null, type: string}
+    - {name: created_by, admin_ui: null, type: string}
   users:
     title: Users
     client: none
@@ -831,6 +831,10 @@ db_schema:
     - name: permissions
       admin_ui: {width: 200}
       type: simpleObject
+    - {name: created_by, admin_ui: null, type: string}
+    - {name: created_time, admin_ui: null, type: datetime}
+    - {name: updated_by, admin_ui: null, type: string}
+    - {name: updated_time, admin_ui: null, type: datetime}
   case_workflows:
     client: none
     server: full
@@ -1393,6 +1397,23 @@ db_schema:
     - name: updated_by
       admin_ui: {width: 200}
       type: string
+  case_requirements:
+    client: none
+    server: full
+    columns:
+    - {name: case, admin_ui: null, type: link_single, target: cases}
+    - {name: completed, admin_ui: null, type: bool}
+    - {name: created_by, admin_ui: null, type: string}
+    - {name: created_time, admin_ui: null, type: datetime}
+    - {name: due_date, admin_ui: null, type: date}
+    - {name: name, admin_ui: null, type: string}
+    - {name: notes, admin_ui: null, type: string}
+    - {name: tenant_uid, admin_ui: null, type: string}
+    - {name: uid, admin_ui: null, type: string}
+    - {name: updated_by, admin_ui: null, type: string}
+    - {name: updated_time, admin_ui: null, type: datetime}
+    - {name: url, admin_ui: null, type: simpleObject}
+    title: Case Requirements
   contact_roles:
     title: Contact Roles
     client: none
@@ -1477,6 +1498,11 @@ db_schema:
     - name: created_by
       admin_ui: {width: 200}
       type: string
+    - name: columns
+      admin_ui: {order: 0.5}
+      type: simpleObject
+    - {name: model, admin_ui: null, type: string}
+    - {name: owner, admin_ui: null, type: string}
   staff:
     title: Staff
     client: none
