@@ -189,10 +189,11 @@ li.e-list-item.e-level-1.e-hover {
   z-index: 100 !important;
   padding-inline: .5em;
   text-align: justify;
-  padding-bottom: 1.8em;
+  padding-bottom: 1em;
   padding-top: 1em;
   position: fixed;
   padding-right: 15px;
+  margin-right: 1em;
 }
 
 #pm-footer {
@@ -375,7 +376,7 @@ div#pm-appbar-sidebar-toggle {
 /* Large Screen Styles */
 @media only screen and (min-width: 718px) {
   #pm-content {
-    padding-inine: 1em;
+    padding-inline: 1em;
   }
 
   #pm-footer {
@@ -397,4 +398,9 @@ div#pm-appbar-sidebar-toggle {
 #pm-sidebar-menu::-webkit-scrollbar{
 	width: 3px;
 	height: 3px;
+}
+
+.py-dialog {
+  /*top: 1em !important;*/
+  margin-right: 15px !important;
 }
