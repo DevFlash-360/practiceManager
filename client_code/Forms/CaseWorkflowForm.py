@@ -29,7 +29,7 @@ class CaseWorkflowForm(FormBase):
         sections = [
             {
                 'name': '_', 'rows': [
-                    [ self.practice_area, self.name, None],
+                    [self.practice_area, self.name, None],
                     [self.items]
                 ]
             }

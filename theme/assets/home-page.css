@@ -398,3 +398,7 @@ div#pm-appbar-sidebar-toggle {
 	width: 3px;
 	height: 3px;
 }
+
+.py-dialog {
+  padding-top: 1em !important;
+}
