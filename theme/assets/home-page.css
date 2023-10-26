@@ -400,6 +400,6 @@ div#pm-appbar-sidebar-toggle {
 }
 
 .py-dialog {
-  margin-top: 1em !important;
+  top: 1em !important;
   margin-right: 15px !important;
 }
