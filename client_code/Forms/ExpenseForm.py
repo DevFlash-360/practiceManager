@@ -1,4 +1,4 @@
-from AnvilFusion.components.FormBase import FormBase, POPUP_WIDTH_COL2
+from AnvilFusion.components.FormBase import FormBase, POPUP_WIDTH_COL3
 from AnvilFusion.components.FormInputs import *
 import datetime
 
@@ -43,7 +43,7 @@ class ExpenseForm(FormBase):
             ]}
         ]
 
-        super().__init__(sections=sections, width=POPUP_WIDTH_COL2, **kwargs)
+        super().__init__(sections=sections, width=POPUP_WIDTH_COL3, **kwargs)
 
     def form_open(self, args):
         super().form_open(args)

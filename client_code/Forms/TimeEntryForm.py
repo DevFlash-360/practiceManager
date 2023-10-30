@@ -18,7 +18,7 @@ class TimeEntryForm(FormBase):
         self.description = MultiLineInput(name='description', label='Description')
         self.date = DateInput(name='date', label='Entry Date', value=date.today())
         self.rate = NumberInput(name='rate', label='Rate', on_change=self.total_calc)
-        self.rate_type = RadioButtonInput(name='rate_type', label='Rate type', direction='horizontal',
+        self.rate_type = RadioButtonInput(name='rate_type', direction='horizontal',
                                           options=[{'value': 'Per hour'}, {'value': 'Flat'}],
                                           value='Per hour', on_change=self.total_calc)
         self.duration = NumberInput(name='duration', label='Duration (hours)', on_change=self.total_calc)
