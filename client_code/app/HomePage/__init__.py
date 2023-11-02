@@ -108,6 +108,9 @@ class HomePage(HomePageTemplate):
         self.appbar_menu = nav.AppbarMenu(container_el='pm-appbar-menu', sidebar=self.sidebar,
                                           menu_items=nav.PMAPP_APPBAR_MENU)
 
+        AppEnv.navigation = self.sidebar
+
+
     def form_show(self, **event_args):
         # Append appbar controls to elements
         self.appbar.appendTo(jQuery('#pm-appbar')[0])

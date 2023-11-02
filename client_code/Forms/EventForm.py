@@ -46,7 +46,7 @@ class EventForm(FormBase):
                 'name': 'event_details',
                 'cols': [
                     [self.activity, self.location, self.department],
-                    [self.case, self.activity, self.location, self.department],
+                    # [self.case, self.activity, self.location, self.department],
                     [self.documents, self.notes],
                 ]
             },

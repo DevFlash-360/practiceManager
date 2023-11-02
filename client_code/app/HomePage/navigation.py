@@ -136,7 +136,8 @@ PMAPP_NAV_ITEMS = {
     'case_dashboard_requirements': {'model': 'CaseRequirement', 'type': 'view', 'action': 'open', 'props': {}},
 
     'case_reports_events': {'class': 'EventScheduleView', 'type': 'custom', 'action': 'open', 'props': {}},
-    'case_reports_cases': {'model': 'Case', 'type': 'view', 'action': 'open', 'config': 'CaseView', 'props': {}},
+    'case_reports_cases': {'class': 'CaseListView', 'type': 'custom', 'action': 'open', 'config': 'CaseListView',
+                           'props': {}},
     'case_reports_contacts': {'model': 'Contact', 'type': 'view', 'action': 'open', 'config': 'ContactView',
                               'props': {}},
     'case_reports_documents': {'class': 'CaseDocumentsView', 'type': 'custom', 'action': 'open',
@@ -277,11 +278,11 @@ class Sidebar:
     def toggle(self, args):
         self.control.toggle()
 
-    def show_menu(self, menu_id):
+    def show_menu(self, menu_id, subcomponent=None, props=None):
         self.menu.fields.dataSource = PMAPP_SIDEBAR_MENUS[menu_id]
-        self.menu_select(None, subcomponent=PMAPP_DEFAULT_NAV_ITEMS[menu_id])
+        self.menu_select(None, subcomponent=(subcomponent or PMAPP_DEFAULT_NAV_ITEMS[menu_id]), props=props)
 
-    def menu_select(self, args, subcomponent=None):
+    def menu_select(self, args, subcomponent=None, props=None):
         if subcomponent is None:
             if 'e-level-1' in list(args.node.classList):
                 print('Accordion')
@@ -296,6 +297,8 @@ class Sidebar:
             component = PMAPP_NAV_ITEMS[subcomponent]
         if component is None:
             return
+        if props is not None:
+            component['props'] = props
 
         if self.content_control is not None and self.nav_target_id is None:
             self.content_control.destroy()
@@ -360,7 +363,7 @@ PMAPP_APPBAR_ADD_ITEM = {
     'Add Lead': {'model': 'Lead', 'type': 'form'},
     'Add Case': {'model': 'Case', 'type': 'form'},
     'Add Invoice': {'model': 'Invoice', 'type': 'form'},
-    'Add Update': {'model': 'Update', 'type': 'form'},
+    'Add Update': {'model': 'CaseUpdate', 'type': 'form'},
 }
 
 
