@@ -19,4 +19,5 @@ class CaseListView(GridView):
 
 
     def open_dashboard(self, args):
-        AppEnv.navigation.show_menu('case_menu')
+        AppEnv.navigation.show_menu('case_menu', subcomponent='case_dashboard',
+                                    props={'case_uid': args.rowInfo.rowData.uid})

@@ -278,11 +278,11 @@ class Sidebar:
     def toggle(self, args):
         self.control.toggle()
 
-    def show_menu(self, menu_id):
+    def show_menu(self, menu_id, subcomponent=None, props=None):
         self.menu.fields.dataSource = PMAPP_SIDEBAR_MENUS[menu_id]
-        self.menu_select(None, subcomponent=PMAPP_DEFAULT_NAV_ITEMS[menu_id])
+        self.menu_select(None, subcomponent=(subcomponent or PMAPP_DEFAULT_NAV_ITEMS[menu_id]), props=props)
 
-    def menu_select(self, args, subcomponent=None):
+    def menu_select(self, args, subcomponent=None, props=None):
         if subcomponent is None:
             if 'e-level-1' in list(args.node.classList):
                 print('Accordion')
@@ -297,6 +297,8 @@ class Sidebar:
             component = PMAPP_NAV_ITEMS[subcomponent]
         if component is None:
             return
+        if props is not None:
+            component['props'] = props
 
         if self.content_control is not None and self.nav_target_id is None:
             self.content_control.destroy()

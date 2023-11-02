@@ -4,6 +4,7 @@ from AnvilFusion.components.DashboardPage import DashboardPage
 class CaseDashboardPage(DashboardPage):
     
     def __init__(self, container_id, **kwargs):
+        print('CaseDashboardPage', kwargs.get('case_uid', None))
         
         layout = {
             'cellSpacing': [10, 10],
