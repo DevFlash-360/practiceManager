@@ -91,7 +91,7 @@ class CaseDashboardPage(DashboardPage):
             panel_content += f"<h6>Court</h6>{self.case['court']['name']}"
             panel_content += f"<h6>Department</h6>{self.case['department']['full_name']}"
             panel_content += f"<h6>SOL</h6>{self.case['statute_of_limitations']}"
-            panel_content += f"<div style='width:100%;height:100%;overflow:auto;'>{panel_content}</div>"
+            panel_content = f"<div style='width:100%;height:100%;overflow:auto;'>{panel_content}</div>"
             self.dashboard.updatePanel({
                 'id': 'case_details',
                 'content': panel_content,
