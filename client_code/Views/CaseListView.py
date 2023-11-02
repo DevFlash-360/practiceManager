@@ -2,9 +2,9 @@ from AnvilFusion.components.GridView import GridView
 from AnvilFusion.tools.utils import AppEnv
 
 
-class CasesView(GridView):
+class CaseListView(GridView):
     def __init__(self, **kwargs):
-        print('CasesView')
+        print('CaseListView')
 
         context_menu_items = [
             {'id': 'select_tenant', 'label': 'Open Dashboard', 'action': AppEnv.navigation.show_menu('case_menu')},
