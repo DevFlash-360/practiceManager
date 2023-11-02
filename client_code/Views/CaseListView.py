@@ -18,5 +18,5 @@ class CaseListView(GridView):
             **kwargs)
 
 
-    def open_dashboard(self):
+    def open_dashboard(self, args):
         AppEnv.navigation.show_menu('case_menu')
