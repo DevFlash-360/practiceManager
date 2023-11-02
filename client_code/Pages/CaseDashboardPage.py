@@ -1,10 +1,15 @@
 from AnvilFusion.components.DashboardPage import DashboardPage
+from AnvilFusion.tools.utils import set_cookie, get_cookie
 
 
 class CaseDashboardPage(DashboardPage):
     
     def __init__(self, container_id, **kwargs):
         self.case_uid = kwargs.get('case_uid', None)
+        if self.case_uid:
+            set_cookie('case_uid', self.case_uid)
+        else:
+            self.case_uid = get_cookie('case_uid')
         print('CaseDashboardPage', self.case_uid)
         
         layout = {
@@ -58,7 +63,13 @@ class CaseDashboardPage(DashboardPage):
                 },
             ],
         }
-        
+        if not self.case_uid:
+            layout = {
+                'panels': [
+                    {'content': '<div>Case not selected</div>'}
+                ]
+            }
+
         super().__init__(
             layout=layout,
             container_id=container_id,
