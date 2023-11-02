@@ -64,4 +64,9 @@ class CaseDashboardPage(DashboardPage):
             container_style='margin-top: 10px; margin-right: 10px;',
             **kwargs
         )
+
+
+    def form_show(self):
+        super().form_show()
+        print('show dashboard', self.dashboard.panels)
     
