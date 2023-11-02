@@ -3,6 +3,9 @@ from AnvilFusion.tools.utils import set_cookie, get_cookie
 from ..app.models import Case
 
 
+DASHBOARD_PANEL_CONTAINER_STYLE = "width:100%;height:100%;overflow:scroll;"
+
+
 class CaseDashboardPage(DashboardPage):
     
     def __init__(self, container_id, **kwargs):
@@ -13,11 +16,13 @@ class CaseDashboardPage(DashboardPage):
             self.case_uid = get_cookie('case_uid')
         print('CaseDashboardPage', self.case_uid)
         self.case = Case.get(self.case_uid) if self.case_uid else None
+        self.panel_container_style = DASHBOARD_PANEL_CONTAINER_STYLE
         
         layout = {
             'cellSpacing': [10, 10],
             'columns': 3,
             'cellAspectRatio': 100/50,
+            'allowResizing': True,
             'panels': [
                 {
                     'sizeX': 2, 'sizeY': 1, 'row': 0, 'col': 0,
@@ -91,7 +96,7 @@ class CaseDashboardPage(DashboardPage):
             panel_content += f"<h6>Court</h6>{self.case['court']['name']}"
             panel_content += f"<h6>Department</h6>{self.case['department']['full_name']}"
             panel_content += f"<h6>SOL</h6>{self.case['statute_of_limitations']}"
-            panel_content = f"<div style='width:100%;height:100%;overflow:auto;'>{panel_content}</div>"
+            panel_content = f"<div style='{self.panel_container_style}'>{panel_content}</div>"
             self.dashboard.updatePanel({
                 'id': 'case_details',
                 'content': panel_content,
@@ -100,7 +105,7 @@ class CaseDashboardPage(DashboardPage):
             panel_content = f"<h5>{self.case['incident_date']}</h5>"
             panel_content += f"<h6>Incident Location</h6>{self.case['incident_location']}"
             panel_content += f"<h6>Case Description</h6>{self.case['case_description']}"
-            panel_content = f"<div style='width:100%;height:100%;overflow:auto;'>{panel_content}</div>"
+            panel_content = f"<div style='{self.panel_container_style}'>{panel_content}</div>"
             self.dashboard.updatePanel({
                 'id': 'incident_date',
                 'content': panel_content,
@@ -110,7 +115,7 @@ class CaseDashboardPage(DashboardPage):
             for cause in self.case['cause_of_action']:
                 panel_content += f"<li>{cause['cause_of_action']}</li>"
             panel_content += f"</ul>"
-            panel_content = f"<div style='width:100%;height:100%;overflow:auto;'>{panel_content}</div>"
+            panel_content = f"<div style='{self.panel_container_style}'>{panel_content}</div>"
             self.dashboard.updatePanel({
                 'id': 'cause_of_action',
                 'content': panel_content,
@@ -118,7 +123,7 @@ class CaseDashboardPage(DashboardPage):
             # case status
             panel_content = f"<h5>{self.case['case_status']['name']}</h5>"
             panel_content += f"<h6>Last Update</h6>TBD"
-            panel_content = f"<div style='width:100%;height:100%;overflow:auto;'>{panel_content}</div>"
+            panel_content = f"<div style='{self.panel_container_style}'>{panel_content}</div>"
             self.dashboard.updatePanel({
                 'id': 'case_status',
                 'content': panel_content,
@@ -128,7 +133,7 @@ class CaseDashboardPage(DashboardPage):
             panel_content += f"<h6>Jail/Prison</h6>TBD"
             panel_content += f"<h6>Inmate ID</h6>TBD"
             panel_content += f"<h6>Bail Status</h6>TBD"
-            panel_content = f"<div style='width:100%;height:100%;overflow:auto;'>{panel_content}</div>"
+            panel_content = f"<div style='{self.panel_container_style}'>{panel_content}</div>"
             self.dashboard.updatePanel({
                 'id': 'custody_status',
                 'content': panel_content,
@@ -138,7 +143,7 @@ class CaseDashboardPage(DashboardPage):
             for attorney in self.case['assigned_attorneys']:
                 panel_content += f"<li>{attorney['full_name']}</li>"
             panel_content += f"</ul>"
-            panel_content = f"<div style='width:100%;height:100%;overflow:auto;'>{panel_content}</div>"
+            panel_content = f"<div style='{self.panel_container_style}'>{panel_content}</div>"
             self.dashboard.updatePanel({
                 'id': 'assigned_attorney',
                 'content': panel_content,
@@ -148,7 +153,7 @@ class CaseDashboardPage(DashboardPage):
             for contact in self.case['contacts']:
                 panel_content += f"<li>{contact['full_name']} - {contact['contact_group']['name']}</li>"
             panel_content += f"</ul>"
-            panel_content = f"<div style='width:100%;height:100%;overflow:auto;'>{panel_content}</div>"
+            panel_content = f"<div style='{self.panel_container_style}'>{panel_content}</div>"
             self.dashboard.updatePanel({
                 'id': 'contacts',
                 'content': panel_content,
@@ -162,7 +167,7 @@ class CaseDashboardPage(DashboardPage):
             panel_content += f"<h6>Investigator</h6>" + ("Not " if not self.case['investigator'] else "") + "Included"
             panel_content += f"<h6>Investigator Budget</h6>" + f"${self.case['investigator_budget']:,.2f}" if self.case['investigator'] else ""
             panel_content += f"<h6>Seal/Expungement</h6>" + ("Not " if not self.case['record_seal_expungement'] else "") + "Included"
-            panel_content = f"<div style='width:100%;height:100%;overflow:auto;'>{panel_content}</div>"
+            panel_content = f"<div style='{self.panel_container_style}'>{panel_content}</div>"
             self.dashboard.updatePanel({
                 'id': 'case_payments',
                 'content': panel_content,
