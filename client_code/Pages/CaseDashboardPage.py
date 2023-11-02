@@ -96,4 +96,13 @@ class CaseDashboardPage(DashboardPage):
                 'id': 'case_details',
                 'content': panel_content,
             })
+            # incident date
+            panel_content = f"<h5>{self.case['incident_date']}</h5>"
+            panel_content += f"<h6>Incident Location</h6>{self.case['incident_location']}"
+            panel_content += f"<h6>Case Description</h6>{self.case['case_description']}"
+            panel_content = f"<div style='width:100%;height:100%;overflow:auto;'>{panel_content}</div>"
+            self.dashboard.updatePanel({
+                'id': 'incident_date',
+                'content': panel_content,
+            })
     
