@@ -105,4 +105,14 @@ class CaseDashboardPage(DashboardPage):
                 'id': 'incident_date',
                 'content': panel_content,
             })
+            # cause of action
+            panel_content = f"<ul>"
+            for cause in self.case['causes_of_action']:
+                panel_content += f"<li>{cause['cause_of_action']}</li>"
+            panel_content += f"</ul>"
+            panel_content = f"<div style='width:100%;height:100%;overflow:auto;'>{panel_content}</div>"
+            self.dashboard.updatePanel({
+                'id': 'cause_of_action',
+                'content': panel_content,
+            })
     
