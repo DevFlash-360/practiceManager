@@ -4,7 +4,8 @@ from AnvilFusion.components.DashboardPage import DashboardPage
 class CaseDashboardPage(DashboardPage):
     
     def __init__(self, container_id, **kwargs):
-        print('CaseDashboardPage', kwargs.get('case_uid', None))
+        self.case_uid = kwargs.get('case_uid', None)
+        print('CaseDashboardPage', self.case_uid)
         
         layout = {
             'cellSpacing': [10, 10],
@@ -69,4 +70,8 @@ class CaseDashboardPage(DashboardPage):
     def form_show(self):
         super().form_show()
         print('show dashboard', self.dashboard.panels)
+        self.dashboard.updatePanel({
+            'id': 'case_details',
+            'content': f'<div>Case uid: {self.case_uid}</div>',
+        })
     
