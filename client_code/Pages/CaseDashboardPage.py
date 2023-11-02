@@ -1,5 +1,6 @@
 from AnvilFusion.components.DashboardPage import DashboardPage
 from AnvilFusion.tools.utils import set_cookie, get_cookie
+from ..app.models import Case
 
 
 class CaseDashboardPage(DashboardPage):
@@ -11,6 +12,7 @@ class CaseDashboardPage(DashboardPage):
         else:
             self.case_uid = get_cookie('case_uid')
         print('CaseDashboardPage', self.case_uid)
+        self.case = Case.get(self.case_uid) if self.case_uid else None
         
         layout = {
             'cellSpacing': [10, 10],
@@ -80,9 +82,17 @@ class CaseDashboardPage(DashboardPage):
 
     def form_show(self):
         super().form_show()
-        print('show dashboard', self.dashboard.panels)
-        self.dashboard.updatePanel({
-            'id': 'case_details',
-            'content': f'<div>Case uid: {self.case_uid}</div>',
-        })
+        if self.case:
+            # case details
+            panel_content = f"<h5>Case uid: {self.case['case_name']}</h5>"
+            panel_content += f"<h6>Case Number</h6>{self.case['case_number']}"
+            panel_content += f"<h6>Practice Area</h6>{self.case['practice_area']['name']}"
+            panel_content += f"<h6>Case Stage</h6>{self.case['case_stage']['name']}"
+            panel_content += f"<h6>Court</h6>{self.case['court']['name']}"
+            panel_content += f"<h6>Department</h6>{self.case['department']['full_name']}"
+            panel_content += f"<h6>SOL</h6>{self.case['statute_of_limitations']}"
+            self.dashboard.updatePanel({
+                'id': 'case_details',
+                'content': panel_content,
+            })
     
