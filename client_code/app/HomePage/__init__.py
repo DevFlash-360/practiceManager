@@ -124,7 +124,7 @@ class HomePage(HomePageTemplate):
         self.appbar_menu.show()
 
         # Show sidebar menu
-        self.sidebar.show()
+        self.sidebar.show(AppEnv.start_menu)
 
     # Sidebar toggle event handler
     def sidebar_toggle(self, args):
