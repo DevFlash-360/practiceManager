@@ -12,6 +12,7 @@ import navigation as nav
 AppEnv.APP_ID = 'practiceMANAGER'
 AppEnv.ANVIL_FUSION_VERSION = "0.0.2"
 AppEnv.content_container_id = 'pm_content'
+AppEnv.start_menu = "case_menu"
 AppEnv.data_models = app.models
 AppEnv.forms = Forms
 AppEnv.views = Views
