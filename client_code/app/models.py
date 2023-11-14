@@ -21,7 +21,6 @@ ENUM_MODEL_LIST = {
     'StaffGroup': {'model': 'StaffGroup', 'name_field': 'name'},
     'StaffPayType': {'model': 'StaffPayType', 'name_field': 'name'},
     'TypeOfAction': {'model': 'TypeOfAction', 'name_field': 'name'},
-    'User': {'model': 'User', 'name_field': 'email'},
 }
 
 
