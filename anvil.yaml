@@ -550,6 +550,15 @@ db_schema:
     - name: created_by
       admin_ui: {width: 200}
       type: string
+    - name: file_version
+      admin_ui: {width: 200}
+      type: string
+    - name: file
+      admin_ui: {width: 200}
+      type: media
+    - name: path
+      admin_ui: {width: 200}
+      type: string
   lead_sources:
     title: Lead Sources
     client: none
@@ -1245,6 +1254,23 @@ db_schema:
     - name: updated_by
       admin_ui: {width: 200}
       type: string
+  time_off_requests:
+    title: Time Off Requests
+    client: none
+    server: full
+    columns:
+    - {name: date_of_return, admin_ui: null, type: date}
+    - {name: reason, admin_ui: null, type: string}
+    - {name: uid, admin_ui: null, type: string}
+    - {name: staff, admin_ui: null, type: link_single, target: staff}
+    - {name: date_of_leave, admin_ui: null, type: date}
+    - {name: updated_by, admin_ui: null, type: string}
+    - {name: tenant_uid, admin_ui: null, type: string}
+    - {name: created_time, admin_ui: null, type: datetime}
+    - {name: status, admin_ui: null, type: string}
+    - {name: updated_time, admin_ui: null, type: datetime}
+    - {name: notes, admin_ui: null, type: string}
+    - {name: created_by, admin_ui: null, type: string}
   documents:
     client: none
     server: full
@@ -1397,6 +1423,28 @@ db_schema:
     - name: updated_by
       admin_ui: {width: 200}
       type: string
+  reimbursement_requests:
+    title: Reimbursement Requests
+    client: none
+    server: full
+    columns:
+    - {name: staff, admin_ui: null, type: link_single, target: staff}
+    - {name: status, admin_ui: null, type: string}
+    - {name: quantity, admin_ui: null, type: number}
+    - {name: created_by, admin_ui: null, type: string}
+    - {name: total, admin_ui: null, type: number}
+    - {name: created_time, admin_ui: null, type: datetime}
+    - {name: tenant_uid, admin_ui: null, type: string}
+    - {name: description, admin_ui: null, type: string}
+    - {name: amount, admin_ui: null, type: number}
+    - {name: add_to_case, admin_ui: null, type: bool}
+    - {name: activity, admin_ui: null, type: link_single, target: activities}
+    - {name: date, admin_ui: null, type: date}
+    - {name: case, admin_ui: null, type: link_single, target: cases}
+    - {name: uid, admin_ui: null, type: string}
+    - {name: receipt_invoice, admin_ui: null, type: simpleObject}
+    - {name: updated_by, admin_ui: null, type: string}
+    - {name: updated_time, admin_ui: null, type: datetime}
   case_requirements:
     client: none
     server: full
