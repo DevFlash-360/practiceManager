@@ -8,6 +8,7 @@ class TaskListView(GridView):
         view_config = {
             'model': 'Task',
             'columns': [
+                {'name': 'completed', 'label': 'Completed'},
                 {'name': 'due_date_days', 'label': 'Due Date'},
                 {'name': 'due_date_view', 'label': 'Due Date', 'visible': False},
                 {'name': 'due_date', 'label': 'Due Date'},

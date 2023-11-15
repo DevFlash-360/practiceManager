@@ -648,7 +648,7 @@ class Task:
     notes = Attribute(field_type=types.FieldTypes.MULTI_LINE)
     """Detail View"""
     documents = Attribute(field_type=types.FieldTypes.FILE_UPLOAD)
-    status = Attribute(field_type=types.FieldTypes.BOOLEAN)
+    completed = Attribute(field_type=types.FieldTypes.BOOLEAN)
 
     @staticmethod
     def get_due_date_view(args):
