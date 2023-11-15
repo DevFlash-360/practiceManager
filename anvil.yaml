@@ -3,7 +3,7 @@ dependencies:
 - dep_id: dep_4vj9jnxbmdg1zu
   version: {dev: false}
   resolution_hints: {app_id: RKPNSNWS3GPPJAO7, name: AnvilFusion, package_name: AnvilFusion}
-- dep_id: dep_mzhpzei5mel00i
+- dep_id: dep_kainr9ne2o2ibk
   version: {dev: false}
   resolution_hints: {app_id: DNY7C2CJKZX7M63Z, name: AnvilFusion2, package_name: AnvilFusion2}
 services:
