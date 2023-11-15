@@ -14,7 +14,7 @@ class CaseRequirementForm(FormBase):
         self.name = TextInput(name='name', label='Name', required=True)
         self.notes = MultiLineInput(name='notes', label="Notes", rows=4)
         self.url = HyperlinkInput(name='url', label='URL')
-        self.due_date = DateTimeInput(name='due_date', label='Due Date')
+        self.due_date = DateInput(name='due_date', label='Due Date')
         self.completed = CheckboxInput(name='completed', label='Completed')
 
         sections = [
