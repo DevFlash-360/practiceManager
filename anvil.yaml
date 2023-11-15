@@ -3,9 +3,6 @@ dependencies:
 - dep_id: dep_4vj9jnxbmdg1zu
   version: {dev: false}
   resolution_hints: {app_id: RKPNSNWS3GPPJAO7, name: AnvilFusion, package_name: AnvilFusion}
-- dep_id: dep_9d33di4bms5rl
-  version: {dev: false}
-  resolution_hints: {app_id: HYKA3GUMM4JIMWV3, name: Feedback Form 1, package_name: Feedback_Form_1}
 services:
 - source: /runtime/services/tables.yml
   client_config: {enable_v2: true}
