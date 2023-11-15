@@ -331,3 +331,7 @@ div#pm-appbar-add-item-popup ul {
 ul#pm-sidebar-menu {
     margin: 15px 0px 15px 15px !important;
 }
+
+.bold {
+    font-weight: bold;
+}

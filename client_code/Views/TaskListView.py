@@ -11,7 +11,7 @@ class TaskListView(GridView):
                 {'name': 'completed', 'label': 'Completed'},
                 {'name': 'due_date_days', 'label': 'Due Date'},
                 {'name': 'due_date_view', 'label': 'Due Date', 'visible': False},
-                {'name': 'due_date', 'label': 'Due Date'},
+                {'name': 'due_date', 'label': 'Due Date', 'customAttributes': {'class':'bold'}},
                 {'name': 'case.case_name', 'label': 'Case'},
                 {'name': 'activity.name', 'label': 'Activity'},
                 {'name': 'priority', 'label': 'Priority'},
