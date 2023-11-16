@@ -20,6 +20,7 @@ class TaskListView(GridView):
             ],
             'filter': {'case': kwargs.get('case_uid')} if kwargs.get('case_uid') else None,
         }
+        toolbar_items = ['Add', 'Edit', 'Delete', 'Search', 'Print']
         case_uid = case['uid'] if case else case_uid
         if case_uid:
             filters = {
@@ -28,7 +29,7 @@ class TaskListView(GridView):
         else:
             filters = None
 
-        super().__init__(model='Task', view_config=view_config, filters=filters, **kwargs)
+        super().__init__(model='Task', view_config=view_config, filters=filters, toolbar_items=toolbar_items, **kwargs)
         anvil.js.window['captionTemplateFormat'] = self.due_date_caption
         self.grid.allowGrouping = True
         self.grid.groupSettings = {
@@ -69,9 +70,3 @@ class TaskListView(GridView):
         if self.first_load:
             self.grid.groupModule.collapseAll()
             self.first_load = False
-
-    def update_grid(self, data_row, add_new, get_relationships=False):
-        print("update_grid")
-        super().update_grid(data_row, add_new, get_relationships=False)
-        self.grid.refresh()
-        self.grid.refreshColumns()
