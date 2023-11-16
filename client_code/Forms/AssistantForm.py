@@ -13,7 +13,7 @@ class AssistantForm:
         self.container_id = str(f"assistant-{uuid.uuid4()}")
         self.container_el = anvil.js.window.document.createElement('div')
         self.container_el.setAttribute('id', self.container_id)
-        self.container_el.style.visibility = 'hidden'
+        # self.container_el.style.visibility = 'hidden'
         self.target_el.append(self.container_el)
         self.form_id = str(f"assistant-form-{uuid.uuid4()}")
 
