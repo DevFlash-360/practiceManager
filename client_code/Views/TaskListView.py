@@ -1,7 +1,24 @@
 from AnvilFusion.components.GridView import GridView
 import anvil.js
 
+GRID_TOOLBAR_COMMAND_ADD = {'id': 'add', 'text': '', 'prefixIcon': 'e-add', 'tooltipText': 'Add', 'align': 'Right'}
+GRID_TOOLBAR_COMMAND_DELETE = {'id': 'delete', 'text': '', 'prefixIcon': 'e-delete', 'tooltipText': 'Delete',
+                               'align': 'Right', 'style': 'color: #d6292c;'}
+GRID_TOOLBAR_COMMAND_SEARCH = {'id': 'search', 'text': 'Search', 'prefixIcon': 'e-search', 'tooltipText': 'Search',
+                               'align': 'Right'}
+GRID_TOOLBAR_COMMAND_SEARCH_TOGGLE = {'id': 'search-toggle', 'text': '', 'prefixIcon': 'e-search',
+                                      'tooltipText': 'Search', 'align': 'Right'}
 
+GRID_TOOLBAR_COMMAND_PRINT = {'id': 'print', 'text': '', 'prefixIcon': 'print',
+                                      'tooltipText': 'Print', 'align': 'Right'}
+
+TOOLBAR_ITEMS = [
+    GRID_TOOLBAR_COMMAND_DELETE,
+    GRID_TOOLBAR_COMMAND_SEARCH,
+    GRID_TOOLBAR_COMMAND_SEARCH_TOGGLE,
+    GRID_TOOLBAR_COMMAND_ADD,
+    GRID_TOOLBAR_COMMAND_PRINT
+]
 class TaskListView(GridView):
     def __init__(self, case=None, case_uid=None, **kwargs):
         print('TaskListView')
@@ -20,7 +37,6 @@ class TaskListView(GridView):
             ],
             'filter': {'case': kwargs.get('case_uid')} if kwargs.get('case_uid') else None,
         }
-        toolbar_items = ['Add', 'Edit', 'Delete', 'Search', 'Print']
         case_uid = case['uid'] if case else case_uid
         if case_uid:
             filters = {
@@ -29,7 +45,7 @@ class TaskListView(GridView):
         else:
             filters = None
 
-        super().__init__(model='Task', view_config=view_config, filters=filters, toolbar_items=toolbar_items, **kwargs)
+        super().__init__(model='Task', view_config=view_config, filters=filters, toolbar_items=TOOLBAR_ITEMS, **kwargs)
         anvil.js.window['captionTemplateFormat'] = self.due_date_caption
         self.grid.allowGrouping = True
         self.grid.groupSettings = {
