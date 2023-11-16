@@ -38,7 +38,7 @@ class AssistantForm:
             'target': self.target_el,
             'isModal': False,
             'width': '500px',
-            'height': '95%',
+            'height': '99%',
             'visible': True,
             'position': {'X': 'right', 'Y': '20'},
             'animationSettings': {'effect': 'Zoom'},
