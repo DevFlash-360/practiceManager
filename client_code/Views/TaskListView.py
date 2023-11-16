@@ -12,12 +12,16 @@ GRID_TOOLBAR_COMMAND_SEARCH_TOGGLE = {'id': 'search-toggle', 'text': '', 'prefix
 GRID_TOOLBAR_COMMAND_PRINT = {'id': 'print', 'text': '', 'prefixIcon': 'e-print',
                                       'tooltipText': 'Print', 'align': 'Right'}
 
+GRID_TOOLBAR_COMMAND_EDIT = {'id': 'edit', 'text': '', 'prefixIcon': 'e-edit',
+                                      'tooltipText': 'Edit', 'align': 'Right'}
+
 TOOLBAR_ITEMS = [
     GRID_TOOLBAR_COMMAND_DELETE,
     GRID_TOOLBAR_COMMAND_SEARCH,
     GRID_TOOLBAR_COMMAND_SEARCH_TOGGLE,
     GRID_TOOLBAR_COMMAND_ADD,
-    GRID_TOOLBAR_COMMAND_PRINT
+    GRID_TOOLBAR_COMMAND_PRINT,
+    GRID_TOOLBAR_COMMAND_EDIT
 ]
 class TaskListView(GridView):
     def __init__(self, case=None, case_uid=None, **kwargs):
