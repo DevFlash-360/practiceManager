@@ -9,7 +9,7 @@ GRID_TOOLBAR_COMMAND_SEARCH = {'id': 'search', 'text': 'Search', 'prefixIcon': '
 GRID_TOOLBAR_COMMAND_SEARCH_TOGGLE = {'id': 'search-toggle', 'text': '', 'prefixIcon': 'e-search',
                                       'tooltipText': 'Search', 'align': 'Right'}
 
-GRID_TOOLBAR_COMMAND_PRINT = {'id': 'print', 'text': '', 'prefixIcon': 'print',
+GRID_TOOLBAR_COMMAND_PRINT = {'id': 'print', 'text': '', 'prefixIcon': 'e-print',
                                       'tooltipText': 'Print', 'align': 'Right'}
 
 TOOLBAR_ITEMS = [
