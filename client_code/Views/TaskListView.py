@@ -69,3 +69,7 @@ class TaskListView(GridView):
         if self.first_load:
             self.grid.groupModule.collapseAll()
             self.first_load = False
+
+    def update_grid(self, data_row, add_new, get_relationships=False):
+        print("update_grid")
+        super().update_grid(data_row, add_new, get_relationships=False)
