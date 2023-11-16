@@ -72,6 +72,7 @@ class HomePage(HomePageTemplate):
                 {'id': 'case', 'text': 'Add Case'},
                 {'id': 'invoice', 'text': 'Add Invoice'},
                 {'id': 'update', 'text': 'Add Update'},
+                {'id': 'assistant', 'text': 'Ask Me Anything'},
                 ],
             'open': self.appbar_menu_popup_open,
             'select': self.appbar_add_item_select,
