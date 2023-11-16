@@ -104,6 +104,11 @@ class HomePage(HomePageTemplate):
             'items': appbar_user_menu_items,
             'open': self.appbar_menu_popup_open
         })
+        self.appbar_assistant_button = ej.buttons.Button({
+            'cssClass': 'e-inherit e-caret-hide pm-menu-font',
+            'iconCss': 'fa-solid fa-question pm-appbar-menu-icon',
+            'click': self.appbar_assistant_button_click
+        })
 
         self.sidebar = nav.Sidebar(target_el='.pm-page-container', container_el='pm-sidebar',
                                    content_id=self.content_id)
@@ -118,7 +123,8 @@ class HomePage(HomePageTemplate):
         self.appbar.appendTo(jQuery('#pm-appbar')[0])
         self.appbar_add_item.appendTo(jQuery('#pm-appbar-add-item')[0])
         self.appbar_notification_list.appendTo(jQuery('#pm-appbar-notification-list')[0])
-        self.appbar_help_menu.appendTo(jQuery('#pm-appbar-help-menu')[0])
+        # self.appbar_help_menu.appendTo(jQuery('#pm-appbar-help-menu')[0])
+        self.appbar_assistant_button.appendTo(jQuery('#pm-appbar-help-menu')[0])
         self.appbar_user_menu.appendTo(jQuery('#pm-appbar-user-menu')[0])
         self.appbar_sidebar_toggle.appendTo(jQuery('#pm-appbar-sidebar-toggle')[0])
         self.appbar_sidebar_toggle.element.addEventListener('click', self.sidebar.toggle)
@@ -146,8 +152,8 @@ class HomePage(HomePageTemplate):
 
     def appbar_add_item_select(self, args):
         nav.add_item_select(args, self.content_id)
-        # item = args['item']
-        # print(args.keys())
-        # print(args['name'])
-        # print(item, item['text'], item.keys())
-        # print(args['element'])
+
+
+    def appbar_assistant_button_click(self):
+        form_control = Forms.AssistantForm(target=self.content_id)
+        form_control.form_show()
