@@ -50,7 +50,7 @@ class AssistantForm:
         })
         self.form.cssClass = 'e-fixed py-dialog'
         self.form.appendTo(self.container_el)
-        print(self.target_el. self.container_el)
+        print(self.target_el, self.container_el)
 
 
     def form_show(self):
