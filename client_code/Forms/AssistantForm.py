@@ -7,7 +7,7 @@ import uuid
 
 class AssistantForm:
     def __init__(self, target):
-        print('AssistantForm')
+        print('AssistantForm', target)
 
         self.target_el = anvil.js.window.document.getElementById(target)
         self.container_id = str(f"assistant-{uuid.uuid4()}")
@@ -16,7 +16,6 @@ class AssistantForm:
         self.container_el.style.visibility = 'hidden'
         self.target_el.append(self.container_el)
         self.form_id = str(f"assistant-form-{uuid.uuid4()}")
-        self.form_el = None
 
 
         self.user_message = MultiLineInput(name='user_message', label='')
@@ -51,6 +50,7 @@ class AssistantForm:
         })
         self.form.cssClass = 'e-fixed py-dialog'
         self.form.appendTo(self.container_el)
+        print(self.target_el. self.container_el)
 
 
     def form_show(self):
