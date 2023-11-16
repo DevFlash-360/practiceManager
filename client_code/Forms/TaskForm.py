@@ -24,7 +24,7 @@ class TaskForm(FormBase):
                                          on_change=self.no_due_date_toggle)
         self.no_case = CheckboxInput(name='no_case', label='Task is not related to case', save=False,
                                      on_change=self.no_case_toggle)
-        self.completed = CheckboxInput(name='completed', label='Task is completed', save=False)
+        self.completed = CheckboxInput(name='completed', label='Task is completed')
 
         sections = [
             {'name': '_', 'rows': [
