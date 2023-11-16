@@ -124,7 +124,7 @@ class HomePage(HomePageTemplate):
         self.appbar_add_item.appendTo(jQuery('#pm-appbar-add-item')[0])
         self.appbar_notification_list.appendTo(jQuery('#pm-appbar-notification-list')[0])
         # self.appbar_help_menu.appendTo(jQuery('#pm-appbar-help-menu')[0])
-        self.appbar_assistant_button.appendTo(jQuery('#pm-appbar-help-menu')[0])
+        # self.appbar_assistant_button.appendTo(jQuery('#pm-appbar-help-menu')[0])
         self.appbar_user_menu.appendTo(jQuery('#pm-appbar-user-menu')[0])
         self.appbar_sidebar_toggle.appendTo(jQuery('#pm-appbar-sidebar-toggle')[0])
         self.appbar_sidebar_toggle.element.addEventListener('click', self.sidebar.toggle)
@@ -155,5 +155,6 @@ class HomePage(HomePageTemplate):
 
 
     def appbar_assistant_button_click(self):
+        print('appbar_assistant_button_click')
         form_control = Forms.AssistantForm(target=self.content_id)
         form_control.form_show()

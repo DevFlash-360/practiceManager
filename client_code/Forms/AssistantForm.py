@@ -40,7 +40,7 @@ class AssistantForm:
             'width': '500px',
             'height': '95%',
             'visible': True,
-            'position': {'X': 'right', 'Y': '30'},
+            'position': {'X': 'right', 'Y': '20'},
             'animationSettings': {'effect': 'Zoom'},
             'cssClass': 'e-fixed py-dialog',
             'open': self.form_open,
