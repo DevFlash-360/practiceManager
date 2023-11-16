@@ -73,3 +73,4 @@ class TaskListView(GridView):
     def update_grid(self, data_row, add_new, get_relationships=False):
         print("update_grid")
         super().update_grid(data_row, add_new, get_relationships=False)
+        self.grid.refresh()
