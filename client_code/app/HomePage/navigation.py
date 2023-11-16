@@ -365,6 +365,7 @@ PMAPP_APPBAR_ADD_ITEM = {
     'Add Case': {'model': 'Case', 'type': 'form'},
     'Add Invoice': {'model': 'Invoice', 'type': 'form'},
     'Add Update': {'model': 'CaseUpdate', 'type': 'form'},
+    'Ask Me Anything': {'model': 'Assistant', 'type': 'form'},
 }
 
 
