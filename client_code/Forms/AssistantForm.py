@@ -65,3 +65,4 @@ class AssistantForm:
     def form_open(self):
         for field in self.fields:
             field.show()
+        self.container_el.style.visibility = 'visible'
