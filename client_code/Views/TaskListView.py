@@ -1,7 +1,7 @@
-from AnvilFusion.components.GridView import GridView
+from DevFusion.components.GridView2 import GridView2
 import anvil.js
 
-class TaskListView(GridView):
+class TaskListView(GridView2):
     def __init__(self, case=None, case_uid=None, **kwargs):
         print('TaskListView')
         view_config = {
