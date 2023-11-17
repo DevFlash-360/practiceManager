@@ -3,9 +3,9 @@ dependencies:
 - dep_id: dep_4vj9jnxbmdg1zu
   version: {dev: false}
   resolution_hints: {app_id: RKPNSNWS3GPPJAO7, name: AnvilFusion, package_name: AnvilFusion}
-- dep_id: dep_5dz7tpiqlwls3
+- dep_id: dep_o65p6rix2quj7
   version: {dev: false}
-  resolution_hints: {app_id: TEPMWLQXXSCNBAND, name: AnvilDFusion, package_name: AnvilDFusion}
+  resolution_hints: {app_id: 6OVB6WYVVACMAXYK, name: DevFusion, package_name: DevFusion}
 services:
 - source: /runtime/services/tables.yml
   client_config: {enable_v2: true}
