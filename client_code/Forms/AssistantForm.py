@@ -26,8 +26,11 @@ class AssistantForm:
             self.thread,
             self.user_message,
         ]
-        self.form_content += f'<div style="height:100%;scroll:auto;" ><div id="{self.thread.container_id}"></div></div>'
+        self.form_content = '<div style="display: flex; flex-direction: column; height: 100%;">'
+        self.form_content += f'<div style="flex 1; overflow: auto;" ><div id="{self.thread.container_id}"></div></div>'
         self.form_content += f'<div><div id="{self.user_message.container_id}"></div></div>'
+        self.form_content += '</div>'
+
         self.form_content = f'<form id="{self.form_id}" style="padding-top:1em;!important">' + self.form_content + '</form>'
 
         self.form = ej.popups.Dialog({
