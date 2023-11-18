@@ -62,7 +62,7 @@ class AssistantForm:
         #     self.container_el.style['max-height'] = f"{container_el_height}px"
 
 
-    def form_open(self):
+    def form_open(self, args):
         print('form_open')
         for field in self.fields:
             field.show()
