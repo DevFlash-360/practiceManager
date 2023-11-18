@@ -26,7 +26,7 @@ class AssistantForm:
             self.thread,
             self.user_message,
         ]
-        self.form_content += f'<div height="100%" ><div id="{self.thread.container_id}"></div></div>'
+        self.form_content += f'<div style="height:100%;scroll:auto;" ><div id="{self.thread.container_id}"></div></div>'
         self.form_content += f'<div><div id="{self.user_message.container_id}"></div></div>'
         self.form_content = f'<form id="{self.form_id}" style="padding-top:1em;!important">' + self.form_content + '</form>'
 
