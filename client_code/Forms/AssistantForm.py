@@ -20,7 +20,7 @@ class AssistantForm:
         self.chat_el = None
 
 
-        self.user_message = MultiLineInput(name='user_message', label='')
+        self.user_message = MultiLineInput(name='user_message', label='', rows=1)
         self.thread = InlineMessage(name='thread')
 
         self.form_content = ''
