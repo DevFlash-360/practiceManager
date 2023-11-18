@@ -16,6 +16,8 @@ class AssistantForm:
         # self.container_el.style.visibility = 'hidden'
         self.target_el.append(self.container_el)
         self.form_id = str(f"assistant-form-{uuid.uuid4()}")
+        self.chat_id = str(f"assistant-chat-{uuid.uuid4()}")
+        self.chat_el = None
 
 
         self.user_message = MultiLineInput(name='user_message', label='')
@@ -26,7 +28,7 @@ class AssistantForm:
             self.thread,
             self.user_message,
         ]
-        self.form_content = '<div style="display: flex; flex-direction: column; height: 100%;">'
+        self.form_content = f'<div id="{self.chat_id}" style="display: flex; flex-direction: column; height: 100vh;">'
         self.form_content += f'<div style="flex-grow: 1; overflow: auto;" ><div id="{self.thread.container_id}"></div></div>'
         self.form_content += f'<div><div id="{self.user_message.container_id}"></div></div>'
         self.form_content += '</div>'
@@ -58,6 +60,8 @@ class AssistantForm:
     def form_show(self):
         print('show assistant form')
         self.form.show()
+        self.chat_el = anvil.js.window.document.getElementById(self.chat_id)
+        self.chat_el.style.height = f"{self.container_el.offsetHeight}px"
         # if view_mode:
         #     container_el_height = int(self.container_el.style['max-height'][0:-2]) - DIALOG_FULLSCREEN_HEIGHT_OFFSET
         #     self.container_el.style.top = f"{DIALOG_FULLSCREEN_HEIGHT_OFFSET}px"
