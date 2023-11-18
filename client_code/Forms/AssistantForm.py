@@ -26,9 +26,8 @@ class AssistantForm:
             self.thread,
             self.user_message,
         ]
-        for field in self.fields:
-            self.form_content += f'<div class="row"><div class="col-xs-12" id="{field.container_id}"></div></div>'
-
+        self.form_content += f'<div class="row"><div height="100%" id="{self.thread.container_id}"></div></div>'
+        self.form_content += f'<div class="row"><div id="{self.user_message.container_id}"></div></div>'
         self.form_content = f'<form id="{self.form_id}" style="padding-top:1em;!important">' + self.form_content + '</form>'
 
         self.form = ej.popups.Dialog({
