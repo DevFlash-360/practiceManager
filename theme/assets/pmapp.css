@@ -335,7 +335,3 @@ ul#pm-sidebar-menu {
 .bold {
     font-weight: bold;
 }
-
-.priority::before {
-    content: '\e823';
-}

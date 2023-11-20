@@ -13,7 +13,7 @@ class TaskListView(GridView2):
                 {'name': 'due_date', 'label': 'Due Date'},
                 {'name': 'case.case_name', 'label': 'Case'},
                 {'name': 'activity.name', 'label': 'Activity'},
-                {'name': 'priority', 'label': 'Priority', 'custom_attributes': {'class':'priority'}},
+                {'name': 'priority', 'label': 'Priority', 'custom_attributes': {'class':'e-icons e-small e-search'}},
                 {'name': 'assigned_staff.full_name', 'label': 'Assigned Staff'},
                 {'name': 'notes', 'label': 'Notes'},
             ],
