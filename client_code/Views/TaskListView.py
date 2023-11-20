@@ -6,7 +6,7 @@ class TaskListView(GridView2):
         print('TaskListView')
         view_config = {
             'model': 'Task',
-            'commandClick': self.commandClick,
+            # 'commandClick': self.commandClick,
             'columns': [
                 {'name': 'completed', 'label': 'Completed', 'custom_attributes': {}},
                 {'name': 'due_date_days', 'label': 'Due Date'},
