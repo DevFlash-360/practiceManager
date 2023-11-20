@@ -107,7 +107,6 @@ class HomePage(HomePageTemplate):
         self.appbar_assistant_button = ej.buttons.Button({
             'cssClass': 'e-inherit e-caret-hide pm-menu-font',
             'iconCss': 'fa-solid fa-question pm-appbar-menu-icon',
-            'click': self.appbar_assistant_button_click
         })
 
         self.sidebar = nav.Sidebar(target_el='.pm-page-container', container_el='pm-sidebar',
@@ -125,6 +124,7 @@ class HomePage(HomePageTemplate):
         self.appbar_notification_list.appendTo(jQuery('#pm-appbar-notification-list')[0])
         # self.appbar_help_menu.appendTo(jQuery('#pm-appbar-help-menu')[0])
         self.appbar_assistant_button.appendTo(jQuery('#pm-appbar-help-menu')[0])
+        self.appbar_assistant_button.element.addEventListener('click', self.appbar_assistant_button_click)
         self.appbar_user_menu.appendTo(jQuery('#pm-appbar-user-menu')[0])
         self.appbar_sidebar_toggle.appendTo(jQuery('#pm-appbar-sidebar-toggle')[0])
         self.appbar_sidebar_toggle.element.addEventListener('click', self.sidebar.toggle)
@@ -136,6 +136,7 @@ class HomePage(HomePageTemplate):
     # Sidebar toggle event handler
     def sidebar_toggle(self, args):
         self.sidebar.toggle(args)
+
 
     # Appbar menu popup window position adjustment
     @staticmethod
