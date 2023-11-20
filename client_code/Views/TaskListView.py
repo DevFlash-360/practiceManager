@@ -14,7 +14,7 @@ class TaskListView(GridView2):
                 {'name': 'due_date', 'label': 'Due Date'},
                 {'name': 'case.case_name', 'label': 'Case'},
                 {'name': 'activity.name', 'label': 'Activity'},
-                {'name': 'priority', 'label': 'Priority', 'iconCss': 'e-search'},
+                {'name': 'priority', 'label': 'Priority'},
                 {'name': 'assigned_staff.full_name', 'label': 'Assigned Staff'},
                 {'name': 'notes', 'label': 'Notes'},
             ],
