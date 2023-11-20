@@ -6,8 +6,10 @@ class TaskListView(GridView2):
         print('TaskListView')
         view_config = {
             'model': 'Task',
+            'commandClick': 'commandClick',
             'columns': [
-                {'name': 'completed', 'label': 'Completed', 'custom_attributes': {}},
+                { 'headerText': 'Completed', 'commands': [{ 'buttonOption': {'cssClass': 'e-icons e-check'}}]},
+                # {'name': 'completed', 'label': 'Completed', 'custom_attributes': {}},
                 {'name': 'due_date_days', 'label': 'Due Date'},
                 {'name': 'due_date_view', 'label': 'Due Date', 'visible': False},
                 {'name': 'due_date', 'label': 'Due Date'},
@@ -68,3 +70,6 @@ class TaskListView(GridView2):
         if self.first_load:
             self.grid.groupModule.collapseAll()
             self.first_load = False
+
+    def commandClick(args):
+        print(f"Click {args}")
