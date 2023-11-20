@@ -155,7 +155,7 @@ class HomePage(HomePageTemplate):
         nav.add_item_select(args, self.content_id)
 
 
-    def appbar_assistant_button_click(self):
+    def appbar_assistant_button_click(self, args):
         print('appbar_assistant_button_click')
         form_control = Forms.AssistantForm(target=self.content_id)
         form_control.form_show()
