@@ -8,8 +8,7 @@ class TaskListView(GridView2):
             'model': 'Task',
             'commandClick': 'commandClick',
             'columns': [
-                { 'headerText': 'Completed', 'commands': [{ 'buttonOption': {'cssClass': 'e-icons e-check'}}]},
-                # {'name': 'completed', 'label': 'Completed', 'custom_attributes': {}},
+                {'name': 'completed', 'label': 'Completed', 'custom_attributes': {}},
                 {'name': 'due_date_days', 'label': 'Due Date'},
                 {'name': 'due_date_view', 'label': 'Due Date', 'visible': False},
                 {'name': 'due_date', 'label': 'Due Date'},
