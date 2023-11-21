@@ -70,6 +70,7 @@ class TaskListView(GridView2):
         for item in self.grid['dataSource']:
             item['completed'] = f"<span class='fas fa-check fa-2x {'text-green' if item['completed'] else 'text-muted'}'></span>"
             item['priority'] = f"<span class='fas fa-circle fa-sm me-1 text-{'red' if item['priority'] == 'High' else 'green'}'></span> " + item['priority']
+        self.check_unread.appendTo(jQuery(f"#{self.grid_el_id}")[0])
 
     def collapse_all(self, args):
         if self.first_load:
