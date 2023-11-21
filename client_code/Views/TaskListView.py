@@ -1,3 +1,4 @@
+from anvil.js.window import ej, jQuery
 from DevFusion.components.GridView2 import GridView2
 import anvil.js
 
@@ -51,6 +52,9 @@ class TaskListView(GridView2):
         # }
         # self.grid.dataBound = self.collapse_all
         self.first_load = True
+        
+        self.check_unread = ej.buttons.CheckBox({ 'label': 'Default' })
+
 
 
     def due_date_caption(self, args):
