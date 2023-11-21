@@ -53,9 +53,8 @@ class TaskListView(GridView2):
         # self.grid.dataBound = self.collapse_all
         self.first_load = True
         
-        self.check_unread = ej.buttons.CheckBox({ 'label': 'Default' })
-
-
+        self.check_incomplete = ej.buttons.CheckBox({ 'label': 'Incomplete tasks only' })
+        self.check_incomplete.addEventListener('change', self.unreadChange)
 
     def due_date_caption(self, args):
         # print('due_date_caption', args)
@@ -79,3 +78,9 @@ class TaskListView(GridView2):
 
     def commandClick(args):
         print(f"Click {args}")
+
+    def unreadChange(self, args):
+        print(f"unreadChange {args}")
+        # self.grid.filterByColumn(
+        #     fieldName='completed',
+        # )

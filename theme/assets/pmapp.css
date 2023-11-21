@@ -335,3 +335,7 @@ ul#pm-sidebar-menu {
 .bold {
     font-weight: bold;
 }
+
+div#pm-filter-container {
+    padding: 12px;
+}
