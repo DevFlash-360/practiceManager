@@ -55,15 +55,16 @@ class TaskListView(GridView2):
         
         self.check_incomplete = ej.buttons.CheckBox({ 'label': 'Incomplete tasks only' })
         self.check_incomplete.addEventListener('change', self.unreadChange)
-        sortFormatData = [
-            { 'Class': 'asc-sort', 'Type': 'Sort A to Z', 'id': '1' },
-            { 'Class': 'dsc-sort', 'Type': 'Sort Z to A ', 'id': '2' },
-            { 'Class': 'filter', 'Type': 'Filter', 'id': '3' },
-            { 'Class': 'clear', 'Type': 'Clear', 'id': '4' }
+        sports_data = [
+            {'Id': 'game1', 'Game': 'Badminton', 'IconCss': 'e-icons e-badminton'},
+            {'Id': 'game2', 'Game': 'Cricket', 'IconCss': 'e-icons e-cricket'},
+            # More items...
         ]
+        item_template = '<div><span class="${IconCss}"></span>${Game}</div>'
+
         self.filter_complete = ej.dropdowns.ComboBox({
-            'dataSource': sortFormatData,
-            'fields': { 'value': 'Type', 'iconCss': 'Class' },
+            'dataSource': sports_data,
+            'fields': { 'value': 'Id', 'text': 'Game', 'iconCss': 'IconCss' },
             'placeholder': 'Find a format'
         })
 
