@@ -20,5 +20,5 @@ import anvil.server
 #
 
 @anvil.server.callable
-def get_status_data():
+def get_staff_data():
     return app_tables.staff.search()

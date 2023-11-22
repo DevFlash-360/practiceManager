@@ -77,9 +77,13 @@ class TaskListView(GridView2):
         self.filter_complete.addEventListener('change', self.handler_filter_complete)
 
         # Assigned filter
-        status_data = [
-            ''
-        ]
+        staff_data = anvil.server.call('get_staff_data')
+        staff_data_for_combobox = [{'Id': row['uid'], 'Text': row['first_name'] + " " + row['last_name']} for row in staff_data]
+        self.filter_staff = ej.dropdowns.ComboBox({
+            'dataSource': staff_data_for_combobox,
+            'fields': {'value': 'Id', 'text': 'Text'}
+        })
+        self.filter_staff.addEventListener('change', self.handler_filter_staff)
 
 
     def due_date_caption(self, args):
@@ -93,6 +97,7 @@ class TaskListView(GridView2):
         print("TaskListView/form_show")
         super().form_show(get_data=get_data, **args)
         self.add_filter_component(self.filter_complete)
+        self.add_filter_component(self.filter_staff)
 
         self.invalidate()
 
@@ -112,6 +117,9 @@ class TaskListView(GridView2):
             self.grid.filterByColumn('completed', 'equal', "<span class='fas fa-check fa-2x text-muted'></span>")
         else:
             self.grid.clearFiltering()
+
+    def handler_filter_staff(self, args):
+        print(args)
 
     def grid_action_handler(self, args):
         super().grid_action_handler(args)
