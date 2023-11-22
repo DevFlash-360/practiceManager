@@ -110,7 +110,6 @@ class TaskListView(GridView2):
         print(f"Click {args}")
 
     def handler_filter_complete(self, args):
-        print(args)
         if args['itemData']['Id'] == 'complete':
             self.grid.filterByColumn('completed', 'equal', "<span class='fas fa-check fa-2x text-green'></span>")
         elif args['itemData']['Id'] == 'incomplete':
@@ -119,6 +118,7 @@ class TaskListView(GridView2):
             self.grid.clearFiltering()
 
     def handler_filter_staff(self, args):
+        print(args['itemData']['Text'])
         self.grid.filterByColumn('assigned_staff', 'contains', args['itemData']['Text'])
 
     def grid_action_handler(self, args):
