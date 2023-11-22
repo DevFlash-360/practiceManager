@@ -64,8 +64,10 @@ class TaskListView(GridView2):
 
         self.filter_complete = ej.dropdowns.ComboBox({
             'dataSource': sports_data,
-            'fields': { 'value': 'Id', 'text': 'Game', 'iconCss': 'IconCss' },
-            'placeholder': 'Find a format'
+            'fields': { 'value': 'Id', 'text': 'Game'},
+            'iconTemplate': item_template,
+            'placeholder': 'Find a format',
+            'cssClass': 'e-outline'
         })
 
         self.grid_config['actionComplete'] = self.grid_action_handler
