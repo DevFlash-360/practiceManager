@@ -1,3 +1,4 @@
+import anvil.server
 from anvil.js.window import ej, jQuery
 from DevFusion.components.GridView2 import GridView2
 import anvil.js

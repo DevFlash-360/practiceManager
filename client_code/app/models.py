@@ -1,3 +1,4 @@
+import anvil.server
 from AnvilFusion.datamodel.particles import model_type, Attribute, Relationship, Computed
 from AnvilFusion.datamodel import types
 from datetime import date
