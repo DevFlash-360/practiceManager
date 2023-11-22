@@ -52,7 +52,12 @@ class TaskListView(GridView2):
         # }
         # self.grid.dataBound = self.collapse_all
         self.first_load = True
-        
+
+        self.init_filters()
+
+        self.grid_config['actionComplete'] = self.grid_action_handler
+
+    def init_filters(self):
         sports_data = [
             {'Id': 'all', 'Text': 'All statuses', 'IconCss': 'e-icons e-badminton'},
             {'Id': 'complete', 'Text': 'Complete', 'IconCss': 'e-icons e-badminton'},
@@ -69,11 +74,7 @@ class TaskListView(GridView2):
         })
         self.filter_complete.addEventListener('change', self.handler_filter_complete)
 
-        self.grid_config['actionComplete'] = self.grid_action_handler
-        # self.grid.addEventListener('actionComplete', self.actionComplete)
-
     def due_date_caption(self, args):
-        # print('due_date_caption', args)
         caption_color = 'color:#a63333;' if args['key'] == -100 else ''
         return (f'<div class="template" style="font-size:14px;font-weight:bold;{caption_color}">'
                 f'{args.items[0].due_date_view}</div>')
@@ -103,12 +104,6 @@ class TaskListView(GridView2):
             self.grid.filterByColumn('completed', 'equal', "<span class='fas fa-check fa-2x text-muted'></span>")
         else:
             self.grid.clearFiltering()
-        
-        # val = args['checked']
-        # if val:
-        #     self.grid.filterByColumn('completed', 'equal', "<span class='fas fa-check fa-2x text-muted'></span>")
-        # else:
-        #     self.grid.clearFiltering()
 
     def grid_action_handler(self, args):
         super().grid_action_handler(args)
@@ -123,4 +118,3 @@ class TaskListView(GridView2):
                 data[ind]['priority'] = f"<span class='fas fa-circle fa-sm me-1 text-red'></span> High"
             elif item['priority'] == 'Normal':
                 data[ind]['priority'] = f"<span class='fas fa-circle fa-sm me-1 text-green'></span> Normal"
-        
