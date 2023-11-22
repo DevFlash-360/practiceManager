@@ -94,6 +94,7 @@ class TaskListView(GridView2):
         self.invalidate()
 
     def invalidate(self):
+        print(self.grid_data)
         for item in self.grid['dataSource']:
             item['completed'] = f"<span class='fas fa-check fa-2x {'text-green' if item['completed'] else 'text-muted'}'></span>"
             if item['priority'] == 'High':
