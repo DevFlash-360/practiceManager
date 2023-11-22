@@ -94,10 +94,11 @@ class TaskListView(GridView2):
         self.invalidate()
 
     def invalidate(self):
-        for item in self.grid_data:
-            item['completed'] = f"<span class='fas fa-check fa-2x {'text-green' if item['completed'] else 'text-muted'}'></span>"
+        data = self.grid['dataSource']
+        for ind, item in self.grid_data:
+            data[ind]['completed'] = f"<span class='fas fa-check fa-2x {'text-green' if item['completed'] else 'text-muted'}'></span>"
             if item['priority'] == 'High':
-                item['priority'] = f"<span class='fas fa-circle fa-sm me-1 text-red'></span> High"
+                data[ind]['priority'] = f"<span class='fas fa-circle fa-sm me-1 text-red'></span> High"
             elif item['priority'] == 'Normal':
-                item['priority'] = f"<span class='fas fa-circle fa-sm me-1 text-green'></span> Normal"
+                data[ind]['priority'] = f"<span class='fas fa-circle fa-sm me-1 text-green'></span> Normal"
         
