@@ -80,5 +80,5 @@ class TaskListView(GridView2):
         print(f"Click {args}")
 
     def unreadChange(self, args):
-        print(f"unreadChange {args}")
-        self.grid.filterByColumn('completed', 'equal', not args['checked'])
+        print(f"unreadChange {not args["checked"]}")
+        # self.grid.filterByColumn('completed', 'equal', not args['checked'])
