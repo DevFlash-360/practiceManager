@@ -82,6 +82,6 @@ class TaskListView(GridView2):
     def unreadChange(self, args):
         val = args['checked']
         if val:
-            self.grid.filterByColumn('completed', 'equal', False)
+            self.grid.filterByColumn('completed', 'equal', "<span class='fas fa-check fa-2x text-muted'></span>")
         else:
             self.grid.clearFiltering()
