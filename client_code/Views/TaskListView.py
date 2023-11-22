@@ -53,8 +53,6 @@ class TaskListView(GridView2):
         # self.grid.dataBound = self.collapse_all
         self.first_load = True
         
-        self.check_incomplete = ej.buttons.CheckBox({ 'label': 'Incomplete tasks only' })
-        self.check_incomplete.addEventListener('change', self.unreadChange)
         sports_data = [
             {'Id': 'all', 'Text': 'All statuses', 'IconCss': 'e-icons e-badminton'},
             {'Id': 'complete', 'Text': 'Complete', 'IconCss': 'e-icons e-badminton'},
@@ -69,6 +67,7 @@ class TaskListView(GridView2):
             'placeholder': 'Find a format',
             'cssClass': 'e-outline'
         })
+        self.filter_complete.addEventListener('change', self.handler_filter_complete)
 
         self.grid_config['actionComplete'] = self.grid_action_handler
         # self.grid.addEventListener('actionComplete', self.actionComplete)
@@ -84,9 +83,6 @@ class TaskListView(GridView2):
     def form_show(self, get_data=True, **args):
         print("TaskListView/form_show")
         super().form_show(get_data=get_data, **args)
-        # self.check_incomplete.appendTo(jQuery(f"#{self.filters_el_id}")[0])
-        # self.filter_complete.appendTo(jQuery(f"#{self.filters_el_id}")[0])
-        self.add_filter_component(self.check_incomplete)
         self.add_filter_component(self.filter_complete)
 
         self.invalidate()
@@ -99,12 +95,14 @@ class TaskListView(GridView2):
     def commandClick(args):
         print(f"Click {args}")
 
-    def unreadChange(self, args):
-        val = args['checked']
-        if val:
-            self.grid.filterByColumn('completed', 'equal', "<span class='fas fa-check fa-2x text-muted'></span>")
-        else:
-            self.grid.clearFiltering()
+    def handler_filter_complete(self, args):
+        print(args)
+        
+        # val = args['checked']
+        # if val:
+        #     self.grid.filterByColumn('completed', 'equal', "<span class='fas fa-check fa-2x text-muted'></span>")
+        # else:
+        #     self.grid.clearFiltering()
 
     def grid_action_handler(self, args):
         super().grid_action_handler(args)
