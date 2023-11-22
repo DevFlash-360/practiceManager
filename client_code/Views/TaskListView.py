@@ -119,7 +119,7 @@ class TaskListView(GridView2):
             self.grid.clearFiltering()
 
     def handler_filter_staff(self, args):
-        print(args)
+        self.grid.filterByColumn('assigned_staff', 'contains', args['itemData']['Text'])
 
     def grid_action_handler(self, args):
         super().grid_action_handler(args)
