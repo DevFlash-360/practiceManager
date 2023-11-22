@@ -56,7 +56,7 @@ class TaskListView(GridView2):
         self.check_incomplete = ej.buttons.CheckBox({ 'label': 'Incomplete tasks only' })
         self.check_incomplete.addEventListener('change', self.unreadChange)
 
-        self.grid.addEventListener('actionComplete', self.form_show)
+        self.grid.addEventListener('actionComplete', self.actionComplete)
 
     def due_date_caption(self, args):
         # print('due_date_caption', args)
@@ -88,3 +88,7 @@ class TaskListView(GridView2):
             self.grid.filterByColumn('completed', 'equal', "<span class='fas fa-check fa-2x text-muted'></span>")
         else:
             self.grid.clearFiltering()
+
+    def actionComplete(self, args):
+        super().actionComplete(args)
+        self.form_show()
