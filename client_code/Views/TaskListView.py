@@ -95,6 +95,7 @@ class TaskListView(GridView2):
         self.invalidate()
 
     def invalidate(self):
+        print("invalidate")
         data = self.grid['dataSource']
         for ind, item in enumerate(self.grid_data):
             data[ind]['completed'] = f"<span class='fas fa-check fa-2x {'text-green' if item['completed'] else 'text-muted'}'></span>"
