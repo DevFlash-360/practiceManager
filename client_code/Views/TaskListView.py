@@ -118,7 +118,7 @@ class TaskListView(GridView2):
             self.grid.clearFiltering()
 
     def handler_filter_staff(self, args):
-        print(self.grid.getColumns())
+        print(self.grid.getColumnFieldNames())
         self.grid.filterByColumn('assigned_staff.full_name', 'contains', args['itemData']['Text'])
 
     def grid_action_handler(self, args):
