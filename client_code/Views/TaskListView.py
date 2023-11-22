@@ -69,10 +69,13 @@ class TaskListView(GridView2):
     def form_show(self, get_data=True, **args):
         print("TaskListView/form_show")
         super().form_show(get_data=get_data, **args)
+        print("===1===")
         for item in self.grid['dataSource']:
             item['completed'] = f"<span class='fas fa-check fa-2x {'text-green' if item['completed'] else 'text-muted'}'></span>"
             item['priority'] = f"<span class='fas fa-circle fa-sm me-1 text-{'red' if item['priority'] == 'High' else 'green'}'></span> " + item['priority']
+        print("===2===")
         self.check_incomplete.appendTo(jQuery(f"#{self.filters_el_id}")[0])
+        print("===3===")
 
     def collapse_all(self, args):
         if self.first_load:
@@ -91,4 +94,4 @@ class TaskListView(GridView2):
 
     def actionComplete(self, args):
         print("TaskListView/actionComplete")
-        # self.form_show()
+        self.form_show()
