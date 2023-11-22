@@ -58,7 +58,8 @@ class TaskListView(GridView2):
         self.grid_config['actionComplete'] = self.grid_action_handler
 
     def init_filters(self):
-        sports_data = [
+        # Status filter
+        status_data = [
             {'Id': 'all', 'Text': 'All statuses', 'IconCss': 'e-icons e-badminton'},
             {'Id': 'complete', 'Text': 'Complete', 'IconCss': 'e-icons e-badminton'},
             {'Id': 'incomplete', 'Text': 'Incomplete', 'IconCss': 'e-icons e-cricket'},
@@ -66,13 +67,19 @@ class TaskListView(GridView2):
         item_template = '<div><span class="${IconCss}"></span>${Text}</div>'
 
         self.filter_complete = ej.dropdowns.ComboBox({
-            'dataSource': sports_data,
+            'dataSource': status_data,
             'fields': { 'value': 'Id', 'text': 'Text'},
             'iconTemplate': item_template,
             'placeholder': 'Find a format',
             'cssClass': 'e-outline'
         })
         self.filter_complete.addEventListener('change', self.handler_filter_complete)
+
+        # Assigned filter
+        status_data = [
+            ''
+        ]
+
 
     def due_date_caption(self, args):
         caption_color = 'color:#a63333;' if args['key'] == -100 else ''
