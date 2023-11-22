@@ -90,4 +90,5 @@ class TaskListView(GridView2):
             self.grid.clearFiltering()
 
     def actionComplete(self, args):
-        self.form_show()
+        print("TaskListView/actionComplete")
+        # self.form_show()
