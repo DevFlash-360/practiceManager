@@ -55,6 +55,17 @@ class TaskListView(GridView2):
         
         self.check_incomplete = ej.buttons.CheckBox({ 'label': 'Incomplete tasks only' })
         self.check_incomplete.addEventListener('change', self.unreadChange)
+        sortFormatData = [
+            { 'Class': 'asc-sort', 'Type': 'Sort A to Z', 'id': '1' },
+            { 'Class': 'dsc-sort', 'Type': 'Sort Z to A ', 'id': '2' },
+            { 'Class': 'filter', 'Type': 'Filter', 'id': '3' },
+            { 'Class': 'clear', 'Type': 'Clear', 'id': '4' }
+        ]
+        self.filter_complete = ej.dropdowns.ComboBox({
+            'dataSource': sortFormatData,
+            'fields': { 'value': 'Type', 'iconCss': 'Class' },
+            'placeholder': 'Find a format'
+        })
 
         self.grid_config['actionComplete'] = self.grid_action_handler
         # self.grid.addEventListener('actionComplete', self.actionComplete)
@@ -71,9 +82,9 @@ class TaskListView(GridView2):
         print("TaskListView/form_show")
         super().form_show(get_data=get_data, **args)
         self.check_incomplete.appendTo(jQuery(f"#{self.filters_el_id}")[0])
+        self.filter_complete.appendTo(jQuery(f"#{self.filters_el_id}")[0])
 
         self.invalidate()
-
 
     def collapse_all(self, args):
         if self.first_load:
