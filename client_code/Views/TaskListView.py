@@ -65,6 +65,7 @@ class TaskListView(GridView2):
 
 
     def form_show(self, get_data=True, **args):
+        print("TaskListView/form_show")
         super().form_show(get_data=get_data, **args)
         for item in self.grid['dataSource']:
             item['completed'] = f"<span class='fas fa-check fa-2x {'text-green' if item['completed'] else 'text-muted'}'></span>"
