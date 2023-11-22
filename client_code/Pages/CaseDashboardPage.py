@@ -1,3 +1,4 @@
+import anvil.server
 from AnvilFusion.components.DashboardPage import DashboardPage
 from AnvilFusion.tools.utils import set_cookie, get_cookie
 from ..app.models import Case
