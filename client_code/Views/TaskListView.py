@@ -79,6 +79,8 @@ class TaskListView(GridView2):
         # Assigned filter
         staff_data = anvil.server.call('get_staff_data')
         staff_data_for_combobox = [{'Id': row['uid'], 'Text': row['first_name'] + " " + row['last_name']} for row in staff_data]
+        staff_data_for_combobox.insert(0, {'Id': 'all', 'Text': 'All staffs'})
+
         self.filter_staff = ej.dropdowns.ComboBox({
             'dataSource': staff_data_for_combobox,
             'fields': {'value': 'Id', 'text': 'Text'}
@@ -116,11 +118,11 @@ class TaskListView(GridView2):
         elif args['itemData']['Id'] == 'incomplete':
             self.grid.filterByColumn('completed', 'equal', "<span class='fas fa-check fa-2x text-muted'></span>")
         else:
-            self.grid.clearFiltering()
+            self.grid.filterByColumn('completed', 'equal', "")
 
     def handler_filter_staff(self, args):
         if args['itemData']['Id'] == 'all':
-            self.grid.clearFiltering()
+            self.grid.filterByColumn('assigned_staff__full_name', 'contains', '')
         else:
             self.grid.filterByColumn('assigned_staff__full_name', 'contains', args['itemData']['Text'])
 
