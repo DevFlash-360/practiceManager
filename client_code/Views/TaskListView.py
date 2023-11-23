@@ -161,3 +161,14 @@ class TaskListView(GridView2):
                 data[ind]['priority'] = f"<span class='fas fa-circle fa-sm me-1 text-red'></span> High"
             elif item['priority'] == 'Normal':
                 data[ind]['priority'] = f"<span class='fas fa-circle fa-sm me-1 text-green'></span> Normal"
+
+    def update_grid(self, data_row, add_new, get_relationships=False):
+        print("GridView2/update_grid")
+        if data_row.uid is None:
+            data_row.uid = f"grid_{uuid.uuid4()}"
+        grid_row = data_row.get_row_view(
+            self.view_config['columns'],
+            include_row=False,
+            get_relationships=get_relationships,
+        )
+        self.update_grid_style(grid_row, add_new, get_relationships)
