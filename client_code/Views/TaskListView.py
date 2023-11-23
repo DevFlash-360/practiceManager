@@ -91,7 +91,7 @@ class TaskListView(GridView2):
         self.filter_staff.addEventListener('change', self.handler_filter_staff)
 
         print("filterSettings")
-        print(self.grid['filterSettings'])
+        print(self.grid['filterSettings']['columns'])
         # self.grid['filterSettings']['columns'] = filters_setting
 
     def due_date_caption(self, args):
