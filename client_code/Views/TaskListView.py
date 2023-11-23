@@ -9,7 +9,6 @@ class TaskListView(GridView2):
         print('TaskListView')
         view_config = {
             'model': 'Task',
-            # 'commandClick': self.commandClick,
             'columns': [
                 {'name': 'completed', 'label': 'Completed', 'custom_attributes': {}},
                 {'name': 'due_date_days', 'label': 'Due Date'},
@@ -116,9 +115,6 @@ class TaskListView(GridView2):
         if self.first_load:
             self.grid.groupModule.collapseAll()
             self.first_load = False
-
-    def commandClick(args):
-        print(f"Click {args}")
 
     # Handle complete filter
     def handler_filter_complete(self, args):
