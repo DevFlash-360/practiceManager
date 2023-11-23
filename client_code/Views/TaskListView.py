@@ -59,7 +59,7 @@ class TaskListView(GridView2):
         self.grid_config['actionComplete'] = self.grid_action_handler
 
     def init_filters(self):
-        filters_setting = [
+        self.filters_setting = [
             {'field': 'complete', 'operator': 'equal', 'value': ''},
             {'field': 'assigned_staff__full_name', 'operator': 'contains', 'value': ''},
         ]
@@ -90,10 +90,6 @@ class TaskListView(GridView2):
         })
         self.filter_staff.addEventListener('change', self.handler_filter_staff)
 
-        print("filterSettings")
-        print(self.grid['filterSettings']['columns'])
-        # self.grid['filterSettings']['columns'] = filters_setting
-
     def due_date_caption(self, args):
         caption_color = 'color:#a63333;' if args['key'] == -100 else ''
         return (f'<div class="template" style="font-size:14px;font-weight:bold;{caption_color}">'
@@ -118,6 +114,8 @@ class TaskListView(GridView2):
         print(f"Click {args}")
 
     def handler_filter_complete(self, args):
+        self.grid['filterSettings']['columns'] = self.filters_setting
+
         if args['itemData']['Id'] == 'complete':
             # self.grid.filterByColumn('completed', 'equal', "<span class='fas fa-check fa-2x text-green'></span>")
             self.grid.filterSettings['columns'][0]['value'] = "<span class='fas fa-check fa-2x text-green'></span>"
