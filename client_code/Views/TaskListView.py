@@ -60,13 +60,6 @@ class TaskListView(GridView2):
         self.grid_config['actionComplete'] = self.grid_action_handler
 
     def init_filters(self):
-        self.grid.filterSettings['column'].append(
-            {'field': 'complete', 'operator': 'equal', 'value': ''}
-        )
-        # self.grid.filterSettings['columns'] = [
-        #     {'field': 'complete', 'operator': 'equal', 'value': ''},
-        #     {'field': 'assigned_staff__full_name', 'operator': 'contains', 'value': ''},
-        # ]
         # Status filter
         status_data = [
             {'Id': 'all', 'Text': 'All statuses', 'IconCss': 'e-icons e-badminton'},
@@ -118,7 +111,10 @@ class TaskListView(GridView2):
         print(f"Click {args}")
 
     def handler_filter_complete(self, args):
-
+        self.grid.filterSettings['columns'] = [
+            {'field': 'complete', 'operator': 'equal', 'value': ''},
+            {'field': 'assigned_staff__full_name', 'operator': 'contains', 'value': ''},
+        ]
         if args['itemData']['Id'] == 'complete':
             # self.grid.filterByColumn('completed', 'equal', "<span class='fas fa-check fa-2x text-green'></span>")
             self.grid.filterSettings['columns'][0]['value'] = "<span class='fas fa-check fa-2x text-green'></span>"
