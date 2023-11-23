@@ -45,6 +45,7 @@ class TaskListView(GridView2):
                 {'field': 'due_date_days', 'direction': 'Ascending'},
             ]
         }
+        
         # self.grid.editSettings = {
         #     'allowEditing': True,
         #     'allowAdding': False,
@@ -59,10 +60,13 @@ class TaskListView(GridView2):
         self.grid_config['actionComplete'] = self.grid_action_handler
 
     def init_filters(self):
-        self.filters_setting = [
-            {'field': 'complete', 'operator': 'equal', 'value': ''},
-            {'field': 'assigned_staff__full_name', 'operator': 'contains', 'value': ''},
-        ]
+        self.grid.filterSettings = {
+            'type': 'Menu',
+            'columns':[
+                {'field': 'complete', 'operator': 'equal', 'value': ''},
+                {'field': 'assigned_staff__full_name', 'operator': 'contains', 'value': ''},
+            ]
+        }
         # Status filter
         status_data = [
             {'Id': 'all', 'Text': 'All statuses', 'IconCss': 'e-icons e-badminton'},
@@ -114,7 +118,6 @@ class TaskListView(GridView2):
         print(f"Click {args}")
 
     def handler_filter_complete(self, args):
-        self.grid['filterSettings']['columns'] = self.filters_setting
 
         if args['itemData']['Id'] == 'complete':
             # self.grid.filterByColumn('completed', 'equal', "<span class='fas fa-check fa-2x text-green'></span>")
@@ -124,6 +127,7 @@ class TaskListView(GridView2):
             self.grid.filterSettings['columns'][0]['value'] = "<span class='fas fa-check fa-2x text-muted'></span>"
         else:
             self.grid.filterSettings['columns'][0]['value'] = ""
+        self.grid.refresh()
 
     def handler_filter_staff(self, args):
         if args['itemData']['Id'] == 'all':
