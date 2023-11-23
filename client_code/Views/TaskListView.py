@@ -1,3 +1,4 @@
+import uuid
 import anvil.server
 from anvil.js.window import ej, jQuery
 from DevFusion.components.GridView2 import GridView2
@@ -89,7 +90,7 @@ class TaskListView(GridView2):
         })
         self.filter_staff.addEventListener('change', self.handler_filter_staff)
         
-		# Cases filter
+        # Cases filter
         cases_data = anvil.server.call('get_cases_data')
         cases_data_for_combobox = [{'Id': row['uid'], 'Text': row['case_name']} for row in cases_data]
         cases_data_for_combobox.insert(0, {'Id': 'all', 'Text': 'All cases'})
@@ -163,4 +164,22 @@ class TaskListView(GridView2):
                 
     def update_grid(self, data_row, add_new, get_relationships=False):
         print("TaskListView/update_grid")
-        super().update_grid(data_row, add_new, get_relationships)
+        if data_row.uid is None:
+            data_row.uid = f"grid_{uuid.uuid4()}"
+        grid_row = data_row.get_row_view(
+            self.view_config['columns'],
+            include_row=False,
+            get_relationships=get_relationships,
+        )
+        if add_new:
+            self.grid.addRecord(grid_row)
+        else:
+            # self.grid.setRowData(grid_row['uid'], grid_row)
+            self.grid.updateRow(self.grid.getRowIndexByPrimaryKey(grid_row['uid']), grid_row)
+        self.grid_data = self.grid_class.get_grid_view(self.view_config,
+                                                            search_queries=self.search_queries,
+                                                            filters=self.filters,
+                                                            include_rows=False)
+        self.invalidate()
+        self.grid.refresh()
+        print("updated grid_Data")
