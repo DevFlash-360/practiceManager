@@ -56,6 +56,7 @@ class TaskListView(GridView2):
 
         self.init_filters()
 
+        self.grid_config['actionBegin'] = self.grid_action_handler
         self.grid_config['actionComplete'] = self.grid_action_handler
 
     def init_filters(self):
