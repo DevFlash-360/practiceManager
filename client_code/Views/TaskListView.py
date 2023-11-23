@@ -60,13 +60,10 @@ class TaskListView(GridView2):
         self.grid_config['actionComplete'] = self.grid_action_handler
 
     def init_filters(self):
-        self.grid.filterSettings = {
-            'type': 'Menu',
-            'columns':[
-                {'field': 'complete', 'operator': 'equal', 'value': ''},
-                {'field': 'assigned_staff__full_name', 'operator': 'contains', 'value': ''},
-            ]
-        }
+        self.grid.filterSettings['columns'] = [
+            {'field': 'complete', 'operator': 'equal', 'value': ''},
+            {'field': 'assigned_staff__full_name', 'operator': 'contains', 'value': ''},
+        ]
         # Status filter
         status_data = [
             {'Id': 'all', 'Text': 'All statuses', 'IconCss': 'e-icons e-badminton'},
