@@ -45,7 +45,6 @@ class TaskListView(GridView2):
                 {'field': 'due_date_days', 'direction': 'Ascending'},
             ]
         }
-        
         # self.grid.editSettings = {
         #     'allowEditing': True,
         #     'allowAdding': False,
@@ -80,12 +79,12 @@ class TaskListView(GridView2):
         # Assigned filter
         staff_data = anvil.server.call('get_staff_data')
         staff_data_for_combobox = [{'Id': row['uid'], 'Text': row['first_name'] + " " + row['last_name']} for row in staff_data]
-        staff_data_for_combobox.insert(0, {'Id': 'all', 'Text': 'All staffs'})
         self.filter_staff = ej.dropdowns.ComboBox({
             'dataSource': staff_data_for_combobox,
             'fields': {'value': 'Id', 'text': 'Text'}
         })
         self.filter_staff.addEventListener('change', self.handler_filter_staff)
+
 
     def due_date_caption(self, args):
         caption_color = 'color:#a63333;' if args['key'] == -100 else ''
@@ -111,25 +110,16 @@ class TaskListView(GridView2):
         print(f"Click {args}")
 
     def handler_filter_complete(self, args):
-        self.grid.filterSettings['columns'] = [
-            {'field': 'complete', 'operator': 'equal', 'value': ''},
-            {'field': 'assigned_staff__full_name', 'operator': 'contains', 'value': ''},
-        ]
+        print(args)
         if args['itemData']['Id'] == 'complete':
-            # self.grid.filterByColumn('completed', 'equal', "<span class='fas fa-check fa-2x text-green'></span>")
-            self.grid.filterSettings['columns'][0]['value'] = "<span class='fas fa-check fa-2x text-green'></span>"
+            self.grid.filterByColumn('completed', 'equal', "<span class='fas fa-check fa-2x text-green'></span>")
         elif args['itemData']['Id'] == 'incomplete':
-            # self.grid.filterByColumn('completed', 'equal', "<span class='fas fa-check fa-2x text-muted'></span>")
-            self.grid.filterSettings['columns'][0]['value'] = "<span class='fas fa-check fa-2x text-muted'></span>"
+            self.grid.filterByColumn('completed', 'equal', "<span class='fas fa-check fa-2x text-muted'></span>")
         else:
-            self.grid.filterSettings['columns'][0]['value'] = ""
-        self.grid.refresh()
+            self.grid.clearFiltering()
 
     def handler_filter_staff(self, args):
-        if args['itemData']['Id'] == 'all':
-            self.grid.clearFiltering()
-        else:
-            self.grid.filterByColumn('assigned_staff__full_name', 'contains', args['itemData']['Text'])
+        print(args)
 
     def grid_action_handler(self, args):
         super().grid_action_handler(args)
