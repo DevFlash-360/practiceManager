@@ -166,9 +166,18 @@ class TaskListView(GridView2):
         print("GridView2/update_grid")
         if data_row.uid is None:
             data_row.uid = f"grid_{uuid.uuid4()}"
+        grid_row = self.get_style_row(data_row, get_relationships)
+        self.update_grid_style(grid_row, add_new, get_relationships)
+    
+    def get_style_row(self, data_row, get_relationships):
         grid_row = data_row.get_row_view(
             self.view_config['columns'],
             include_row=False,
             get_relationships=get_relationships,
         )
-        self.update_grid_style(grid_row, add_new, get_relationships)
+        if grid_row['priority'] == 'High':
+            grid_row['priority'] = f"<span class='fas fa-circle fa-sm me-1 text-red'></span> High"
+        elif grid_row['priority'] == 'Normal':
+            grid_row['priority'] = f"<span class='fas fa-circle fa-sm me-1 text-green'></span> Normal"
+        grid_row['completed'] = f"<span class='fas fa-check fa-2x {'text-green' if grid_row['completed'] else 'text-muted'}'></span>"
+        return grid_row
