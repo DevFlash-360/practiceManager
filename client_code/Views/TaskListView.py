@@ -86,7 +86,17 @@ class TaskListView(GridView2):
             'fields': {'value': 'Id', 'text': 'Text'}
         })
         self.filter_staff.addEventListener('change', self.handler_filter_staff)
-
+        
+		# Cases filter
+        cases_data = anvil.server.call('get_cases_data')
+        cases_data_for_combobox = [{'Id': row['uid'], 'Text': row['case_name']} for row in cases_data]
+        cases_data_for_combobox.insert(0, {'Id': 'all', 'Text': 'All cases'})
+        self.filter_case = ej.dropdowns.ComboBox({
+            'dataSource': cases_data_for_combobox,
+            'fields': {'value': 'Id', 'text': 'Text'}
+        })
+        self.filter_staff.addEventListener('change', self.handler_filter_cases)
+        
 
     def due_date_caption(self, args):
         caption_color = 'color:#a63333;' if args['key'] == -100 else ''
@@ -100,6 +110,7 @@ class TaskListView(GridView2):
         super().form_show(get_data=get_data, **args)
         self.add_filter_component(self.filter_complete)
         self.add_filter_component(self.filter_staff)
+        self.add_filter_component(self.filter_case)
 
         self.invalidate()
 
@@ -125,6 +136,12 @@ class TaskListView(GridView2):
             self.grid.clearFiltering(['assigned_staff__full_name'])
         else:
             self.grid.filterByColumn('assigned_staff__full_name', 'contains', args['itemData']['Text'])
+
+    def handler_filter_cases(self, args):
+        if args['itemData']['Id'] == 'all':
+            self.grid.clearFiltering(['case__case_name'])
+        else:
+            self.grid.filterByColumn('case__case_name', 'equal', args['itemData']['Text'])
 
     def grid_action_handler(self, args):
         super().grid_action_handler(args)

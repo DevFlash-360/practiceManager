@@ -22,3 +22,7 @@ import anvil.server
 @anvil.server.callable
 def get_staff_data():
     return app_tables.staff.search()
+
+@anvil.server.callable
+def get_cases_data():
+    return app_tables.cases.search()
