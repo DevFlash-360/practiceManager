@@ -60,7 +60,9 @@ class TaskListView(GridView2):
         self.grid_config['actionComplete'] = self.grid_action_handler
 
     def init_filters(self):
-        print(self.grid.filterSettings['columns'])
+        self.grid.filterSettings['column'].append(
+            {'field': 'complete', 'operator': 'equal', 'value': ''}
+        )
         # self.grid.filterSettings['columns'] = [
         #     {'field': 'complete', 'operator': 'equal', 'value': ''},
         #     {'field': 'assigned_staff__full_name', 'operator': 'contains', 'value': ''},
