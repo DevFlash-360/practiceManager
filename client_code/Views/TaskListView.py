@@ -71,7 +71,7 @@ class TaskListView(GridView2):
             'dataSource': status_data,
             'fields': { 'value': 'Id', 'text': 'Text'},
             'iconTemplate': item_template,
-            'placeholder': 'Find a format',
+            'placeholder': 'Complete...',
             'cssClass': 'e-outline'
         })
         self.filter_complete.addEventListener('change', self.handler_filter_complete)
@@ -83,7 +83,8 @@ class TaskListView(GridView2):
 
         self.filter_staff = ej.dropdowns.ComboBox({
             'dataSource': staff_data_for_combobox,
-            'fields': {'value': 'Id', 'text': 'Text'}
+            'fields': {'value': 'Id', 'text': 'Text'},
+            'placeholder': 'Staff...',
         })
         self.filter_staff.addEventListener('change', self.handler_filter_staff)
         
@@ -93,7 +94,8 @@ class TaskListView(GridView2):
         cases_data_for_combobox.insert(0, {'Id': 'all', 'Text': 'All cases'})
         self.filter_case = ej.dropdowns.ComboBox({
             'dataSource': cases_data_for_combobox,
-            'fields': {'value': 'Id', 'text': 'Text'}
+            'fields': {'value': 'Id', 'text': 'Text'},
+            'placeholder': 'Cases...',
         })
         self.filter_case.addEventListener('change', self.handler_filter_cases)
         
@@ -108,9 +110,9 @@ class TaskListView(GridView2):
     def form_show(self, get_data=True, **args):
         print("TaskListView/form_show")
         super().form_show(get_data=get_data, **args)
-        self.add_filter_component(self.filter_complete)
-        self.add_filter_component(self.filter_staff)
-        self.add_filter_component(self.filter_case)
+        self.add_filter_component('Completion Status', self.filter_complete)
+        self.add_filter_component('Assigned to', self.filter_staff)
+        self.add_filter_component('By Case', self.filter_case)
 
         self.invalidate()
 
