@@ -57,9 +57,6 @@ class TaskListView(GridView2):
 
         self.init_filters()
 
-        self.grid_config['actionBegin'] = self.grid_action_handler
-        self.grid_config['actionComplete'] = self.grid_action_handler
-
     def init_filters(self):
         # Status filter
         status_data = [
@@ -100,14 +97,11 @@ class TaskListView(GridView2):
             'placeholder': 'Cases...',
         })
         self.filter_case.addEventListener('change', self.handler_filter_cases)
-        
 
     def due_date_caption(self, args):
         caption_color = 'color:#a63333;' if args['key'] == -100 else ''
         return (f'<div class="template" style="font-size:14px;font-weight:bold;{caption_color}">'
                 f'{args.items[0].due_date_view}</div>')
-        # return args['due_date']
-
 
     def form_show(self, get_data=True, **args):
         print("TaskListView/form_show")
@@ -126,6 +120,7 @@ class TaskListView(GridView2):
     def commandClick(args):
         print(f"Click {args}")
 
+    # Handle complete filter
     def handler_filter_complete(self, args):
         print(args)
         if args['itemData']['Id'] == 'complete':
@@ -135,22 +130,20 @@ class TaskListView(GridView2):
         else:
             self.grid.clearFiltering(['completed'])
 
+    # Handle staff filter
     def handler_filter_staff(self, args):
         if args['itemData']['Id'] == 'all':
             self.grid.clearFiltering(['assigned_staff__full_name'])
         else:
             self.grid.filterByColumn('assigned_staff__full_name', 'contains', args['itemData']['Text'])
 
+    # Handle cases filter
     def handler_filter_cases(self, args):
         print(args)
         if args['itemData']['Id'] == 'all':
             self.grid.clearFiltering(['case__case_name'])
         else:
             self.grid.filterByColumn('case__case_name', 'equal', args['itemData']['Text'])
-
-    def grid_action_handler(self, args):
-        super().grid_action_handler(args)
-        # self.invalidate()
 
     def invalidate(self):
         print("invalidate")
@@ -169,6 +162,7 @@ class TaskListView(GridView2):
         grid_row = self.get_style_row(data_row, get_relationships)
         self.update_grid_style(grid_row, add_new, get_relationships)
     
+    # Get completed, priority components with style
     def get_style_row(self, data_row, get_relationships):
         grid_row = data_row.get_row_view(
             self.view_config['columns'],
