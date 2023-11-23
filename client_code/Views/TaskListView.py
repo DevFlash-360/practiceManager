@@ -162,4 +162,5 @@ class TaskListView(GridView2):
                 data[ind]['priority'] = f"<span class='fas fa-circle fa-sm me-1 text-green'></span> Normal"
                 
     def update_grid(self, data_row, add_new, get_relationships=False):
+        print("TaskListView/update_grid")
         super().update_grid(data_row, add_new, get_relationships)
