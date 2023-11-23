@@ -95,7 +95,7 @@ class TaskListView(GridView2):
             'dataSource': cases_data_for_combobox,
             'fields': {'value': 'Id', 'text': 'Text'}
         })
-        self.filter_staff.addEventListener('change', self.handler_filter_cases)
+        self.filter_case.addEventListener('change', self.handler_filter_cases)
         
 
     def due_date_caption(self, args):
