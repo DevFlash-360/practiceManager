@@ -160,3 +160,6 @@ class TaskListView(GridView2):
                 data[ind]['priority'] = f"<span class='fas fa-circle fa-sm me-1 text-red'></span> High"
             elif item['priority'] == 'Normal':
                 data[ind]['priority'] = f"<span class='fas fa-circle fa-sm me-1 text-green'></span> Normal"
+                
+    def update_grid(self, data_row, add_new, get_relationships=False):
+        super().update_grid(data_row, add_new, get_relationships)
