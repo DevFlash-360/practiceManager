@@ -181,5 +181,4 @@ class TaskListView(GridView2):
                                                             filters=self.filters,
                                                             include_rows=False)
         self.grid.refresh()
-        self.invalidate()
         print("updated grid_Data")
