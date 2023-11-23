@@ -180,6 +180,6 @@ class TaskListView(GridView2):
                                                             search_queries=self.search_queries,
                                                             filters=self.filters,
                                                             include_rows=False)
-        self.invalidate()
         self.grid.refresh()
+        self.invalidate()
         print("updated grid_Data")
