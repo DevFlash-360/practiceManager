@@ -90,7 +90,7 @@ class TaskListView(GridView2):
         })
         self.filter_staff.addEventListener('change', self.handler_filter_staff)
 
-        self.grid.filterSettings['columns'] = filters_setting
+        # self.grid.filterSettings['columns'] = filters_setting
 
     def due_date_caption(self, args):
         caption_color = 'color:#a63333;' if args['key'] == -100 else ''
