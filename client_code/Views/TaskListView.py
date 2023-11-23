@@ -138,6 +138,7 @@ class TaskListView(GridView2):
             self.grid.filterByColumn('assigned_staff__full_name', 'contains', args['itemData']['Text'])
 
     def handler_filter_cases(self, args):
+        print(args)
         if args['itemData']['Id'] == 'all':
             self.grid.clearFiltering(['case__case_name'])
         else:
