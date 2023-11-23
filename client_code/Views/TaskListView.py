@@ -150,7 +150,7 @@ class TaskListView(GridView2):
 
     def grid_action_handler(self, args):
         super().grid_action_handler(args)
-        self.invalidate()
+        # self.invalidate()
 
     def invalidate(self):
         print("invalidate")
