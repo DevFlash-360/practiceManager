@@ -227,9 +227,9 @@ class EventScheduleView:
             event['subject'] = event['activity__name']
             if event['case__case_name']:
                 event['subject'] = f"{event['case__case_name']}: {event['subject']}"
-                event['location'] = f"{event['location']} / {event['department']}<br>{event['staff__full_name']}"
+                event['location'] = f"{event['location']} / {event['department']} {event['staff__full_name']}"
             else:
-                event['location'] += f"<br>{event['staff__full_name']}"
+                event['location'] += f" {event['staff__full_name']}"
         self.events = ej.base.extend([], self.events, None, True)
         print('Events #', len(self.events))
         for event in self.events:
