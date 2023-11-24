@@ -222,6 +222,8 @@ class EventScheduleView:
         #         event['location'] = f"{event['location']['name']}<br>" if event['location'] is not None else ''
         #         event['location'] += staff_list
         self.events = Event.get_grid_view(view_config={'columns': event_cols}, filters=query)
+        print("self.events = ")
+        print(self.events)
         for event in self.events:
             event['subject'] = event['activity']
             if event['case']:
