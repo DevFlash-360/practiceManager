@@ -90,6 +90,8 @@ class EventForm(FormBase):
         return f"{rec['full_name']} - {rec['title_position']}"
 
     def update_time(self, args):
+        if not self.start_time or not self.end_time:
+            return
         if args['name'] == 'start_time' and self.start_time.value is not None:
             if (self.end_time.value - self.start_time.value).total_seconds() / 3600 < 1:
                 self.end_time.value = self.start_time.value + timedelta(hours=1)
