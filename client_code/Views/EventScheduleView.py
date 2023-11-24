@@ -78,6 +78,7 @@ class EventScheduleView:
             'currentView': 'Agenda',
             'views': PM_SCHEDULE_DEFAULT_VIEWS,
             'selectedDate': Date.now(),
+            'disableHtmlEncode': False, 
             'eventSettings': {
                 'dataSource': self.data_manager,
                 # 'dataSource': self.events,
