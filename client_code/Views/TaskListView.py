@@ -3,7 +3,7 @@ import anvil.server
 from anvil.js.window import ej, jQuery
 from DevFusion.components.GridView2 import GridView2
 import anvil.js
-
+from ..app.models import Staff
 class TaskListView(GridView2):
     def __init__(self, case=None, case_uid=None, **kwargs):
         print('TaskListView')
@@ -75,7 +75,8 @@ class TaskListView(GridView2):
         self.filter_complete.addEventListener('change', self.handler_filter_complete)
 
         # Assigned filter
-        staff_data = anvil.server.call('get_staff_data')
+        # staff_data = anvil.server.call('get_staff_data')
+        staff_data = Staff.search()
         staff_data_for_combobox = [{'Id': row['uid'], 'Text': row['first_name'] + " " + row['last_name']} for row in staff_data]
         staff_data_for_combobox.insert(0, {'Id': 'all', 'Text': 'All staffs'})
 
