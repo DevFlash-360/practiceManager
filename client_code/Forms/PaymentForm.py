@@ -1,4 +1,3 @@
-import anvil.server
 from AnvilFusion.components.FormBase import FormBase, POPUP_WIDTH_COL2
 from AnvilFusion.components.FormInputs import *
 

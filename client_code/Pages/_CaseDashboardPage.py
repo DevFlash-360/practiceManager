@@ -1,4 +1,3 @@
-import anvil.server
 from anvil.js.window import jQuery, ej
 import uuid
 

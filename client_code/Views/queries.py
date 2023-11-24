@@ -1,4 +1,3 @@
-import anvil.server
 # Saved quires and filters for grid views
 from anvil.tables import query as q
 

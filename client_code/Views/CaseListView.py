@@ -1,4 +1,3 @@
-import anvil.server
 from AnvilFusion.components.GridView import GridView
 from AnvilFusion.tools.utils import AppEnv
 

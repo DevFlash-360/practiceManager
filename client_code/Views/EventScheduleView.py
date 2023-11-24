@@ -1,4 +1,3 @@
-import anvil.server
 from anvil.tables import query as q
 from anvil.js.window import ej, jQuery, Date, XMLHttpRequest, Object
 from AnvilFusion.tools.utils import datetime_js_to_py
@@ -222,6 +221,7 @@ class EventScheduleView:
         #         event['location'] = f"{event['location']['name']}<br>" if event['location'] is not None else ''
         #         event['location'] += staff_list
         self.events = Event.get_grid_view(view_config={'columns': event_cols}, filters=query)
+        print(f"self.events = {self.events}")
         for event in self.events:
             event['subject'] = event['activity__name']
             if event['case__case_name']:

@@ -1,4 +1,3 @@
-import anvil.server
 from AnvilFusion.components.GridView import GridView
 import anvil.js
 import uuid
