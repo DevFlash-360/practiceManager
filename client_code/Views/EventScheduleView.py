@@ -222,15 +222,13 @@ class EventScheduleView:
         #         event['location'] = f"{event['location']['name']}<br>" if event['location'] is not None else ''
         #         event['location'] += staff_list
         self.events = Event.get_grid_view(view_config={'columns': event_cols}, filters=query)
-        print("self.events = ")
-        print(self.events)
         for event in self.events:
-            event['subject'] = event['activity']
-            if event['case']:
-                event['subject'] = f"{event['case']}: {event['subject']}"
-                event['location'] = f"{event['location']} / {event['department']}<br>{event['staff']}"
+            event['subject'] = event['activity__name']
+            if event['case__case_name']:
+                event['subject'] = f"{event['case__case_name']}: {event['subject']}"
+                event['location'] = f"{event['location']} / {event['department']}<br>{event['staff__full_name']}"
             else:
-                event['location'] += f"<br>{event['staff']}"
+                event['location'] += f"<br>{event['staff__full_name']}"
         self.events = ej.base.extend([], self.events, None, True)
         print('Events #', len(self.events))
         for event in self.events:
