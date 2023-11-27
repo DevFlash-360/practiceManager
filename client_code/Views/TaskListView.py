@@ -18,7 +18,7 @@ class TaskListView(GridView2):
                 {'name': 'priority', 'label': 'Priority'},
                 {'name': 'assigned_staff.full_name', 'label': 'Assigned Staff'},
                 {'name': 'notes', 'label': 'Notes'},
-                {'name': 'button', 'label': 'Test', 'template': self.buttonTemplate}
+                # {'name': 'button', 'label': 'Test', 'template': self.buttonTemplate}
             ],
             'filter': {'case': kwargs.get('case_uid')} if kwargs.get('case_uid') else None,
         }
