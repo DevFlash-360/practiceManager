@@ -9,7 +9,7 @@ class TaskListView(GridView2):
         view_config = {
             'model': 'Task',
             'columns': [
-                {'name': 'completed', 'label': 'Completed', 'custom_attributes': {'click': self.handle_click}},
+                {'name': 'completed', 'label': 'Completed', 'custom_attributes': {}},
                 {'name': 'due_date_days', 'label': 'Due Date'},
                 {'name': 'due_date_view', 'label': 'Due Date', 'visible': False},
                 {'name': 'due_date', 'label': 'Due Date'},
@@ -171,6 +171,3 @@ class TaskListView(GridView2):
             grid_row['priority'] = f"<span class='fas fa-circle fa-sm me-1 text-green'></span> Normal"
         grid_row['completed'] = f"<span class='fas fa-check fa-2x {'text-green' if grid_row['completed'] else 'text-muted'}'></span>"
         return grid_row
-    
-    def handle_click(self, args):
-        print(f"===== click button {args}")
