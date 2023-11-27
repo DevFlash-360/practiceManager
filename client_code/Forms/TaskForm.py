@@ -25,6 +25,7 @@ class TaskForm(FormBase):
         self.no_case = CheckboxInput(name='no_case', label='Task is not related to case', save=False,
                                      on_change=self.no_case_toggle)
         self.completed = CheckboxInput(name='completed', label='Task is completed')
+        self.testbutton = CheckboxInput(name='completed', label='Task is completed')
 
         sections = [
             {'name': '_', 'rows': [
