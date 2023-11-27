@@ -18,7 +18,6 @@ class TaskListView(GridView2):
                 {'name': 'priority', 'label': 'Priority'},
                 {'name': 'assigned_staff.full_name', 'label': 'Assigned Staff'},
                 {'name': 'notes', 'label': 'Notes'},
-                {'name': 'button', 'label': 'Test', 'template': self.buttonTemplate}
             ],
             'filter': {'case': kwargs.get('case_uid')} if kwargs.get('case_uid') else None,
         }
@@ -173,5 +172,5 @@ class TaskListView(GridView2):
         grid_row['completed'] = f"<span class='fas fa-check fa-2x {'text-green' if grid_row['completed'] else 'text-muted'}'></span>"
         return grid_row
     
-    def buttonTemplate(self, props):
-        return '<button class="grid-btn" onclick="alert(' + props.Id + ')">Click Me</button>'
+    def handle_click(self, args):
+        print(f"===== click button {args}")
