@@ -146,7 +146,7 @@ class TaskListView(GridView2):
         print("invalidate")
         data = self.grid['dataSource']
         for ind, item in enumerate(self.grid_data):
-            # data[ind]['completed'] = f"<span class='fas fa-check fa-2x {'text-green' if item['completed'] else 'text-muted'}'></span>"
+            data[ind]['completed'] = f"<span class='fas fa-check fa-2x {'text-green' if item['completed'] else 'text-muted'}'></span>"
             if item['priority'] == 'High':
                 data[ind]['priority'] = f"<span class='fas fa-circle fa-sm me-1 text-red'></span> High"
             elif item['priority'] == 'Normal':
