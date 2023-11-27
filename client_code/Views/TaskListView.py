@@ -8,11 +8,6 @@ class TaskListView(GridView2):
         print('TaskListView')
         view_config = {
             'model': 'Task',
-            'edit': {
-                'create': self.createOrderDateFn,
-                'destroy': self.destroyOrderDateFn,
-                'read': self.readOrderDateFn,
-                'write': self.writeOrderDateFn },
             'columns': [
                 {'name': 'completed', 'label': 'Completed', 'custom_attributes': {}},
                 {'name': 'due_date_days', 'label': 'Due Date'},
