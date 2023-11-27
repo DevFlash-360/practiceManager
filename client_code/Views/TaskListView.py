@@ -8,6 +8,11 @@ class TaskListView(GridView2):
         print('TaskListView')
         view_config = {
             'model': 'Task',
+            'edit': {
+                'create': self.createOrderDateFn,
+                'destroy': self.destroyOrderDateFn,
+                'read': self.readOrderDateFn,
+                'write': self.writeOrderDateFn },
             'columns': [
                 {'name': 'completed', 'label': 'Completed', 'custom_attributes': {}},
                 {'name': 'due_date_days', 'label': 'Due Date'},
@@ -146,7 +151,7 @@ class TaskListView(GridView2):
         print("invalidate")
         data = self.grid['dataSource']
         for ind, item in enumerate(self.grid_data):
-            data[ind]['completed'] = f"<span class='fas fa-check fa-2x {'text-green' if item['completed'] else 'text-muted'}'></span>"
+            # data[ind]['completed'] = f"<span class='fas fa-check fa-2x {'text-green' if item['completed'] else 'text-muted'}'></span>"
             if item['priority'] == 'High':
                 data[ind]['priority'] = f"<span class='fas fa-circle fa-sm me-1 text-red'></span> High"
             elif item['priority'] == 'Normal':
@@ -171,3 +176,20 @@ class TaskListView(GridView2):
             grid_row['priority'] = f"<span class='fas fa-circle fa-sm me-1 text-green'></span> Normal"
         grid_row['completed'] = f"<span class='fas fa-check fa-2x {'text-green' if grid_row['completed'] else 'text-muted'}'></span>"
         return grid_row
+    
+    def createOrderDateFn(self):
+        self.ddElem = anvil.js.window.document.createElement('input')
+        return self.ddElem
+    
+    def destroyOrderDateFn(self):
+        self.timeObject.destroy()
+
+    def readOrderDateFn(self):
+        return self.timeObject.value
+    
+    def writeOrderDateFn(self,args):
+        self.timeObject = ej.calendars.TimePicker({
+            'value': args.rowData[args.column.field],
+            'step': 60
+        })
+        self.timeObject.appendTo(self.ddElem)
