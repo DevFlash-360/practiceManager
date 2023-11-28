@@ -146,7 +146,7 @@ class TaskListView(GridView2):
         data = self.grid['dataSource']
         rows = self.grid.getRows()
         print(f"============== self.grid.element =============")
-        print(rows[0])
+        print(rows)
         for ind, item in enumerate(self.grid_data):
             element = rows[ind]
             if item['completed']:
@@ -173,6 +173,9 @@ class TaskListView(GridView2):
             include_row=False,
             get_relationships=get_relationships,
         )
+        rows = self.grid.getRows()
+        print(rows)
+
         # if grid_row['priority'] == 'High':
         #     grid_row['priority'] = f"<span class='fas fa-circle fa-sm me-1 text-red'></span> High"
         # elif grid_row['priority'] == 'Normal':
