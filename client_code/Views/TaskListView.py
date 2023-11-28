@@ -142,6 +142,7 @@ class TaskListView(GridView2):
             self.grid.filterByColumn('case__case_name', 'equal', args['itemData']['Text'])
 
     def invalidate(self):
+        return
         print("invalidate")
         data = self.grid['dataSource']
         print(f"data={data}")
@@ -167,11 +168,11 @@ class TaskListView(GridView2):
             include_row=False,
             get_relationships=get_relationships,
         )
-        if grid_row['priority'] == 'High':
-            grid_row['priority'] = f"<span class='fas fa-circle fa-sm me-1 text-red'></span> High"
-        elif grid_row['priority'] == 'Normal':
-            grid_row['priority'] = f"<span class='fas fa-circle fa-sm me-1 text-green'></span> Normal"
-        grid_row['completed'] = f"<span class='fas fa-check fa-2x {'text-green' if grid_row['completed'] else 'text-muted'}'></span>"
+        # if grid_row['priority'] == 'High':
+        #     grid_row['priority'] = f"<span class='fas fa-circle fa-sm me-1 text-red'></span> High"
+        # elif grid_row['priority'] == 'Normal':
+        #     grid_row['priority'] = f"<span class='fas fa-circle fa-sm me-1 text-green'></span> Normal"
+        # grid_row['completed'] = f"<span class='fas fa-check fa-2x {'text-green' if grid_row['completed'] else 'text-muted'}'></span>"
         return grid_row
     
     def commandClick(self, args):
