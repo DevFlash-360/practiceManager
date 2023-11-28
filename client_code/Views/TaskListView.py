@@ -192,5 +192,7 @@ class TaskListView(GridView2):
     def commandClick(self, args):
         obj = Task.get(args['rowData']['uid'])
         obj.update({'completed': not obj['completed']})
+        obj.save()
         print(f"updated completed = {obj['completed']}")
+        self.grid.refresh()
         # print(F"completed = {obj['completed']}, notes = {obj['notes']}")
