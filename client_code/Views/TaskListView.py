@@ -142,7 +142,6 @@ class TaskListView(GridView2):
             self.grid.filterByColumn('case__case_name', 'equal', args['itemData']['Text'])
 
     def invalidate(self):
-        return
         print("invalidate")
         data = self.grid['dataSource']
         print(f"data={data}")
