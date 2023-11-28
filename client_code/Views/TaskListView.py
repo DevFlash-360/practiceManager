@@ -148,7 +148,7 @@ class TaskListView(GridView2):
 
     def invalidate(self):
         print("invalidate")
-        el1 = self.grid.element.querySelector('.e-table')
+        el1 = self.grid.element.querySelector('.e-content .e-table')
         print(el1.innerHTML)
         print("================")
         data = self.grid['dataSource']
