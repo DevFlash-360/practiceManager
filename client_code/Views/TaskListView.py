@@ -54,6 +54,7 @@ class TaskListView(GridView2):
         self.first_load = True
 
         self.init_filters()
+        self.init_events()
 
     def init_filters(self):
         # Status filter
@@ -97,6 +98,9 @@ class TaskListView(GridView2):
         })
         self.filter_case.addEventListener('change', self.handler_filter_cases)
 
+    def init_events(self):
+        self.grid.addEvnetListener('dataBound', self.handler_databound)
+
     def due_date_caption(self, args):
         caption_color = 'color:#a63333;' if args['key'] == -100 else ''
         return (f'<div class="template" style="font-size:14px;font-weight:bold;{caption_color}">'
@@ -108,8 +112,6 @@ class TaskListView(GridView2):
         self.add_filter_component('Completion Status', self.filter_complete)
         self.add_filter_component('Assigned to', self.filter_staff)
         self.add_filter_component('By Case', self.filter_case)
-
-        self.invalidate()
 
     def collapse_all(self, args):
         if self.first_load:
@@ -140,6 +142,9 @@ class TaskListView(GridView2):
             self.grid.clearFiltering(['case__case_name'])
         else:
             self.grid.filterByColumn('case__case_name', 'equal', args['itemData']['Text'])
+
+    def handler_databound(self, args):
+        self.invalidate()
 
     def invalidate(self):
         print("invalidate")
