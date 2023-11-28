@@ -349,5 +349,5 @@ td:nth-child(5) > .task-incomplete ~ td:nth-child(3) > button > span {
 }
 
 .btn-complete {
-	color: green
+	color: green;
 }
