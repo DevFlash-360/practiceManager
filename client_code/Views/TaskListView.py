@@ -192,4 +192,4 @@ class TaskListView(GridView2):
     def commandClick(self, args):
         print(f"===== click {args} =====")
         obj = Task.get(args['rowData']['uid'])
-        print(obj)
+        print(F"completed = {obj['completed']}, notes = {obj['notes']}")
