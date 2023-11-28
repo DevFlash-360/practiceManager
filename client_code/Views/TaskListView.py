@@ -2,7 +2,7 @@ import uuid
 from anvil.js.window import ej, jQuery
 from DevFusion.components.GridView2 import GridView2
 import anvil.js
-from ..app.models import Staff, Case
+from ..app.models import Staff, Case, Task
 class TaskListView(GridView2):
     def __init__(self, case=None, case_uid=None, **kwargs):
         print('TaskListView')
@@ -190,4 +190,6 @@ class TaskListView(GridView2):
         self.timeObject.appendTo(self.ddElem)
 
     def commandClick(self, args):
-        print(f"===== click {args} =====")
+        obj = Task.get(args['uid'])
+        print(obj)
+
