@@ -190,4 +190,4 @@ class TaskListView(GridView2):
         self.timeObject.appendTo(self.ddElem)
 
     def commandClick(self, args):
-        print("===== click =====")
+        print(f"===== click {args} =====")
