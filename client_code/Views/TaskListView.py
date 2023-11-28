@@ -173,23 +173,6 @@ class TaskListView(GridView2):
         grid_row['completed'] = f"<span class='fas fa-check fa-2x {'text-green' if grid_row['completed'] else 'text-muted'}'></span>"
         return grid_row
     
-    def createOrderDateFn(self):
-        self.ddElem = anvil.js.window.document.createElement('input')
-        return self.ddElem
-    
-    def destroyOrderDateFn(self):
-        self.timeObject.destroy()
-
-    def readOrderDateFn(self):
-        return self.timeObject.value
-    
-    def writeOrderDateFn(self,args):
-        self.timeObject = ej.calendars.TimePicker({
-            'value': args.rowData[args.column.field],
-            'step': 60
-        })
-        self.timeObject.appendTo(self.ddElem)
-
     def commandClick(self, args):
         obj = Task.get(args['rowData']['uid'])
         obj.update({'completed': not obj['completed']})
