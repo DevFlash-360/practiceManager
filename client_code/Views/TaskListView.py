@@ -194,5 +194,6 @@ class TaskListView(GridView2):
         obj.update({'completed': not obj['completed']})
         obj.save()
         print(f"updated completed = {obj['completed']}")
+        self.invalidate()
         self.grid.refresh()
         # print(F"completed = {obj['completed']}, notes = {obj['notes']}")
