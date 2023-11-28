@@ -87,7 +87,6 @@ class TaskListView(GridView2):
         self.filter_staff.addEventListener('change', self.handler_filter_staff)
         
         # Cases filter
-        # cases_data = anvil.server.call('get_cases_data')
         cases_data = Case.search()
         cases_data_for_combobox = [{'Id': row['uid'], 'Text': row['case_name']} for row in cases_data]
         cases_data_for_combobox.insert(0, {'Id': 'all', 'Text': 'All cases'})
