@@ -99,7 +99,7 @@ class TaskListView(GridView2):
         self.filter_case.addEventListener('change', self.handler_filter_cases)
 
     def init_events(self):
-        self.grid.addEvnetListener('dataBound', self.handler_databound)
+        self.grid.addEventListener('dataBound', self.handler_databound)
 
     def due_date_caption(self, args):
         caption_color = 'color:#a63333;' if args['key'] == -100 else ''
