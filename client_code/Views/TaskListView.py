@@ -99,7 +99,7 @@ class TaskListView(GridView2):
         self.filter_case.addEventListener('change', self.handler_filter_cases)
 
     def init_events(self):
-        self.grid.addEventListener('actionComplete', self.actionComplete)
+        self.grid.addEventListener('dataBound', self.handler_databound)
 
     def due_date_caption(self, args):
         caption_color = 'color:#a63333;' if args['key'] == -100 else ''
@@ -143,15 +143,15 @@ class TaskListView(GridView2):
         else:
             self.grid.filterByColumn('case__case_name', 'equal', args['itemData']['Text'])
 
-    def actionComplete(self, args):
+    def handler_databound(self, args):
         self.invalidate()
 
     def invalidate(self):
         print("invalidate")
-        data = self.grid['dataSource']
         el1 = self.grid.element.querySelector('.e-table')
         print(el1.innerHTML)
         print("================")
+        data = self.grid['dataSource']
         for ind, item in enumerate(self.grid_data):
             if item['completed']:
                 data[ind]['completed'] = f"<span class='fas fa-check fa-2x 'task-complete text-green'></span>"
