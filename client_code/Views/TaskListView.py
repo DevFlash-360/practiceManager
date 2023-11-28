@@ -182,7 +182,7 @@ class TaskListView(GridView2):
 		# 													search_queries=self.search_queries,
 		# 													filters=self.filters,
 		# 													include_rows=False)
-        self.update_grid(args, False)
+        self.update_grid(args['rowData'], False)
         # self.invalidate()
         # self.grid.refresh()
         # print(F"completed = {obj['completed']}, notes = {obj['notes']}")
