@@ -339,3 +339,11 @@ ul#pm-sidebar-menu {
 div#pm-filter-container {
     padding: 12px;
 }
+
+td:nth-child(5) > .task-complete ~ td:nth-child(3) > button {
+	color: var(--un-text-opacity);
+}
+
+td:nth-child(5) > .task-incomplete ~ td:nth-child(3) > button {
+	color: #777777;
+}
