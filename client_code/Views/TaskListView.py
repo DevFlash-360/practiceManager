@@ -144,10 +144,11 @@ class TaskListView(GridView2):
     def invalidate(self):
         print("invalidate")
         data = self.grid['dataSource']
+        rows = self.grid.getRows()
         print(f"============== self.grid.element =============")
-        print(self.grid.getRowByIndex(0))
+        print(rows[0])
         for ind, item in enumerate(self.grid_data):
-            element = self.grid.getRowByIndex(ind)
+            element = rows[ind]
             if item['completed']:
                 data[ind]['completed'] = f"<span class='fas fa-check fa-2x 'task-complete text-green'></span>"
             else:
