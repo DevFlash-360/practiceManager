@@ -153,6 +153,7 @@ class TaskListView(GridView2):
                 data[ind]['priority'] = f"<span class='fas fa-circle fa-sm me-1 text-green'></span> Normal"
 
     def update_grid(self, data_row, add_new, get_relationships=False):
+        print("TaskListView/update_grid")
         if data_row.uid is None:
             data_row.uid = f"grid_{uuid.uuid4()}"
         grid_row = self.get_style_row(data_row, get_relationships)
@@ -194,6 +195,10 @@ class TaskListView(GridView2):
         obj.update({'completed': not obj['completed']})
         obj.save()
         print(f"updated completed = {obj['completed']}")
+        self.grid_data = self.grid_class.get_grid_view(self.view_config,
+															search_queries=self.search_queries,
+															filters=self.filters,
+															include_rows=False)
         self.invalidate()
         self.grid.refresh()
         # print(F"completed = {obj['completed']}, notes = {obj['notes']}")
