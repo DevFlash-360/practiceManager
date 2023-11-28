@@ -145,13 +145,7 @@ class TaskListView(GridView2):
         print("invalidate")
         data = self.grid['dataSource']
         el1 = self.grid.element.querySelector('.e-table')
-        el2 = self.grid.element.querySelector('.e-content')
-        el3 = self.grid.element.querySelector('.e-row')
-        print(el1)
-        print("================")
-        print(el2)
-        print("================")
-        print(el3)
+        print(el1.innerHTML)
         print("================")
         for ind, item in enumerate(self.grid_data):
             if item['completed']:
