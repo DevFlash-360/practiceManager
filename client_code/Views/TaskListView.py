@@ -190,6 +190,7 @@ class TaskListView(GridView2):
         self.timeObject.appendTo(self.ddElem)
 
     def commandClick(self, args):
-        print(f"===== click {args} =====")
         obj = Task.get(args['rowData']['uid'])
-        print(F"completed = {obj['completed']}, notes = {obj['notes']}")
+        obj.update({'completed': not obj['completed']})
+        print(f"updated completed = {obj['completed']}")
+        # print(F"completed = {obj['completed']}, notes = {obj['notes']}")
