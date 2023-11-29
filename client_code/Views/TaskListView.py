@@ -126,7 +126,7 @@ class TaskListView(GridView2):
         if args['itemData']['Id'] == 'complete':
             self.grid.filterByColumn('completed', 'equal', "true")
         elif args['itemData']['Id'] == 'incomplete':
-            self.grid.filterByColumn('completed', 'notequal ', "true")
+            self.grid.filterByColumn('completed', 'notequal', 'true')
         else:
             self.grid.clearFiltering(['completed'])
 
