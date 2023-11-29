@@ -157,17 +157,16 @@ class TaskListView(GridView2):
             else:
                 print("incomplete")
                 print(row.querySelector('td:nth-child(5)').textContent)
+        # for ind, item in enumerate(self.grid_data):
+        #     if item['completed']:
+        #         data[ind]['completed'] = f"<span class='fas fa-check fa-2x 'task-complete text-green'></span>"
+        #     else:
+        #         data[ind]['completed'] = f"<span class='fas fa-check fa-2x 'task-incomplete text-muted'></span>"
 
-        for ind, item in enumerate(self.grid_data):
-            if item['completed']:
-                data[ind]['completed'] = f"<span class='fas fa-check fa-2x 'task-complete text-green'></span>"
-            else:
-                data[ind]['completed'] = f"<span class='fas fa-check fa-2x 'task-incomplete text-muted'></span>"
-
-            if item['priority'] == 'High':
-                data[ind]['priority'] = f"<span class='fas fa-circle fa-sm me-1 text-red'></span> High"
-            elif item['priority'] == 'Normal':
-                data[ind]['priority'] = f"<span class='fas fa-circle fa-sm me-1 text-green'></span> Normal"
+        #     if item['priority'] == 'High':
+        #         data[ind]['priority'] = f"<span class='fas fa-circle fa-sm me-1 text-red'></span> High"
+        #     elif item['priority'] == 'Normal':
+        #         data[ind]['priority'] = f"<span class='fas fa-circle fa-sm me-1 text-green'></span> Normal"
 
     def update_grid(self, data_row, add_new, get_relationships=False):
         print("TaskListView/update_grid")
@@ -183,9 +182,6 @@ class TaskListView(GridView2):
             include_row=False,
             get_relationships=get_relationships,
         )
-        rows = self.grid.getRows()
-        print(rows)
-
         # if grid_row['priority'] == 'High':
         #     grid_row['priority'] = f"<span class='fas fa-circle fa-sm me-1 text-red'></span> High"
         # elif grid_row['priority'] == 'Normal':
