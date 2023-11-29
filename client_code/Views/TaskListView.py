@@ -151,12 +151,14 @@ class TaskListView(GridView2):
         rows = self.grid.element.querySelectorAll('.e-content .e-table .e-row')
         data = self.grid['dataSource']
         for ind, row in enumerate(rows):
-            if self.grid_data[ind]['completed']:
-                print("complte")
-                print(row.querySelector('td:nth-child(5)').textContent)
+            if row.querySelector('td:nth-child(5)').textContent == 'true':
+                print("complete")
+                row.querySelector('td:nth-child(3) button span').classList.remove('text-muted')
+                row.querySelector('td:nth-child(3) button span').classList.add('text-green')
             else:
                 print("incomplete")
-                print(row.querySelector('td:nth-child(5)').textContent)
+                row.querySelector('td:nth-child(3) button span').classList.remove('text-green')
+                row.querySelector('td:nth-child(3) button span').classList.add('text-muted')
         # for ind, item in enumerate(self.grid_data):
         #     if item['completed']:
         #         data[ind]['completed'] = f"<span class='fas fa-check fa-2x 'task-complete text-green'></span>"
