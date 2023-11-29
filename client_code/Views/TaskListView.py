@@ -123,11 +123,10 @@ class TaskListView(GridView2):
 
     # Handle complete filter
     def handler_filter_complete(self, args):
-        print(args)
         if args['itemData']['Id'] == 'complete':
-            self.grid.filterByColumn('completed', 'equal', "<span class='fas fa-check fa-2x text-green'></span>")
+            self.grid.filterByColumn('completed', 'equal', "true")
         elif args['itemData']['Id'] == 'incomplete':
-            self.grid.filterByColumn('completed', 'equal', "<span class='fas fa-check fa-2x text-muted'></span>")
+            self.grid.filterByColumn('completed', 'notequal ', "true")
         else:
             self.grid.clearFiltering(['completed'])
 
