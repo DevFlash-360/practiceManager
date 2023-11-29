@@ -149,6 +149,7 @@ class TaskListView(GridView2):
     def invalidate(self):
         print("invalidate")
         rows = self.grid.element.querySelectorAll('.e-content .e-table .e-row')
+        print(rows[0])
         data = self.grid['dataSource']
         for ind, row in enumerate(rows):
             if row.querySelector('td:nth-child(5)').textContent == 'true':
