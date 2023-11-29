@@ -174,7 +174,7 @@ class TaskListView(GridView2):
         grid_row = self.get_style_row(data_row, get_relationships)
         self.update_grid_style(grid_row, add_new, get_relationships)
 
-        self.update_command_column(grid_row['uid'])
+        # self.update_command_column(grid_row['uid'])
     
     # Get completed, priority components with style
     def get_style_row(self, data_row, get_relationships):
@@ -194,7 +194,7 @@ class TaskListView(GridView2):
         obj = Task.get(args['rowData']['uid'])
         obj.update({'completed': not obj['completed']})
         obj.save()
-        # self.update_grid(obj, False)
+        self.update_grid(obj, False)
 
     def update_command_column(self, pk):
         row = self.grid.getRowByIndex(self.grid.getRowIndexByPrimaryKey(pk))
