@@ -340,14 +340,18 @@ div#pm-filter-container {
     padding: 12px;
 }
 
-td:nth-child(5) > .task-complete ~ td:nth-child(3) > button > span{
+/* td:nth-child(5) > .task-complete ~ td:nth-child(3) > button > span{
 	color: var(--un-text-opacity);
 }
 
 td:nth-child(5) > .task-incomplete ~ td:nth-child(3) > button > span {
 	color: #777777;
+} */
+
+tr.task-complete > td button > span.btn-task-status {
+	color: var(--un-text-opacity);
 }
 
-.btn-complete {
-	color: green;
+tr.task-incomplete > td button > span.btn-task-status {
+	color: #777777;
 }

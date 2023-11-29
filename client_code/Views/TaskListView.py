@@ -157,11 +157,11 @@ class TaskListView(GridView2):
         data = self.grid['dataSource']
         for ind, row in enumerate(rows):
             if row.querySelector('td:nth-child(5)').textContent == 'true':
-                row.querySelector('td:nth-child(3) button span').classList.remove('text-muted')
-                row.querySelector('td:nth-child(3) button span').classList.add('text-green')
+                row.classList.add('task-complete')
+                row.classList.remove('task-incomplete')
             else:
-                row.querySelector('td:nth-child(3) button span').classList.remove('text-green')
-                row.querySelector('td:nth-child(3) button span').classList.add('text-muted')
+                row.classList.add('task-incomplete')
+                row.classList.remove('task-complete')
 
         for ind, item in enumerate(self.grid_data):
             if item['priority'] == 'High':
@@ -185,6 +185,7 @@ class TaskListView(GridView2):
             include_row=False,
             get_relationships=get_relationships,
         )
+        print(grid_row)
         if grid_row['priority'] == 'High':
             grid_row['priority'] = f"<span class='fas fa-circle fa-sm me-1 text-red'></span> High"
         elif grid_row['priority'] == 'Normal':
