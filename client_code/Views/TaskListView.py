@@ -148,9 +148,8 @@ class TaskListView(GridView2):
 
     def invalidate(self):
         print("invalidate")
-        el1 = self.grid.element.querySelector('.e-content .e-table')
-        print(el1.innerHTML)
-        print("================")
+        rows = self.grid.element.querySelector('.e-content .e-table .e-row')
+        print(rows[0])
         data = self.grid['dataSource']
         for ind, item in enumerate(self.grid_data):
             if item['completed']:
