@@ -162,14 +162,11 @@ class TaskListView(GridView2):
                 row.querySelector('td:nth-child(3) button span').classList.remove('text-green')
                 row.querySelector('td:nth-child(3) button span').classList.add('text-muted')
 
-        print(self.grid_data)
         for ind, item in enumerate(self.grid_data):
             if item['priority'] == 'High':
                 data[ind]['priority'] = f"<span class='fas fa-circle fa-sm me-1 text-red'></span> High"
-                print("High")
             elif item['priority'] == 'Normal':
                 data[ind]['priority'] = f"<span class='fas fa-circle fa-sm me-1 text-green'></span> Normal"
-                print("Normal")
 
     def update_grid(self, data_row, add_new, get_relationships=False):
         print("TaskListView/update_grid")
@@ -202,5 +199,10 @@ class TaskListView(GridView2):
 
     def update_command_column(self, pk):
         row = self.grid.getRowByIndex(self.grid.getRowIndexByPrimaryKey(pk))
-        print("update_command_column")
-        print(row)
+        if row.querySelector('td:nth-child(5)').textContent == 'true':
+            row.querySelector('td:nth-child(3) button span').classList.remove('text-muted')
+            row.querySelector('td:nth-child(3) button span').classList.add('text-green')
+        else:
+            row.querySelector('td:nth-child(3) button span').classList.remove('text-green')
+            row.querySelector('td:nth-child(3) button span').classList.add('text-muted')
+
