@@ -201,6 +201,7 @@ ul#pm-sidebar-menu {
 .e-grid .e-headercell,
 .e-grid .e-detailheadercell {
     background: #fff;
+	vertical-align: top;
 }
 
 .e-grid .e-rowcell {
