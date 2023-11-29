@@ -80,8 +80,8 @@ class EventScheduleView:
             'selectedDate': Date.now(),
             'disableHtmlEncode': False, 
             'eventSettings': {
-                'dataSource': self.data_manager,
-                # 'dataSource': self.events,
+                # 'dataSource': self.data_manager,
+                'dataSource': self.events,
                 'fields': event_fields,
             },
             'popupOpen': self.popup_open,
