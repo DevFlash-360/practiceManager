@@ -113,6 +113,8 @@ class TaskListView(GridView2):
         self.add_filter_component('Assigned to', self.filter_staff)
         self.add_filter_component('By Case', self.filter_case)
 
+        self.invalidate()
+
     def collapse_all(self, args):
         if self.first_load:
             self.grid.groupModule.collapseAll()
@@ -164,8 +166,10 @@ class TaskListView(GridView2):
         for ind, item in enumerate(self.grid_data):
             if item['priority'] == 'High':
                 data[ind]['priority'] = f"<span class='fas fa-circle fa-sm me-1 text-red'></span> High"
+                print("High")
             elif item['priority'] == 'Normal':
                 data[ind]['priority'] = f"<span class='fas fa-circle fa-sm me-1 text-green'></span> Normal"
+                print("Normal")
 
     def update_grid(self, data_row, add_new, get_relationships=False):
         print("TaskListView/update_grid")
