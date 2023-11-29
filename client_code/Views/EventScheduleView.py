@@ -221,17 +221,19 @@ class EventScheduleView:
         #     else:
         #         event['location'] = f"{event['location']['name']}<br>" if event['location'] is not None else ''
         #         event['location'] += staff_list
-        self.events = Event.get_grid_view(view_config={'columns': event_cols}, filters=query)
-        print(f"self.events = {self.events}")
-        for event in self.events:
-            event['subject'] = event['activity__name']
-            if event['case__case_name']:
-                event['subject'] = f"{event['case__case_name']}: {event['subject']}"
-            event['location__name'] += f" {event['staff__full_name']}"
-        self.events = ej.base.extend([], self.events, None, True)
-        print('Events #', len(self.events))
-        for event in self.events:
-            print(event['subject'], event['location'])
+
+
+        # self.events = Event.get_grid_view(view_config={'columns': event_cols}, filters=query)
+        # print(f"self.events = {self.events}")
+        # for event in self.events:
+        #     event['subject'] = event['activity__name']
+        #     if event['case__case_name']:
+        #         event['subject'] = f"{event['case__case_name']}: {event['subject']}"
+        #     event['location__name'] += f" {event['staff__full_name']}"
+        # self.events = ej.base.extend([], self.events, None, True)
+        # print('Events #', len(self.events))
+        # for event in self.events:
+        #     print(event['subject'], event['location'])
 
 
     def data_adaptor_get_data(self, query):
