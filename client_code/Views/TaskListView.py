@@ -9,7 +9,7 @@ class TaskListView(GridView2):
         view_config = {
             'model': 'Task',
             'columns': [
-                {'name': 'completed', 'label': 'Completed', 'custom_attributes': {}},
+                {'name': 'completed', 'label': 'Completed', 'visible': False, 'custom_attributes': {}},
                 {'name': 'due_date_days', 'label': 'Due Date'},
                 {'name': 'due_date_view', 'label': 'Due Date', 'visible': False},
                 {'name': 'due_date', 'label': 'Due Date'},
