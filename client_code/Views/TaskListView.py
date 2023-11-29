@@ -163,6 +163,7 @@ class TaskListView(GridView2):
                 row.classList.add('task-incomplete')
                 row.classList.remove('task-complete')
 
+        print(data)
         for ind, item in enumerate(self.grid_data):
             if item['priority'] == 'High':
                 data[ind]['priority'] = f"<span class='fas fa-circle fa-sm me-1 text-red'></span> High"
