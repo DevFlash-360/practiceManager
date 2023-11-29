@@ -146,11 +146,10 @@ class TaskListView(GridView2):
             self.grid.filterByColumn('case__case_name', 'equal', args['itemData']['Text'])
 
     def handler_databound(self, args):
-        print("handler_databound")
-        print(args)
         self.invalidate()
 
     def invalidate(self):
+        return
         print("invalidate")
         rows = self.grid.element.querySelectorAll('.e-content .e-table .e-row')
         data = self.grid['dataSource']
