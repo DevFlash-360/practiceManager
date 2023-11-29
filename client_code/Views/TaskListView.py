@@ -152,14 +152,13 @@ class TaskListView(GridView2):
         data = self.grid['dataSource']
         for ind, row in enumerate(rows):
             if row.querySelector('td:nth-child(5)').textContent == 'true':
-                print("complete")
                 row.querySelector('td:nth-child(3) button span').classList.remove('text-muted')
                 row.querySelector('td:nth-child(3) button span').classList.add('text-green')
             else:
-                print("incomplete")
                 row.querySelector('td:nth-child(3) button span').classList.remove('text-green')
                 row.querySelector('td:nth-child(3) button span').classList.add('text-muted')
 
+        print(self.grid_data)
         for ind, item in enumerate(self.grid_data):
             if item['priority'] == 'High':
                 data[ind]['priority'] = f"<span class='fas fa-circle fa-sm me-1 text-red'></span> High"
@@ -186,7 +185,7 @@ class TaskListView(GridView2):
             grid_row['priority'] = f"<span class='fas fa-circle fa-sm me-1 text-red'></span> High"
         elif grid_row['priority'] == 'Normal':
             grid_row['priority'] = f"<span class='fas fa-circle fa-sm me-1 text-green'></span> Normal"
-        grid_row['completed'] = f"<span class='fas fa-check fa-2x {'text-green' if grid_row['completed'] else 'text-muted'}'></span>"
+        # grid_row['completed'] = f"<span class='fas fa-check fa-2x {'text-green' if grid_row['completed'] else 'text-muted'}'></span>"
         return grid_row
     
     def commandClick(self, args):
@@ -196,6 +195,6 @@ class TaskListView(GridView2):
         self.update_grid(obj, False)
 
     def update_command_column(self, pk):
-        row = self.getRowByIndex(self.grid.getRowIndexByPrimaryKey(pk))
+        row = self.grid.getRowByIndex(self.grid.getRowIndexByPrimaryKey(pk))
         print("update_command_column")
         print(row)
