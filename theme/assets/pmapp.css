@@ -349,7 +349,7 @@ td:nth-child(5) > .task-incomplete ~ td:nth-child(3) > button > span {
 } */
 
 tr.task-complete > td button > span.btn-task-status {
-	color: var(--un-text-opacity);
+	color: rgb(74 222 128);
 }
 
 tr.task-incomplete > td button > span.btn-task-status {
