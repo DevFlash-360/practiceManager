@@ -152,7 +152,11 @@ class TaskListView(GridView2):
         data = self.grid['dataSource']
         for ind, row in enumerate(rows):
             if self.grid_data[ind]['completed']:
-                row.querySelector('td:nth-child(5)')
+                print("complte")
+                print(row.querySelector('td:nth-child(5)'))
+            else:
+                print("incomplete")
+                print(row.querySelector('td:nth-child(5)'))
 
         for ind, item in enumerate(self.grid_data):
             if item['completed']:
