@@ -223,7 +223,7 @@ class EventScheduleView:
         #         event['location'] += staff_list
 
 
-        # self.events = Event.get_grid_view(view_config={'columns': event_cols}, filters=query)
+        self.events = Event.get_grid_view(view_config={'columns': event_cols}, filters=query)
         # print(f"self.events = {self.events}")
         # for event in self.events:
         #     event['subject'] = event['activity__name']
