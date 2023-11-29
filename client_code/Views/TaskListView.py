@@ -149,7 +149,6 @@ class TaskListView(GridView2):
     def invalidate(self):
         print("invalidate")
         rows = self.grid.element.querySelectorAll('.e-content .e-table .e-row')
-        print(rows[0])
         data = self.grid['dataSource']
         for ind, row in enumerate(rows):
             if row.querySelector('td:nth-child(5)').textContent == 'true':
@@ -173,6 +172,8 @@ class TaskListView(GridView2):
             data_row.uid = f"grid_{uuid.uuid4()}"
         grid_row = self.get_style_row(data_row, get_relationships)
         self.update_grid_style(grid_row, add_new, get_relationships)
+
+        self.update_command_column(grid_row['uid'])
     
     # Get completed, priority components with style
     def get_style_row(self, data_row, get_relationships):
@@ -181,18 +182,20 @@ class TaskListView(GridView2):
             include_row=False,
             get_relationships=get_relationships,
         )
-        print("get_style_row")
-        print(grid_row.querySelector('td:nth-child(5)').textContent)
-        # if grid_row['priority'] == 'High':
-        #     grid_row['priority'] = f"<span class='fas fa-circle fa-sm me-1 text-red'></span> High"
-        # elif grid_row['priority'] == 'Normal':
-        #     grid_row['priority'] = f"<span class='fas fa-circle fa-sm me-1 text-green'></span> Normal"
-        # grid_row['completed'] = f"<span class='fas fa-check fa-2x {'text-green' if grid_row['completed'] else 'text-muted'}'></span>"
+        if grid_row['priority'] == 'High':
+            grid_row['priority'] = f"<span class='fas fa-circle fa-sm me-1 text-red'></span> High"
+        elif grid_row['priority'] == 'Normal':
+            grid_row['priority'] = f"<span class='fas fa-circle fa-sm me-1 text-green'></span> Normal"
+        grid_row['completed'] = f"<span class='fas fa-check fa-2x {'text-green' if grid_row['completed'] else 'text-muted'}'></span>"
         return grid_row
     
     def commandClick(self, args):
         obj = Task.get(args['rowData']['uid'])
         obj.update({'completed': not obj['completed']})
         obj.save()
-        print(f"updated completed = {obj['completed']}")
         self.update_grid(obj, False)
+
+    def update_command_column(self, pk):
+        row = self.getRowByIndex(self.grid.getRowIndexByPrimaryKey(pk))
+        print("update_command_column")
+        print(row)
