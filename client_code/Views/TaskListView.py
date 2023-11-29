@@ -139,7 +139,6 @@ class TaskListView(GridView2):
 
     # Handle cases filter
     def handler_filter_cases(self, args):
-        print(args)
         if args['itemData']['Id'] == 'all':
             self.grid.clearFiltering(['case__case_name'])
         else:
@@ -152,7 +151,6 @@ class TaskListView(GridView2):
         self.invalidate()
 
     def invalidate(self):
-        print("invalidate")
         rows = self.grid.element.querySelectorAll('.e-content .e-table .e-row')
         data = self.grid['dataSource']
         for ind, row in enumerate(rows):
@@ -163,7 +161,6 @@ class TaskListView(GridView2):
                 row.classList.add('task-incomplete')
                 row.classList.remove('task-complete')
 
-        print(data)
         for ind, item in enumerate(data):
             if item['priority'] == 'High':
                 data[ind]['priority'] = f"<span class='fas fa-circle fa-sm me-1 text-red'></span> High"
@@ -171,7 +168,6 @@ class TaskListView(GridView2):
                 data[ind]['priority'] = f"<span class='fas fa-circle fa-sm me-1 text-green'></span> Normal"
 
     def update_grid(self, data_row, add_new, get_relationships=False):
-        print("TaskListView/update_grid")
         if data_row.uid is None:
             data_row.uid = f"grid_{uuid.uuid4()}"
         grid_row = self.get_style_row(data_row, get_relationships)
@@ -184,7 +180,6 @@ class TaskListView(GridView2):
             include_row=False,
             get_relationships=get_relationships,
         )
-        print(grid_row)
         if grid_row['priority'] == 'High':
             grid_row['priority'] = f"<span class='fas fa-circle fa-sm me-1 text-red'></span> High"
         elif grid_row['priority'] == 'Normal':
