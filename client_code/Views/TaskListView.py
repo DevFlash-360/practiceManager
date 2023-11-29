@@ -99,7 +99,8 @@ class TaskListView(GridView2):
         self.filter_case.addEventListener('change', self.handler_filter_cases)
 
     def init_events(self):
-        self.grid.addEventListener('dataBound', self.handler_databound)
+        # self.grid.addEventListener('dataBound', self.handler_databound)
+        self.grid.addEventListener('actionCompltete', self.handle_actionComplete)
 
     def due_date_caption(self, args):
         caption_color = 'color:#a63333;' if args['key'] == -100 else ''
@@ -148,8 +149,10 @@ class TaskListView(GridView2):
     def handler_databound(self, args):
         self.invalidate()
 
+    def handle_actionComplete(self, args):
+        self.invalidate()
+
     def invalidate(self):
-        return
         print("invalidate")
         rows = self.grid.element.querySelectorAll('.e-content .e-table .e-row')
         data = self.grid['dataSource']
@@ -174,7 +177,7 @@ class TaskListView(GridView2):
         grid_row = self.get_style_row(data_row, get_relationships)
         self.update_grid_style(grid_row, add_new, get_relationships)
 
-        # self.update_command_column(grid_row['uid'])
+        self.update_command_column(grid_row['uid'])
     
     # Get completed, priority components with style
     def get_style_row(self, data_row, get_relationships):
@@ -200,10 +203,10 @@ class TaskListView(GridView2):
         row = self.grid.getRowByIndex(self.grid.getRowIndexByPrimaryKey(pk))
         if row.querySelector('td:nth-child(5)').textContent == 'true':
             print("11111111111111111")
-            row.querySelector('td:nth-child(3) button span').classList.remove('text-muted')
             row.querySelector('td:nth-child(3) button span').classList.add('text-green')
+            row.querySelector('td:nth-child(3) button span').classList.remove('text-muted')
         else:
             print("2222222222222222")
-            row.querySelector('td:nth-child(3) button span').classList.remove('text-green')
             row.querySelector('td:nth-child(3) button span').classList.add('text-muted')
+            row.querySelector('td:nth-child(3) button span').classList.remove('text-green')
 
