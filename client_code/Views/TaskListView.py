@@ -149,7 +149,6 @@ class TaskListView(GridView2):
         self.invalidate()
 
     def invalidate(self):
-        return
         print("invalidate")
         rows = self.grid.element.querySelectorAll('.e-content .e-table .e-row')
         data = self.grid['dataSource']
@@ -175,7 +174,6 @@ class TaskListView(GridView2):
         self.update_grid_style(grid_row, add_new, get_relationships)
 
         self.update_command_column(grid_row['uid'])
-        print("update command column")
     
     # Get completed, priority components with style
     def get_style_row(self, data_row, get_relationships):
