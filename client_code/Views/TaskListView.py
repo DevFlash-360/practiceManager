@@ -157,11 +157,9 @@ class TaskListView(GridView2):
         data = self.grid['dataSource']
         for ind, row in enumerate(rows):
             if row.querySelector('td:nth-child(5)').textContent == 'true':
-                print("complete")
                 row.classList.add('task-complete')
                 row.classList.remove('task-incomplete')
             else:
-                print("incomplete")
                 row.classList.add('task-incomplete')
                 row.classList.remove('task-complete')
 
@@ -178,8 +176,6 @@ class TaskListView(GridView2):
         grid_row = self.get_style_row(data_row, get_relationships)
         self.update_grid_style(grid_row, add_new, get_relationships)
 
-        # self.update_command_column(grid_row['uid'])
-    
     # Get completed, priority components with style
     def get_style_row(self, data_row, get_relationships):
         grid_row = data_row.get_row_view(
@@ -200,15 +196,3 @@ class TaskListView(GridView2):
         obj.update({'completed': not obj['completed']})
         obj.save()
         self.update_grid(obj, False)
-
-    def update_command_column(self, pk):
-        row = self.grid.getRowByIndex(self.grid.getRowIndexByPrimaryKey(pk))
-        if row.querySelector('td:nth-child(5)').textContent == 'true':
-            print("11111111111111111")
-            row.classList.add('task-complete')
-            row.classList.remove('task-incomplete')
-        else:
-            print("2222222222222222")
-            row.classList.add('task-incomplete')
-            row.classList.remove('task-complete')
-
