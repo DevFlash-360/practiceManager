@@ -99,8 +99,8 @@ class TaskListView(GridView2):
         self.filter_case.addEventListener('change', self.handler_filter_cases)
 
     def init_events(self):
-        # self.grid.addEventListener('dataBound', self.handler_databound)
-        self.grid.addEventListener('actionCompltete', self.handle_actionComplete)
+        self.grid.addEventListener('dataBound', self.handler_databound)
+        # self.grid.addEventListener('actionCompltete', self.handle_actionComplete)
 
     def due_date_caption(self, args):
         caption_color = 'color:#a63333;' if args['key'] == -100 else ''
@@ -157,9 +157,11 @@ class TaskListView(GridView2):
         data = self.grid['dataSource']
         for ind, row in enumerate(rows):
             if row.querySelector('td:nth-child(5)').textContent == 'true':
+                print("complete")
                 row.classList.add('task-complete')
                 row.classList.remove('task-incomplete')
             else:
+                print("incomplete")
                 row.classList.add('task-incomplete')
                 row.classList.remove('task-complete')
 
