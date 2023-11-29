@@ -149,6 +149,7 @@ class TaskListView(GridView2):
         self.invalidate()
 
     def invalidate(self):
+        return
         print("invalidate")
         rows = self.grid.element.querySelectorAll('.e-content .e-table .e-row')
         data = self.grid['dataSource']
@@ -193,7 +194,7 @@ class TaskListView(GridView2):
         obj = Task.get(args['rowData']['uid'])
         obj.update({'completed': not obj['completed']})
         obj.save()
-        self.update_grid(obj, False)
+        # self.update_grid(obj, False)
 
     def update_command_column(self, pk):
         row = self.grid.getRowByIndex(self.grid.getRowIndexByPrimaryKey(pk))
