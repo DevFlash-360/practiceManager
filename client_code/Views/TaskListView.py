@@ -199,9 +199,11 @@ class TaskListView(GridView2):
     def update_command_column(self, pk):
         row = self.grid.getRowByIndex(self.grid.getRowIndexByPrimaryKey(pk))
         if row.querySelector('td:nth-child(5)').textContent == 'true':
+            print("11111111111111111")
             row.querySelector('td:nth-child(3) button span').classList.remove('text-muted')
             row.querySelector('td:nth-child(3) button span').classList.add('text-green')
         else:
+            print("2222222222222222")
             row.querySelector('td:nth-child(3) button span').classList.remove('text-green')
             row.querySelector('td:nth-child(3) button span').classList.add('text-muted')
 
