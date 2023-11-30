@@ -252,7 +252,7 @@ class EventScheduleView:
 
     def data_adaptor_get_data(self, query):
         print('getData')
-        print(query)
+        print(f"query = {query}")
 
         query_data = json.loads(query.data)
         start_time = datetime.fromisoformat(query_data['StartDate'][:10])
