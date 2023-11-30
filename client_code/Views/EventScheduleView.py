@@ -2,7 +2,8 @@ from anvil.tables import query as q
 from anvil.js.window import ej, jQuery, Date, XMLHttpRequest, Object
 from AnvilFusion.tools.utils import datetime_js_to_py
 from ..app.models import Event, Task
-from ..Forms.EventForm import EventForm, TaskForm
+from ..Forms.EventForm import EventForm
+from ..Forms.TaskForm import TaskForm
 from datetime import datetime, date, timedelta
 import uuid
 import json
