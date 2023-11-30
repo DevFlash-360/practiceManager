@@ -248,6 +248,7 @@ class EventScheduleView:
             item['subject'] = task['activity__name']
             self.tasks.append(item)
             
+        print(f"self.tasks = {self.tasks}")
         self.schedules = ej.base.extend(self.events, self.tasks, None, True)		
 
     def data_adaptor_get_data(self, query):
