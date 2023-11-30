@@ -240,20 +240,20 @@ class EventScheduleView:
         print('getData')
         print(query)
 
-        # query_data = json.loads(query.data)
-        # start_time = datetime.fromisoformat(query_data['StartDate'][:10])
-        # end_time = datetime.fromisoformat(query_data['EndDate'][:10])
-        # self.get_events(start_time, end_time)
+        query_data = json.loads(query.data)
+        start_time = datetime.fromisoformat(query_data['StartDate'][:10])
+        end_time = datetime.fromisoformat(query_data['EndDate'][:10])
+        self.get_events(start_time, end_time)
 
-        # # construct HTTP request for data adaptor
-        # request = XMLHttpRequest()
-        # request.open('GET', '_/theme/data-adaptor.json', False)
-        # request.setRequestHeader('Content-Type', 'application/json; charset=utf-8')
-        # request.send({})
-        # query['httpRequest'] = request
+        # construct HTTP request for data adaptor
+        request = XMLHttpRequest()
+        request.open('GET', '_/theme/data-adaptor.json', False)
+        request.setRequestHeader('Content-Type', 'application/json; charset=utf-8')
+        request.send({})
+        query['httpRequest'] = request
 
-        # # call back to pass data back to adaptor
-        # query.onSuccess(self.events, query)
+        # call back to pass data back to adaptor
+        query.onSuccess(self.events, query)
 
 
     def data_adaptor_record(self, query):
