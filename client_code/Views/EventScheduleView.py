@@ -237,13 +237,13 @@ class EventScheduleView:
 
         self.tasks = []
         tasks = Task.get_grid_view(view_config={'columns':event_cols}, filters=query)
-
+        print(f"tasks = {tasks}")
         for task in tasks:
             item = {}
             item['event_type'] = PM_TYPE_TASK
             item['uid'] = task['uid']
             item['start_time'] = task['due_date']
-            item['end_time'] = task['due_date']+1
+            item['end_time'] = task['due_date']
             item['isAllDay'] = True
             item['subject'] = task['activity__name']
             self.tasks.append(item)
