@@ -196,6 +196,7 @@ class EventScheduleView:
 
 
     def get_events(self, start_time, end_time):
+        print("self.get_events")
         query = {'start_time': q.all_of(q.greater_than(start_time), q.less_than(end_time))}
         event_cols = [
             {'name': 'uid'},
