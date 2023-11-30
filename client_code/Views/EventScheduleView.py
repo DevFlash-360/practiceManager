@@ -3,7 +3,7 @@ from anvil.js.window import ej, jQuery, Date, XMLHttpRequest, Object
 from AnvilFusion.tools.utils import datetime_js_to_py
 from ..app.models import Event, Task
 from ..Forms.EventForm import EventForm
-from datetime import datetime, timedelta
+from datetime import datetime, date, timedelta
 import uuid
 import json
 
@@ -243,7 +243,7 @@ class EventScheduleView:
             item['event_type'] = PM_TYPE_TASK
             item['uid'] = task['uid']
             item['start_time'] = task['due_date']
-            item['end_time'] = task['due_date']
+            item['end_time'] = date.fromisoformat(task['due_date']) + timedelta(days=1)
             item['isAllDay'] = True
             item['subject'] = task['activity__name']
             self.tasks.append(item)
