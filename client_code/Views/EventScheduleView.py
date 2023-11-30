@@ -2,7 +2,7 @@ from anvil.tables import query as q
 from anvil.js.window import ej, jQuery, Date, XMLHttpRequest, Object
 from AnvilFusion.tools.utils import datetime_js_to_py
 from ..app.models import Event, Task
-from ..Forms.EventForm import EventForm
+from ..Forms.EventForm import EventForm, TaskForm
 from datetime import datetime, date, timedelta
 import uuid
 import json
@@ -123,22 +123,29 @@ class EventScheduleView:
 
     def popup_open(self, args):
         print('popup', args)
-        if (args.type == 'QuickInfo' and 'subject' not in args.data.keys()) or args.type == 'Editor':
-            args.cancel = True
-            if args.type == 'Editor':
-                # print(args.data)
-                event_uid = args.data.get('uid', None)
-                if event_uid:
+        if args.type == 'Editor':
+            event_type = args.data.get('event_type', PM_SCHEDULE_TYPE_EVENT)
+            uid = args.data.get('uid', None)
+            if event_type == PM_SCHEDULE_TYPE_EVENT:
+                if uid:
                     action = 'edit'
-                    event = Event.get(event_uid)
+                    event = Event.get(uid)
                 else:
                     action = 'add'
                     start_time = datetime_js_to_py(args.data.start_time)
                     end_time = start_time + timedelta(hours=1)
                     event = Event(start_time=start_time, end_time=end_time)
-                editor = EventForm(data=event, action=action, target=self.container_id,
-                                   update_source=self.update_schedule)
-                editor.form_show()
+                editor = EventForm(data=event, action=action, target=self.container_id, update_source=self.update_schedule)
+            elif event_type == PM_SCHEDULE_TYPE_TASK:
+                if uid:
+                    action = 'edit'
+                    task = Task.get(uid)
+                else:
+                    action = 'add'
+                    due_date = datetime_js_to_py(args.data.start_time)
+                    task = Task(due_date=due_date)
+                editor = TaskForm(data=task, action=action, target=self.container_id, update_source=self.update_schedule)
+            editor.form_show()
         elif args.type == 'QuickInfo':
             # print('POPUP', args.data)
             args.data['location'] = 'LOCATION'
