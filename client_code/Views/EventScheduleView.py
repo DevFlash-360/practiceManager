@@ -157,7 +157,7 @@ class EventScheduleView:
             args.data['location'] = 'LOCATION'
 
 
-    def update_schedule(self, event):
+    def update_schedule(self, data, add_new):
         self.schedule.refreshEvents()
 
 
