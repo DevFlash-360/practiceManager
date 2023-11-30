@@ -125,6 +125,7 @@ class EventScheduleView:
     def popup_open(self, args):
         print('popup', args)
         if args.type == 'Editor':
+            args.cancel = True
             event_type = args.data.get('event_type', PM_SCHEDULE_TYPE_EVENT)
             uid = args.data.get('uid', None)
             if event_type == PM_SCHEDULE_TYPE_EVENT:
@@ -151,6 +152,7 @@ class EventScheduleView:
             editor.form_show()
         elif args.type == 'QuickInfo':
             # print('POPUP', args.data)
+            args.cancel = True
             args.data['location'] = 'LOCATION'
 
 
