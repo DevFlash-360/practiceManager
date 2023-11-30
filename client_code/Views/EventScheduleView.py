@@ -237,6 +237,7 @@ class EventScheduleView:
 
         self.tasks = []
         tasks = Task.get_grid_view(view_config={'columns':event_cols}, filters=query)
+        print(f"tasks = {tasks}")
         for task in tasks:
             item = {}
             item['event_type'] = PM_SCHEDULE_TYPE_TASK
