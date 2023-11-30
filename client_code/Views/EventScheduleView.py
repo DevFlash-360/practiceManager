@@ -237,7 +237,6 @@ class EventScheduleView:
 
         self.tasks = []
         tasks = Task.get_grid_view(view_config={'columns':event_cols}, filters=query)
-        print(f"tasks = {tasks}")
         for task in tasks:
             item = {}
             item['event_type'] = PM_TYPE_TASK
@@ -259,6 +258,7 @@ class EventScheduleView:
         end_time = datetime.fromisoformat(query_data['EndDate'][:10])
         self.get_events(start_time, end_time)
         self.get_tasks(start_time, end_time)
+        print(f"self.schedules = {self.schedules}")
 
         # construct HTTP request for data adaptor
         request = XMLHttpRequest()
@@ -268,7 +268,7 @@ class EventScheduleView:
         query['httpRequest'] = request
 
         # call back to pass data back to adaptor
-        query.onSuccess(self.events, query)
+        query.onSuccess(self.schedules, query)
 
 
     def data_adaptor_record(self, query):
