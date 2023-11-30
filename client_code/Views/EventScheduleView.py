@@ -122,7 +122,7 @@ class EventScheduleView:
 
 
     def popup_open(self, args):
-        # print('popup', args.type)
+        print('popup', args.type)
         if (args.type == 'QuickInfo' and 'subject' not in args.data.keys()) or args.type == 'Editor':
             args.cancel = True
             if args.type == 'Editor':
