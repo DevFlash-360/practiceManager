@@ -1,7 +1,7 @@
 from anvil.tables import query as q
 from anvil.js.window import ej, jQuery, Date, XMLHttpRequest, Object
 from AnvilFusion.tools.utils import datetime_js_to_py
-from ..app.models import Event
+from ..app.models import Event, Task
 from ..Forms.EventForm import EventForm
 from datetime import datetime, timedelta
 import uuid
@@ -52,6 +52,7 @@ class EventScheduleView:
         self.container_id = container_id
         self.container_el = None
         self.events = None
+        self.tasks = None
 
         event_fields = {
             'id': {'name': 'uid'},
@@ -81,7 +82,6 @@ class EventScheduleView:
             'disableHtmlEncode': False, 
             'eventSettings': {
                 'dataSource': self.data_manager,
-                # 'dataSource': self.events,
                 'fields': event_fields,
             },
             'popupOpen': self.popup_open,
@@ -109,7 +109,6 @@ class EventScheduleView:
        </div>'
         self.schedule.appendTo(jQuery(f"#{self.schedule_el_id}")[0])
         # self.get_events()
-        # self.schedule.eventSettings.dataSource = self.events
 
 
     def destroy(self):
@@ -196,7 +195,6 @@ class EventScheduleView:
 
 
     def get_events(self, start_time, end_time):
-        print("self.get_events")
         query = {'start_time': q.all_of(q.greater_than(start_time), q.less_than(end_time))}
         event_cols = [
             {'name': 'uid'},
@@ -225,7 +223,6 @@ class EventScheduleView:
 
 
         self.events = Event.get_grid_view(view_config={'columns': event_cols}, filters=query)
-        print(f"====== self.events = {self.events}")
         # print(f"self.events = {self.events}")
         for event in self.events:
             event['subject'] = event['activity__name']
@@ -237,6 +234,23 @@ class EventScheduleView:
         # for event in self.events:
         #     print(event['subject'], event['location'])
 
+    def get_tasks(self, start_time, end_time):
+        query = {
+            'due_date': q.all_of(q.greater_than(start_time), q.less_than(end_time)),
+            'completed': False
+        }
+        event_cols = [
+            {'name':'uid'},
+            {'name':'case.case_name'},
+            {'name':'activity.name'},
+            {'name':'due_date'},
+            {'name':'priority'},
+            {'name':'assigned_staff.full_name'},
+        ]
+
+        self.tasks = Task.get_grid_view(view_config={'columns':event_cols}, filters=query)
+        print("===== Tasks =====")
+        print(self.tasks)
 
     def data_adaptor_get_data(self, query):
         print('getData')
@@ -246,6 +260,7 @@ class EventScheduleView:
         start_time = datetime.fromisoformat(query_data['StartDate'][:10])
         end_time = datetime.fromisoformat(query_data['EndDate'][:10])
         self.get_events(start_time, end_time)
+        self.get_tasks(start_time, end_time)
 
         # construct HTTP request for data adaptor
         request = XMLHttpRequest()
