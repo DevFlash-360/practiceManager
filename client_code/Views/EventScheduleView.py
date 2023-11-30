@@ -25,17 +25,17 @@ PM_SCHEDULE_DETAIL_VIEWS = [
 ]
 PM_SCHEDULE_CELL_TEMPLATE = '${if(type === "workCells")}<div>${pmRenderCell(resource)}</div>${/if}${if(type === ' \
                             '"monthCells")}${/if}'
-PM_EVENT_VIEW_COLUMNS = [
-    {'name': 'start_time'},
-    {'name': 'end_time'},
-    {'name': 'activity.name'},
-    {'name': 'location.name'},
-    {'name': 'staff.full_name'},
-    {'name': 'case.case_name'},
-    {'name': 'no_case'},
-    {'name': 'department.full_name'},
-    {'name': ''},
-]
+# PM_EVENT_VIEW_COLUMNS = [
+#     {'name': 'start_time'},
+#     {'name': 'end_time'},
+#     {'name': 'activity.name'},
+#     {'name': 'location.name'},
+#     {'name': 'staff.full_name'},
+#     {'name': 'case.case_name'},
+#     {'name': 'no_case'},
+#     {'name': 'department.full_name'},
+#     {'name': ''},
+# ]
 
 
 class EventScheduleView:
