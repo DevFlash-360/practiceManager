@@ -26,8 +26,8 @@ PM_SCHEDULE_DETAIL_VIEWS = [
 PM_SCHEDULE_CELL_TEMPLATE = '${if(type === "workCells")}<div>${pmRenderCell(resource)}</div>${/if}${if(type === ' \
                             '"monthCells")}${/if}'
 
-PM_TYPE_EVENT = "event"
-PM_TYPE_TASK = "task"
+PM_SCHEDULE_TYPE_EVENT = "event"
+PM_SCHEDULE_TYPE_TASK = "task"
 # PM_EVENT_VIEW_COLUMNS = [
 #     {'name': 'start_time'},
 #     {'name': 'end_time'},
@@ -214,7 +214,7 @@ class EventScheduleView:
         self.events = Event.get_grid_view(view_config={'columns': event_cols}, filters=query)
         # print(f"self.events = {self.events}")
         for event in self.events:
-            event['event_type'] = PM_TYPE_EVENT
+            event['event_type'] = PM_SCHEDULE_TYPE_EVENT
             event['subject'] = event['activity__name']
         #     if event['case__case_name']:
         #         event['subject'] = f"{event['case__case_name']}: {event['subject']}"
@@ -239,7 +239,7 @@ class EventScheduleView:
         tasks = Task.get_grid_view(view_config={'columns':event_cols}, filters=query)
         for task in tasks:
             item = {}
-            item['event_type'] = PM_TYPE_TASK
+            item['event_type'] = PM_SCHEDULE_TYPE_TASK
             item['uid'] = task['uid']
             item['start_time'] = task['due_date']
             item['end_time'] = (date.fromisoformat(task['due_date']) + timedelta(days=1)).strftime('%Y-%m-%d %H:%M:%S')
