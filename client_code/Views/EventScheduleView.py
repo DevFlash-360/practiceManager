@@ -128,6 +128,7 @@ class EventScheduleView:
             event_type = args.data.get('event_type', PM_SCHEDULE_TYPE_EVENT)
             uid = args.data.get('uid', None)
             if event_type == PM_SCHEDULE_TYPE_EVENT:
+                print("popup_event")
                 if uid:
                     action = 'edit'
                     event = Event.get(uid)
@@ -138,6 +139,7 @@ class EventScheduleView:
                     event = Event(start_time=start_time, end_time=end_time)
                 editor = EventForm(data=event, action=action, target=self.container_id, update_source=self.update_schedule)
             elif event_type == PM_SCHEDULE_TYPE_TASK:
+                print("popup_task")
                 if uid:
                     action = 'edit'
                     task = Task.get(uid)
