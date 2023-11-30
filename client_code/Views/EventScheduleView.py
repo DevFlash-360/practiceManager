@@ -115,21 +115,17 @@ class EventScheduleView:
         self.schedule.appendTo(jQuery(f"#{self.schedule_el_id}")[0])
         # self.get_events()
 
-
     def destroy(self):
         self.schedule.destroy()
         if self.container_el is not None:
             self.container_el.innerHTML = ''
 
-
     def popup_open(self, args):
-        print('popup', args)
         if args.type == 'Editor':
             args.cancel = True
             event_type = args.data.get('event_type', PM_SCHEDULE_TYPE_EVENT)
             uid = args.data.get('uid', None)
             if event_type == PM_SCHEDULE_TYPE_EVENT:
-                print("popup_event")
                 if uid:
                     action = 'edit'
                     event = Event.get(uid)
@@ -140,7 +136,6 @@ class EventScheduleView:
                     event = Event(start_time=start_time, end_time=end_time)
                 editor = EventForm(data=event, action=action, target=self.container_id, update_source=self.update_schedule)
             elif event_type == PM_SCHEDULE_TYPE_TASK:
-                print("popup_task")
                 if uid:
                     action = 'edit'
                     task = Task.get(uid)
@@ -151,7 +146,6 @@ class EventScheduleView:
                 editor = TaskForm(data=task, action=action, target=self.container_id, update_source=self.update_schedule)
             editor.form_show()
         elif args.type == 'QuickInfo':
-            # print('POPUP', args.data)
             if 'subject' not in args.data.keys():
                 args.cancel = True
             args.data['location'] = 'LOCATION'
@@ -160,12 +154,10 @@ class EventScheduleView:
     def update_schedule(self, data, add_new):
         self.schedule.refreshEvents()
 
-
     def action_begin(self, args):
-        print('Begin', args.requestType)
-
         # change event
         if args.requestType == 'eventChange':
+            print('Begin / eventChange', args.requestType)
             changed_event = args.data
             # event = self.db_data[changed_event.uid]
             event = Event.get(changed_event.uid)
@@ -176,6 +168,7 @@ class EventScheduleView:
 
         # delete event(s)
         if args.requestType == 'eventRemove':
+            print("action_begin / eventRemove")
             for removed in args.data:
                 # event = self.db_data[removed.uid]
                 event = Event.get(removed.uid)
@@ -185,7 +178,6 @@ class EventScheduleView:
 
     def action_complete(self, args):
         print('Complete', args.requestType)
-
 
     def hover_event(self, args):
         if self.schedule.currentView not in PM_SCHEDULE_DETAIL_VIEWS:
@@ -250,7 +242,6 @@ class EventScheduleView:
 
         self.tasks = []
         tasks = Task.get_grid_view(view_config={'columns':event_cols}, filters=query)
-        print(f"tasks = {tasks}")
         for task in tasks:
             item = {}
             item['event_type'] = PM_SCHEDULE_TYPE_TASK
@@ -261,19 +252,16 @@ class EventScheduleView:
             item['subject'] = task['activity__name']
             self.tasks.append(item)
             
-        print(f"self.tasks = {self.tasks}")
         self.schedules = ej.base.extend(self.events, self.tasks, None, True)		
 
     def data_adaptor_get_data(self, query):
         print('getData')
-        print(f"query = {query}")
 
         query_data = json.loads(query.data)
         start_time = datetime.fromisoformat(query_data['StartDate'][:10])
         end_time = datetime.fromisoformat(query_data['EndDate'][:10])
         self.get_events(start_time, end_time)
         self.get_tasks(start_time, end_time)
-        print(f"self.schedules = {self.schedules}")
 
         # construct HTTP request for data adaptor
         request = XMLHttpRequest()
