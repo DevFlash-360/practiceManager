@@ -25,6 +25,9 @@ PM_SCHEDULE_DETAIL_VIEWS = [
 ]
 PM_SCHEDULE_CELL_TEMPLATE = '${if(type === "workCells")}<div>${pmRenderCell(resource)}</div>${/if}${if(type === ' \
                             '"monthCells")}${/if}'
+
+PM_TYPE_EVENT = "event"
+PM_TYPE_TASK = "task"
 # PM_EVENT_VIEW_COLUMNS = [
 #     {'name': 'start_time'},
 #     {'name': 'end_time'},
@@ -51,8 +54,9 @@ class EventScheduleView:
         self.schedule_height = None
         self.container_id = container_id
         self.container_el = None
-        self.events = None
-        self.tasks = None
+        self.events = None # Contain events for Schedule data feed
+        self.tasks = None # Contain tasks for Schedule data feed
+        self.schedules = None # Contain schedule elements = self.events + self.tasks
 
         event_fields = {
             'id': {'name': 'uid'},
@@ -206,33 +210,16 @@ class EventScheduleView:
             {'name': 'department.full_name'},
             {'name': 'staff.full_name'},
         ]
-        # self.db_data = {obj['uid']: obj for obj in Event.search(**query)}
-        # self.events = [obj.to_grid() for obj in self.db_data.values()]
-        # for event in self.events:
-        #     event['subject'] = event['activity']['name']
-        #     staff_list = ''
-        #     for staff in event['staff']:
-        #         staff_list += f"{staff['full_name']}, "
-        #     staff_list = staff_list[:-2]
-        #     if event['no_case'] is not True:
-        #         event['subject'] = f"{event['case']['case_name']}: {event['subject']}"
-        #         event['location'] = f"{event['location']['name']} / {event['department']['name']} - {event['department']['name']}<br>{staff_list}"
-        #     else:
-        #         event['location'] = f"{event['location']['name']}<br>" if event['location'] is not None else ''
-        #         event['location'] += staff_list
-
 
         self.events = Event.get_grid_view(view_config={'columns': event_cols}, filters=query)
         # print(f"self.events = {self.events}")
         for event in self.events:
+            event['event_type'] = PM_TYPE_EVENT
             event['subject'] = event['activity__name']
         #     if event['case__case_name']:
         #         event['subject'] = f"{event['case__case_name']}: {event['subject']}"
         #     event['location__name'] += f" {event['staff__full_name']}"
-        self.events = ej.base.extend([], self.events, None, True)
-        # print('Events #', len(self.events))
-        # for event in self.events:
-        #     print(event['subject'], event['location'])
+        self.schedules = ej.base.extend(self.events, self.tasks, None, True)
 
     def get_tasks(self, start_time, end_time):
         query = {
@@ -248,9 +235,20 @@ class EventScheduleView:
             {'name':'assigned_staff.full_name'},
         ]
 
-        self.tasks = Task.get_grid_view(view_config={'columns':event_cols}, filters=query)
-        print("===== Tasks =====")
-        print(self.tasks)
+        self.tasks = []
+        tasks = Task.get_grid_view(view_config={'columns':event_cols}, filters=query)
+
+        for task in tasks:
+            item = {}
+            item['event_type'] = PM_TYPE_TASK
+            item['uid'] = task['uid']
+            item['start_time'] = task['due_date']
+            item['end_time'] = task['due_date']+1
+            item['isAllDay'] = True
+            item['subject'] = task['activity__name']
+            self.tasks.append(item)
+            
+        self.schedules = ej.base.extend(self.events, self.tasks, None, True)		
 
     def data_adaptor_get_data(self, query):
         print('getData')
