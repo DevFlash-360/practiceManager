@@ -227,8 +227,8 @@ class EventScheduleView:
         self.events = Event.get_grid_view(view_config={'columns': event_cols}, filters=query)
         print(f"====== self.events = {self.events}")
         # print(f"self.events = {self.events}")
-        # for event in self.events:
-        #     event['subject'] = event['activity__name']
+        for event in self.events:
+            event['subject'] = event['activity__name']
         #     if event['case__case_name']:
         #         event['subject'] = f"{event['case__case_name']}: {event['subject']}"
         #     event['location__name'] += f" {event['staff__full_name']}"
