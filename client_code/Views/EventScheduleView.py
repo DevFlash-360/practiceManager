@@ -152,7 +152,8 @@ class EventScheduleView:
             editor.form_show()
         elif args.type == 'QuickInfo':
             # print('POPUP', args.data)
-            args.cancel = True
+            if 'subject' not in args.data.keys():
+                args.cancel = True
             args.data['location'] = 'LOCATION'
 
 
