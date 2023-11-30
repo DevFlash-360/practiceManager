@@ -248,11 +248,11 @@ class EventScheduleView:
         self.get_events(start_time, end_time)
 
         # construct HTTP request for data adaptor
-        # request = XMLHttpRequest()
-        # request.open('GET', '_/theme/data-adaptor.json', False)
-        # request.setRequestHeader('Content-Type', 'application/json; charset=utf-8')
-        # request.send({})
-        # query['httpRequest'] = request
+        request = XMLHttpRequest()
+        request.open('GET', '_/theme/data-adaptor.json', False)
+        request.setRequestHeader('Content-Type', 'application/json; charset=utf-8')
+        request.send({})
+        query['httpRequest'] = request
 
         # call back to pass data back to adaptor
         query.onSuccess(self.events, query)
