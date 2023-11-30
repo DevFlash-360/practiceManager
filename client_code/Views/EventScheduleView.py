@@ -224,7 +224,7 @@ class EventScheduleView:
     def get_tasks(self, start_time, end_time):
         query = {
             'due_date': q.all_of(q.greater_than_or_equal_to(start_time), q.less_than_or_equal_to(end_time)),
-            'completed': False
+            'completed': q.not_(True)
         }
         event_cols = [
             {'name':'uid'},
