@@ -172,7 +172,7 @@ class EventScheduleView:
     def handler_filter_cases(self, args):
         filterItem = args['itemData']['Id']
         self.schedules = []
-        self.schedule.refreshEvents()
+        self.schedule.refresh()
 
     def action_begin(self, args):
         # change event
