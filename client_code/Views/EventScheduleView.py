@@ -168,7 +168,7 @@ class EventScheduleView:
 
         # delete event(s)
         if args.requestType == 'eventRemove':
-            print("action_begin / eventRemove")
+            print(f"action_begin / eventRemove {args}")
             for removed in args.data:
                 # event = self.db_data[removed.uid]
                 event = Event.get(removed.uid)
