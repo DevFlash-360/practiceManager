@@ -151,7 +151,6 @@ class EventScheduleView:
                 args.cancel = True
             args.data['location'] = 'LOCATION'
 
-
     def update_schedule(self, data, add_new):
         self.schedule.refreshEvents()
 
@@ -200,6 +199,12 @@ class EventScheduleView:
                 
     def event_click(self, args):
         print(f"===== event_click {args}")
+        event = self.schedule.getEventDetails(args.element)
+        if event:
+            self.schedule.openQuickInfoPopup(event)
+        else:
+            print("event_click else")
+        
 
     # def render_cell(self, args):
     #     # for k in args.keys():
