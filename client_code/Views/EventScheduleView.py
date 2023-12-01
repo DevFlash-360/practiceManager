@@ -262,7 +262,7 @@ class EventScheduleView:
             item['isAllDay'] = True
             item['subject'] = task['activity__name']
             if task['case__case_name']:
-                item['subject'] = f"{task['case__case_name']}: {task['subject']}"
+                item['subject'] = f"{task['case__case_name']}: {item['subject']}"
             item['description'] = task.get('notes', '')
             self.tasks.append(item)
             
