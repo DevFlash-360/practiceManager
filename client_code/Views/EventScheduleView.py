@@ -170,11 +170,13 @@ class EventScheduleView:
         if args.requestType == 'eventRemove':
             print(f"action_begin / eventRemove {args}")
             for removed in args.data:
-                # event = self.db_data[removed.uid]
-                event = Event.get(removed.uid)
-                event.delete()
+                if removed['event_type'] == PM_SCHEDULE_TYPE_TASK:
+                    task = Task.get(removed.uid)
+                    task.delete()
+                elif removed['event_type'] == PM_SCHEDULE_TYPE_EVENT:
+                    event = Event.get(removed.uid)
+                    event.delete()
             self.schedule.refreshEvents()
-
 
     def action_complete(self, args):
         print('Complete', args.requestType)
