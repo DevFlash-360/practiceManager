@@ -116,6 +116,11 @@ class EventScheduleView:
         })
         self.filter_case.addEventListener('change', self.handler_filter_cases)
 
+        self.filter_dropdown = ej.splitbuttons.DropDownButton({
+            'iconCss': 'fa fa-filter',
+            'items': cases_data_for_combobox
+        }, '#iconbutton')
+
     # get events and bind them to the view
     def form_show(self, **event_args):
         self.schedule_el_id = uuid.uuid4()
@@ -130,6 +135,7 @@ class EventScheduleView:
         self.schedule.appendTo(jQuery(f"#{self.schedule_el_id}")[0])
 
         self.add_filter_component("Case", self.filter_case)
+        self.add_filter_component('', self.filter_dropdown)
 
     def destroy(self):
         self.schedule.destroy()
