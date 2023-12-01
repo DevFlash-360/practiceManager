@@ -136,7 +136,7 @@ class EventScheduleView:
         self.schedule.appendTo(jQuery(f"#{self.schedule_el_id}")[0])
 
         self.add_filter_component("Case", self.filter_case)
-        self.add_filter_component('', self.filter_dropdown)
+        # self.add_filter_component('', self.filter_dropdown)
 
     def destroy(self):
         self.schedule.destroy()
