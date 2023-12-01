@@ -44,6 +44,11 @@ class TaskListView(GridView2):
                 {'field': 'due_date_days', 'direction': 'Ascending'},
             ]
         }
+        self.grid.filterSettings = {
+            'columns': [
+                {'field': 'complete', 'operator': 'equal', 'value': 'incomplete'}
+			]
+		}
         # self.grid.editSettings = {
         #     'allowEditing': True,
         #     'allowAdding': False,
