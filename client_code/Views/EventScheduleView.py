@@ -254,7 +254,7 @@ class EventScheduleView:
             item['event_type'] = PM_SCHEDULE_TYPE_TASK
             item['uid'] = task['uid']
             item['start_time'] = task['due_date']
-            item['end_time'] = (date.fromisoformat(task['due_date']) + timedelta(hours=1)).strftime('%Y-%m-%d %H:%M:%S')
+            item['end_time'] = (date.fromisoformat(task['due_date']) + timedelta(days=1)).strftime('%Y-%m-%d %H:%M:%S')
             item['isAllDay'] = True
             item['subject'] = task['activity__name']
             self.tasks.append(item)
