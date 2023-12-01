@@ -264,6 +264,9 @@ class EventScheduleView:
             'completed': q.not_(True),
             'case': filter_case
         }
+        if filter_case is not None:
+            query['case'] = filter_case
+
         event_cols = [
             {'name':'uid'},
             {'name':'case.case_name'},
