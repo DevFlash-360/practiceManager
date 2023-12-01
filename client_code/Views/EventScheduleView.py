@@ -235,8 +235,11 @@ class EventScheduleView:
 
     def get_tasks(self, start_time, end_time):
         print(f"start_time = {start_time}, end_time = {end_time}")
+        start_date = datetime.strptime(start_time, '%Y-%m-%d %H:%M:%S').date().strftime('%Y-%m-%d')
+        end_date = datetime.strptime(end_time, '%Y-%m-%d %H:%M:%S').date().strftime('%Y-%m-%d')
+
         query = {
-            'due_date': q.all_of(q.greater_than_or_equal_to(start_time), q.less_than_or_equal_to(end_time)),
+            'due_date': q.all_of(q.greater_than_or_equal_to(start_date), q.less_than_or_equal_to(end_date)),
             'completed': q.not_(True)
         }
         event_cols = [
