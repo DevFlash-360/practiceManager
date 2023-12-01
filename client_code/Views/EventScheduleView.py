@@ -262,7 +262,6 @@ class EventScheduleView:
         query = {
             'due_date': q.all_of(q.greater_than_or_equal_to(start_time.date()), q.less_than_or_equal_to(end_time.date())),
             'completed': q.not_(True),
-            'case': filter_case
         }
         if filter_case is not None:
             query['case'] = filter_case
