@@ -234,7 +234,6 @@ class EventScheduleView:
             event['description'] = event['notes']
             if event['case__case_name']:
                 event['subject'] = f"{event['case__case_name']}: {event['subject']}"
-            event['location__name'] += f" {event['staff__full_name']}"
         self.schedules = ej.base.extend(self.events, self.tasks, None, True)
 
     def get_tasks(self, start_time, end_time):
@@ -262,6 +261,8 @@ class EventScheduleView:
             item['end_time'] = (date.fromisoformat(task['due_date']) + timedelta(days=1)).strftime('%Y-%m-%d %H:%M:%S')
             item['isAllDay'] = True
             item['subject'] = task['activity__name']
+            if task['case__case_name']:
+                item['subject'] = f"{task['case__case_name']}: {task['subject']}"
             item['description'] = task.get('notes', '')
             self.tasks.append(item)
             
