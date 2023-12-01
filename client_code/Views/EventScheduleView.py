@@ -161,8 +161,7 @@ class EventScheduleView:
             changed_event = args.data
             if changed_event['event_type'] == PM_SCHEDULE_TYPE_TASK:
                 task = Task.get(changed_event.uid)
-                task['start_time'] = datetime_js_to_py(changed_event.start_time)
-                task['end_time'] = datetime_js_to_py(changed_event.end_time)
+                task['due_date'] = datetime_js_to_py(changed_event.start_time)
                 task.save()
             elif changed_event['event_type'] == PM_SCHEDULE_TYPE_EVENT:
                 event = Event.get(changed_event.uid)
