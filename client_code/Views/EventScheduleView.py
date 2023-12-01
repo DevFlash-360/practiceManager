@@ -232,9 +232,9 @@ class EventScheduleView:
             event['event_type'] = PM_SCHEDULE_TYPE_EVENT
             event['subject'] = event['activity__name']
             event['description'] = event['notes']
-        #     if event['case__case_name']:
-        #         event['subject'] = f"{event['case__case_name']}: {event['subject']}"
-        #     event['location__name'] += f" {event['staff__full_name']}"
+            if event['case__case_name']:
+                event['subject'] = f"{event['case__case_name']}: {event['subject']}"
+            event['location__name'] += f" {event['staff__full_name']}"
         self.schedules = ej.base.extend(self.events, self.tasks, None, True)
 
     def get_tasks(self, start_time, end_time):
