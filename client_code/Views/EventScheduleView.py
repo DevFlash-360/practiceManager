@@ -95,7 +95,7 @@ class EventScheduleView:
             'hover': self.hover_event,
             'cssClass': 'pm-schedule-cell-width pm-schedule-cell-height e-hide-spinner',
             # 'cellTemplate': PM_SCHEDULE_CELL_TEMPLATE,
-            'renderCell': self.render_cell,
+            # 'renderCell': self.render_cell,
         }
 
         self.schedule = ej.schedule.Schedule(schedule_config)
@@ -198,16 +198,16 @@ class EventScheduleView:
                 self.schedule.closeQuickInfoPopup()
 
 
-    def render_cell(self, args):
-        # for k in args.keys():
-        #   print(k, args[k])
-        if args.elementType == 'workCells' or args.elementType == 'monthCells':
-            # print('element', args.element)
-            # for k in args.element.keys():
-            #   print(k, args[k])
-            event = self.schedule.getEventDetails(args.element)
-            # if event:
-            # print('event', event)
+    # def render_cell(self, args):
+    #     # for k in args.keys():
+    #     #   print(k, args[k])
+    #     if args.elementType == 'workCells' or args.elementType == 'monthCells':
+    #         # print('element', args.element)
+    #         # for k in args.element.keys():
+    #         #   print(k, args[k])
+    #         event = self.schedule.getEventDetails(args.element)
+    #         # if event:
+    #         # print('event', event)
 
 
     def get_events(self, start_time, end_time):
