@@ -66,7 +66,7 @@ class TaskListView(GridView2):
         status_data = [
             {'Id': 'all', 'Text': 'All statuses', 'IconCss': 'e-icons e-badminton'},
             {'Id': 'complete', 'Text': 'Complete', 'IconCss': 'e-icons e-badminton'},
-            {'Id': 'incomplete', 'Text': 'Incomplete', 'IconCss': 'e-icons e-cricket', 'selected':'selected'},
+            {'Id': 'incomplete', 'Text': 'Incomplete', 'IconCss': 'e-icons e-cricket'},
         ]
         item_template = '<div><span class="${IconCss}"></span>${Text}</div>'
 
@@ -75,7 +75,8 @@ class TaskListView(GridView2):
             'fields': { 'value': 'Id', 'text': 'Text'},
             'iconTemplate': item_template,
             'placeholder': 'Complete...',
-            'cssClass': 'e-outline'
+            'cssClass': 'e-outline',
+            'value': 'incomplete'
         })
         self.filter_complete.addEventListener('change', self.handler_filter_complete)
 
