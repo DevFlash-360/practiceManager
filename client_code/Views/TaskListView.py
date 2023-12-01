@@ -46,7 +46,7 @@ class TaskListView(GridView2):
         }
         self.grid.filterSettings = {
             'columns': [
-                {'field': 'completed', 'operator': 'equal', 'value': 'incomplete'}
+                {'field': 'completed', 'operator': 'notequal', 'value': True}
             ]
         }
         # self.grid.editSettings = {
@@ -128,8 +128,9 @@ class TaskListView(GridView2):
 
     # Handle complete filter
     def handler_filter_complete(self, args):
-        print(f"=--= {args}")
-        if args['itemData']['Id'] == 'complete':
+        if args['itemData'] is None:
+            self.grid.clearFiltering(['completed'])
+        elif args['itemData']['Id'] == 'complete':
             self.grid.filterByColumn('completed', 'equal', "true")
         elif args['itemData']['Id'] == 'incomplete':
             self.grid.filterByColumn('completed', 'notequal', 'true')
