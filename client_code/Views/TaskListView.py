@@ -46,7 +46,7 @@ class TaskListView(GridView2):
         }
         self.grid.filterSettings = {
             'columns': [
-                {'field': 'complete', 'operator': 'equal', 'value': 'incomplete'}
+                {'field': 'completed', 'operator': 'equal', 'value': 'incomplete'}
 			]
 		}
         # self.grid.editSettings = {
@@ -66,7 +66,7 @@ class TaskListView(GridView2):
         status_data = [
             {'Id': 'all', 'Text': 'All statuses', 'IconCss': 'e-icons e-badminton'},
             {'Id': 'complete', 'Text': 'Complete', 'IconCss': 'e-icons e-badminton'},
-            {'Id': 'incomplete', 'Text': 'Incomplete', 'IconCss': 'e-icons e-cricket'},
+            {'Id': 'incomplete', 'Text': 'Incomplete', 'IconCss': 'e-icons e-cricket', 'selected':'selected'},
         ]
         item_template = '<div><span class="${IconCss}"></span>${Text}</div>'
 
