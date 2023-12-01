@@ -1,7 +1,7 @@
 from anvil.tables import query as q
 from anvil.js.window import ej, jQuery, Date, XMLHttpRequest, Object
 from AnvilFusion.tools.utils import datetime_js_to_py
-from ..app.models import Event, Task
+from ..app.models import Event, Task, Case
 from ..Forms.EventForm import EventForm
 from ..Forms.TaskForm import TaskForm
 from datetime import datetime, date, timedelta
@@ -102,6 +102,18 @@ class EventScheduleView:
         self.schedule = ej.schedule.Schedule(schedule_config)
         # anvil.js.window.pmRenderCell = self.render_cell
 
+        self.init_filters()
+
+    def init_filters(self):
+        cases_data = Case.search()
+        cases_data_for_combobox = [{'Id': row['uid'], 'Text': row['case_name']} for row in cases_data]
+        cases_data_for_combobox.insert(0, {'Id': 'all', 'Text': 'All cases'})
+        self.filter_case = ej.dropdowns.ComboBox({
+            'dataSource': cases_data_for_combobox,
+            'fields': {'value': 'Id', 'text': 'Text'},
+            'placeholder': 'Cases...',
+        })
+        self.filter_case.addEventListener('change', self.handler_filter_cases)
 
     # get events and bind them to the view
     def form_show(self, **event_args):
@@ -152,6 +164,11 @@ class EventScheduleView:
             args.data['location'] = 'LOCATION'
 
     def update_schedule(self, data, add_new):
+        self.schedule.refreshEvents()
+
+    def handler_filter_cases(self, args):
+        filterItem = args['itemData']['Id']
+        self.schedules = []
         self.schedule.refreshEvents()
 
     def action_begin(self, args):
