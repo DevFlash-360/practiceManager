@@ -159,11 +159,16 @@ class EventScheduleView:
         if args.requestType == 'eventChange':
             print('Begin / eventChange', args.requestType)
             changed_event = args.data
-            # event = self.db_data[changed_event.uid]
-            event = Event.get(changed_event.uid)
-            event['start_time'] = datetime_js_to_py(changed_event.start_time)
-            event['end_time'] = datetime_js_to_py(changed_event.end_time)
-            event.save()
+            if changed_event['event_type'] == PM_SCHEDULE_TYPE_TASK:
+                task = Task.get(changed_event.uid)
+                task['start_time'] = datetime_js_to_py(changed_event.start_time)
+                task['end_time'] = datetime_js_to_py(changed_event.end_time)
+                task.save()
+            elif changed_event['event_type'] == PM_SCHEDULE_TYPE_EVENT:
+                event = Event.get(changed_event.uid)
+                event['start_time'] = datetime_js_to_py(changed_event.start_time)
+                event['end_time'] = datetime_js_to_py(changed_event.end_time)
+                event.save()
             self.schedule.refreshEvents()
 
         # delete event(s)
