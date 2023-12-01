@@ -92,7 +92,7 @@ class EventScheduleView:
             'popupOpen': self.popup_open,
             'actionBegin': self.action_begin,
             'actionComplete': self.action_complete,
-            'hover': self.hover_event,
+            # 'hover': self.hover_event,
             'eventClick': self.event_click,
             'cssClass': 'pm-schedule-cell-width pm-schedule-cell-height e-hide-spinner',
             # 'cellTemplate': PM_SCHEDULE_CELL_TEMPLATE,
@@ -187,16 +187,16 @@ class EventScheduleView:
     def action_complete(self, args):
         print('Complete', args.requestType)
 
-    def hover_event(self, args):
-        if self.schedule.currentView not in PM_SCHEDULE_DETAIL_VIEWS:
-            event = self.schedule.getEventDetails(args.element)
-            if event:
-                event['location'] = 'OVERRIDE'
-                self.schedule.openQuickInfoPopup(event)
-                # for k in event.keys():
-                #  print(k, event[k])
-            else:
-                self.schedule.closeQuickInfoPopup()
+    # def hover_event(self, args):
+    #     if self.schedule.currentView not in PM_SCHEDULE_DETAIL_VIEWS:
+    #         event = self.schedule.getEventDetails(args.element)
+    #         if event:
+    #             event['location'] = 'OVERRIDE'
+    #             self.schedule.openQuickInfoPopup(event)
+    #             # for k in event.keys():
+    #             #  print(k, event[k])
+    #         else:
+    #             self.schedule.closeQuickInfoPopup()
                 
     def event_click(self, args):
         print(f"===== event_click {args}")
