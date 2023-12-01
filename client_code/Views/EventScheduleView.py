@@ -1,6 +1,7 @@
 from anvil.tables import query as q
 from anvil.js.window import ej, jQuery, Date, XMLHttpRequest, Object
 from AnvilFusion.tools.utils import datetime_js_to_py
+import anvil.js
 from ..app.models import Event, Task, Case
 from ..Forms.EventForm import EventForm
 from ..Forms.TaskForm import TaskForm
@@ -122,11 +123,13 @@ class EventScheduleView:
         self.schedule_height = self.container_el.offsetHeight - PM_SCHEDULE_HEIGHT_OFFSET
         self.container_el.innerHTML = f'\
        <div class="pm-scheduleview-container" style="height:{self.schedule_height}px;">\
+         <div id="pm-filter-container" class="row"></div>\
          <div class="pm-gridview-title">Agenda</div>\
          <div id="{self.schedule_el_id}"></div>\
        </div>'
         self.schedule.appendTo(jQuery(f"#{self.schedule_el_id}")[0])
-        # self.get_events()
+
+        self.add_filter_component("Case", self.filter_case)
 
     def destroy(self):
         self.schedule.destroy()
@@ -305,3 +308,14 @@ class EventScheduleView:
 
     def data_adaptor_record(self, query):
         print('record', query)
+
+    def add_filter_component(self, label, obj):
+        filter_el_id = uuid.uuid4()
+        grid_toolbar = jQuery("#pm-filter-container")[0]
+        filter_container = anvil.js.window.document.createElement('div')
+        filter_container.className = 'col-6 col-md-4 col-lg-2'
+        filter_container.innerHTML = f'\
+            <label for="{filter_el_id}">{label}</label>\
+            <div id="{filter_el_id}"></div>'
+        grid_toolbar.appendChild(filter_container)
+        obj.appendTo(jQuery(f"#{filter_el_id}")[0])
