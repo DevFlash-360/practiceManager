@@ -116,6 +116,7 @@ class EventScheduleView:
         })
         self.filter_case.addEventListener('change', self.handler_filter_cases)
 
+        cases_data_for_dropdown = [{'Id': row['uid'], 'text': row['case_name']} for row in cases_data]
         self.filter_dropdown = ej.splitbuttons.DropDownButton({
             'iconCss': 'fa fa-filter',
             'items': cases_data_for_combobox
