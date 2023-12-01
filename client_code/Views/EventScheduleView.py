@@ -93,6 +93,7 @@ class EventScheduleView:
             'actionBegin': self.action_begin,
             'actionComplete': self.action_complete,
             'hover': self.hover_event,
+            'eventClick': self.event_click,
             'cssClass': 'pm-schedule-cell-width pm-schedule-cell-height e-hide-spinner',
             # 'cellTemplate': PM_SCHEDULE_CELL_TEMPLATE,
             # 'renderCell': self.render_cell,
@@ -196,7 +197,9 @@ class EventScheduleView:
                 #  print(k, event[k])
             else:
                 self.schedule.closeQuickInfoPopup()
-
+                
+    def event_click(self, args):
+        print(f"===== event_click {args}")
 
     # def render_cell(self, args):
     #     # for k in args.keys():
