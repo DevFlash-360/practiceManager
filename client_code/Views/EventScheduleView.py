@@ -172,7 +172,8 @@ class EventScheduleView:
     def handler_filter_cases(self, args):
         filterItem = args['itemData']['Id']
         self.schedules = []
-        self.schedule.refresh()
+        print(f"======= filter value = {self.filter_case.value}")
+        self.schedule.refreshEvents()
 
     def action_begin(self, args):
         # change event
@@ -292,6 +293,7 @@ class EventScheduleView:
         query_data = json.loads(query.data)
         start_time = datetime.fromisoformat(query_data['StartDate'][:10])
         end_time = datetime.fromisoformat(query_data['EndDate'][:10])
+        print("======== update data ===========")
         self.get_events(start_time, end_time)
         self.get_tasks(start_time, end_time)
 
@@ -304,7 +306,6 @@ class EventScheduleView:
 
         # call back to pass data back to adaptor
         query.onSuccess(self.schedules, query)
-
 
     def data_adaptor_record(self, query):
         print('record', query)
