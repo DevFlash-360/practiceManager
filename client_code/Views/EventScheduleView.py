@@ -224,13 +224,14 @@ class EventScheduleView:
             {'name': 'location.name'},
             {'name': 'department.full_name'},
             {'name': 'staff.full_name'},
+            {'name': 'notes'},
         ]
 
         self.events = Event.get_grid_view(view_config={'columns': event_cols}, filters=query)
-        # print(f"self.events = {self.events}")
         for event in self.events:
             event['event_type'] = PM_SCHEDULE_TYPE_EVENT
             event['subject'] = event['activity__name']
+            event['description'] = event['notes']
         #     if event['case__case_name']:
         #         event['subject'] = f"{event['case__case_name']}: {event['subject']}"
         #     event['location__name'] += f" {event['staff__full_name']}"
