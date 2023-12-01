@@ -261,7 +261,7 @@ class EventScheduleView:
             # item['end_time'] = (date.fromisoformat(task['due_date']) + timedelta(days=1)).strftime('%Y-%m-%d %H:%M:%S')
             item['isAllDay'] = True
             item['subject'] = task['activity__name']
-            item['description'] = task['notes']
+            item['description'] = task.get('notes', '')
             self.tasks.append(item)
             
         self.schedules = ej.base.extend(self.events, self.tasks, None, True)
