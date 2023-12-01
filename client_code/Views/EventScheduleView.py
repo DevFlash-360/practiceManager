@@ -269,8 +269,6 @@ class EventScheduleView:
         self.schedules = ej.base.extend(self.events, self.tasks, None, True)
 
     def data_adaptor_get_data(self, query):
-        print('getData')
-
         query_data = json.loads(query.data)
         start_time = datetime.fromisoformat(query_data['StartDate'][:10])
         end_time = datetime.fromisoformat(query_data['EndDate'][:10])
