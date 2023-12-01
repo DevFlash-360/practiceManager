@@ -172,7 +172,6 @@ class EventScheduleView:
     def handler_filter_cases(self, args):
         filterItem = args['itemData']['Id']
         self.schedules = []
-        print(f"======= filter value = {self.filter_case.value}")
         self.schedule.refreshEvents()
 
     def action_begin(self, args):
@@ -260,7 +259,8 @@ class EventScheduleView:
     def get_tasks(self, start_time, end_time):
         query = {
             'due_date': q.all_of(q.greater_than_or_equal_to(start_time.date()), q.less_than_or_equal_to(end_time.date())),
-            'completed': q.not_(True)
+            'completed': q.not_(True),
+            'case__uid': q.equal_to({self.filter_case.value})
         }
         event_cols = [
             {'name':'uid'},
@@ -293,7 +293,6 @@ class EventScheduleView:
         query_data = json.loads(query.data)
         start_time = datetime.fromisoformat(query_data['StartDate'][:10])
         end_time = datetime.fromisoformat(query_data['EndDate'][:10])
-        print("======== update data ===========")
         self.get_events(start_time, end_time)
         self.get_tasks(start_time, end_time)
 
