@@ -249,7 +249,6 @@ class EventScheduleView:
 
         self.tasks = []
         tasks = Task.get_grid_view(view_config={'columns':event_cols}, filters=query)
-        print(tasks)
         for task in tasks:
             item = {}
             item['event_type'] = PM_SCHEDULE_TYPE_TASK
@@ -260,7 +259,8 @@ class EventScheduleView:
             item['subject'] = task['activity__name']
             self.tasks.append(item)
             
-        self.schedules = ej.base.extend(self.events, self.tasks, None, True)		
+        self.schedules = ej.base.extend(self.events, self.tasks, None, True)
+        print(f"schedules = {self.schedules}")
 
     def data_adaptor_get_data(self, query):
         print('getData')
