@@ -258,7 +258,6 @@ class EventScheduleView:
 
     def get_tasks(self, start_time, end_time):
         filter_case = Case.get(self.filter_case.value)
-        print(f"===== filter_case = {filter_case}")
         query = {
             'due_date': q.all_of(q.greater_than_or_equal_to(start_time.date()), q.less_than_or_equal_to(end_time.date())),
             'completed': q.not_(True),
