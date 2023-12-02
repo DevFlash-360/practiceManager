@@ -120,13 +120,18 @@ class EventScheduleView:
         print("========= 4 ===========")
 
         cases_data_for_combobox = [{'Id': row['uid'], 'Text': row['case_name']} for row in cases_data]
+        print("========= 5 ===========")
+
         cases_data_for_combobox.insert(0, {'Id': 'all', 'Text': 'All cases'})
+        print("========= 6 ===========")
         self.filter_case = ej.dropdowns.ComboBox({
             'dataSource': cases_data_for_combobox,
             'fields': {'value': 'Id', 'text': 'Text'},
             'placeholder': 'Cases...',
         })
+        print("========= 7 ===========")
         self.filter_case.addEventListener('change', self.handler_filter_cases)
+        print("========= 8 ===========")
        
     # get events and bind them to the view
     def form_show(self, **event_args):
