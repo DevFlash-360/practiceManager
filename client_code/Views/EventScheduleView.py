@@ -106,6 +106,7 @@ class EventScheduleView:
         self.init_filters()
 
     def init_filters(self):
+        cases_data = Case.search()
         print(f"========= 1 ===========")
         
         cases_data_for_dropdown = [{'text': case['case_name']} for case in cases_data]
@@ -118,7 +119,6 @@ class EventScheduleView:
         }, '#iconbutton')
         print("========= 4 ===========")
 
-        cases_data = Case.search()
         cases_data_for_combobox = [{'Id': row['uid'], 'Text': row['case_name']} for row in cases_data]
         cases_data_for_combobox.insert(0, {'Id': 'all', 'Text': 'All cases'})
         self.filter_case = ej.dropdowns.ComboBox({
