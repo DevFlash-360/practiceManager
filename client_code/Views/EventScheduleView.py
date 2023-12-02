@@ -107,29 +107,18 @@ class EventScheduleView:
 
     def init_filters(self):
         cases_data = Case.search()
-        print(f"========= 1 ===========")
-        
         cases_data_for_dropdown = [{'text': case['case_name']} for case in cases_data]
-        print("========= 2 ===========")
         cases_data_for_dropdown.insert(0, {'Id': 'all', 'Text': 'All cases'})
-        print("========= 3 ===========")
         self.filter_dropdown = ej.splitbuttons.DropDownButton({
             'iconCss': 'fa fa-filter',
             'items': cases_data_for_dropdown
         }, '#iconbutton')
-        print("========= 4 ===========")
-
-        print("========= 5 ===========")
-
-        print("========= 6 ===========")
         self.filter_case = ej.dropdowns.ComboBox({
             'dataSource': cases_data_for_dropdown,
             'fields': {'value': 'Id', 'text': 'Text'},
             'placeholder': 'Cases...',
         })
-        print("========= 7 ===========")
         self.filter_case.addEventListener('change', self.handler_filter_cases)
-        print("========= 8 ===========")
        
     # get events and bind them to the view
     def form_show(self, **event_args):
