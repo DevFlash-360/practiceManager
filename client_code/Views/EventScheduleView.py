@@ -325,6 +325,6 @@ class EventScheduleView:
         filter_container.className = 'col-6 col-md-4 col-lg-2'
         filter_container.innerHTML = f'\
             <label for="{filter_el_id}">{label}</label>\
-            <div id="{filter_el_id}"></div>'
+            <div id="{filter_el_id}" class="e-caret-hide"></div>'
         grid_toolbar.appendChild(filter_container)
         obj.appendTo(jQuery(f"#{filter_el_id}")[0])
