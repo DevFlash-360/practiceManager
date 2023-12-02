@@ -113,6 +113,7 @@ class EventScheduleView:
             'iconCss': 'fa fa-filter',
             'items': cases_data_for_dropdown
         }, '#iconbutton')
+        self.filter_dropdown.addEventListener('change', self.handler_filter_cases)
         self.filter_case = ej.dropdowns.ComboBox({
             'dataSource': cases_data_for_dropdown,
             'fields': {'value': 'Id', 'text': 'Text'},
