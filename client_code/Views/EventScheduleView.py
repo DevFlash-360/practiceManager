@@ -109,7 +109,8 @@ class EventScheduleView:
         # cases_data = Case.search()
         print(f"========= 1 ===========")
         
-        cases_data = [{'text': case['case_name']} for case in Case.search()]
+        cases_search_data = Case.search()
+        cases_data = [{'text': case['case_name']} for case in cases_search_data]
         cases_data_for_dropdown = [{'text': case['case_name']} for case in cases_data]
         print("========= 2 ===========")
         cases_data_for_dropdown.insert(0, {'Id': 'all', 'Text': 'All cases'})
