@@ -115,9 +115,9 @@ class EventScheduleView:
             'placeholder': 'Cases...',
         })
         self.filter_case.addEventListener('change', self.handler_filter_cases)
-        print("========= 1 ===========")
+        print(f"========= 1 =========== {cases_data}")
         
-        cases_data_for_dropdown = [{'Id': row['uid'], 'Text': row['case_name']} for row in cases_data]
+        cases_data_for_dropdown = [{'text': row['case_name']} for row in cases_data]
         print("========= 2 ===========")
         cases_data_for_dropdown.insert(0, {'Id': 'all', 'Text': 'All cases'})
         print("========= 3 ===========")
