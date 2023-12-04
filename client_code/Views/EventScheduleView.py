@@ -131,6 +131,8 @@ class EventScheduleView:
 
         self.query_filter_cases = []
 
+        print(f"dataSource = {dataSource}")
+
         self.tree_filters = ej.navigations.TreeView({
             'fields': { 'dataSource': dataSource, id: "Id", 'text': "text", 'child': "items" },
             'nodeSelected': self.handler_nodeSelected,
