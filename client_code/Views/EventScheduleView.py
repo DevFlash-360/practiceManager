@@ -106,7 +106,7 @@ class EventScheduleView:
         self.init_filters()
 
     def init_filters(self):
-        ej.base.enableRipple(True)
+        # ej.base.enableRipple(True)
         cases_data = Case.search()
         cases_data_for_dropdown = [{'Id': case['uid'], 'text': case['case_name']} for case in cases_data]
         cases_data_for_dropdown.insert(0, {'Id': 'all', 'text': 'All cases'})
