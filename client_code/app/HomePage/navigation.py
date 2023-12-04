@@ -285,7 +285,6 @@ class Sidebar:
     def menu_select(self, args, subcomponent=None, props=None):
         if subcomponent is None:
             if 'e-level-1' in list(args.node.classList):
-                print('Accordion')
                 self.menu.collapseAll()
                 self.menu.expandAll([args.node])
                 self.nav_target_id = None
