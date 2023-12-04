@@ -203,6 +203,7 @@ class EventScheduleView:
     def handler_nodeSelected(self, args):
         print(f"===== handler_nodeSelected ===== \n {args.node}")
         if (args.node.classList.contains('e-level-1')):
+            args.cancel = True
             self.tree_filters.collapseAll()
             self.tree_filters.expandAll([args.node])
 
