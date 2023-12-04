@@ -2,7 +2,7 @@ from anvil.tables import query as q
 from anvil.js.window import ej, jQuery, Date, XMLHttpRequest, Object
 from AnvilFusion.tools.utils import datetime_js_to_py
 import anvil.js
-from ..app.models import Event, Task, Case
+from ..app.models import Event, Task, Case, Staff
 from ..Forms.EventForm import EventForm
 from ..Forms.TaskForm import TaskForm
 from datetime import datetime, date, timedelta
@@ -106,21 +106,43 @@ class EventScheduleView:
         self.init_filters()
 
     def init_filters(self):
+        ej.base.enableRipple(True)
         cases_data = Case.search()
-        cases_data_for_dropdown = [{'Id': case['uid'], 'text': case['case_name'], 'category': 'cases'} for case in cases_data]
-        cases_data_for_dropdown.insert(0, {'Id': 'all', 'text': 'All cases', 'category': 'cases'})
-        cases_data_for_dropdown.insert(0, {'Id': 'Staff', 'text': 'All Staffs', 'category': 'staff'})
+        cases_data_for_dropdown = [{'Id': case['uid'], 'text': case['case_name']} for case in cases_data]
+        cases_data_for_dropdown.insert(0, {'Id': 'all', 'text': 'All cases'})
+
+        staff_data = Staff.search()
+        staff_data_for_dropdown = [{'Id': row['uid'], 'text': row['first_name'] + " " + row['last_name']} for row in staff_data]
+        staff_data_for_dropdown.insert(0, {'Id': 'all', 'text': 'All staffs'})
+
         self.filter_dropdown = ej.splitbuttons.DropDownButton({
+            'target': '#eventfilterlist',
             'iconCss': 'fa fa-filter',
-            'items': cases_data_for_dropdown
-        }, '#iconbutton')
-        self.filter_dropdown.addEventListener('change', self.handler_filter_cases)
-        self.filter_case = ej.dropdowns.ComboBox({
-            'dataSource': cases_data_for_dropdown,
-            'fields': {'value': 'Id', 'text': 'Text', 'groupBy': 'category'},
-            'placeholder': 'Cases...',
+            'cssClass': 'e-caret-hide'
         })
-        self.filter_case.addEventListener('change', self.handler_filter_cases)
+        self.filter_dropdown.addEventListener('change', self.handler_filter_cases)
+        
+        dataSource = [
+            {'Id': 'cases', 'text': 'Cases'},
+            {'Id': 'staffs', 'text': 'Staffs'},
+        ]
+
+        dataSource[0]['items'] = cases_data_for_dropdown
+        dataSource[1]['items'] = staff_data_for_dropdown
+
+        tree1 = ej.navigations.TreeView({
+            'fields': { 'dataSource': dataSource, id: "Id", 'text': "text", 'child': "items" },
+            'nodeSelected': self.handler_filter_cases,
+            'cssClass': ("accordiontree")
+        })
+        tree1.appendTo('#eventfilterlist')
+
+        # self.filter_case = ej.dropdowns.ComboBox({
+        #     'dataSource': cases_data_for_dropdown,
+        #     'fields': {'value': 'Id', 'text': 'text', 'groupBy': 'category'},
+        #     'placeholder': 'Cases...',
+        # })
+        # self.filter_case.addEventListener('change', self.handler_filter_cases)
        
     # get events and bind them to the view
     def form_show(self, **event_args):
@@ -130,12 +152,13 @@ class EventScheduleView:
         self.container_el.innerHTML = f'\
        <div class="pm-scheduleview-container" style="height:{self.schedule_height}px;">\
          <div id="pm-filter-container" class="row"></div>\
+         <div id="eventfilterlist"></div>\
          <div class="pm-gridview-title">Agenda</div>\
          <div id="{self.schedule_el_id}"></div>\
        </div>'
         self.schedule.appendTo(jQuery(f"#{self.schedule_el_id}")[0])
 
-        self.add_filter_component("Case", self.filter_case)
+        # self.add_filter_component("Case", self.filter_case)
         self.add_filter_component('', self.filter_dropdown)
 
     def destroy(self):
