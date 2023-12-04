@@ -201,9 +201,9 @@ class EventScheduleView:
         self.schedule.refreshEvents()
 
     def handler_nodeSelected(self, args):
-        filterItem = args['itemData']['Id']
-        self.schedules = []
-        self.schedule.refreshEvents()
+        if (args.node.classList.contains('e-level-1')):
+            self.tree_filters.collapseAll()
+            self.tree_filters.expandAll([args.node])
 
     def action_begin(self, args):
         # change event
