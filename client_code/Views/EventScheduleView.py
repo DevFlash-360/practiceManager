@@ -109,11 +109,11 @@ class EventScheduleView:
         # ej.base.enableRipple(True)
         cases_data = Case.search()
         cases_data_for_dropdown = [{'Id': case['uid'], 'text': case['case_name']} for case in cases_data]
-        cases_data_for_dropdown.insert(0, {'Id': 'all', 'text': 'All cases'})
+        cases_data_for_dropdown.insert(0, {'Id': 'cases_all', 'text': 'All cases'})
 
         staff_data = Staff.search()
         staff_data_for_dropdown = [{'Id': row['uid'], 'text': row['first_name'] + " " + row['last_name']} for row in staff_data]
-        staff_data_for_dropdown.insert(0, {'Id': 'all', 'text': 'All staffs'})
+        staff_data_for_dropdown.insert(0, {'Id': 'staffs_all', 'text': 'All staffs'})
 
         self.filter_dropdown = ej.splitbuttons.DropDownButton({
             'target': '#eventfilterlist',
@@ -126,17 +126,55 @@ class EventScheduleView:
             {'Id': 'staffs', 'text': 'Staffs'},
         ]
 
+        continents = [
+            {
+                "code": "AF", "name": "Africa", "countries": [
+                    { "code": "NGA", "name": "Nigeria" },
+                    { "code": "EGY", "name": "Egypt" },
+                    { "code": "ZAF", "name": "South Africa" }
+                ]
+            },
+            {
+                "code": "AS", "name": "Asia", "countries": [
+                    { "code": "CHN", "name": "China" },
+                    { "code": "IND", "name": "India", 'selected': True },
+                    { "code": "JPN", "name": "Japan" }
+                ]
+            },
+            {
+                "code": "EU", "name": "Europe", "countries": [
+                    { "code": "DNK", "name": "Denmark" },
+                    { "code": "FIN", "name": "Finland" },
+                    { "code": "AUT", "name": "Austria", 
+                    }
+                ]
+            },
+            {
+                "code": "NA", "name": "North America", "countries": [
+                    { "code": "USA", "name": "United States of America" },
+                    { "code": "CUB", "name": "Cuba" },
+                    { "code": "MEX", "name": "Mexico" }
+                ]
+            },
+            {
+                "code": "OC", "name": "Oceania", "countries": [
+                    { "code": "AUS", "name": "Australia" },
+                    { "code": "NZL", "name": "New Zealand" },
+                    { "code": "WSM", "name": "Samoa" }
+                ]
+            },
+            
+        ]
+
         dataSource[0]['items'] = cases_data_for_dropdown
         dataSource[1]['items'] = staff_data_for_dropdown
 
         self.query_filter_cases = []
 
-        print(f"dataSource = {dataSource}")
-
         self.tree_filters = ej.navigations.TreeView({
-            'fields': { 'dataSource': dataSource, id: "Id", 'text': "text", 'child': "items" },
+            'fields': { 'dataSource': continents, id: "code", 'text': "name", 'child': "countries" },
             'nodeSelected': self.handler_nodeSelected,
-            'cssClass': ("accordiontree")
+            'cssClass': "accordiontree"
         })
 
         # self.filter_case = ej.dropdowns.ComboBox({
