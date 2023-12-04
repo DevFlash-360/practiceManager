@@ -2,6 +2,7 @@ import uuid
 from anvil.js.window import ej, jQuery
 from DevFusion.components.GridView2 import GridView2
 import anvil.js
+from AnvilFusion.tools.utils import AppEnv
 from ..app.models import Staff, Case, Task
 class TaskListView(GridView2):
     def __init__(self, case=None, case_uid=None, **kwargs):
@@ -90,6 +91,7 @@ class TaskListView(GridView2):
             'dataSource': staff_data_for_combobox,
             'fields': {'value': 'Id', 'text': 'Text'},
             'placeholder': 'Staff...',
+            'value': AppEnv.logged_user['user_uid']
         })
         self.filter_staff.addEventListener('change', self.handler_filter_staff)
         
