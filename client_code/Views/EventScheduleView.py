@@ -120,7 +120,6 @@ class EventScheduleView:
             'iconCss': 'fa fa-filter',
             'cssClass': 'e-caret-hide'
         })
-        self.filter_dropdown.addEventListener('change', self.handler_filter_cases)
         
         dataSource = [
             {'Id': 'cases', 'text': 'Cases'},
@@ -130,9 +129,11 @@ class EventScheduleView:
         dataSource[0]['items'] = cases_data_for_dropdown
         dataSource[1]['items'] = staff_data_for_dropdown
 
+        self.query_filter_cases = []
+
         tree1 = ej.navigations.TreeView({
             'fields': { 'dataSource': dataSource, id: "Id", 'text': "text", 'child': "items" },
-            'nodeSelected': self.handler_filter_cases,
+            'nodeSelected': self.handler_nodeSelected,
             'cssClass': ("accordiontree")
         })
         tree1.appendTo('#eventfilterlist')
@@ -199,7 +200,7 @@ class EventScheduleView:
     def update_schedule(self, data, add_new):
         self.schedule.refreshEvents()
 
-    def handler_filter_cases(self, args):
+    def handler_nodeSelected(self, args):
         filterItem = args['itemData']['Id']
         self.schedules = []
         self.schedule.refreshEvents()
@@ -287,13 +288,12 @@ class EventScheduleView:
         self.schedules = ej.base.extend(self.events, self.tasks, None, True)
 
     def get_tasks(self, start_time, end_time):
-        filter_case = Case.get(self.filter_case.value)
         query = {
             'due_date': q.all_of(q.greater_than_or_equal_to(start_time.date()), q.less_than_or_equal_to(end_time.date())),
             'completed': q.not_(True),
         }
-        if filter_case is not None:
-            query['case'] = filter_case
+        if self.query_filter_cases:
+            query['case'] = q.any_of(self.query_filter_cases)
 
         event_cols = [
             {'name':'uid'},
