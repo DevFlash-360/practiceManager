@@ -120,7 +120,7 @@ class EventScheduleView:
             'iconCss': 'fa fa-filter',
             'cssClass': 'e-caret-hide'
         })
-        
+
         dataSource = [
             {'Id': 'cases', 'text': 'Cases'},
             {'Id': 'staffs', 'text': 'Staffs'},
