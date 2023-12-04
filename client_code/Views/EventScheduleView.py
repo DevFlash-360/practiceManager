@@ -107,8 +107,9 @@ class EventScheduleView:
 
     def init_filters(self):
         cases_data = Case.search()
-        cases_data_for_dropdown = [{'Id': case['uid'], 'text': case['case_name']} for case in cases_data]
-        cases_data_for_dropdown.insert(0, {'Id': 'all', 'text': 'All cases'})
+        cases_data_for_dropdown = [{'Id': case['uid'], 'text': case['case_name'], 'category': 'cases'} for case in cases_data]
+        cases_data_for_dropdown.insert(0, {'Id': 'all', 'text': 'All cases', 'category': 'cases'})
+        cases_data_for_dropdown.insert(0, {'Id': 'Staff', 'text': 'All Staffs', 'category': 'staff'})
         self.filter_dropdown = ej.splitbuttons.DropDownButton({
             'iconCss': 'fa fa-filter',
             'items': cases_data_for_dropdown
