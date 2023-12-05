@@ -268,6 +268,7 @@ class EventScheduleView:
             if 'staff__full_name' in event:
                 event['staff_name'] = event['staff__full_name']
             event['location_name'] = event['location__name'] if 'location__name' in event and event['location__name'] else ''
+        print(type(self.events))
         self.schedules = self.events + self.tasks
         # self.schedules = ej.base.extend(self.events, self.tasks, None, True)
 
