@@ -665,7 +665,6 @@ class Task:
                 due_date_view = f"Due {due_date} - tomorrow"
             else:
                 due_date_view = f"Due {due_date} in {(args['due_date'] - date.today()).days} days"
-        print(f"{due_date_view} when {args['due_date']}")
         return due_date_view
     due_date_view = Computed(['due_date'], 'get_due_date_view')
 
