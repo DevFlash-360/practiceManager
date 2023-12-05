@@ -11,11 +11,10 @@ import json
 
 PM_SCHEDULE_HEIGHT_OFFSET = 35
 PM_SCHEDULE_DEFAULT_VIEWS = [
-    # {
-    #     'option': 'Agenda',
-    #     'eventTemplate': '<div class="template-wrap"><div class="subject">${subject}</div><div class="time">${start_time} - ${end_time}</div></div>'
-    # },
-    'Agenda'
+    {
+        'option': 'Agenda',
+        'eventTemplate': '<div class="template-wrap"><div class="e-subject">${subject}</div><div class="e-date-time">${start_time.date()} - ${end_time.date()}</div></div>'
+    },
     # 'Day',
     # 'Week',
     # 'Month',
