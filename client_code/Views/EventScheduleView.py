@@ -56,8 +56,8 @@ class EventScheduleView:
         self.schedule_height = None
         self.container_id = container_id
         self.container_el = None
-        self.events = None # Contain events for Schedule data feed
-        self.tasks = None # Contain tasks for Schedule data feed
+        self.events = [] # Contain events for Schedule data feed
+        self.tasks = [] # Contain tasks for Schedule data feed
         self.schedules = None # Contain schedule elements = self.events + self.tasks
 
         event_fields = {
