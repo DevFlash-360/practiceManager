@@ -126,53 +126,13 @@ class EventScheduleView:
             {'Id': 'staffs', 'text': 'Staffs'},
         ]
 
-        continents = [
-            {
-                "code": "AF", "name": "Africa", "countries": [
-                    { "code": "NGA", "name": "Nigeria" },
-                    { "code": "EGY", "name": "Egypt" },
-                    { "code": "ZAF", "name": "South Africa" }
-                ]
-            },
-            {
-                "code": "AS", "name": "Asia", "countries": [
-                    { "code": "CHN", "name": "China" },
-                    { "code": "IND", "name": "India", 'selected': True },
-                    { "code": "JPN", "name": "Japan" }
-                ]
-            },
-            {
-                "code": "EU", "name": "Europe", "countries": [
-                    { "code": "DNK", "name": "Denmark" },
-                    { "code": "FIN", "name": "Finland" },
-                    { "code": "AUT", "name": "Austria", 
-                    }
-                ]
-            },
-            {
-                "code": "NA", "name": "North America", "countries": [
-                    { "code": "USA", "name": "United States of America" },
-                    { "code": "CUB", "name": "Cuba" },
-                    { "code": "MEX", "name": "Mexico" }
-                ]
-            },
-            {
-                "code": "OC", "name": "Oceania", "countries": [
-                    { "code": "AUS", "name": "Australia" },
-                    { "code": "NZL", "name": "New Zealand" },
-                    { "code": "WSM", "name": "Samoa" }
-                ]
-            },
-            
-        ]
-
         dataSource[0]['items'] = cases_data_for_dropdown
         dataSource[1]['items'] = staff_data_for_dropdown
 
         self.query_filter_cases = []
 
         self.tree_filters = ej.navigations.TreeView({
-            'fields': { 'dataSource': continents, id: "code", 'text': "name", 'child': "countries" },
+            'fields': { 'dataSource': dataSource, id: "code", 'text': "name", 'child': "countries" },
             'nodeSelected': self.handler_nodeSelected,
             'cssClass': "accordiontree"
         })
