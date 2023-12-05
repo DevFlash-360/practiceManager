@@ -16,31 +16,9 @@ PM_SCHEDULE_DEFAULT_VIEWS = [
     'Week',
     'Month',
 ]
-PM_SCHEDULE_DETAIL_VIEWS = [
-    # 'Agenda',
-    'MonthAgenda',
-    'TimelineDay',
-    'TimelineWeek',
-    'TimelineWorkWeek',
-    'TimelineMonth',
-    'TimelineYear',
-]
-PM_SCHEDULE_CELL_TEMPLATE = '${if(type === "workCells")}<div>${pmRenderCell(resource)}</div>${/if}${if(type === ' \
-                            '"monthCells")}${/if}'
 
 PM_SCHEDULE_TYPE_EVENT = "event"
 PM_SCHEDULE_TYPE_TASK = "task"
-# PM_EVENT_VIEW_COLUMNS = [
-#     {'name': 'start_time'},
-#     {'name': 'end_time'},
-#     {'name': 'activity.name'},
-#     {'name': 'location.name'},
-#     {'name': 'staff.full_name'},
-#     {'name': 'case.case_name'},
-#     {'name': 'no_case'},
-#     {'name': 'department.full_name'},
-#     {'name': ''},
-# ]
 
 
 class EventScheduleView:
@@ -96,7 +74,6 @@ class EventScheduleView:
             # 'hover': self.hover_event,
             'eventClick': self.event_click,
             'cssClass': 'pm-schedule-cell-width pm-schedule-cell-height e-hide-spinner',
-            # 'cellTemplate': PM_SCHEDULE_CELL_TEMPLATE,
             # 'renderCell': self.render_cell,
         }
 
@@ -237,17 +214,6 @@ class EventScheduleView:
 
     def action_complete(self, args):
         print('Complete', args.requestType)
-
-    # def hover_event(self, args):
-    #     if self.schedule.currentView not in PM_SCHEDULE_DETAIL_VIEWS:
-    #         event = self.schedule.getEventDetails(args.element)
-    #         if event:
-    #             event['location'] = 'OVERRIDE'
-    #             self.schedule.openQuickInfoPopup(event)
-    #             # for k in event.keys():
-    #             #  print(k, event[k])
-    #         else:
-    #             self.schedule.closeQuickInfoPopup()
                 
     def event_click(self, args):
         event = self.schedule.getEventDetails(args.element)
