@@ -171,7 +171,7 @@ class TaskListView(GridView2):
                 row.classList.remove('task-complete')
 
         for ind, item in enumerate(data):
-            if item['due_date'] == '':
+            if item['due_date'] is None:
                 data[ind]['due_date'] = "No Due Date"
             if item['priority'] == 'High':
                 data[ind]['priority'] = f"<span class='fas fa-circle fa-sm me-1 text-red'></span> High"
