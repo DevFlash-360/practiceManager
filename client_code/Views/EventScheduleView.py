@@ -263,8 +263,8 @@ class EventScheduleView:
             event['description'] = event['notes']
             if event['case__case_name']:
                 event['subject'] = f"{event['case__case_name']}: {event['subject']}"
-            event['start_time_time'] = datetime.strptime(event['start_time'], '%a %b %d %Y %H:%M:%S GMT%z').strftime('%H:%M')
-            event['end_time_time'] = datetime.strptime(event['end_time'], '%a %b %d %Y %H:%M:%S GMT%z').strftime('%H:%M')
+            event['start_time_time'] = datetime.strptime(event['start_time'], '%Y-%m-%dT%H:%M:%S%z').strftime('%H:%M')
+            event['end_time_time'] = datetime.strptime(event['end_time'], '%Y-%m-%dT%H:%M:%S%z').strftime('%H:%M')
         self.schedules = ej.base.extend(self.events, self.tasks, None, True)
 
     def get_tasks(self, start_time, end_time):
