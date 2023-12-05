@@ -9,6 +9,9 @@ from datetime import datetime, date, timedelta
 import uuid
 import json
 
+PM_SCHEDULE_TYPE_EVENT = "event"
+PM_SCHEDULE_TYPE_TASK = "task"
+
 PM_SCHEDULE_HEIGHT_OFFSET = 35
 PM_SCHEDULE_DEFAULT_VIEWS = [
     {
@@ -36,19 +39,6 @@ PM_SCHEDULE_DETAIL_VIEWS = [
     'TimelineMonth',
     'TimelineYear',
 ]
-PM_SCHEDULE_TYPE_EVENT = "event"
-PM_SCHEDULE_TYPE_TASK = "task"
-# PM_EVENT_VIEW_COLUMNS = [
-#     {'name': 'start_time'},
-#     {'name': 'end_time'},
-#     {'name': 'activity.name'},
-#     {'name': 'location.name'},
-#     {'name': 'staff.full_name'},
-#     {'name': 'case.case_name'},
-#     {'name': 'no_case'},
-#     {'name': 'department.full_name'},
-#     {'name': ''},
-# ]
 
 
 class EventScheduleView:
