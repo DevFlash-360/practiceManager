@@ -14,8 +14,8 @@ PM_SCHEDULE_DEFAULT_VIEWS = [
     {
         'option': 'Agenda',
         'eventTemplate': '<div class="template-wrap"><div class="e-subject">${subject}</div><div class="e-date-time">${start_time_time} - ${end_time_time}</div>\
-        <div>${staff__full_name}</div>\
-        <div>location.name</div>\
+        <div>${staff_name}</div>\
+        <div>${location_name}</div>\
             </div>'
         ''
     },
@@ -268,6 +268,8 @@ class EventScheduleView:
                 event['subject'] = f"{event['case__case_name']}: {event['subject']}"
             event['start_time_time'] = datetime.strptime(event['start_time'], '%Y-%m-%dT%H:%M:%S%z').strftime('%H:%M')
             event['end_time_time'] = datetime.strptime(event['end_time'], '%Y-%m-%dT%H:%M:%S%z').strftime('%H:%M')
+            event['staff_name'] = event['staff__full_name']
+            event['location_name'] = event['location__name']
         self.schedules = ej.base.extend(self.events, self.tasks, None, True)
 
     def get_tasks(self, start_time, end_time):
@@ -296,11 +298,15 @@ class EventScheduleView:
             item['uid'] = task['uid']
             item['start_time'] = task['due_date']
             item['end_time'] = (date.fromisoformat(task['due_date']) + timedelta(days=1)).strftime('%Y-%m-%d %H:%M:%S')
+            item['start_time_time'] = datetime.strptime(item['start_time'], '%Y-%m-%dT%H:%M:%S%z').strftime('%H:%M')
+            item['end_time_time'] = datetime.strptime(item['end_time'], '%Y-%m-%dT%H:%M:%S%z').strftime('%H:%M')
             item['isAllDay'] = True
             item['subject'] = task['activity__name']
             if task['case__case_name']:
                 item['subject'] = f"{task['case__case_name']}: {item['subject']}"
             item['description'] = task.get('notes', '')
+            item['staff_name'] = task['assigned_staff__full_name']
+            item['location_name'] = ''
             self.tasks.append(item)
             
         self.schedules = ej.base.extend(self.events, self.tasks, None, True)
