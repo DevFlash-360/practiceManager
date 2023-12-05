@@ -257,7 +257,6 @@ class EventScheduleView:
         ]
 
         self.events = Event.get_grid_view(view_config={'columns': event_cols}, filters=query)
-        print(f"event_count = {len(self.events)}")
         for event in self.events:
             event['event_type'] = PM_SCHEDULE_TYPE_EVENT
             event['subject'] = event['activity__name']
@@ -319,6 +318,7 @@ class EventScheduleView:
         print(f"=== get data === {start_time} - {end_time}")
         self.get_events(start_time, end_time)
         self.get_tasks(start_time, end_time)
+        print(f"self.schedules count = {len(self.schedules)}")
 
         # construct HTTP request for data adaptor
         request = XMLHttpRequest()
