@@ -269,7 +269,8 @@ class EventScheduleView:
             event['start_time_time'] = datetime.strptime(event['start_time'], '%Y-%m-%dT%H:%M:%S%z').strftime('%H:%M')
             event['end_time_time'] = datetime.strptime(event['end_time'], '%Y-%m-%dT%H:%M:%S%z').strftime('%H:%M')
             event['staff_name'] = event['staff__full_name']
-            event['location_name'] = event['location__name']
+            if event['location__name']:
+                event['location_name'] = event['location__name']
         self.schedules = ej.base.extend(self.events, self.tasks, None, True)
 
     def get_tasks(self, start_time, end_time):
