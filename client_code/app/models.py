@@ -1,7 +1,7 @@
 from AnvilFusion.datamodel.particles import model_type, Attribute, Relationship, Computed
 from AnvilFusion.datamodel import types
 from datetime import date
-
+import math
 
 # Model list for enumerations
 ENUM_MODEL_LIST = {
@@ -674,7 +674,7 @@ class Task:
         if args['due_date']:
             due_date_days = (args['due_date'] - date.today()).days
         else:
-            due_date_days = 100
+            due_date_days = math.inf
         if due_date_days < 0:
             due_date_days = -100
         return due_date_days
