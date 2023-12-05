@@ -17,8 +17,8 @@ PM_SCHEDULE_DEFAULT_VIEWS = [
     {
         'option': 'Agenda',
         'eventTemplate': '<div class="template-wrap">\
-            ${if(event_type==="task")}<span class="badge badge-danger">DUE</span>${/if}\
-            <div class="e-subject">${subject}</div>\
+            ${if(event_type==="task")}<span class="badge badge-danger">${due_date_view}</span>${/if}\
+            <a class="e-subject">${subject}</a>\
             <div class="e-date-time">\
                 ${if(event_type==="event")}${start_time_time} - ${end_time_time}${/if}\
                 ${if(event_type==="task")}All day${/if}\
@@ -283,6 +283,7 @@ class EventScheduleView:
             {'name':'priority'},
             {'name':'assigned_staff.full_name'},
             {'name':'notes'},
+            {'name': 'due_date_view'}
         ]
 
         self.tasks = []
