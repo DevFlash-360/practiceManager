@@ -265,7 +265,7 @@ class EventScheduleView:
                 event['subject'] = f"{event['case__case_name']}: {event['subject']}"
             event['start_time_time'] = datetime.strptime(event['start_time'], '%Y-%m-%dT%H:%M:%S%z').strftime('%H:%M')
             event['end_time_time'] = datetime.strptime(event['end_time'], '%Y-%m-%dT%H:%M:%S%z').strftime('%H:%M')
-            if event['staff__full_name']:
+            if 'staff__full_name' in event:
                 event['staff_name'] = event['staff__full_name']
             event['location_name'] = event['location__name'] if 'location__name' in event else ''
         self.schedules = ej.base.extend(self.events, self.tasks, None, True)
@@ -301,7 +301,7 @@ class EventScheduleView:
             item['end_time_time'] = item['start_time_time']
             item['isAllDay'] = True
             item['subject'] = task['activity__name']
-            if task['case__case_name']:
+            if 'case__case_name' in task:
                 item['subject'] = f"{task['case__case_name']}: {item['subject']}"
             item['description'] = task.get('notes', '')
             item['staff_name'] = task['assigned_staff__full_name']
