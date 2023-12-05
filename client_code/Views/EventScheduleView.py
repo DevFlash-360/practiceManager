@@ -304,7 +304,7 @@ class EventScheduleView:
             item['staff_name'] = task['assigned_staff__full_name']
             item['location_name'] = ''
             item['isOverdue'] = date.fromisoformat(task['due_date']) < date.today()
-            print(f"{item['due_date']} {item['isOverdue']}")
+            print(f"{task['due_date']} {item['isOverdue']}")
             self.tasks.append(item)
             
         self.schedules = ej.base.extend(self.events, self.tasks, None, True)
