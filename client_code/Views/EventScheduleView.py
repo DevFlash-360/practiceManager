@@ -268,7 +268,8 @@ class EventScheduleView:
             if 'staff__full_name' in event:
                 event['staff_name'] = event['staff__full_name']
             event['location_name'] = event['location__name'] if 'location__name' in event and event['location__name'] else ''
-        self.schedules = ej.base.extend(self.events, self.tasks, None, True)
+        self.schedules = self.events + self.tasks
+        # self.schedules = ej.base.extend(self.events, self.tasks, None, True)
 
     def get_tasks(self, start_time, end_time):
         query = {
@@ -309,9 +310,8 @@ class EventScheduleView:
             item['isOverdue'] = date.fromisoformat(task['due_date']) < date.today()
             self.tasks.append(item)
             
-        self.schedules = ej.base.extend(self.events, self.tasks, None, True)
-        print(f"self.events === \n {self.events}")
-        print(f"self.tasks === \n {self.tasks}")
+        # self.schedules = ej.base.extend(self.events, self.tasks, None, True)
+        self.schedules = self.events + self.tasks
 
     def data_adaptor_get_data(self, query):
         query_data = json.loads(query.data)
