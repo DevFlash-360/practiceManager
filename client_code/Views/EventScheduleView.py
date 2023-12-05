@@ -261,17 +261,16 @@ class EventScheduleView:
 
         self.events = Event.get_grid_view(view_config={'columns': event_cols}, filters=query)
         for event in self.events:
-            print(event)
-            # event['event_type'] = PM_SCHEDULE_TYPE_EVENT
-            # event['subject'] = event['activity__name']
-            # event['description'] = event['notes']
-            # if event['case__case_name']:
-            #     event['subject'] = f"{event['case__case_name']}: {event['subject']}"
-            # event['start_time_time'] = datetime.strptime(event['start_time'], '%Y-%m-%dT%H:%M:%S%z').strftime('%H:%M')
-            # event['end_time_time'] = datetime.strptime(event['end_time'], '%Y-%m-%dT%H:%M:%S%z').strftime('%H:%M')
-            # event['staff_name'] = event['staff__full_name']
-            # if event['location__name']:
-            #     event['location_name'] = event['location__name']
+            event['event_type'] = PM_SCHEDULE_TYPE_EVENT
+            event['subject'] = event['activity__name']
+            event['description'] = event['notes']
+            if 'case__case_name' in event:
+                event['subject'] = f"{event['case__case_name']}: {event['subject']}"
+            event['start_time_time'] = datetime.strptime(event['start_time'], '%Y-%m-%dT%H:%M:%S%z').strftime('%H:%M')
+            event['end_time_time'] = datetime.strptime(event['end_time'], '%Y-%m-%dT%H:%M:%S%z').strftime('%H:%M')
+            event['staff_name'] = event['staff__full_name']
+            if 'location__name' in event:
+                event['location_name'] = event['location__name']
         self.schedules = ej.base.extend(self.events, self.tasks, None, True)
 
     def get_tasks(self, start_time, end_time):
