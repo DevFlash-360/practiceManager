@@ -17,7 +17,7 @@ PM_SCHEDULE_DEFAULT_VIEWS = [
     {
         'option': 'Agenda',
         'eventTemplate': '<div class="template-wrap">\
-            ${if(event_type==="task")}<span class="badge badge-danger">${due_date_view}</span>${/if}\
+            ${if(event_type==="task" && isOverdue===True)}<label class="label label-danger">DUE</label>${/if}\
             <a class="e-subject">${subject}</a>\
             <div class="e-date-time">\
                 ${if(event_type==="event")}${start_time_time} - ${end_time_time}${/if}\
@@ -303,6 +303,7 @@ class EventScheduleView:
             item['description'] = task.get('notes', '')
             item['staff_name'] = task['assigned_staff__full_name']
             item['location_name'] = ''
+            item['isOverdue'] = task['due_date'] < date.today()
             self.tasks.append(item)
             
         self.schedules = ej.base.extend(self.events, self.tasks, None, True)
