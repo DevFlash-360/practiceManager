@@ -11,10 +11,11 @@ import json
 
 PM_SCHEDULE_HEIGHT_OFFSET = 35
 PM_SCHEDULE_DEFAULT_VIEWS = [
-    {
-        'option': 'Agenda',
-        'eventTemplate': '<div class="template-wrap"><div class="subject">${subject}</div><div class="time">${start_time} - ${end_time}</div></div>'
-    },
+    # {
+    #     'option': 'Agenda',
+    #     'eventTemplate': '<div class="template-wrap"><div class="subject">${subject}</div><div class="time">${start_time} - ${end_time}</div></div>'
+    # },
+    'Agenda'
     # 'Day',
     # 'Week',
     # 'Month',
@@ -232,17 +233,6 @@ class EventScheduleView:
                     event.delete()
             self.schedule.refreshEvents()
 
-    # def hover_event(self, args):
-    #     if self.schedule.currentView not in PM_SCHEDULE_DETAIL_VIEWS:
-    #         event = self.schedule.getEventDetails(args.element)
-    #         if event:
-    #             event['location'] = 'OVERRIDE'
-    #             self.schedule.openQuickInfoPopup(event)
-    #             # for k in event.keys():
-    #             #  print(k, event[k])
-    #         else:
-    #             self.schedule.closeQuickInfoPopup()
-                
     def event_click(self, args):
         event = self.schedule.getEventDetails(args.element)
         if event:
