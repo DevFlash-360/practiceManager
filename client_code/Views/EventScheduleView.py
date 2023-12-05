@@ -13,11 +13,11 @@ PM_SCHEDULE_HEIGHT_OFFSET = 35
 PM_SCHEDULE_DEFAULT_VIEWS = [
     {
         'option': 'Agenda',
-        'eventTemplate': '<div class="template-wrap"><div class="subject">${subject}</div><div class="time">${start_time)} - ${end_time}</div></div>'
+        'eventTemplate': '<div class="template-wrap"><div class="subject">${subject}</div><div class="time">${start_time} - ${end_time}</div></div>'
     },
-    'Day',
-    'Week',
-    'Month',
+    # 'Day',
+    # 'Week',
+    # 'Month',
 ]
 PM_SCHEDULE_DETAIL_VIEWS = [
     # 'Agenda',
@@ -92,7 +92,6 @@ class EventScheduleView:
             },
             'popupOpen': self.popup_open,
             'actionBegin': self.action_begin,
-            'actionComplete': self.action_complete,
             # 'hover': self.hover_event,
             'eventClick': self.event_click,
             'cssClass': 'pm-schedule-cell-width pm-schedule-cell-height e-hide-spinner',
