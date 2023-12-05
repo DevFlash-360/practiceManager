@@ -15,6 +15,7 @@ PM_SCHEDULE_DEFAULT_VIEWS = [
         'option': 'Agenda',
         'eventTemplate': '<div class="template-wrap"><div class="e-subject">${subject}</div><div class="e-date-time">${start_time_time} - ${end_time_time}</div>\
         <div>${staff__full_name}</div>\
+        <div>location.name</div>\
             </div>'
         ''
     },
