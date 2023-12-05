@@ -265,7 +265,8 @@ class EventScheduleView:
                 event['subject'] = f"{event['case__case_name']}: {event['subject']}"
             event['start_time_time'] = datetime.strptime(event['start_time'], '%Y-%m-%dT%H:%M:%S%z').strftime('%H:%M')
             event['end_time_time'] = datetime.strptime(event['end_time'], '%Y-%m-%dT%H:%M:%S%z').strftime('%H:%M')
-            event['staff_name'] = event['staff__full_name']
+            if event['staff__full_name']:
+                event['staff_name'] = event['staff__full_name']
             event['location_name'] = event['location__name'] if 'location__name' in event else ''
         self.schedules = ej.base.extend(self.events, self.tasks, None, True)
 
