@@ -257,6 +257,7 @@ class EventScheduleView:
         ]
 
         self.events = Event.get_grid_view(view_config={'columns': event_cols}, filters=query)
+        print(f"event_count = {len(self.events)}")
         for event in self.events:
             event['event_type'] = PM_SCHEDULE_TYPE_EVENT
             event['subject'] = event['activity__name']
@@ -267,7 +268,7 @@ class EventScheduleView:
             event['end_time_time'] = datetime.strptime(event['end_time'], '%Y-%m-%dT%H:%M:%S%z').strftime('%H:%M')
             if 'staff__full_name' in event:
                 event['staff_name'] = event['staff__full_name']
-            event['location_name'] = event['location__name'] if 'location__name' in event else ''
+            event['location_name'] = event['location__name'] if 'location__name' in event and event['location__name'] else ''
         self.schedules = ej.base.extend(self.events, self.tasks, None, True)
 
     def get_tasks(self, start_time, end_time):
@@ -307,7 +308,6 @@ class EventScheduleView:
             item['staff_name'] = task['assigned_staff__full_name']
             item['location_name'] = ''
             item['isOverdue'] = date.fromisoformat(task['due_date']) < date.today()
-            print(f"{task['due_date']} {item['isOverdue']}")
             self.tasks.append(item)
             
         self.schedules = ej.base.extend(self.events, self.tasks, None, True)
@@ -316,6 +316,7 @@ class EventScheduleView:
         query_data = json.loads(query.data)
         start_time = datetime.fromisoformat(query_data['StartDate'][:10])
         end_time = datetime.fromisoformat(query_data['EndDate'][:10])
+        print(f"=== get data === {start_time} - {end_time}")
         self.get_events(start_time, end_time)
         self.get_tasks(start_time, end_time)
 
