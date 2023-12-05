@@ -11,14 +11,36 @@ import json
 
 PM_SCHEDULE_HEIGHT_OFFSET = 35
 PM_SCHEDULE_DEFAULT_VIEWS = [
-    'Agenda',
+    {
+        'option': 'Agenda',
+        'eventTemplate': '<div class="template-wrap"><div class="subject">${Subject}</div><div class="time">${getTimeString(data.StartTime)} - ${getTimeString(data.EndTime)}</div></div>'
+    },
     'Day',
     'Week',
     'Month',
 ]
-
+PM_SCHEDULE_DETAIL_VIEWS = [
+    # 'Agenda',
+    'MonthAgenda',
+    'TimelineDay',
+    'TimelineWeek',
+    'TimelineWorkWeek',
+    'TimelineMonth',
+    'TimelineYear',
+]
 PM_SCHEDULE_TYPE_EVENT = "event"
 PM_SCHEDULE_TYPE_TASK = "task"
+# PM_EVENT_VIEW_COLUMNS = [
+#     {'name': 'start_time'},
+#     {'name': 'end_time'},
+#     {'name': 'activity.name'},
+#     {'name': 'location.name'},
+#     {'name': 'staff.full_name'},
+#     {'name': 'case.case_name'},
+#     {'name': 'no_case'},
+#     {'name': 'department.full_name'},
+#     {'name': ''},
+# ]
 
 
 class EventScheduleView:
@@ -78,7 +100,6 @@ class EventScheduleView:
         }
 
         self.schedule = ej.schedule.Schedule(schedule_config)
-        # anvil.js.window.pmRenderCell = self.render_cell
 
         self.init_filters()
 
@@ -214,6 +235,17 @@ class EventScheduleView:
 
     def action_complete(self, args):
         print('Complete', args.requestType)
+
+    # def hover_event(self, args):
+    #     if self.schedule.currentView not in PM_SCHEDULE_DETAIL_VIEWS:
+    #         event = self.schedule.getEventDetails(args.element)
+    #         if event:
+    #             event['location'] = 'OVERRIDE'
+    #             self.schedule.openQuickInfoPopup(event)
+    #             # for k in event.keys():
+    #             #  print(k, event[k])
+    #         else:
+    #             self.schedule.closeQuickInfoPopup()
                 
     def event_click(self, args):
         event = self.schedule.getEventDetails(args.element)
@@ -221,16 +253,8 @@ class EventScheduleView:
             self.schedule.openQuickInfoPopup(event)
 
     # def render_cell(self, args):
-    #     # for k in args.keys():
-    #     #   print(k, args[k])
     #     if args.elementType == 'workCells' or args.elementType == 'monthCells':
-    #         # print('element', args.element)
-    #         # for k in args.element.keys():
-    #         #   print(k, args[k])
     #         event = self.schedule.getEventDetails(args.element)
-    #         # if event:
-    #         # print('event', event)
-
 
     def get_events(self, start_time, end_time):
         query = {'start_time': q.all_of(q.greater_than(start_time), q.less_than(end_time))}
