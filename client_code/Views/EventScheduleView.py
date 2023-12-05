@@ -309,12 +309,9 @@ class EventScheduleView:
             item['isOverdue'] = date.fromisoformat(task['due_date']) < date.today()
             self.tasks.append(item)
             
-        print(f"self.events count = {len(self.events)}")
-        print(f"self.tasks count = {len(self.tasks)}")
         self.schedules = ej.base.extend(self.events, self.tasks, None, True)
-        print(f"self.events count = {len(self.events)}")
-        print(f"self.tasks count = {len(self.tasks)}")
-        print(f"self.schedules count = {len(self.schedules)}")
+        print(f"self.events === \n {self.events}")
+        print(f"self.tasks === \n {self.tasks}")
 
     def data_adaptor_get_data(self, query):
         query_data = json.loads(query.data)
