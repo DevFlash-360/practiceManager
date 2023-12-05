@@ -17,7 +17,7 @@ PM_SCHEDULE_DEFAULT_VIEWS = [
     {
         'option': 'Agenda',
         'eventTemplate': '<div class="template-wrap">\
-            ${if(event_type==="task" && isOverdue===true)}<label class="label label-danger">DUE</label>${/if}\
+            ${if(event_type==="task" && isOverdue===true)}<span class="label label-danger">DUE</span>${/if}\
             <a class="e-subject">${subject}</a>\
             <div class="e-date-time">\
                 ${if(event_type==="event")}${start_time_time} - ${end_time_time}${/if}\
