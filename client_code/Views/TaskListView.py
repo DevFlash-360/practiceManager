@@ -86,12 +86,11 @@ class TaskListView(GridView2):
         staff_data_for_combobox = [{'Id': row['uid'], 'Text': row['first_name'] + " " + row['last_name']} for row in staff_data]
         staff_data_for_combobox.insert(0, {'Id': 'all', 'Text': 'All staffs'})
         
-        print(f"AppEnv.logged_user = {AppEnv.logged_user}")
         self.filter_staff = ej.dropdowns.ComboBox({
             'dataSource': staff_data_for_combobox,
             'fields': {'value': 'Id', 'text': 'Text'},
             'placeholder': 'Staff...',
-            'value': AppEnv.logged_user['user_uid']
+            'value': 'all'
         })
         self.filter_staff.addEventListener('change', self.handler_filter_staff)
         
