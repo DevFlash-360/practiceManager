@@ -233,9 +233,6 @@ class EventScheduleView:
                     event.delete()
             self.schedule.refreshEvents()
 
-    def action_complete(self, args):
-        print('Complete', args.requestType)
-
     # def hover_event(self, args):
     #     if self.schedule.currentView not in PM_SCHEDULE_DETAIL_VIEWS:
     #         event = self.schedule.getEventDetails(args.element)
