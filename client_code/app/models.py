@@ -652,7 +652,7 @@ class Task:
 
     @staticmethod
     def get_due_date_view(args):
-        if not args['due_date'] or args['due_date'] is None: 
+        if not args['due_date']: 
             due_date_view = 'No Due Date'
         elif args['due_date'] < date.today():
             due_date_view = 'OVERDUE'
