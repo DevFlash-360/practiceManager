@@ -13,7 +13,7 @@ PM_SCHEDULE_HEIGHT_OFFSET = 35
 PM_SCHEDULE_DEFAULT_VIEWS = [
     {
         'option': 'Agenda',
-        'eventTemplate': '<div class="template-wrap"><div class="e-subject">${subject}</div><div class="e-date-time">${start_time.date()} - ${end_time.date()}</div></div>'
+        'eventTemplate': '<div class="template-wrap"><div class="e-subject">${subject}</div><div class="e-date-time">${datetime_js_to_py(start_time).date()} - ${end_time}</div></div>'
     },
     # 'Day',
     # 'Week',
