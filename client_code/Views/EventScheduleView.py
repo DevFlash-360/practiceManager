@@ -17,8 +17,16 @@ PM_SCHEDULE_DEFAULT_VIEWS = [
     {
         'option': 'Agenda',
         'eventTemplate': '<div class="template-wrap">\
-            ${if(event_type==="task" && isOverdue===true)}<span class="label label-danger">DUE</span>${/if}\
-            <a class="e-subject">${subject}</a>\
+            <div class="row">\
+                <div class="col-md-6 col-xs-12">\
+                    ${if(event_type==="task" && isOverdue===true)}<span class="label label-danger">DUE</span>${/if}\
+                    <a class="e-subject">${subject}</a>\
+                </div>\
+                <div class="col-md-6 col-xs-12">\
+                    ${if(client_attendance_required===true)}<span>Client attendance required</span>${/if}\
+                </div>\
+                <div class="col-md-6 col-xs-12"></div>\
+            </div>\
             <div class="e-date-time">\
                 ${if(event_type==="event")}${start_time_time} - ${end_time_time}${/if}\
                 ${if(event_type==="task")}All day${/if}\
@@ -252,6 +260,7 @@ class EventScheduleView:
             {'name': 'department.full_name'},
             {'name': 'staff.full_name'},
             {'name': 'notes'},
+            {'name': 'client_attendance_required'}
         ]
 
         self.events = Event.get_grid_view(view_config={'columns': event_cols}, filters=query)
