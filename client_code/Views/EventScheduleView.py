@@ -13,7 +13,8 @@ PM_SCHEDULE_HEIGHT_OFFSET = 35
 PM_SCHEDULE_DEFAULT_VIEWS = [
     {
         'option': 'Agenda',
-        'eventTemplate': '<div class="template-wrap"><div class="e-subject">${subject}</div><div class="e-date-time">${start_time} - ${end_time}</div></div>'
+        'eventTemplate': '<div class="template-wrap"><div class="e-subject">${subject}</div><div class="e-date-time">${start_time_time} - ${end_time_time}</div></div>'
+        ''
     },
     # 'Day',
     # 'Week',
@@ -262,6 +263,8 @@ class EventScheduleView:
             event['description'] = event['notes']
             if event['case__case_name']:
                 event['subject'] = f"{event['case__case_name']}: {event['subject']}"
+            event['start_time_time'] = event['start_time'].time()
+            event['end_time_time'] = event['end_time'].time()
         self.schedules = ej.base.extend(self.events, self.tasks, None, True)
 
     def get_tasks(self, start_time, end_time):
