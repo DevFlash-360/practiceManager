@@ -13,11 +13,15 @@ PM_SCHEDULE_HEIGHT_OFFSET = 35
 PM_SCHEDULE_DEFAULT_VIEWS = [
     {
         'option': 'Agenda',
-        'eventTemplate': '<div class="template-wrap"><div class="e-subject">${subject}</div><div class="e-date-time">${start_time_time} - ${end_time_time}</div>\
-        <div>${staff_name}</div>\
-        <div>${location_name}</div>\
-            </div>'
-        ''
+        'eventTemplate': '<div class="template-wrap">\
+            <div class="e-subject">${subject}</div>\
+            <div class="e-date-time">\
+                ${if(event_type===PM_SCHEDULE_TYPE_EVENT)}${start_time_time} - ${end_time_time}${/if}\
+                ${if(event_type===PM_SCHEDULE_TYPE_TASK)}All day${/if}\
+            </div>\
+            <div>${staff_name}</div>\
+            <div>${location_name}</div>\
+        </div>'
     },
     # 'Day',
     # 'Week',
