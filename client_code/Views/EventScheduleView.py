@@ -17,14 +17,15 @@ PM_SCHEDULE_DEFAULT_VIEWS = [
     {
         'option': 'Agenda',
         'eventTemplate': '<div class="template-wrap">\
+            ${if(event_type==="task")}<span class="badge badge-danger">DUE</span>${/if}\
             <div class="e-subject">${subject}</div>\
-                <div class="e-date-time">\
-                    ${if(event_type==="event")}${start_time_time} - ${end_time_time}${/if}\
-                    ${if(event_type==="task")}All day${/if}\
-                </div>\
-                <div>${staff_name}</div>\
-                <div>${location_name}</div>\
-            </div>'
+            <div class="e-date-time">\
+                ${if(event_type==="event")}${start_time_time} - ${end_time_time}${/if}\
+                ${if(event_type==="task")}All day${/if}\
+            </div>\
+            <div>${staff_name}</div>\
+            <div>${location_name}</div>\
+        </div>'
     },
     # 'Day',
     # 'Week',
