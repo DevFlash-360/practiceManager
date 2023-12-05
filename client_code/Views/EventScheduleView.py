@@ -16,8 +16,8 @@ PM_SCHEDULE_DEFAULT_VIEWS = [
         'eventTemplate': '<div class="template-wrap">\
             <div class="e-subject">${subject}</div>\
                 <div class="e-date-time">\
-                    ${if(event_type==="event")}${start_time_time} - ${end_time_time}${/if}\
-                    ${if(event_type==="task")}All day${/if}\
+                    ${if(event_type===PM_SCHEDULE_TYPE_EVENT)}${start_time_time} - ${end_time_time}${/if}\
+                    ${if(event_type===PM_SCHEDULE_TYPE_TASK)}All day${/if}\
                 </div>\
                 <div>${staff_name}</div>\
                 <div>${location_name}</div>\
