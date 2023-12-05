@@ -674,7 +674,7 @@ class Task:
         if args['due_date']:
             due_date_days = (args['due_date'] - date.today()).days
         else:
-            due_date_days = -1
+            due_date_days = 100
         if due_date_days < 0:
             due_date_days = -100
         return due_date_days
