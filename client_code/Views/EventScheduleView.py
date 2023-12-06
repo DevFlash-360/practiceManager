@@ -14,24 +14,23 @@ PM_SCHEDULE_TYPE_TASK = "task"
 
 PM_SCHEDULE_HEIGHT_OFFSET = 35
 PM_SCHEDULE_DEFAULT_VIEWS = [
-    # {
-    #     'option': 'Agenda',
-    #     'eventTemplate': '<div class="template-wrap">\
-    #         ${if(event_type==="task" && isOverdue===true)}<span class="label label-danger">DUE</span>${/if}\
-    #         <a class="e-subject">${subject}</a>\
-    #         <div class="e-date-time">\
-    #             <i class="fa-regular fa-clock pr-1"></i>\
-    #             ${if(event_type==="event")}${start_time_time} - ${end_time_time}${/if}\
-    #             ${if(event_type==="task")}All day${/if}\
-    #         </div>\
-    #         <div><i class="fa-light fa-user pr-1"></i>${staff_name}</div>\
-    #         ${if(location_name)}\
-    #             <div><i class="fa-light fa-location-dot pr-1"></i>${location_name}</div>\
-    #         ${/if}\
-    #         ${if(client_attendance_required===true)}<i class="fa-solid fa-check pr-1"></i>Client attendance required${/if}\
-    #     </div>'
-    # },
-    'Agenda',
+    {
+        'option': 'Agenda',
+        'eventTemplate': '<div class="template-wrap">\
+            ${if(event_type==="task" && isOverdue===true)}<span class="label label-danger">DUE</span>${/if}\
+            <a class="e-subject">${subject}</a>\
+            <div class="e-date-time">\
+                <i class="fa-regular fa-clock pr-1"></i>\
+                ${if(event_type==="event")}${start_time_time} - ${end_time_time}${/if}\
+                ${if(event_type==="task")}All day${/if}\
+            </div>\
+            <div><i class="fa-light fa-user pr-1"></i>${staff_name}</div>\
+            ${if(location_name)}\
+                <div><i class="fa-light fa-location-dot pr-1"></i>${location_name}</div>\
+            ${/if}\
+            ${if(client_attendance_required===true)}<i class="fa-solid fa-check pr-1"></i>Client attendance required${/if}\
+        </div>'
+    },
     # 'Day',
     # 'Week',
     'Month',
