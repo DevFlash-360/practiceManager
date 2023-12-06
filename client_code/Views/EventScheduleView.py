@@ -32,7 +32,7 @@ PM_SCHEDULE_DEFAULT_VIEWS = [
         </div>'
     },
     # 'Day',
-    # 'Week',
+    'Week',
     'Month',
 ]
 PM_SCHEDULE_DETAIL_VIEWS = [
