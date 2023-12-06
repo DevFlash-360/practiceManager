@@ -69,7 +69,7 @@ class EventScheduleView:
             'startTime': {'name': 'start_time', 'title': 'Start Time'},
             'endTime': {'name': 'end_time', 'title': 'End Time'},
             'description': {'name': 'description', 'title': 'Description'},
-            'location': {'name': 'location', 'title': 'Location'},
+            'location': {'name': 'location_name', 'title': 'Location'},
         }
 
         self.data_adaptor = ej.data.CustomDataAdaptor()
