@@ -312,7 +312,7 @@ class EventScheduleView:
                 item['subject'] = f"{task['case__case_name']}: {item['subject']}"
             item['description'] = task.get('notes', '')
             item['staff_name'] = task['assigned_staff__full_name']
-            item['location_name'] = ''
+            # item['location_name'] = ''
             item['isOverdue'] = date.fromisoformat(task['due_date']) < date.today()
             self.tasks.append(item)
             
