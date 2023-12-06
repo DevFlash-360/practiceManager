@@ -25,7 +25,9 @@ PM_SCHEDULE_DEFAULT_VIEWS = [
                 ${if(event_type==="task")}All day${/if}\
             </div>\
             <div><i class="fa-light fa-user pr-1"></i>${staff_name}</div>\
-            <div><i class="fa-light fa-location-dot pr-1"></i>${location_name}</div>\
+            ${if(location_name && location_name.trim() !=='')}\
+                <div><i class="fa-light fa-location-dot pr-1"></i>${location_name}</div>\
+            ${/if}\
             ${if(client_attendance_required===true)}<i class="fa-solid fa-check pr-1"></i>Client attendance required${/if}\
         </div>'
     },
