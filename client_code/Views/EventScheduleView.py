@@ -29,8 +29,8 @@ PM_SCHEDULE_DEFAULT_VIEWS = [
             ${if(client_attendance_required===true)}<i class="fa-solid fa-check pr-1"></i>Client attendance required${/if}\
         </div>'
     },
-    'Day',
-    'Week',
+    # 'Day',
+    # 'Week',
     'Month',
 ]
 PM_SCHEDULE_DETAIL_VIEWS = [
