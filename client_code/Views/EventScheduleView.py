@@ -26,7 +26,7 @@ PM_SCHEDULE_DEFAULT_VIEWS = [
             </div>\
             <div><i class="fa-light fa-user pr-1"></i>${staff_name}</div>\
             <div><i class="fa-light fa-location-dot pr-1"></i>${location_name}</div>\
-            ${if(client_attendance_required===true)}<span>Client attendance required</span>${/if}\
+            ${if(client_attendance_required===true)}<i class="fa-solid fa-check pr-1"></i>Client attendance required${/if}\
         </div>'
     },
     'Day',
