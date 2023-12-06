@@ -264,6 +264,10 @@ class EventScheduleView:
             event['description'] = event['notes']
             if 'case__case_name' in event:
                 event['subject'] = f"{event['case__case_name']}: {event['subject']}"
+            print(f"start_time = {event['start_time']}")
+            print(f"start_time_time = {datetime.strptime(event['start_time'], '%Y-%m-%dT%H:%M:%S%z').strftime('%H:%M')}")
+            print(f"end_time = {datetime.strptime(event['end_time'], '%Y-%m-%dT%H:%M:%S%z').strftime('%H:%M')}")
+            print(f"end_time_time = {datetime.strptime(event['start_time'], '%Y-%m-%dT%H:%M:%S%z').strftime('%H:%M')}")
             event['start_time_time'] = datetime.strptime(event['start_time'], '%Y-%m-%dT%H:%M:%S%z').strftime('%H:%M')
             event['end_time_time'] = datetime.strptime(event['end_time'], '%Y-%m-%dT%H:%M:%S%z').strftime('%H:%M')
             if 'staff__full_name' in event:
