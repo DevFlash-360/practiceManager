@@ -20,12 +20,12 @@ PM_SCHEDULE_DEFAULT_VIEWS = [
             ${if(event_type==="task" && isOverdue===true)}<span class="label label-danger">DUE</span>${/if}\
             <a class="e-subject">${subject}</a>\
             <div class="e-date-time">\
-                <i class="fa-regular fa-clock"></i>\
+                <i class="fa-regular fa-clock pr-1"></i>\
                 ${if(event_type==="event")}${start_time_time} - ${end_time_time}${/if}\
                 ${if(event_type==="task")}All day${/if}\
             </div>\
-            <div>${staff_name}</div>\
-            <div>${location_name}</div>\
+            <div><i class="fa-light fa-user pr-1"></i>${staff_name}</div>\
+            <div><i class="fa-light fa-location-dot pr-1"></i>${location_name}</div>\
             ${if(client_attendance_required===true)}<span>Client attendance required</span>${/if}\
         </div>'
     },
