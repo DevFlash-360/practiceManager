@@ -142,7 +142,7 @@ class EventScheduleView:
             'mode': 'Custom',
             'showCheckBox': True,
             'treeSettings': {'autoCheck': True},
-            'width': 'auto'
+            'width': '240px'
         })
 
         # self.filter_case = ej.dropdowns.ComboBox({
