@@ -168,6 +168,7 @@ class EventScheduleView:
          <div id="{self.schedule_el_id}"></div>\
        </div>'
         self.schedule.appendTo(jQuery(f"#{self.schedule_el_id}")[0])
+        self.dropdowntree.appendTo(jQuery(f"#{self.filter_el_id}")[0])
 
         # self.add_filter_component("Case", self.filter_case)
         # self.tree_filters.appendTo('#eventfilterlist')
