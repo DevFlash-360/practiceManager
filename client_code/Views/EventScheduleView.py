@@ -128,8 +128,8 @@ class EventScheduleView:
 
         # dataSource[0]['items'] = cases_data_for_dropdown
         # dataSource[1]['items'] = staff_data_for_dropdown
-        dataSource.extend(cases_data_for_dropdown)
         dataSource.extend(staff_data_for_dropdown)
+        dataSource.extend(cases_data_for_dropdown)
 
         self.query_filter_cases = []
 
