@@ -164,13 +164,13 @@ ul li.e-hover {
     left: 0;
 }
 
-.e-text-content .e-icons {
+/* .e-text-content .e-icons {
     position: absolute;
     right: 0;
     visibility: visible !important;
     top: 8px;
     padding: 0;
-}
+} */
 
 .e-menu-wrapper.e-inherit.e-lib.e-keyboard {
     width: 60px;
