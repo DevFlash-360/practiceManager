@@ -108,12 +108,12 @@ class EventScheduleView:
     def init_filters(self):
         # ej.base.enableRipple(True)
         cases_data = Case.search()
-        cases_data_for_dropdown = [{'Id': case['uid'], 'text': case['case_name']} for case in cases_data]
-        cases_data_for_dropdown.insert(0, {'Id': 'cases_all', 'text': 'All cases'})
+        cases_data_for_dropdown = [{'id': case['uid'], 'pid': 'cases', 'text': case['case_name']} for case in cases_data]
+        # cases_data_for_dropdown.insert(0, {'Id': 'cases_all', 'text': 'All cases'})
 
         staff_data = Staff.search()
-        staff_data_for_dropdown = [{'Id': row['uid'], 'text': row['first_name'] + " " + row['last_name']} for row in staff_data]
-        staff_data_for_dropdown.insert(0, {'Id': 'staffs_all', 'text': 'All staffs'})
+        staff_data_for_dropdown = [{'id': row['uid'], 'pid': 'staffs', 'text': row['first_name'] + " " + row['last_name']} for row in staff_data]
+        # staff_data_for_dropdown.insert(0, {'Id': 'staffs_all', 'text': 'All staffs'})
 
         self.filter_dropdown = ej.splitbuttons.DropDownButton({
             'target': '#eventfilterlist',
@@ -122,12 +122,14 @@ class EventScheduleView:
         })
 
         dataSource = [
-            {'Id': 'cases', 'text': 'Cases'},
-            {'Id': 'staffs', 'text': 'Staffs'},
+            {'id': 'cases', 'text': 'Cases', 'hasChild': True},
+            {'id': 'staffs', 'text': 'Staffs', 'hasChild': True},
         ]
 
-        dataSource[0]['items'] = cases_data_for_dropdown
-        dataSource[1]['items'] = staff_data_for_dropdown
+        # dataSource[0]['items'] = cases_data_for_dropdown
+        # dataSource[1]['items'] = staff_data_for_dropdown
+        dataSource.extend(cases_data_for_dropdown)
+        dataSource.extend(staff_data_for_dropdown)
 
         self.query_filter_cases = []
 
@@ -138,8 +140,7 @@ class EventScheduleView:
         # })
 
         self.dropdowntree = ej.dropdowns.DropDownTree({
-            'fields': {'dataSource': dataSource, 'value':'Id', 'text':'text', 'child':'items'},
-            'mode': 'Custom',
+            'fields': {'dataSource': dataSource, 'value':'Id', 'text':'text'},
             'showCheckBox': True,
             'treeSettings': {'autoCheck': True},
             'width': '240px'
