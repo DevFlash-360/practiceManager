@@ -155,11 +155,14 @@ class EventScheduleView:
     # get events and bind them to the view
     def form_show(self, **event_args):
         self.schedule_el_id = uuid.uuid4()
+        self.filter_el_id = uuid.uuid4()
         self.container_el = jQuery(f"#{self.container_id}")[0]
         self.schedule_height = self.container_el.offsetHeight - PM_SCHEDULE_HEIGHT_OFFSET
         self.container_el.innerHTML = f'\
        <div class="pm-scheduleview-container" style="height:{self.schedule_height}px;">\
-         <div id="pm-filter-container" class="row"></div>\
+         <div id="pm-filter-container">
+          <div id="{self.filter_el_id}" class="e-caret-hide"></div>
+         </div>\
          <div id="eventfilterlist"></div>\
          <div class="pm-gridview-title">Agenda</div>\
          <div id="{self.schedule_el_id}"></div>\
@@ -169,7 +172,8 @@ class EventScheduleView:
         # self.add_filter_component("Case", self.filter_case)
         # self.tree_filters.appendTo('#eventfilterlist')
         # self.add_filter_component('', self.filter_dropdown)
-        self.add_filter_component('', self.dropdowntree)
+        # self.add_filter_component('', self.dropdowntree)
+
 
     def destroy(self):
         self.schedule.destroy()
