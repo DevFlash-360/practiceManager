@@ -160,8 +160,8 @@ class EventScheduleView:
         self.schedule_height = self.container_el.offsetHeight - PM_SCHEDULE_HEIGHT_OFFSET
         self.container_el.innerHTML = f'\
        <div class="pm-scheduleview-container" style="height:{self.schedule_height}px;">\
-         <div id="pm-filter-container">
-          <div id="{self.filter_el_id}" class="e-caret-hide"></div>
+         <div id="pm-filter-container">\
+          <div id="{self.filter_el_id}" class="e-caret-hide"></div>\
          </div>\
          <div id="eventfilterlist"></div>\
          <div class="pm-gridview-title">Agenda</div>\
