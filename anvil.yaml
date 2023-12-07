@@ -41,9 +41,7 @@ native_deps: {head_html: "<!-- Material Design icons -->\n<link href=\"https://c
     \ -->\n<link href=\"https://cdn.syncfusion.com/ej2/23.1.36/tailwind.css\" rel=\"\
     stylesheet\">\n<script src=\"https://cdn.syncfusion.com/ej2/23.1.36/dist/ej2.min.js\"\
     \ type=\"text/javascript\"></script>\n<script src=\"_/theme/aws-sdk-v3-bundle.js\"\
-    \ type=\"text/javascript\"></script>\n<script src=\"https://cdn.syncfusion.com/ej2/23.2.4/dist/ej2.min.js\"\
-    \ type=\"text/javascript\"></script>\n<script src=\"https://cdn.syncfusion.com/ej2/syncfusion-helper.js\"\
-    \ type =\"text/javascript\"></script>\n<link href=\"_/theme/anvil-fusion.css\"\
+    \ type=\"text/javascript\"></script>\n\n<link href=\"_/theme/anvil-fusion.css\"\
     \ rel=\"stylesheet\">\n<link href=\"_/theme/pmapp.css\" rel=\"stylesheet\">\n\n\
     <!-- Custom stylesheets -->\n<link href=\"https://cdn.syncfusion.com/ej2/23.2.4/ej2-base/styles/material.css\"\
     \ rel=\"stylesheet\">\n<link href=\"https://cdn.syncfusion.com/ej2/23.2.4/ej2-inputs/styles/material.css\"\
@@ -51,7 +49,9 @@ native_deps: {head_html: "<!-- Material Design icons -->\n<link href=\"https://c
     \ rel=\"stylesheet\">\n<link href=\"https://cdn.syncfusion.com/ej2/23.2.4/ej2-buttons/styles/material.css\"\
     \ rel=\"stylesheet\">\n<link href=\"https://cdn.syncfusion.com/ej2/23.2.4/ej2-navigations/styles/material.css\"\
     \ rel=\"stylesheet\">\n<link href=\"https://cdn.syncfusion.com/ej2/23.2.4/ej2-dropdowns/styles/material.css\"\
-    \ rel=\"stylesheet\">\n\n<!-- Packages -->\n<script>\n  ej.base.registerLicense('ORg4AjUWIQA/Gnt2VlhhQlJCfV5AQmBIYVp/TGpJfl96cVxMZVVBJAtUQF1hSn5ad01iX35acXdQQmlc');\n\
+    \ rel=\"stylesheet\">\n\n<!-- Custom scripts -->\n<script src=\"https://cdn.syncfusion.com/ej2/23.2.4/dist/ej2.min.js\"\
+    \ type=\"text/javascript\"></script>\n<script src=\"https://cdn.syncfusion.com/ej2/syncfusion-helper.js\"\
+    \ type =\"text/javascript\"></script>\n<!-- Packages -->\n<script>\n  ej.base.registerLicense('ORg4AjUWIQA/Gnt2VlhhQlJCfV5AQmBIYVp/TGpJfl96cVxMZVVBJAtUQF1hSn5ad01iX35acXdQQmlc');\n\
     \  ej.schedule.Schedule.inject(ej.schedule.DragAndDrop, ej.schedule.Resize)\n\
     </script>\n\n<!-- UnoCSS -->\n<script src=\"https://cdn.jsdelivr.net/npm/@unocss/runtime\"\
     ></script>\n<script>\n// pass unocss options\nwindow.__unocss = {\n  rules: [\n\
