@@ -140,7 +140,7 @@ class EventScheduleView:
         # })
 
         self.dropdowntree = ej.dropdowns.DropDownTree({
-            'fields': {'dataSource': dataSource, 'value':'id', 'text':'text', 'hasChildren': 'hasChild'},
+            'fields': {'dataSource': dataSource, 'value':'id', 'parentValue': 'pid', 'text':'text', 'hasChildren': 'hasChild'},
             'showCheckBox': True,
             'treeSettings': {'autoCheck': True},
         })
