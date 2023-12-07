@@ -355,5 +355,5 @@ tr.task-incomplete > td button > span.btn-task-status {
 }
 
 #pm-filter-container span.e-icons {
-	bottom: 4px;
+	margin-bottom: 5px;
 }
