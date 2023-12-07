@@ -141,7 +141,8 @@ class EventScheduleView:
             'fields': {'dataSource': dataSource, 'value':'Id', 'text':'text', 'child':'items'},
             'mode': 'Custom',
             'showCheckBox': True,
-            'treeSettings': {'autoCheck': True}
+            'treeSettings': {'autoCheck': True},
+            'width': 'auto'
         })
 
         # self.filter_case = ej.dropdowns.ComboBox({
