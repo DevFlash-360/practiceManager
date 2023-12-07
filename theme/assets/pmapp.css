@@ -348,3 +348,8 @@ tr.task-complete > td button > span.btn-task-status {
 tr.task-incomplete > td button > span.btn-task-status {
 	color: #777777;
 }
+
+#pm-filter-container .e-input-group {
+	display:flex;
+	align-items: center;
+}
