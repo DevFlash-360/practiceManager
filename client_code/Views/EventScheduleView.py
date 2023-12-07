@@ -279,7 +279,7 @@ class EventScheduleView:
             event['subject'] = event['activity__name']
             event['description'] = event['notes']
             if 'case__case_name' in event:
-                event['subject'] = f"{event['case__case_name']}: {event['subject']}"
+                event['subject'] = f"{event['subject']}: {event['case__case_name']}"
             event['start_time_time'] = datetime.strptime(event['start_time'], '%Y-%m-%dT%H:%M:%S%z').strftime('%H:%M')
             event['end_time_time'] = datetime.strptime(event['end_time'], '%Y-%m-%dT%H:%M:%S%z').strftime('%H:%M')
             if 'staff__full_name' in event:
@@ -320,7 +320,7 @@ class EventScheduleView:
             item['isAllDay'] = True
             item['subject'] = task['activity__name']
             if 'case__case_name' in task:
-                item['subject'] = f"{task['case__case_name']}: {item['subject']}"
+                item['subject'] = f"{item['subject']}: {task['case__case_name']}"
             item['description'] = task.get('notes', '')
             item['staff_name'] = task['assigned_staff__full_name']
             # item['location_name'] = ''
