@@ -131,10 +131,14 @@ class EventScheduleView:
 
         self.query_filter_cases = []
 
-        self.tree_filters = ej.navigations.TreeView({
-            'fields': { 'dataSource': dataSource, id: "code", 'text': "name", 'child': "countries" },
-            'nodeSelected': self.handler_nodeSelected,
-            'cssClass': "accordiontree"
+        # self.tree_filters = ej.navigations.TreeView({
+        #     'fields': { 'dataSource': dataSource, id: "code", 'text': "name", 'child': "countries" },
+        #     'nodeSelected': self.handler_nodeSelected,
+        #     'cssClass': "accordiontree"
+        # })
+
+        self.dropdowntree = ej.dropdowns.DropDownTree({
+            'fields': {'dataSource': dataSource, 'value':'Id', 'text':'text', 'child':'items'}
         })
 
         # self.filter_case = ej.dropdowns.ComboBox({
@@ -159,8 +163,9 @@ class EventScheduleView:
         self.schedule.appendTo(jQuery(f"#{self.schedule_el_id}")[0])
 
         # self.add_filter_component("Case", self.filter_case)
-        self.tree_filters.appendTo('#eventfilterlist')
-        self.add_filter_component('', self.filter_dropdown)
+        # self.tree_filters.appendTo('#eventfilterlist')
+        # self.add_filter_component('', self.filter_dropdown)
+        self.add_filter_component('', self.dropdowntree)
 
     def destroy(self):
         self.schedule.destroy()
