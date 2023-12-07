@@ -168,7 +168,7 @@ li.e-list-item.e-level-1.e-hover {
   background-color: red !important;
 }
 
-.e-treeview li.e-level-2 {
+.pm-sidebar-menu .e-treeview li.e-level-2 {
   width: 100% !important;
   transform: scale(0.9);
 }

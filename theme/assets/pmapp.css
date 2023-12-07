@@ -164,7 +164,7 @@ ul li.e-hover {
     left: 0;
 }
 
-#pm-sidebar .e-text-content .e-icons {
+.pm-sidebar-menu .e-text-content .e-icons {
     position: absolute;
     right: 0;
     visibility: visible !important;
