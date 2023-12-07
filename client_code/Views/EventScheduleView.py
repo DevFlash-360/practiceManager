@@ -115,11 +115,11 @@ class EventScheduleView:
         staff_data_for_dropdown = [{'id': row['uid'], 'pid': 'staffs', 'text': row['first_name'] + " " + row['last_name']} for row in staff_data]
         # staff_data_for_dropdown.insert(0, {'Id': 'staffs_all', 'text': 'All staffs'})
 
-        self.filter_dropdown = ej.splitbuttons.DropDownButton({
-            'target': '#eventfilterlist',
-            'iconCss': 'fa fa-filter',
-            'cssClass': 'e-caret-hide'
-        })
+        # self.filter_dropdown = ej.splitbuttons.DropDownButton({
+        #     'target': '#eventfilterlist',
+        #     'iconCss': 'fa fa-filter',
+        #     'cssClass': 'e-caret-hide'
+        # })
 
         dataSource = [
             {'id': 'cases', 'text': 'Cases', 'hasChild': True},
@@ -140,10 +140,9 @@ class EventScheduleView:
         # })
 
         self.dropdowntree = ej.dropdowns.DropDownTree({
-            'fields': {'dataSource': dataSource, 'value':'id', 'text':'text'},
+            'fields': {'dataSource': dataSource, 'value':'id', 'text':'text', 'hasChildren': 'hasChild'},
             'showCheckBox': True,
             'treeSettings': {'autoCheck': True},
-            'width': 'auto'
         })
 
         # self.filter_case = ej.dropdowns.ComboBox({
