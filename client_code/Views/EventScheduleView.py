@@ -66,6 +66,8 @@ class EventScheduleView:
         self.container_el = None
         self.events = [] # Contain events for Schedule data feed
         self.tasks = [] # Contain tasks for Schedule data feed
+        self.cases_filters = [] # Filter cards with this cases
+        self.staffs_filters = [] # Filter cards with this staffs
         self.schedules = None # Contain schedule elements = self.events + self.tasks
 
         event_fields = {
@@ -193,13 +195,19 @@ class EventScheduleView:
         self.schedule.refreshEvents()
 
     def handler_filter_select(self, args):
-        print(f"handler_filter_select {args}")
         tree_data = self.dropdown_tree.getData()
         all_cases = tree_data[0].get('selected', False)
         all_staffs = tree_data[1].get('selected', False)
-        print(f"all_cases = {all_cases}, all_staffs = {all_staffs}")
         selected_items = [item for item in tree_data if item.get('selected')]
 
+        self.cases_filters = []
+        self.staffs_filters = []
+
+        for item in selected_items:
+            if not all_cases and item.get('pid') == 'cases':
+                self.cases_filters.append(item['uid'])
+            if not all_staffs and item.get('pid') == 'staffs':
+                self.staffs_filters.append(item['uid'])
 
         self.schedule.refreshEvents()
 
@@ -238,6 +246,9 @@ class EventScheduleView:
 
     def get_events(self, start_time, end_time):
         query = {'start_time': q.all_of(q.greater_than(start_time), q.less_than(end_time))}
+        if self.cases_filters:
+            query['case'] = q.any_of(self.cases_filters)
+
         event_cols = [
             {'name': 'uid'},
             {'name': 'start_time'},
