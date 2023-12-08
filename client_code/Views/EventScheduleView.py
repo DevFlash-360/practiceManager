@@ -199,6 +199,7 @@ class EventScheduleView:
         all_cases = tree_data[0].get('selected', False)
         all_staffs = tree_data[1].get('selected', False)
         selected_items = [item for item in tree_data if item.get('selected')]
+        print(f"selected_items = {selected_items}")
 
         self.cases_filters = []
         self.staffs_filters = []
