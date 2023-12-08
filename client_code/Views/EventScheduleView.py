@@ -193,11 +193,11 @@ class EventScheduleView:
     def update_schedule(self, data, add_new):
         self.schedule.refreshEvents()
 
-    def handler_filter_change(self, args):
-        print(f"handler_filter_change {args}")
+    # def handler_filter_change(self, args):
+    #     print(f"handler_filter_change {args}")
 
-    def handler_filter_select(self, args):
-        print(f"handler_filter_select {args}")
+    # def handler_filter_select(self, args):
+    #     print(f"handler_filter_select {args}")
 
     def action_begin(self, args):
         # change event
