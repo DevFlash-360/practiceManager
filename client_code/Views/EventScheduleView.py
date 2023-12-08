@@ -127,12 +127,15 @@ class EventScheduleView:
 
         self.query_filter_cases = []
 
-        self.dropdowntree = ej.dropdowns.DropDownTree({
+        self.dropdown_tree = ej.dropdowns.dropdown_tree({
             'fields': {'dataSource': dataSource, 'value':'id', 'parentValue': 'pid', 'text':'text', 'hasChildren': 'hasChild'},
             'showCheckBox': True,
             'treeSettings': {'autoCheck': True},
             'placeholder': 'Apply filter...'
         })
+        
+        self.dropdown_tree.addEventListener('change', self.handler_filter_change)
+        self.dropdown_tree.addEventListener('select', self.handler_filter_select)
        
     # get events and bind them to the view
     def form_show(self, **event_args):
@@ -150,7 +153,7 @@ class EventScheduleView:
          <div id="{self.schedule_el_id}"></div>\
        </div>'
         self.schedule.appendTo(jQuery(f"#{self.schedule_el_id}")[0])
-        self.dropdowntree.appendTo(jQuery(f"#{self.filter_el_id}")[0])
+        self.dropdown_tree.appendTo(jQuery(f"#{self.filter_el_id}")[0])
 
     def destroy(self):
         self.schedule.destroy()
@@ -190,12 +193,11 @@ class EventScheduleView:
     def update_schedule(self, data, add_new):
         self.schedule.refreshEvents()
 
-    def handler_nodeSelected(self, args):
-        print(f"===== handler_nodeSelected ===== \n {args.node}")
-        if (args.node.classList.contains('e-level-1')):
-            args.cancel = True
-            self.tree_filters.collapseAll()
-            self.tree_filters.expandAll([args.node])
+    def handler_filter_change(self, args):
+        print(f"handler_filter_change {args}")
+
+    def handler_filter_select(self, args):
+        print(f"handler_filter_select {args}")
 
     def action_begin(self, args):
         # change event
