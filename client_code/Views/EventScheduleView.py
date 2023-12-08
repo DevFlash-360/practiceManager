@@ -244,11 +244,12 @@ class EventScheduleView:
             self.schedule.openQuickInfoPopup(event)
 
     def get_events(self, start_time, end_time):
-        query = {'start_time': q.all_of(q.greater_than(start_time), q.less_than(end_time))}
         cases_test1 = Case.get('18cdfe25-cbbf-4aa8-b8ce-b8ecc60b4ea9')
         cases_test2 = Case.get('6f9d60d8-fe11-4909-85fe-bafe16e4e26e')
-        # if self.cases_filters:
-        query['case'] = q.all_of(cases_test1, cases_test2)
+        query = {
+            'start_time': q.all_of(q.greater_than(start_time), q.less_than(end_time)),
+            'case': q.any_of(cases_test1, cases_test2)
+        }
 
         event_cols = [
             {'name': 'uid'},
