@@ -134,8 +134,8 @@ class EventScheduleView:
             'placeholder': 'Apply filter...'
         })
         
-        self.dropdown_tree.addEventListener('change', self.handler_filter_change)
-        self.dropdown_tree.addEventListener('select', self.handler_filter_select)
+        # self.dropdown_tree.addEventListener('change', self.handler_filter_change)
+        # self.dropdown_tree.addEventListener('select', self.handler_filter_select)
        
     # get events and bind them to the view
     def form_show(self, **event_args):
