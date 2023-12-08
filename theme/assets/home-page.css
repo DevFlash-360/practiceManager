@@ -133,10 +133,10 @@ input#pm-appbar-search.e-input {
 /*.pm-sidebar-menu .e-list-item .e-text-content {
   padding-left: 16px!important;
 }*/
-.pm-sidebar-menu .e-ul {
+/* .pm-sidebar-menu .e-ul {
   padding-left: 0 !important;
   overflow: hidden;
-}
+} */
 
 .pm-sidebar-menu .e-list-item .e-list-text {
   font-weight: 300;
