@@ -131,6 +131,7 @@ class EventScheduleView:
             'fields': {'dataSource': dataSource, 'value':'id', 'parentValue': 'pid', 'text':'text', 'hasChildren': 'hasChild'},
             'showCheckBox': True,
             'treeSettings': {'autoCheck': True},
+            'placeholder': 'Filter with case/staff'
         })
        
     # get events and bind them to the view
