@@ -127,15 +127,15 @@ class EventScheduleView:
 
         self.query_filter_cases = []
 
-        self.dropdown_tree = ej.dropdowns.dropdown_tree({
+        self.dropdown_tree = ej.dropdowns.DropDownTree({
             'fields': {'dataSource': dataSource, 'value':'id', 'parentValue': 'pid', 'text':'text', 'hasChildren': 'hasChild'},
             'showCheckBox': True,
             'treeSettings': {'autoCheck': True},
             'placeholder': 'Apply filter...'
         })
         
-        # self.dropdown_tree.addEventListener('change', self.handler_filter_change)
-        # self.dropdown_tree.addEventListener('select', self.handler_filter_select)
+        self.dropdown_tree.addEventListener('change', self.handler_filter_change)
+        self.dropdown_tree.addEventListener('select', self.handler_filter_select)
        
     # get events and bind them to the view
     def form_show(self, **event_args):
@@ -193,11 +193,11 @@ class EventScheduleView:
     def update_schedule(self, data, add_new):
         self.schedule.refreshEvents()
 
-    # def handler_filter_change(self, args):
-    #     print(f"handler_filter_change {args}")
+    def handler_filter_change(self, args):
+        print(f"handler_filter_change {args}")
 
-    # def handler_filter_select(self, args):
-    #     print(f"handler_filter_select {args}")
+    def handler_filter_select(self, args):
+        print(f"handler_filter_select {args}")
 
     def action_begin(self, args):
         # change event
