@@ -134,7 +134,6 @@ class EventScheduleView:
             'placeholder': 'Apply filter...'
         })
         
-        self.dropdown_tree.addEventListener('change', self.handler_filter_change)
         self.dropdown_tree.addEventListener('select', self.handler_filter_select)
        
     # get events and bind them to the view
@@ -193,11 +192,8 @@ class EventScheduleView:
     def update_schedule(self, data, add_new):
         self.schedule.refreshEvents()
 
-    def handler_filter_change(self, args):
-        print(f"handler_filter_change {args}")
-
     def handler_filter_select(self, args):
-        print(f"handler_filter_select {args}")
+        self.dropdown_tree.refreshEvents(False)
 
     def action_begin(self, args):
         # change event
@@ -307,6 +303,7 @@ class EventScheduleView:
         query_data = json.loads(query.data)
         start_time = datetime.fromisoformat(query_data['StartDate'][:10])
         end_time = datetime.fromisoformat(query_data['EndDate'][:10])
+        print(" ===== get data =====")
         self.get_events(start_time, end_time)
         self.get_tasks(start_time, end_time)
 
