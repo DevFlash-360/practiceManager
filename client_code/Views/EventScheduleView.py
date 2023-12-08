@@ -30,6 +30,9 @@ PM_SCHEDULE_DEFAULT_VIEWS = [
             ${if(location_name)}\
                 <div><i class="fa-light fa-location-dot pr-1"></i>${location_name}</div>\
             ${/if}\
+            ${if(department)}\
+                <div><i class="fa-regular fa-building"></i>${department}</div>\
+            ${/if}\
             ${if(client_attendance_required===true)}<i class="fa-solid fa-check pr-1"></i>Client attendance required${/if}\
         </div>'
     },
@@ -236,6 +239,7 @@ class EventScheduleView:
             {'name': 'case.case_name'},
             {'name': 'location.name'},
             {'name': 'department.full_name'},
+            {'name': 'department.title_position'},
             {'name': 'staff.full_name'},
             {'name': 'notes'},
             {'name': 'client_attendance_required'}
@@ -253,6 +257,7 @@ class EventScheduleView:
             if 'staff__full_name' in event:
                 event['staff_name'] = event['staff__full_name']
             event['location_name'] = event['location__name'] if 'location__name' in event and event['location__name'] else ''
+            event['department'] = f"{event['department__full_name']} - {event['title_position']}" if event['department__full_name'] in event and event['department__full_name'] else ''
         self.schedules = self.events + self.tasks
         # self.schedules = ej.base.extend(self.events, self.tasks, None, True)
 
