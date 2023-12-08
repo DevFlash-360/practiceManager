@@ -194,6 +194,8 @@ class EventScheduleView:
 
     def handler_filter_select(self, args):
         print(f"handler_filter_select {args}")
+
+        print(f"tree data = {self.dropdown_tree.getData()}")
         self.schedule.refreshEvents()
 
     def action_begin(self, args):
