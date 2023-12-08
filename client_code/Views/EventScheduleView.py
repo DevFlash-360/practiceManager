@@ -255,7 +255,7 @@ class EventScheduleView:
             {'name': 'start_time'},
             {'name': 'end_time'},
             {'name': 'activity.name'},
-            {'name': 'case.id'},
+            {'name': 'case.uid'},
             {'name': 'case.case_name'},
             {'name': 'location.name'},
             {'name': 'department.full_name'},
