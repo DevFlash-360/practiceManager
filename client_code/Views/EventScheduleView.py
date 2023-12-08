@@ -206,9 +206,9 @@ class EventScheduleView:
 
         for item in selected_items:
             if not all_cases and item.get('pid') == 'cases':
-                self.cases_filters.append(item['uid'])
+                self.cases_filters.append(item['id'])
             if not all_staffs and item.get('pid') == 'staffs':
-                self.staffs_filters.append(item['uid'])
+                self.staffs_filters.append(item['id'])
 
         self.schedule.refreshEvents()
 
