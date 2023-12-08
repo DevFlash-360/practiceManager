@@ -195,8 +195,8 @@ class EventScheduleView:
     def handler_filter_select(self, args):
         print(f"handler_filter_select {args}")
         tree_data = self.dropdown_tree.getData()
-        all_cases = tree_data[0]['selected']
-        all_staffs = tree_data[1]['selected']
+        all_cases = tree_data[0].get('selected', False)
+        all_staffs = tree_data[1].get('selected', False)
         print(f"all_cases = {all_cases}, all_staffs = {all_staffs}")
         selected_items = [item for item in tree_data if item.get('selected')]
 
