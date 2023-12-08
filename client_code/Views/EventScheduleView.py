@@ -109,48 +109,24 @@ class EventScheduleView:
         # ej.base.enableRipple(True)
         cases_data = Case.search()
         cases_data_for_dropdown = [{'id': case['uid'], 'pid': 'cases', 'text': case['case_name']} for case in cases_data]
-        # cases_data_for_dropdown.insert(0, {'Id': 'cases_all', 'text': 'All cases'})
 
         staff_data = Staff.search()
         staff_data_for_dropdown = [{'id': row['uid'], 'pid': 'staffs', 'text': row['first_name'] + " " + row['last_name']} for row in staff_data]
-        # staff_data_for_dropdown.insert(0, {'Id': 'staffs_all', 'text': 'All staffs'})
-
-        # self.filter_dropdown = ej.splitbuttons.DropDownButton({
-        #     'target': '#eventfilterlist',
-        #     'iconCss': 'fa fa-filter',
-        #     'cssClass': 'e-caret-hide'
-        # })
 
         dataSource = [
             {'id': 'cases', 'text': 'Cases', 'hasChild': True},
             {'id': 'staffs', 'text': 'Staffs', 'hasChild': True},
         ]
-
-        # dataSource[0]['items'] = cases_data_for_dropdown
-        # dataSource[1]['items'] = staff_data_for_dropdown
         dataSource.extend(staff_data_for_dropdown)
         dataSource.extend(cases_data_for_dropdown)
 
         self.query_filter_cases = []
-
-        # self.tree_filters = ej.navigations.TreeView({
-        #     'fields': { 'dataSource': dataSource, id: "code", 'text': "name", 'child': "countries" },
-        #     'nodeSelected': self.handler_nodeSelected,
-        #     'cssClass': "accordiontree"
-        # })
 
         self.dropdowntree = ej.dropdowns.DropDownTree({
             'fields': {'dataSource': dataSource, 'value':'id', 'parentValue': 'pid', 'text':'text', 'hasChildren': 'hasChild'},
             'showCheckBox': True,
             'treeSettings': {'autoCheck': True},
         })
-
-        # self.filter_case = ej.dropdowns.ComboBox({
-        #     'dataSource': cases_data_for_dropdown,
-        #     'fields': {'value': 'Id', 'text': 'text', 'groupBy': 'category'},
-        #     'placeholder': 'Cases...',
-        # })
-        # self.filter_case.addEventListener('change', self.handler_filter_cases)
        
     # get events and bind them to the view
     def form_show(self, **event_args):
@@ -169,12 +145,6 @@ class EventScheduleView:
        </div>'
         self.schedule.appendTo(jQuery(f"#{self.schedule_el_id}")[0])
         self.dropdowntree.appendTo(jQuery(f"#{self.filter_el_id}")[0])
-
-        # self.add_filter_component("Case", self.filter_case)
-        # self.tree_filters.appendTo('#eventfilterlist')
-        # self.add_filter_component('', self.filter_dropdown)
-        # self.add_filter_component('', self.dropdowntree)
-
 
     def destroy(self):
         self.schedule.destroy()
@@ -253,10 +223,6 @@ class EventScheduleView:
         event = self.schedule.getEventDetails(args.element)
         if event:
             self.schedule.openQuickInfoPopup(event)
-
-    # def render_cell(self, args):
-    #     if args.elementType == 'workCells' or args.elementType == 'monthCells':
-    #         event = self.schedule.getEventDetails(args.element)
 
     def get_events(self, start_time, end_time):
         query = {'start_time': q.all_of(q.greater_than(start_time), q.less_than(end_time))}
