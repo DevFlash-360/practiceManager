@@ -248,13 +248,14 @@ class EventScheduleView:
         cases_test1 = Case.get('18cdfe25-cbbf-4aa8-b8ce-b8ecc60b4ea9')
         cases_test2 = Case.get('6f9d60d8-fe11-4909-85fe-bafe16e4e26e')
         # if self.cases_filters:
-        query['case'] = q.any_of(cases_test1, cases_test2)
+        query['case__id'] = q.any_of(cases_test1, cases_test2)
 
         event_cols = [
             {'name': 'uid'},
             {'name': 'start_time'},
             {'name': 'end_time'},
             {'name': 'activity.name'},
+            {'name': 'case.id'},
             {'name': 'case.case_name'},
             {'name': 'location.name'},
             {'name': 'department.full_name'},
