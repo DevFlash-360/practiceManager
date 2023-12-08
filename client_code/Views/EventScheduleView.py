@@ -24,7 +24,9 @@ PM_SCHEDULE_DEFAULT_VIEWS = [
                 ${if(event_type==="event")}${start_time_time} - ${end_time_time}${/if}\
                 ${if(event_type==="task")}All day${/if}\
             </div>\
-            <div><i class="fa-light fa-user pr-1"></i>${staff_name}</div>\
+            ${if(staff_name)}\
+                <div><i class="fa-light fa-user pr-1"></i>${staff_name}</div>\
+            ${/if}\
             ${if(location_name)}\
                 <div><i class="fa-light fa-location-dot pr-1"></i>${location_name}</div>\
             ${/if}\
