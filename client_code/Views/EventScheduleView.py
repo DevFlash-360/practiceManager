@@ -260,7 +260,6 @@ class EventScheduleView:
             event['location_name'] = event['location__name'] if 'location__name' in event and event['location__name'] else ''
             event['department'] = f"{event['department__full_name']} - {event['department__title_position']}" if 'department__full_name' in event and event['department__full_name'] else ''
         self.schedules = self.events + self.tasks
-        # self.schedules = ej.base.extend(self.events, self.tasks, None, True)
 
     def get_tasks(self, start_time, end_time):
         query = {
@@ -297,11 +296,9 @@ class EventScheduleView:
                 item['subject'] = f"{item['subject']}: {task['case__case_name']}"
             item['description'] = task.get('notes', '')
             item['staff_name'] = task['assigned_staff__full_name']
-            # item['location_name'] = ''
             item['isOverdue'] = date.fromisoformat(task['due_date']) < date.today()
             self.tasks.append(item)
             
-        # self.schedules = ej.base.extend(self.events, self.tasks, None, True)
         self.schedules = self.events + self.tasks
 
     def data_adaptor_get_data(self, query):
