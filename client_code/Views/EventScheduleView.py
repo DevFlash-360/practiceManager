@@ -248,7 +248,7 @@ class EventScheduleView:
         cases_test2 = Case.get('6f9d60d8-fe11-4909-85fe-bafe16e4e26e')
         query = {
             'start_time': q.all_of(q.greater_than(start_time), q.less_than(end_time)),
-            'notes': q.any_of('a')
+            'case': {'uid': q.any_of('18cdfe25-cbbf-4aa8-b8ce-b8ecc60b4ea9', '6f9d60d8-fe11-4909-85fe-bafe16e4e26e')}
         }
 
         event_cols = [
