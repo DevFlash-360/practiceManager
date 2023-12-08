@@ -247,6 +247,7 @@ class EventScheduleView:
 
     def get_events(self, start_time, end_time):
         query = {'start_time': q.all_of(q.greater_than(start_time), q.less_than(end_time))}
+        print(f"get_events query = {query}")
         if self.cases_filters:
             query['case'] = q.any_of(self.cases_filters)
 
@@ -323,7 +324,6 @@ class EventScheduleView:
         query_data = json.loads(query.data)
         start_time = datetime.fromisoformat(query_data['StartDate'][:10])
         end_time = datetime.fromisoformat(query_data['EndDate'][:10])
-        print(" ===== get data =====")
         self.get_events(start_time, end_time)
         self.get_tasks(start_time, end_time)
 
