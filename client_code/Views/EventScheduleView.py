@@ -193,7 +193,7 @@ class EventScheduleView:
         self.schedule.refreshEvents()
 
     def handler_filter_select(self, args):
-        self.dropdown_tree.refreshEvents(False)
+        self.schedule.refreshEvents()
 
     def action_begin(self, args):
         # change event
