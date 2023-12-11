@@ -26,9 +26,9 @@ def get_events(start_time, end_time, case_ids, staff_ids):
     else:
         cases = [case for case in app_tables.cases.search()]
     if staff_ids:
-        staffs = [staff for staff in app_tables.staffs.search(uid=qu.any_of(*staff_ids))]
+        staffs = [staff for staff in app_tables.staff.search(uid=q.any_of(*staff_ids))]
     else:
-        staffs = [staff for staff in app_tables.staffs.search()]
+        staffs = [staff for staff in app_tables.staff.search()]
     events = app_tables.events.search(
         case=q.any_of(*cases),
         staff=q.any_of(*staffs),
