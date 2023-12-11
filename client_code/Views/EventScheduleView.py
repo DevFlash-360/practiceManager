@@ -247,7 +247,7 @@ class EventScheduleView:
             self.schedule.openQuickInfoPopup(event)
 
     def get_events(self, start_time, end_time):
-        events = anvil.server.call('get_events', self.cases_filters)
+        events = anvil.server.call('get_events', start_time, end_time, self.cases_filters)
         # query = {
         #     'start_time': q.all_of(q.greater_than(start_time), q.less_than(end_time))
         # }
