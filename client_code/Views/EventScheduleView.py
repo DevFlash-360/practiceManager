@@ -202,13 +202,10 @@ class EventScheduleView:
         self.staffs_filters = []
 
         for item in selected_items:
-            if not all_cases and item.get('pid') == 'cases':
+            if item.get('pid') == 'cases':
                 self.cases_filters.append(item['id'])
-            if not all_staffs and item.get('pid') == 'staffs':
+            if item.get('pid') == 'staffs':
                 self.staffs_filters.append(item['id'])
-
-        print(f"case_filters = {self.cases_filters}")
-        print(f"staff_filters = {self.staffs_filters}")
 
         self.schedule.refreshEvents()
 
@@ -246,27 +243,29 @@ class EventScheduleView:
             self.schedule.openQuickInfoPopup(event)
 
     def get_events(self, start_time, end_time):
-        cases = Case.search()
-        query = {
-            'start_time': q.all_of(q.greater_than(start_time), q.less_than(end_time))
-        }
+        cases = [case for case in Case.search(id=q.any_of(self.cases_filters))]
+        self.events = Event.search(case=q.any_of(cases))
+        # query = {
+        #     'start_time': q.all_of(q.greater_than(start_time), q.less_than(end_time))
+        # }
 
-        event_cols = [
-            {'name': 'uid'},
-            {'name': 'start_time'},
-            {'name': 'end_time'},
-            {'name': 'activity.name'},
-            {'name': 'case.case_name'},
-            {'name': 'location.name'},
-            {'name': 'department.full_name'},
-            {'name': 'department.title_position'},
-            {'name': 'staff.full_name'},
-            {'name': 'notes'},
-            {'name': 'client_attendance_required'}
-        ]
+        # event_cols = [
+        #     {'name': 'uid'},
+        #     {'name': 'start_time'},
+        #     {'name': 'end_time'},
+        #     {'name': 'activity.name'},
+        #     {'name': 'case.case_name'},
+        #     {'name': 'location.name'},
+        #     {'name': 'department.full_name'},
+        #     {'name': 'department.title_position'},
+        #     {'name': 'staff.full_name'},
+        #     {'name': 'notes'},
+        #     {'name': 'client_attendance_required'}
+        # ]
 
-        self.events = Event.get_grid_view(view_config={'columns': event_cols}, filters=query)
+        # self.events = Event.get_grid_view(view_config={'columns': event_cols}, filters=query)
         for event in self.events:
+            print(event)
             event['event_type'] = PM_SCHEDULE_TYPE_EVENT
             event['subject'] = event['activity__name']
             event['description'] = event['notes']
