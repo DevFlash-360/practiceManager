@@ -202,9 +202,9 @@ class EventScheduleView:
         self.staffs_filters = []
 
         for item in selected_items:
-            if item.get('pid') == 'cases':
+            if not all_cases and item.get('pid') == 'cases':
                 self.cases_filters.append(item['id'])
-            if item.get('pid') == 'staffs':
+            if not all_staffs and item.get('pid') == 'staffs':
                 self.staffs_filters.append(item['id'])
 
         self.schedule.refreshEvents()
@@ -243,7 +243,10 @@ class EventScheduleView:
             self.schedule.openQuickInfoPopup(event)
 
     def get_events(self, start_time, end_time):
-        cases = [case for case in Case.search(uid=q.any_of(self.cases_filters))]
+        if self.cases_filters:
+            cases = [case for case in Case.search(uid=q.any_of(self.cases_filters))]
+        else:
+            cases = [case for case in Case.search()]
         self.events = Event.search(case=q.any_of(cases))
         # query = {
         #     'start_time': q.all_of(q.greater_than(start_time), q.less_than(end_time))
