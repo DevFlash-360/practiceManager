@@ -276,7 +276,7 @@ class EventScheduleView:
             item['subject'] = event['activity']
             item['event_type'] = PM_SCHEDULE_TYPE_EVENT
             item['subject'] = event['activity']['name']
-            event['description'] = event['notes']
+            item['description'] = event['notes']
             if event['case']['case_name']:
                 item['subject'] = f"{event['subject']}: {event['case']['case_name']}"
             item['start_time_time'] = datetime.strptime(event['start_time'], '%Y-%m-%dT%H:%M:%S%z').strftime('%H:%M')
@@ -331,7 +331,7 @@ class EventScheduleView:
         start_time = datetime.fromisoformat(query_data['StartDate'][:10])
         end_time = datetime.fromisoformat(query_data['EndDate'][:10])
         self.get_events(start_time, end_time)
-        self.get_tasks(start_time, end_time)
+        # self.get_tasks(start_time, end_time)
 
         # construct HTTP request for data adaptor
         request = XMLHttpRequest()
