@@ -197,7 +197,6 @@ class EventScheduleView:
         all_cases = tree_data[0].get('selected', False)
         all_staffs = tree_data[1].get('selected', False)
         selected_items = [item for item in tree_data if item.get('selected')]
-        print(f"selected_items = {selected_items}")
 
         self.cases_filters = []
         self.staffs_filters = []
@@ -207,6 +206,9 @@ class EventScheduleView:
                 self.cases_filters.append(item['id'])
             if not all_staffs and item.get('pid') == 'staffs':
                 self.staffs_filters.append(item['id'])
+
+        print(f"case_filters = {self.cases_filters}")
+        print(f"staff_filters = {self.staffs_filters}")
 
         self.schedule.refreshEvents()
 
@@ -246,8 +248,7 @@ class EventScheduleView:
     def get_events(self, start_time, end_time):
         cases = Case.search()
         query = {
-            'start_time': q.all_of(q.greater_than(start_time), q.less_than(end_time)),
-            'notes': q.any_of(*['as', 'a', 'b'])
+            'start_time': q.all_of(q.greater_than(start_time), q.less_than(end_time))
         }
 
         event_cols = [
