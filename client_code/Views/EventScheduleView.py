@@ -272,8 +272,8 @@ class EventScheduleView:
         for event in events:
             item = {}
             item['uid'] = event['uid']
-            item['start_time'] = event['start_time']
-            item['end_time'] = event['end_time']
+            item['start_time'] = event['start_time'].strftime('%Y-%m-%d %H:%M:%S')
+            item['end_time'] = event['end_time'].strftime('%Y-%m-%d %H:%M:%S')
             item['event_type'] = PM_SCHEDULE_TYPE_EVENT
             item['subject'] = event['activity']['name']
             item['description'] = event['notes']
