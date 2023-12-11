@@ -247,7 +247,7 @@ class EventScheduleView:
             self.schedule.openQuickInfoPopup(event)
 
     def get_events(self, start_time, end_time):
-        events = anvil.server.call('get_events', start_time, end_time, self.cases_filters)
+        events = anvil.server.call('get_events', start_time, end_time, self.cases_filters, self.staffs_filters)
         self.events = []
         for event in events:
             item = {}
