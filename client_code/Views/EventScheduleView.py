@@ -311,7 +311,6 @@ class EventScheduleView:
 
         tasks_filter = []
         tasks = Task.get_grid_view(view_config={'columns':event_cols}, filters=query)
-        self.tasks = copy.deepcopy(tasks)
         for task in self.tasks:
             item = {}
             item['event_type'] = PM_SCHEDULE_TYPE_TASK
@@ -328,7 +327,7 @@ class EventScheduleView:
             item['staff_name'] = task['assigned_staff__full_name']
             item['isOverdue'] = date.fromisoformat(task['due_date']) < date.today()
             self.tasks.append(item)
-            
+
         self.schedules = self.events + self.tasks
 
     def data_adaptor_get_data(self, query):
