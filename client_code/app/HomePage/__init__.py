@@ -1,3 +1,4 @@
+import anvil.server
 from ._anvil_designer import HomePageTemplate
 from anvil.js.window import ej, jQuery
 from AnvilFusion.tools.utils import AppEnv, init_user_session
