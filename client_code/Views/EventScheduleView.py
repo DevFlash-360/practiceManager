@@ -309,6 +309,7 @@ class EventScheduleView:
             {'name': 'due_date_view'}
         ]
 
+        self.tasks = []
         tasks = Task.get_grid_view(view_config={'columns':event_cols}, filters=query)
         for task in tasks:
             item = {}
