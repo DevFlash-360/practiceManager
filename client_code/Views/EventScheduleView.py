@@ -248,26 +248,6 @@ class EventScheduleView:
 
     def get_events(self, start_time, end_time):
         events = anvil.server.call('get_events', start_time, end_time, self.cases_filters)
-        # query = {
-        #     'start_time': q.all_of(q.greater_than(start_time), q.less_than(end_time))
-        # }
-
-        # event_cols = [
-        #     {'name': 'uid'},
-        #     {'name': 'start_time'},
-        #     {'name': 'end_time'},
-        #     {'name': 'activity.name'},
-        #     {'name': 'case.case_name'},
-        #     {'name': 'location.name'},
-        #     {'name': 'department.full_name'},
-        #     {'name': 'department.title_position'},
-        #     {'name': 'staff.full_name'},
-        #     {'name': 'notes'},
-        #     {'name': 'client_attendance_required'}
-        # ]
-
-        # self.events = Event.get_grid_view(view_config={'columns': event_cols}, filters=query)
-
         self.events = []
         for event in events:
             item = {}
