@@ -282,7 +282,7 @@ class EventScheduleView:
             item['start_time_time'] = event['start_time'].strftime('%H:%M')
             item['end_time_time'] = event['end_time'].strftime('%H:%M')
             item['staff_name'] = ' '.join([f"{staff['first_name']} {staff['last_name']}" for staff in event['staff']])
-            item['location_name'] = event['location']['name'] if event['location']['name'] else ''
+            item['location_name'] = event['location']['name'] if event['location'] and event['location']['name'] else ''
             item['department'] = ""
             if event['department']['first_name'] and event['department']['last_name']:
                 item['department'] = f"{event['department']['first_name']} {event['department']['last_name']}" 
