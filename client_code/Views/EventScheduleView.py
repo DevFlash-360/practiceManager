@@ -269,6 +269,7 @@ class EventScheduleView:
         # self.events = Event.get_grid_view(view_config={'columns': event_cols}, filters=query)
 
         for event in events:
+            print(f"==== event.staff = {[dict(staff) for staff in event['staff']]}")
             item = {}
             item['uid'] = event['uid']
             item['start_time'] = event['start_time']
@@ -284,6 +285,7 @@ class EventScheduleView:
             item['staff_name'] = ' '.join([f"{staff['full_name']}" for staff in event['staff']])
             item['location_name'] = event['location']['name'] if event['location']['name'] else ''
             item['department'] = f"{event['department']['full_name']} - {event['department']['title_position']}" if event['department']['full_name'] else ''
+            self.events.append(item)
         self.schedules = self.events + self.tasks
 
     def get_tasks(self, start_time, end_time):
