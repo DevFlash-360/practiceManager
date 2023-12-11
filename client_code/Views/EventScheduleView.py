@@ -247,7 +247,7 @@ class EventScheduleView:
         cases = Case.search()
         query = {
             'start_time': q.all_of(q.greater_than(start_time), q.less_than(end_time)),
-            'case': q.any_of(*cases)
+            'notes': q.any_of(*['as', 'a', 'b'])
         }
 
         event_cols = [
