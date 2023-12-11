@@ -247,6 +247,7 @@ class EventScheduleView:
             cases = [case for case in Case.search(uid=q.any_of(self.cases_filters))]
         else:
             cases = [case for case in Case.search()]
+        print(f"cases={cases}")
         self.events = Event.search(case=q.any_of(*cases))
         # query = {
         #     'start_time': q.all_of(q.greater_than(start_time), q.less_than(end_time))
