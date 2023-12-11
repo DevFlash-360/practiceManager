@@ -309,9 +309,8 @@ class EventScheduleView:
             {'name': 'due_date_view'}
         ]
 
-        tasks_filter = []
         tasks = Task.get_grid_view(view_config={'columns':event_cols}, filters=query)
-        for task in self.tasks:
+        for task in tasks:
             item = {}
             item['event_type'] = PM_SCHEDULE_TYPE_TASK
             item['uid'] = task['uid']
@@ -335,7 +334,7 @@ class EventScheduleView:
         start_time = datetime.fromisoformat(query_data['StartDate'][:10])
         end_time = datetime.fromisoformat(query_data['EndDate'][:10])
         self.get_events(start_time, end_time)
-        # self.get_tasks(start_time, end_time)
+        self.get_tasks(start_time, end_time)
 
         # construct HTTP request for data adaptor
         request = XMLHttpRequest()
