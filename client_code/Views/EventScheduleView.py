@@ -284,9 +284,9 @@ class EventScheduleView:
             item['staff_name'] = ' '.join([f"{staff['first_name']} {staff['last_name']}" for staff in event['staff']])
             item['location_name'] = event['location']['name'] if event['location'] and event['location']['name'] else ''
             item['department'] = ""
-            if event['department']['first_name'] and event['department']['last_name']:
+            if event['department'] and event['department']['first_name'] and event['department']['last_name']:
                 item['department'] = f"{event['department']['first_name']} {event['department']['last_name']}" 
-            if event['department']['title_position']:
+            if event['department'] and event['department']['title_position']:
                 item['department'] = f"{item['department']} - {event['department']['title_position']}"
             self.events.append(item)
         self.schedules = self.events + self.tasks
