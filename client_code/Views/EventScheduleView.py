@@ -245,10 +245,10 @@ class EventScheduleView:
 
     def get_events(self, start_time, end_time):
         if self.cases_filters:
-            cases = [case for case in app_tables.Cases.search(uid=q.any_of(self.cases_filters))]
+            cases = [case for case in app_tables.cases.search(uid=q.any_of(self.cases_filters))]
             # cases = [case for case in Case.search(uid=q.any_of(self.cases_filters))]
         else:
-            cases = [case for case in app_tables.Cases.search()]
+            cases = [case for case in app_tables.cases.search()]
             # cases = [case for case in Case.search()]
 
         print(f"cases={cases}")
