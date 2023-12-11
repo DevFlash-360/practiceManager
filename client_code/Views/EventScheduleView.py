@@ -247,7 +247,7 @@ class EventScheduleView:
             self.schedule.openQuickInfoPopup(event)
 
     def get_events(self, start_time, end_time):
-        events = [dict(r) for r in anvil.server.call('get_events', self.cases_filters)]
+        events = anvil.server.call('get_events', self.cases_filters)
         # query = {
         #     'start_time': q.all_of(q.greater_than(start_time), q.less_than(end_time))
         # }
@@ -267,9 +267,10 @@ class EventScheduleView:
         # ]
 
         # self.events = Event.get_grid_view(view_config={'columns': event_cols}, filters=query)
-        print(f"events = {events}")
 
-        for event in self.events:
+        for event in events:
+            print(dict(event))
+            pass
             item = {}
             item['uid'] = event['uid']
             item['start_time'] = event['start_time']
