@@ -273,11 +273,10 @@ class EventScheduleView:
             item['uid'] = event['uid']
             item['start_time'] = event['start_time']
             item['end_time'] = event['end_time']
-            item['subject'] = event['activity']
             item['event_type'] = PM_SCHEDULE_TYPE_EVENT
             item['subject'] = event['activity']['name']
             item['description'] = event['notes']
-            if event['case']['case_name']:
+            if event['case'] and event['case']['case_name']:
                 item['subject'] = f"{item['subject']}: {event['case']['case_name']}"
             item['start_time_time'] = event['start_time'].strftime('%H:%M')
             item['end_time_time'] = event['end_time'].strftime('%H:%M')
