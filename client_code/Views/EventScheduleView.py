@@ -278,7 +278,7 @@ class EventScheduleView:
             item['subject'] = event['activity']['name']
             item['description'] = event['notes']
             if event['case']['case_name']:
-                item['subject'] = f"{event['subject']}: {event['case']['case_name']}"
+                item['subject'] = f"{item['subject']}: {event['case']['case_name']}"
             item['start_time_time'] = datetime.strptime(event['start_time'], '%Y-%m-%dT%H:%M:%S%z').strftime('%H:%M')
             item['end_time_time'] = datetime.strptime(event['end_time'], '%Y-%m-%dT%H:%M:%S%z').strftime('%H:%M')
             if event['staff']['full_name']:
