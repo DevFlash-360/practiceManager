@@ -2,6 +2,7 @@ from anvil.tables import query as q
 from anvil.js.window import ej, jQuery, Date, XMLHttpRequest, Object
 from AnvilFusion.tools.utils import datetime_js_to_py
 import anvil.js
+from anvil.tables import app_tables
 from ..app.models import Event, Task, Case, Staff
 from ..Forms.EventForm import EventForm
 from ..Forms.TaskForm import TaskForm
@@ -244,9 +245,12 @@ class EventScheduleView:
 
     def get_events(self, start_time, end_time):
         if self.cases_filters:
-            cases = [case for case in Case.search(uid=q.any_of(self.cases_filters))]
+            cases = [case for case in app_tables.Cases.search(uid=q.any_of(self.cases_filters))]
+            # cases = [case for case in Case.search(uid=q.any_of(self.cases_filters))]
         else:
-            cases = [case for case in Case.search()]
+            cases = [case for case in app_tables.Cases.search()]
+            # cases = [case for case in Case.search()]
+
         print(f"cases={cases}")
         self.events = Event.search(case=q.any_of(*cases))
         # query = {
