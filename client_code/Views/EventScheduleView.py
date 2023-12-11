@@ -247,7 +247,7 @@ class EventScheduleView:
             self.schedule.openQuickInfoPopup(event)
 
     def get_events(self, start_time, end_time):
-        events = anvil.server.call('get_events', self.cases_filters)
+        events = [dict(r) for r in anvil.server.call('get_events', self.cases_filters)]
         # query = {
         #     'start_time': q.all_of(q.greater_than(start_time), q.less_than(end_time))
         # }
@@ -269,12 +269,20 @@ class EventScheduleView:
         # self.events = Event.get_grid_view(view_config={'columns': event_cols}, filters=query)
         print(f"events = {events}")
 
-        self.events = copy.deepcopy(events)
         for event in self.events:
             item = {}
             item['uid'] = event['uid']
+            item['start_time'] = event['start_time']
+            item['end_time'] = event['end_time']
+            item['case__case_name'] = event['case_name']
+            item['location__name'] = event['location__name']
+            item['uid'] = event['uid']
+            item['uid'] = event['uid']
+            item['uid'] = event['uid']
+            item['uid'] = event['uid']
+
             item['event_type'] = PM_SCHEDULE_TYPE_EVENT
-            event['subject'] = event['activity__name']
+            item['subject'] = event['activity__name']
             event['description'] = event['notes']
             if 'case__case_name' in event:
                 event['subject'] = f"{event['subject']}: {event['case__case_name']}"
@@ -283,7 +291,7 @@ class EventScheduleView:
             if 'staff__full_name' in event:
                 event['staff_name'] = event['staff__full_name']
             event['location_name'] = event['location__name'] if 'location__name' in event and event['location__name'] else ''
-            event['department'] = f"{event['department__full_name']} - {event['department__title_position']}" if 'department__full_name' in event and event['department__full_name'] else ''
+            item['department'] = f"{event['department__full_name']} - {event['department__title_position']}" if 'department__full_name' in event and event['department__full_name'] else ''
         self.schedules = self.events + self.tasks
 
     def get_tasks(self, start_time, end_time):
