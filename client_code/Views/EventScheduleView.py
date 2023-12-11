@@ -244,9 +244,10 @@ class EventScheduleView:
             self.schedule.openQuickInfoPopup(event)
 
     def get_events(self, start_time, end_time):
+        cases = Case.search()
         query = {
             'start_time': q.all_of(q.greater_than(start_time), q.less_than(end_time)),
-            'case.case_name': q.any_of('Playwright Case', 'Playwright Updated Case')
+            'case.case_name': q.any_of(cases)
         }
 
         event_cols = [
