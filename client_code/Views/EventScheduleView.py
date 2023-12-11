@@ -267,11 +267,12 @@ class EventScheduleView:
         # ]
 
         # self.events = Event.get_grid_view(view_config={'columns': event_cols}, filters=query)
+        print(f"events = {events}")
 
         self.events = copy.deepcopy(events)
         for event in self.events:
             item = {}
-            print(event)
+            item['uid'] = event['uid']
             item['event_type'] = PM_SCHEDULE_TYPE_EVENT
             event['subject'] = event['activity__name']
             event['description'] = event['notes']
