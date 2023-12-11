@@ -274,7 +274,6 @@ class EventScheduleView:
             item['start_time'] = event['start_time']
             item['end_time'] = event['end_time']
             item['subject'] = event['activity']
-            item['location__name'] = event['location__name']
             item['event_type'] = PM_SCHEDULE_TYPE_EVENT
             item['subject'] = event['activity']['name']
             event['description'] = event['notes']
