@@ -269,32 +269,23 @@ class EventScheduleView:
         # self.events = Event.get_grid_view(view_config={'columns': event_cols}, filters=query)
 
         for event in events:
-            print("////////////////")
-            print(dict(event))
-            print("==============")
-            pass
             item = {}
             item['uid'] = event['uid']
             item['start_time'] = event['start_time']
             item['end_time'] = event['end_time']
-            item['case__case_name'] = event['case_name']
+            item['subject'] = event['activity']
             item['location__name'] = event['location__name']
-            item['uid'] = event['uid']
-            item['uid'] = event['uid']
-            item['uid'] = event['uid']
-            item['uid'] = event['uid']
-
             item['event_type'] = PM_SCHEDULE_TYPE_EVENT
-            item['subject'] = event['activity__name']
+            item['subject'] = event['activity']['name']
             event['description'] = event['notes']
-            if 'case__case_name' in event:
-                event['subject'] = f"{event['subject']}: {event['case__case_name']}"
-            event['start_time_time'] = datetime.strptime(event['start_time'], '%Y-%m-%dT%H:%M:%S%z').strftime('%H:%M')
-            event['end_time_time'] = datetime.strptime(event['end_time'], '%Y-%m-%dT%H:%M:%S%z').strftime('%H:%M')
-            if 'staff__full_name' in event:
-                event['staff_name'] = event['staff__full_name']
-            event['location_name'] = event['location__name'] if 'location__name' in event and event['location__name'] else ''
-            item['department'] = f"{event['department__full_name']} - {event['department__title_position']}" if 'department__full_name' in event and event['department__full_name'] else ''
+            if event['case']['case_name']:
+                item['subject'] = f"{event['subject']}: {event['case']['case_name']}"
+            item['start_time_time'] = datetime.strptime(event['start_time'], '%Y-%m-%dT%H:%M:%S%z').strftime('%H:%M')
+            item['end_time_time'] = datetime.strptime(event['end_time'], '%Y-%m-%dT%H:%M:%S%z').strftime('%H:%M')
+            if event['staff']['full_name']:
+                item['staff_name'] = event['staff']['full_name']
+            item['location_name'] = event['location']['name'] if event['location']['name'] else ''
+            item['department'] = f"{event['department']['full_name']} - {event['department']['title_position']}" if event['department']['full_name'] else ''
         self.schedules = self.events + self.tasks
 
     def get_tasks(self, start_time, end_time):
