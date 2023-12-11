@@ -4,7 +4,7 @@ from anvil.js.window import ej, jQuery, Date, XMLHttpRequest, Object
 from AnvilFusion.tools.utils import datetime_js_to_py
 import anvil.js
 from anvil.tables import app_tables
-from practiceMANAGER.server_code.ServerModule1 import get_events
+import anvil.server
 from ..app.models import Event, Task, Case, Staff
 from ..Forms.EventForm import EventForm
 from ..Forms.TaskForm import TaskForm
@@ -246,7 +246,7 @@ class EventScheduleView:
             self.schedule.openQuickInfoPopup(event)
 
     def get_events(self, start_time, end_time):
-        self.events = get_events(self.cases_filters)
+        self.events = anvil.server.call('get_events', self.cases_filters)
         # query = {
         #     'start_time': q.all_of(q.greater_than(start_time), q.less_than(end_time))
         # }
