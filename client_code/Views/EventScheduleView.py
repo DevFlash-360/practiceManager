@@ -1,3 +1,4 @@
+import copy
 import anvil.server
 from anvil.tables import query as q
 from anvil.js.window import ej, jQuery, Date, XMLHttpRequest, Object
@@ -67,10 +68,10 @@ class EventScheduleView:
         self.schedule_height = None
         self.container_id = container_id
         self.container_el = None
-        self.events = [] # Contain events for Schedule data feed
-        self.tasks = [] # Contain tasks for Schedule data feed
         self.cases_filters = [] # Filter cards with this cases
         self.staffs_filters = [] # Filter cards with this staffs
+        self.events  = []
+        self.tasks = []
         self.schedules = None # Contain schedule elements = self.events + self.tasks
 
         event_fields = {
@@ -246,12 +247,7 @@ class EventScheduleView:
             self.schedule.openQuickInfoPopup(event)
 
     def get_events(self, start_time, end_time):
-        # self.events = anvil.server.call('get_events', self.cases_filters)
-        if self.cases_filters:
-            cases = [case for case in app_tables.cases.search(uid=q.any_of(self.cases_filters))]
-        else:
-            cases = [case for case in app_tables.cases.search()]
-        print(cases)
+        events = anvil.server.call('get_events', self.cases_filters)
         # query = {
         #     'start_time': q.all_of(q.greater_than(start_time), q.less_than(end_time))
         # }
@@ -271,21 +267,23 @@ class EventScheduleView:
         # ]
 
         # self.events = Event.get_grid_view(view_config={'columns': event_cols}, filters=query)
-        
-        # for event in self.events:
-        #     print(event)
-        #     event['event_type'] = PM_SCHEDULE_TYPE_EVENT
-        #     event['subject'] = event['activity__name']
-        #     event['description'] = event['notes']
-        #     if 'case__case_name' in event:
-        #         event['subject'] = f"{event['subject']}: {event['case__case_name']}"
-        #     event['start_time_time'] = datetime.strptime(event['start_time'], '%Y-%m-%dT%H:%M:%S%z').strftime('%H:%M')
-        #     event['end_time_time'] = datetime.strptime(event['end_time'], '%Y-%m-%dT%H:%M:%S%z').strftime('%H:%M')
-        #     if 'staff__full_name' in event:
-        #         event['staff_name'] = event['staff__full_name']
-        #     event['location_name'] = event['location__name'] if 'location__name' in event and event['location__name'] else ''
-        #     event['department'] = f"{event['department__full_name']} - {event['department__title_position']}" if 'department__full_name' in event and event['department__full_name'] else ''
-        # self.schedules = self.events + self.tasks
+
+        self.events = copy.deepcopy(events)
+        for event in self.events:
+            item = {}
+            print(event)
+            item['event_type'] = PM_SCHEDULE_TYPE_EVENT
+            event['subject'] = event['activity__name']
+            event['description'] = event['notes']
+            if 'case__case_name' in event:
+                event['subject'] = f"{event['subject']}: {event['case__case_name']}"
+            event['start_time_time'] = datetime.strptime(event['start_time'], '%Y-%m-%dT%H:%M:%S%z').strftime('%H:%M')
+            event['end_time_time'] = datetime.strptime(event['end_time'], '%Y-%m-%dT%H:%M:%S%z').strftime('%H:%M')
+            if 'staff__full_name' in event:
+                event['staff_name'] = event['staff__full_name']
+            event['location_name'] = event['location__name'] if 'location__name' in event and event['location__name'] else ''
+            event['department'] = f"{event['department__full_name']} - {event['department__title_position']}" if 'department__full_name' in event and event['department__full_name'] else ''
+        self.schedules = self.events + self.tasks
 
     def get_tasks(self, start_time, end_time):
         query = {
@@ -304,9 +302,10 @@ class EventScheduleView:
             {'name': 'due_date_view'}
         ]
 
-        self.tasks = []
+        tasks_filter = []
         tasks = Task.get_grid_view(view_config={'columns':event_cols}, filters=query)
-        for task in tasks:
+        self.tasks = copy.deepcopy(tasks)
+        for task in self.tasks:
             item = {}
             item['event_type'] = PM_SCHEDULE_TYPE_TASK
             item['uid'] = task['uid']
