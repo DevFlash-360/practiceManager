@@ -269,7 +269,9 @@ class EventScheduleView:
         # self.events = Event.get_grid_view(view_config={'columns': event_cols}, filters=query)
 
         for event in events:
+            print("////////////////")
             print(dict(event))
+            print("==============")
             pass
             item = {}
             item['uid'] = event['uid']
