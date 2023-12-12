@@ -70,8 +70,8 @@ class EventScheduleView:
         self.container_el = None
         self.cases_filters = [] # Filter cards with this cases
         self.staffs_filters = [] # Filter cards with this staffs
-        self.events  = []
-        self.tasks = []
+        self.events  = [] # Events on filter
+        self.tasks = [] # Staffs on filter
         self.schedules = None # Contain schedule elements = self.events + self.tasks
 
         event_fields = {
