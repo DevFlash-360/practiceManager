@@ -2,6 +2,7 @@ import anvil.server
 import uuid
 from anvil.js.window import ej, jQuery
 from DevFusion.components.GridView2 import GridView2
+from datetime import datetime
 import anvil.js
 from AnvilFusion.tools.utils import AppEnv
 from ..app.models import Staff, Case, Task
@@ -90,7 +91,7 @@ class TaskListView(GridView2):
             'treeSettings': {'autoCheck': True},
             'placeholder': 'Apply filter...'
         })
-        # self.dropdown_tree.addEventListener('close', self.handler_filter_close)
+        self.dropdown_tree.addEventListener('close', self.handler_filter_close)
 
 
         # Status filter
@@ -183,6 +184,30 @@ class TaskListView(GridView2):
     #         self.grid.clearFiltering(['case__case_name'])
     #     else:
     #         self.grid.filterByColumn('case__case_name', 'equal', args['itemData']['Text'])
+
+    def handler_filter_close(self, args):
+        tree_data = self.dropdown_tree.getData()
+        all_status = tree_data[0].get('selected', False)
+        all_cases = tree_data[3].get('selected', False)
+        all_staffs = tree_data[4].get('selected', False)
+        selected_items = [item for item in tree_data if item.get('selected')]
+
+        self.cases_filters = []
+        self.staffs_filters = []
+
+        for item in selected_items:
+            if not all_cases and item.get('pid') == 'cases':
+                self.cases_filters.append(item['id'])
+            if not all_staffs and item.get('pid') == 'staffs':
+                self.staffs_filters.append(item['id'])
+
+        self.grid_data = anvil.server.call('get_tasks_filter', datetime.min, datetime.max, self.cases_filters, self.staffs_filters)
+        # self.grid_data = self.grid_class.get_grid_view(self.view_config,
+        #                                                     search_queries=self.search_queries,
+        #                                                     filters=self.filters,
+        #                                                     include_rows=False)
+
+        self.grid.refresh()
 
     def handler_databound(self, args):
         self.invalidate()
