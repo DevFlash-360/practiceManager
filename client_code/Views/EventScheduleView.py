@@ -284,12 +284,12 @@ class EventScheduleView:
             item['start_time_time'] = task['due_date'].strftime('%H:%M')
             item['end_time_time'] = item['start_time_time']
             item['isAllDay'] = True
-            item['subject'] = task['activity__name']
-            if 'case__case_name' in task:
-                item['subject'] = f"{item['subject']}: {task['case__case_name']}"
+            item['subject'] = task['activity']['name']
+            if task['case'] and task['case']['case_name']:
+                item['subject'] = f"{item['subject']}: {task['case']['case_name']}"
             item['description'] = task.get('notes', '')
-            item['staff_name'] = task['assigned_staff__full_name']
-            item['isOverdue'] = date.fromisoformat(task['due_date']) < date.today()
+            item['staff_name'] = ' '.join([f"{staff['first_name']} {staff['last_name']}" for staff in task['assigned_staff']])
+            item['isOverdue'] = task['due_date'] < date.today()
             self.tasks.append(item)
         self.schedules = self.events + self.tasks
         # return
