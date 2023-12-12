@@ -269,6 +269,7 @@ class EventScheduleView:
             if event['department'] and event['department']['title_position']:
                 item['department'] = f"{item['department']} - {event['department']['title_position']}"
             self.events.append(item)
+        print(f"self.events length = {len(self.events)}")
         self.schedules = self.events + self.tasks
 
     def get_tasks(self, start_time, end_time):
