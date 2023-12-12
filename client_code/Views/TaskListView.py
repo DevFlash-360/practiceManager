@@ -65,31 +65,31 @@ class TaskListView(GridView2):
 
     def init_filters(self):
         
-        # self.events  = [] # Events on filter
-        # self.tasks = [] # Staffs on filter
+        self.events  = [] # Events on filter
+        self.tasks = [] # Staffs on filter
 
-        # cases_data = Case.search()
-        # cases_data_for_dropdown = [{'id': case['uid'], 'pid': 'cases', 'text': case['case_name']} for case in cases_data]
+        cases_data = Case.search()
+        cases_data_for_dropdown = [{'id': case['uid'], 'pid': 'cases', 'text': case['case_name']} for case in cases_data]
 
-        # staff_data = Staff.search()
-        # staff_data_for_dropdown = [{'id': row['uid'], 'pid': 'staffs', 'text': row['first_name'] + " " + row['last_name']} for row in staff_data]
+        staff_data = Staff.search()
+        staff_data_for_dropdown = [{'id': row['uid'], 'pid': 'staffs', 'text': row['first_name'] + " " + row['last_name']} for row in staff_data]
 
-        # dataSource = [
-        #     {'id': 'statuses', 'text': 'Status', 'hasChild': True},
-        #     {'id': 'complete', 'text': 'Complete', 'pid': 'statuses'},
-        #     {'id': 'incomplete', 'text': 'Incomplete', 'pid': 'statuses'},
-        #     {'id': 'cases', 'text': 'Cases', 'hasChild': True},
-        #     {'id': 'staffs', 'text': 'Staffs', 'hasChild': True},
-        # ]
-        # dataSource.extend(staff_data_for_dropdown)
-        # dataSource.extend(cases_data_for_dropdown)
+        dataSource = [
+            {'id': 'statuses', 'text': 'Status', 'hasChild': True},
+            {'id': 'complete', 'text': 'Complete', 'pid': 'statuses'},
+            {'id': 'incomplete', 'text': 'Incomplete', 'pid': 'statuses'},
+            {'id': 'cases', 'text': 'Cases', 'hasChild': True},
+            {'id': 'staffs', 'text': 'Staffs', 'hasChild': True},
+        ]
+        dataSource.extend(staff_data_for_dropdown)
+        dataSource.extend(cases_data_for_dropdown)
 
-        # self.dropdown_tree = ej.dropdowns.DropDownTree({
-        #     'fields': {'dataSource': dataSource, 'value':'id', 'parentValue': 'pid', 'text':'text', 'hasChildren': 'hasChild'},
-        #     'showCheckBox': True,
-        #     'treeSettings': {'autoCheck': True},
-        #     'placeholder': 'Apply filter...'
-        # })
+        self.dropdown_tree = ej.dropdowns.DropDownTree({
+            'fields': {'dataSource': dataSource, 'value':'id', 'parentValue': 'pid', 'text':'text', 'hasChildren': 'hasChild'},
+            'showCheckBox': True,
+            'treeSettings': {'autoCheck': True},
+            'placeholder': 'Apply filter...'
+        })
         # self.dropdown_tree.addEventListener('close', self.handler_filter_close)
 
 
