@@ -297,7 +297,6 @@ class EventScheduleView:
             item['uid'] = task['uid']
             item['start_time'] = task['due_date']
             item['end_time'] = (date.fromisoformat(task['due_date']) + timedelta(days=1)).strftime('%Y-%m-%d %H:%M:%S')
-            print(type(item['start_time']))
             item['start_time_time'] = date.fromisoformat(task['due_date']).strftime('%H:%M')
             item['end_time_time'] = item['start_time_time']
             item['isAllDay'] = True
