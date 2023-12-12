@@ -138,7 +138,7 @@ class EventScheduleView:
             'placeholder': 'Apply filter...'
         })
         
-        self.dropdown_tree.addEventListener('select', self.handler_filter_select)
+        # self.dropdown_tree.addEventListener('select', self.handler_filter_select)
         self.dropdown_tree.addEventListener('close', self.handler_filter_close)
        
     # get events and bind them to the view
@@ -197,7 +197,24 @@ class EventScheduleView:
     def update_schedule(self, data, add_new):
         self.schedule.refreshEvents()
 
-    def handler_filter_select(self, args):
+    # def handler_filter_select(self, args):
+    #     tree_data = self.dropdown_tree.getData()
+    #     all_cases = tree_data[0].get('selected', False)
+    #     all_staffs = tree_data[1].get('selected', False)
+    #     selected_items = [item for item in tree_data if item.get('selected')]
+
+    #     self.cases_filters = []
+    #     self.staffs_filters = []
+
+    #     for item in selected_items:
+    #         if not all_cases and item.get('pid') == 'cases':
+    #             self.cases_filters.append(item['id'])
+    #         if not all_staffs and item.get('pid') == 'staffs':
+    #             self.staffs_filters.append(item['id'])
+
+    #     self.schedule.refreshEvents()
+
+    def handler_filter_close(self, args):
         tree_data = self.dropdown_tree.getData()
         all_cases = tree_data[0].get('selected', False)
         all_staffs = tree_data[1].get('selected', False)
@@ -213,9 +230,6 @@ class EventScheduleView:
                 self.staffs_filters.append(item['id'])
 
         self.schedule.refreshEvents()
-
-    def handler_filter_close(self, args):
-        print("======= handler_filter_close ===== ")
 
     def action_begin(self, args):
         # change event
