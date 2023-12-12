@@ -20,7 +20,7 @@ import anvil.server
 #
 
 @anvil.server.callable
-def get_events(start_time, end_time, case_ids, staff_ids):
+def get_events_filter(start_time, end_time, case_ids, staff_ids):
     if case_ids:
         cases = [case for case in app_tables.cases.search(uid=q.any_of(*case_ids))]
     else:
