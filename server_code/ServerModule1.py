@@ -29,6 +29,7 @@ def get_events_filter(start_time, end_time, case_ids, staff_ids):
         staffs = [staff for staff in app_tables.staff.search(uid=q.any_of(*staff_ids))]
     else:
         staffs = [staff for staff in app_tables.staff.search()]
+    print(f"server_side staffs = {staffs}")
     events = app_tables.events.search(
         case=q.any_of(*cases),
         staff=q.any_of(staffs),
