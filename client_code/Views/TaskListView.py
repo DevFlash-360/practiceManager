@@ -94,46 +94,46 @@ class TaskListView(GridView2):
 
 
         # Status filter
-        status_data = [
-            {'Id': 'all', 'Text': 'All statuses', 'IconCss': 'e-icons e-badminton'},
-            {'Id': 'complete', 'Text': 'Complete', 'IconCss': 'e-icons e-badminton'},
-            {'Id': 'incomplete', 'Text': 'Incomplete', 'IconCss': 'e-icons e-cricket'},
-        ]
-        item_template = '<div><span class="${IconCss}"></span>${Text}</div>'
+        # status_data = [
+        #     {'Id': 'all', 'Text': 'All statuses', 'IconCss': 'e-icons e-badminton'},
+        #     {'Id': 'complete', 'Text': 'Complete', 'IconCss': 'e-icons e-badminton'},
+        #     {'Id': 'incomplete', 'Text': 'Incomplete', 'IconCss': 'e-icons e-cricket'},
+        # ]
+        # item_template = '<div><span class="${IconCss}"></span>${Text}</div>'
 
-        self.filter_complete = ej.dropdowns.ComboBox({
-            'dataSource': status_data,
-            'fields': { 'value': 'Id', 'text': 'Text'},
-            'iconTemplate': item_template,
-            'placeholder': 'Complete...',
-            'cssClass': 'e-outline',
-            'value': 'incomplete'
-        })
-        self.filter_complete.addEventListener('change', self.handler_filter_complete)
+        # self.filter_complete = ej.dropdowns.ComboBox({
+        #     'dataSource': status_data,
+        #     'fields': { 'value': 'Id', 'text': 'Text'},
+        #     'iconTemplate': item_template,
+        #     'placeholder': 'Complete...',
+        #     'cssClass': 'e-outline',
+        #     'value': 'incomplete'
+        # })
+        # self.filter_complete.addEventListener('change', self.handler_filter_complete)
 
-        # Assigned filter
-        staff_data = Staff.search()
-        staff_data_for_combobox = [{'Id': row['uid'], 'Text': row['first_name'] + " " + row['last_name']} for row in staff_data]
-        staff_data_for_combobox.insert(0, {'Id': 'all', 'Text': 'All staffs'})
+        # # Assigned filter
+        # staff_data = Staff.search()
+        # staff_data_for_combobox = [{'Id': row['uid'], 'Text': row['first_name'] + " " + row['last_name']} for row in staff_data]
+        # staff_data_for_combobox.insert(0, {'Id': 'all', 'Text': 'All staffs'})
         
-        self.filter_staff = ej.dropdowns.ComboBox({
-            'dataSource': staff_data_for_combobox,
-            'fields': {'value': 'Id', 'text': 'Text'},
-            'placeholder': 'Staff...',
-            'value': 'all'
-        })
-        self.filter_staff.addEventListener('change', self.handler_filter_staff)
+        # self.filter_staff = ej.dropdowns.ComboBox({
+        #     'dataSource': staff_data_for_combobox,
+        #     'fields': {'value': 'Id', 'text': 'Text'},
+        #     'placeholder': 'Staff...',
+        #     'value': 'all'
+        # })
+        # self.filter_staff.addEventListener('change', self.handler_filter_staff)
         
-        # Cases filter
-        cases_data = Case.search()
-        cases_data_for_combobox = [{'Id': row['uid'], 'Text': row['case_name']} for row in cases_data]
-        cases_data_for_combobox.insert(0, {'Id': 'all', 'Text': 'All cases'})
-        self.filter_case = ej.dropdowns.ComboBox({
-            'dataSource': cases_data_for_combobox,
-            'fields': {'value': 'Id', 'text': 'Text'},
-            'placeholder': 'Cases...',
-        })
-        self.filter_case.addEventListener('change', self.handler_filter_cases)
+        # # Cases filter
+        # cases_data = Case.search()
+        # cases_data_for_combobox = [{'Id': row['uid'], 'Text': row['case_name']} for row in cases_data]
+        # cases_data_for_combobox.insert(0, {'Id': 'all', 'Text': 'All cases'})
+        # self.filter_case = ej.dropdowns.ComboBox({
+        #     'dataSource': cases_data_for_combobox,
+        #     'fields': {'value': 'Id', 'text': 'Text'},
+        #     'placeholder': 'Cases...',
+        # })
+        # self.filter_case.addEventListener('change', self.handler_filter_cases)
 
     def init_events(self):
         self.grid.addEventListener('dataBound', self.handler_databound)
@@ -159,29 +159,29 @@ class TaskListView(GridView2):
             self.first_load = False
 
     # Handle complete filter
-    def handler_filter_complete(self, args):
-        if args['itemData'] is None:
-            self.grid.clearFiltering(['completed'])
-        elif args['itemData']['Id'] == 'complete':
-            self.grid.filterByColumn('completed', 'equal', "true")
-        elif args['itemData']['Id'] == 'incomplete':
-            self.grid.filterByColumn('completed', 'notequal', 'true')
-        else:
-            self.grid.clearFiltering(['completed'])
+    # def handler_filter_complete(self, args):
+    #     if args['itemData'] is None:
+    #         self.grid.clearFiltering(['completed'])
+    #     elif args['itemData']['Id'] == 'complete':
+    #         self.grid.filterByColumn('completed', 'equal', "true")
+    #     elif args['itemData']['Id'] == 'incomplete':
+    #         self.grid.filterByColumn('completed', 'notequal', 'true')
+    #     else:
+    #         self.grid.clearFiltering(['completed'])
 
-    # Handle staff filter
-    def handler_filter_staff(self, args):
-        if args['itemData']['Id'] == 'all':
-            self.grid.clearFiltering(['assigned_staff__full_name'])
-        else:
-            self.grid.filterByColumn('assigned_staff__full_name', 'contains', args['itemData']['Text'])
+    # # Handle staff filter
+    # def handler_filter_staff(self, args):
+    #     if args['itemData']['Id'] == 'all':
+    #         self.grid.clearFiltering(['assigned_staff__full_name'])
+    #     else:
+    #         self.grid.filterByColumn('assigned_staff__full_name', 'contains', args['itemData']['Text'])
 
-    # Handle cases filter
-    def handler_filter_cases(self, args):
-        if args['itemData']['Id'] == 'all':
-            self.grid.clearFiltering(['case__case_name'])
-        else:
-            self.grid.filterByColumn('case__case_name', 'equal', args['itemData']['Text'])
+    # # Handle cases filter
+    # def handler_filter_cases(self, args):
+    #     if args['itemData']['Id'] == 'all':
+    #         self.grid.clearFiltering(['case__case_name'])
+    #     else:
+    #         self.grid.filterByColumn('case__case_name', 'equal', args['itemData']['Text'])
 
     def handler_databound(self, args):
         self.invalidate()
