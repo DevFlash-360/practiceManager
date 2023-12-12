@@ -292,45 +292,6 @@ class EventScheduleView:
             item['isOverdue'] = task['due_date'] < date.today()
             self.tasks.append(item)
         self.schedules = self.events + self.tasks
-        # return
-        
-        
-        # query = {
-        #     'due_date': q.all_of(q.greater_than_or_equal_to(start_time.date()), q.less_than_or_equal_to(end_time.date())),
-        #     'completed': q.not_(True),
-        # }
-
-        # event_cols = [
-        #     {'name':'uid'},
-        #     {'name':'case.case_name'},
-        #     {'name':'activity.name'},
-        #     {'name':'due_date'},
-        #     {'name':'priority'},
-        #     {'name':'assigned_staff.full_name'},
-        #     {'name':'notes'},
-        #     {'name': 'due_date_view'}
-        # ]
-
-        # self.tasks = []
-        # tasks = Task.get_grid_view(view_config={'columns':event_cols}, filters=query)
-        # for task in tasks:
-        #     item = {}
-        #     item['event_type'] = PM_SCHEDULE_TYPE_TASK
-        #     item['uid'] = task['uid']
-        #     item['start_time'] = task['due_date']
-        #     item['end_time'] = (date.fromisoformat(task['due_date']) + timedelta(days=1)).strftime('%Y-%m-%d %H:%M:%S')
-        #     item['start_time_time'] = date.fromisoformat(task['due_date']).strftime('%H:%M')
-        #     item['end_time_time'] = item['start_time_time']
-        #     item['isAllDay'] = True
-        #     item['subject'] = task['activity__name']
-        #     if 'case__case_name' in task:
-        #         item['subject'] = f"{item['subject']}: {task['case__case_name']}"
-        #     item['description'] = task.get('notes', '')
-        #     item['staff_name'] = task['assigned_staff__full_name']
-        #     item['isOverdue'] = date.fromisoformat(task['due_date']) < date.today()
-        #     self.tasks.append(item)
-
-        # self.schedules = self.events + self.tasks
 
     def data_adaptor_get_data(self, query):
         query_data = json.loads(query.data)
