@@ -64,47 +64,75 @@ class TaskListView(GridView2):
         self.init_events()
 
     def init_filters(self):
-        # Status filter
-        status_data = [
-            {'Id': 'all', 'Text': 'All statuses', 'IconCss': 'e-icons e-badminton'},
-            {'Id': 'complete', 'Text': 'Complete', 'IconCss': 'e-icons e-badminton'},
-            {'Id': 'incomplete', 'Text': 'Incomplete', 'IconCss': 'e-icons e-cricket'},
-        ]
-        item_template = '<div><span class="${IconCss}"></span>${Text}</div>'
-
-        self.filter_complete = ej.dropdowns.ComboBox({
-            'dataSource': status_data,
-            'fields': { 'value': 'Id', 'text': 'Text'},
-            'iconTemplate': item_template,
-            'placeholder': 'Complete...',
-            'cssClass': 'e-outline',
-            'value': 'incomplete'
-        })
-        self.filter_complete.addEventListener('change', self.handler_filter_complete)
-
-        # Assigned filter
-        staff_data = Staff.search()
-        staff_data_for_combobox = [{'Id': row['uid'], 'Text': row['first_name'] + " " + row['last_name']} for row in staff_data]
-        staff_data_for_combobox.insert(0, {'Id': 'all', 'Text': 'All staffs'})
         
-        self.filter_staff = ej.dropdowns.ComboBox({
-            'dataSource': staff_data_for_combobox,
-            'fields': {'value': 'Id', 'text': 'Text'},
-            'placeholder': 'Staff...',
-            'value': 'all'
-        })
-        self.filter_staff.addEventListener('change', self.handler_filter_staff)
-        
-        # Cases filter
+        self.events  = [] # Events on filter
+        self.tasks = [] # Staffs on filter
+
         cases_data = Case.search()
-        cases_data_for_combobox = [{'Id': row['uid'], 'Text': row['case_name']} for row in cases_data]
-        cases_data_for_combobox.insert(0, {'Id': 'all', 'Text': 'All cases'})
-        self.filter_case = ej.dropdowns.ComboBox({
-            'dataSource': cases_data_for_combobox,
-            'fields': {'value': 'Id', 'text': 'Text'},
-            'placeholder': 'Cases...',
+        cases_data_for_dropdown = [{'id': case['uid'], 'pid': 'cases', 'text': case['case_name']} for case in cases_data]
+
+        staff_data = Staff.search()
+        staff_data_for_dropdown = [{'id': row['uid'], 'pid': 'staffs', 'text': row['first_name'] + " " + row['last_name']} for row in staff_data]
+
+        dataSource = [
+            {'id': 'statuses', 'text': 'Status', 'hasChild': True},
+            {'id': 'complete', 'text': 'Complete', 'pid': 'statuses'},
+            {'id': 'incomplete', 'text': 'Incomplete', 'pid': 'statuses'},
+            {'id': 'cases', 'text': 'Cases', 'hasChild': True},
+            {'id': 'staffs', 'text': 'Staffs', 'hasChild': True},
+        ]
+        dataSource.extend(staff_data_for_dropdown)
+        dataSource.extend(cases_data_for_dropdown)
+
+        self.dropdown_tree = ej.dropdowns.DropDownTree({
+            'fields': {'dataSource': dataSource, 'value':'id', 'parentValue': 'pid', 'text':'text', 'hasChildren': 'hasChild'},
+            'showCheckBox': True,
+            'treeSettings': {'autoCheck': True},
+            'placeholder': 'Apply filter...'
         })
-        self.filter_case.addEventListener('change', self.handler_filter_cases)
+        self.dropdown_tree.addEventListener('close', self.handler_filter_close)
+
+        # # Status filter
+        # status_data = [
+        #     {'Id': 'all', 'Text': 'All statuses', 'IconCss': 'e-icons e-badminton'},
+        #     {'Id': 'complete', 'Text': 'Complete', 'IconCss': 'e-icons e-badminton'},
+        #     {'Id': 'incomplete', 'Text': 'Incomplete', 'IconCss': 'e-icons e-cricket'},
+        # ]
+        # item_template = '<div><span class="${IconCss}"></span>${Text}</div>'
+
+        # self.filter_complete = ej.dropdowns.ComboBox({
+        #     'dataSource': status_data,
+        #     'fields': { 'value': 'Id', 'text': 'Text'},
+        #     'iconTemplate': item_template,
+        #     'placeholder': 'Complete...',
+        #     'cssClass': 'e-outline',
+        #     'value': 'incomplete'
+        # })
+        # self.filter_complete.addEventListener('change', self.handler_filter_complete)
+
+        # # Assigned filter
+        # staff_data = Staff.search()
+        # staff_data_for_combobox = [{'Id': row['uid'], 'Text': row['first_name'] + " " + row['last_name']} for row in staff_data]
+        # staff_data_for_combobox.insert(0, {'Id': 'all', 'Text': 'All staffs'})
+        
+        # self.filter_staff = ej.dropdowns.ComboBox({
+        #     'dataSource': staff_data_for_combobox,
+        #     'fields': {'value': 'Id', 'text': 'Text'},
+        #     'placeholder': 'Staff...',
+        #     'value': 'all'
+        # })
+        # self.filter_staff.addEventListener('change', self.handler_filter_staff)
+        
+        # # Cases filter
+        # cases_data = Case.search()
+        # cases_data_for_combobox = [{'Id': row['uid'], 'Text': row['case_name']} for row in cases_data]
+        # cases_data_for_combobox.insert(0, {'Id': 'all', 'Text': 'All cases'})
+        # self.filter_case = ej.dropdowns.ComboBox({
+        #     'dataSource': cases_data_for_combobox,
+        #     'fields': {'value': 'Id', 'text': 'Text'},
+        #     'placeholder': 'Cases...',
+        # })
+        # self.filter_case.addEventListener('change', self.handler_filter_cases)
 
     def init_events(self):
         self.grid.addEventListener('dataBound', self.handler_databound)
@@ -118,9 +146,10 @@ class TaskListView(GridView2):
     def form_show(self, get_data=True, **args):
         print("TaskListView/form_show")
         super().form_show(get_data=get_data, **args)
-        self.add_filter_component('Completion Status', self.filter_complete)
-        self.add_filter_component('Assigned to', self.filter_staff)
-        self.add_filter_component('By Case', self.filter_case)
+        self.dropdown_tree.appendTo(jQuery(f"#{self.filter_el_id}")[0])
+        # self.add_filter_component('Completion Status', self.filter_complete)
+        # self.add_filter_component('Assigned to', self.filter_staff)
+        # self.add_filter_component('By Case', self.filter_case)
 
         self.invalidate()
 
