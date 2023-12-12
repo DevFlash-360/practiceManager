@@ -31,7 +31,7 @@ def get_events(start_time, end_time, case_ids, staff_ids):
         staffs = [staff for staff in app_tables.staff.search()]
     events = app_tables.events.search(
         case=q.any_of(*cases),
-        staff=q.any_of(*staffs),
+        staff=q.any_of(staffs),
         start_time=q.greater_than(start_time),
         end_time=q.less_than(end_time)
     )
