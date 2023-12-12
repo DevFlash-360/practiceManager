@@ -139,6 +139,7 @@ class EventScheduleView:
         })
         
         self.dropdown_tree.addEventListener('select', self.handler_filter_select)
+        self.dropdown_tree.addEventListener('close', self.handler_filter_close)
        
     # get events and bind them to the view
     def form_show(self, **event_args):
@@ -212,6 +213,9 @@ class EventScheduleView:
                 self.staffs_filters.append(item['id'])
 
         self.schedule.refreshEvents()
+
+    def handler_filter_close(self, args):
+        print("======= handler_filter_close ===== ")
 
     def action_begin(self, args):
         # change event
