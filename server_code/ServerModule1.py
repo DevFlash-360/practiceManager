@@ -26,13 +26,12 @@ def get_events_filter(start_time, end_time, case_ids, staff_ids):
     else:
         cases = [case for case in app_tables.cases.search()]
     if staff_ids:
-        staffs = [staff for staff in app_tables.staff.search(uid=q.any_of(*staff_ids))]
+        staffs = [[staff] for staff in app_tables.staff.search(uid=q.any_of(*staff_ids))]
     else:
-        staffs = [staff for staff in app_tables.staff.search()]
-    print(f"server_side staffs = {staffs}")
+        staffs = [[staff] for staff in app_tables.staff.search()]
     events = app_tables.events.search(
         case=q.any_of(*cases),
-        staff=q.any_of(staffs),
+        staff=q.any_of(*staffs),
         start_time=q.greater_than(start_time),
         end_time=q.less_than(end_time)
     )
