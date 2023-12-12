@@ -90,6 +90,7 @@ class TaskListView(GridView2):
             'treeSettings': {'autoCheck': True},
             'placeholder': 'Apply filter...'
         })
+        self.dropdown_tree.appendTo(jQuery(f"#{self.filter_el_id}")[0])
         # self.dropdown_tree.addEventListener('close', self.handler_filter_close)
 
 
