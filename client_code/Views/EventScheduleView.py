@@ -273,7 +273,6 @@ class EventScheduleView:
 
     def get_tasks(self, start_time, end_time):
         tasks = anvil.server.call('get_tasks_filter', start_time, end_time, self.cases_filters, self.staffs_filters)
-        print(f"===== tasks = {len(tasks)}")
         self.tasks = []
         for task in tasks:
             item = {}
