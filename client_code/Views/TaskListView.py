@@ -146,7 +146,7 @@ class TaskListView(GridView2):
     def form_show(self, get_data=True, **args):
         print("TaskListView/form_show")
         super().form_show(get_data=get_data, **args)
-        self.dropdown_tree.appendTo(jQuery(f"#{self.filter_el_id}")[0])
+        # self.dropdown_tree.appendTo(jQuery(f"#{self.filter_el_id}")[0])
         # self.add_filter_component('Completion Status', self.filter_complete)
         # self.add_filter_component('Assigned to', self.filter_staff)
         # self.add_filter_component('By Case', self.filter_case)
