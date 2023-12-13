@@ -186,7 +186,6 @@ class TaskListView(GridView2):
     #         self.grid.filterByColumn('case__case_name', 'equal', args['itemData']['Text'])
 
     def handler_filter_close(self, args):
-        print("handler_filter_close")
         tree_data = self.dropdown_tree.getData()
         all_status = tree_data[0].get('selected', False)
         all_cases = tree_data[3].get('selected', False)
@@ -209,6 +208,7 @@ class TaskListView(GridView2):
         #                                                     filters=self.filters,
         #                                                     include_rows=False)
 
+        self.grid.dataSource = self.grid_data
         self.grid.refresh()
 
     def handler_databound(self, args):
