@@ -210,7 +210,7 @@ class TaskListView(GridView2):
             item['due_date_days'] = Task.get_due_date_days(task)
             item['uid'] = task['uid']
             item['completed'] = task['completed']
-            item['assigned_staff__full_name'] = f"{task['assigned_staff']['first_name']} {task['assigned_staff']['last_name']}"
+            item['assigned_staff__full_name'] = ' '.join([f"{staff['first_name']} {staff['last_name']}" for staff in task['assigned_staff']])
             item['activity__name']  = task['activity']['name']
             item['priority'] = task['priority']
             item['case__case_name'] = task['case']['case_name']
