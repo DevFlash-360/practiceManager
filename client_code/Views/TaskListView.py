@@ -92,7 +92,6 @@ class TaskListView(GridView2):
             'placeholder': 'Apply filter...'
         })
         self.dropdown_tree.addEventListener('close', self.handler_filter_close)
-        self.dropdown_tree.addEventListener('change', self.handler_filter_change)
 
         # Status filter
         # status_data = [
