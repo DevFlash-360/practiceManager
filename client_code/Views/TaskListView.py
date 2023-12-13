@@ -78,7 +78,7 @@ class TaskListView(GridView2):
         dataSource = [
             {'id': 'statuses', 'text': 'Status', 'hasChild': True},
             {'id': 'complete', 'text': 'Complete', 'pid': 'statuses'},
-            {'id': 'incomplete', 'text': 'Incomplete', 'pid': 'statuses'},
+            {'id': 'incomplete', 'text': 'Incomplete', 'pid': 'statuses', 'checked': True},
             {'id': 'cases', 'text': 'Cases', 'hasChild': True},
             {'id': 'staffs', 'text': 'Staffs', 'hasChild': True},
         ]
