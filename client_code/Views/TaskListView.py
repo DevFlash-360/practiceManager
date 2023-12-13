@@ -211,7 +211,7 @@ class TaskListView(GridView2):
             self.param_complete = [True]
         if filter_incomplete:
             self.param_complete = [False, None]
-        if all_status:
+        if not filter_complete and not filter_incomplete or all_status:
             self.param_complete = [True, False, None]
         self.get_tasks_filter()
         self.grid.refresh()
