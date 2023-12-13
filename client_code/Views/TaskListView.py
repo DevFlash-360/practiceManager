@@ -189,7 +189,6 @@ class TaskListView(GridView2):
         tree_data = self.dropdown_tree.getData()
         all_status = tree_data[0].get('selected', False)
         filter_complete = tree_data[1].get('selected', False)
-        filter_incomplete = tree_data[2].get('selected', False)
         all_cases = tree_data[3].get('selected', False)
         all_staffs = tree_data[4].get('selected', False)
         selected_items = [item for item in tree_data if item.get('selected')]
