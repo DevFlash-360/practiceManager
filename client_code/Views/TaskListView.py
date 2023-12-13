@@ -204,6 +204,7 @@ class TaskListView(GridView2):
         tasks = anvil.server.call('get_tasks_filter', datetime.min, datetime.max, self.cases_filters, self.staffs_filters)
         dict_items = []
         for task in tasks:
+            print(f"==========\n{task['assigned_staff']}=======")
             item = {}
             item['due_date'] = task['due_date'].strftime("%Y-%m-%d")
             item['due_date_days'] = Task.get_due_date_days(task)
