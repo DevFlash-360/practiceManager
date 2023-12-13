@@ -223,10 +223,7 @@ class TaskListView(GridView2):
         self.invalidate()
 
     def get_tasks_filter(self):
-        print("===== 1 =====")
         tasks = anvil.server.call('get_tasks_filter', datetime.min, datetime.max, self.cases_filters, self.staffs_filters, self.param_complete)
-        print("===== 2 =====")
-        # dict_items = []
         self.grid_data = []
         for task in tasks:
             item = {}
@@ -241,15 +238,7 @@ class TaskListView(GridView2):
             item['due_date_view'] = Task.get_due_date_view(task)
             item['notes'] = task['notes']
             self.grid_data.append(item)
-
-        # self.grid_data = self.grid_class.get_grid_view(self.view_config,
-        #                                                     search_queries=self.search_queries,
-        #                                                     filters=self.filters,
-        #                                                     include_rows=False)
-        print("===== 3 =====")
-
         self.grid['dataSource'] = self.grid_data
-        print("===== 4 =====")
 
     def invalidate(self):
         rows = self.grid.element.querySelectorAll('.e-content .e-table .e-row')
