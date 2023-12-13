@@ -201,8 +201,10 @@ class TaskListView(GridView2):
             if not all_staffs and item.get('pid') == 'staffs':
                 self.staffs_filters.append(item['id'])
 
-        self.grid_data = anvil.server.call('get_tasks_filter', datetime.min, datetime.max, self.cases_filters, self.staffs_filters)
-        print(f"====11111 {self.grid_data}== \n==============")
+        tasks = anvil.server.call('get_tasks_filter', datetime.min, datetime.max, self.cases_filters, self.staffs_filters)
+        for task in tasks:
+            item = dict(task)
+            print(f"======== dict(task) ======== \n{item}\n=====================")
         self.grid_data = self.grid_class.get_grid_view(self.view_config,
                                                             search_queries=self.search_queries,
                                                             filters=self.filters,
