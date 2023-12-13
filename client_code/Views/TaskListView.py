@@ -249,7 +249,8 @@ class TaskListView(GridView2):
 
         self.grid['dataSource'] = self.grid_data
         print("===== 4 =====")
-        self.grid.refresh()
+        if self.grid:
+            self.grid.refresh()
         print("===== 5 =====")
 
     def invalidate(self):
