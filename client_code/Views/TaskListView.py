@@ -47,11 +47,12 @@ class TaskListView(GridView2):
                 {'field': 'due_date_days', 'direction': 'Ascending'},
             ]
         }
-        self.grid.filterSettings = {
-            'columns': [
-                {'field': 'completed', 'operator': 'notequal', 'value': True}
-            ]
-        }
+        # self.grid.filterSettings = {
+        #     'columns': [
+        #         {'field': 'completed', 'operator': 'notequal', 'value': True}
+        #     ]
+        # }
+
         # self.grid.editSettings = {
         #     'allowEditing': True,
         #     'allowAdding': False,
@@ -63,6 +64,7 @@ class TaskListView(GridView2):
 
         self.init_filters()
         self.init_events()
+        self.get_tasks_filter()
 
     def init_filters(self):
         
@@ -185,6 +187,15 @@ class TaskListView(GridView2):
     #         self.grid.filterByColumn('case__case_name', 'equal', args['itemData']['Text'])
 
     def handler_filter_close(self, args):
+        self.get_tasks_filter()
+
+    def handler_databound(self, args):
+        self.invalidate()
+
+    def handle_actionComplete(self, args):
+        self.invalidate()
+
+    def get_tasks_filter(self):
         tree_data = self.dropdown_tree.getData()
         all_status = tree_data[0].get('selected', False)
         filter_complete = tree_data[1].get('selected', False)
@@ -204,7 +215,6 @@ class TaskListView(GridView2):
         param_complete = [True] if filter_complete else [False, None]
         if all_status:
             param_complete = [True, False, None]
-        print(f"param_complete = {param_complete}")
         tasks = anvil.server.call('get_tasks_filter', datetime.min, datetime.max, self.cases_filters, self.staffs_filters, param_complete)
         dict_items = []
         for task in tasks:
@@ -228,12 +238,6 @@ class TaskListView(GridView2):
 
         self.grid['dataSource'] = dict_items
         self.grid.refresh()
-
-    def handler_databound(self, args):
-        self.invalidate()
-
-    def handle_actionComplete(self, args):
-        self.invalidate()
 
     def invalidate(self):
         rows = self.grid.element.querySelectorAll('.e-content .e-table .e-row')
