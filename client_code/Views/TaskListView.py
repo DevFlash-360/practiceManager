@@ -2,7 +2,7 @@ import anvil.server
 import uuid
 from anvil.js.window import ej, jQuery
 from DevFusion.components.GridView2 import GridView2
-from datetime import datetime
+from datetime import datetime, date
 import anvil.js
 from AnvilFusion.tools.utils import AppEnv
 from ..app.models import Staff, Case, Task
@@ -202,16 +202,27 @@ class TaskListView(GridView2):
                 self.staffs_filters.append(item['id'])
 
         tasks = anvil.server.call('get_tasks_filter', datetime.min, datetime.max, self.cases_filters, self.staffs_filters)
+        dict_items = []
         for task in tasks:
-            item = dict(task)
-            print(f"======== dict(task) ======== \n{item}\n=====================")
-        self.grid_data = self.grid_class.get_grid_view(self.view_config,
-                                                            search_queries=self.search_queries,
-                                                            filters=self.filters,
-                                                            include_rows=False)
+            item = {}
+            item['due_date'] = task['due_date'].strftime("%Y-%m-%d")
+            item['due_date_days'] = Task.get_due_date_days(task)
+            item['uid'] = task['uid']
+            item['completed'] = task['completed']
+            item['assigned_staff__full_name'] = f"{task['assigned_staff']['first_name']} {task['assigned_staff']['last_name']}"
+            item['activity__name']  = task['activity']['name']
+            item['priority'] = task['priority']
+            item['case__case_name'] = task['case']['case_name']
+            item['due_date_view'] = Task.get_due_date_view(task)
+            item['notes'] = task['notes']
+            dict_items.append(item)
 
-        print(f"==== {self.grid_data}== ")
-        self.grid['dataSource'] = self.grid_data
+        # self.grid_data = self.grid_class.get_grid_view(self.view_config,
+        #                                                     search_queries=self.search_queries,
+        #                                                     filters=self.filters,
+        #                                                     include_rows=False)
+
+        self.grid['dataSource'] = dict_items
         self.grid.refresh()
 
     def handler_databound(self, args):
