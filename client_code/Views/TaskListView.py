@@ -61,6 +61,9 @@ class TaskListView(GridView2):
         # }
         # self.grid.dataBound = self.collapse_all
         self.first_load = True
+        self.cases_filters = [] # Filter cards with this cases
+        self.staffs_filters = [] # Filter cards with this staffs
+        self.param_complete = [False, None]
 
         self.init_filters()
         self.init_events()

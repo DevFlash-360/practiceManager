@@ -72,7 +72,6 @@ class EventScheduleView:
         self.staffs_filters = [] # Filter cards with this staffs
         self.events  = [] # Events on filter
         self.tasks = [] # Staffs on filter
-        self.param_complete = [False, None]
         self.schedules = None # Contain schedule elements = self.events + self.tasks
 
         event_fields = {
