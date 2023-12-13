@@ -195,6 +195,8 @@ class TaskListView(GridView2):
         self.filter_changed = False
         tree_data = self.dropdown_tree.getData()
         all_status = tree_data[0].get('selected', False)
+        filter_complete = tree_data[1].get('selected', False)
+        filter_incomplete = tree_data[2].get('selected', False)
         all_cases = tree_data[3].get('selected', False)
         all_staffs = tree_data[4].get('selected', False)
         selected_items = [item for item in tree_data if item.get('selected')]
@@ -208,7 +210,10 @@ class TaskListView(GridView2):
             if not all_staffs and item.get('pid') == 'staffs':
                 self.staffs_filters.append(item['id'])
 
-        tasks = anvil.server.call('get_tasks_filter', datetime.min, datetime.max, self.cases_filters, self.staffs_filters)
+        param_complete = [True] if filter_complete else [False]
+        if all_status:
+            param_complete = [True, False, None]
+        tasks = anvil.server.call('get_tasks_filter', datetime.min, datetime.max, self.cases_filters, self.staffs_filters, param_complete)
         dict_items = []
         for task in tasks:
             print(f"==========\n{task['assigned_staff']}=======")
