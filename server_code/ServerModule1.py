@@ -47,12 +47,12 @@ def get_tasks_filter(start_time, end_time, case_ids, staff_ids, completed = [Tru
         staffs = [[staff] for staff in app_tables.staff.search(uid=q.any_of(*staff_ids))]
     else:
         staffs = [[staff] for staff in app_tables.staff.search()]
-    # case_ids.append(None)
-    # staff_ids.append([None])   
+    case_ids.append(None)
+    staff_ids.append([None])   
     tasks = app_tables.tasks.search(
         case=q.any_of(*cases),
         assigned_staff=q.any_of(*staffs),
         due_date=q.all_of(q.greater_than_or_equal_to(start_time.date()), q.less_than_or_equal_to(end_time.date())),
-        # completed=q.any_of(*completed)
+        completed=q.any_of(*completed)
     )
     return tasks

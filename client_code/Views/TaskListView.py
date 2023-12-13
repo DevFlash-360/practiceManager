@@ -201,7 +201,7 @@ class TaskListView(GridView2):
             if not all_staffs and item.get('pid') == 'staffs':
                 self.staffs_filters.append(item['id'])
 
-        param_complete = [True] if filter_complete else [False]
+        param_complete = [True] if filter_complete else [False, None]
         if all_status:
             param_complete = [True, False, None]
         tasks = anvil.server.call('get_tasks_filter', datetime.min, datetime.max, self.cases_filters, self.staffs_filters, param_complete)
