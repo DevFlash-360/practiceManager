@@ -204,10 +204,10 @@ class TaskListView(GridView2):
         param_complete = [True] if filter_complete else [False, None]
         if all_status:
             param_complete = [True, False, None]
+        print(f"param_complete = {param_complete}")
         tasks = anvil.server.call('get_tasks_filter', datetime.min, datetime.max, self.cases_filters, self.staffs_filters, param_complete)
         dict_items = []
         for task in tasks:
-            print(f"==========\n{task['assigned_staff']}=======")
             item = {}
             item['due_date'] = task['due_date'].strftime("%Y-%m-%d")
             item['due_date_days'] = Task.get_due_date_days(task)
