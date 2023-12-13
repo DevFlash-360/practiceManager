@@ -214,9 +214,9 @@ class TaskListView(GridView2):
             item['uid'] = task['uid']
             item['completed'] = task['completed']
             item['assigned_staff__full_name'] = ' '.join([f"{staff['first_name']} {staff['last_name']}" for staff in task['assigned_staff']])
-            item['activity__name']  = task['activity']['name']
+            item['activity__name']  = task['activity']['name'] if task['activity'] and task['activity']['name'] else ""
             item['priority'] = task['priority']
-            item['case__case_name'] = task['case']['case_name']
+            item['case__case_name'] = task['case']['case_name'] if task['case'] and task['case']['case_name'] else ""
             item['due_date_view'] = Task.get_due_date_view(task)
             item['notes'] = task['notes']
             dict_items.append(item)
