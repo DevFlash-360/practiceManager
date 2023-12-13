@@ -208,7 +208,7 @@ class TaskListView(GridView2):
         #                                                     filters=self.filters,
         #                                                     include_rows=False)
 
-        self.grid.dataSource = self.grid_data
+        self.grid['dataSource'] = self.grid_data
         self.grid.refresh()
 
     def handler_databound(self, args):
