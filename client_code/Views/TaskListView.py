@@ -193,6 +193,7 @@ class TaskListView(GridView2):
         tree_data = self.dropdown_tree.getData()
         all_status = tree_data[0].get('selected', False)
         filter_complete = tree_data[1].get('selected', False)
+        filter_incomplete = tree_data[2].get('selected', False)
         all_cases = tree_data[3].get('selected', False)
         all_staffs = tree_data[4].get('selected', False)
         selected_items = [item for item in tree_data if item.get('selected')]
@@ -206,7 +207,10 @@ class TaskListView(GridView2):
             if not all_staffs and item.get('pid') == 'staffs':
                 self.staffs_filters.append(item['id'])
 
-        self.param_complete = [True] if filter_complete else [False, None]
+        if filter_complete:
+            self.param_complete = [True]
+        if filter_incomplete:
+            self.param_complete = [False, None]
         if all_status:
             self.param_complete = [True, False, None]
         self.get_tasks_filter()
@@ -221,7 +225,8 @@ class TaskListView(GridView2):
         print("===== 1 =====")
         tasks = anvil.server.call('get_tasks_filter', datetime.min, datetime.max, self.cases_filters, self.staffs_filters, self.param_complete)
         print("===== 2 =====")
-        dict_items = []
+        # dict_items = []
+        self.grid_data = []
         for task in tasks:
             item = {}
             item['due_date'] = task['due_date'].strftime("%Y-%m-%d")
@@ -234,7 +239,7 @@ class TaskListView(GridView2):
             item['case__case_name'] = task['case']['case_name'] if task['case'] and task['case']['case_name'] else ""
             item['due_date_view'] = Task.get_due_date_view(task)
             item['notes'] = task['notes']
-            dict_items.append(item)
+            self.grid_data.append(item)
 
         # self.grid_data = self.grid_class.get_grid_view(self.view_config,
         #                                                     search_queries=self.search_queries,
@@ -242,7 +247,7 @@ class TaskListView(GridView2):
         #                                                     include_rows=False)
         print("===== 3 =====")
 
-        self.grid['dataSource'] = dict_items
+        self.grid['dataSource'] = self.grid_data
         print("===== 4 =====")
         self.grid.refresh()
 
