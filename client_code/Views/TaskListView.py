@@ -67,7 +67,7 @@ class TaskListView(GridView2):
 
         self.init_filters()
         self.init_events()
-        # self.get_tasks_filter()
+        self.get_tasks_filter()
 
     def init_filters(self):
         
@@ -250,6 +250,7 @@ class TaskListView(GridView2):
         self.grid['dataSource'] = self.grid_data
         print("===== 4 =====")
         self.grid.refresh()
+        print("===== 5 =====")
 
     def invalidate(self):
         rows = self.grid.element.querySelectorAll('.e-content .e-table .e-row')
