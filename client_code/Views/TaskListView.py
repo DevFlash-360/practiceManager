@@ -60,7 +60,6 @@ class TaskListView(GridView2):
         # }
         # self.grid.dataBound = self.collapse_all
         self.first_load = True
-        self.filter_changed = True
 
         self.init_filters()
         self.init_events()
@@ -186,13 +185,7 @@ class TaskListView(GridView2):
     #     else:
     #         self.grid.filterByColumn('case__case_name', 'equal', args['itemData']['Text'])
 
-    def handler_filter_change(self, args):
-        self.filter_changed = True
-
     def handler_filter_close(self, args):
-        if not self.filter_changed:
-            return
-        self.filter_changed = False
         tree_data = self.dropdown_tree.getData()
         all_status = tree_data[0].get('selected', False)
         filter_complete = tree_data[1].get('selected', False)
