@@ -67,7 +67,7 @@ class TaskListView(GridView2):
 
         self.init_filters()
         self.init_events()
-        self.get_tasks_filter()
+        # self.get_tasks_filter()
 
     def init_filters(self):
         
@@ -218,7 +218,9 @@ class TaskListView(GridView2):
         self.invalidate()
 
     def get_tasks_filter(self):
+        print("===== 1 =====")
         tasks = anvil.server.call('get_tasks_filter', datetime.min, datetime.max, self.cases_filters, self.staffs_filters, self.param_complete)
+        print("===== 2 =====")
         dict_items = []
         for task in tasks:
             item = {}
@@ -238,8 +240,10 @@ class TaskListView(GridView2):
         #                                                     search_queries=self.search_queries,
         #                                                     filters=self.filters,
         #                                                     include_rows=False)
+        print("===== 3 =====")
 
         self.grid['dataSource'] = dict_items
+        print("===== 4 =====")
         self.grid.refresh()
 
     def invalidate(self):
