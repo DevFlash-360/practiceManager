@@ -214,6 +214,7 @@ class TaskListView(GridView2):
         if all_status:
             self.param_complete = [True, False, None]
         self.get_tasks_filter()
+        self.grid.refresh()
 
     def handler_databound(self, args):
         self.invalidate()
@@ -249,9 +250,6 @@ class TaskListView(GridView2):
 
         self.grid['dataSource'] = self.grid_data
         print("===== 4 =====")
-        if self.grid:
-            self.grid.refresh()
-        print("===== 5 =====")
 
     def invalidate(self):
         rows = self.grid.element.querySelectorAll('.e-content .e-table .e-row')
