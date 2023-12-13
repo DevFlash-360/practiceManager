@@ -187,15 +187,6 @@ class TaskListView(GridView2):
     #         self.grid.filterByColumn('case__case_name', 'equal', args['itemData']['Text'])
 
     def handler_filter_close(self, args):
-        self.get_tasks_filter()
-
-    def handler_databound(self, args):
-        self.invalidate()
-
-    def handle_actionComplete(self, args):
-        self.invalidate()
-
-    def get_tasks_filter(self):
         tree_data = self.dropdown_tree.getData()
         all_status = tree_data[0].get('selected', False)
         filter_complete = tree_data[1].get('selected', False)
@@ -212,10 +203,19 @@ class TaskListView(GridView2):
             if not all_staffs and item.get('pid') == 'staffs':
                 self.staffs_filters.append(item['id'])
 
-        param_complete = [True] if filter_complete else [False, None]
+        self.param_complete = [True] if filter_complete else [False, None]
         if all_status:
-            param_complete = [True, False, None]
-        tasks = anvil.server.call('get_tasks_filter', datetime.min, datetime.max, self.cases_filters, self.staffs_filters, param_complete)
+            self.param_complete = [True, False, None]
+        self.get_tasks_filter()
+
+    def handler_databound(self, args):
+        self.invalidate()
+
+    def handle_actionComplete(self, args):
+        self.invalidate()
+
+    def get_tasks_filter(self):
+        tasks = anvil.server.call('get_tasks_filter', datetime.min, datetime.max, self.cases_filters, self.staffs_filters, self.param_complete)
         dict_items = []
         for task in tasks:
             item = {}
