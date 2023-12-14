@@ -5,7 +5,7 @@ from DevFusion.components.GridView2 import GridView2
 from datetime import datetime, date
 import anvil.js
 from AnvilFusion.tools.utils import AppEnv
-from ..app.models import Staff, Case, Task
+from ..app.models import Staff, Case, Task, Activity
 class TaskListView(GridView2):
     def __init__(self, case=None, case_uid=None, **kwargs):
         print('TaskListView')
@@ -63,6 +63,7 @@ class TaskListView(GridView2):
         self.first_load = True
         self.cases_filters = [] # Filter cards with this cases
         self.staffs_filters = [] # Filter cards with this staffs
+        self.activity_filters = [] # Filter cards with this activities
         self.param_complete = [False, None]
 
         self.init_filters()
@@ -79,16 +80,22 @@ class TaskListView(GridView2):
 
         staff_data = Staff.search()
         staff_data_for_dropdown = [{'id': row['uid'], 'pid': 'staffs', 'text': row['first_name'] + " " + row['last_name']} for row in staff_data]
+       
+        activity_data = Activity.search()
+        activity_data_for_dropdown = [{'id': row['uid'], 'pid': 'activities', 'text': row['name']} for row in activity_data]
+
 
         dataSource = [
             {'id': 'statuses', 'text': 'Status', 'hasChild': True},
             {'id': 'complete', 'text': 'Complete', 'pid': 'statuses'},
             {'id': 'incomplete', 'text': 'Incomplete', 'pid': 'statuses', 'selected': True},
-            {'id': 'cases', 'text': 'Cases', 'hasChild': True},
-            {'id': 'staffs', 'text': 'Staffs', 'hasChild': True},
+            {'id': 'cases', 'text': 'Case', 'hasChild': True},
+            {'id': 'staffs', 'text': 'Staff', 'hasChild': True},
+            {'id': 'activities', 'text': 'Activity', 'hasChild': True},
         ]
         dataSource.extend(staff_data_for_dropdown)
         dataSource.extend(cases_data_for_dropdown)
+        dataSource.extend(activity_data_for_dropdown)
 
         self.dropdown_tree = ej.dropdowns.DropDownTree({
             'fields': {'dataSource': dataSource, 'value':'id', 'parentValue': 'pid', 'text':'text', 'hasChildren': 'hasChild'},
@@ -200,11 +207,14 @@ class TaskListView(GridView2):
 
         self.cases_filters = []
         self.staffs_filters = []
+        self.activity_filters = []
 
         for item in selected_items:
             if not all_cases and item.get('pid') == 'cases':
                 self.cases_filters.append(item['id'])
             if not all_staffs and item.get('pid') == 'staffs':
+                self.staffs_filters.append(item['id'])
+            if not all_s and item.get('pid') == 'staffs':
                 self.staffs_filters.append(item['id'])
 
         if filter_complete:
@@ -223,7 +233,7 @@ class TaskListView(GridView2):
         self.invalidate()
 
     def get_tasks_filter(self):
-        tasks = anvil.server.call('get_tasks_filter', self.cases_filters, self.staffs_filters, None, None, self.param_complete)
+        tasks = anvil.server.call('get_tasks_filter', self.cases_filters, self.staffs_filters, self.activity_filters, None, None, self.param_complete)
         self.grid_data = []
         for task in tasks:
             item = {}

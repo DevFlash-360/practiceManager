@@ -43,13 +43,15 @@ def get_events_filter(start_time, end_time, case_ids, staff_ids, activity_ids):
     return events
 
 @anvil.server.callable
-def get_tasks_filter(case_ids, staff_ids, start_time, end_time, completed = [True, False, None]):
+def get_tasks_filter(case_ids, staff_ids, activity_ids, start_time, end_time, completed = [True, False, None]):
     cases = []
     staffs = []
     if case_ids:
         cases = [case for case in app_tables.cases.search(uid=q.any_of(*case_ids))]
     if staff_ids:
         staffs = [[staff] for staff in app_tables.staff.search(uid=q.any_of(*staff_ids))]
+    if activity_ids:
+        activities = [activity for activity in app_tables.activities.search(uid=q.any_of(*activity_ids))]
 
     kwargs = {
         'completed': q.any_of(*completed)
@@ -60,5 +62,7 @@ def get_tasks_filter(case_ids, staff_ids, start_time, end_time, completed = [Tru
         kwargs['case'] = q.any_of(*cases)
     if staffs:
         kwargs['assigned_staff'] = q.any_of(*staffs)
+    if activities:
+        kwargs['activity'] = q.any_of(*activities)
     tasks = app_tables.tasks.search(q.all_of(**kwargs))
     return tasks
