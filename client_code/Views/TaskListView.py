@@ -223,7 +223,7 @@ class TaskListView(GridView2):
         self.invalidate()
 
     def get_tasks_filter(self):
-        tasks = anvil.server.call('get_tasks_filter', datetime.min, datetime.max, self.cases_filters, self.staffs_filters, self.param_complete)
+        tasks = anvil.server.call('get_tasks_filter', self.cases_filters, self.staffs_filters, None, None, self.param_complete)
         self.grid_data = []
         for task in tasks:
             item = {}

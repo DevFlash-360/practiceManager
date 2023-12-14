@@ -290,7 +290,7 @@ class EventScheduleView:
         self.schedules = self.events + self.tasks
 
     def get_tasks(self, start_time, end_time):
-        tasks = anvil.server.call('get_tasks_filter', start_time, end_time, self.cases_filters, self.staffs_filters)
+        tasks = anvil.server.call('get_tasks_filter', self.cases_filters, self.staffs_filters, start_time, end_time)
         self.tasks = []
         for task in tasks:
             item = {}
