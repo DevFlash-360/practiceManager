@@ -126,7 +126,7 @@ class EventScheduleView:
         staff_data_for_dropdown = [{'id': row['uid'], 'pid': 'staffs', 'text': row['first_name'] + " " + row['last_name']} for row in staff_data]
 
         activity_data = Activity.search()
-        activity_data_for_dropdown = [{'id': row['uid'], 'pid': 'activities', 'text': row['nme']} for row in activity_data]
+        activity_data_for_dropdown = [{'id': row['uid'], 'pid': 'activities', 'text': row['name']} for row in activity_data]
 
         dataSource = [
             {'id': 'cases', 'text': 'Case', 'hasChild': True},
