@@ -46,6 +46,7 @@ def get_events_filter(start_time, end_time, case_ids, staff_ids, activity_ids):
 def get_tasks_filter(case_ids, staff_ids, activity_ids, start_time, end_time, completed = [True, False, None]):
     cases = []
     staffs = []
+    activities = []
     if case_ids:
         cases = [case for case in app_tables.cases.search(uid=q.any_of(*case_ids))]
     if staff_ids:
