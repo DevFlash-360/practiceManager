@@ -38,7 +38,7 @@ def get_events_filter(start_time, end_time, case_ids, staff_ids):
     return events
 
 @anvil.server.callable
-def get_tasks_filter(case_ids, staff_ids, start_time = None, end_time = None, completed = [True, False, None]):
+def get_tasks_filter(case_ids, staff_ids, start_time, end_time, completed = [True, False, None]):
     cases = []
     staffs = []
     if case_ids:
