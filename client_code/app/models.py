@@ -375,6 +375,9 @@ class Contact:
     }
     additional_info = Attribute(field_type=types.FieldTypes.OBJECT, schema=additional_info_schema)
 
+    department = Attribute(field_type=types.FieldTypes.SINGLE_LINE)
+    courtroom = Attribute(field_type=types.FieldTypes.SINGLE_LINE)
+
     @staticmethod
     def get_full_name(args):
         return f"{args['first_name']} {args['last_name']}"
