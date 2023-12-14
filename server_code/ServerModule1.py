@@ -20,7 +20,7 @@ import anvil.server
 #
 
 @anvil.server.callable
-def get_events_filter(start_time, end_time, case_ids, staff_ids):
+def get_events_filter(start_time, end_time, case_ids, staff_ids, activity_ids):
     if case_ids:
         cases = [case for case in app_tables.cases.search(uid=q.any_of(*case_ids))]
     else:
@@ -29,9 +29,14 @@ def get_events_filter(start_time, end_time, case_ids, staff_ids):
         staffs = [[staff] for staff in app_tables.staff.search(uid=q.any_of(*staff_ids))]
     else:
         staffs = [[staff] for staff in app_tables.staff.search()]
+    if activity_ids:
+        activities = [activity for activity in app_tables.activities.search(uid=q.any_of(*activity_ids))]
+    else:
+        activities = [activity for activity in app_tables.activities.search()]
     events = app_tables.events.search(
         case=q.any_of(*cases),
         staff=q.any_of(*staffs),
+        activity=q.any_of(*activities),
         start_time=q.greater_than(start_time),
         end_time=q.less_than(end_time)
     )
