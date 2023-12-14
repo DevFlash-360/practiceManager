@@ -203,6 +203,7 @@ class TaskListView(GridView2):
         filter_incomplete = tree_data[2].get('selected', False)
         all_cases = tree_data[3].get('selected', False)
         all_staffs = tree_data[4].get('selected', False)
+        all_activities = tree_data[5].get('selected', False)
         selected_items = [item for item in tree_data if item.get('selected')]
 
         self.cases_filters = []
@@ -214,8 +215,8 @@ class TaskListView(GridView2):
                 self.cases_filters.append(item['id'])
             if not all_staffs and item.get('pid') == 'staffs':
                 self.staffs_filters.append(item['id'])
-            if not all_s and item.get('pid') == 'staffs':
-                self.staffs_filters.append(item['id'])
+            if not all_activities and item.get('pid') == 'activities':
+                self.activity_filters.append(item['id'])
 
         if filter_complete:
             self.param_complete = [True]
