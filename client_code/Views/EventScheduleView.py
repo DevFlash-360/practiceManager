@@ -6,7 +6,7 @@ from AnvilFusion.tools.utils import datetime_js_to_py
 import anvil.js
 from anvil.tables import app_tables
 import anvil.server
-from ..app.models import Event, Task, Case, Staff
+from ..app.models import Event, Task, Case, Staff, Activity
 from ..Forms.EventForm import EventForm
 from ..Forms.TaskForm import TaskForm
 from datetime import datetime, date, timedelta
@@ -70,6 +70,7 @@ class EventScheduleView:
         self.container_el = None
         self.cases_filters = [] # Filter cards with this cases
         self.staffs_filters = [] # Filter cards with this staffs
+        self.activity_filters = [] # Filter cards with this activities
         self.events  = [] # Events on filter
         self.tasks = [] # Staffs on filter
         self.schedules = None # Contain schedule elements = self.events + self.tasks
@@ -124,12 +125,17 @@ class EventScheduleView:
         staff_data = Staff.search()
         staff_data_for_dropdown = [{'id': row['uid'], 'pid': 'staffs', 'text': row['first_name'] + " " + row['last_name']} for row in staff_data]
 
+        activity_data = Activity.search()
+        activity_data_for_dropdown = [{'id': row['uid'], 'pid': 'activities', 'text': row['nme']} for row in activity_data]
+
         dataSource = [
-            {'id': 'cases', 'text': 'Cases', 'hasChild': True},
-            {'id': 'staffs', 'text': 'Staffs', 'hasChild': True},
+            {'id': 'cases', 'text': 'Case', 'hasChild': True},
+            {'id': 'staffs', 'text': 'Staff', 'hasChild': True},
+            {'id': 'activities', 'text': 'Activity', 'hasChild': True},
         ]
         dataSource.extend(staff_data_for_dropdown)
         dataSource.extend(cases_data_for_dropdown)
+        dataSource.extend(activity_data_for_dropdown)
 
         self.dropdown_tree = ej.dropdowns.DropDownTree({
             'fields': {'dataSource': dataSource, 'value':'id', 'parentValue': 'pid', 'text':'text', 'hasChildren': 'hasChild'},
@@ -218,16 +224,20 @@ class EventScheduleView:
         tree_data = self.dropdown_tree.getData()
         all_cases = tree_data[0].get('selected', False)
         all_staffs = tree_data[1].get('selected', False)
+        all_activity = tree_data[2].get('selected', False)
         selected_items = [item for item in tree_data if item.get('selected')]
 
         self.cases_filters = []
         self.staffs_filters = []
+        self.activity_filters = []
 
         for item in selected_items:
             if not all_cases and item.get('pid') == 'cases':
                 self.cases_filters.append(item['id'])
             if not all_staffs and item.get('pid') == 'staffs':
                 self.staffs_filters.append(item['id'])
+            if not all_activity and item.get('pid') == 'activities':
+                self.activity_filters.append(item['id'])
 
         self.schedule.refreshEvents()
 
