@@ -227,7 +227,8 @@ class TaskListView(GridView2):
         self.grid_data = []
         for task in tasks:
             item = {}
-            item['due_date'] = task['due_date'].strftime("%Y-%m-%d")
+            if task['due_date']:
+                item['due_date'] = task['due_date'].strftime("%Y-%m-%d")
             item['due_date_days'] = Task.get_due_date_days(task)
             item['uid'] = task['uid']
             item['completed'] = task['completed']
