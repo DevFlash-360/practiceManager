@@ -312,7 +312,7 @@ class EventScheduleView:
             item['location_name'] = event['location']['name'] if event['location'] and event['location']['name'] else ''
             item['department'] = ""
             if event['department'] and event['department']['department'] and event['department']['courtroom']:
-                item['department'] = f"{event['department']['department']} {event['department']['courtroom']}"
+                item['department'] = f"{event['department']['department']}/{event['department']['courtroom']} - {event['department']['last_name']}"
             self.events.append(item)
         self.schedules = self.events + self.tasks
 

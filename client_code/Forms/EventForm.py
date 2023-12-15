@@ -87,7 +87,7 @@ class EventForm(FormBase):
             self.department.value = None
 
     def contact_department(self, rec):
-        return f"{rec['department']} - {rec['courtroom']}"
+        return f"{rec['department']}/{rec['courtroom']} - {rec['last_name']}"
 
     def update_time(self, args):
         if not self.start_time.value or not self.end_time.value:
