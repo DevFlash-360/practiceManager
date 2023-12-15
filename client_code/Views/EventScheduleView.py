@@ -45,7 +45,7 @@ PM_SCHEDULE_DEFAULT_VIEWS = [
     'Month',
 ]
 PM_SCHEDULE_POPUP = {
-    'content': '${if(event_type==="task" && isOverdue===true)}<span class="label label-danger">DUE</span>${/if}\
+    'content': '<div style="font-size: 14px;">\
 		<div class="e-date-time">\
 			<i class="fa-regular fa-clock pr-1"></i>\
 			${if(event_type==="event")}${start_time_time} - ${end_time_time}${/if}\
