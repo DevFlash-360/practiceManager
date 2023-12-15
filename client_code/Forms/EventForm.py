@@ -25,7 +25,7 @@ class EventForm(FormBase):
         self.location = LookupInput(name='location', label='Location', model='Entity', text_field='name',
                                     on_change=self.location_change)
         self.department = LookupInput(name='department', label='Department', model='Contact',
-                                      text_field=['department', 'courtroom'],
+                                      text_field=['department', 'courtroom', 'last_name'],
                                       compute_option=self.contact_department, enabled=False)
         self.client_attendance_required = CheckboxInput(name='client_attendance_required',
                                                         label='Client attendance required')
