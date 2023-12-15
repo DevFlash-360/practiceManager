@@ -61,9 +61,9 @@ PM_SCHEDULE_POPUP = {
             <div class="e-event-content">\
                 <div class="e-subject-wrap">\
                     ${if (Subject)}\
-                    <div class="subject">${Subject}</div>${/if} ${if (City)}\
-                    <div class="location">${City}</div>${/if} ${if (Description)}\
-                    <div class="description">${Description}</div>${/if}\
+                    <div class="subject">${subject}</div>${/if} ${if (City)}\
+                    <div class="location">${location_name}</div>${/if} ${if (Description)}\
+                    <div class="description">${department}</div>${/if}\
                 </div>\
             </div>\
             ${/if}\
