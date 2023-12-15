@@ -46,26 +46,23 @@ PM_SCHEDULE_DEFAULT_VIEWS = [
 ]
 PM_SCHEDULE_POPUP = {
     'content': '<div>\
-            ${if (elementType === "cell")}\
-            <div class="e-cell-content">\
-                <form class="e-schedule-form">\
-                    <div>\
-                        <input class="subject e-field" type="text" name="Subject" placeholder="Title">\
-                    </div>\
-                    <div>\
-                        <input class="location e-field" type="text" name="Location" placeholder="Location">\
-                    </div>\
-                </form>\
-            </div>\
-            ${else}\
-            <div class="e-event-content">\
-                <div class="e-subject-wrap">\
-                    ${if (subject)}<div class="subject">${subject}</div>${/if} \
-                    ${if (location_name)}<div class="location">${location_name}</div>${/if}\
-                    ${if (department)}<div class="description">${department}</div>${/if}\
-                </div>\
-            </div>\
-            ${/if}\
+		${if(event_type==="task" && isOverdue===true)}<span class="label label-danger">DUE</span>${/if}\
+		<a class="e-subject">${subject}</a>\
+		<div class="e-date-time">\
+			<i class="fa-regular fa-clock pr-1"></i>\
+			${if(event_type==="event")}${start_time_time} - ${end_time_time}${/if}\
+			${if(event_type==="task")}All day${/if}\
+		</div>\
+		${if(staff_name)}\
+			<div><i class="fa-light fa-user pr-1"></i>${staff_name}</div>\
+		${/if}\
+		${if(location_name)}\
+			<div><i class="fa-light fa-location-dot pr-1"></i>${location_name}</div>\
+		${/if}\
+		${if(department)}\
+			<div><i class="fa-regular fa-building pr-1"></i>${department}</div>\
+		${/if}\
+		${if(client_attendance_required===true)}<i class="fa-solid fa-check pr-1"></i>Client attendance required${/if}\
         </div>'
 }
 PM_SCHEDULE_DETAIL_VIEWS = [
