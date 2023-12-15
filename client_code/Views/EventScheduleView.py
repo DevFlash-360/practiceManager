@@ -47,9 +47,8 @@ PM_SCHEDULE_DEFAULT_VIEWS = [
 PM_SCHEDULE_POPUP = {
     'content': '<div>\
 		${if(event_type==="task" && isOverdue===true)}<span class="label label-danger">DUE</span>${/if}\
-		<a class="e-subject">${subject}</a>\
 		<div class="e-date-time">\
-			<i class="fa-regular fa-clock pr-1"></i>\
+			<div class="e-date-time-icon e-icons"></div>\
 			${if(event_type==="event")}${start_time_time} - ${end_time_time}${/if}\
 			${if(event_type==="task")}All day${/if}\
 		</div>\
