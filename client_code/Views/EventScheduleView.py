@@ -44,6 +44,31 @@ PM_SCHEDULE_DEFAULT_VIEWS = [
     'Week',
     'Month',
 ]
+PM_SCHEDULE_POPUP = {
+    'content': '<div>\
+            ${if (elementType === "cell")}\
+            <div class="e-cell-content">\
+                <form class="e-schedule-form">\
+                    <div>\
+                        <input class="subject e-field" type="text" name="Subject" placeholder="Title">\
+                    </div>\
+                    <div>\
+                        <input class="location e-field" type="text" name="Location" placeholder="Location">\
+                    </div>\
+                </form>\
+            </div>\
+            ${else}\
+            <div class="e-event-content">\
+                <div class="e-subject-wrap">\
+                    ${if (Subject)}\
+                    <div class="subject">${Subject}</div>${/if} ${if (City)}\
+                    <div class="location">${City}</div>${/if} ${if (Description)}\
+                    <div class="description">${Description}</div>${/if}\
+                </div>\
+            </div>\
+            ${/if}\
+        </div>'
+}
 PM_SCHEDULE_DETAIL_VIEWS = [
     # 'Agenda',
     'MonthAgenda',
@@ -110,6 +135,7 @@ class EventScheduleView:
             # 'hover': self.hover_event,
             'eventClick': self.event_click,
             'cssClass': 'pm-schedule-cell-width pm-schedule-cell-height e-hide-spinner',
+            'quickInfoTemplates': PM_SCHEDULE_POPUP,
             # 'renderCell': self.render_cell,
         }
 
