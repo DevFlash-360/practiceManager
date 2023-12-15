@@ -220,10 +220,10 @@ tr.e-columnheader th span.e-headertext {
     font-weight: 600;
 }
 
-.e-control.e-toolbar {
+/* .e-control.e-toolbar {
     padding-top: 12px;
     padding-bottom: 12px;
-}
+} */
 
 input.e-input,
 .e-input-group input,
