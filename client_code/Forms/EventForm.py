@@ -25,7 +25,7 @@ class EventForm(FormBase):
         self.location = LookupInput(name='location', label='Location', model='Entity', text_field='name',
                                     on_change=self.location_change)
         self.department = LookupInput(name='department', label='Department', model='Contact',
-                                      text_field=['full_name', 'title_position'],
+                                      text_field=['department', 'courtroom'],
                                       compute_option=self.contact_department, enabled=False)
         self.client_attendance_required = CheckboxInput(name='client_attendance_required',
                                                         label='Client attendance required')
@@ -87,7 +87,7 @@ class EventForm(FormBase):
             self.department.value = None
 
     def contact_department(self, rec):
-        return f"{rec['full_name']} - {rec['title_position']}"
+        return f"{rec['department']} - {rec['courtroom']}"
 
     def update_time(self, args):
         if not self.start_time.value or not self.end_time.value:
