@@ -119,6 +119,7 @@ class EventScheduleView:
             'views': PM_SCHEDULE_DEFAULT_VIEWS,
             'selectedDate': Date.now(),
             'disableHtmlEncode': False, 
+            'showHeaderBar': True,
             'eventSettings': {
                 'dataSource': self.data_manager,
                 'fields': event_fields,
