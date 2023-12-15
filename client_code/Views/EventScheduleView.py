@@ -134,7 +134,7 @@ class EventScheduleView:
             # 'hover': self.hover_event,
             'eventClick': self.event_click,
             'cssClass': 'pm-schedule-cell-width pm-schedule-cell-height e-hide-spinner',
-            'quickInfoTemplates': PM_SCHEDULE_POPUP,
+            # 'quickInfoTemplates': PM_SCHEDULE_POPUP,
             # 'renderCell': self.render_cell,
         }
 
