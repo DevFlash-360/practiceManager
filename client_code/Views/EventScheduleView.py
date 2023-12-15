@@ -48,18 +48,18 @@ PM_SCHEDULE_POPUP = {
     'content': '<div>\
 		${if(event_type==="task" && isOverdue===true)}<span class="label label-danger">DUE</span>${/if}\
 		<div class="e-date-time">\
-			<div class="e-date-time-icon e-icons"></div>\
+			<i class="fa-regular fa-clock pr-1"></i>\
 			${if(event_type==="event")}${start_time_time} - ${end_time_time}${/if}\
 			${if(event_type==="task")}All day${/if}\
 		</div>\
 		${if(staff_name)}\
-			<div><i class="fa-light fa-user pr-1"></i>${staff_name}</div>\
+			<div style="padding-top:12px;"><i class="fa-light fa-user pr-1"></i>${staff_name}</div>\
 		${/if}\
 		${if(location_name)}\
-			<div><i class="fa-light fa-location-dot pr-1"></i>${location_name}</div>\
+			<div style="padding-top:12px;"><i class="fa-light fa-location-dot pr-1"></i>${location_name}</div>\
 		${/if}\
 		${if(department)}\
-			<div><i class="fa-regular fa-building pr-1"></i>${department}</div>\
+			<div style="padding-top:12px;"><i class="fa-regular fa-building pr-1"></i>${department}</div>\
 		${/if}\
 		${if(client_attendance_required===true)}<i class="fa-solid fa-check pr-1"></i>Client attendance required${/if}\
         </div>'
@@ -130,7 +130,7 @@ class EventScheduleView:
             # 'hover': self.hover_event,
             'eventClick': self.event_click,
             'cssClass': 'pm-schedule-cell-width pm-schedule-cell-height e-hide-spinner',
-            # 'quickInfoTemplates': PM_SCHEDULE_POPUP,
+            'quickInfoTemplates': PM_SCHEDULE_POPUP,
             # 'renderCell': self.render_cell,
         }
 
