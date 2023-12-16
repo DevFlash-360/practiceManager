@@ -370,6 +370,10 @@ tr.task-incomplete > td button > span.btn-task-status {
     display: none;
 }
 
+#pm-filter-container .e-overflow .e-show-text.e-total-count {
+	display: none;
+}
+
 .e-ddt.e-popup {
 	width: auto !important;
 }
