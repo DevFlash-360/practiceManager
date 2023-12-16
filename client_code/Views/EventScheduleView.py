@@ -161,7 +161,7 @@ class EventScheduleView:
             'fields': {'dataSource': dataSource, 'value':'id', 'parentValue': 'pid', 'text':'text', 'hasChildren': 'hasChild'},
             'showCheckBox': True,
             'treeSettings': {'autoCheck': True},
-            'placeholder': 'Apply filter...'
+            # 'placeholder': 'Apply filter...'
         })
         
         # self.dropdown_tree.addEventListener('select', self.handler_filter_select)

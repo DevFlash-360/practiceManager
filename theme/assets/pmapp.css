@@ -371,5 +371,5 @@ tr.task-incomplete > td button > span.btn-task-status {
 }
 
 .e-ddt.e-popup {
-	width: auto;
+	width: auto !important;
 }
