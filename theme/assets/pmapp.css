@@ -361,3 +361,11 @@ tr.task-incomplete > td button > span.btn-task-status {
 #pm-filter-container .e-input-group.e-control-wrapper {
     width: 300px;
 }
+
+#pm-filter-container .e-chips-wrapper {
+    display: none;
+}
+
+#pm-filter-container .e-clear-icon {
+    display: none;
+}
