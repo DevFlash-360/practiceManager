@@ -369,3 +369,7 @@ tr.task-incomplete > td button > span.btn-task-status {
 #pm-filter-container .e-clear-icon {
     display: none;
 }
+
+.e-ddt.e-popup {
+	width: auto;
+}
