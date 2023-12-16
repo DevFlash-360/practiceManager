@@ -359,7 +359,7 @@ tr.task-incomplete > td button > span.btn-task-status {
 }
 
 #pm-filter-container .e-input-group.e-control-wrapper {
-    width: 300px;
+    width: 38px !important;
 }
 
 #pm-filter-container .e-chips-wrapper {
