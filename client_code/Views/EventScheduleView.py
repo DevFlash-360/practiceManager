@@ -178,7 +178,7 @@ class EventScheduleView:
          <div id="eventfilterlist"></div>\
          <div class="pm-gridview-title">Agenda</div>\
          <div id="pm-filter-container">\
-          <div id="{self.filter_el_id}" class="e-caret-hide" style="display:block;"></div>\
+          <div id="{self.filter_el_id}" class="e-caret-hide" style="width: 250px;display:block;"></div>\
          </div>\
          <div id="{self.schedule_el_id}"></div>\
        </div>'
