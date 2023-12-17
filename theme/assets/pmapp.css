@@ -377,3 +377,7 @@ tr.task-incomplete > td button > span.btn-task-status {
 .e-ddt.e-popup {
 	width: auto !important;
 }
+
+#pm-filter-container .e-input-group.e-control-wrapper.e-show-dd-icon.e-ddt .e-ddt-icon {
+	position: absolute;
+}
