@@ -380,4 +380,6 @@ tr.task-incomplete > td button > span.btn-task-status {
 
 #pm-filter-container .e-input-group.e-control-wrapper.e-show-dd-icon.e-ddt .e-ddt-icon {
 	position: absolute;
+	right:0;
+	bottom:0;
 }
