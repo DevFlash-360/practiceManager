@@ -261,7 +261,7 @@ class EventScheduleView:
                 
         if selected_items:
             print("11111111")
-            jQuery("#pm-filter-container .e-icons.e-ddt-icon")[0].style.color = "#272D83"
+            jQuery("#pm-filter-container .e-icons.e-ddt-icon")[0].style.color = "rgb(0 147 255)"
             # self.grid.element.querySelector(f'#pm-filter-container .e-icons.e-input-group-icon.e-ddt-icon::before').content = "\e735"
         else:
             print("22222222")
