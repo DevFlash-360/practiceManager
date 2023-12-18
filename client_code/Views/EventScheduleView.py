@@ -259,6 +259,10 @@ class EventScheduleView:
             if not all_activity and item.get('pid') == 'activities':
                 self.activity_filters.append(item['id'])
                 
+        if selected_items:
+            self.grid.element.querySelector(f'#pm-filter-container .e-icons.e-input-group-icon.e-ddt-icon::before').content = "\e735"
+        else:
+            self.grid.element.querySelector(f'#pm-filter-container .e-icons.e-input-group-icon.e-ddt-icon::before').content = "\e72c"
         self.schedule.refreshEvents()
 
     def action_begin(self, args):
