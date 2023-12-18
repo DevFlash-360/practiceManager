@@ -383,7 +383,7 @@ tr.task-incomplete > td button > span.btn-task-status {
 	width: auto !important;
 }
 
-#pm-filter-container .e-input-group.e-control-wrapper.e-show-dd-icon.e-ddt .e-ddt-icon {
+#pm-filter-container .e-input-group.e-control-wrapper.e-show-dd-icon.e-ddt .e-input-group-icon.e-icons {
 	position: absolute;
 	right:0;
 	bottom:0;
@@ -398,4 +398,8 @@ tr.task-incomplete > td button > span.btn-task-status {
 
 #pm-grid-container .e-toolbar-left {
 	display: flex;
+}
+
+#pm-filter-container .e-icons.e-ddt-icon::before {
+	content: "\e72c";
 }

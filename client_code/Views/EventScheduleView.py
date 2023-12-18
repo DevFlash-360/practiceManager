@@ -46,21 +46,21 @@ PM_SCHEDULE_DEFAULT_VIEWS = [
 ]
 PM_SCHEDULE_POPUP = {
     'content': '<div style="font-size: 14px;">\
-		<div>\
-			<i class="fa-regular fa-clock pr-1"></i>\
-			${if(event_type==="event")}${start_time_time} - ${end_time_time}${/if}\
-			${if(event_type==="task")}All day${/if}\
-		</div>\
-		${if(staff_name)}\
-			<div style="padding-top:12px;"><i class="fa-regular fa-user pr-1"></i>${staff_name}</div>\
-		${/if}\
-		${if(location_name)}\
-			<div style="padding-top:12px;"><i class="fa-regular fa-location-dot pr-1"></i>${location_name}</div>\
-		${/if}\
-		${if(department)}\
-			<div style="padding-top:12px;"><i class="fa-regular fa-building pr-1"></i>${department}</div>\
-		${/if}\
-		${if(client_attendance_required===true)}<i class="fa-solid fa-check pr-1"></i>Client attendance required${/if}'
+        <div>\
+            <i class="fa-regular fa-clock pr-1"></i>\
+            ${if(event_type==="event")}${start_time_time} - ${end_time_time}${/if}\
+            ${if(event_type==="task")}All day${/if}\
+        </div>\
+        ${if(staff_name)}\
+            <div style="padding-top:12px;"><i class="fa-regular fa-user pr-1"></i>${staff_name}</div>\
+        ${/if}\
+        ${if(location_name)}\
+            <div style="padding-top:12px;"><i class="fa-regular fa-location-dot pr-1"></i>${location_name}</div>\
+        ${/if}\
+        ${if(department)}\
+            <div style="padding-top:12px;"><i class="fa-regular fa-building pr-1"></i>${department}</div>\
+        ${/if}\
+        ${if(client_attendance_required===true)}<i class="fa-solid fa-check pr-1"></i>Client attendance required${/if}'
 }
 PM_SCHEDULE_DETAIL_VIEWS = [
     # 'Agenda',
@@ -242,7 +242,6 @@ class EventScheduleView:
 
     def handler_filter_close(self, args):
         tree_data = self.dropdown_tree.getData()
-        print(f"=======tree_data = \n{tree_data}=========")
         all_cases = tree_data[0].get('selected', False)
         all_staffs = tree_data[1].get('selected', False)
         all_activity = tree_data[2].get('selected', False)
@@ -259,7 +258,7 @@ class EventScheduleView:
                 self.staffs_filters.append(item['id'])
             if not all_activity and item.get('pid') == 'activities':
                 self.activity_filters.append(item['id'])
-
+                
         self.schedule.refreshEvents()
 
     def action_begin(self, args):
