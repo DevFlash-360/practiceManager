@@ -260,8 +260,10 @@ class EventScheduleView:
                 self.activity_filters.append(item['id'])
                 
         if selected_items:
+            print("11111111")
             self.grid.element.querySelector(f'#pm-filter-container .e-icons.e-input-group-icon.e-ddt-icon::before').content = "\e735"
         else:
+            print("22222222")
             self.grid.element.querySelector(f'#pm-filter-container .e-icons.e-input-group-icon.e-ddt-icon::before').content = "\e72c"
         self.schedule.refreshEvents()
 
