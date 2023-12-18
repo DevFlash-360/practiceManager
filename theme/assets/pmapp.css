@@ -383,3 +383,9 @@ tr.task-incomplete > td button > span.btn-task-status {
 	right:0;
 	bottom:0;
 }
+
+#pm-content .pm-scheduleview-container .pm-gridview-title,
+#pm-content .pm-scheduleview-container #pm-filter-container {
+	display: inline-block;
+	vertical-align: top;
+}
