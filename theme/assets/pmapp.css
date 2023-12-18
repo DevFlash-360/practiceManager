@@ -354,12 +354,13 @@ tr.task-incomplete > td button > span.btn-task-status {
 	align-items: center;
 }
 
-#pm-filter-container span.e-icons {
+/* #pm-filter-container span.e-icons {
 	margin-bottom: 5px;
-}
+} */
 
 #pm-filter-container .e-input-group.e-control-wrapper {
     width: 38px !important;
+	height: 30px;
 }
 
 #pm-filter-container .e-chips-wrapper {
@@ -389,4 +390,8 @@ tr.task-incomplete > td button > span.btn-task-status {
 	display: inline-block;
 	vertical-align: top;
 	margin-top: -11px;
+}
+
+#pm-grid-container .e-toolbar-left {
+	display: flex;
 }
