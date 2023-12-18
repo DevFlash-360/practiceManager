@@ -388,4 +388,5 @@ tr.task-incomplete > td button > span.btn-task-status {
 #pm-content .pm-scheduleview-container #pm-filter-container {
 	display: inline-block;
 	vertical-align: top;
+	margin-top: -0.5em;
 }
