@@ -242,6 +242,7 @@ class EventScheduleView:
 
     def handler_filter_close(self, args):
         tree_data = self.dropdown_tree.getData()
+        print(f"=======tree_data = \n{tree_data}=========")
         all_cases = tree_data[0].get('selected', False)
         all_staffs = tree_data[1].get('selected', False)
         all_activity = tree_data[2].get('selected', False)
