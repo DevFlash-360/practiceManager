@@ -337,8 +337,8 @@ ul#pm-sidebar-menu {
     font-weight: bold;
 }
 
-#pm-grid-containerdiv #pm-filter-container {
-    padding: 4px;
+#pm-grid-container #pm-filter-container {
+    padding: 4px 12px;
 }
 
 .pm-scheduleview-container #pm-filter-container {
