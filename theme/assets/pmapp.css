@@ -400,14 +400,8 @@ tr.task-incomplete > td button > span.btn-task-status {
 	display: flex;
 }
 
-.pm-scheduleview-container #pm-filter-container .e-icons.e-ddt-icon::before {
-	content: "\e72c";
-	transform: none;
-	transition: none;
-}
-
-#pm-grid-container #pm-filter-container .e-icons.e-ddt-icon::before {
-	content: "\e735";
+#pm-filter-container .e-icons.e-ddt-icon::before {
+	content: "\e7f7";
 	transform: none;
 	transition: none;
 }
