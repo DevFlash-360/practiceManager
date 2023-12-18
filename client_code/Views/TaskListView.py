@@ -101,7 +101,7 @@ class TaskListView(GridView2):
             'fields': {'dataSource': dataSource, 'value':'id', 'parentValue': 'pid', 'text':'text', 'hasChildren': 'hasChild'},
             'showCheckBox': True,
             'treeSettings': {'autoCheck': True},
-            'placeholder': 'Apply filter...'
+            'placeholder': ''
         })
         self.dropdown_tree.addEventListener('close', self.handler_filter_close)
 
