@@ -227,11 +227,9 @@ class TaskListView(GridView2):
             self.param_complete = [True, False, None]
         self.get_tasks_filter()
         if selected_items:
-            print("11111111")
             jQuery("#pm-filter-container .e-icons.e-ddt-icon")[0].style.color = "rgb(0 147 255)"
             # self.grid.element.querySelector(f'#pm-filter-container .e-icons.e-input-group-icon.e-ddt-icon::before').content = "\e735"
         else:
-            print("22222222")
             jQuery("#pm-filter-container .e-icons.e-ddt-icon")[0].style.color = "#6b7280"
             # self.grid.element.querySelector(f'#pm-filter-container .e-icons.e-input-group-icon.e-ddt-icon::before').content = "\e72c"
         self.grid.refresh()
