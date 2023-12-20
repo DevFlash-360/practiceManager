@@ -1,10 +1,10 @@
 import anvil.server
-from AnvilFusion.components.GridView import GridView
+from DevFusion.components.GridView2 import GridView2
 from AnvilFusion.tools.utils import AppEnv
 
 
 
-class CaseListView(GridView):
+class CaseListView(GridView2):
     def __init__(self, **kwargs):
         print('CaseListView')
 
