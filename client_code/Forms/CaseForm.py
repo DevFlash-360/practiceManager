@@ -119,12 +119,12 @@ class CaseForm(FormBase):
             if self.data is None or self.data == {}:
                 self.case_name.enabled = False
                 self.auto_generate_case_name.value = True
-                # self.statute_of_limitations.hide()
-                # self.flat_fee_retainer.hide()
-                # self.retainer_hours_limit.hide()
-                # self.investigator_budget.hide()
-                # self.pre_litigation_rate.hide()
-                # self.litigation_rate.hide()
+                self.statute_of_limitations.hide()
+                self.flat_fee_retainer.hide()
+                self.retainer_hours_limit.hide()
+                self.investigator_budget.hide()
+                self.pre_litigation_rate.hide()
+                self.litigation_rate.hide()
             # else:
             #     self.generate_case_name(None)
             #     self.limit_retainer(None)
