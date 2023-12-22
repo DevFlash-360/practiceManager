@@ -16,7 +16,7 @@ class CaseListView(GridView2):
                 {'name': 'case_stage.name', 'label': 'Case Stage'},
                 {'name': 'cause_of_action.cause_of_action', 'label': 'Causes) of Action'},
                 {'name': 'close_date', 'label': 'Close Date'},
-                
+
             ]
         }
         super().__init__(model='Case', view_config=view_config, **kwargs)
