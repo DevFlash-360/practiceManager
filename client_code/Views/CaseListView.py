@@ -7,11 +7,17 @@ from AnvilFusion.tools.utils import AppEnv
 class CaseListView(GridView2):
     def __init__(self, **kwargs):
         print('CaseListView')
-
-        super().__init__(
-            model='Case',
-            # view_config=view_config,
-            **kwargs)
+        view_config = {
+            'model': 'Case',
+            'commandClick': self.open_dashboard,
+            'columns': [
+                {'name': 'practice_area', 'label': 'Practice Area'},
+                {'name': 'cause_of_action', 'label': 'Cause of Action'},
+                {'label': 'Dashboard', 'commands': [{'buttonOption': {'content': 'Dashboard', 'cssClass': 'e-flat'}}]}
+            ],
+            'filter': {'case': kwargs.get('case_uid')} if kwargs.get('case_uid') else None,
+        }
+        super().__init__(model='Case', view_config=view_config, **kwargs)
 
 
     def open_dashboard(self, args):
