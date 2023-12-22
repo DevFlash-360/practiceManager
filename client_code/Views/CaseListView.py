@@ -9,8 +9,6 @@ class CaseListView(GridView2):
         print('CaseListView')
         view_config = {
             'model': 'Case',
-            'commandClick': self.open_dashboard,
-            # 'commandName': 'Dashboard',
             'columns': [
                 {'name': 'practice_area.name', 'label': 'Practice Area'},
                 {'name': 'cause_of_action.cause_of_action', 'label': 'Cause of Action'},
