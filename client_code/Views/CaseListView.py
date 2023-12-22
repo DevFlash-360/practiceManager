@@ -11,9 +11,11 @@ class CaseListView(GridView2):
             'model': 'Case',
             'columns': [
                 {'name': 'case_name', 'label': 'Case Name'},
-                {'name': 'practice_area.name', 'label': 'Practice Area'},
-                {'name': 'cause_of_action.cause_of_action', 'label': 'Cause of Action'},
                 {'name': 'assigned_attorneys.full_name', 'label': 'Assigned Attorneys'},
+                {'name': 'practice_area.name', 'label': 'Practice Area'},
+                {'name': 'case_stage.name', 'label': 'Case Stage'},
+                {'name': 'cause_of_action.cause_of_action', 'label': 'Causes) of Action'},
+                {'name': 'close_date', 'label': 'Close Date'},
                 
             ]
         }
