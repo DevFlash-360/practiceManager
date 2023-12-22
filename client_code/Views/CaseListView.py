@@ -13,6 +13,8 @@ class CaseListView(GridView2):
                 {'name': 'case_name', 'label': 'Case Name'},
                 {'name': 'practice_area.name', 'label': 'Practice Area'},
                 {'name': 'cause_of_action.cause_of_action', 'label': 'Cause of Action'},
+                {'name': 'assigned_attorneys.full_name', 'label': 'Assigned Attorneys'},
+                
             ]
         }
         super().__init__(model='Case', view_config=view_config, **kwargs)
