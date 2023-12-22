@@ -10,10 +10,10 @@ class CaseListView(GridView2):
         view_config = {
             'model': 'Case',
             'commandClick': self.open_dashboard,
+            'commandName': 'Dashboard',
             'columns': [
                 {'name': 'practice_area.name', 'label': 'Practice Area'},
                 {'name': 'cause_of_action.cause_of_action', 'label': 'Cause of Action'},
-                {'label': 'Dashboard', 'commands': [{'buttonOption': {'content': 'Dashboard', 'cssClass': 'e-flat'}}]}
             ]
         }
         super().__init__(model='Case', view_config=view_config, **kwargs)
