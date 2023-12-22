@@ -9,7 +9,7 @@ class ContactView(GridView2):
 		view_config = {
 			'model': 'Contact',
 			'columns': [
-				{'name': 'full_name', 'label': 'Name'},
+				{'name': 'first_name', 'label': 'Name'},
 			]
 		}
 		super().__init__(model='Contact', view_config=view_config, *kwargs)
