@@ -11,8 +11,8 @@ class CaseListView(GridView2):
             'model': 'Case',
             # 'commandClick': self.open_dashboard,
             'columns': [
-                {'name': 'practice_area', 'label': 'Practice Area'},
-                {'name': 'cause_of_action', 'label': 'Cause of Action'},
+                {'name': 'practice_area.name', 'label': 'Practice Area'},
+                {'name': 'cause_of_action.cause_of_action', 'label': 'Cause of Action'},
                 # {'label': 'Dashboard', 'commands': [{'buttonOption': {'content': 'Dashboard', 'cssClass': 'e-flat'}}]}
             ]
         }
