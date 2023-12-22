@@ -1,15 +1,16 @@
 import anvil.server
-import anvil.users
-import anvil.tables as tables
-import anvil.tables.query as q
-from anvil.tables import app_tables
-# This is a module.
-# You can define variables and functions here, and use them from any form. For example, in a top-level form:
-#
-#    from .Views import Module1
-#
-#    Module1.say_hello()
-#
+from DevFusion.components.GridView2 import GridView2
+from AnvilFusion.tools.utils import AppEnv
 
-def say_hello():
-  print("Hello, world")
+
+class ContactView(GridView2):
+	def __init__(self, **kwargs):
+		print("ContactView")
+		view_config = {
+			'model': 'Contact',
+			'columns': [
+				{'name': 'first_name', 'label': 'Name'},
+				{'name': 'last_name', 'label': 'Name'}
+			]
+		}
+		super().__init__(model='Contact', view_config=view_config, *kwargs)
