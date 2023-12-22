@@ -10,6 +10,7 @@ class CaseListView(GridView2):
         view_config = {
             'model': 'Case',
             'columns': [
+                {'name': 'case_name', 'label': 'Case Name'},
                 {'name': 'practice_area.name', 'label': 'Practice Area'},
                 {'name': 'cause_of_action.cause_of_action', 'label': 'Cause of Action'},
             ]
