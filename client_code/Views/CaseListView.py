@@ -13,7 +13,7 @@ class CaseListView(GridView2):
             'columns': [
                 {'name': 'practice_area', 'label': 'Practice Area'},
                 {'name': 'cause_of_action', 'label': 'Cause of Action'},
-                {'label': 'Dashboard', 'commands': [{'buttonOption': {'content': 'Dashboard', 'cssClass': 'e-flat'}}]}
+                # {'label': 'Dashboard', 'commands': [{'buttonOption': {'content': 'Dashboard', 'cssClass': 'e-flat'}}]}
             ]
         }
         super().__init__(model='Case', view_config=view_config, **kwargs)
