@@ -14,8 +14,7 @@ class CaseListView(GridView2):
                 {'name': 'practice_area', 'label': 'Practice Area'},
                 {'name': 'cause_of_action', 'label': 'Cause of Action'},
                 {'label': 'Dashboard', 'commands': [{'buttonOption': {'content': 'Dashboard', 'cssClass': 'e-flat'}}]}
-            ],
-            'filter': {'case': kwargs.get('case_uid')} if kwargs.get('case_uid') else None,
+            ]
         }
         super().__init__(model='Case', view_config=view_config, **kwargs)
 
