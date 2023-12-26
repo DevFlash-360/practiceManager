@@ -342,7 +342,7 @@ class Sidebar:
         # print(component, self.content_control)
         if args:
             print("========= ABC ===========")
-            print(args.node[0])
+            print(args.node.innerHTML)
             print("========= ABC ===========")
         self.content_control.form_show()
         # except Exception as e:
