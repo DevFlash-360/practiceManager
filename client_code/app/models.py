@@ -386,6 +386,7 @@ class Contact:
     def get_department_desc(args):
         if args['department'] and args['courtroom']:
             return f"{args['department']}/{args['courtroom'] - args['last_name']}"
+        return args['last_name']
     full_name = Computed(('first_name', 'last_name'), 'get_full_name')
     department_desc = Computed(('department', 'courtroom', 'last_name'), 'get_department_desc')
 
