@@ -340,7 +340,7 @@ class Sidebar:
 
         # try:
         # print(component, self.content_control)
-        print(f"====navigation/menu_select\n{args.node}")
+        print(f"====navigation/menu_select\n{args}")
         self.content_control.form_show()
         # except Exception as e:
         #     print(e)
