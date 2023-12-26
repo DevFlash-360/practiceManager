@@ -382,12 +382,12 @@ class Contact:
     def get_full_name(args):
         return f"{args['first_name']} {args['last_name']}"
     
-    @staticmethod
-    def get_department_desc(args):
-        if args['department'] and args['courtroom']:
-            return f"{args['department']}/{args['courtroom'] - args['last_name']}"
+    # @staticmethod
+    # def get_department_desc(args):
+    #     if args['department'] and args['courtroom']:
+    #         return f"{args['department']}/{args['courtroom'] - args['last_name']}"
     full_name = Computed(('first_name', 'last_name'), 'get_full_name')
-    department_desc = Computed(('department', 'courtroom', 'last_name'), 'get_department_desc')
+    # department_desc = Computed(('department', 'courtroom', 'last_name'), 'get_department_desc')
 
 
 @model_type
