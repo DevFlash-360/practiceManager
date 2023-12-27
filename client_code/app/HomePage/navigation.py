@@ -298,6 +298,7 @@ class Sidebar:
         else:
             component = PMAPP_NAV_ITEMS[subcomponent]
         print("1")
+        self.menu.expandAll(['case_dashboard'])
         if component is None:
             return
         if props is not None:
