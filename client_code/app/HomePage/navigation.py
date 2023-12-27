@@ -253,7 +253,7 @@ class Sidebar:
             'width': sidebar_width,
             'target': self.target_el,
             'mediaQuery': '(min-width: 600px)',
-            'isOpen': True,
+            'isOpen': False,
             'animate': False,
         })
 
