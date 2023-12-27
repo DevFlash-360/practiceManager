@@ -347,14 +347,14 @@ class Sidebar:
 
         # try:
         # print(component, self.content_control)
-        if args:
-            print("========= ABC ===========")
-            ele = args.node.querySelector('.e-icon-wrapper div.e-icons')
-            if ele:
-                ele.classList.remove('e-icon-expandable')
-                ele.classList.add('e-icon-collapsible')
-            print("========= ABC ===========")
-        print("5")
+        # if args:
+        #     print("========= ABC ===========")
+        #     ele = args.node.querySelector('.e-icon-wrapper div.e-icons')
+        #     if ele:
+        #         ele.classList.remove('e-icon-expandable')
+        #         ele.classList.add('e-icon-collapsible')
+        #     print("========= ABC ===========")
+        # print("5")
         self.content_control.form_show()
         print("6")
         # except Exception as e:

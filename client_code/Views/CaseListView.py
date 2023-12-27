@@ -1,6 +1,7 @@
 import anvil.server
 from DevFusion.components.GridView2 import GridView2
 from AnvilFusion.tools.utils import AppEnv
+from anvil.js.window import ej, jQuery
 
 
 
@@ -26,3 +27,6 @@ class CaseListView(GridView2):
         print(f"CaseListview/open_dashboard args = {args}")
         AppEnv.navigation.show_menu('case_menu', subcomponent='case_dashboard',
                                     props={'case_uid': args.rowData.uid})
+        jQuery('#pm-sidebar-menu li[data-uid="case_dashboard"] div.e-icon-wrapper div.e-icons').classList.remove('e-icon-expandable')
+        jQuery('#pm-sidebar-menu li[data-uid="case_dashboard"] ul').style.display = "block"
+        
