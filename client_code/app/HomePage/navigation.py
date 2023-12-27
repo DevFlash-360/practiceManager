@@ -283,7 +283,8 @@ class Sidebar:
         self.menu_select(None, subcomponent=(subcomponent or PMAPP_DEFAULT_NAV_ITEMS[menu_id]), props=props)
 
     def menu_select(self, args, subcomponent=None, props=None):
-        print("navigation/menu_select")
+        print(f"navigation/menu_select\n args={args}\nsubcomponent={subcomponent}\nprops={props}\n================")
+
         if subcomponent is None:
             if 'e-level-1' in list(args.node.classList):
                 self.menu.collapseAll()
