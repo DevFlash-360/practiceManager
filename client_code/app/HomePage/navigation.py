@@ -342,7 +342,7 @@ class Sidebar:
         # print(component, self.content_control)
         if args:
             print("========= ABC ===========")
-            print(args.node.outerHTML)
+            print(args.node.querySelector('.e-icon-wrapper .e-icons'))
             print("========= ABC ===========")
         self.content_control.form_show()
         # except Exception as e:
