@@ -287,9 +287,10 @@ class Sidebar:
 
         if subcomponent is None:
             if 'e-level-1' in list(args.node.classList):
-                self.menu.collapseAll()
-                self.menu.expandAll([args.node])
-                self.nav_target_id = None
+                print("e-level-1")
+                # self.menu.collapseAll()
+                # self.menu.expandAll([args.node])
+                # self.nav_target_id = None
 
             menu_item_id = args.nodeData.id
             print(menu_item_id)
