@@ -343,6 +343,7 @@ class Sidebar:
 
         if hasattr(self.content_control, 'target_id'):
             self.nav_target_id = self.content_control.target_id
+        print(f"self.content_control={self.content_control}\nself.nav_target_id={self.nav_target_id}")
 
         # try:
         # print(component, self.content_control)
