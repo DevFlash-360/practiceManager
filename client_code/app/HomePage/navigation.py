@@ -306,6 +306,7 @@ class Sidebar:
             self.content_control.destroy()
 
         nav_container_id = self.content_id if self.nav_target_id is None else self.nav_target_id
+        print(component['type'])
         if component['type'] == 'custom':
             try:
                 view_class = getattr(AppEnv.views, component['class'])
