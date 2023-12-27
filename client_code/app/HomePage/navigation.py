@@ -265,6 +265,7 @@ class Sidebar:
                 'text': 'nodeText',
                 'child': 'nodeChild'
             },
+            'loadOnDemand': True,
             'expandOn': 'Click',
             'nodeSelected': self.menu_select,
         })
