@@ -295,6 +295,7 @@ class Sidebar:
             component = PMAPP_NAV_ITEMS[menu_item_id] if menu_item_id in PMAPP_NAV_ITEMS else None
         else:
             self.menu.expandAll()
+            print("expand all")
             component = PMAPP_NAV_ITEMS[subcomponent]
         print("1")
         if component is None:
