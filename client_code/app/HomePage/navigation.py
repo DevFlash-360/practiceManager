@@ -287,23 +287,20 @@ class Sidebar:
 
         if subcomponent is None:
             if 'e-level-1' in list(args.node.classList):
-                print("e-level-1")
-                # self.menu.collapseAll()
-                # self.menu.expandAll([args.node])
-                # self.nav_target_id = None
-
+                self.menu.collapseAll()
+                self.menu.expandAll([args.node])
+                self.nav_target_id = None
             menu_item_id = args.nodeData.id
             print(menu_item_id)
             component = PMAPP_NAV_ITEMS[menu_item_id] if menu_item_id in PMAPP_NAV_ITEMS else None
         else:
+            self.menu.expandAll([subcomponent])
             component = PMAPP_NAV_ITEMS[subcomponent]
         print("1")
-        self.menu.expandAll(['case_dashboard'])
         if component is None:
             return
         if props is not None:
             component['props'] = props
-        print("2")
 
         if self.content_control is not None and self.nav_target_id is None:
             self.content_control.destroy()
