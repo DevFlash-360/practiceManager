@@ -92,9 +92,12 @@ class CaseDashboardPage(DashboardPage):
             # case details
             panel_content = f"<h5>{self.case['case_name']}</h5>"
             panel_content += f"<h6>Case Number</h6>{self.case['case_number']}"
-            panel_content += f"<h6>Practice Area</h6>{self.case['practice_area']['name']}"
-            panel_content += f"<h6>Case Stage</h6>{self.case['case_stage']['name']}"
-            panel_content += f"<h6>Court</h6>{self.case['court']['name']}"
+            if self.case['practice_area']:
+                panel_content += f"<h6>Practice Area</h6>{self.case['practice_area']['name']}"
+            if self.case['case_stage']:
+                panel_content += f"<h6>Case Stage</h6>{self.case['case_stage']['name']}"
+            if self.case['court']:
+                panel_content += f"<h6>Court</h6>{self.case['court']['name']}"
             # panel_content += f"<h6>Department</h6>{self.case['department']['department_desc']}"
             panel_content += f"<h6>SOL</h6>{self.case['statute_of_limitations']}"
             panel_content = f"<div style='{self.panel_container_style}'>{panel_content}</div>"
