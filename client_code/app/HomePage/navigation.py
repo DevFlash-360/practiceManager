@@ -295,10 +295,7 @@ class Sidebar:
             print(menu_item_id)
             component = PMAPP_NAV_ITEMS[menu_item_id] if menu_item_id in PMAPP_NAV_ITEMS else None
         else:
-            self.menu.expandAll()
-            print("expand all")
             component = PMAPP_NAV_ITEMS[subcomponent]
-        print("1")
         if component is None:
             return
         if props is not None:
@@ -308,15 +305,12 @@ class Sidebar:
             self.content_control.destroy()
 
         nav_container_id = self.content_id if self.nav_target_id is None else self.nav_target_id
-        print(component['type'])
         if component['type'] == 'custom':
             try:
                 view_class = getattr(AppEnv.views, component['class'])
                 self.content_control = view_class(container_id=nav_container_id, **component['props'])
             except Exception as e:
                 print(e)
-        print("3")
-
         if component['type'] == 'view':
             if 'config' in component:
                 self.content_control = GridView(view_name=component['config'], container_id=nav_container_id)
@@ -341,7 +335,6 @@ class Sidebar:
             except Exception as e:
                 print(e.args)
                 # self.content_control = Pages.BaseForm(model=component['model'], target=self.content_id)
-        print("4")
 
         if hasattr(self.content_control, 'target_id'):
             self.nav_target_id = self.content_control.target_id
@@ -349,16 +342,8 @@ class Sidebar:
 
         # try:
         # print(component, self.content_control)
-        # if args:
-        #     print("========= ABC ===========")
-        #     ele = args.node.querySelector('.e-icon-wrapper div.e-icons')
-        #     if ele:
-        #         ele.classList.remove('e-icon-expandable')
-        #         ele.classList.add('e-icon-collapsible')
-        #     print("========= ABC ===========")
-        # print("5")
+        
         self.content_control.form_show()
-        print("6")
         # except Exception as e:
         #     print(e)
         if self.control.isOpen:
