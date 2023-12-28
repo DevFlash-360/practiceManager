@@ -122,7 +122,8 @@ class CaseDashboardPage(DashboardPage):
                 'content': panel_content,
             })
             # case status
-            panel_content = f"<h5>{self.case['case_status']['name']}</h5>"
+            if 'case_status' in self.case and 'name' in self.case['case_status']:
+                panel_content = f"<h5>{self.case['case_status']['name']}</h5>"
             panel_content += f"<h6>Last Update</h6>TBD"
             panel_content = f"<div style='{self.panel_container_style}'>{panel_content}</div>"
             self.dashboard.updatePanel({
