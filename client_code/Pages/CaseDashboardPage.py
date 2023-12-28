@@ -165,7 +165,8 @@ class CaseDashboardPage(DashboardPage):
             })
             # case payments
             panel_content = f"<h5>TBD</h5>"
-            panel_content += f"<h6>Fee Type</h6>{self.case['fee_type']['name']}"
+            if self.case['fee_type']:
+                panel_content += f"<h6>Fee Type</h6>{self.case['fee_type']['name']}"
             panel_content += f"<h6>Retainer</h6>${(self.case['flat_fee_retainer'] or self.case['hourly_retainer']) or 0:,.2f}"
             panel_content += f"<h6>Trial</h6>" + ("Not " if not self.case['trial_included'] else "") + "Included"
             panel_content += f"<h6>Retainer Hour Limit</h6>{self.case['retainer_hours_limit'] or 'Unlimited'}"
