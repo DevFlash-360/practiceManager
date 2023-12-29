@@ -355,6 +355,16 @@ class Sidebar:
             self.menu_select(None, subcomponent=component['subcomponent'])
 
 
+class DetailsView:
+    def __init__(self):
+        self.sidebar = ej.navigations.Sidebar({
+            'width': '200px',
+            'showBackdrop': True,
+            'isOpen': True
+        })
+        self.sidebar.appendTo(jQuery(f"#{self.container_el}")[0])
+    
+
 PMAPP_APPBAR_ADD_ITEM = {
     'Add Time Entry': {'model': 'TimeEntry', 'type': 'form'},
     'Add Event': {'model': 'Event', 'type': 'form'},
