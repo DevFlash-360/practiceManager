@@ -362,7 +362,7 @@ class DetailsView:
             'showBackdrop': True,
             'isOpen': True
         })
-        self.sidebar.appendTo(jQuery(f"#{self.container_el}")[0])
+        self.sidebar.appendTo(jQuery(f"#pm-details-sidebar")[0])
     
 
 PMAPP_APPBAR_ADD_ITEM = {
