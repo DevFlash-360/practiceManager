@@ -362,7 +362,8 @@ class DetailsView:
             'showBackdrop': True,
             'enablePersistence': True,
             'type': 'Push',
-            'position': 'Right'
+            'position': 'Right',
+            'closeOnDocumentClick': True
         })
 
     def show(self):
