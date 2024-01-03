@@ -366,10 +366,19 @@ class DetailsView:
             'closeOnDocumentClick': True,
             'isOpen': True
         })
+        self.close_btn = ej.buttons.Button({
+            'cssClass': 'e-flat',
+            'content': 'Button'
+        })
+        self.close_btn.addEventListener('click', self.hide)
 
     def show(self):
+        self.close_btn.appendTo(jQuery('#pm-details-sidebar')[0])
         self.sidebar.appendTo(jQuery(f"#pm-details-sidebar")[0])
         self.sidebar.show()
+    
+    def hide(self):
+        self.sidebar.hide()
     
 
 PMAPP_APPBAR_ADD_ITEM = {
