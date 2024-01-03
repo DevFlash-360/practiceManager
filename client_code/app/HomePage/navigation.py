@@ -364,6 +364,8 @@ class DetailsView:
             'type': 'Push',
             'position': 'Right'
         })
+
+    def show(self):
         self.sidebar.appendTo(jQuery(f"#pm-details-sidebar")[0])
     
 

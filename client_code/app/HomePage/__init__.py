@@ -108,6 +108,7 @@ class HomePage(HomePageTemplate):
                                    content_id=self.content_id)
         self.appbar_menu = nav.AppbarMenu(container_el='pm-appbar-menu', sidebar=self.sidebar,
                                           menu_items=nav.PMAPP_APPBAR_MENU)
+        self.detailsbar = nav.DetailsView()
 
         AppEnv.navigation = self.sidebar
 
@@ -122,6 +123,7 @@ class HomePage(HomePageTemplate):
         self.appbar_sidebar_toggle.appendTo(jQuery('#pm-appbar-sidebar-toggle')[0])
         self.appbar_sidebar_toggle.element.addEventListener('click', self.sidebar.toggle)
         self.appbar_menu.show()
+        self.detailsbar.show()
 
         # Show sidebar menu
         self.sidebar.show()
