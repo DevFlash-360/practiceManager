@@ -378,6 +378,7 @@ class DetailsView:
         self.sidebar.show()
     
     def hide(self):
+        print("hide")
         self.sidebar.hide()
     
 
