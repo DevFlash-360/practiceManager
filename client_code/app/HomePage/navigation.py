@@ -370,7 +370,7 @@ class DetailsView:
             'cssClass': 'e-flat',
             'content': 'Button'
         })
-        self.close_btn.element.onclick = self.hide
+        self.close_btn.addEventListener('onclick', self.hide)
 
     def show(self):
         self.close_btn.appendTo(jQuery('#btn_close')[0])
