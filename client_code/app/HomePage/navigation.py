@@ -360,7 +360,9 @@ class DetailsView:
         self.sidebar = ej.navigations.Sidebar({
             'width': '200px',
             'showBackdrop': True,
-            'isOpen': True
+            'enablePersistence': True,
+            'type': 'Push',
+            'position': 'Right'
         })
         self.sidebar.appendTo(jQuery(f"#pm-details-sidebar")[0])
     
