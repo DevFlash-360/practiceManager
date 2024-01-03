@@ -363,7 +363,8 @@ class DetailsView:
             'enablePersistence': True,
             'type': 'Push',
             'position': 'Right',
-            'closeOnDocumentClick': True
+            'closeOnDocumentClick': True,
+            'isOpen': True
         })
 
     def show(self):
