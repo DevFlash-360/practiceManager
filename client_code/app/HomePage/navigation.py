@@ -370,10 +370,10 @@ class DetailsView:
             'cssClass': 'e-flat',
             'content': 'Button'
         })
-        self.close_btn.addEventListener('click', self.hide)
+        self.close_btn.element.onclick = self.hide
 
     def show(self):
-        self.close_btn.appendTo(jQuery('#div-btn-close')[0])
+        self.close_btn.appendTo(jQuery('#btn_close')[0])
         self.sidebar.appendTo(jQuery(f"#pm-details-sidebar")[0])
         self.sidebar.show()
     
