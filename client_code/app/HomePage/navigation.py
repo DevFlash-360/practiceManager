@@ -377,7 +377,7 @@ class DetailsView:
         self.sidebar.appendTo(jQuery(f"#pm-details-sidebar")[0])
         self.sidebar.show()
     
-    def hide(self):
+    def hide(self, args):
         print("hide")
         self.sidebar.hide()
     
