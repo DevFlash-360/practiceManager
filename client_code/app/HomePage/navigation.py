@@ -366,9 +366,10 @@ class DetailsView:
             'closeOnDocumentClick': True,
             'isOpen': True
         })
+        self.sidebar.appendTo(jQuery(f"#pm-details-sidebar")[0])
 
     def show(self):
-        self.sidebar.appendTo(jQuery(f"#pm-details-sidebar")[0])
+        self.sidebar.show()
     
 
 PMAPP_APPBAR_ADD_ITEM = {
