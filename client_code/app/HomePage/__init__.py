@@ -111,6 +111,7 @@ class HomePage(HomePageTemplate):
         self.detailsbar = nav.DetailsView()
 
         AppEnv.navigation = self.sidebar
+        AppEnv.details = self.detailsbar
 
 
     def form_show(self, **event_args):
