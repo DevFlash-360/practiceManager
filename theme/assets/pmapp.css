@@ -405,3 +405,7 @@ tr.task-incomplete > td button > span.btn-task-status {
 	transform: none;
 	transition: none;
 }
+
+.close-btn::before {
+	content: "\f00d";
+}
