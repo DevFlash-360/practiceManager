@@ -407,5 +407,5 @@ tr.task-incomplete > td button > span.btn-task-status {
 }
 
 .close-btn::before {
-	content: "\f00d";
+	content: '\e702';
 }
