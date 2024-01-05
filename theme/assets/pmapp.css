@@ -454,7 +454,7 @@ tr.task-incomplete > td button > span.btn-task-status {
 }
 
 .details_wrapper {
-	height: calc(100%-30px);
+	height: calc(100% - 30px);
 }
 
 .details_content {
