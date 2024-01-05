@@ -418,6 +418,10 @@ tr.task-incomplete > td button > span.btn-task-status {
 	display: table;
 }
 
+.details_record {
+	width: 100%;
+}
+
 .details_record_label {
 	display: table-cell;
 	width: 50%;
