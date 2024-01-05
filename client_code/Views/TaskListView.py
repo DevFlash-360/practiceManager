@@ -310,8 +310,13 @@ class TaskListView(GridView2):
     def details_content(self, task):
         item = Task.get(task['uid'])
         content = "<div class='details_title'>Overview</div>"
-        content += f"<div>Task Status: {'Complete' if task['completed'] else 'Incomplete'}</div>"
-        content += f"<div>Due Date: {task['due_date_view']}</div>"
-        content += f"<div>Priority: {task['priority']}</div>"
-        content += f"<div></div>"
+        content += f"<div class='details_table'>\
+            <div class='details_record_label'>Task Status\
+            <div class='details_record_data'>{'Complete' if task['completed'] else 'Incomplete'}</div>\
+            <div class='details_record_label'>Due Date\
+            <div class='details_record_data'>{task['due_date_view']}</div>\
+            <div class='details_record_label'>Priority\
+            <div class='details_record_data'>{task['priority']}</div>\
+        </div>"
+        content = "<div class='details_title'>Details</div>"
         return content

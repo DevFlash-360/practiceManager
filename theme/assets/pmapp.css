@@ -413,3 +413,17 @@ tr.task-incomplete > td button > span.btn-task-status {
 	border-bottom: 1px solid #e5e5e6;
 	padding-bottom: 8px;
 }
+
+.details_table {
+	display: table;
+}
+
+.details_record_label {
+	display: table-cell;
+	width: 50%;
+}
+
+.details_record_data {
+	display: table-cell;
+	width: 50%;
+}
