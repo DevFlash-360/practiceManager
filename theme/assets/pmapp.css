@@ -415,19 +415,40 @@ tr.task-incomplete > td button > span.btn-task-status {
 }
 
 .details_table {
-	display: table;
+	border: 1px solid #eaeaea;
 }
 
 .details_record {
+	border-color: #ededee;
+	background-color: #f9fafa;
+	min-height: 40px;
+	border-bottom: 1px solid #f3f3f3;
+	display: table;
 	width: 100%;
 }
 
 .details_record_label {
 	display: table-cell;
+	border-color: #ededee;
+	vertical-align: top;
+	padding: 10px 15px;
+	line-height:21px;
+	white-space: normal;
+	word-break: break-word;
+	box-sizing: border-box;
 	width: 50%;
 }
 
 .details_record_data {
 	display: table-cell;
+	border-color: #ededee;
+	vertical-align: top;
+	text-align: left;
+	padding:10px 15px;
+	border-left: 1px solid #f3f3f3;
+	white-space: normal;
+	word-break: break-word;
+	word-wrap: break-word;
+	box-sizing: border-box;
 	width: 50%;
 }
