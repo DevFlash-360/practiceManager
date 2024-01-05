@@ -371,11 +371,13 @@ class DetailsView:
             'iconCss': 'fa-solid fa-xmark'
         })
 
-    def show(self):
-        print("details show")
+    def form_show(self):
         self.close_btn.appendTo(jQuery('#btn_close')[0])
         self.sidebar.appendTo(jQuery(f"#pm-details-sidebar")[0])
         self.close_btn.element.addEventListener('click', self.hide)
+
+    def show(self):
+        print("details show")
         self.sidebar.show()
     
     def hide(self, args):

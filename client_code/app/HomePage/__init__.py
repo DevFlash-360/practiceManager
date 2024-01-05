@@ -124,7 +124,7 @@ class HomePage(HomePageTemplate):
         self.appbar_sidebar_toggle.appendTo(jQuery('#pm-appbar-sidebar-toggle')[0])
         self.appbar_sidebar_toggle.element.addEventListener('click', self.sidebar.toggle)
         self.appbar_menu.show()
-        self.detailsbar.show()
+        self.detailsbar.form_show()
 
         # Show sidebar menu
         self.sidebar.show()
