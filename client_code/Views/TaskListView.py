@@ -308,7 +308,7 @@ class TaskListView(GridView2):
         super().row_selected(args)
         
     def details_content(self, task):
-        item = Task.get(task['uid'])
+        # item = Task.get(task['uid'])
         content = "<div class='details_title'>Overview</div>"
         content += f"<div class='details_table'>\
             <div class='details_record'>\
