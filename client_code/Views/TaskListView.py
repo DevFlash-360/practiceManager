@@ -325,4 +325,18 @@ class TaskListView(GridView2):
             </div>\
         </div>"
         content += "<div class='details_title'>Details</div>"
+        content += f"<div class='details_table'>\
+            <div class='details_record'>\
+                <div class='details_record_label'>Case</div>\
+                <div class='details_record_data'>{task['case__case_name']}</div>\
+            </div>\
+            <div class='details_record'>\
+                <div class='details_record_label'>Assigned Staff</div>\
+                <div class='details_record_data'>{task['assigned_staff__full_name']}</div>\
+            </div>\
+            <div class='details_record'>\
+                <div class='details_record_label'>Notes</div>\
+                <div class='details_record_data'>{task['notes']}</div>\
+            </div>\
+        <div>"
         return content
