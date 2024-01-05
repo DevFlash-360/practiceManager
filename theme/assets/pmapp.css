@@ -456,3 +456,9 @@ tr.task-incomplete > td button > span.btn-task-status {
 .details_wrapper {
 	height: calc(100%-30px);
 }
+
+.details_content {
+	overflow-y: auto;
+	max-height: 100%;
+	padding: 15px;
+}
