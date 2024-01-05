@@ -302,3 +302,10 @@ class TaskListView(GridView2):
         obj.update({'completed': not obj['completed']})
         obj.save()
         self.update_grid(obj, False)
+
+    def row_selected(self, args):
+        # jQuery(f"#{self.container_id}")[0].innerHTML = self.details_content(args[])
+        super().row_selected(args)
+        
+    def details_content(self, task):
+        return "Details TaskView"
