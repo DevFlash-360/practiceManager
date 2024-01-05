@@ -309,11 +309,11 @@ class TaskListView(GridView2):
         
     def details_content(self, task):
         item = Task.get(task['uid'])
-        created_by = User.get(item['created_by'])
+        created_by = User.get(item['created_by']) if item['created_by'] else None
         if created_by:
             created_by = created_by['email']
         
-        updated_by = User.get(item['updated_by'])
+        updated_by = User.get(item['updated_by']) if item['updated_by'] else None
         if updated_by:
             updated_by = updated_by['email']
 
