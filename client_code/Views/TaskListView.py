@@ -311,11 +311,11 @@ class TaskListView(GridView2):
         item = Task.get(task['uid'])
         content = "<div class='details_title'>Overview</div>"
         content += f"<div class='details_table'>\
-            <div class='details_record_label'>Task Status\
+            <div class='details_record_label'>Task Status</div>\
             <div class='details_record_data'>{'Complete' if task['completed'] else 'Incomplete'}</div>\
-            <div class='details_record_label'>Due Date\
+            <div class='details_record_label'>Due Date</div>\
             <div class='details_record_data'>{task['due_date_view']}</div>\
-            <div class='details_record_label'>Priority\
+            <div class='details_record_label'>Priority</div>\
             <div class='details_record_data'>{task['priority']}</div>\
         </div>"
         content += "<div class='details_title'>Details</div>"
