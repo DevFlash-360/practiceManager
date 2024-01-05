@@ -452,3 +452,7 @@ tr.task-incomplete > td button > span.btn-task-status {
 	box-sizing: border-box;
 	width: 50%;
 }
+
+.details_wrapper {
+	height: calc(100%-30px);
+}
