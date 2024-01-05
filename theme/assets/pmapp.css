@@ -406,6 +406,8 @@ tr.task-incomplete > td button > span.btn-task-status {
 	transition: none;
 }
 
-.close-btn::before {
-	content: "\f00d";
+.details_title {
+	margin: 15px 0px;
+	border-bottom: 1px solid #e5e5e6;
+	padding-bottom: 8px;
 }

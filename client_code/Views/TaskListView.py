@@ -308,4 +308,6 @@ class TaskListView(GridView2):
         super().row_selected(args)
         
     def details_content(self, task):
-        return "Details TaskView"
+        content = "<div class='details_title'>Overview</div>"
+        content += f"<div>Task Status: {'Complete' if task['completed'] else 'Incomplete'}</div>"
+        return content
