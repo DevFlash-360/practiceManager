@@ -367,12 +367,12 @@ class DetailsView:
             'isOpen': True
         })
         self.close_btn = ej.buttons.Button({
-            'cssClass': 'e-btn-sb-icon e-flat close-btn'
-        }, '#btn_close')
+            'iconCss': 'e-btn-sb-icon e-flat close-btn'
+        })
 
     def show(self):
         print("details show")
-        # self.close_btn.appendTo(jQuery('#btn_close')[0])
+        self.close_btn.appendTo(jQuery('#btn_close')[0])
         self.sidebar.appendTo(jQuery(f"#pm-details-sidebar")[0])
         self.close_btn.element.addEventListener('click', self.hide)
         self.sidebar.show()
