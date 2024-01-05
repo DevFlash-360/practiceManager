@@ -407,6 +407,8 @@ tr.task-incomplete > td button > span.btn-task-status {
 }
 
 .details_title {
+	font-size: 16px;
+	font-weight: 600;
 	margin: 15px 0px;
 	border-bottom: 1px solid #e5e5e6;
 	padding-bottom: 8px;
