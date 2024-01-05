@@ -5,7 +5,7 @@ from DevFusion.components.GridView2 import GridView2
 from datetime import datetime, date
 import anvil.js
 from AnvilFusion.tools.utils import AppEnv
-from ..app.models import Staff, Case, Task, Activity
+from ..app.models import Staff, Case, Task, Activity, User
 class TaskListView(GridView2):
     def __init__(self, case=None, case_uid=None, **kwargs):
         print('TaskListView')
@@ -309,6 +309,14 @@ class TaskListView(GridView2):
         
     def details_content(self, task):
         item = Task.get(task['uid'])
+        created_by = User.get(item['created_by'])
+        if created_by:
+            created_by = created_by['email']
+        
+        updated_by = User.get(item['updated_by'])
+        if updated_by:
+            updated_by = updated_by['email']
+
         content = "<div class='details_title'>Overview</div>"
         content += f"<div class='details_table'>\
             <div class='details_record'>\
@@ -345,23 +353,23 @@ class TaskListView(GridView2):
         content += f"<div class='details_table'>\
             <div class='details_record'>\
                 <div class='details_record_label'>Added User</div>\
-                <div class='details_record_data'>{item['created_by']}</div>\
+                <div class='details_record_data'>{created_by}</div>\
             </div>\
             <div class='details_record'>\
                 <div class='details_record_label'>Added Time</div>\
-                <div class='details_record_data'>{item['created_by']}</div>\
+                <div class='details_record_data'>{item['created_time']}</div>\
             </div>\
             <div class='details_record'>\
                 <div class='details_record_label'>Modified User</div>\
-                <div class='details_record_data'>{item['created_by']}</div>\
+                <div class='details_record_data'>{updated_by}</div>\
             </div>\
             <div class='details_record'>\
                 <div class='details_record_label'>Modified Time</div>\
-                <div class='details_record_data'>{item['created_by']}</div>\
+                <div class='details_record_data'>{item['updated_time']}</div>\
             </div>\
             <div class='details_record'>\
                 <div class='details_record_label'>ID</div>\
-                <div class='details_record_data'>{item['created_by']}</div>\
+                <div class='details_record_data'>{task['uid']}</div>\
             </div>\
         <div>"
         return content
