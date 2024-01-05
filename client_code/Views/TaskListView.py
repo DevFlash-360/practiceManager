@@ -318,5 +318,5 @@ class TaskListView(GridView2):
             <div class='details_record_label'>Priority\
             <div class='details_record_data'>{task['priority']}</div>\
         </div>"
-        content = "<div class='details_title'>Details</div>"
+        content += "<div class='details_title'>Details</div>"
         return content
