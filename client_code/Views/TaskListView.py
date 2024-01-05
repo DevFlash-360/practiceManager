@@ -308,7 +308,7 @@ class TaskListView(GridView2):
         super().row_selected(args)
         
     def details_content(self, task):
-        # item = Task.get(task['uid'])
+        item = Task.get(task['uid'])
         content = "<div class='details_title'>Overview</div>"
         content += f"<div class='details_table'>\
             <div class='details_record'>\
@@ -324,6 +324,7 @@ class TaskListView(GridView2):
                 <div class='details_record_data'>{task['priority']}</div>\
             </div>\
         </div>"
+        
         content += "<div class='details_title'>Details</div>"
         content += f"<div class='details_table'>\
             <div class='details_record'>\
@@ -337,6 +338,30 @@ class TaskListView(GridView2):
             <div class='details_record'>\
                 <div class='details_record_label'>Notes</div>\
                 <div class='details_record_data'>{task['notes']}</div>\
+            </div>\
+        <div>"
+
+        content += "<div class='details_title'>Record Data</div>"
+        content += f"<div class='details_table'>\
+            <div class='details_record'>\
+                <div class='details_record_label'>Added User</div>\
+                <div class='details_record_data'>{item['created_by']}</div>\
+            </div>\
+            <div class='details_record'>\
+                <div class='details_record_label'>Added Time</div>\
+                <div class='details_record_data'>{item['created_by']}</div>\
+            </div>\
+            <div class='details_record'>\
+                <div class='details_record_label'>Modified User</div>\
+                <div class='details_record_data'>{item['created_by']}</div>\
+            </div>\
+            <div class='details_record'>\
+                <div class='details_record_label'>Modified Time</div>\
+                <div class='details_record_data'>{item['created_by']}</div>\
+            </div>\
+            <div class='details_record'>\
+                <div class='details_record_label'>ID</div>\
+                <div class='details_record_data'>{item['created_by']}</div>\
             </div>\
         <div>"
         return content
