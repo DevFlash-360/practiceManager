@@ -358,7 +358,7 @@ class Sidebar:
 class DetailsView:
     def __init__(self):
         self.sidebar = ej.navigations.Sidebar({
-            'width': '200px',
+            'width': '400px',
             'showBackdrop': True,
             'enablePersistence': True,
             'type': 'Push',
