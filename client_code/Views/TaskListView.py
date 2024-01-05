@@ -357,7 +357,7 @@ class TaskListView(GridView2):
             </div>\
             <div class='details_record'>\
                 <div class='details_record_label'>Added Time</div>\
-                <div class='details_record_data'>{datetime.strptime(item['created_time'], '%Y-%m-%d %H:%M:%S.%f%z').strftime('%m/%d/%Y %I:%M %p')}</div>\
+                <div class='details_record_data'>{item['created_time'].strftime('%m/%d/%Y %I:%M %p')}</div>\
             </div>\
             <div class='details_record'>\
                 <div class='details_record_label'>Modified User</div>\
@@ -365,7 +365,7 @@ class TaskListView(GridView2):
             </div>\
             <div class='details_record'>\
                 <div class='details_record_label'>Modified Time</div>\
-                <div class='details_record_data'>{datetime.strptime(item['updated_time'], '%Y-%m-%d %H:%M:%S.%f%z').strftime('%m/%d/%Y %I:%M %p')}</div>\
+                <div class='details_record_data'>{item['updated_time'].strftime('%m/%d/%Y %I:%M %p')}</div>\
             </div>\
             <div class='details_record'>\
                 <div class='details_record_label'>ID</div>\
