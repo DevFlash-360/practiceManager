@@ -367,7 +367,8 @@ class DetailsView:
             'isOpen': True
         })
         self.close_btn = ej.buttons.Button({
-            'iconCss': 'e-btn-sb-icon e-flat close-btn'
+            'cssClass': 'e-flat',
+            'iconCss': 'e-plus-icon'
         })
 
     def show(self):
