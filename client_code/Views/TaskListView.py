@@ -302,12 +302,9 @@ class TaskListView(GridView2):
         obj.update({'completed': not obj['completed']})
         obj.save()
         self.update_grid(obj, False)
-
-    def row_selected(self, args):
-        jQuery(f"#details_content")[0].innerHTML = self.details_content(args['data'])
-        super().row_selected(args)
         
-    def details_content(self, task):
+    def details_content(self, args):
+        task = args['data']
         item = Task.get(task['uid'])
         created_by = User.get(item['created_by']) if item['created_by'] else None
         if created_by:
