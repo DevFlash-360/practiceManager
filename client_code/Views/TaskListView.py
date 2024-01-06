@@ -303,9 +303,9 @@ class TaskListView(GridView2):
         obj.save()
         self.update_grid(obj, False)
 
-    # def row_selected(self, args):
-    #     jQuery(f"#details_content")[0].innerHTML = self.details_content(args['data'])
-    #     super().row_selected(args)
+    def row_selected(self, args):
+        jQuery(f"#details_content")[0].innerHTML = self.details_content(args)
+        super().row_selected(args)
         
     def details_content(self, args):
         task = args['data']
