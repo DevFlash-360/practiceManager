@@ -354,7 +354,6 @@ class Sidebar:
             time.sleep(0.5)
             self.menu_select(None, subcomponent=component['subcomponent'])
 
-
 class DetailsView:
     def __init__(self):
         self.sidebar = ej.navigations.Sidebar({
