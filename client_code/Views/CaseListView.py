@@ -27,10 +27,9 @@ class CaseListView(GridView2):
         print(f"CaseListview/open_dashboard args = {args}")
         AppEnv.navigation.show_menu('case_menu', subcomponent='case_dashboard',
                                     props={'case_uid': args.rowData.uid})
-		# Expand AppSidebar Case Dashboard
+        # Expand AppSidebar Case Dashboard
         jQuery('#pm-sidebar-menu li.e-level-1').removeClass('e-active')
         jQuery('#pm-sidebar-menu li[data-uid="case_dashboard"]').addClass('e-active')
         jQuery('#pm-sidebar-menu li[data-uid="case_dashboard"] div.e-icon-wrapper div.e-icons').removeClass('e-icon-expandable')
         jQuery('#pm-sidebar-menu li[data-uid="case_dashboard"] div.e-icon-wrapper div.e-icons').addClass('e-icon-collapsible')
         jQuery('#pm-sidebar-menu li[data-uid="case_dashboard"] ul')[0].style.display = "block"
-        
