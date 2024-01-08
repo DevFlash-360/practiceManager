@@ -33,3 +33,11 @@ class CaseListView(GridView2):
         jQuery('#pm-sidebar-menu li[data-uid="case_dashboard"] div.e-icon-wrapper div.e-icons').removeClass('e-icon-expandable')
         jQuery('#pm-sidebar-menu li[data-uid="case_dashboard"] div.e-icon-wrapper div.e-icons').addClass('e-icon-collapsible')
         jQuery('#pm-sidebar-menu li[data-uid="case_dashboard"] ul')[0].style.display = "block"
+
+    def row_selected(self, args):
+        jQuery(f"#details_content")[0].innerHTML = self.details_content(args)
+        super().row_selected(args)
+
+    def details_content(self, args):
+        case = args['data']
+        return "case details"
