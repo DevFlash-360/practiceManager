@@ -1,8 +1,9 @@
+import anvil.server
 from AnvilFusion.components.FormBase import FormBase, POPUP_WIDTH_COL3
 from AnvilFusion.components.FormInputs import *
-from .. import Forms
 from datetime import datetime, timedelta
-
+from .. import Forms
+from ..app.models import Entity
 
 class EventForm(FormBase):
 
@@ -24,7 +25,7 @@ class EventForm(FormBase):
         self.location = LookupInput(name='location', label='Location', model='Entity', text_field='name',
                                     on_change=self.location_change)
         self.department = LookupInput(name='department', label='Department', model='Contact',
-                                      text_field=['full_name', 'title_position'],
+                                      text_field=['department', 'courtroom', 'last_name'],
                                       compute_option=self.contact_department, enabled=False)
         self.client_attendance_required = CheckboxInput(name='client_attendance_required',
                                                         label='Client attendance required')
@@ -86,9 +87,13 @@ class EventForm(FormBase):
             self.department.value = None
 
     def contact_department(self, rec):
-        return f"{rec['full_name']} - {rec['title_position']}"
+        if rec['department'] and rec['courtroom'] and rec['last_name']:
+            return f"{rec['department']}/{rec['courtroom']} - {rec['last_name']}"
+        return None
 
     def update_time(self, args):
+        if not self.start_time.value or not self.end_time.value:
+            return
         if args['name'] == 'start_time' and self.start_time.value is not None:
             if (self.end_time.value - self.start_time.value).total_seconds() / 3600 < 1:
                 self.end_time.value = self.start_time.value + timedelta(hours=1)

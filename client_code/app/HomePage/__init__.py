@@ -1,3 +1,4 @@
+import anvil.server
 from ._anvil_designer import HomePageTemplate
 from anvil.js.window import ej, jQuery
 from AnvilFusion.tools.utils import AppEnv, init_user_session
@@ -107,8 +108,10 @@ class HomePage(HomePageTemplate):
                                    content_id=self.content_id)
         self.appbar_menu = nav.AppbarMenu(container_el='pm-appbar-menu', sidebar=self.sidebar,
                                           menu_items=nav.PMAPP_APPBAR_MENU)
+        self.detailsbar = nav.DetailsView()
 
         AppEnv.navigation = self.sidebar
+        AppEnv.details = self.detailsbar
 
 
     def form_show(self, **event_args):
@@ -121,6 +124,7 @@ class HomePage(HomePageTemplate):
         self.appbar_sidebar_toggle.appendTo(jQuery('#pm-appbar-sidebar-toggle')[0])
         self.appbar_sidebar_toggle.element.addEventListener('click', self.sidebar.toggle)
         self.appbar_menu.show()
+        self.detailsbar.form_show()
 
         # Show sidebar menu
         self.sidebar.show()

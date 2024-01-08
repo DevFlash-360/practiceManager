@@ -40,7 +40,8 @@ unique_ids:
     Forms.CaseWorkflowForm: SWNKVTQUTCUTEZX2L64TRO3PU7KAX7HS
     Forms.CaseWorkflowItemForm: P5MGQIPWAVJIAL25CZC7YF6VRDBLXVUC
     Pages.CaseDashboardPage: '1673998005721716312587661.4374'
-  server_modules: {}
+  server_modules:
+    ServerModule1: '1702313647721768214213403.2162'
   assets:
     theme.css: GX5E4RW5C675WJNEDNYJINM2HLD23UR2
     custom.js: '1695312160974988799288953.1774'

@@ -1,3 +1,4 @@
+import anvil.server
 from AnvilFusion.components.DashboardPage import DashboardPage
 from AnvilFusion.tools.utils import set_cookie, get_cookie
 from ..app.models import Case
@@ -91,10 +92,13 @@ class CaseDashboardPage(DashboardPage):
             # case details
             panel_content = f"<h5>{self.case['case_name']}</h5>"
             panel_content += f"<h6>Case Number</h6>{self.case['case_number']}"
-            panel_content += f"<h6>Practice Area</h6>{self.case['practice_area']['name']}"
-            panel_content += f"<h6>Case Stage</h6>{self.case['case_stage']['name']}"
-            panel_content += f"<h6>Court</h6>{self.case['court']['name']}"
-            panel_content += f"<h6>Department</h6>{self.case['department']['full_name']}"
+            if self.case['practice_area']:
+                panel_content += f"<h6>Practice Area</h6>{self.case['practice_area']['name']}"
+            if self.case['case_stage']:
+                panel_content += f"<h6>Case Stage</h6>{self.case['case_stage']['name']}"
+            if self.case['court']:
+                panel_content += f"<h6>Court</h6>{self.case['court']['name']}"
+            # panel_content += f"<h6>Department</h6>{self.case['department']['department_desc']}"
             panel_content += f"<h6>SOL</h6>{self.case['statute_of_limitations']}"
             panel_content = f"<div style='{self.panel_container_style}'>{panel_content}</div>"
             self.dashboard.updatePanel({
@@ -121,7 +125,8 @@ class CaseDashboardPage(DashboardPage):
                 'content': panel_content,
             })
             # case status
-            panel_content = f"<h5>{self.case['case_status']['name']}</h5>"
+            if self.case['case_status'] and self.case['case_status']['name']:
+                panel_content = f"<h5>{self.case['case_status']['name']}</h5>"
             panel_content += f"<h6>Last Update</h6>TBD"
             panel_content = f"<div style='{self.panel_container_style}'>{panel_content}</div>"
             self.dashboard.updatePanel({
@@ -160,7 +165,8 @@ class CaseDashboardPage(DashboardPage):
             })
             # case payments
             panel_content = f"<h5>TBD</h5>"
-            panel_content += f"<h6>Fee Type</h6>{self.case['fee_type']['name']}"
+            if self.case['fee_type']:
+                panel_content += f"<h6>Fee Type</h6>{self.case['fee_type']['name']}"
             panel_content += f"<h6>Retainer</h6>${(self.case['flat_fee_retainer'] or self.case['hourly_retainer']) or 0:,.2f}"
             panel_content += f"<h6>Trial</h6>" + ("Not " if not self.case['trial_included'] else "") + "Included"
             panel_content += f"<h6>Retainer Hour Limit</h6>{self.case['retainer_hours_limit'] or 'Unlimited'}"

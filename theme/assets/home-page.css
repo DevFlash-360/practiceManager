@@ -133,10 +133,10 @@ input#pm-appbar-search.e-input {
 /*.pm-sidebar-menu .e-list-item .e-text-content {
   padding-left: 16px!important;
 }*/
-.pm-sidebar-menu .e-ul {
+/* .pm-sidebar-menu .e-ul {
   padding-left: 0 !important;
   overflow: hidden;
-}
+} */
 
 .pm-sidebar-menu .e-list-item .e-list-text {
   font-weight: 300;
@@ -168,7 +168,7 @@ li.e-list-item.e-level-1.e-hover {
   background-color: red !important;
 }
 
-.e-treeview li.e-level-2 {
+.pm-sidebar-menu .e-treeview li.e-level-2 {
   width: 100% !important;
   transform: scale(0.9);
 }
@@ -211,7 +211,7 @@ li.e-list-item.e-level-1.e-hover {
 
 /* Grid Customization */
 .pm-gridview-title {
-  margin-top: -.5em;
+  margin-top: -11px;
 }
 
 .e-grid {

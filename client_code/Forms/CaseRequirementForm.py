@@ -1,3 +1,4 @@
+import anvil.server
 from AnvilFusion.components.FormBase import FormBase, POPUP_WIDTH_COL2
 from AnvilFusion.components.FormInputs import *
 from AnvilFusion.components.MultiFieldInput import HyperlinkInput
@@ -14,7 +15,7 @@ class CaseRequirementForm(FormBase):
         self.name = TextInput(name='name', label='Name', required=True)
         self.notes = MultiLineInput(name='notes', label="Notes", rows=4)
         self.url = HyperlinkInput(name='url', label='URL')
-        self.due_date = DateTimeInput(name='due_date', label='Due Date')
+        self.due_date = DateInput(name='due_date', label='Due Date')
         self.completed = CheckboxInput(name='completed', label='Completed')
 
         sections = [

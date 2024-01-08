@@ -164,7 +164,7 @@ ul li.e-hover {
     left: 0;
 }
 
-.e-text-content .e-icons {
+.pm-sidebar-menu .e-text-content .e-icons {
     position: absolute;
     right: 0;
     visibility: visible !important;
@@ -201,6 +201,7 @@ ul#pm-sidebar-menu {
 .e-grid .e-headercell,
 .e-grid .e-detailheadercell {
     background: #fff;
+	vertical-align: top;
 }
 
 .e-grid .e-rowcell {
@@ -219,10 +220,10 @@ tr.e-columnheader th span.e-headertext {
     font-weight: 600;
 }
 
-.e-control.e-toolbar {
+/* .e-control.e-toolbar {
     padding-top: 12px;
     padding-bottom: 12px;
-}
+} */
 
 input.e-input,
 .e-input-group input,
@@ -330,4 +331,134 @@ div#pm-appbar-add-item-popup ul {
 
 ul#pm-sidebar-menu {
     margin: 15px 0px 15px 15px !important;
+}
+
+.bold {
+    font-weight: bold;
+}
+
+#pm-grid-container #pm-filter-container {
+    padding: 4px 12px;
+}
+
+.pm-scheduleview-container #pm-filter-container {
+    padding: 12px;
+}
+
+tr.task-complete > td button > span.btn-task-status {
+	color: rgb(74 222 128);
+}
+
+tr.task-incomplete > td button > span.btn-task-status {
+	color: #777777;
+}
+
+#pm-filter-container .e-input-group {
+	display:flex;
+	align-items: center;
+}
+
+/* #pm-filter-container span.e-icons {
+	margin-bottom: 5px;
+} */
+
+#pm-filter-container .e-input-group.e-control-wrapper {
+    width: 38px !important;
+	height: 30px;
+}
+
+#pm-filter-container .e-chips-wrapper {
+    display: none;
+}
+
+#pm-filter-container .e-clear-icon {
+    display: none;
+}
+
+#pm-filter-container .e-overflow.e-show-text.e-total-count {
+	display: none;
+}
+
+.e-ddt.e-popup {
+	width: auto !important;
+}
+
+#pm-filter-container .e-input-group.e-control-wrapper.e-show-dd-icon.e-ddt .e-input-group-icon.e-icons {
+	position: absolute;
+	right:0;
+	bottom:0;
+}
+
+#pm-content .pm-scheduleview-container .pm-gridview-title,
+#pm-content .pm-scheduleview-container #pm-filter-container {
+	display: inline-block;
+	vertical-align: top;
+	margin-top: -11px;
+}
+
+#pm-grid-container .e-toolbar-left {
+	display: flex;
+}
+
+#pm-filter-container .e-icons.e-ddt-icon::before {
+	content: "\e7f7";
+	transform: none;
+	transition: none;
+}
+
+.details_title {
+	font-size: 16px;
+	font-weight: 600;
+	margin: 15px 0px;
+	border-bottom: 1px solid #e5e5e6;
+	padding-bottom: 8px;
+}
+
+.details_table {
+	border: 1px solid #eaeaea;
+}
+
+.details_record {
+	border-color: #ededee;
+	background-color: #f9fafa;
+	min-height: 40px;
+	border-bottom: 1px solid #f3f3f3;
+	display: table;
+	width: 100%;
+}
+
+.details_record_label {
+	display: table-cell;
+	border-color: #ededee;
+	vertical-align: top;
+	padding: 10px 15px;
+	line-height:21px;
+	white-space: normal;
+	word-break: break-word;
+	box-sizing: border-box;
+	width: 50%;
+}
+
+.details_record_data {
+	display: table-cell;
+	border-color: #ededee;
+	vertical-align: top;
+	text-align: left;
+	padding:10px 15px;
+	border-left: 1px solid #f3f3f3;
+	white-space: normal;
+	word-break: break-word;
+	word-wrap: break-word;
+	box-sizing: border-box;
+	width: 50%;
+}
+
+.details_wrapper {
+	height: calc(100% - 30px);
+}
+
+.details_content {
+	overflow-y: auto;
+	max-height: 100%;
+	padding: 15px;
 }

@@ -1,3 +1,4 @@
+import anvil.server
 from AnvilFusion.components.FormBase import FormBase, POPUP_WIDTH_COL3
 from AnvilFusion.components.FormInputs import *
 from AnvilFusion.components.MultiFieldInput import MultiFieldInput
@@ -17,6 +18,8 @@ class ContactForm(FormBase):
         self.mobile_phone = TextInput(name='mobile_phone', label='Mobile Phone', input_type='tel')
         self.work_phone = TextInput(name='work_phone', label='Work Phone', input_type='tel')
         self.title_position = TextInput(name='title_position', label='Title / Position')
+        self.department = TextInput(name='department', label='Department')
+        self.courtroom = TextInput(name='courtroom', label='Courtroom')
 
         self.personal_details = MultiFieldInput(name='personal_details', model='Contact')
         self.address = MultiFieldInput(name='address', model='Contact')
@@ -30,6 +33,7 @@ class ContactForm(FormBase):
                 [self.email, self.contact_group],
                 [self.mobile_phone, self.entity],
                 [self.work_phone, self.title_position],
+                [self.department, self.courtroom],
                 [self.personal_details, self.address],
                 [self.employment, self.additional_info],
                 [self.criminal_history]

@@ -1,3 +1,4 @@
+import anvil.server
 # Application navigation
 from anvil.js.window import ej, jQuery
 import sys
@@ -138,8 +139,7 @@ PMAPP_NAV_ITEMS = {
     'case_reports_events': {'class': 'EventScheduleView', 'type': 'custom', 'action': 'open', 'props': {}},
     'case_reports_cases': {'class': 'CaseListView', 'type': 'custom', 'action': 'open', 'config': 'CaseListView',
                            'props': {}},
-    'case_reports_contacts': {'model': 'Contact', 'type': 'view', 'action': 'open', 'config': 'ContactView',
-                              'props': {}},
+    'case_reports_contacts': {'model': 'Contact', 'type': 'view', 'action': 'open', 'props': {}},
     'case_reports_documents': {'class': 'CaseDocumentsView', 'type': 'custom', 'action': 'open',
                                'props': {'case_uid': 'a31c356d-668c-4e62-b103-61869154adb1'}},
     'case_reports_time_entries': {'model': 'TimeEntry', 'type': 'view', 'action': 'open', 'config': 'TimeEntryView',
@@ -253,7 +253,7 @@ class Sidebar:
             'width': sidebar_width,
             'target': self.target_el,
             'mediaQuery': '(min-width: 600px)',
-            'isOpen': True,
+            'isOpen': False,
             'animate': False,
         })
 
@@ -265,6 +265,7 @@ class Sidebar:
                 'text': 'nodeText',
                 'child': 'nodeChild'
             },
+            'loadOnDemand': False,
             'expandOn': 'Click',
             'nodeSelected': self.menu_select,
         })
@@ -283,13 +284,13 @@ class Sidebar:
         self.menu_select(None, subcomponent=(subcomponent or PMAPP_DEFAULT_NAV_ITEMS[menu_id]), props=props)
 
     def menu_select(self, args, subcomponent=None, props=None):
+        print(f"navigation/menu_select\n args={args}\nsubcomponent={subcomponent}\nprops={props}\n================")
+
         if subcomponent is None:
             if 'e-level-1' in list(args.node.classList):
-                print('Accordion')
                 self.menu.collapseAll()
                 self.menu.expandAll([args.node])
                 self.nav_target_id = None
-
             menu_item_id = args.nodeData.id
             print(menu_item_id)
             component = PMAPP_NAV_ITEMS[menu_item_id] if menu_item_id in PMAPP_NAV_ITEMS else None
@@ -310,7 +311,6 @@ class Sidebar:
                 self.content_control = view_class(container_id=nav_container_id, **component['props'])
             except Exception as e:
                 print(e)
-
         if component['type'] == 'view':
             if 'config' in component:
                 self.content_control = GridView(view_name=component['config'], container_id=nav_container_id)
@@ -338,9 +338,11 @@ class Sidebar:
 
         if hasattr(self.content_control, 'target_id'):
             self.nav_target_id = self.content_control.target_id
+        print(f"self.content_control={self.content_control}\nself.nav_target_id={self.nav_target_id}")
 
         # try:
-        print(component, self.content_control)
+        # print(component, self.content_control)
+        
         self.content_control.form_show()
         # except Exception as e:
         #     print(e)
@@ -352,6 +354,34 @@ class Sidebar:
             time.sleep(0.5)
             self.menu_select(None, subcomponent=component['subcomponent'])
 
+class DetailsView:
+    def __init__(self):
+        self.sidebar = ej.navigations.Sidebar({
+            'width': '400px',
+            # 'showBackdrop': True,
+            'enablePersistence': True,
+            'type': 'Push',
+            'position': 'Right',
+            'closeOnDocumentClick': True
+        })
+        self.close_btn = ej.buttons.Button({
+            'cssClass': 'e-flat',
+            'iconCss': 'fa-solid fa-xmark'
+        })
+
+    def form_show(self):
+        self.close_btn.appendTo(jQuery('#btn_close')[0])
+        self.sidebar.appendTo(jQuery(f"#pm-details-sidebar")[0])
+        self.close_btn.element.addEventListener('click', self.hide)
+
+    def show(self):
+        print("details show")
+        self.sidebar.show()
+    
+    def hide(self, args):
+        print("details hide")
+        self.sidebar.hide()
+    
 
 PMAPP_APPBAR_ADD_ITEM = {
     'Add Time Entry': {'model': 'TimeEntry', 'type': 'form'},

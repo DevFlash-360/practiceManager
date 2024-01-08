@@ -3,6 +3,9 @@ dependencies:
 - dep_id: dep_4vj9jnxbmdg1zu
   version: {dev: false}
   resolution_hints: {app_id: RKPNSNWS3GPPJAO7, name: AnvilFusion, package_name: AnvilFusion}
+- dep_id: dep_lc1qg7fkomjm9v
+  version: {dev: false}
+  resolution_hints: {app_id: 6OVB6WYVVACMAXYK, name: DevFusion, package_name: DevFusion}
 services:
 - source: /runtime/services/tables.yml
   client_config: {enable_v2: true}
@@ -38,9 +41,15 @@ native_deps: {head_html: "<!-- Material Design icons -->\n<link href=\"https://c
     \ -->\n<link href=\"https://cdn.syncfusion.com/ej2/23.1.36/tailwind.css\" rel=\"\
     stylesheet\">\n<script src=\"https://cdn.syncfusion.com/ej2/23.1.36/dist/ej2.min.js\"\
     \ type=\"text/javascript\"></script>\n<script src=\"_/theme/aws-sdk-v3-bundle.js\"\
-    \ type=\"text/javascript\"></script>\n<link href=\"_/theme/anvil-fusion.css\"\
+    \ type=\"text/javascript\"></script>\n\n<link href=\"_/theme/anvil-fusion.css\"\
     \ rel=\"stylesheet\">\n<link href=\"_/theme/pmapp.css\" rel=\"stylesheet\">\n\n\
-    <!-- Packages -->\n<script>\n  ej.base.registerLicense('ORg4AjUWIQA/Gnt2VlhhQlJCfV5AQmBIYVp/TGpJfl96cVxMZVVBJAtUQF1hSn5ad01iX35acXdQQmlc');\n\
+    <!-- Custom stylesheets -->\n<!-- <link href=\"https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css\"\
+    \ rel=\"stylesheet\"> -->\n<link href=\"https://cdn.syncfusion.com/ej2/24.1.41/ej2-base/styles/material.css\"\
+    \ rel=\"stylesheet\">\n<link href=\"https://cdn.syncfusion.com/ej2/24.1.41/ej2-buttons/styles/material.css\"\
+    \ rel=\"stylesheet\">\n<!-- <link href=\"https://cdn.syncfusion.com/ej2/24.1.41/ej2-navigations/styles/material.css\"\
+    \ rel=\"stylesheet\"> -->\n\n<!-- Custom scripts -->\n<script src=\"https://cdn.syncfusion.com/ej2/24.1.41/dist/ej2.min.js\"\
+    \ type=\"text/javascript\"></script>\n<script src=\"https://cdn.syncfusion.com/ej2/syncfusion-helper.js\"\
+    \ type =\"text/javascript\"></script>\n<!-- Packages -->\n<script>\n  ej.base.registerLicense('ORg4AjUWIQA/Gnt2VlhhQlJCfV5AQmBIYVp/TGpJfl96cVxMZVVBJAtUQF1hSn5ad01iX35acXdQQmlc');\n\
     \  ej.schedule.Schedule.inject(ej.schedule.DragAndDrop, ej.schedule.Resize)\n\
     </script>\n\n<!-- UnoCSS -->\n<script src=\"https://cdn.jsdelivr.net/npm/@unocss/runtime\"\
     ></script>\n<script>\n// pass unocss options\nwindow.__unocss = {\n  rules: [\n\
@@ -176,6 +185,12 @@ db_schema:
     - name: additional_info
       admin_ui: {}
       type: simpleObject
+    - name: department
+      admin_ui: {width: 200}
+      type: string
+    - name: courtroom
+      admin_ui: {width: 200}
+      type: string
   time_entries:
     title: Time Entries
     client: none
@@ -319,12 +334,15 @@ db_schema:
       admin_ui: {width: 200}
       type: string
     - name: created_by
-      admin_ui: {width: 200}
+      admin_ui: {order: 11, width: 123}
       type: string
     - name: assigned_staff
       admin_ui: {width: 200}
       type: link_multiple
       target: staff
+    - name: completed
+      admin_ui: {width: 200}
+      type: bool
   causes_of_action:
     title: Causes Of Action
     client: none
@@ -550,6 +568,15 @@ db_schema:
     - name: created_by
       admin_ui: {width: 200}
       type: string
+    - name: path
+      admin_ui: {width: 200}
+      type: string
+    - name: file_version
+      admin_ui: {width: 200}
+      type: string
+    - name: file
+      admin_ui: {width: 200}
+      type: media
   lead_sources:
     title: Lead Sources
     client: none
@@ -1245,6 +1272,23 @@ db_schema:
     - name: updated_by
       admin_ui: {width: 200}
       type: string
+  time_off_requests:
+    title: Time Off Requests
+    client: none
+    server: full
+    columns:
+    - {name: date_of_return, admin_ui: null, type: date}
+    - {name: reason, admin_ui: null, type: string}
+    - {name: uid, admin_ui: null, type: string}
+    - {name: staff, admin_ui: null, type: link_single, target: staff}
+    - {name: date_of_leave, admin_ui: null, type: date}
+    - {name: updated_by, admin_ui: null, type: string}
+    - {name: tenant_uid, admin_ui: null, type: string}
+    - {name: created_time, admin_ui: null, type: datetime}
+    - {name: status, admin_ui: null, type: string}
+    - {name: updated_time, admin_ui: null, type: datetime}
+    - {name: notes, admin_ui: null, type: string}
+    - {name: created_by, admin_ui: null, type: string}
   documents:
     client: none
     server: full
@@ -1397,6 +1441,28 @@ db_schema:
     - name: updated_by
       admin_ui: {width: 200}
       type: string
+  reimbursement_requests:
+    title: Reimbursement Requests
+    client: none
+    server: full
+    columns:
+    - {name: staff, admin_ui: null, type: link_single, target: staff}
+    - {name: status, admin_ui: null, type: string}
+    - {name: quantity, admin_ui: null, type: number}
+    - {name: created_by, admin_ui: null, type: string}
+    - {name: total, admin_ui: null, type: number}
+    - {name: created_time, admin_ui: null, type: datetime}
+    - {name: tenant_uid, admin_ui: null, type: string}
+    - {name: description, admin_ui: null, type: string}
+    - {name: amount, admin_ui: null, type: number}
+    - {name: add_to_case, admin_ui: null, type: bool}
+    - {name: activity, admin_ui: null, type: link_single, target: activities}
+    - {name: date, admin_ui: null, type: date}
+    - {name: case, admin_ui: null, type: link_single, target: cases}
+    - {name: uid, admin_ui: null, type: string}
+    - {name: receipt_invoice, admin_ui: null, type: simpleObject}
+    - {name: updated_by, admin_ui: null, type: string}
+    - {name: updated_time, admin_ui: null, type: datetime}
   case_requirements:
     client: none
     server: full

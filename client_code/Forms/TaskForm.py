@@ -1,3 +1,4 @@
+import anvil.server
 from AnvilFusion.components.FormBase import FormBase, POPUP_WIDTH_COL2
 from AnvilFusion.components.FormInputs import *
 from AnvilFusion.tools.utils import AppEnv
@@ -24,6 +25,7 @@ class TaskForm(FormBase):
                                          on_change=self.no_due_date_toggle)
         self.no_case = CheckboxInput(name='no_case', label='Task is not related to case', save=False,
                                      on_change=self.no_case_toggle)
+        # self.completed = CheckboxInput(name='completed', label='Task is completed')
 
         sections = [
             {'name': '_', 'rows': [
@@ -43,7 +45,8 @@ class TaskForm(FormBase):
                 [self.due_date, self.assigned_staff],
                 [self.no_due_date],
                 [self.documents]
-            ]}
+                # [self.completed]
+            ]},
         ]
 
         super().__init__(sections=sections, width=POPUP_WIDTH_COL2, **kwargs)
