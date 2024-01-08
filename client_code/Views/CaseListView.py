@@ -41,4 +41,19 @@ class CaseListView(GridView2):
     def details_content(self, args):
         case = args['data']
         print(case)
-        return "case details"
+        content = "<div class='details_title'>Overview</div>"
+        content += f"<div class='details_table'>\
+            <div class='details_record'>\
+                <div class='details_record_label'>Case Name</div>\
+                <div class='details_record_data'>{case['case_name']}</div>\
+            </div>\
+            <div class='details_record'>\
+                <div class='details_record_label'>Practice Area</div>\
+                <div class='details_record_data'>{case['practice_area__name']}</div>\
+            </div>\
+            <div class='details_record'>\
+                <div class='details_record_label'>Case Stage</div>\
+                <div class='details_record_data'>{case['case_stage__name']}</div>\
+            </div>\
+        </div>"
+        return content
