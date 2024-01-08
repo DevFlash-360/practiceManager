@@ -43,6 +43,10 @@ class CaseListView(GridView2):
         case = args['data']
         item = Case.get(case['uid'])
         print(case)
+
+        practice_area = case['practice_area__name'] if 'practice_area__name' in case else None
+        case_stage = case['case_stage__name'] if 'case_stage__name' in case else None
+        cause_of_action = case['cause_of_action__cause_of_action'] if 'cause_of_action__cause_of_action' in case else None
         content = "<div class='details_title'>Overview</div>"
         content += f"<div class='details_table'>\
             <div class='details_record'>\
@@ -51,15 +55,15 @@ class CaseListView(GridView2):
             </div>\
             <div class='details_record'>\
                 <div class='details_record_label'>Practice Area</div>\
-                <div class='details_record_data'>{case['practice_area__name']}</div>\
+                <div class='details_record_data'>{practice_area}</div>\
             </div>\
             <div class='details_record'>\
                 <div class='details_record_label'>Case Stage</div>\
-                <div class='details_record_data'>{case['case_stage__name']}</div>\
+                <div class='details_record_data'>{case_stage}</div>\
             </div>\
             <div class='details_record'>\
                 <div class='details_record_label'>Cause of Action</div>\
-                <div class='details_record_data'>{case['cause_of_action__cause_of_action']}</div>\
+                <div class='details_record_data'>{cause_of_action}</div>\
             </div>\
             <div class='details_record'>\
                 <div class='details_record_label'>Assigned Attorney</div>\
