@@ -52,7 +52,7 @@ class CaseListView(GridView2):
         case_stage = case['case_stage__name'] if 'case_stage__name' in case else None
         cause_of_action = case['cause_of_action__cause_of_action'] if 'cause_of_action__cause_of_action' in case else None
         assigned_attorneys = case['assigned_attorneys__full_name'] if 'assigned_attorneys__full_name' in case else None
-        print(f"case_status = {item['case_status']}")
+        print(f"court, department = {item['court']}, {item['department']}")
         case_status = item['case_status']['name'] if item['case_status'] else None
         content = "<div class='details_title'>Overview</div>"
         content += f"<div class='details_table'>\
@@ -91,6 +91,14 @@ class CaseListView(GridView2):
             <div class='details_record'>\
                 <div class='details_record_label'>Close Date</div>\
                 <div class='details_record_data'>{item['close_date']}</div>\
+            </div>\
+            <div class='details_record'>\
+                <div class='details_record_label'>Statue of Limitations</div>\
+                <div class='details_record_data'>{item['statute_of_limitations']}</div>\
+            </div>\
+            <div class='details_record'>\
+                <div class='details_record_label'>Court</div>\
+                <div class='details_record_data'>{item['statute_of_limitations']}</div>\
             </div>\
         <div>"
 
