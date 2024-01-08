@@ -54,6 +54,7 @@ class CaseListView(GridView2):
         assigned_attorneys = case['assigned_attorneys__full_name'] if 'assigned_attorneys__full_name' in case else None
         case_status = item['case_status']['name'] if item['case_status'] else None
         court = f"{item['court']} - {item['department']}"
+        print(item['clients'])
         clients = ','.join(item['clients'])
         content = "<div class='details_title'>Overview</div>"
         content += f"<div class='details_table'>\
