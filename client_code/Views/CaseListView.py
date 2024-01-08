@@ -40,4 +40,5 @@ class CaseListView(GridView2):
 
     def details_content(self, args):
         case = args['data']
+        print(case)
         return "case details"
