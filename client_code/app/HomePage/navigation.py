@@ -361,8 +361,7 @@ class DetailsView:
             # 'showBackdrop': True,
             'enablePersistence': True,
             'type': 'Push',
-            'position': 'Right',
-            'closeOnDocumentClick': True
+            'position': 'Right'
         })
         self.close_btn = ej.buttons.Button({
             'cssClass': 'e-flat',
