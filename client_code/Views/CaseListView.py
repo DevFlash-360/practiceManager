@@ -43,7 +43,13 @@ class CaseListView(GridView2):
         case = args['data']
         item = Case.get(case['uid'])
         print(case)
-
+        created_by = User.get(item['created_by']) if item['created_by'] else None
+        if created_by:
+            created_by = created_by['email']
+        
+        updated_by = User.get(item['updated_by']) if item['updated_by'] else None
+        if updated_by:
+            updated_by = updated_by['email']
         practice_area = case['practice_area__name'] if 'practice_area__name' in case else None
         case_stage = case['case_stage__name'] if 'case_stage__name' in case else None
         cause_of_action = case['cause_of_action__cause_of_action'] if 'cause_of_action__cause_of_action' in case else None
@@ -81,6 +87,30 @@ class CaseListView(GridView2):
             <div class='details_record'>\
                 <div class='details_record_label'>Close Date</div>\
                 <div class='details_record_data'>{item['close_date']}</div>\
+            </div>\
+        <div>"
+
+        content += "<div class='details_title'>Record Data</div>"
+        content += f"<div class='details_table'>\
+            <div class='details_record'>\
+                <div class='details_record_label'>Added User</div>\
+                <div class='details_record_data'>{created_by}</div>\
+            </div>\
+            <div class='details_record'>\
+                <div class='details_record_label'>Added Time</div>\
+                <div class='details_record_data'>{item['created_time'].strftime('%m/%d/%Y %I:%M %p')}</div>\
+            </div>\
+            <div class='details_record'>\
+                <div class='details_record_label'>Modified User</div>\
+                <div class='details_record_data'>{updated_by}</div>\
+            </div>\
+            <div class='details_record'>\
+                <div class='details_record_label'>Modified Time</div>\
+                <div class='details_record_data'>{item['updated_time'].strftime('%m/%d/%Y %I:%M %p')}</div>\
+            </div>\
+            <div class='details_record'>\
+                <div class='details_record_label'>ID</div>\
+                <div class='details_record_data'>{case['uid']}</div>\
             </div>\
         <div>"
         return content
