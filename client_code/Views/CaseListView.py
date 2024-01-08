@@ -42,7 +42,6 @@ class CaseListView(GridView2):
     def details_content(self, args):
         case = args['data']
         item = Case.get(case['uid'])
-        print(case)
         created_by = User.get(item['created_by']) if item['created_by'] else None
         if created_by:
             created_by = created_by['email']
@@ -53,6 +52,7 @@ class CaseListView(GridView2):
         case_stage = case['case_stage__name'] if 'case_stage__name' in case else None
         cause_of_action = case['cause_of_action__cause_of_action'] if 'cause_of_action__cause_of_action' in case else None
         assigned_attorneys = case['assigned_attorneys__full_name'] if 'assigned_attorneys__full_name' in case else None
+        print(f"case_status = {item['case_status']}")
         case_status = CaseStatus.get(item['case_status']) if item['case_status'] else None
         if case_status:
             case_status = case_status['name']
