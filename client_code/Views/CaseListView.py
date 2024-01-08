@@ -2,6 +2,7 @@ import anvil.server
 from DevFusion.components.GridView2 import GridView2
 from AnvilFusion.tools.utils import AppEnv
 from anvil.js.window import ej, jQuery
+from ..app.models import Staff, Case, Task, Activity, User
 
 
 
@@ -40,6 +41,7 @@ class CaseListView(GridView2):
 
     def details_content(self, args):
         case = args['data']
+        item = Case.get(case['uid'])
         print(case)
         content = "<div class='details_title'>Overview</div>"
         content += f"<div class='details_table'>\
@@ -55,5 +57,21 @@ class CaseListView(GridView2):
                 <div class='details_record_label'>Case Stage</div>\
                 <div class='details_record_data'>{case['case_stage__name']}</div>\
             </div>\
+            <div class='details_record'>\
+                <div class='details_record_label'>Cause of Action</div>\
+                <div class='details_record_data'>{case['cause_of_action__cause_of_action']}</div>\
+            </div>\
+            <div class='details_record'>\
+                <div class='details_record_label'>Assigned Attorney</div>\
+                <div class='details_record_data'>{item['assigned_attorneys']}</div>\
+            </div>\
         </div>"
+
+        content += "<div class='details_title'>Details</div>"
+        content += f"<div class='details_table'>\
+            <div class='details_record'>\
+                <div class='details_record_label'>Case Number</div>\
+                <div class='details_record_data'>{item['case_number']}</div>\
+            </div>\
+        <div>"
         return content
