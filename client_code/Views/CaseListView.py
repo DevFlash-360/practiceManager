@@ -47,6 +47,7 @@ class CaseListView(GridView2):
         practice_area = case['practice_area__name'] if 'practice_area__name' in case else None
         case_stage = case['case_stage__name'] if 'case_stage__name' in case else None
         cause_of_action = case['cause_of_action__cause_of_action'] if 'cause_of_action__cause_of_action' in case else None
+        assigned_attorneys = case['assigned_attorneys__full_name'] if 'assigned_attorneys__full_name' in case else None
         content = "<div class='details_title'>Overview</div>"
         content += f"<div class='details_table'>\
             <div class='details_record'>\
@@ -67,7 +68,7 @@ class CaseListView(GridView2):
             </div>\
             <div class='details_record'>\
                 <div class='details_record_label'>Assigned Attorney</div>\
-                <div class='details_record_data'>{item['assigned_attorneys']}</div>\
+                <div class='details_record_data'>{assigned_attorneys}</div>\
             </div>\
         </div>"
 
