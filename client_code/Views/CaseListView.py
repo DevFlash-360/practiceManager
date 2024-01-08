@@ -78,5 +78,9 @@ class CaseListView(GridView2):
                 <div class='details_record_label'>Case Number</div>\
                 <div class='details_record_data'>{item['case_number']}</div>\
             </div>\
+            <div class='details_record'>\
+                <div class='details_record_label'>Close Date</div>\
+                <div class='details_record_data'>{item['close_date']}</div>\
+            </div>\
         <div>"
         return content
