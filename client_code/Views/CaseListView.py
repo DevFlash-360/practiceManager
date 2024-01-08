@@ -2,7 +2,7 @@ import anvil.server
 from DevFusion.components.GridView2 import GridView2
 from AnvilFusion.tools.utils import AppEnv
 from anvil.js.window import ej, jQuery
-from ..app.models import Case, CaseStatus
+from ..app.models import Case, CaseStatus, User
 
 
 
