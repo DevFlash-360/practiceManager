@@ -53,9 +53,7 @@ class CaseListView(GridView2):
         cause_of_action = case['cause_of_action__cause_of_action'] if 'cause_of_action__cause_of_action' in case else None
         assigned_attorneys = case['assigned_attorneys__full_name'] if 'assigned_attorneys__full_name' in case else None
         print(f"case_status = {item['case_status']}")
-        case_status = CaseStatus.get(item['case_status']) if item['case_status'] else None
-        if case_status:
-            case_status = case_status['name']
+        case_status = item['case_status']['name'] if item['case_status'] else None
         content = "<div class='details_title'>Overview</div>"
         content += f"<div class='details_table'>\
             <div class='details_record'>\
