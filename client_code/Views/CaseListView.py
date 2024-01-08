@@ -54,8 +54,8 @@ class CaseListView(GridView2):
         assigned_attorneys = case['assigned_attorneys__full_name'] if 'assigned_attorneys__full_name' in case else None
         case_status = item['case_status']['name'] if item['case_status'] else None
         court = f"{item['court']} - {item['department']}"
-        print(item['clients'])
         clients = ','.join([client['client_name'] for client in item['clients']])
+        contacts = ','.join([contact['full_name'] for contact in item['contacts']])
         content = "<div class='details_title'>Overview</div>"
         content += f"<div class='details_table'>\
             <div class='details_record'>\
@@ -111,12 +111,16 @@ class CaseListView(GridView2):
                 <div class='details_record_data'>{court}</div>\
             </div>\
             <div class='details_record'>\
-                <div class='details_record_label'>Description</div>\
-                <div class='details_record_data'>{item['case_description']}</div>\
-            </div>\
-            <div class='details_record'>\
                 <div class='details_record_label'>Clients</div>\
                 <div class='details_record_data'>{clients}</div>\
+            </div>\
+            <div class='details_record'>\
+                <div class='details_record_label'>Contacts</div>\
+                <div class='details_record_data'>{contacts}</div>\
+            </div>\
+            <div class='details_record'>\
+                <div class='details_record_label'>Description</div>\
+                <div class='details_record_data'>{item['case_description']}</div>\
             </div>\
         <div>"
 
