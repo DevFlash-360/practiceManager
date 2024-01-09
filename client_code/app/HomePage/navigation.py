@@ -149,7 +149,7 @@ PMAPP_NAV_ITEMS = {
     'case_reports_invoices': {'model': 'Invoice', 'type': 'view', 'action': 'open', 'config': 'InvoiceView',
                               'props': {}},
 
-    'intake_leads': {'model': 'Lead', 'type': 'view', 'action': 'open', 'props': {}},
+    'intake_leads': {'class': 'LeadListView', 'type': 'custom', 'action': 'open', 'props': {}},
     # 'intake_lead_analytics': {'model': '', 'type': 'page|view|form', 'action': 'open|popup', 'props': {}},
 
     # 'tools_date_calculator': {'model': '', 'type': 'view', 'action': 'open', 'props': {}},
