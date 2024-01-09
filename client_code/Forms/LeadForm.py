@@ -44,7 +44,7 @@ class LeadForm(FormBase):
                                         text_field='full_name')
 
         self.referred_by = LookupInput(name='referred_by', label='Referred By', model='Contact', text_field='full_name')
-        self.case_contacts = LookupInput(name='case_contacts', label='Contacts', model='Contact',
+        self.case_contacts = LookupInput(name='contacts', label='Contacts', model='Contact',
                                          text_field='full_name', select='multi')
         self.case_contacts.options = self.referred_by.options
 
@@ -159,7 +159,6 @@ class LeadForm(FormBase):
 
     # lead_source on_change handler
     def lead_source_referral(self, args):
-        print(args)
         if args['value'] is not None and args['value']['name'] == 'Referral':
             self.referred_by.show()
         else:
