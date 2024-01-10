@@ -3,6 +3,7 @@ from AnvilFusion.components.FormBase import FormBase, POPUP_WIDTH_COL1, POPUP_WI
 from AnvilFusion.components.FormInputs import *
 from AnvilFusion.components.SubformGrid import SubformGrid
 from ..Forms.ContactForm import ContactForm
+from AnvilFusion.tools.utils import AppEnv
 
 
 FEE_TYPE_RETAINER = ('Flat Fee', 'Hourly', 'Hybrid Flat/Hourly', 'Hybrid Flat/Contingency')
@@ -212,6 +213,10 @@ class LeadForm(FormBase):
                 self.pre_litigation_rate.value = None
                 self.litigation_rate.hide()
                 self.litigation_rate.value = None
+                
+    def form_save(self, args):
+        print(AppEnv.views)
+        super().form_save(args)
 
 
 class LeadActivityForm(FormBase):
