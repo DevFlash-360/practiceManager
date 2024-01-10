@@ -531,7 +531,17 @@ class Lead:
     incident_location = Attribute(field_type=types.FieldTypes.ADDRESS)
     case_description = Attribute(field_type=types.FieldTypes.MULTI_LINE)
     contacts = Relationship('Contact', with_many=True)
-    # client_details = ... need to discuss
+    # billing
+    fee_type = Relationship('FeeType')
+    flat_fee_retainer = Attribute(field_type=types.FieldTypes.CURRENCY)
+    hourly_retainer = Attribute(field_type=types.FieldTypes.CURRENCY)
+    pre_litigation_rate = Attribute(field_type=types.FieldTypes.CURRENCY)
+    litigation_rate = Attribute(field_type=types.FieldTypes.CURRENCY)
+    trial_included = Attribute(field_type=types.FieldTypes.BOOLEAN)
+    retainer_hours_limit = Attribute(field_type=types.FieldTypes.NUMBER)
+    investigator = Attribute(field_type=types.FieldTypes.BOOLEAN)
+    investigator_budget = Attribute(field_type=types.FieldTypes.CURRENCY)
+    record_seal_expungement = Attribute(field_type=types.FieldTypes.BOOLEAN)
 
 
 @model_type
