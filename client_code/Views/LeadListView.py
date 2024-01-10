@@ -28,6 +28,8 @@ class LeadListView(GridView2):
         lead_source = item['lead_source']['name'] if item['lead_source'] else None
         referred_by = item['referred_by']['full_name'] if item['referred_by'] else None
         practice_area = item['practice_area']['name'] if item['practice_area'] else None
+        case_stage = item['case_stage']['name'] if item['case_stage'] else None
+        cause_of_action = item['cause_of_action']['cause_of_action'] if item['cause_of_action'] else None
         content = "<div class='details_title'>Lead Overview</div>"
         content += f"<div class='details_table'>\
             <div class='details_record'>\
@@ -57,6 +59,18 @@ class LeadListView(GridView2):
             <div class='details_record'>\
                 <div class='details_record_label'>Case Name</div>\
                 <div class='details_record_data'>{item['case_name']}</div>\
+            </div>\
+            <div class='details_record'>\
+                <div class='details_record_label'>Case Stage</div>\
+                <div class='details_record_data'>{case_stage}</div>\
+            </div>\
+            <div class='details_record'>\
+                <div class='details_record_label'>Cause of Action</div>\
+                <div class='details_record_data'>{cause_of_action}</div>\
+            </div>\
+            <div class='details_record'>\
+                <div class='details_record_label'>SOL</div>\
+                <div class='details_record_data'>{item['statute_of_limitations']}</div>\
             </div>\
         </div>"
         return content
