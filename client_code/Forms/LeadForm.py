@@ -213,10 +213,6 @@ class LeadForm(FormBase):
                 self.pre_litigation_rate.value = None
                 self.litigation_rate.hide()
                 self.litigation_rate.value = None
-                
-    def form_save(self, args):
-        print(AppEnv.views)
-        super().form_save(args)
 
 
 class LeadActivityForm(FormBase):
