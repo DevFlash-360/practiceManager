@@ -2,7 +2,7 @@ import anvil.server
 from DevFusion.components.GridView2 import GridView2
 from AnvilFusion.tools.utils import AppEnv
 from anvil.js.window import ej, jQuery
-from ..app.models import Case, CaseStatus, User
+from ..app.models import Lead
 
 
 class LeadListView(GridView2):
@@ -23,5 +23,8 @@ class LeadListView(GridView2):
 
     def details_content(self, args):
         lead = args['data']
+        item = Lead.get(lead['uid'])
         print(lead)
         return "lead-detail"
+    
+    
