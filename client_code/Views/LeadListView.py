@@ -26,6 +26,8 @@ class LeadListView(GridView2):
         item = Lead.get(lead['uid'])
         intake_staffs = ', '.join([staff['full_name'] for staff in item['intake_staff']])
         lead_source = item['lead_source']['name'] if item['lead_source'] else None
+        referred_by = item['referred_by']['full_name'] if item['referred_by'] else None
+        practice_area = item['practice_area']['name'] if item['practice_area'] else None
         content = "<div class='details_title'>Lead Overview</div>"
         content += f"<div class='details_table'>\
             <div class='details_record'>\
@@ -40,9 +42,19 @@ class LeadListView(GridView2):
                 <div class='details_record_label'>Lead Source</div>\
                 <div class='details_record_data'>{lead_source}</div>\
             </div>\
+            <div class='details_record'>\
+                <div class='details_record_label'>Referred By</div>\
+                <div class='details_record_data'>{referred_by}</div>\
+            </div>\
         </div>"
 
         content += "<div class='details_title'>Case Overview</div>"
+        content += f"<div class='details_table'>\
+            <div class='details_record'>\
+                <div class='details_record_label'>Practice Area</div>\
+                <div class='details_record_data'>{practice_area}</div>\
+            </div>\
+        </div>"
         return content
     
     
