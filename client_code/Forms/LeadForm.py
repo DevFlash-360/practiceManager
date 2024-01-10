@@ -42,7 +42,7 @@ class LeadForm(FormBase):
         self.lead_source = LookupInput(model='LeadSource', name='lead_source', label='Lead Source',
                                        on_change=self.lead_source_referral)
         self.intake_staff = LookupInput(name='intake_staff', label='Intake Staff', model='Staff',
-                                        text_field='full_name')
+                                        text_field='full_name', select='multi')
 
         self.referred_by = LookupInput(name='referred_by', label='Referred By', model='Contact', text_field='full_name')
         self.case_contacts = LookupInput(name='contacts', label='Contacts', model='Contact',
