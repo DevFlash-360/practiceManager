@@ -24,7 +24,18 @@ class LeadListView(GridView2):
     def details_content(self, args):
         lead = args['data']
         item = Lead.get(lead['uid'])
-        print(lead)
+        intake_staffs = ', '.join([staff['full_name'] for staff in item['intake_staff']])
+        content = "<div class='details_title'>Overview</div>"
+        f"<div class='details_table'>\
+            <div class='details_record'>\
+                <div class='details_record_label'>Lead Status</div>\
+                <div class='details_record_data'>{item['lead_status']}</div>\
+            </div>\
+            <div class='details_record'>\
+                <div class='details_record_label'>Intake Staff</div>\
+                <div class='details_record_data'>{intake_staffs}</div>\
+            </div>\
+        </div>"
         return "lead-detail"
     
     
