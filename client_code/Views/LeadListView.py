@@ -36,6 +36,6 @@ class LeadListView(GridView2):
                 <div class='details_record_data'>{intake_staffs}</div>\
             </div>\
         </div>"
-        return "lead-detail"
+        return content
     
     
