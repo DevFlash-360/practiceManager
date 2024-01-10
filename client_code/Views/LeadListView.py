@@ -25,7 +25,7 @@ class LeadListView(GridView2):
         lead = args['data']
         item = Lead.get(lead['uid'])
         intake_staffs = ', '.join([staff['full_name'] for staff in item['intake_staff']])
-        lead_source = item['lead_source']['name']
+        lead_source = item['lead_source']['name'] if item['lead_source'] else None
         content = "<div class='details_title'>Lead Overview</div>"
         content += f"<div class='details_table'>\
             <div class='details_record'>\
