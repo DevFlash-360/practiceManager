@@ -29,7 +29,7 @@ class LeadListView(GridView2):
         referred_by = item['referred_by']['full_name'] if item['referred_by'] else None
         practice_area = item['practice_area']['name'] if item['practice_area'] else None
         case_stage = item['case_stage']['name'] if item['case_stage'] else None
-        cause_of_action = item['cause_of_action']['cause_of_action'] if item['cause_of_action'] else None
+        cause_of_action = ', '.join([cause['cause_of_action'] for cause in item['cause_of_action']])
         content = "<div class='details_title'>Lead Overview</div>"
         content += f"<div class='details_table'>\
             <div class='details_record'>\
