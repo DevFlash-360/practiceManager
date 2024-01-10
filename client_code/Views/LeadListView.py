@@ -30,6 +30,7 @@ class LeadListView(GridView2):
         practice_area = item['practice_area']['name'] if item['practice_area'] else None
         case_stage = item['case_stage']['name'] if item['case_stage'] else None
         cause_of_action = ', '.join([cause['cause_of_action'] for cause in item['cause_of_action']])
+        court = f"{item['court']} - {item['department']}"
         content = "<div class='details_title'>Lead Overview</div>"
         content += f"<div class='details_table'>\
             <div class='details_record'>\
@@ -71,6 +72,14 @@ class LeadListView(GridView2):
             <div class='details_record'>\
                 <div class='details_record_label'>SOL</div>\
                 <div class='details_record_data'>{item['statute_of_limitations']}</div>\
+            </div>\
+            <div class='details_record'>\
+                <div class='details_record_label'>Case Number</div>\
+                <div class='details_record_data'>{item['case_number']}</div>\
+            </div>\
+            <div class='details_record'>\
+                <div class='details_record_label'>Court</div>\
+                <div class='details_record_data'>{court}</div>\
             </div>\
         </div>"
         return content
