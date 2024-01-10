@@ -25,8 +25,8 @@ class LeadListView(GridView2):
         lead = args['data']
         item = Lead.get(lead['uid'])
         intake_staffs = ', '.join([staff['full_name'] for staff in item['intake_staff']])
-        content = "<div class='details_title'>Overview</div>"
-        f"<div class='details_table'>\
+        content = "<div class='details_title'>Lead Overview</div>"
+        content += f"<div class='details_table'>\
             <div class='details_record'>\
                 <div class='details_record_label'>Lead Status</div>\
                 <div class='details_record_data'>{item['lead_status']}</div>\
@@ -36,6 +36,8 @@ class LeadListView(GridView2):
                 <div class='details_record_data'>{intake_staffs}</div>\
             </div>\
         </div>"
+
+        content += "<div class='details_title'>Case Overview</div>"
         return content
     
     
