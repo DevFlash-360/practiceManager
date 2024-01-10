@@ -30,12 +30,6 @@ class LeadListView(GridView2):
         practice_area = item['practice_area']['name'] if item['practice_area'] else None
         case_stage = item['case_stage']['name'] if item['case_stage'] else None
         cause_of_action = ', '.join([cause['cause_of_action'] for cause in item['cause_of_action']])
-        court = item['court']['name'] if item['court'] else None
-        if item['department']:
-            if court:
-                court = f"{court} - {item['department']}"
-            else:
-                court = item['department']
 
         content = "<div class='details_title'>Lead Overview</div>"
         content += f"<div class='details_table'>\
@@ -85,9 +79,30 @@ class LeadListView(GridView2):
             </div>\
             <div class='details_record'>\
                 <div class='details_record_label'>Court</div>\
-                <div class='details_record_data'>{court}</div>\
+                <div class='details_record_data'>{item['court']}</div>\
+            </div>\
+            <div class='details_record'>\
+                <div class='details_record_label'>Department</div>\
+                <div class='details_record_data'>{item['department']}</div>\
             </div>\
         </div>"
+        content += "<div class='details_title'>Case Details</div>"
+        content += f"<div class='details_table'>\
+            <div class='details_record'>\
+                <div class='details_record_label'>Incident Date</div>\
+                <div class='details_record_data'>{item['incident_date']}</div>\
+            </div>\
+            <div class='details_record'>\
+                <div class='details_record_label'>Incident Location</div>\
+                <div class='details_record_data'>{item['incident_location']}</div>\
+            </div>\
+            <div class='details_record'>\
+                <div class='details_record_label'>Case Description</div>\
+                <div class='details_record_data'>{item['case_description']}</div>\
+            </div>\
+        </div>"
+        content += "<div class='details_title'>Billing Details</div>"
+        
         return content
     
     
