@@ -54,6 +54,10 @@ class LeadListView(GridView2):
                 <div class='details_record_label'>Practice Area</div>\
                 <div class='details_record_data'>{practice_area}</div>\
             </div>\
+            <div class='details_record'>\
+                <div class='details_record_label'>Case Name</div>\
+                <div class='details_record_data'>{item['case_name']}</div>\
+            </div>\
         </div>"
         return content
     
