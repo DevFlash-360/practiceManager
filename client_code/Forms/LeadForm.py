@@ -130,6 +130,11 @@ class LeadForm(FormBase):
 
         super().__init__(tabs=tabs, width=POPUP_WIDTH_COL3, **kwargs)
         self.fullscreen = True
+    
+    def form_open(self, args):
+        super().form_open(args)
+        if self.data is None or self.data == {}:
+            self.case_status.value = "Open"    
 
     def after_open(self):
         print(f"after_open self.data = {self.data}")
