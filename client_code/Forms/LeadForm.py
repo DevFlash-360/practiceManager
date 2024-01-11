@@ -86,7 +86,7 @@ class LeadForm(FormBase):
         tabs = [
             {'name': 'lead_details', 'label': 'Lead Details', 'sections': [
                 {'name': 'lead_info', 'label': 'Lead Information', 'rows': [
-                    [self.lead_source, self.intake_staff],
+                    [self.lead_status, self.lead_source, self.intake_staff],
                     [self.referred_by, None],
                 ]},
                 {'name': 'case_contacts', 'label': 'Case Contacts', 'rows': [
@@ -133,10 +133,7 @@ class LeadForm(FormBase):
     
     def form_open(self, args):
         super().form_open(args)
-        print(f"case_status.value = {self.lead_status.value}")
-        if self.lead_status.value is None:
-            print("init case_status")
-            self.lead_status.value = "Open"    
+        self.lead_status.hide()
 
     def after_open(self):
         print(f"after_open self.data = {self.data}")
