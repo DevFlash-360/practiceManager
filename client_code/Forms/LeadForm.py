@@ -134,7 +134,7 @@ class LeadForm(FormBase):
     def form_open(self, args):
         super().form_open(args)
         print(f"form_open self.data = {self.data}")
-        if self.data is None or self.data == {}:
+        if self.case_status.value is None:
             self.case_status.value = "Open"    
 
     def after_open(self):
