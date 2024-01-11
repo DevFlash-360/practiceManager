@@ -38,7 +38,7 @@ class LeadForm(FormBase):
                                            view_config=lead_activities_view,
                                            add_edit_form=LeadActivityForm,
                                            )
-        self.lead_status = DropdownInput(name="status", label="Status", options=["Open", "Close"], value="Open")
+        self.lead_status = TextInput(name='lead_status', label='Lead Status', value="Open")
         self.lead_source = LookupInput(model='LeadSource', name='lead_source', label='Lead Source',
                                        on_change=self.lead_source_referral)
         self.intake_staff = LookupInput(name='intake_staff', label='Intake Staff', model='Staff',
@@ -135,6 +135,7 @@ class LeadForm(FormBase):
         if not self.data:
             self.case_name.enabled = False
             self.auto_generate_case_name.value = True
+            self.lead_status.value = "Open"
             self.statute_of_limitations.hide()
             self.retainer.hide()
             self.retainer_hour_limit.hide()
