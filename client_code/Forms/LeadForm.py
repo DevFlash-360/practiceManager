@@ -132,6 +132,7 @@ class LeadForm(FormBase):
         self.fullscreen = True
 
     def after_open(self):
+        print(f"after_open self.data = {self.data}")
         if not self.data:
             self.case_name.enabled = False
             self.auto_generate_case_name.value = True
