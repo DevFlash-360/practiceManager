@@ -30,6 +30,7 @@ class LeadListView(GridView2):
         practice_area = item['practice_area']['name'] if item['practice_area'] else None
         case_stage = item['case_stage']['name'] if item['case_stage'] else None
         cause_of_action = ', '.join([cause['cause_of_action'] for cause in item['cause_of_action']])
+        contacts = ', '.join([contact['full_name'] for contact in item['contacts']])
 
         content = "<div class='details_title'>Lead Overview</div>"
         content += f"<div class='details_table'>\
@@ -102,7 +103,52 @@ class LeadListView(GridView2):
             </div>\
         </div>"
         content += "<div class='details_title'>Billing Details</div>"
-        
+        content += f"<div class='details_table'>\
+            <div class='details_record'>\
+                <div class='details_record_label'>Fee Type</div>\
+                <div class='details_record_data'>{item['fee_type']}</div>\
+            </div>\
+            <div class='details_record'>\
+                <div class='details_record_label'>Retainer</div>\
+                <div class='details_record_data'>{item['flat_fee_retainer']}</div>\
+            </div>\
+            <div class='details_record'>\
+                <div class='details_record_label'>Pre-Litigation Rate</div>\
+                <div class='details_record_data'>{item['pre_litigation_rate']}</div>\
+            </div>\
+            <div class='details_record'>\
+                <div class='details_record_label'>Litigation Rate</div>\
+                <div class='details_record_data'>{item['litigation_rate']}</div>\
+            </div>\
+            <div class='details_record'>\
+                <div class='details_record_label'>Trial Included</div>\
+                <div class='details_record_data'>{item['trial_included']}</div>\
+            </div>\
+            <div class='details_record'>\
+                <div class='details_record_label'>Hours Limited on Retainer</div>\
+                <div class='details_record_data'>{item['retainer_hours_limit']}</div>\
+            </div>\
+            <div class='details_record'>\
+                <div class='details_record_label'>Investigator Included</div>\
+                <div class='details_record_data'>{item['investigator']}</div>\
+            </div>\
+            <div class='details_record'>\
+                <div class='details_record_label'>Investigator Budget</div>\
+                <div class='details_record_data'>{item['investigator_budget']}</div>\
+            </div>\
+            <div class='details_record'>\
+                <div class='details_record_label'>Record Seal/Expungement Included</div>\
+                <div class='details_record_data'>{item['record_seal_expungement']}</div>\
+            </div>\
+        </div>"
+        content += "<div class='details_title'>Contacts</div>"
+        content += f"<div class='details_table'>\
+            <div class='details_record'>\
+                <div class='details_record_label'>Contacts</div>\
+                <div class='details_record_data'>{contacts}</div>\
+            </div>\
+        </div>"
+
         return content
     
     
