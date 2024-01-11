@@ -38,7 +38,7 @@ class LeadListView(GridView2):
         if updated_by:
             updated_by = updated_by['email']
 
-        print(f"item_status = item['lead_status']")
+        print(f"item_status = {item['lead_status']}")
 
         content = "<div class='details_title'>Lead Overview</div>"
         content += f"<div class='details_table'>\
