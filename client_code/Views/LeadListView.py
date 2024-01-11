@@ -2,7 +2,7 @@ import anvil.server
 from DevFusion.components.GridView2 import GridView2
 from AnvilFusion.tools.utils import AppEnv
 from anvil.js.window import ej, jQuery
-from ..app.models import Lead
+from ..app.models import Lead, User
 
 
 class LeadListView(GridView2):
@@ -31,6 +31,12 @@ class LeadListView(GridView2):
         case_stage = item['case_stage']['name'] if item['case_stage'] else None
         cause_of_action = ', '.join([cause['cause_of_action'] for cause in item['cause_of_action']])
         contacts = ', '.join([contact['full_name'] for contact in item['contacts']])
+        created_by = User.get(item['created_by']) if item['created_by'] else None
+        if created_by:
+            created_by = created_by['email']
+        updated_by = User.get(item['updated_by']) if item['updated_by'] else None
+        if updated_by:
+            updated_by = updated_by['email']
 
         content = "<div class='details_title'>Lead Overview</div>"
         content += f"<div class='details_table'>\
@@ -148,7 +154,29 @@ class LeadListView(GridView2):
                 <div class='details_record_data'>{contacts}</div>\
             </div>\
         </div>"
+        content += "<div class='details_title'>Record Data</div>"
+        content += f"<div class='details_table'>\
+            <div class='details_record'>\
+                <div class='details_record_label'>Added User</div>\
+                <div class='details_record_data'>{created_by}</div>\
+            </div>\
+            <div class='details_record'>\
+                <div class='details_record_label'>Added Time</div>\
+                <div class='details_record_data'>{item['created_time'].strftime('%m/%d/%Y %I:%M %p')}</div>\
+            </div>\
+            <div class='details_record'>\
+                <div class='details_record_label'>Modified User</div>\
+                <div class='details_record_data'>{updated_by}</div>\
+            </div>\
+            <div class='details_record'>\
+                <div class='details_record_label'>Modified Time</div>\
+                <div class='details_record_data'>{item['updated_time'].strftime('%m/%d/%Y %I:%M %p')}</div>\
+            </div>\
+            <div class='details_record'>\
+                <div class='details_record_label'>ID</div>\
+                <div class='details_record_data'>{lead['uid']}</div>\
+            </div>\
+        <div>"
 
         return content
-    
     
