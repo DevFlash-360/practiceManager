@@ -38,7 +38,7 @@ class LeadForm(FormBase):
                                            view_config=lead_activities_view,
                                            add_edit_form=LeadActivityForm,
                                            )
-
+        self.lead_status = TextInput(name='lead_status', label='Lead Status', value="Open")
         self.lead_source = LookupInput(model='LeadSource', name='lead_source', label='Lead Source',
                                        on_change=self.lead_source_referral)
         self.intake_staff = LookupInput(name='intake_staff', label='Intake Staff', model='Staff',
