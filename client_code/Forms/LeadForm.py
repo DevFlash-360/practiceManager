@@ -86,7 +86,7 @@ class LeadForm(FormBase):
         tabs = [
             {'name': 'lead_details', 'label': 'Lead Details', 'sections': [
                 {'name': 'lead_info', 'label': 'Lead Information', 'rows': [
-                    [self.lead_status, self.lead_source, self.intake_staff],
+                    [self.lead_source, self.intake_staff],
                     [self.referred_by, None],
                 ]},
                 {'name': 'case_contacts', 'label': 'Case Contacts', 'rows': [
@@ -99,7 +99,7 @@ class LeadForm(FormBase):
                     [self.cause_of_action, self.statute_of_limitations],
                 ]},
                 {'name': 'case_details', 'label': 'Case Details', 'cols': [
-                    [self.incident_date, self.incident_location],
+                    [self.incident_date, self.incident_location, self.lead_status],
                     [self.case_description],
                 ]},
             ]},
