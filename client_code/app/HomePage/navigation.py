@@ -369,7 +369,7 @@ class DetailsView:
         })
 
     def form_show(self):
-        self.close_btn.appendTo(jQuery('#pm-details-sidebar #btn_close')[0])
+        self.close_btn.appendTo(jQuery('#btn_details_close')[0])
         self.sidebar.appendTo(jQuery(f"#pm-details-sidebar")[0])
         self.close_btn.element.addEventListener('click', self.hide)
 
