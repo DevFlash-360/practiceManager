@@ -363,12 +363,27 @@ class DetailsView:
             'type': 'Push',
             'position': 'Right'
         })
+        self.reopen_btn = ej.buttons.Button({
+            'cssClass': 'e-flat',
+            'content': 'Reopen'
+		})
+        self.won_btn = ej.buttons.Button({
+            'cssClass': 'e-flat',
+            'content': 'Won'
+		})
+        self.lost_btn = ej.buttons.Button({
+            'cssClass': 'e-flat',
+            'content': 'Lost'
+		})
         self.close_btn = ej.buttons.Button({
             'cssClass': 'e-flat',
             'iconCss': 'fa-solid fa-xmark'
         })
 
     def form_show(self):
+        self.reopen_btn_btn.appendTo(jQuery('#btn_details_close')[0])
+        self.won_btn.appendTo(jQuery('#btn_details_close')[0])
+        self.lost_btn.appendTo(jQuery('#btn_details_close')[0])
         self.close_btn.appendTo(jQuery('#btn_details_close')[0])
         self.sidebar.appendTo(jQuery(f"#pm-details-sidebar")[0])
         self.close_btn.element.addEventListener('click', self.hide)
