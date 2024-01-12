@@ -462,3 +462,7 @@ tr.task-incomplete > td button > span.btn-task-status {
 	max-height: 100%;
 	padding: 15px;
 }
+
+.btn_details_btn {
+	padding-left: 10px;
+}
