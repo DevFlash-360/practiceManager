@@ -381,7 +381,7 @@ class DetailsView:
         })
 
     def form_show(self):
-        self.reopen_btn_btn.appendTo(jQuery('#btn_details_reopen')[0])
+        self.reopen_btn.appendTo(jQuery('#btn_details_reopen')[0])
         self.won_btn.appendTo(jQuery('#btn_details_won')[0])
         self.lost_btn.appendTo(jQuery('#btn_details_lost')[0])
         self.close_btn.appendTo(jQuery('#btn_details_close')[0])
