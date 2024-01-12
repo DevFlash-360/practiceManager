@@ -38,8 +38,10 @@ class LeadListView(GridView2):
         if updated_by:
             updated_by = updated_by['email']
             
-        # if item['lead_status'] is "Open":
-
+        if item['lead_status'] is "Open":
+            AppEnv.detials.hide_reopen()
+        else:
+            AppEnv.detials.show_reopen()
 
         content = "<div class='details_title'>Lead Overview</div>"
         content += f"<div class='details_table'>\
