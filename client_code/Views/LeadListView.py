@@ -37,8 +37,10 @@ class LeadListView(GridView2):
         updated_by = User.get(item['updated_by']) if item['updated_by'] else None
         if updated_by:
             updated_by = updated_by['email']
+            
+        if item['lead_status'] is "Open":
+            
 
-        print(f"item_status = {item['lead_status']}")
 
         content = "<div class='details_title'>Lead Overview</div>"
         content += f"<div class='details_table'>\
