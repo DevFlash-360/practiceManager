@@ -38,8 +38,7 @@ class LeadListView(GridView2):
         if updated_by:
             updated_by = updated_by['email']
             
-        if item['lead_status'] is "Open":
-            
+        # if item['lead_status'] is "Open":
 
 
         content = "<div class='details_title'>Lead Overview</div>"
