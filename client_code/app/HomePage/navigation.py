@@ -385,9 +385,9 @@ class DetailsView:
         self.sidebar.appendTo(jQuery(f"#pm-details-sidebar")[0])
         self.close_btn.element.addEventListener('click', self.hide)
         
-        self.reopen_btn.hide()
-        self.won_btn.hide()
-        self.lost_btn.hide()
+        jQuery(f"#btn_details_reopen")[0].style.display = 'None'
+        jQuery(f"#btn_details_won")[0].style.display = 'None'
+        jQuery(f"#btn_details_lost")[0].style.display = 'None'
 
     def show(self):
         print("details show")
@@ -396,7 +396,17 @@ class DetailsView:
     def hide(self, args):
         print("details hide")
         self.sidebar.hide()
-    
+
+    def show_reopen(self):
+        jQuery(f"#btn_details_reopen")[0].style.display = 'block'
+        jQuery(f"#btn_details_won")[0].style.display = 'None'
+        jQuery(f"#btn_details_lost")[0].style.display = 'None'
+
+    def hide_reopen(self):
+        jQuery(f"#btn_details_reopen")[0].style.display = 'None'
+        jQuery(f"#btn_details_won")[0].style.display = 'block'
+        jQuery(f"#btn_details_lost")[0].style.display = 'block'
+
 
 PMAPP_APPBAR_ADD_ITEM = {
     'Add Time Entry': {'model': 'TimeEntry', 'type': 'form'},
