@@ -383,7 +383,11 @@ class DetailsView:
         self.lost_btn.appendTo(jQuery('#btn_details_lost')[0])
         self.close_btn.appendTo(jQuery('#btn_details_close')[0])
         self.sidebar.appendTo(jQuery(f"#pm-details-sidebar")[0])
+
         self.close_btn.element.addEventListener('click', self.hide)
+        self.reopen_btn.element.addEventListener('click', self.lead_reopen_handler)
+        self.won_btn.element.addEventListener('click', self.lead_won_handler)
+        self.lost_btn.element.addEventListener('click', self.lead_lost_handler)
         
         jQuery(f"#btn_details_reopen")[0].style.display = 'None'
         jQuery(f"#btn_details_won")[0].style.display = 'None'
@@ -406,6 +410,15 @@ class DetailsView:
         jQuery(f"#btn_details_reopen")[0].style.display = 'None'
         jQuery(f"#btn_details_won")[0].style.display = 'block'
         jQuery(f"#btn_details_lost")[0].style.display = 'block'
+    
+    def lead_won_handler(self, args):
+        print(f"lead_won_handler {AppEnv.details_lead_uid}")
+    
+    def lead_lost_handler(self, args):
+        print(f"lead_lost_handler {AppEnv.details_lead_uid}")
+    
+    def lead_reopen_handler(self, args):
+        print(f"lead_reopen_handler {AppEnv.details_lead_uid}")
 
 
 PMAPP_APPBAR_ADD_ITEM = {
