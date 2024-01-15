@@ -27,6 +27,11 @@ class ContactListView(GridView2):
         print("----------")
         print(args)
 
+        address = item['address_line_1']
+        if item['address_line_2']:
+            address += f", {item['address_line_2']}"
+        address += f", {item['city_district']}, {item['state_province']}, {item['postal_code']}"
+
         contact = args['data']
         item = Contact.get(contact['uid'])
 
@@ -61,7 +66,7 @@ class ContactListView(GridView2):
             </div>\
             <div class='details_record'>\
                 <div class='details_record_label'>Address</div>\
-                <div class='details_record_data'>{item['address']}</div>\
+                <div class='details_record_data'>{address}</div>\
             </div>\
             <div class='details_record'>\
                 <div class='details_record_label'>Department</div>\
