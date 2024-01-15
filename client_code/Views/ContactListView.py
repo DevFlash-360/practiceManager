@@ -36,5 +36,9 @@ class ContactListView(GridView2):
                 <div class='details_record_label'>Name</div>\
                 <div class='details_record_data'>{item['full_name']}</div>\
             </div>\
+            <div class='details_record'>\
+                <div class='details_record_label'>Group</div>\
+                <div class='details_record_data'>{item['contact_group']['name']}</div>\
+            </div>\
         </div>"
         return content
