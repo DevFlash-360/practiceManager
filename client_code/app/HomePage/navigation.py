@@ -138,7 +138,7 @@ PMAPP_NAV_ITEMS = {
 
     'case_reports_events': {'class': 'EventScheduleView', 'type': 'custom', 'action': 'open', 'props': {}},
     'case_reports_cases': {'class': 'CaseListView', 'type': 'custom', 'action': 'open', 'config': 'CaseListView', 'props': {}},
-    'case_reports_contacts': {'class': 'ContactListView', 'type': 'custom', 'action': 'open', 'config': 'ContactListView', 'props': {}},
+    'case_reports_contacts': {'class': 'ContactListView', 'type': 'custom', 'action': 'open', 'props': {}},
     'case_reports_documents': {'class': 'CaseDocumentsView', 'type': 'custom', 'action': 'open',
                                'props': {'case_uid': 'a31c356d-668c-4e62-b103-61869154adb1'}},
     'case_reports_time_entries': {'model': 'TimeEntry', 'type': 'view', 'action': 'open', 'config': 'TimeEntryView',
