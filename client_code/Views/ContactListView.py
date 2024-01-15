@@ -31,18 +31,19 @@ class ContactListView(GridView2):
         item = Contact.get(contact['uid'])
 
         address = ""
-        if item['address']['address_line_1']:
-            address += item['address']['address_line_1']
-        if item['address']['address_line_2']:
-            address += f", {item['address']['address_line_2']}"
-        if item['address']['city_district']:
-            address += f", {item['address']['city_district']}"
-        if item['address']['state_province']:
-            address += f", {item['address']['state_province']}"
-        if item['address']['postal_code']:
-            address += f", {item['address']['postal_code']}"
-        if address:
-            address += ", United States"
+        if item['address']:
+            if item['address']['address_line_1']:
+                address += item['address']['address_line_1']
+            if item['address']['address_line_2']:
+                address += f", {item['address']['address_line_2']}"
+            if item['address']['city_district']:
+                address += f", {item['address']['city_district']}"
+            if item['address']['state_province']:
+                address += f", {item['address']['state_province']}"
+            if item['address']['postal_code']:
+                address += f", {item['address']['postal_code']}"
+            if address:
+                address += ", United States"
 
         content = "<div class='details_title'>Overview</div>"
         content += f"<div class='details_table'>\
