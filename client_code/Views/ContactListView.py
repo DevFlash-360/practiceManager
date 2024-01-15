@@ -11,8 +11,8 @@ class ContactListView(GridView2):
             'model': 'Contact',
             'columns': [
                 # {'name': 'full_name', 'label': 'Name'},
-                {'name': 'contact_group', 'label': 'Group'},
-                {'name': 'email', 'label': 'Email'},
+                # {'name': 'contact_group', 'label': 'Group'},
+                # {'name': 'email', 'label': 'Email'},
                 {'name': 'mobile_phone', 'label': 'Mobile Phone'},
                 {'name': 'work_phone', 'label': 'Work Phone'},
             ]
