@@ -33,8 +33,8 @@ class ContactListView(GridView2):
         address = item['address_line_1']
         if item['address_line_2']:
             address += f", {item['address_line_2']}"
-        address += f", {item['city_district']}, {item['state_province']}, {item['postal_code']}"
-
+        address += f", {item['city_district']}, {item['state_province']}, \
+            {item['postal_code']}, United States"
 
         content = "<div class='details_title'>Overview</div>"
         content += f"<div class='details_table'>\
