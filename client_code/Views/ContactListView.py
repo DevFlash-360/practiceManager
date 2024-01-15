@@ -101,5 +101,45 @@ class ContactListView(GridView2):
                 <div class='details_record_label'>Country of Citizenship</div>\
                 <div class='details_record_data'>{item['personal_details']['country_of_citizenship'] if item['personal_details'] else ''}</div>\
             </div>\
+            <div class='details_record'>\
+                <div class='details_record_label'>Native Language</div>\
+                <div class='details_record_data'>{item['personal_details']['native_language'] if item['personal_details'] else ''}</div>\
+            </div>\
+            <div class='details_record'>\
+                <div class='details_record_label'>Education</div>\
+                <div class='details_record_data'>{item['personal_details']['education'] if item['personal_details'] else ''}</div>\
+            </div>\
+            <div class='details_record'>\
+                <div class='details_record_label'>Employment</div>\
+                <div class='details_record_data'>{item['employment']['employment'] if item['employment'] else ''}</div>\
+            </div>\
+            <div class='details_record'>\
+                <div class='details_record_label'>Current Employer</div>\
+                <div class='details_record_data'>{item['employment']['current_employer'] if item['employment'] else ''}</div>\
+            </div>\
+            <div class='details_record'>\
+                <div class='details_record_label'>Time with current employer</div>\
+                <div class='details_record_data'>{item['employment']['time_with_current_employer'] if item['employment'] else ''}</div>\
+            </div>\
+            <div class='details_record'>\
+                <div class='details_record_label'>Community Service</div>\
+                <div class='details_record_data'>{item['additional_info']['community_service'] if item['additional_info'] else ''}</div>\
+            </div>\
+            <div class='details_record'>\
+                <div class='details_record_label'>Family Support</div>\
+                <div class='details_record_data'>{item['additional_info']['family_support'] if item['additional_info'] else ''}</div>\
+            </div>\
+            <div class='details_record'>\
+                <div class='details_record_label'>Source of Funds</div>\
+                <div class='details_record_data'>{item['additional_info']['source_of_funds'] if item['additional_info'] else ''}</div>\
+            </div>\
+            <div class='details_record'>\
+                <div class='details_record_label'>Criminal History</div>\
+                <div class='details_record_data'>{item['criminal_history']['criminal_history'] if item['criminal_history'] else ''}</div>\
+            </div>\
+            <div class='details_record'>\
+                <div class='details_record_label'>Description of Criminal History</div>\
+                <div class='details_record_data'>{item['criminal_history']['description'] if item['criminal_history'] else ''}</div>\
+            </div>\
         </div>"
         return content
