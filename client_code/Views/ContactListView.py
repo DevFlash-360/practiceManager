@@ -91,7 +91,7 @@ class ContactListView(GridView2):
         content += f"<div class='details_table'>\
             <div class='details_record'>\
                 <div class='details_record_label'>DOB</div>\
-                <div class='details_record_data'>{item['personal_details']['full_name'] if item['personal_details'] else ''}</div>\
+                <div class='details_record_data'>{item['personal_details']['dob'] if item['personal_details'] else ''}</div>\
             </div>\
             <div class='details_record'>\
                 <div class='details_record_label'>SSN</div>\
