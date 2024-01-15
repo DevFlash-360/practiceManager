@@ -41,4 +41,46 @@ class ContactListView(GridView2):
                 <div class='details_record_data'>{item['contact_group']['name']}</div>\
             </div>\
         </div>"
+        content += "<div class='details_title'>Contact Details</div>"
+        content += f"<div class='details_table'>\
+            <div class='details_record'>\
+                <div class='details_record_label'>Email</div>\
+                <div class='details_record_data'>{item['email']}</div>\
+            </div>\
+            <div class='details_record'>\
+                <div class='details_record_label'>Mobile Phone</div>\
+                <div class='details_record_data'>{item['mobile_phone']}</div>\
+            </div>\
+            <div class='details_record'>\
+                <div class='details_record_label'>Alternate Phone</div>\
+                <div class='details_record_data'>{item['alternate_phone']}</div>\
+            </div>\
+            <div class='details_record'>\
+                <div class='details_record_label'>Work Phone</div>\
+                <div class='details_record_data'>{item['work_phone']}</div>\
+            </div>\
+            <div class='details_record'>\
+                <div class='details_record_label'>Address</div>\
+                <div class='details_record_data'>{item['address']}</div>\
+            </div>\
+            <div class='details_record'>\
+                <div class='details_record_label'>Department</div>\
+                <div class='details_record_data'>{item['department']}</div>\
+            </div>\
+            <div class='details_record'>\
+                <div class='details_record_label'>Courtroom</div>\
+                <div class='details_record_data'>{item['courtroom']}</div>\
+            </div>\
+        </div>"
+        content += "<div class='details_title'>Biographical Details</div>"
+        # content += f"<div class='details_table'>\
+        #     <div class='details_record'>\
+        #         <div class='details_record_label'>DOB</div>\
+        #         <div class='details_record_data'>{item['full_name']}</div>\
+        #     </div>\
+        #     <div class='details_record'>\
+        #         <div class='details_record_label'>Group</div>\
+        #         <div class='details_record_data'>{item['contact_group']['name']}</div>\
+        #     </div>\
+        # </div>"
         return content
