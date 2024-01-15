@@ -8,7 +8,7 @@ from ..app.models import Contact
 class ContactListView(GridView2):
     def __init__(self, **kwargs):
         view_config = {
-            'model': 'Contacts',
+            'model': 'Contact',
             'columns': [
                 # {'name': 'full_name', 'label': 'Name'},
                 # {'name': 'contact_group', 'label': 'Group'},
@@ -17,4 +17,4 @@ class ContactListView(GridView2):
                 {'name': 'work_phone', 'label': 'Work Phone'},
             ]
         }
-        super().__init__(model='Contacts', view_config=view_config, **kwargs)
+        super().__init__(model='Contact', view_config=view_config, **kwargs)
