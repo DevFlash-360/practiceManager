@@ -26,4 +26,15 @@ class ContactListView(GridView2):
     def details_content(self, args):
         print("----------")
         print(args)
-        return "Contact Details"
+
+        contact = args['data']
+        item = Contact.get(contact['uid'])
+
+        content = "<div class='details_title'>Overview</div>"
+        content += f"<div class='details_table'>\
+            <div class='details_record'>\
+                <div class='details_record_label'>Name</div>\
+                <div class='details_record_data'>{item['full_name']}</div>\
+            </div>\
+        </div>"
+        return content
