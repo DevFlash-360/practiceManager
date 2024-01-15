@@ -24,4 +24,6 @@ class ContactListView(GridView2):
         super().row_selected(args)
 
     def details_content(self, args):
+        print("----------")
+        print(args)
         return "Contact Details"
