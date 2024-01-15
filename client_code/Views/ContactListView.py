@@ -32,7 +32,7 @@ class ContactListView(GridView2):
 
         address = ""
         if item['address']['address_line_1']:
-            address += item['address_line_1']
+            address += item['address']['address_line_1']
         if item['address']['address_line_2']:
             address += f", {item['address']['address_line_2']}"
         if item['address']['city_district']:
