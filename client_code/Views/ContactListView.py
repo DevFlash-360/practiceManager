@@ -148,21 +148,5 @@ class ContactListView(GridView2):
                 <div class='details_record_label'>Added User</div>\
                 <div class='details_record_data'>{item['created_by']['email'] if item['created_by'] else ''}</div>\
             </div>\
-            <div class='details_record'>\
-                <div class='details_record_label'>Added Time</div>\
-                <div class='details_record_data'>{item['created_time'].strftime('%m/%d/%Y %I:%M %p')}</div>\
-            </div>\
-            <div class='details_record'>\
-                <div class='details_record_label'>Modified User</div>\
-                <div class='details_record_data'>{item['updated_by']['email'] if item['updated_by'] else ''}</div>\
-            </div>\
-            <div class='details_record'>\
-                <div class='details_record_label'>Modified Time</div>\
-                <div class='details_record_data'>{item['updated_time'].strftime('%m/%d/%Y %I:%M %p')}</div>\
-            </div>\
-            <div class='details_record'>\
-                <div class='details_record_label'>ID</div>\
-                <div class='details_record_data'>{contact['uid']}</div>\
-            </div>\
         <div>"
         return content
