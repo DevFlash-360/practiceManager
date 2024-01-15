@@ -137,9 +137,8 @@ PMAPP_NAV_ITEMS = {
     'case_dashboard_requirements': {'model': 'CaseRequirement', 'type': 'view', 'action': 'open', 'props': {}},
 
     'case_reports_events': {'class': 'EventScheduleView', 'type': 'custom', 'action': 'open', 'props': {}},
-    'case_reports_cases': {'class': 'CaseListView', 'type': 'custom', 'action': 'open', 'config': 'CaseListView',
-                           'props': {}},
-    'case_reports_contacts': {'model': 'Contact', 'type': 'view', 'action': 'open', 'props': {}},
+    'case_reports_cases': {'class': 'CaseListView', 'type': 'custom', 'action': 'open', 'config': 'CaseListView', 'props': {}},
+    'case_reports_contacts': {'class': 'ContactListView', 'type': 'custom', 'action': 'open', 'props': {}},
     'case_reports_documents': {'class': 'CaseDocumentsView', 'type': 'custom', 'action': 'open',
                                'props': {'case_uid': 'a31c356d-668c-4e62-b103-61869154adb1'}},
     'case_reports_time_entries': {'model': 'TimeEntry', 'type': 'view', 'action': 'open', 'config': 'TimeEntryView',
@@ -149,7 +148,7 @@ PMAPP_NAV_ITEMS = {
     'case_reports_invoices': {'model': 'Invoice', 'type': 'view', 'action': 'open', 'config': 'InvoiceView',
                               'props': {}},
 
-    'intake_leads': {'model': 'Lead', 'type': 'view', 'action': 'open', 'props': {}},
+    'intake_leads': {'class': 'LeadListView', 'type': 'custom', 'action': 'open', 'props': {}},
     # 'intake_lead_analytics': {'model': '', 'type': 'page|view|form', 'action': 'open|popup', 'props': {}},
 
     # 'tools_date_calculator': {'model': '', 'type': 'view', 'action': 'open', 'props': {}},
@@ -361,8 +360,16 @@ class DetailsView:
             # 'showBackdrop': True,
             'enablePersistence': True,
             'type': 'Push',
-            'position': 'Right',
-            'closeOnDocumentClick': True
+            'position': 'Right'
+        })
+        self.reopen_btn = ej.buttons.Button({
+            'content': 'Reopen'
+        })
+        self.won_btn = ej.buttons.Button({
+            'content': 'Won'
+        })
+        self.lost_btn = ej.buttons.Button({
+            'content': 'Lost'
         })
         self.close_btn = ej.buttons.Button({
             'cssClass': 'e-flat',
@@ -370,9 +377,20 @@ class DetailsView:
         })
 
     def form_show(self):
-        self.close_btn.appendTo(jQuery('#btn_close')[0])
+        self.reopen_btn.appendTo(jQuery('#btn_details_reopen')[0])
+        self.won_btn.appendTo(jQuery('#btn_details_won')[0])
+        self.lost_btn.appendTo(jQuery('#btn_details_lost')[0])
+        self.close_btn.appendTo(jQuery('#btn_details_close')[0])
         self.sidebar.appendTo(jQuery(f"#pm-details-sidebar")[0])
+
         self.close_btn.element.addEventListener('click', self.hide)
+        self.reopen_btn.element.addEventListener('click', self.lead_reopen_handler)
+        self.won_btn.element.addEventListener('click', self.lead_won_handler)
+        self.lost_btn.element.addEventListener('click', self.lead_lost_handler)
+        
+        jQuery(f"#btn_details_reopen")[0].style.display = 'None'
+        jQuery(f"#btn_details_won")[0].style.display = 'None'
+        jQuery(f"#btn_details_lost")[0].style.display = 'None'
 
     def show(self):
         print("details show")
@@ -381,7 +399,26 @@ class DetailsView:
     def hide(self, args):
         print("details hide")
         self.sidebar.hide()
+
+    def show_reopen(self):
+        jQuery(f"#btn_details_reopen")[0].style.display = 'block'
+        jQuery(f"#btn_details_won")[0].style.display = 'None'
+        jQuery(f"#btn_details_lost")[0].style.display = 'None'
+
+    def hide_reopen(self):
+        jQuery(f"#btn_details_reopen")[0].style.display = 'None'
+        jQuery(f"#btn_details_won")[0].style.display = 'block'
+        jQuery(f"#btn_details_lost")[0].style.display = 'block'
     
+    def lead_won_handler(self, args):
+        print(f"lead_won_handler {AppEnv.details_lead_uid}")
+    
+    def lead_lost_handler(self, args):
+        print(f"lead_lost_handler {AppEnv.details_lead_uid}")
+    
+    def lead_reopen_handler(self, args):
+        print(f"lead_reopen_handler {AppEnv.details_lead_uid}")
+
 
 PMAPP_APPBAR_ADD_ITEM = {
     'Add Time Entry': {'model': 'TimeEntry', 'type': 'form'},

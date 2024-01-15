@@ -3,6 +3,7 @@ from AnvilFusion.components.FormBase import FormBase, POPUP_WIDTH_COL1, POPUP_WI
 from AnvilFusion.components.FormInputs import *
 from AnvilFusion.components.SubformGrid import SubformGrid
 from ..Forms.ContactForm import ContactForm
+from AnvilFusion.tools.utils import AppEnv
 
 
 FEE_TYPE_RETAINER = ('Flat Fee', 'Hourly', 'Hybrid Flat/Hourly', 'Hybrid Flat/Contingency')
@@ -37,14 +38,14 @@ class LeadForm(FormBase):
                                            view_config=lead_activities_view,
                                            add_edit_form=LeadActivityForm,
                                            )
-
+        self.lead_status = TextInput(name='lead_status', label='Lead Status', value="Open")
         self.lead_source = LookupInput(model='LeadSource', name='lead_source', label='Lead Source',
                                        on_change=self.lead_source_referral)
         self.intake_staff = LookupInput(name='intake_staff', label='Intake Staff', model='Staff',
-                                        text_field='full_name')
+                                        text_field='full_name', select='multi')
 
         self.referred_by = LookupInput(name='referred_by', label='Referred By', model='Contact', text_field='full_name')
-        self.case_contacts = LookupInput(name='case_contacts', label='Contacts', model='Contact',
+        self.case_contacts = LookupInput(name='contacts', label='Contacts', model='Contact',
                                          text_field='full_name', select='multi')
         self.case_contacts.options = self.referred_by.options
 
@@ -98,7 +99,7 @@ class LeadForm(FormBase):
                     [self.cause_of_action, self.statute_of_limitations],
                 ]},
                 {'name': 'case_details', 'label': 'Case Details', 'cols': [
-                    [self.incident_date, self.incident_location],
+                    [self.incident_date, self.incident_location, self.lead_status],
                     [self.case_description],
                 ]},
             ]},
@@ -129,11 +130,17 @@ class LeadForm(FormBase):
 
         super().__init__(tabs=tabs, width=POPUP_WIDTH_COL3, **kwargs)
         self.fullscreen = True
+    
+    def form_open(self, args):
+        super().form_open(args)
+        self.lead_status.hide()
 
     def after_open(self):
+        print(f"after_open self.data = {self.data}")
         if not self.data:
             self.case_name.enabled = False
             self.auto_generate_case_name.value = True
+            self.lead_status.value = "Open"
             self.statute_of_limitations.hide()
             self.retainer.hide()
             self.retainer_hour_limit.hide()
@@ -159,7 +166,7 @@ class LeadForm(FormBase):
 
     # lead_source on_change handler
     def lead_source_referral(self, args):
-        if args['value'] is not None and self.lead_source_referral.value == 'Referral':
+        if args['value'] is not None and args['value']['name'] == 'Referral':
             self.referred_by.show()
         else:
             self.referred_by.hide()

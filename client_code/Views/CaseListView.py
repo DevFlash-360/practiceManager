@@ -2,6 +2,7 @@ import anvil.server
 from DevFusion.components.GridView2 import GridView2
 from AnvilFusion.tools.utils import AppEnv
 from anvil.js.window import ej, jQuery
+from ..app.models import Case, CaseStatus, User
 
 
 
@@ -40,4 +41,110 @@ class CaseListView(GridView2):
 
     def details_content(self, args):
         case = args['data']
-        return "case details"
+        item = Case.get(case['uid'])
+        created_by = User.get(item['created_by']) if item['created_by'] else None
+        if created_by:
+            created_by = created_by['email']
+        updated_by = User.get(item['updated_by']) if item['updated_by'] else None
+        if updated_by:
+            updated_by = updated_by['email']
+        practice_area = case['practice_area__name'] if 'practice_area__name' in case else None
+        case_stage = case['case_stage__name'] if 'case_stage__name' in case else None
+        cause_of_action = case['cause_of_action__cause_of_action'] if 'cause_of_action__cause_of_action' in case else None
+        assigned_attorneys = case['assigned_attorneys__full_name'] if 'assigned_attorneys__full_name' in case else None
+        case_status = item['case_status']['name'] if item['case_status'] else None
+        court = f"{item['court']} - {item['department']}"
+        clients = ', '.join([client['client_name'] for client in item['clients']])
+        contacts = ', '.join([contact['full_name'] for contact in item['contacts']])
+        content = "<div class='details_title'>Overview</div>"
+        content += f"<div class='details_table'>\
+            <div class='details_record'>\
+                <div class='details_record_label'>Case Name</div>\
+                <div class='details_record_data'>{case['case_name']}</div>\
+            </div>\
+            <div class='details_record'>\
+                <div class='details_record_label'>Practice Area</div>\
+                <div class='details_record_data'>{practice_area}</div>\
+            </div>\
+            <div class='details_record'>\
+                <div class='details_record_label'>Case Stage</div>\
+                <div class='details_record_data'>{case_stage}</div>\
+            </div>\
+            <div class='details_record'>\
+                <div class='details_record_label'>Cause of Action</div>\
+                <div class='details_record_data'>{cause_of_action}</div>\
+            </div>\
+            <div class='details_record'>\
+                <div class='details_record_label'>Assigned Attorney</div>\
+                <div class='details_record_data'>{assigned_attorneys}</div>\
+            </div>\
+            <div class='details_record'>\
+                <div class='details_record_label'>Case Status</div>\
+                <div class='details_record_data'>{case_status}</div>\
+            </div>\
+        </div>"
+
+        content += "<div class='details_title'>Details</div>"
+        content += f"<div class='details_table'>\
+            <div class='details_record'>\
+                <div class='details_record_label'>Case Number</div>\
+                <div class='details_record_data'>{item['case_number']}</div>\
+            </div>\
+            <div class='details_record'>\
+                <div class='details_record_label'>Close Date</div>\
+                <div class='details_record_data'>{item['close_date']}</div>\
+            </div>\
+            <div class='details_record'>\
+                <div class='details_record_label'>Statue of Limitations</div>\
+                <div class='details_record_data'>{item['statute_of_limitations']}</div>\
+            </div>\
+            <div class='details_record'>\
+                <div class='details_record_label'>Incident Date</div>\
+                <div class='details_record_data'>{item['incident_date']}</div>\
+            </div>\
+            <div class='details_record'>\
+                <div class='details_record_label'>Incident Location</div>\
+                <div class='details_record_data'>{item['incident_location']}</div>\
+            </div>\
+            <div class='details_record'>\
+                <div class='details_record_label'>Court</div>\
+                <div class='details_record_data'>{court}</div>\
+            </div>\
+            <div class='details_record'>\
+                <div class='details_record_label'>Clients</div>\
+                <div class='details_record_data'>{clients}</div>\
+            </div>\
+            <div class='details_record'>\
+                <div class='details_record_label'>Contacts</div>\
+                <div class='details_record_data'>{contacts}</div>\
+            </div>\
+            <div class='details_record'>\
+                <div class='details_record_label'>Description</div>\
+                <div class='details_record_data'>{item['case_description']}</div>\
+            </div>\
+        <div>"
+
+        content += "<div class='details_title'>Record Data</div>"
+        content += f"<div class='details_table'>\
+            <div class='details_record'>\
+                <div class='details_record_label'>Added User</div>\
+                <div class='details_record_data'>{created_by}</div>\
+            </div>\
+            <div class='details_record'>\
+                <div class='details_record_label'>Added Time</div>\
+                <div class='details_record_data'>{item['created_time'].strftime('%m/%d/%Y %I:%M %p')}</div>\
+            </div>\
+            <div class='details_record'>\
+                <div class='details_record_label'>Modified User</div>\
+                <div class='details_record_data'>{updated_by}</div>\
+            </div>\
+            <div class='details_record'>\
+                <div class='details_record_label'>Modified Time</div>\
+                <div class='details_record_data'>{item['updated_time'].strftime('%m/%d/%Y %I:%M %p')}</div>\
+            </div>\
+            <div class='details_record'>\
+                <div class='details_record_label'>ID</div>\
+                <div class='details_record_data'>{case['uid']}</div>\
+            </div>\
+        <div>"
+        return content
