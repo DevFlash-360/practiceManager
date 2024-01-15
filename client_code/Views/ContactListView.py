@@ -29,6 +29,12 @@ class ContactListView(GridView2):
 
         contact = args['data']
         item = Contact.get(contact['uid'])
+        created_by = Contact.get(item['created_by']) if item['created_by'] else None
+        if created_by:
+            created_by = created_by['email']
+        updated_by = Contact.get(item['updated_by']) if item['updated_by'] else None
+        if updated_by:
+            updated_by = updated_by['email']
 
         address = ""
         if item['address']:
@@ -146,7 +152,23 @@ class ContactListView(GridView2):
         content += f"<div class='details_table'>\
             <div class='details_record'>\
                 <div class='details_record_label'>Added User</div>\
-                <div class='details_record_data'>{item['created_by']['email'] if item['created_by'] else ''}</div>\
+                <div class='details_record_data'>{created_by}</div>\
+            </div>\
+            <div class='details_record'>\
+                <div class='details_record_label'>Added Time</div>\
+                <div class='details_record_data'>{item['created_time'].strftime('%m/%d/%Y %I:%M %p')}</div>\
+            </div>\
+            <div class='details_record'>\
+                <div class='details_record_label'>Modified User</div>\
+                <div class='details_record_data'>{updated_by}</div>\
+            </div>\
+            <div class='details_record'>\
+                <div class='details_record_label'>Modified Time</div>\
+                <div class='details_record_data'>{item['updated_time'].strftime('%m/%d/%Y %I:%M %p')}</div>\
+            </div>\
+            <div class='details_record'>\
+                <div class='details_record_label'>ID</div>\
+                <div class='details_record_data'>{contact['uid']}</div>\
             </div>\
         <div>"
         return content
