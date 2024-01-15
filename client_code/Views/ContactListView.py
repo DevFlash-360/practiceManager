@@ -30,11 +30,19 @@ class ContactListView(GridView2):
         contact = args['data']
         item = Contact.get(contact['uid'])
 
-        address = item['address_line_1']
+        address = ""
+        if item['address_line_1']:
+            address += item['address_line_1']
         if item['address_line_2']:
             address += f", {item['address_line_2']}"
-        address += f", {item['city_district']}, {item['state_province']}, \
-            {item['postal_code']}, United States"
+        if item['city_district']:
+            address += f", {item['city_district']}"
+        if item['state_province']:
+            address += f", {item['state_province']}"
+        if item['postal_code']:
+            address += f", {item['postal_code']}"
+        if address:
+            address += ", United States"
 
         content = "<div class='details_title'>Overview</div>"
         content += f"<div class='details_table'>\
