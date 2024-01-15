@@ -1896,6 +1896,13 @@ db_schema:
       admin_ui: {width: 200}
       type: link_single
       target: lead_sources
+    - {name: retainer_hours_limit, admin_ui: null, type: unresolved}
+    - {name: record_seal_expungement, admin_ui: null, type: unresolved}
+    - {name: pre_litigation_rate, admin_ui: null, type: number}
+    - {name: litigation_rate, admin_ui: null, type: number}
+    - {name: investigator, admin_ui: null, type: unresolved}
+    - {name: hourly_retainer, admin_ui: null, type: unresolved}
+    - {name: flat_fee_retainer, admin_ui: null, type: unresolved}
   ledger:
     title: Ledger
     client: none
