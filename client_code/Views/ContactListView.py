@@ -18,4 +18,4 @@ class ContactListView(GridView2):
                 {'name': 'work_phone', 'label': 'Work Phone'},
             ]
         }
-        super().__init__(model='Lead', view_config=view_config, **kwargs)
+        super().__init__(model='Contact', view_config=view_config, **kwargs)
