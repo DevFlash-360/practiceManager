@@ -88,14 +88,18 @@ class ContactListView(GridView2):
             </div>\
         </div>"
         content += "<div class='details_title'>Biographical Details</div>"
-        # content += f"<div class='details_table'>\
-        #     <div class='details_record'>\
-        #         <div class='details_record_label'>DOB</div>\
-        #         <div class='details_record_data'>{item['full_name']}</div>\
-        #     </div>\
-        #     <div class='details_record'>\
-        #         <div class='details_record_label'>Group</div>\
-        #         <div class='details_record_data'>{item['contact_group']['name']}</div>\
-        #     </div>\
-        # </div>"
+        content += f"<div class='details_table'>\
+            <div class='details_record'>\
+                <div class='details_record_label'>DOB</div>\
+                <div class='details_record_data'>{item['personal_details']['full_name'] if item['personal_details'] else ''}</div>\
+            </div>\
+            <div class='details_record'>\
+                <div class='details_record_label'>SSN</div>\
+                <div class='details_record_data'>{item['personal_details']['ssn'] if item['personal_details'] else ''}</div>\
+            </div>\
+            <div class='details_record'>\
+                <div class='details_record_label'>Country of Citizenship</div>\
+                <div class='details_record_data'>{item['personal_details']['country_of_citizenship'] if item['personal_details'] else ''}</div>\
+            </div>\
+        </div>"
         return content
