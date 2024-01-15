@@ -13,6 +13,7 @@ import navigation as nav
 AppEnv.APP_ID = 'practiceMANAGER'
 AppEnv.ANVIL_FUSION_VERSION = "0.0.2"
 AppEnv.content_container_id = 'pm_content'
+AppEnv.start_menu = "case_menu"
 AppEnv.data_models = app.models
 AppEnv.forms = Forms
 AppEnv.views = Views
@@ -72,6 +73,7 @@ class HomePage(HomePageTemplate):
                 {'id': 'case', 'text': 'Add Case'},
                 {'id': 'invoice', 'text': 'Add Invoice'},
                 {'id': 'update', 'text': 'Add Update'},
+                {'id': 'assistant', 'text': 'Ask Me Anything'},
                 ],
             'open': self.appbar_menu_popup_open,
             'select': self.appbar_add_item_select,
@@ -103,6 +105,10 @@ class HomePage(HomePageTemplate):
             'items': appbar_user_menu_items,
             'open': self.appbar_menu_popup_open
         })
+        self.appbar_assistant_button = ej.buttons.Button({
+            'cssClass': 'e-inherit e-caret-hide pm-menu-font',
+            'iconCss': 'fa-solid fa-question pm-appbar-menu-icon',
+        })
 
         self.sidebar = nav.Sidebar(target_el='.pm-page-container', container_el='pm-sidebar',
                                    content_id=self.content_id)
@@ -119,7 +125,9 @@ class HomePage(HomePageTemplate):
         self.appbar.appendTo(jQuery('#pm-appbar')[0])
         self.appbar_add_item.appendTo(jQuery('#pm-appbar-add-item')[0])
         self.appbar_notification_list.appendTo(jQuery('#pm-appbar-notification-list')[0])
-        self.appbar_help_menu.appendTo(jQuery('#pm-appbar-help-menu')[0])
+        # self.appbar_help_menu.appendTo(jQuery('#pm-appbar-help-menu')[0])
+        self.appbar_assistant_button.appendTo(jQuery('#pm-appbar-help-menu')[0])
+        self.appbar_assistant_button.element.addEventListener('click', self.appbar_assistant_button_click)
         self.appbar_user_menu.appendTo(jQuery('#pm-appbar-user-menu')[0])
         self.appbar_sidebar_toggle.appendTo(jQuery('#pm-appbar-sidebar-toggle')[0])
         self.appbar_sidebar_toggle.element.addEventListener('click', self.sidebar.toggle)
@@ -127,11 +135,12 @@ class HomePage(HomePageTemplate):
         self.detailsbar.form_show()
 
         # Show sidebar menu
-        self.sidebar.show()
+        self.sidebar.show(AppEnv.start_menu)
 
     # Sidebar toggle event handler
     def sidebar_toggle(self, args):
         self.sidebar.toggle(args)
+
 
     # Appbar menu popup window position adjustment
     @staticmethod
@@ -148,8 +157,9 @@ class HomePage(HomePageTemplate):
 
     def appbar_add_item_select(self, args):
         nav.add_item_select(args, self.content_id)
-        # item = args['item']
-        # print(args.keys())
-        # print(args['name'])
-        # print(item, item['text'], item.keys())
-        # print(args['element'])
+
+
+    def appbar_assistant_button_click(self, args):
+        print('appbar_assistant_button_click')
+        form_control = Forms.AssistantForm(target=self.content_id)
+        form_control.form_show()

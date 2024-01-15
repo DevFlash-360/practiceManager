@@ -270,9 +270,10 @@ class Sidebar:
         })
 
     # Show sidebar menu
-    def show(self):
+    def show(self, menu_id):
         self.menu.appendTo(jQuery(f"#{self.container_el}-menu")[0])
         self.control.appendTo(jQuery(f"#{self.container_el}")[0])
+        self.show_menu(menu_id)
 
     # Sidebar toggle
     def toggle(self, args):
@@ -431,6 +432,7 @@ PMAPP_APPBAR_ADD_ITEM = {
     'Add Case': {'model': 'Case', 'type': 'form'},
     'Add Invoice': {'model': 'Invoice', 'type': 'form'},
     'Add Update': {'model': 'CaseUpdate', 'type': 'form'},
+    'Ask Me Anything': {'model': 'Assistant', 'type': 'form'},
 }
 
 

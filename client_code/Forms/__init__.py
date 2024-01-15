@@ -1,4 +1,5 @@
 import anvil.server
+from .AssistantForm import AssistantForm
 from .BankAccountForm import BankAccountForm
 from .CaseForm import CaseForm
 from .CaseWorkflowForm import CaseWorkflowForm

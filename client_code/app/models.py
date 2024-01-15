@@ -116,6 +116,13 @@ class Activity:
 
 
 @model_type
+class Assistant:
+    _title = 'name'
+    name = Attribute(field_type=types.FieldTypes.SINGLE_LINE)
+    openai_id = Attribute(field_type=types.FieldTypes.SINGLE_LINE)
+
+
+@model_type
 class BankAccount:
     _title = 'account_type'
 
