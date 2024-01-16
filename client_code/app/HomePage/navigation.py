@@ -6,6 +6,7 @@ import time
 from AnvilFusion.tools.utils import AppEnv
 from AnvilFusion.components.GridView import GridView
 from AnvilFusion.components.FormBase import FormBase
+from ... import Forms
 
 # Sidebar control CSS
 PMAPP_SIDEBAR_CSS = 'e-inherit e-caret-hide pm-sidebar-menu'
@@ -416,6 +417,8 @@ class DetailsView:
     
     def lead_lost_handler(self, args):
         print(f"lead_lost_handler {AppEnv.details_lead_uid}")
+        form_control = Forms.LeadLostForm(target="pm-content")
+        form_control.form_show()
     
     def lead_reopen_handler(self, args):
         print(f"lead_reopen_handler {AppEnv.details_lead_uid}")
