@@ -25,9 +25,13 @@ class LeadLostForm:
             'isModal': True,
             'width': '430px',
             'height': '200px',
+            'open': self.form_open,
         })
         self.form.appendTo(self.container_el)
     
     def form_show(self):
         self.form.show()
+
+    def form_open(self, args):
+        print("form_open")
 
