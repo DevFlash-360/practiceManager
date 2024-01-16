@@ -26,6 +26,17 @@ class LeadLostForm:
             'width': '430px',
             'height': '200px',
             'open': self.form_open,
+            'buttons': [
+                {
+                    'buttonModel':
+                        {'isPrimary': True, 'content': 'Submit', 'cssClass': 'da-save-button'},
+                    'click': self.form_save,
+                },{
+                    'buttonModel':
+                        {'isPrimary': False, 'content': 'Cancel', 'cssClass': 'da-cancel-button'},
+                    'click': self.form_cancel,
+                },
+            ]
         })
         self.form.appendTo(self.container_el)
     
@@ -35,3 +46,12 @@ class LeadLostForm:
     def form_open(self, args):
         print("form_open")
 
+    def form_save(self, args):
+        print("form_save")
+    
+    def form_cancel(self, args):
+        print("form_cancel")
+        # for field in self.form_fields:
+        #     field.value = None
+        #     field.hide()
+        self.form.hide()
