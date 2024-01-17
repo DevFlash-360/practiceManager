@@ -29,7 +29,10 @@ class LeadListView(GridView2):
         super().row_selected(args)
 
     def details_content(self, args):
-        lead = args['data']
+        if isinstance(args['data'], list):
+            lead = args['data'][0]
+        else:
+            lead = args['data']
         item = Lead.get(lead['uid'])
         intake_staffs = ', '.join([staff['full_name'] for staff in item['intake_staff']])
         lead_source = item['lead_source']['name'] if item['lead_source'] else None
