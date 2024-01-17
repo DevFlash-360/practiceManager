@@ -415,7 +415,8 @@ class DetailsView:
     
     def lead_won_handler(self, args):
         print(f"lead_won_handler {AppEnv.details_lead_uid}")
-        form_control = Forms.LeadForm(target="pm-content")
+        form_control = Forms.CaseForm(target="pm-content")
+        print(form_control.form_fields)
         form_control.form_show()
     
     def lead_lost_handler(self, args):
@@ -430,7 +431,6 @@ class DetailsView:
         lead.save()
         # doesn't work. maybe sync needed
         # AppEnv.navigation.content_control.refresh()
-        
 
 
 PMAPP_APPBAR_ADD_ITEM = {
