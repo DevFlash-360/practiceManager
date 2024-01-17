@@ -399,7 +399,7 @@ class DetailsView:
         print("details show")
         self.sidebar.show()
     
-    def hide(self, args):
+    def hide(self, args=None):
         print("details hide")
         self.sidebar.hide()
 
