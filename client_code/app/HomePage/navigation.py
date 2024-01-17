@@ -415,6 +415,8 @@ class DetailsView:
     
     def lead_won_handler(self, args):
         print(f"lead_won_handler {AppEnv.details_lead_uid}")
+        form_control = Forms.LeadForm(target="pm-content")
+        form_control.form_show()
     
     def lead_lost_handler(self, args):
         print(f"lead_lost_handler {AppEnv.details_lead_uid}")
@@ -426,7 +428,8 @@ class DetailsView:
         lead = Lead.get(AppEnv.details_lead_uid)
         lead.update({'lead_status': 'Open'})
         lead.save()
-        AppEnv.navigation.content_control.refresh()
+        # doesn't work. maybe sync needed
+        # AppEnv.navigation.content_control.refresh()
         
 
 
