@@ -427,6 +427,8 @@ class DetailsView:
         lead.update({'lead_status': 'Open'})
         lead.save()
         self.hide()
+        AppEnv.navigation.content_control.refresh()
+        
 
 
 PMAPP_APPBAR_ADD_ITEM = {
