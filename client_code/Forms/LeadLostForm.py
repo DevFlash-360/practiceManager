@@ -70,7 +70,7 @@ class LeadLostForm:
                 field.hide()
                 field.value = None
             self.form.hide()
-            Views.LeadListView.update_grid()
+            Views.LeadListView.refresh()
         else:
             args.cancel = True
             print("cancel")
