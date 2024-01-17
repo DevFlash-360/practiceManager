@@ -61,6 +61,8 @@ class LeadLostForm:
     def form_save(self, args):
         print("form_save")
         lead = Lead.get(AppEnv.details_lead_uid)
+        lead.update({'lead_status': 'Lost'})
+        lead.save()
         print(lead)
 
     
