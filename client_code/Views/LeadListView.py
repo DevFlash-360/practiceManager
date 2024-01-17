@@ -19,9 +19,11 @@ class LeadListView(GridView2):
         
     def row_selected(self, args):
         print(type(args['data']))
-        if type(args['data']) is 'ProxyList':
+        if isinstance(args['data'], list):
+            print("11")
             AppEnv.details_lead_uid = args['data'][0]['uid']
         else:
+            print("22")
             AppEnv.details_lead_uid = args['data']['uid']
         jQuery(f"#details_content")[0].innerHTML = self.details_content(args)
         super().row_selected(args)
