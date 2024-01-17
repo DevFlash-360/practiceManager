@@ -426,7 +426,6 @@ class DetailsView:
         lead = Lead.get(AppEnv.details_lead_uid)
         lead.update({'lead_status': 'Open'})
         lead.save()
-        self.hide()
         AppEnv.navigation.content_control.refresh()
         
 
