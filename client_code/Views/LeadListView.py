@@ -18,6 +18,7 @@ class LeadListView(GridView2):
         super().__init__(model='Lead', view_config=view_config, **kwargs)
         
     def row_selected(self, args):
+        print(type(args['data']))
         if type(args['data']) is 'ProxyList':
             AppEnv.details_lead_uid = args['data'][0]['uid']
         else:
