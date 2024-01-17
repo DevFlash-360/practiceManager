@@ -65,7 +65,7 @@ class LeadLostForm:
             lead.update({'lead_status': 'Lost'})
             lead.save()
             print("save")
-            for field in self.form_fields:
+            for field in self.fields:
                 field.hide()
                 field.value = None
             self.form.hide()
