@@ -6,7 +6,7 @@ import time
 from AnvilFusion.tools.utils import AppEnv
 from AnvilFusion.components.GridView import GridView
 from AnvilFusion.components.FormBase import FormBase
-from ... import Forms, Views
+from ... import Forms
 from ..models import Lead
 
 # Sidebar control CSS
@@ -426,7 +426,6 @@ class DetailsView:
         lead = Lead.get(AppEnv.details_lead_uid)
         lead.update({'lead_status': 'Open'})
         lead.save()
-        Views.LeadListView.refresh()
 
 
 PMAPP_APPBAR_ADD_ITEM = {
