@@ -60,11 +60,11 @@ class LeadLostForm:
 
     def form_save(self, args):
         print("form_save")
-        lead = Lead.get(AppEnv.details_lead_uid)
-        lead.update({'lead_status': 'Lost'})
-        lead.save()
-        print(lead)
-
+        print(self.lost_reason.value)
+        # lead = Lead.get(AppEnv.details_lead_uid)
+        # lead.update({'lead_status': 'Lost'})
+        # lead.save()
+        
     
     def form_cancel(self, args):
         print("form_cancel")
