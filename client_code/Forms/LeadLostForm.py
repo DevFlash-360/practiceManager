@@ -6,6 +6,7 @@ from AnvilFusion.tools.utils import AppEnv
 import anvil.js.window
 from anvil.js.window import ej
 import uuid
+from ..app.models import Lead
 
 
 class LeadLostForm:
@@ -59,6 +60,8 @@ class LeadLostForm:
 
     def form_save(self, args):
         print("form_save")
+        lead = Lead.get(AppEnv.details_lead_uid)
+        print(lead)
 
     
     def form_cancel(self, args):
