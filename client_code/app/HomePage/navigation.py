@@ -7,6 +7,7 @@ from AnvilFusion.tools.utils import AppEnv
 from AnvilFusion.components.GridView import GridView
 from AnvilFusion.components.FormBase import FormBase
 from ... import Forms
+from ..models import Lead
 
 # Sidebar control CSS
 PMAPP_SIDEBAR_CSS = 'e-inherit e-caret-hide pm-sidebar-menu'
@@ -422,6 +423,9 @@ class DetailsView:
     
     def lead_reopen_handler(self, args):
         print(f"lead_reopen_handler {AppEnv.details_lead_uid}")
+        lead = Lead.get(AppEnv.details_lead_uid)
+        lead.update({'lead_status': 'Open'})
+        lead.save()
 
 
 PMAPP_APPBAR_ADD_ITEM = {

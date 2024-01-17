@@ -6,6 +6,7 @@ from AnvilFusion.tools.utils import AppEnv
 import anvil.js.window
 from anvil.js.window import ej
 import uuid
+from .. import Views
 from ..app.models import Lead
 
 
@@ -69,13 +70,14 @@ class LeadLostForm:
                 field.hide()
                 field.value = None
             self.form.hide()
+            Views.LeadListView.update_grid()
         else:
             args.cancel = True
             print("cancel")
     
     def form_cancel(self, args):
         print("form_cancel")
-        # for field in self.form_fields:
-        #     field.value = None
-        #     field.hide()
+        for field in self.fields:
+            field.value = None
+            field.hide()
         self.form.hide()
