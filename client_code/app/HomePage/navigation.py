@@ -415,13 +415,11 @@ class DetailsView:
     
     def lead_won_handler(self, args):
         print(f"lead_won_handler {AppEnv.details_lead_uid}")
-        self.hide()
     
     def lead_lost_handler(self, args):
         print(f"lead_lost_handler {AppEnv.details_lead_uid}")
         form_control = Forms.LeadLostForm(target="pm-content")
         form_control.form_show()
-        self.hide()
     
     def lead_reopen_handler(self, args):
         print(f"lead_reopen_handler {AppEnv.details_lead_uid}")
