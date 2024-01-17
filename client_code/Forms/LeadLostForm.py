@@ -20,6 +20,9 @@ class LeadLostForm:
             'No Money', 'No Case', 'Calling for Information', 'Marketing', 'Wrong Number',
             'Out of State', 'Outside Practice Area', 'Hired Someone Else']
         )
+        self.fields = [
+            self.lost_reason
+        ]
 
 
         self.form_content = f'<div id="{self.lost_reason.container_id}"></div>'
@@ -51,6 +54,8 @@ class LeadLostForm:
 
     def form_open(self, args):
         print("form_open")
+        for field in self.fields:
+            field.show()
 
     def form_save(self, args):
         print("form_save")
