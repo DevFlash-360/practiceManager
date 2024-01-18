@@ -418,10 +418,9 @@ class DetailsView:
         form_control = Forms.CaseForm(target="pm-content")
         print(form_control.form_fields)
         lead = Lead.get(AppEnv.details_lead_uid)
-        for field in [x for x in form_control.form_fields if x.is_dependent]:
-            # print(field.name, self.data)
-            field.value = self.data
-            field.show()
+        for field in [x for x in form_control.form_fields if not x.is_dependent]:
+            val = getattr(lead, field.name, None)
+            print(val)
 
         form_control.form_show()
     
