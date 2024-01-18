@@ -421,13 +421,13 @@ class DetailsView:
         for field in [x for x in form_control.form_fields if not x.is_dependent and x not in form_control.subforms]:
             if field.name and getattr(lead, field.name, None):
                 field.value = lead[field.name]
-        for field in [x for x in form_control.form_fields if x.is_dependent]:
-            field.value = form_control.data
-        for subform in form_control.subforms:
-            subform.value = form_control.data
-        for field in form_control.form_fields:
-            if field.on_change is not None:
-                field.on_change({'name': field.name, 'value': field.value})
+        # for field in [x for x in form_control.form_fields if x.is_dependent]:
+        #     field.value = form_control.data
+        # for subform in form_control.subforms:
+        #     subform.value = form_control.data
+        # for field in form_control.form_fields:
+        #     if field.on_change is not None:
+        #         field.on_change({'name': field.name, 'value': field.value})
 
         form_control.form_show()
     
