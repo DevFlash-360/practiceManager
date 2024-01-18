@@ -138,7 +138,7 @@ class CaseForm(FormBase):
         except Exception as e:
             print(e)
         for field in [x for x in self.form_fields if not x.is_dependent and x not in self.subforms]:
-            print(field.value)
+            print(f"{field.name} = {field.value}")
         print('CaseForm.form_open end')
 
     # auto_generate_case_name on_change handler
