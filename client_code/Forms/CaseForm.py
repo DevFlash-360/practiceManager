@@ -115,12 +115,12 @@ class CaseForm(FormBase):
     def form_open(self, args):
         print('form open')
         print(self.data)
-        # for field in [x for x in self.form_fields if not x.is_dependent and x not in self.subforms]:
-        #     # print(field.name)
-        #     field.show()
-        #     if field.name and getattr(self.data, field.name, None):
-        #         field.value = self.data[field.name]
-        #         print(f"1111 {field.name} <= {field.value}")
+        for field in [x for x in self.form_fields if not x.is_dependent and x not in self.subforms]:
+            # print(field.name)
+            field.show()
+            if field.name and getattr(self.data, field.name, None):
+                field.value = self.data[field.name]
+                print(f"1111 {field.name} <= {field.value}")
         # for field in [x for x in self.form_fields if x.is_dependent]:
         #     # print(field.name, self.data)
         #     field.value = self.data
