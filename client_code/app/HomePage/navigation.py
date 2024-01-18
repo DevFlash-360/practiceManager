@@ -420,7 +420,7 @@ class DetailsView:
         lead = Lead.get(AppEnv.details_lead_uid)
         for field in [x for x in form_control.form_fields if not x.is_dependent and x not in form_control.subforms]:
             if field.name and getattr(lead, field.name, None):
-                print(field.name)
+                print(f"{field.name} = {lead[field.name]}")
                 field.value = lead[field.name]
         # for field in [x for x in form_control.form_fields if x.is_dependent]:
         #     field.value = form_control.data
