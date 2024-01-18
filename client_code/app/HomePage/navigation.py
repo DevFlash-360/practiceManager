@@ -421,6 +421,8 @@ class DetailsView:
         for field in [x for x in form_control.form_fields if not x.is_dependent]:
             val = getattr(lead, field.name, None)
             print(val)
+            if field.name and getattr(lead, field.name, None):
+                field.value = lead[field.name]
 
         form_control.form_show()
     
