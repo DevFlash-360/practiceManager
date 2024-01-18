@@ -113,7 +113,46 @@ class CaseForm(FormBase):
         self.fullscreen = True
 
     def form_open(self, args):
-        super().form_open(args)
+        print('form open')
+        # try:
+        # if not self.data:
+        #     print('no data')
+        #     instance_data = {x: self.default_data[x] for x in self.default_data
+        #                      if x in self.class_name._attributes or x in self.class_name._relationships}
+        #     self.data = self.class_name(**instance_data)
+        #     self.data = self.default_data
+        print(self.data)
+        for field in [x for x in self.form_fields if not x.is_dependent and x not in self.subforms]:
+            # print(field.name)
+            field.show()
+            if field.name and getattr(self.data, field.name, None):
+                field.value = self.data[field.name]
+                print(f"1111 {field.name} <= {field.value}")
+        for field in [x for x in self.form_fields if x.is_dependent]:
+            # print(field.name, self.data)
+            field.value = self.data
+            print(f"2222 {field.name} <= {field.value}")
+            field.show()
+        for subform in self.subforms:
+            print(f"3333 {subform.value} <= {self.data}")
+            subform.value = self.data
+        for field in self.form_fields:
+            if field.on_change is not None:
+                print('on_change', field.name)
+                field.on_change({'name': field.name, 'value': field.value})
+        self.container_el.style.visibility = 'visible'
+        self.form.cssClass = 'e-fixed py-dialog'
+        if self.form_tabs is not None:
+            for i in range(len(self.form_tabs) - 1, -1, -1):
+                self.tabs.select(i)
+        # except Exception as e:
+        #     print('exception', e)
+
+        if self.validation is not None:
+            self.validation['customPlacement'] = lambda input_el, error: \
+                input_el.parentElement.parentElement.appendChild(error)
+            self.validator = ej.inputs.FormValidator(f"#{self.form_id}", self.validation)
+        print('form open end')
         print('CaseForm.form_open start')
         try:
             if self.data is None or self.data == {}:
