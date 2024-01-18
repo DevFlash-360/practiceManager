@@ -416,7 +416,7 @@ class DetailsView:
     def lead_won_handler(self, args):
         print(f"lead_won_handler {AppEnv.details_lead_uid}")
         form_control = Forms.CaseForm(target="pm-content")
-        print(form_control.form_fields)
+        print(form_control.data)
         lead = Lead.get(AppEnv.details_lead_uid)
         for field in [x for x in form_control.form_fields if not x.is_dependent and x not in form_control.subforms]:
             if field.name and getattr(lead, field.name, None):
