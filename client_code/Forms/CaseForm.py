@@ -137,12 +137,6 @@ class CaseForm(FormBase):
             #         self.statute_of_limitations.hide()
         except Exception as e:
             print(e)
-        for field in [x for x in self.form_fields if not x.is_dependent and x not in self.subforms]:
-            print(f"{field.name} = {field.value}")
-        for field in self.form_fields:
-            if field.on_change is not None:
-                print('on_change', field.name)
-                field.on_change({'name': field.name, 'value': field.value})
         print('CaseForm.form_open end')
 
     # auto_generate_case_name on_change handler
