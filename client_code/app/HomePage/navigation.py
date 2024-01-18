@@ -417,6 +417,12 @@ class DetailsView:
         print(f"lead_won_handler {AppEnv.details_lead_uid}")
         form_control = Forms.CaseForm(target="pm-content")
         print(form_control.form_fields)
+        lead = Lead.get(AppEnv.details_lead_uid)
+        for field in [x for x in form_control.form_fields if x.is_dependent]:
+            # print(field.name, self.data)
+            field.value = self.data
+            field.show()
+
         form_control.form_show()
     
     def lead_lost_handler(self, args):
