@@ -437,7 +437,6 @@ class DetailsView:
         lead = Lead.get(AppEnv.details_lead_uid)
         lead.update({'lead_status': 'Open'})
         lead.save()
-        # doesn't work. maybe sync needed
         AppEnv.navigation.content_control.refresh()
 
 

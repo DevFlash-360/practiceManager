@@ -69,8 +69,7 @@ class LeadLostForm:
                 field.hide()
                 field.value = None
             self.form.hide()
-            # doesn't work. maybe sync needed
-            # AppEnv.navigation.content_control.refresh()
+            AppEnv.navigation.content_control.refresh()
         else:
             args.cancel = True
             print("cancel")
