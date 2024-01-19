@@ -438,7 +438,7 @@ class DetailsView:
         lead.update({'lead_status': 'Open'})
         lead.save()
         # doesn't work. maybe sync needed
-        # AppEnv.navigation.content_control.refresh()
+        AppEnv.navigation.content_control.refresh()
 
 
 PMAPP_APPBAR_ADD_ITEM = {
