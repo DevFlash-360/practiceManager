@@ -117,7 +117,7 @@ PMAPP_DEFAULT_NAV_ITEMS = {
 
 # Navigation items/actions
 PMAPP_NAV_ITEMS = {
-    # 'case_agenda': {'model': '', 'type': 'page|view|form', 'action': 'open|popup', 'props': {}},
+    'case_agenda': {'class': 'CaseAgendaView', 'type': 'custom', 'action': 'open', 'props': {}},
     # 'case_tasks': {'model': 'Task', 'type': 'view', 'action': 'open', 'config': 'TaskView', 'props': {}},
     'case_tasks': {'class': 'TaskListView', 'type': 'custom', 'action': 'open', 'props': {}},
 
