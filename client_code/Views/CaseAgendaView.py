@@ -6,7 +6,6 @@ from datetime import datetime, date
 import anvil.js
 from AnvilFusion.tools.utils import AppEnv
 from ..app.models import Staff, Case, Task, Activity, User
-from .tools import utils
 
 
 class CaseAgendaView:
