@@ -40,13 +40,13 @@ class CaseAgendaView:
             'dataSource': arts
         })
 
-        def form_show(self):
-            self.container_el.innerHTML = f'\
-                <div>\
-                    <div id="{self.cases_element_id}" style="display: inline-block;flex:0 0 60%; border-right-style:solid; border-width: 1px; border-color: #E9EDF2;">\
-                    </div>\
-                    <div id="{self.updates_element_id}" style="display:inline-block;">\
-                    </div>\
-                </div>'
-            self.case_list.appendTo(f"#{self.cases_element_id}")
-            self.case_updates.appendTo(f"#{self.updates_element_id}")
+    def form_show(self):
+        self.container_el.innerHTML = f'\
+            <div>\
+                <div id="{self.cases_element_id}" style="display: inline-block;flex:0 0 60%; border-right-style:solid; border-width: 1px; border-color: #E9EDF2;">\
+                </div>\
+                <div id="{self.updates_element_id}" style="display:inline-block;">\
+                </div>\
+            </div>'
+        self.case_list.appendTo(f"#{self.cases_element_id}")
+        self.case_updates.appendTo(f"#{self.updates_element_id}")
