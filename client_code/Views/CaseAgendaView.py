@@ -7,7 +7,7 @@ from DevFusion.components.GridView2 import GridView2
 from datetime import datetime, timedelta
 import anvil.js
 from AnvilFusion.tools.utils import AppEnv
-from ..app.models import Staff, Case, Task, Activity, Event
+from ..app.models import Staff, Case, Activity, Event
 from ..Forms.EventForm import EventForm
 
 PM_SCHEDULE_HEIGHT_OFFSET = 35
@@ -15,12 +15,10 @@ PM_AGENDA_SCHEDULE_DEFAULT_VIEWS = [
     {
         'option': 'Agenda',
         'eventTemplate': '<div class="template-wrap">\
-            ${if(event_type==="task" && isOverdue===true)}<span class="label label-danger">DUE</span>${/if}\
-            <a class="e-subject">${subject}</a>\
+            $<a class="e-subject">${subject}</a>\
             <div class="e-date-time">\
                 <i class="fa-regular fa-clock pr-1"></i>\
                 ${if(event_type==="event")}${start_time_time} - ${end_time_time}${/if}\
-                ${if(event_type==="task")}All day${/if}\
             </div>\
             ${if(staff_name)}\
                 <div><i class="fa-light fa-user pr-1"></i>${staff_name}</div>\
@@ -40,7 +38,6 @@ PM_AGENDA_SCHEDULE_POPUP = {
         <div>\
             <i class="fa-regular fa-clock pr-1"></i>\
             ${if(event_type==="event")}${start_time_time} - ${end_time_time}${/if}\
-            ${if(event_type==="task")}All day${/if}\
         </div>\
         ${if(staff_name)}\
             <div style="padding-top:12px;"><i class="fa-regular fa-user pr-1"></i>${staff_name}</div>\
@@ -113,7 +110,7 @@ class AgendaEventView:
         self.cases_filters = [] # Filter cards with this cases
         self.staffs_filters = [] # Filter cards with this staffs
         self.activity_filters = [] # Filter cards with this activities
-        self.schedules = None # Contain schedule elements = self.events + self.tasks
+        self.schedules = None # Contain schedule elements = self.events
         
         event_fields = {
             'id': {'name': 'uid'},
@@ -304,14 +301,13 @@ class AgendaEventView:
             if event['department'] and event['department']['department'] and event['department']['courtroom']:
                 item['department'] = f"{event['department']['department']}/{event['department']['courtroom']} - {event['department']['last_name']}"
             self.events.append(item)
-        self.schedules = self.events + self.tasks
+        self.schedules = self.events
 
     def data_adaptor_get_data(self, query):
         query_data = json.loads(query.data)
         start_time = datetime.fromisoformat(query_data['StartDate'][:10])
         end_time = datetime.fromisoformat(query_data['EndDate'][:10])
         self.get_events(start_time, end_time)
-        self.get_tasks(start_time, end_time)
 
         # construct HTTP request for data adaptor
         request = XMLHttpRequest()
