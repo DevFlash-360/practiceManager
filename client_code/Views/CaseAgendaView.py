@@ -1,7 +1,7 @@
 import anvil.server
 import json
 import uuid
-from anvil.js.window import ej, jQuery, XMLHttpRequest
+from anvil.js.window import ej, jQuery, XMLHttpRequest, Date
 from AnvilFusion.tools.utils import datetime_js_to_py
 from DevFusion.components.GridView2 import GridView2
 from datetime import datetime, timedelta
