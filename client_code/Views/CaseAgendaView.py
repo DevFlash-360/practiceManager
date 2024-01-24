@@ -97,6 +97,10 @@ class CaseAgendaView:
         self.events_view.form_show()
         self.case_updates.appendTo(f"#{self.updates_element_id}")
 
+    def destroy(self):
+        self.events_view.destroy()
+        if self.container_el is not None:
+            self.container_el.innerHTML = ''
 
 class AgendaEventView:
     def __init__(self,
