@@ -67,31 +67,9 @@ class CaseAgendaView:
         self.events_element_id = f"cases_{uuid.uuid4()}"
         self.updates_element_id = f"updates_{uuid.uuid4()}"
 
-        data = [{
-                'OrderID': 10248, 'CustomerID': 'VINET', 'Role': 'Admin', 'EmployeeID': 5,
-                'ShipName': 'Vins et alcools Chevalier', 'ShipCity': 'Reims', 'ShipAddress': '59 rue de l Abbaye',
-                'ShipRegion': 'CJ', 'Mask': '1111','ShipPostalCode': '51100', 'ShipCountry': 'France', 'Freight': 32.38, 'Verified': 0
-            },
-            {
-                'OrderID': 10249, 'CustomerID': 'TOMSP', 'Role': 'Employee', 'EmployeeID': 6,
-                'ShipName': 'Toms Spezialitäten', 'ShipCity': 'Münster', 'ShipAddress': 'Luisenstr. 48',
-                'ShipRegion': 'CJ',  'Mask': '2222', 'ShipPostalCode': '44087', 'ShipCountry': 'Germany', 'Freight': 11.61, 'Verified': 1
-            }
-        ]
-        arts = ["Artwork", "Abstract", "Modern Painting", "Ceramics", "Animation Art", "Oil Painting"]
-        self.case_list = ej.grids.Grid({
-            'dataSource': data,
-            'columns': [
-                { 'field': 'OrderID', 'headerText': 'Order ID', 'textAlign': 'Right', 'width': 120, 'type': 'number' },
-                { 'field': 'CustomerID', 'width': 140, 'headerText': 'Customer ID', 'type': 'string' },
-                { 'field': 'Freight', 'headerText': 'Freight', 'textAlign': 'Right', 'width': 120, 'format': 'C' },
-            ]
-        })
         self.events_view = AgendaEventView(self.events_element_id)
+        self.updates_view = AgendaCaseUpdatesView(self.updates_element_id)
 
-        self.case_updates = ej.lists.ListView({
-            'dataSource': arts
-        })
 
     def form_show(self):
         self.container_el.innerHTML = f'\
@@ -103,7 +81,7 @@ class CaseAgendaView:
             </div>'
         # self.case_list.appendTo(f"#{self.events_element_id}")
         self.events_view.form_show()
-        self.case_updates.appendTo(f"#{self.updates_element_id}")
+        self.updates_view.form_show()
 
     def destroy(self):
         self.events_view.destroy()
