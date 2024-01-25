@@ -138,7 +138,6 @@ class AgendaEventView:
             # 'renderCell': self.render_cell,
         }
         self.schedule = ej.schedule.Schedule(schedule_config)
-        self.schedule.agendaDaysCount(30)
         self.init_filters()
 
     def init_filters(self):
