@@ -177,7 +177,7 @@ class AgendaEventView:
         self.container_el = jQuery(f"#{self.container_id}")[0]
         self.schedule_height = jQuery(f"#pm-content")[0].offsetHeight - PM_SCHEDULE_HEIGHT_OFFSET
         self.container_el.innerHTML = f'\
-        <div class="pm-scheduleview-container">\
+        <div class="pm-scheduleview-container" style="height:{self.schedule_height}px;">\
             <div id="eventfilterlist"></div>\
             <div class="pm-gridview-title">Agenda</div>\
             <div id="pm-filter-container">\
@@ -355,7 +355,7 @@ class AgendaCaseUpdatesView:
         self.container_el = jQuery(f"#{self.container_id}")[0]
         self.schedule_height = jQuery(f"#pm-content")[0].offsetHeight - PM_SCHEDULE_HEIGHT_OFFSET
         self.container_el.innerHTML = f'\
-        <div class="pm-scheduleview-container">\
+        <div class="pm-scheduleview-container" style="height:{self.schedule_height}px;">\
             <div id="{self.schedule_el_id}"></div>\
         </div>'
         self.schedule.appendTo(jQuery(f"#{self.schedule_el_id}")[0])
