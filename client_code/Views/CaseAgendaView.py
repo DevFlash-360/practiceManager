@@ -13,7 +13,7 @@ from ..Forms.EventForm import EventForm
 PM_SCHEDULE_HEIGHT_OFFSET = 35
 PM_AGENDA_SCHEDULE_DEFAULT_VIEWS = [
     {
-        'option': 'Agenda',
+        'option': 'MonthAgenda',
         'eventTemplate': '<div class="template-wrap">\
             $<a class="e-subject">${subject}</a>\
             <div class="e-date-time">\
@@ -35,7 +35,7 @@ PM_AGENDA_SCHEDULE_DEFAULT_VIEWS = [
 ]
 PM_AGENDA_UPDATE_DEFAULT_VIEWS = [
     {
-        'option': 'Agenda',
+        'option': 'MonthAgenda',
         'eventTemplate': '<div class="template-wrap">\
             <div>{next_date}</div>\
         </div>'
@@ -346,7 +346,6 @@ class AgendaCaseUpdatesView:
             'actionBegin': self.action_begin,
             # 'hover': self.hover_event,
             'cssClass': 'pm-schedule-cell-width pm-schedule-cell-height e-hide-spinner',
-            'quickInfoTemplates': PM_AGENDA_SCHEDULE_POPUP,
             # 'renderCell': self.render_cell,
         }
         self.schedule = ej.schedule.Schedule(schedule_config)
