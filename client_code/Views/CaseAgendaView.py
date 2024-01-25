@@ -37,7 +37,7 @@ PM_AGENDA_UPDATE_DEFAULT_VIEWS = [
     {
         'option': 'Agenda',
         'eventTemplate': '<div class="template-wrap">\
-            <div>{next_date}</div>\
+            <div>{start_time}</div>\
         </div>'
     }
 ]
@@ -319,6 +319,8 @@ class AgendaCaseUpdatesView:
 
         update_fields = {
             'id': {'name': 'uid'},
+            'startTime': {'name': 'start_time', 'title': 'Start Time'},
+            'endTime': {'name': 'end_time', 'title': 'End Time'},
             'next_date': {'name': 'next_date'}
         }
 
@@ -380,7 +382,14 @@ class AgendaCaseUpdatesView:
     def get_case_updates(self):
         # case_updates = anvil.server.call('get_case_updates', start_time)
         case_updates = CaseUpdate.search()
-        self.schedules = case_updates
+        self.schedules = []
+        for update in case_updates:
+            item = {}
+            item['uid'] = update['uid']
+            item['start_time'] = item['next_date'].strftime('%Y-%m-%d %H:%M:%S')
+            item['end_time'] = (update['next_date'] + timedelta(days=1)).strftime('%Y-%m-%d %H:%M:%S')
+            item['isAllDay'] = True
+            self.schedules.append(item)
     
     def data_adaptor_get_data(self, query):
         self.get_case_updates()
