@@ -13,7 +13,7 @@ from ..Forms.EventForm import EventForm
 PM_SCHEDULE_HEIGHT_OFFSET = 35
 PM_AGENDA_SCHEDULE_DEFAULT_VIEWS = [
     {
-        'option': 'MonthAgenda',
+        'option': 'Agenda',
         'eventTemplate': '<div class="template-wrap">\
             $<a class="e-subject">${subject}</a>\
             <div class="e-date-time">\
@@ -35,7 +35,7 @@ PM_AGENDA_SCHEDULE_DEFAULT_VIEWS = [
 ]
 PM_AGENDA_UPDATE_DEFAULT_VIEWS = [
     {
-        'option': 'MonthAgenda',
+        'option': 'Agenda',
         'eventTemplate': '<div class="template-wrap">\
             <div>{next_date}</div>\
         </div>'
@@ -120,7 +120,7 @@ class AgendaEventView:
         
         schedule_config = {
             'height': '100%',
-            'currentView': 'MonthAgenda',
+            'currentView': 'Agenda',
             'views': PM_AGENDA_SCHEDULE_DEFAULT_VIEWS,
             'selectedDate': Date.now(),
             'disableHtmlEncode': False, 
@@ -138,6 +138,7 @@ class AgendaEventView:
             # 'renderCell': self.render_cell,
         }
         self.schedule = ej.schedule.Schedule(schedule_config)
+        self.schedule.agendaDaysCount(30)
         self.init_filters()
 
     def init_filters(self):
@@ -333,7 +334,7 @@ class AgendaCaseUpdatesView:
         })
         schedule_config = {
             'height': '100%',
-            'currentView': 'MonthAgenda',
+            'currentView': 'Agenda',
             'views': PM_AGENDA_UPDATE_DEFAULT_VIEWS,
             'selectedDate': Date.now(),
             'disableHtmlEncode': False, 
