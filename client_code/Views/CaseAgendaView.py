@@ -375,15 +375,14 @@ class AgendaCaseUpdatesView:
     def action_begin(self, args):
         print("Case Updates action_begin")
 
-    def get_case_updates(self, start_time):
+    def get_case_updates(self):
         # case_updates = anvil.server.call('get_case_updates', start_time)
         case_updates = CaseUpdate.search()
         return case_updates
     
     def data_adaptor_get_data(self, query):
         query_data = json.loads(query.data)
-        start_time = datetime.fromisoformat(query_data['StartDate'][:10])
-        self.get_case_updates(start_time)
+        self.get_case_updates()
 
         # construct HTTP request for data adaptor
         request = XMLHttpRequest()
