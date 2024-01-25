@@ -175,7 +175,7 @@ class AgendaEventView:
         self.schedule_el_id = uuid.uuid4()
         self.filter_el_id = uuid.uuid4()
         self.container_el = jQuery(f"#{self.container_id}")[0]
-        # self.schedule_height = self.container_el.offsetHeight - PM_SCHEDULE_HEIGHT_OFFSET
+        self.schedule_height = jQuery(f"#pm-content")[0].offsetHeight - PM_SCHEDULE_HEIGHT_OFFSET
         self.container_el.innerHTML = f'\
         <div class="pm-scheduleview-container">\
             <div id="eventfilterlist"></div>\
@@ -353,7 +353,7 @@ class AgendaCaseUpdatesView:
     def form_show(self):
         self.schedule_el_id = uuid.uuid4()
         self.container_el = jQuery(f"#{self.container_id}")[0]
-        # self.schedule_height = self.container_el.offsetHeight - PM_SCHEDULE_HEIGHT_OFFSET
+        self.schedule_height = jQuery(f"#pm-content")[0].offsetHeight - PM_SCHEDULE_HEIGHT_OFFSET
         self.container_el.innerHTML = f'\
         <div class="pm-scheduleview-container">\
             <div id="{self.schedule_el_id}"></div>\
