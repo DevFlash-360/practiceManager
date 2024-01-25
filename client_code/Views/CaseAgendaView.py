@@ -37,7 +37,7 @@ PM_AGENDA_UPDATE_DEFAULT_VIEWS = [
     {
         'option': 'Agenda',
         'eventTemplate': '<div class="template-wrap">\
-            <div>{start_time}</div>\
+            <div>${start_time}</div>\
         </div>'
     }
 ]
