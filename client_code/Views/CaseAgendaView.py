@@ -74,7 +74,7 @@ class CaseAgendaView:
     def form_show(self):
         self.container_el.innerHTML = f'\
             <div style="display:flex;">\
-                <div id="{self.events_element_id}" style="display: inline-block;flex:0 0 60%; border-right-style:solid; border-width: 1px; border-color: #E9EDF2;">\
+                <div id="{self.events_element_id}" style="display: inline-block;flex:0 0 60%;">\
                 </div>\
                 <div id="{self.updates_element_id}" style="display:inline-block;">\
                 </div>\
