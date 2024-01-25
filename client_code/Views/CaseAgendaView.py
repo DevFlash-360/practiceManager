@@ -387,7 +387,7 @@ class AgendaCaseUpdatesView:
             item = {}
             item['uid'] = update['uid']
             item['start_time'] = update['next_date'].strftime('%Y-%m-%d %H:%M:%S')
-            item['end_time'] = (update['next_date'] + timedelta(days=1)).strftime('%Y-%m-%d %H:%M:%S')
+            item['end_time'] = (update['next_date'] + timedelta(minutes=1)).strftime('%Y-%m-%d %H:%M:%S')
             item['isAllDay'] = True
             self.schedules.append(item)
     
