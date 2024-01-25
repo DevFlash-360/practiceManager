@@ -120,7 +120,7 @@ class AgendaEventView:
         
         schedule_config = {
             'height': '100%',
-            'currentView': 'Agenda',
+            'currentView': 'MonthAgenda',
             'views': PM_AGENDA_SCHEDULE_DEFAULT_VIEWS,
             'selectedDate': Date.now(),
             'disableHtmlEncode': False, 
@@ -333,7 +333,7 @@ class AgendaCaseUpdatesView:
         })
         schedule_config = {
             'height': '100%',
-            'currentView': 'Agenda',
+            'currentView': 'MonthAgenda',
             'views': PM_AGENDA_UPDATE_DEFAULT_VIEWS,
             'selectedDate': Date.now(),
             'disableHtmlEncode': False, 
