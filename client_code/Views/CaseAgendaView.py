@@ -7,7 +7,7 @@ from DevFusion.components.GridView2 import GridView2
 from datetime import datetime, timedelta
 import anvil.js
 from AnvilFusion.tools.utils import AppEnv
-from ..app.models import Staff, Case, Activity, Event
+from ..app.models import Staff, Case, Activity, Event, CaseUpdate
 from ..Forms.EventForm import EventForm
 
 PM_SCHEDULE_HEIGHT_OFFSET = 35
@@ -32,6 +32,14 @@ PM_AGENDA_SCHEDULE_DEFAULT_VIEWS = [
             ${if(client_attendance_required===true)}<i class="fa-solid fa-check pr-1"></i>Client attendance required${/if}\
         </div>'
     },
+]
+PM_AGENDA_UPDATE_DEFAULT_VIEWS = [
+    {
+        'option': 'Agenda',
+        'eventTemplate': '<div class="template-wrap">\
+            <div>{next_date}</div>\
+        </div>'
+    }
 ]
 PM_AGENDA_SCHEDULE_POPUP = {
     'content': '<div style="font-size: 14px;">\
@@ -103,11 +111,7 @@ class CaseAgendaView:
             self.container_el.innerHTML = ''
 
 class AgendaEventView:
-    def __init__(self,
-                 container_id=None,
-                 model=None,
-                 title=None,
-                 ):
+    def __init__(self, container_id=None):
         self.schedule_el_id = None
         self.container_id = container_id
         self.container_el = None
@@ -316,6 +320,96 @@ class AgendaEventView:
         # construct HTTP request for data adaptor
         request = XMLHttpRequest()
         request.open('GET', '_/theme/agenda-data-adaptor.json', False)
+        request.setRequestHeader('Content-Type', 'application/json; charset=utf-8')
+        request.send({})
+        query['httpRequest'] = request
+
+        # call back to pass data back to adaptor
+        query.onSuccess(self.schedules, query)
+
+    def data_adaptor_record(self, query):
+        print('record', query)
+
+
+class AgendaCaseUpdatesView:
+    def __init__(self, container_id=None):
+        self.schedule_el_id = None
+        self.container_id = container_id
+        self.container_el = None
+        self.schedules = None # Contain schedule elements = self.case_updates
+
+        update_fields = {
+            'id': {'name': 'uid'},
+            'next_date': {'name': 'next_date'}
+        }
+
+        self.data_adaptor = ej.data.CustomDataAdaptor()
+        self.data_adaptor.options.getData = self.data_adaptor_get_data
+        self.data_adaptor.options.addRecord = self.data_adaptor_record
+        self.data_adaptor.options.updateRecord = self.data_adaptor_record
+        self.data_adaptor.options.deleteRecord = self.data_adaptor_record
+        self.data_adaptor.options.butchUpdate = self.data_adaptor_record
+        self.data_manager = ej.data.DataManager({
+            'url': '_/theme/case-data-adaptor.json',
+            'adaptor': self.data_adaptor,
+        })
+        schedule_config = {
+            'height': '100%',
+            'currentView': 'Agenda',
+            'views': PM_AGENDA_UPDATE_DEFAULT_VIEWS,
+            'selectedDate': Date.now(),
+            'disableHtmlEncode': False, 
+            # 'enableAdaptiveUI': True,
+            'eventSettings': {
+                'dataSource': self.data_manager,
+                'fields': update_fields,
+            },
+            'popupOpen': self.popup_open,
+            'actionBegin': self.action_begin,
+            # 'hover': self.hover_event,
+            'cssClass': 'pm-schedule-cell-width pm-schedule-cell-height e-hide-spinner',
+            'quickInfoTemplates': PM_AGENDA_SCHEDULE_POPUP,
+            # 'renderCell': self.render_cell,
+        }
+        self.schedule = ej.schedule.Schedule(schedule_config)
+
+    def form_show(self):
+        self.schedule_el_id = uuid.uuid4()
+        self.container_el = jQuery(f"#{self.container_id}")[0]
+        self.schedule_height = self.container_el.offsetHeight - PM_SCHEDULE_HEIGHT_OFFSET
+        self.container_el.innerHTML = f'\
+        <div class="pm-scheduleview-container" style="height:{self.schedule_height}px;">\
+            <div id="{self.schedule_el_id}"></div>\
+        </div>'
+        self.schedule.appendTo(jQuery(f"#{self.schedule_el_id}")[0])
+    
+    def destroy(self):
+        self.schedule.destroy()
+        if self.container_el is not None:
+            self.container_el.innerHTML = ''
+
+    def popup_open(self, args):
+        print("Case Updates popup_open")
+    
+    def update_schedule(self, data, add_new):
+        self.schedule.refreshEvents()
+
+    def action_begin(self, args):
+        print("Case Updates action_begin")
+
+    def get_case_updates(self, start_time):
+        # case_updates = anvil.server.call('get_case_updates', start_time)
+        case_updates = CaseUpdate.search()
+        return case_updates
+    
+    def data_adaptor_get_data(self, query):
+        query_data = json.loads(query.data)
+        start_time = datetime.fromisoformat(query_data['StartDate'][:10])
+        self.get_case_updates(start_time)
+
+        # construct HTTP request for data adaptor
+        request = XMLHttpRequest()
+        request.open('GET', '_/theme/case-data-adaptor.json', False)
         request.setRequestHeader('Content-Type', 'application/json; charset=utf-8')
         request.send({})
         query['httpRequest'] = request
