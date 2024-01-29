@@ -41,7 +41,7 @@ PM_AGENDA_UPDATE_DEFAULT_VIEWS = [
             <div>${todays_update}</div>\
             <div style="background-color: rgb(247, 247, 247); padding:5px;">\
                 <div>${activity}</div>\
-                <div>${start_time}</div>\
+                <div>${update_time}</div>\
                    ${if(client_attendance_required===true)}<i class="fa-solid fa-check pr-1"></i>Client attendance required${/if}\
             </div>\
         </div>'
@@ -392,8 +392,8 @@ class AgendaCaseUpdatesView:
         for update in case_updates:
             item = {}
             item['uid'] = update['uid']
+            item['update_time'] = update['next_date'].strftime("%m/%d/%Y @ %I:%M %p")
             item['start_time'] = update['next_date'].strftime("%m/%d/%Y @ %I:%M %p")
-            print("111111111")
             print(item['start_time'])
             item['end_time'] = (update['next_date'] + timedelta(minutes=1)).strftime("%m/%d/%Y @ %I:%M %p")
             item['isAllDay'] = True
