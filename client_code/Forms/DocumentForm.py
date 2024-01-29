@@ -54,7 +54,7 @@ class DocumentForm(FormBase):
         validation = {
             'rules': {
                 self.case.el_id: {'required': True},
-                self.folder.el_id: {'required': True},
+                # self.folder.el_id: {'required': True},
                 self.type.el_id: {'required': True},
             }
         }
