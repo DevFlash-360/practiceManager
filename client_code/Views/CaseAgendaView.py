@@ -37,11 +37,11 @@ PM_AGENDA_UPDATE_DEFAULT_VIEWS = [
     {
         'option': 'Agenda',
         'eventTemplate': '<div class="template-wrap">\
-			<div style="background-color: rgb(39, 45, 131); padding: 5px;">{case_name}</div>\
+			<div style="color: white;background-color: rgb(39, 45, 131); padding: 5px;">${case_name}</div>\
             <div>${todays_update}</div>\
             <div style="background-color: rgb(247, 247, 247); padding:5px;">\
-				<div>{activity}</div>\
-				<div>{start_time}</div>\
+				<div>${activity}</div>\
+				<div>${start_time}</div>\
    	            ${if(client_attendance_required===true)}<i class="fa-solid fa-check pr-1"></i>Client attendance required${/if}\
             </div>\
         </div>'
