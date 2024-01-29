@@ -15,7 +15,7 @@ PM_AGENDA_SCHEDULE_DEFAULT_VIEWS = [
     {
         'option': 'Agenda',
         'eventTemplate': '<div class="template-wrap">\
-            $<a class="e-subject">${subject}</a>\
+            <a class="e-subject">${subject}</a>\
             <div class="e-date-time">\
                 <i class="fa-regular fa-clock pr-1"></i>\
                 ${start_time_time} - ${end_time_time}$\
@@ -352,7 +352,7 @@ class AgendaCaseUpdatesView:
                 'dataSource': self.data_manager,
                 'fields': update_fields,
             },
-            'popupOpen': self.popup_open,
+            # 'popupOpen': self.popup_open,
             'actionBegin': self.action_begin,
             # 'hover': self.hover_event,
             'cssClass': 'pm-schedule-cell-width pm-schedule-cell-height e-hide-spinner',
