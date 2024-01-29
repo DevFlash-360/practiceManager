@@ -115,6 +115,10 @@ class CaseForm(FormBase):
     def form_open(self, args):
         super().form_open(args)
         print('CaseForm.form_open start')
+        print(self.data)
+        for field in [x for x in self.form_fields if not x.is_dependent and x not in self.subforms]:
+            if field.name and getattr(self.data, field.name, None):
+                print(f"{field.name} = {self.data[field.name]}")
         try:
             if self.data is None or self.data == {}:
                 self.case_name.enabled = False

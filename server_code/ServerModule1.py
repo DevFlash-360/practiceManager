@@ -67,3 +67,13 @@ def get_tasks_filter(case_ids, staff_ids, activity_ids, start_time, end_time, co
         kwargs['activity'] = q.any_of(*activities)
     tasks = app_tables.tasks.search(q.all_of(**kwargs))
     return tasks
+
+@anvil.server.callable
+def get_case_updates():
+    cases = [case for case in app_tables.cases.search()]
+    activities = [activity for activity in app_tables.activities.search()]
+    case_updates = app_tables.case_updates.search(
+        case=q.any_of(*cases),
+        next_activity=q.any_of(*activities)
+    )
+    return case_updates

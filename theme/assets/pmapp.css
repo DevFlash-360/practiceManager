@@ -342,7 +342,7 @@ ul#pm-sidebar-menu {
 }
 
 .pm-scheduleview-container #pm-filter-container {
-    padding: 12px;
+    padding: 10px;
 }
 
 tr.task-complete > td button > span.btn-task-status {
@@ -465,4 +465,8 @@ tr.task-incomplete > td button > span.btn-task-status {
 
 .btn_details_btn {
 	margin-left: 10px;
+}
+
+.e-schedule .e-agenda-view .e-appointment.e-template {
+	display: list-item;
 }

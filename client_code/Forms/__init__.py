@@ -20,3 +20,5 @@ from .TimeEntryForm import TimeEntryForm
 from .TimesheetForm import TimesheetForm
 from .CaseUpdateForm import CaseUpdateForm
 from .CaseRequirementForm import CaseRequirementForm
+from .LeadLostForm import LeadLostForm
+from .LeadWonForm import LeadWonForm

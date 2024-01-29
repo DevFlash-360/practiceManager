@@ -6,6 +6,8 @@ import time
 from AnvilFusion.tools.utils import AppEnv
 from AnvilFusion.components.GridView import GridView
 from AnvilFusion.components.FormBase import FormBase
+from ... import Forms
+from ..models import Lead
 
 # Sidebar control CSS
 PMAPP_SIDEBAR_CSS = 'e-inherit e-caret-hide pm-sidebar-menu'
@@ -115,7 +117,7 @@ PMAPP_DEFAULT_NAV_ITEMS = {
 
 # Navigation items/actions
 PMAPP_NAV_ITEMS = {
-    # 'case_agenda': {'model': '', 'type': 'page|view|form', 'action': 'open|popup', 'props': {}},
+    'case_agenda': {'class': 'CaseAgendaView', 'type': 'custom', 'action': 'open', 'props': {}},
     # 'case_tasks': {'model': 'Task', 'type': 'view', 'action': 'open', 'config': 'TaskView', 'props': {}},
     'case_tasks': {'class': 'TaskListView', 'type': 'custom', 'action': 'open', 'props': {}},
 
@@ -397,7 +399,7 @@ class DetailsView:
         print("details show")
         self.sidebar.show()
     
-    def hide(self, args):
+    def hide(self, args=None):
         print("details hide")
         self.sidebar.hide()
 
@@ -413,12 +415,29 @@ class DetailsView:
     
     def lead_won_handler(self, args):
         print(f"lead_won_handler {AppEnv.details_lead_uid}")
+        form_control = Forms.CaseForm(target="pm-content")
+        lead = Lead.get(AppEnv.details_lead_uid)
+        for field in [x for x in form_control.form_fields if not x.is_dependent and x not in form_control.subforms]:
+            field.show()
+            if field.name and getattr(lead, field.name, None):
+                field.value = lead[field.name]
+        for field in form_control.form_fields:
+            if field.on_change is not None:
+                field.on_change({'name': field.name, 'value': field.value})
+
+        form_control.form_show()
     
     def lead_lost_handler(self, args):
         print(f"lead_lost_handler {AppEnv.details_lead_uid}")
+        form_control = Forms.LeadLostForm(target="pm-content")
+        form_control.form_show()
     
     def lead_reopen_handler(self, args):
         print(f"lead_reopen_handler {AppEnv.details_lead_uid}")
+        lead = Lead.get(AppEnv.details_lead_uid)
+        lead.update({'lead_status': 'Open'})
+        lead.save()
+        AppEnv.navigation.content_control.refresh()
 
 
 PMAPP_APPBAR_ADD_ITEM = {

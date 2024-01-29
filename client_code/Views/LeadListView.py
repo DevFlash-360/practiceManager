@@ -18,12 +18,18 @@ class LeadListView(GridView2):
         super().__init__(model='Lead', view_config=view_config, **kwargs)
         
     def row_selected(self, args):
-        AppEnv.details_lead_uid = args['data']['uid']
+        if isinstance(args['data'], list):
+            AppEnv.details_lead_uid = args['data'][0]['uid']
+        else:
+            AppEnv.details_lead_uid = args['data']['uid']
         jQuery(f"#details_content")[0].innerHTML = self.details_content(args)
         super().row_selected(args)
 
     def details_content(self, args):
-        lead = args['data']
+        if isinstance(args['data'], list):
+            lead = args['data'][0]
+        else:
+            lead = args['data']
         item = Lead.get(lead['uid'])
         intake_staffs = ', '.join([staff['full_name'] for staff in item['intake_staff']])
         lead_source = item['lead_source']['name'] if item['lead_source'] else None
