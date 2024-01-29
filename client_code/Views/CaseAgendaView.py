@@ -387,7 +387,7 @@ class AgendaCaseUpdatesView:
 
     def get_case_updates(self):
         # case_updates = anvil.server.call('get_case_updates', start_time)
-        case_updates = CaseUpdate.search()
+        case_updates = anvil.server.call('get_case_updates')
         self.schedules = []
         for update in case_updates:
             item = {}
