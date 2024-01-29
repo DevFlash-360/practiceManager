@@ -353,7 +353,7 @@ class AgendaCaseUpdatesView:
                 'fields': update_fields,
             },
             # 'popupOpen': self.popup_open,
-            'actionBegin': self.action_begin,
+            # 'actionBegin': self.action_begin,
             # 'hover': self.hover_event,
             'cssClass': 'pm-schedule-cell-width pm-schedule-cell-height e-hide-spinner',
             # 'renderCell': self.render_cell,
