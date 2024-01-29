@@ -37,12 +37,12 @@ PM_AGENDA_UPDATE_DEFAULT_VIEWS = [
     {
         'option': 'Agenda',
         'eventTemplate': '<div class="template-wrap">\
-			<div style="color: white;background-color: rgb(39, 45, 131); padding: 5px;">${case_name}</div>\
+            <div style="color: white;background-color: rgb(39, 45, 131); padding: 5px;">${case_name}</div>\
             <div>${todays_update}</div>\
             <div style="background-color: rgb(247, 247, 247); padding:5px;">\
-				<div>${activity}</div>\
-				<div>${start_time}</div>\
-   	            ${if(client_attendance_required===true)}<i class="fa-solid fa-check pr-1"></i>Client attendance required${/if}\
+                <div>${activity}</div>\
+                <div>${start_time}</div>\
+                   ${if(client_attendance_required===true)}<i class="fa-solid fa-check pr-1"></i>Client attendance required${/if}\
             </div>\
         </div>'
     }
@@ -393,6 +393,8 @@ class AgendaCaseUpdatesView:
             item = {}
             item['uid'] = update['uid']
             item['start_time'] = update['next_date'].strftime("%m/%d/%Y @ %I:%M %p")
+            print("111111111")
+            print(item['start_time'])
             item['end_time'] = (update['next_date'] + timedelta(minutes=1)).strftime("%m/%d/%Y @ %I:%M %p")
             item['isAllDay'] = True
             item['todays_update'] = update['todays_update']
