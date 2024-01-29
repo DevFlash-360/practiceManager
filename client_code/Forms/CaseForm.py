@@ -17,7 +17,7 @@ class CaseForm(FormBase):
         
         self.auto_generate_case_name = CheckboxInput(name='auto_generate_case_name', label='Auto Generate Case Name',
                                                      save=False)
-        self.case_name = TextInput(name='case_name', label='Case Name', required=True)
+        self.case_name = TextInput(name='case_name', label='Case Name')
         self.assigned_attorneys = LookupInput(name='assigned_attorneys', label='Assigned Attorneys', select='multi',
                                               model='Staff', text_field='full_name')
         self.practice_area = LookupInput(name='practice_area', label='Practice Area', model='PracticeArea')
