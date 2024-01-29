@@ -392,8 +392,8 @@ class AgendaCaseUpdatesView:
         for update in case_updates:
             item = {}
             item['uid'] = update['uid']
-            item['start_time'] = update['next_date'].strftime('%Y-%m-%d %H:%M:%S')
-            item['end_time'] = (update['next_date'] + timedelta(minutes=1)).strftime('%Y-%m-%d %H:%M:%S')
+            item['start_time'] = update['next_date'].strftime("MM/dd/yyyy ' @ ' hh:mm a")
+            item['end_time'] = (update['next_date'] + timedelta(minutes=1)).strftime("MM/dd/yyyy ' @ ' hh:mm a")
             item['isAllDay'] = True
             item['todays_update'] = update['todays_update']
             item['activity'] = update['next_activity']['name']
