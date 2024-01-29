@@ -74,6 +74,6 @@ def get_case_updates():
     activities = [activity for activity in app_tables.activities.search()]
     case_updates = app_tables.case_updates.search(
         case=q.any_of(*cases),
-        activity=q.any_of(*activities)
+        next_activity=q.any_of(*activities)
     )
     return case_updates
