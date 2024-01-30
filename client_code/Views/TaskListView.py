@@ -75,7 +75,8 @@ class TaskListView(GridView2):
 
         if self.filter_case_uid:
             filter_case = Case.get(self.filter_case_uid)
-            cases_data_for_dropdown = [{'id': self.filter_case_uid, 'pid': 'cases', 'text': filter_case['case_name']}]
+            cases_data_for_dropdown = [{'id': self.filter_case_uid, 'pid': 'cases', 'text': filter_case['case_name'], 'selected': True}]
+            self.cases_filters = [self.filter_case_uid]
         else:
             cases_data = Case.search()
             cases_data_for_dropdown = [{'id': case['uid'], 'pid': 'cases', 'text': case['case_name']} for case in cases_data]
@@ -223,7 +224,6 @@ class TaskListView(GridView2):
         
         if self.filter_case_uid:
             self.cases_filters.append(self.filter_case_uid)
-            print("============= append ===============")
 
         if filter_complete:
             self.param_complete = [True]
