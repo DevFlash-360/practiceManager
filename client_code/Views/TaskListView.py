@@ -23,21 +23,12 @@ class TaskListView(GridView2):
             ],
             'filter': {'case': kwargs.get('case_uid')} if kwargs.get('case_uid') else None,
         }
-        
+        self.filter_case_uid = None
         is_dashboard = kwargs.pop('dashboard', None)
-        print(f"is_dashboard = {is_dashboard}")
         if is_dashboard:
-            case_uid = get_cookie('case_uid')
-            print(f"case_uid = {case_uid}")
-            if case_uid:
-                filters = {
-                    'case': {'uid': case_uid}
-                }
-            else:
-                filters = None
+            self.filter_case_uid = get_cookie('case_uid')
 
-
-        super().__init__(model='Task', view_config=view_config, filters=filters, **kwargs)
+        super().__init__(model='Task', view_config=view_config, **kwargs)
         anvil.js.window['captionTemplateFormat'] = self.due_date_caption
         self.grid.allowGrouping = True
         self.grid.groupSettings = {
@@ -80,8 +71,12 @@ class TaskListView(GridView2):
         self.events  = [] # Events on filter
         self.tasks = [] # Staffs on filter
 
-        cases_data = Case.search()
-        cases_data_for_dropdown = [{'id': case['uid'], 'pid': 'cases', 'text': case['case_name']} for case in cases_data]
+        if self.filter_case_uid:
+            filter_case = Case.get(self.filter_case_uid)
+            cases_data_for_dropdown = [{'id': self.filter_case_uid, 'pid': 'cases', 'text': filter_case['case_name']}]
+        else:
+            cases_data = Case.search()
+            cases_data_for_dropdown = [{'id': case['uid'], 'pid': 'cases', 'text': case['case_name']} for case in cases_data]
 
         staff_data = Staff.search()
         staff_data_for_dropdown = [{'id': row['uid'], 'pid': 'staffs', 'text': row['first_name'] + " " + row['last_name']} for row in staff_data]
@@ -207,7 +202,7 @@ class TaskListView(GridView2):
         all_status = tree_data[0].get('selected', False)
         filter_complete = tree_data[1].get('selected', False)
         filter_incomplete = tree_data[2].get('selected', False)
-        all_cases = tree_data[3].get('selected', False)
+        all_cases = tree_data[3].get('selected', False) and not self.filter_case_uid
         all_staffs = tree_data[4].get('selected', False)
         all_activities = tree_data[5].get('selected', False)
         selected_items = [item for item in tree_data if item.get('selected')]
@@ -223,6 +218,9 @@ class TaskListView(GridView2):
                 self.staffs_filters.append(item['id'])
             if not all_activities and item.get('pid') == 'activities':
                 self.activity_filters.append(item['id'])
+        
+        if self.filter_case_uid:
+            self.cases_filters.append(self.filter_case_uid)
 
         if filter_complete:
             self.param_complete = [True]
