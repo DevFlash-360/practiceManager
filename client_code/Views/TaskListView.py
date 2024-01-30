@@ -8,7 +8,7 @@ from AnvilFusion.tools.utils import AppEnv
 from ..app.models import Staff, Case, Task, Activity, User
 class TaskListView(GridView2):
     def __init__(self, case=None, case_uid=None, **kwargs):
-        print('TaskListView')
+        print(f'TaskListView case_uid = {case_uid}, kwargs = {kwargs}')
         view_config = {
             'model': 'Task',
             'columns': [
