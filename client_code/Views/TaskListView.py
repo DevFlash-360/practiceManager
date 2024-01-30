@@ -8,6 +8,11 @@ from AnvilFusion.tools.utils import AppEnv, get_cookie
 from ..app.models import Staff, Case, Task, Activity, User
 class TaskListView(GridView2):
     def __init__(self, **kwargs):
+        self.filter_case_uid = None
+        is_dashboard = kwargs.pop('dashboard', None)
+        if is_dashboard:
+            self.filter_case_uid = get_cookie('case_uid')
+
         view_config = {
             'model': 'Task',
             'columns': [
@@ -21,12 +26,8 @@ class TaskListView(GridView2):
                 {'name': 'assigned_staff.full_name', 'label': 'Assigned Staff'},
                 {'name': 'notes', 'label': 'Notes'},
             ],
-            'filter': {'case': kwargs.get('case_uid')} if kwargs.get('case_uid') else None,
+            'filter': {'case': self.filter_case_uid} if self.filter_case_uid else None,
         }
-        self.filter_case_uid = None
-        is_dashboard = kwargs.pop('dashboard', None)
-        if is_dashboard:
-            self.filter_case_uid = get_cookie('case_uid')
 
         super().__init__(model='Task', view_config=view_config, **kwargs)
         anvil.js.window['captionTemplateFormat'] = self.due_date_caption
