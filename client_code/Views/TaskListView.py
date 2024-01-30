@@ -4,10 +4,10 @@ from anvil.js.window import ej, jQuery
 from DevFusion.components.GridView2 import GridView2
 from datetime import datetime, date
 import anvil.js
-from AnvilFusion.tools.utils import AppEnv
+from AnvilFusion.tools.utils import AppEnv, get_cookie
 from ..app.models import Staff, Case, Task, Activity, User
 class TaskListView(GridView2):
-    def __init__(self, case=None, case_uid=None, **kwargs):
+    def __init__(self, **kwargs):
         print(f'TaskListView case_uid = {case_uid}, kwargs = {kwargs}')
         view_config = {
             'model': 'Task',
@@ -24,13 +24,19 @@ class TaskListView(GridView2):
             ],
             'filter': {'case': kwargs.get('case_uid')} if kwargs.get('case_uid') else None,
         }
-        case_uid = case['uid'] if case else case_uid
-        if case_uid:
-            filters = {
-                'case': {'uid': case_uid}
-            }
-        else:
-            filters = None
+        
+        is_dashboard = kwargs.pop('dashboard', None)
+        print(f"is_dashboard = {is_dashboard}")
+        if is_dashboard:
+            case_uid = get_cookie('case_uid', None)
+            print(f"case_uid = {case_uid}")
+            if case_uid:
+                filters = {
+                    'case': {'uid': case_uid}
+                }
+            else:
+                filters = None
+
 
         super().__init__(model='Task', view_config=view_config, filters=filters, **kwargs)
         anvil.js.window['captionTemplateFormat'] = self.due_date_caption
