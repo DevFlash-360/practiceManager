@@ -8,7 +8,6 @@ from AnvilFusion.tools.utils import AppEnv, get_cookie
 from ..app.models import Staff, Case, Task, Activity, User
 class TaskListView(GridView2):
     def __init__(self, **kwargs):
-        print(f'TaskListView case_uid = {case_uid}, kwargs = {kwargs}')
         view_config = {
             'model': 'Task',
             'columns': [
