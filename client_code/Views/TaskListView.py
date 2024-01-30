@@ -221,6 +221,7 @@ class TaskListView(GridView2):
         
         if self.filter_case_uid:
             self.cases_filters.append(self.filter_case_uid)
+            print("============= append ===============")
 
         if filter_complete:
             self.param_complete = [True]
