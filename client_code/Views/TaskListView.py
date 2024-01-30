@@ -27,7 +27,7 @@ class TaskListView(GridView2):
         is_dashboard = kwargs.pop('dashboard', None)
         print(f"is_dashboard = {is_dashboard}")
         if is_dashboard:
-            case_uid = get_cookie('case_uid', None)
+            case_uid = get_cookie('case_uid')
             print(f"case_uid = {case_uid}")
             if case_uid:
                 filters = {
