@@ -15,7 +15,7 @@ class CaseDashboardPage(DashboardPage):
             set_cookie('case_uid', self.case_uid)
             print(f"set_cookie {self.case_uid}")
         else:
-            self.case_uid = get_cookie('case_uid')
+            self.case_uid = get_cookie('case_uid') or 'a31c356d-668c-4e62-b103-61869154adb1'
             print(f"get_cookie {self.case_uid}")
         print('CaseDashboardPage', self.case_uid)
         self.case = Case.get(self.case_uid) if self.case_uid else None
