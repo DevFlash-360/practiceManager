@@ -123,8 +123,8 @@ PMAPP_NAV_ITEMS = {
 
     'case_dashboard_old': {'name': 'CaseDashboardOldPage', 'type': 'page', 'action': 'open',
                            'subcomponent': 'case_dashboard_events', 'props': {}},
-    'case_dashboard': {'name': 'CaseDashboardPage', 'type': 'page', 'action': 'open', 'config': '', 'props': {'dashboard': True}},
-    'case_dashboard_events': {'class': 'EventScheduleView', 'type': 'custom', 'action': 'open', 'props': {}},
+    'case_dashboard': {'name': 'CaseDashboardPage', 'type': 'page', 'action': 'open', 'config': '', 'props': {}},
+    'case_dashboard_events': {'class': 'EventScheduleView', 'type': 'custom', 'action': 'open', 'props': {'dashboard': True}},
     'case_dashboard_tasks': {'class': 'TaskListView', 'type': 'custom', 'action': 'open', 'props': {'dashboard': True}},
     # 'case_dashboard_tasks': {'model': 'Task', 'type': 'view', 'action': 'open', 'config': 'TaskView', 'props': {}},
     'case_dashboard_documents': {'class': 'CaseDocumentsView', 'type': 'custom', 'action': 'open',
