@@ -12,6 +12,6 @@ def auth(**params):
           "headers: {anvil.server.request.headers}\n"
           f"params: {params}\n")
 
-    tenant_uid = params['state'] if params['state'] else None
+    tenant_uid = params.get('state', None)
 
     return anvil.server.HttpResponse(200, f'OK')
