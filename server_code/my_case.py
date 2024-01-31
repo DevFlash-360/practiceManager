@@ -9,7 +9,7 @@ PMAPP_API_ORIGIN = 'https://dd2scido6vqpf3xb.anvil.app/UFWI73RUL6AQM3I2K32OXEHW/
 @anvil.server.http_endpoint('/my-case/auth', methods=['GET', 'POST'])
 def auth(**params):
     print(f"method: {anvil.server.request.method}\n"
-          "headers: {anvil.server.request.headers}\n"
+          f"headers: {anvil.server.request.headers}\n"
           f"params: {params}\n")
 
     tenant_uid = params.get('state', None)
