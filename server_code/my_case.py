@@ -1,4 +1,4 @@
-from ..app.models import * # noqa
+from .app.models import * # noqa
 import anvil.server
 import anvil.secrets
 
