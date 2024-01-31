@@ -141,9 +141,13 @@ class EventScheduleView:
         self.init_filters()
 
     def init_filters(self):
-        # ej.base.enableRipple(True)
-        cases_data = Case.search()
-        cases_data_for_dropdown = [{'id': case['uid'], 'pid': 'cases', 'text': case['case_name']} for case in cases_data]
+        if self.filter_case_uid:
+            filter_case = Case.get(self.filter_case_uid)
+            cases_data_for_dropdown = [{'id': self.filter_case_uid, 'pid': 'cases', 'text': filter_case['case_name'], 'selected': True}]
+            self.cases_filters = [self.filter_case_uid]
+        else:
+            cases_data = Case.search()
+            cases_data_for_dropdown = [{'id': case['uid'], 'pid': 'cases', 'text': case['case_name']} for case in cases_data]
 
         staff_data = Staff.search()
         staff_data_for_dropdown = [{'id': row['uid'], 'pid': 'staffs', 'text': row['first_name'] + " " + row['last_name']} for row in staff_data]
@@ -245,7 +249,7 @@ class EventScheduleView:
 
     def handler_filter_close(self, args):
         tree_data = self.dropdown_tree.getData()
-        all_cases = tree_data[0].get('selected', False)
+        all_cases = tree_data[0].get('selected', False) and not self.filter_case_uid
         all_staffs = tree_data[1].get('selected', False)
         all_activity = tree_data[2].get('selected', False)
         selected_items = [item for item in tree_data if item.get('selected')]
@@ -261,13 +265,14 @@ class EventScheduleView:
                 self.staffs_filters.append(item['id'])
             if not all_activity and item.get('pid') == 'activities':
                 self.activity_filters.append(item['id'])
+
+        if self.filter_case_uid:
+            self.cases_filters.append(self.filter_case_uid)
                 
         if selected_items:
-            print("11111111")
             jQuery("#pm-filter-container .e-icons.e-ddt-icon")[0].style.color = "rgb(0 147 255)"
             # self.grid.element.querySelector(f'#pm-filter-container .e-icons.e-input-group-icon.e-ddt-icon::before').content = "\e735"
         else:
-            print("22222222")
             jQuery("#pm-filter-container .e-icons.e-ddt-icon")[0].style.color = "#6b7280"
             # self.grid.element.querySelector(f'#pm-filter-container .e-icons.e-input-group-icon.e-ddt-icon::before').content = "\e72c"
         self.schedule.refreshEvents()
