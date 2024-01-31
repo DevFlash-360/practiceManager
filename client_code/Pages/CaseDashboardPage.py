@@ -10,13 +10,14 @@ DASHBOARD_PANEL_CONTAINER_STYLE = "width:100%;height:100%;overflow:scroll;"
 class CaseDashboardPage(DashboardPage):
     
     def __init__(self, container_id, **kwargs):
-        self.case_uid = kwargs.get('case_uid', 'a31c356d-668c-4e62-b103-61869154adb1')
+        self.case_uid = kwargs.get('case_uid', None)
         if self.case_uid:
             set_cookie('case_uid', self.case_uid)
             print(f"set_cookie {self.case_uid}")
         else:
             self.case_uid = get_cookie('case_uid')
-            print(f"get_cookie {self.case_uid}")
+            if not self.case_uid:
+                self.case_uid = 'a31c356d-668c-4e62-b103-61869154adb1'
         print('CaseDashboardPage', self.case_uid)
         self.case = Case.get(self.case_uid) if self.case_uid else None
         self.panel_container_style = DASHBOARD_PANEL_CONTAINER_STYLE
