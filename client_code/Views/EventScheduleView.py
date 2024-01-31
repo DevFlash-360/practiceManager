@@ -2,7 +2,7 @@ import copy
 import anvil.server
 from anvil.tables import query as q
 from anvil.js.window import ej, jQuery, Date, XMLHttpRequest, Object
-from AnvilFusion.tools.utils import datetime_js_to_py
+from AnvilFusion.tools.utils import datetime_js_to_py, get_cookie
 import anvil.js
 from anvil.tables import app_tables
 import anvil.server
@@ -74,11 +74,20 @@ PM_SCHEDULE_DETAIL_VIEWS = [
 
 
 class EventScheduleView:
-    def __init__(self, **kwargs):
-
+    def __init__(self,
+                 container_id=None,
+                 **kwargs
+                 ):
+        self.filter_case_uid = None
+        is_dashboard = kwargs.pop('dashboard', None)
+        if is_dashboard:
+            self.filter_case_uid = get_cookie('case_uid')
+            print(f"self.filter_case_uid = {self.filter_case_uid}")
+            
         self.db_data = None
         self.schedule_el_id = None
         self.schedule_height = None
+        self.container_id = container_id
         self.container_el = None
         self.cases_filters = [] # Filter cards with this cases
         self.staffs_filters = [] # Filter cards with this staffs
