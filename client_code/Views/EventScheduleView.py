@@ -74,17 +74,11 @@ PM_SCHEDULE_DETAIL_VIEWS = [
 
 
 class EventScheduleView:
-    def __init__(self,
-                 container_id=None,
-                 model=None,
-                 title=None,
-                 ):
-        print('EventScheduleView')
+    def __init__(self, **kwargs):
 
         self.db_data = None
         self.schedule_el_id = None
         self.schedule_height = None
-        self.container_id = container_id
         self.container_el = None
         self.cases_filters = [] # Filter cards with this cases
         self.staffs_filters = [] # Filter cards with this staffs
