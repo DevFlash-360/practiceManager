@@ -13,5 +13,6 @@ def auth(**params):
           f"params: {params}\n")
 
     tenant_uid = params.get('state', None)
+    print('tenant_uid', tenant_uid)
 
     return anvil.server.HttpResponse(200, f'OK')
