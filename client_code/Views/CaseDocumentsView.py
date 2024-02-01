@@ -47,7 +47,7 @@ class CaseDocumentsView(GridView):
         #     'allowDeleting': True,
         #     'mode': 'Normal',
         # }
-        self.grid.dataBound = self.collapse_all
+        # self.grid.dataBound = self.collapse_all
         self.first_load = True
 
 
