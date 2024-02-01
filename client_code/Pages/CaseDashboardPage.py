@@ -13,8 +13,11 @@ class CaseDashboardPage(DashboardPage):
         self.case_uid = kwargs.get('case_uid', None)
         if self.case_uid:
             set_cookie('case_uid', self.case_uid)
+            print(f"set_cookie {self.case_uid}")
         else:
             self.case_uid = get_cookie('case_uid')
+            if not self.case_uid:
+                self.case_uid = 'a31c356d-668c-4e62-b103-61869154adb1'
         print('CaseDashboardPage', self.case_uid)
         self.case = Case.get(self.case_uid) if self.case_uid else None
         self.panel_container_style = DASHBOARD_PANEL_CONTAINER_STYLE

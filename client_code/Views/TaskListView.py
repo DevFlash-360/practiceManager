@@ -4,11 +4,15 @@ from anvil.js.window import ej, jQuery
 from DevFusion.components.GridView2 import GridView2
 from datetime import datetime, date
 import anvil.js
-from AnvilFusion.tools.utils import AppEnv
+from AnvilFusion.tools.utils import AppEnv, get_cookie
 from ..app.models import Staff, Case, Task, Activity, User
 class TaskListView(GridView2):
-    def __init__(self, case=None, case_uid=None, **kwargs):
-        print('TaskListView')
+    def __init__(self, **kwargs):
+        self.filter_case_uid = None
+        is_dashboard = kwargs.pop('dashboard', None)
+        if is_dashboard:
+            self.filter_case_uid = get_cookie('case_uid')
+
         view_config = {
             'model': 'Task',
             'columns': [
@@ -22,17 +26,10 @@ class TaskListView(GridView2):
                 {'name': 'assigned_staff.full_name', 'label': 'Assigned Staff'},
                 {'name': 'notes', 'label': 'Notes'},
             ],
-            'filter': {'case': kwargs.get('case_uid')} if kwargs.get('case_uid') else None,
+            'filter': {'case': self.filter_case_uid} if self.filter_case_uid else None,
         }
-        case_uid = case['uid'] if case else case_uid
-        if case_uid:
-            filters = {
-                'case': {'uid': case_uid}
-            }
-        else:
-            filters = None
 
-        super().__init__(model='Task', view_config=view_config, filters=filters, **kwargs)
+        super().__init__(model='Task', view_config=view_config, **kwargs)
         anvil.js.window['captionTemplateFormat'] = self.due_date_caption
         self.grid.allowGrouping = True
         self.grid.groupSettings = {
@@ -75,8 +72,13 @@ class TaskListView(GridView2):
         self.events  = [] # Events on filter
         self.tasks = [] # Staffs on filter
 
-        cases_data = Case.search()
-        cases_data_for_dropdown = [{'id': case['uid'], 'pid': 'cases', 'text': case['case_name']} for case in cases_data]
+        if self.filter_case_uid:
+            filter_case = Case.get(self.filter_case_uid)
+            cases_data_for_dropdown = [{'id': self.filter_case_uid, 'pid': 'cases', 'text': filter_case['case_name'], 'selected': True}]
+            self.cases_filters = [self.filter_case_uid]
+        else:
+            cases_data = Case.search()
+            cases_data_for_dropdown = [{'id': case['uid'], 'pid': 'cases', 'text': case['case_name']} for case in cases_data]
 
         staff_data = Staff.search()
         staff_data_for_dropdown = [{'id': row['uid'], 'pid': 'staffs', 'text': row['first_name'] + " " + row['last_name']} for row in staff_data]
@@ -202,7 +204,7 @@ class TaskListView(GridView2):
         all_status = tree_data[0].get('selected', False)
         filter_complete = tree_data[1].get('selected', False)
         filter_incomplete = tree_data[2].get('selected', False)
-        all_cases = tree_data[3].get('selected', False)
+        all_cases = tree_data[3].get('selected', False) and not self.filter_case_uid
         all_staffs = tree_data[4].get('selected', False)
         all_activities = tree_data[5].get('selected', False)
         selected_items = [item for item in tree_data if item.get('selected')]
@@ -218,6 +220,9 @@ class TaskListView(GridView2):
                 self.staffs_filters.append(item['id'])
             if not all_activities and item.get('pid') == 'activities':
                 self.activity_filters.append(item['id'])
+        
+        if self.filter_case_uid:
+            self.cases_filters.append(self.filter_case_uid)
 
         if filter_complete:
             self.param_complete = [True]
