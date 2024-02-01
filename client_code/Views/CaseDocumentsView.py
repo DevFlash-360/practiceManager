@@ -1,5 +1,6 @@
 import anvil.server
 from AnvilFusion.components.GridView import GridView
+from AnvilFusion.tools.utils import AppEnv, get_cookie
 import anvil.js
 import uuid
 
@@ -7,6 +8,11 @@ import uuid
 class CaseDocumentsView(GridView):
     def __init__(self, case=None, case_uid=None, **kwargs):
         print('CaseDocumentsView')
+        self.filter_case_uid = None
+        is_dashboard = kwargs.pop('dashboard', None)
+        if is_dashboard:
+            self.filter_case_uid = get_cookie('case_uid')
+
         view_config = {
             'model': 'Document',
             'columns': [
@@ -18,12 +24,11 @@ class CaseDocumentsView(GridView):
                 {'name': 'reviewed_by.full_name', 'label': 'Reviewed By'},
                 {'name': 'notes', 'label': 'Notes'},
             ],
-            'filter': {'document_folder.case': kwargs.get('case_uid')},
+            'filter': {'document_folder.case': self.filter_case_uid},
         }
-        case_uid = case['uid'] if case else case_uid
-        if case_uid:
+        if self.filter_case_uid:
             filters = {
-                'case': {'uid': case_uid}
+                'case': {'uid': self.filter_case_uid}
             }
         else:
             filters = None
