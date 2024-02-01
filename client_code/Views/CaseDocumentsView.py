@@ -56,6 +56,8 @@ class CaseDocumentsView(GridView):
 
 
     def collapse_all(self, args):
+        print("collapse_all")
         if self.first_load:
+            print(self.grid.groupModule)
             self.grid.groupModule.collapseAll()
             self.first_load = False
