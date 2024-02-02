@@ -129,7 +129,7 @@ PMAPP_NAV_ITEMS = {
     # 'case_dashboard_tasks': {'model': 'Task', 'type': 'view', 'action': 'open', 'config': 'TaskView', 'props': {}},
     'case_dashboard_documents': {'class': 'CaseDocumentsView', 'type': 'custom', 'action': 'open', 'props': {'dashboard': True}},
     'case_dashboard_time_entries': {'model': 'TimeEntry', 'type': 'view', 'action': 'open', 'config': 'TimeEntryView',
-                                    'props': {}},
+                                    'props': {'dashboard': True}},
     'case_dashboard_expenses': {'model': 'Expense', 'type': 'view', 'action': 'open', 'config': 'ExpenseView',
                                 'props': {}},
     'case_dashboard_invoices': {'model': 'Invoice', 'type': 'view', 'action': 'open', 'config': 'InvoiceView',
