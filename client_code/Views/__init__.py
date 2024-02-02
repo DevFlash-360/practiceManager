@@ -7,3 +7,4 @@ from .LeadListView import LeadListView
 from .ContactListView import ContactListView
 from .CaseAgendaView import CaseAgendaView
 from .TimeEntryView import TimeEntryView
+from .ExpenseView import ExpenseView
