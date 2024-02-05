@@ -1,12 +1,17 @@
 import anvil.server
 from DevFusion.components.GridView2 import GridView2
-from AnvilFusion.tools.utils import AppEnv
+from AnvilFusion.tools.utils import AppEnv, get_cookie
 from anvil.js.window import ej, jQuery
 from ..app.models import Contact
 
 
 class ContactListView(GridView2):
     def __init__(self, **kwargs):
+        self.filter_case_uid = None
+        is_dashboard = kwargs.pop('dashboard', None)
+        if is_dashboard:
+            self.filter_case_uid = get_cookie('case_uid')
+
         view_config = {
             'model': 'Contact',
             'columns': [
@@ -15,9 +20,16 @@ class ContactListView(GridView2):
                 {'name': 'email', 'label': 'Email'},
                 {'name': 'mobile_phone', 'label': 'Mobile Phone'},
                 {'name': 'work_phone', 'label': 'Work Phone'},
-            ]
+            ],
+            'filter': {'case': self.filter_case_uid},
         }
-        super().__init__(model='Contact', view_config=view_config, **kwargs)
+        if self.filter_case_uid:
+            filters = {
+                'case': {'uid': self.filter_case_uid}
+            }
+        else:
+            filters = None
+        super().__init__(model='Contact', view_config=view_config, filters=filters, **kwargs)
 
     def row_selected(self, args):
         jQuery(f"#details_content")[0].innerHTML = self.details_content(args)
