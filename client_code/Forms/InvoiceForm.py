@@ -24,7 +24,7 @@ class InvoiceForm(FormBase):
         print('InvoiceForm')
         kwargs['model'] = 'Invoice'
         self.invoice_number = NumberInput(name='invoice_number', label='Invoice Number')
-        self.case = LookupInput(name='case', label='Case', midel='Case', text_field='case_name')
+        self.case = LookupInput(name='case', label='Case', model='Case', text_field='case_name')
         self.bill_to = LookupInput(name='bill_to', label='Bill To', model='Contact', text_field='full_name')
         self.fee_type = LookupInput(model='FeeType', name='fee_type', label='Fee Type')
         self.total = NumberInput(name='total', label='Total')
