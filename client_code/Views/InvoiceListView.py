@@ -1,11 +1,11 @@
 import anvil.server
-from AnvilFusion.components.GridView import GridView
+from DevFusion.components.GridView2 import GridView2
 from AnvilFusion.tools.utils import AppEnv, get_cookie
 import anvil.js
 import uuid
 
 
-class InvoiceListView(GridView):
+class InvoiceListView(GridView2):
     def __init__(self, case=None, case_uid=None, **kwargs):
         self.filter_case_uid = None
         is_dashboard = kwargs.pop('dashboard', None)
