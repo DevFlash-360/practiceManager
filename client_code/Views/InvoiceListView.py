@@ -36,4 +36,8 @@ class InvoiceListView(GridView2):
         super().form_show(get_data=get_data, **args)
 
     def form_save(self, args):
+        print("----------------")
         print(args)
+        print("----------------")
+        args.pop('fee_type', None)
+        super().form_save(args)
