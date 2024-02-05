@@ -12,6 +12,8 @@ class InvoiceListView(GridView2):
         if is_dashboard:
             self.filter_case_uid = get_cookie('case_uid')
         
+        print(f"========== is_dashboard = {is_dashboard}")
+        
         view_config = {
             'model': 'Invoice',
             'columns': [
