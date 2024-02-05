@@ -17,7 +17,7 @@ class InvoiceListView(GridView2):
             'columns': [
                 {'name': 'invoice_number', 'label': 'Invoice Number'},
                 {'name': 'case.case_name', 'label': 'Case'},
-                
+                {'name': 'bill_to.full_name', 'label': 'Bill To'},
             ],
             'filter': {'case': self.filter_case_uid},
         }
