@@ -8,3 +8,4 @@ from .ContactListView import ContactListView
 from .CaseAgendaView import CaseAgendaView
 from .TimeEntryView import TimeEntryView
 from .ExpenseView import ExpenseView
+from .InvoiceListView import InvoiceListView
