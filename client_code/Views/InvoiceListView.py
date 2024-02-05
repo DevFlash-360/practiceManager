@@ -1,5 +1,5 @@
 import anvil.server
-from DevFusion.components.GridView import GridView
+from AnvilFusion.components.GridView import GridView
 from AnvilFusion.tools.utils import AppEnv, get_cookie
 import anvil.js
 import uuid
