@@ -141,7 +141,7 @@ PMAPP_NAV_ITEMS = {
     'case_reports_documents': {'class': 'CaseDocumentsView', 'type': 'custom', 'action': 'open', 'props': {}},
     'case_reports_time_entries': {'class': 'TimeEntryView', 'type': 'custom', 'action': 'open', 'props': {}},
     'case_reports_expenses': {'class': 'ExpenseView', 'type': 'custom', 'action': 'open', 'props': {}},
-    'case_reports_invoices': {'class': 'InvoiceListView', 'type': 'custom', 'action': 'open', 'props': {}},
+    'case_reports_invoices': {'model': 'Invoice', 'type': 'view', 'action': 'open', 'props': {}},
 
     'intake_leads': {'class': 'LeadListView', 'type': 'custom', 'action': 'open', 'props': {}},
     # 'intake_lead_analytics': {'model': '', 'type': 'page|view|form', 'action': 'open|popup', 'props': {}},
