@@ -2,6 +2,9 @@ from .app.models import * # noqa
 import anvil.server
 import anvil.secrets
 
+# https://wooldridge-law1.mycase.com
+# RhVWPWDzP43FNQmQ
+# rs75miSiB5JtGZd8vzsexAua3tSfiypH
 
 PMAPP_API_ORIGIN = 'https://dd2scido6vqpf3xb.anvil.app/UFWI73RUL6AQM3I2K32OXEHW/_/api'
 
