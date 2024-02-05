@@ -132,7 +132,7 @@ PMAPP_NAV_ITEMS = {
     'case_dashboard_expenses': {'class': 'ExpenseView', 'type': 'custom', 'action': 'open', 'props': {'dashboard': True}},
     'case_dashboard_invoices': {'model': 'Invoice', 'type': 'view', 'action': 'open', 'config': 'InvoiceView',
                                 'props': {}},
-    'case_dashboard_contacts': {'class': 'ContactListView', 'type': 'custom', 'action': 'open', 'props': {'dashboard': True}},
+    'case_dashboard_contacts': {'model': 'CaseContact', 'type': 'view', 'action': 'open', 'props': {}},
     'case_dashboard_updates': {'model': 'CaseUpdate', 'type': 'view', 'action': 'open', 'props': {}},
     'case_dashboard_requirements': {'model': 'CaseRequirement', 'type': 'view', 'action': 'open', 'props': {}},
 
