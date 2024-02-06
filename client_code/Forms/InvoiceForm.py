@@ -99,8 +99,7 @@ class InvoiceForm(FormBase):
         
     def form_save(self, args):
         print("----------------")
-        print(args)
+        print(self.data)
         print("----------------")
         args.pop('fee_type', None)
         super().form_save(args)
-
