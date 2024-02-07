@@ -96,10 +96,3 @@ class InvoiceForm(FormBase):
 
         super().__init__(sections=sections, width=POPUP_WIDTH_COL3, **kwargs)
         self.fullscreen = True
-        
-    def form_save(self, args):
-        print("----------------")
-        print(self.data)
-        print("----------------")
-        args.pop('fee_type', None)
-        super().form_save(args)
