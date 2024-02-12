@@ -27,7 +27,6 @@ PMAPP_APPBAR_MENU = [
 PMAPP_SIDEBAR_MENUS = {
     'case_menu': [
         {'nodeId': 'case_agenda', 'nodeText': 'Agenda', 'nodeChild': []},
-        {'nodeId': 'case_tasks', 'nodeText': 'Tasks', 'nodeChild': []},
         {'nodeId': 'case_dashboard', 'nodeText': 'Case Dashboard', 'nodeChild': [
             {'nodeId': 'case_dashboard_events', 'nodeText': 'Events', 'nodeChild': []},
             {'nodeId': 'case_dashboard_tasks', 'nodeText': 'Tasks', 'nodeChild': []},
@@ -42,7 +41,7 @@ PMAPP_SIDEBAR_MENUS = {
         {'nodeId': 'case_reports', 'nodeText': 'Reports', 'nodeChild': [
             {'nodeId': 'case_reports_events', 'nodeText': 'Events', 'nodeChild': []},
             {'nodeId': 'case_reports_cases', 'nodeText': 'Cases', 'nodeChild': []},
-            # {'nodeId': 'case_reports_tasks', 'nodeText': 'Tasks', 'nodeChild': []},
+            {'nodeId': 'case_reports_tasks', 'nodeText': 'Tasks', 'nodeChild': []},
             {'nodeId': 'case_reports_contacts', 'nodeText': 'Contacts', 'nodeChild': []},
             {'nodeId': 'case_reports_documents', 'nodeText': 'Documents', 'nodeChild': []},
             {'nodeId': 'case_reports_time_entries', 'nodeText': 'Time Entries', 'nodeChild': []},
