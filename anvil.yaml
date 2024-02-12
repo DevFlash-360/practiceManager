@@ -36,10 +36,11 @@ startup_form: null
 native_deps: {head_html: "<!-- Material Design icons -->\n<link href=\"https://cdn.jsdelivr.net/npm/@mdi/font@6.5.95/css/materialdesignicons.min.css\"\
     \ rel=\"stylesheet\" type=\"text/css\"/>\n<link href=\"https://fonts.googleapis.com/css2?family=Lora&display=swap\"\
     \ rel=\"stylesheet\">\n<link href=\"https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap\"\
-    \ rel=\"stylesheet\">\n\n<!--Fontawsome library -->\n<script src=\"https://kit.fontawesome.com/1466988a10.js\"\
-    \ crossorigin=\"anonymous\"></script>\n\n<!-- Essential JS 2 styles and scripts\
-    \ -->\n<link href=\"https://cdn.syncfusion.com/ej2/23.1.36/tailwind.css\" rel=\"\
-    stylesheet\">\n<script src=\"https://cdn.syncfusion.com/ej2/23.1.36/dist/ej2.min.js\"\
+    \ rel=\"stylesheet\">\n\n<!--Fontawsome library -->\n<!-- <script src=\"https://kit.fontawesome.com/1466988a10.js\"\
+    \ crossorigin=\"anonymous\"></script> -->\n<link rel=\"canonical\" href=\"https://fontawesome.com\"\
+    >\n<link rel=\"stylesheet\" href=\"https://site-assets.fontawesome.com/releases/v6.5.1/css/all.css\"\
+    >\n<!-- Essential JS 2 styles and scripts -->\n<link href=\"https://cdn.syncfusion.com/ej2/23.1.36/tailwind.css\"\
+    \ rel=\"stylesheet\">\n<script src=\"https://cdn.syncfusion.com/ej2/23.1.36/dist/ej2.min.js\"\
     \ type=\"text/javascript\"></script>\n<script src=\"_/theme/aws-sdk-v3-bundle.js\"\
     \ type=\"text/javascript\"></script>\n\n<link href=\"_/theme/anvil-fusion.css\"\
     \ rel=\"stylesheet\">\n<link href=\"_/theme/pmapp.css\" rel=\"stylesheet\">\n\n\
