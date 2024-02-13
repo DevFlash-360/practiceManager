@@ -128,8 +128,27 @@ class InvoiceForm(FormBase):
             CheckboxInput(name='billable', label='Billable'),
             DropdownInput(name='status', label='Status', select='single', options=EXPENSE_STATUS_OPTIONS)
         ]
-        self.expenses = SubformBase(name='expenses', fields=expense_fields, model='Expense', link_model='Invoice',
-                                    link_field='invoice', save=False)
+        expenses_view = {
+            'model': 'Expense',
+            'columns': [
+                {'name': 'date', 'label': 'Date'},
+                {'name': 'staff.full_name', 'label': 'Staff'},
+                {'name': 'activity.name', 'label': 'Activity'},
+                {'name': 'description', 'label': 'Description'},
+                {'name': 'amount', 'label': 'Amount'},
+                {'name': 'quantity', 'label': 'Quantity'},
+                {'name': 'reduction', 'label': 'Reduction'},
+                {'name': 'total', 'label': 'Total'},
+                {'name': 'billable', 'label': 'Billable'},
+                {'name': 'status', 'label': 'Status'},
+            ],
+        }
+        self.expenses = SubformGrid(
+            name='expenses', model='Expense',
+            link_model='Invoice', link_field='invoice',
+            add_edit_form='ExpenseForm', form_container_id=kwargs.get('target'),
+            view_config=expenses_view,
+        )
 
         adjustment_fields = [
             DropdownInput(name='type', label='Type', options=['Add', 'Discount']),
@@ -140,7 +159,7 @@ class InvoiceForm(FormBase):
             NumberInput(name='adjustment_amount', label='Adjustment $'),
             NumberInput(name='adjustment_percent', label='Adjustment %'),
         ]
-        self.adjustments = SubformBase(name='adjustments', fields=adjustment_fields)
+        self.adjustments = SubformGrid(name='adjustments', fields=adjustment_fields)
 
         sections = [
             {'name': '_', 'rows': [
@@ -150,7 +169,7 @@ class InvoiceForm(FormBase):
                 [None, self.status],
             ]},
             {'name': 'time_entries', 'label': 'Time Entries', 'rows': [[self.time_entries]]},
-            # {'name': 'expenses', 'label': 'Expenses', 'rows': [[self.expenses]]},
+            {'name': 'expenses', 'label': 'Expenses', 'rows': [[self.expenses]]},
             # {'name': 'adjustments', 'label': 'Adjustments', 'rows': [[self.adjustments]]},
             {'name': 'payments', 'label': 'Payments', 'rows': [[self.payments]]},
         ]
