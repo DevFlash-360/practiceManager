@@ -159,7 +159,7 @@ class InvoiceForm(FormBase):
             NumberInput(name='adjustment_amount', label='Adjustment $'),
             NumberInput(name='adjustment_percent', label='Adjustment %'),
         ]
-        self.adjustments = SubformGrid(name='adjustments', fields=adjustment_fields)
+        # self.adjustments = SubformGrid(name='adjustments', fields=adjustment_fields)
 
         sections = [
             {'name': '_', 'rows': [
