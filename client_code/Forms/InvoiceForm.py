@@ -2,6 +2,8 @@ import anvil.server
 from AnvilFusion.components.FormBase import FormBase, SubformBase, POPUP_WIDTH_COL3
 from AnvilFusion.components.FormInputs import *
 from AnvilFusion.components.SubformGrid import SubformGrid
+from AnvilFusion.datamodel.types import FieldTypes
+from ..Forms.PaymentForm import PAYMENT_METHOD_OPTIONS, PAYMENT_STATUS_OPTIONS
 from ..Forms.ExpenseForm import EXPENSE_STATUS_OPEN, EXPENSE_STATUS_INVOICED, EXPENSE_STATUS_OPTIONS
 
 
@@ -32,14 +34,52 @@ class InvoiceForm(FormBase):
         self.balance_due = NumberInput(name='balance_due', label='Balance Due')
         self.status = DropdownInput(name='status', label='Status', options=INVOICE_STATUS_OPTIONS)
 
+        # specific_roles_fields = [
+        #     TextInput(name='name', on_change=self.specific_role_change),
+        #     LookupInput(name='employee_role', model='EmployeeRole', on_change=self.specific_role_change,
+        #                 grid_field='employee_role.name', inline_grid=True),
+        #     LookupInput(name='pay_category', model='PayCategory', on_change=self.specific_role_change,
+        #                 grid_field='pay_category.name', inline_grid=True),
+        #     NumberInput(name='pay_rate', format='c2', on_change=self.specific_role_change, field_type=FieldTypes.CURRENCY),
+        # ]
+        # specific_roles_view = {
+        #     'model': 'PayRateTemplateSpecificRole',
+        #     'columns': [
+        #         {'name': 'name', 'label': 'Name'},
+        #         {'name': 'employee_role.name', 'label': 'Employee Role'},
+        #         {'name': 'pay_category.name', 'label': 'Payroll Category'},
+        #         {'name': 'pay_rate', 'label': 'Rate'},
+        #     ],
+        #     'inline_edit_fields': specific_roles_fields,
+        # }
+        # self.specific_roles = SubformGrid(
+        #     name='specific_roles', label='Pay Rate Specific Roles', model='PayRateTemplateSpecificRole',
+        #     link_model='PayRateTemplateItem', link_field='pay_rate_template_item',
+        #     add_edit_form='PayRateTemplateSpecificRoleForm', form_container_id=kwargs.get('target'),
+        #     view_config=specific_roles_view, edit_mode='inline',
+        # )
+
         payment_fields = [
             DateTimeInput(name='payment_time', label='Payment Time'),
-            NumberInput(name='amount', label='Amount'),
-            TextInput(name='payment_method', label='Payment Method'),
-            TextInput(name='status', label='Status', select='single')
+            NumberInput(name='amount', label='Amount', field_type=FieldTypes.CURRENCY),
+            DropdownInput(name='payment_method', label='Payment Method', options=PAYMENT_METHOD_OPTIONS),
+            DropdownInput(name='status', label='Status', options=PAYMENT_STATUS_OPTIONS),
         ]
-        self.payments = SubformBase(name='payments', fields=payment_fields, model='Payment', link_model='Invoice',
-                                    link_field='invoice', save=False)
+        payments_view = {
+            'model': 'Payment',
+            'columns': [
+                {'name': 'payment_time', 'label': 'Payment Time'},
+                {'name': 'amount', 'label': 'Amount'},
+                {'name': 'payment_method', 'label': 'Payment Method'},
+                {'name': 'status', 'label': 'Status'},
+            ],
+            'inline_edit_fields': payment_fields,
+        }
+        self.payments = SubformGrid(
+            name='payments', label='Payments', model='Payment',
+            link_model='Invoice', link_field='invoice',
+            view_config=payments_view, edit_mode='inline',
+        )
 
         time_entry_fields = [
             DateInput(name='date', label='Entry Date', ),
@@ -92,7 +132,7 @@ class InvoiceForm(FormBase):
             # {'name': 'time_entries', 'label': 'Time Entries', 'rows': [[self.time_entries]]},
             # {'name': 'expenses', 'label': 'Expenses', 'rows': [[self.expenses]]},
             # {'name': 'adjustments', 'label': 'Adjustments', 'rows': [[self.adjustments]]},
-            # {'name': 'payments', 'label': 'Payments', 'rows': [[self.payments]]},
+            {'name': 'payments', 'label': 'Payments', 'rows': [[self.payments]]},
         ]
 
         super().__init__(sections=sections, width=POPUP_WIDTH_COL3, **kwargs)
