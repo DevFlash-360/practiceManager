@@ -83,7 +83,7 @@ class InvoiceForm(FormBase):
 
         time_entry_fields = [
             DateInput(name='date', label='Entry Date', ),
-            LookupInput(name='staff', label='Staff', model='Staff',
+            LookupInput(name='staff', label='Staff', model='Staff', text_field='full_name',
                         grid_field='staff.full_name', inline_grid=True),
             LookupInput(model='Activity', name='activity', label='Activity',
                         grid_field='activity.name', inline_grid=True),
