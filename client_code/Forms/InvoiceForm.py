@@ -107,12 +107,13 @@ class InvoiceForm(FormBase):
                 {'name': 'duration', 'label': 'Duration'},
                 {'name': 'total', 'label': 'Total'},
             ],
-            'inline_edit_fields': time_entry_fields,
+            # 'inline_edit_fields': time_entry_fields,
         }
         self.time_entries = SubformGrid(
             name='time_entries', label='Time Entry', model='TimeEntry',
+            add_edit_form='TimeEntryForm', form_container_id=kwargs.get('target'),
             link_model='Invoice', link_field='invoice',
-            view_config=time_entries_view, edit_mode='inline',
+            view_config=time_entries_view,
         )
 
         expense_fields = [
