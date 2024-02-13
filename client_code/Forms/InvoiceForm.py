@@ -83,18 +83,38 @@ class InvoiceForm(FormBase):
 
         time_entry_fields = [
             DateInput(name='date', label='Entry Date', ),
-            LookupInput(name='staff', label='Staff', model='Staff', text_field='full_name'),
-            LookupInput(model='Activity', name='activity', label='Activity'),
+            LookupInput(name='staff', label='Staff', model='Staff',
+                        grid_field='staff.full_name', inline_grid=True),
+            LookupInput(model='Activity', name='activity', label='Activity',
+                        grid_field='activity.name', inline_grid=True),
             MultiLineInput(name='description', label='Description'),
             CheckboxInput(name='billable', label='This time entry is billable', label_position='After', value=True),
-            RadioButtonInput(name='rate_type', label='Rate type', direction='horizontal',
+            RadioButtonInput(name='rate_type', label='Rate type', direction='vertical',
                              options=[{'value': 'Per hour'}, {'value': 'Flat'}]),
-            NumberInput(name='rate', label='Rate'),
+            NumberInput(name='rate', label='Rate', field_type=FieldTypes.CURRENCY),
             NumberInput(name='duration', label='Duration (hours)'),
-            NumberInput(name='total', label='Total')
+            NumberInput(name='total', label='Total', field_type=FieldTypes.CURRENCY, enabled=False, value=0.00),
         ]
-        self.time_entries = SubformBase(name='time_entries', fields=time_entry_fields, model='TimeEntry',
-                                        link_model='Invoice', link_field='invoice', save=False)
+        time_entries_view = {
+            'model': 'TimeEntry',
+            'columns': [
+                {'name': 'date', 'label': 'Date'},
+                {'name': 'staff.full_name', 'label': 'Staff'},
+                {'name': 'activity.name', 'label': 'Activity'},
+                {'name': 'description', 'label': 'Description'},
+                {'name': 'billable', 'label': 'Billable'},
+                {'name': 'rate_type', 'label': 'Rate Type'},
+                {'name': 'rate', 'label': 'Rate'},
+                {'name': 'duration', 'label': 'Duration'},
+                {'name': 'total', 'label': 'Total'},
+            ],
+            'inline_edit_fields': time_entry_fields,
+        }
+        self.time_entries = SubformGrid(
+            name='time_entries', label='Time Entry', model='TimeEntry',
+            link_model='Invoice', link_field='invoice',
+            view_config=time_entries_view, edit_mode='inline',
+        )
 
         expense_fields = [
             DateInput(name='date', label='Date'),
