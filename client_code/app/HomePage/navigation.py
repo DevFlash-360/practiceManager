@@ -27,7 +27,6 @@ PMAPP_APPBAR_MENU = [
 PMAPP_SIDEBAR_MENUS = {
     'case_menu': [
         {'nodeId': 'case_agenda', 'nodeText': 'Agenda', 'nodeChild': []},
-        {'nodeId': 'case_tasks', 'nodeText': 'Tasks', 'nodeChild': []},
         {'nodeId': 'case_dashboard', 'nodeText': 'Case Dashboard', 'nodeChild': [
             {'nodeId': 'case_dashboard_events', 'nodeText': 'Events', 'nodeChild': []},
             {'nodeId': 'case_dashboard_tasks', 'nodeText': 'Tasks', 'nodeChild': []},
@@ -42,7 +41,7 @@ PMAPP_SIDEBAR_MENUS = {
         {'nodeId': 'case_reports', 'nodeText': 'Reports', 'nodeChild': [
             {'nodeId': 'case_reports_events', 'nodeText': 'Events', 'nodeChild': []},
             {'nodeId': 'case_reports_cases', 'nodeText': 'Cases', 'nodeChild': []},
-            # {'nodeId': 'case_reports_tasks', 'nodeText': 'Tasks', 'nodeChild': []},
+            {'nodeId': 'case_reports_tasks', 'nodeText': 'Tasks', 'nodeChild': []},
             {'nodeId': 'case_reports_contacts', 'nodeText': 'Contacts', 'nodeChild': []},
             {'nodeId': 'case_reports_documents', 'nodeText': 'Documents', 'nodeChild': []},
             {'nodeId': 'case_reports_time_entries', 'nodeText': 'Time Entries', 'nodeChild': []},
@@ -118,15 +117,12 @@ PMAPP_DEFAULT_NAV_ITEMS = {
 # Navigation items/actions
 PMAPP_NAV_ITEMS = {
     'case_agenda': {'class': 'CaseAgendaView', 'type': 'custom', 'action': 'open', 'props': {}},
-    # 'case_tasks': {'model': 'Task', 'type': 'view', 'action': 'open', 'config': 'TaskView', 'props': {}},
-    'case_tasks': {'class': 'TaskListView', 'type': 'custom', 'action': 'open', 'props': {}},
 
     'case_dashboard_old': {'name': 'CaseDashboardOldPage', 'type': 'page', 'action': 'open',
                            'subcomponent': 'case_dashboard_events', 'props': {}},
     'case_dashboard': {'name': 'CaseDashboardPage', 'type': 'page', 'action': 'open', 'config': '', 'props': {}},
     'case_dashboard_events': {'class': 'EventScheduleView', 'type': 'custom', 'action': 'open', 'props': {'dashboard': True}},
     'case_dashboard_tasks': {'class': 'TaskListView', 'type': 'custom', 'action': 'open', 'props': {'dashboard': True}},
-    # 'case_dashboard_tasks': {'model': 'Task', 'type': 'view', 'action': 'open', 'config': 'TaskView', 'props': {}},
     'case_dashboard_documents': {'class': 'CaseDocumentsView', 'type': 'custom', 'action': 'open', 'props': {'dashboard': True}},
     'case_dashboard_time_entries': {'class': 'TimeEntryView', 'type': 'custom', 'action': 'open', 'props': {'dashboard': True}},
     'case_dashboard_expenses': {'class': 'ExpenseView', 'type': 'custom', 'action': 'open', 'props': {'dashboard': True}},
@@ -137,6 +133,7 @@ PMAPP_NAV_ITEMS = {
 
     'case_reports_events': {'class': 'EventScheduleView', 'type': 'custom', 'action': 'open', 'props': {}},
     'case_reports_cases': {'class': 'CaseListView', 'type': 'custom', 'action': 'open', 'config': 'CaseListView', 'props': {}},
+    'case_reports_tasks': {'class': 'TaskListView', 'type': 'custom', 'action': 'open', 'props': {}},
     'case_reports_contacts': {'class': 'ContactListView', 'type': 'custom', 'action': 'open', 'props': {}},
     'case_reports_documents': {'class': 'CaseDocumentsView', 'type': 'custom', 'action': 'open', 'props': {}},
     'case_reports_time_entries': {'class': 'TimeEntryView', 'type': 'custom', 'action': 'open', 'props': {}},
