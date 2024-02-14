@@ -81,19 +81,19 @@ class InvoiceForm(FormBase):
             view_config=payments_view, edit_mode='inline',
         )
 
-        time_entry_fields = [
-            DateInput(name='date', label='Entry Date', ),
-            LookupInput(name='staff', label='Staff', model='Staff', text_field='full_name',
-                        grid_field='staff.full_name', inline_grid=True),
-            LookupInput(model='Activity', name='activity', label='Activity',
-                        grid_field='activity.name', inline_grid=True),
-            MultiLineInput(name='description', label='Description'),
-            CheckboxInput(name='billable', value=True, field_type=FieldTypes.BOOLEAN),
-            DropdownInput(name='rate_type', label='Rate type', options=['Per hour', 'Flat']),
-            NumberInput(name='rate', label='Rate', field_type=FieldTypes.CURRENCY),
-            NumberInput(name='duration', label='Duration (hours)'),
-            NumberInput(name='total', label='Total', field_type=FieldTypes.CURRENCY, enabled=False, value=0.00),
-        ]
+        # time_entry_fields = [
+        #     DateInput(name='date', label='Entry Date', ),
+        #     LookupInput(name='staff', label='Staff', model='Staff', text_field='full_name',
+        #                 grid_field='staff.full_name', inline_grid=True),
+        #     LookupInput(model='Activity', name='activity', label='Activity',
+        #                 grid_field='activity.name', inline_grid=True),
+        #     MultiLineInput(name='description', label='Description'),
+        #     CheckboxInput(name='billable', value=True, field_type=FieldTypes.BOOLEAN),
+        #     DropdownInput(name='rate_type', label='Rate type', options=['Per hour', 'Flat']),
+        #     NumberInput(name='rate', label='Rate', field_type=FieldTypes.CURRENCY),
+        #     NumberInput(name='duration', label='Duration (hours)'),
+        #     NumberInput(name='total', label='Total', field_type=FieldTypes.CURRENCY, enabled=False, value=0.00),
+        # ]
         time_entries_view = {
             'model': 'TimeEntry',
             'columns': [
@@ -116,18 +116,18 @@ class InvoiceForm(FormBase):
             view_config=time_entries_view,
         )
 
-        expense_fields = [
-            DateInput(name='date', label='Date'),
-            LookupInput(name='staff', label='Staff', model='Staff', text_field='full_name'),
-            LookupInput(model='Activity', name='activity', label='Activity'),
-            MultiLineInput(name='description', label='Description'),
-            NumberInput(name='amount', label='Amount'),
-            NumberInput(name='quantity', label='Quantity'),
-            NumberInput(name='reduction', label='Reduction'),
-            NumberInput(name='total', label='Total'),
-            CheckboxInput(name='billable', label='Billable'),
-            DropdownInput(name='status', label='Status', select='single', options=EXPENSE_STATUS_OPTIONS)
-        ]
+        # expense_fields = [
+        #     DateInput(name='date', label='Date'),
+        #     LookupInput(name='staff', label='Staff', model='Staff', text_field='full_name'),
+        #     LookupInput(model='Activity', name='activity', label='Activity'),
+        #     MultiLineInput(name='description', label='Description'),
+        #     NumberInput(name='amount', label='Amount'),
+        #     NumberInput(name='quantity', label='Quantity'),
+        #     NumberInput(name='reduction', label='Reduction'),
+        #     NumberInput(name='total', label='Total'),
+        #     CheckboxInput(name='billable', label='Billable'),
+        #     DropdownInput(name='status', label='Status', select='single', options=EXPENSE_STATUS_OPTIONS)
+        # ]
         expenses_view = {
             'model': 'Expense',
             'columns': [
@@ -159,7 +159,22 @@ class InvoiceForm(FormBase):
             NumberInput(name='adjustment_amount', label='Adjustment $'),
             NumberInput(name='adjustment_percent', label='Adjustment %'),
         ]
-        # self.adjustments = SubformGrid(name='adjustments', fields=adjustment_fields)
+        adjustments_view = {
+            # 'model': 'Adjustment',
+            # 'columns': [
+            #     {'name': 'type', 'label': 'Type'},
+            #     {'name': 'applied_to', 'label': 'Applied To'},
+            #     {'name': 'description', 'label': 'Description'},
+            #     {'name': 'basis', 'label': 'Basis'},
+            #     {'name': 'adjustment_amount', 'label': 'Adjustment $'},
+            #     {'name': 'adjustment_percent', 'label': 'Adjustment %'},
+            # ],
+            'inline_edit_fields': adjustment_fields,
+        }
+        self.adjustments = SubformGrid(
+            name='adjustments', label='Adjustments',
+            view_config=adjustments_view, edit_mode='inline',
+        )
 
         sections = [
             {'name': '_', 'rows': [
@@ -170,7 +185,7 @@ class InvoiceForm(FormBase):
             ]},
             {'name': 'time_entries', 'label': 'Time Entries', 'rows': [[self.time_entries]]},
             {'name': 'expenses', 'label': 'Expenses', 'rows': [[self.expenses]]},
-            # {'name': 'adjustments', 'label': 'Adjustments', 'rows': [[self.adjustments]]},
+            {'name': 'adjustments', 'label': 'Adjustments', 'rows': [[self.adjustments]]},
             {'name': 'payments', 'label': 'Payments', 'rows': [[self.payments]]},
         ]
 
