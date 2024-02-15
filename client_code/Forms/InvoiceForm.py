@@ -34,31 +34,6 @@ class InvoiceForm(FormBase):
         self.balance_due = NumberInput(name='balance_due', label='Balance Due')
         self.status = DropdownInput(name='status', label='Status', options=INVOICE_STATUS_OPTIONS)
 
-        # specific_roles_fields = [
-        #     TextInput(name='name', on_change=self.specific_role_change),
-        #     LookupInput(name='employee_role', model='EmployeeRole', on_change=self.specific_role_change,
-        #                 grid_field='employee_role.name', inline_grid=True),
-        #     LookupInput(name='pay_category', model='PayCategory', on_change=self.specific_role_change,
-        #                 grid_field='pay_category.name', inline_grid=True),
-        #     NumberInput(name='pay_rate', format='c2', on_change=self.specific_role_change, field_type=FieldTypes.CURRENCY),
-        # ]
-        # specific_roles_view = {
-        #     'model': 'PayRateTemplateSpecificRole',
-        #     'columns': [
-        #         {'name': 'name', 'label': 'Name'},
-        #         {'name': 'employee_role.name', 'label': 'Employee Role'},
-        #         {'name': 'pay_category.name', 'label': 'Payroll Category'},
-        #         {'name': 'pay_rate', 'label': 'Rate'},
-        #     ],
-        #     'inline_edit_fields': specific_roles_fields,
-        # }
-        # self.specific_roles = SubformGrid(
-        #     name='specific_roles', label='Pay Rate Specific Roles', model='PayRateTemplateSpecificRole',
-        #     link_model='PayRateTemplateItem', link_field='pay_rate_template_item',
-        #     add_edit_form='PayRateTemplateSpecificRoleForm', form_container_id=kwargs.get('target'),
-        #     view_config=specific_roles_view, edit_mode='inline',
-        # )
-
         payment_fields = [
             DateTimeInput(name='payment_time', label='Payment Time'),
             NumberInput(name='amount', label='Amount', field_type=FieldTypes.CURRENCY),
