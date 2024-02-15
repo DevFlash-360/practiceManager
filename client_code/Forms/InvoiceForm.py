@@ -2,6 +2,8 @@ import anvil.server
 from AnvilFusion.components.FormBase import FormBase, SubformBase, POPUP_WIDTH_COL3
 from AnvilFusion.components.FormInputs import *
 from AnvilFusion.components.SubformGrid import SubformGrid
+from AnvilFusion.datamodel.types import FieldTypes
+from ..Forms.PaymentForm import PAYMENT_METHOD_OPTIONS, PAYMENT_STATUS_OPTIONS
 from ..Forms.ExpenseForm import EXPENSE_STATUS_OPEN, EXPENSE_STATUS_INVOICED, EXPENSE_STATUS_OPTIONS
 
 
@@ -34,42 +36,94 @@ class InvoiceForm(FormBase):
 
         payment_fields = [
             DateTimeInput(name='payment_time', label='Payment Time'),
-            NumberInput(name='amount', label='Amount'),
-            TextInput(name='payment_method', label='Payment Method'),
-            TextInput(name='status', label='Status', select='single')
+            NumberInput(name='amount', label='Amount', field_type=FieldTypes.CURRENCY),
+            DropdownInput(name='payment_method', label='Payment Method', options=PAYMENT_METHOD_OPTIONS),
+            DropdownInput(name='status', label='Status', options=PAYMENT_STATUS_OPTIONS),
         ]
-        self.payments = SubformBase(name='payments', fields=payment_fields, model='Payment', link_model='Invoice',
-                                    link_field='invoice', save=False)
+        payments_view = {
+            'model': 'Payment',
+            'columns': [
+                {'name': 'payment_time', 'label': 'Payment Time'},
+                {'name': 'amount', 'label': 'Amount'},
+                {'name': 'payment_method', 'label': 'Payment Method'},
+                {'name': 'status', 'label': 'Status'},
+            ],
+            'inline_edit_fields': payment_fields,
+        }
+        self.payments = SubformGrid(
+            name='payments', label='Payments', model='Payment',
+            link_model='Invoice', link_field='invoice',
+            view_config=payments_view, edit_mode='inline',
+        )
 
-        time_entry_fields = [
-            DateInput(name='date', label='Entry Date', ),
-            LookupInput(name='staff', label='Staff', model='Staff', text_field='full_name'),
-            LookupInput(model='Activity', name='activity', label='Activity'),
-            MultiLineInput(name='description', label='Description'),
-            CheckboxInput(name='billable', label='This time entry is billable', label_position='After', value=True),
-            RadioButtonInput(name='rate_type', label='Rate type', direction='horizontal',
-                             options=[{'value': 'Per hour'}, {'value': 'Flat'}]),
-            NumberInput(name='rate', label='Rate'),
-            NumberInput(name='duration', label='Duration (hours)'),
-            NumberInput(name='total', label='Total')
-        ]
-        self.time_entries = SubformBase(name='time_entries', fields=time_entry_fields, model='TimeEntry',
-                                        link_model='Invoice', link_field='invoice', save=False)
+        # time_entry_fields = [
+        #     DateInput(name='date', label='Entry Date', ),
+        #     LookupInput(name='staff', label='Staff', model='Staff', text_field='full_name',
+        #                 grid_field='staff.full_name', inline_grid=True),
+        #     LookupInput(model='Activity', name='activity', label='Activity',
+        #                 grid_field='activity.name', inline_grid=True),
+        #     MultiLineInput(name='description', label='Description'),
+        #     CheckboxInput(name='billable', value=True, field_type=FieldTypes.BOOLEAN),
+        #     DropdownInput(name='rate_type', label='Rate type', options=['Per hour', 'Flat']),
+        #     NumberInput(name='rate', label='Rate', field_type=FieldTypes.CURRENCY),
+        #     NumberInput(name='duration', label='Duration (hours)'),
+        #     NumberInput(name='total', label='Total', field_type=FieldTypes.CURRENCY, enabled=False, value=0.00),
+        # ]
+        time_entries_view = {
+            'model': 'TimeEntry',
+            'columns': [
+                {'name': 'date', 'label': 'Date'},
+                {'name': 'staff.full_name', 'label': 'Staff'},
+                {'name': 'activity.name', 'label': 'Activity'},
+                {'name': 'description', 'label': 'Description'},
+                {'name': 'billable', 'label': 'Billable'},
+                {'name': 'rate_type', 'label': 'Rate Type'},
+                {'name': 'rate', 'label': 'Rate'},
+                {'name': 'duration', 'label': 'Duration'},
+                {'name': 'total', 'label': 'Total'},
+            ],
+            # 'inline_edit_fields': time_entry_fields,
+        }
+        self.time_entries = SubformGrid(
+            name='time_entries', label='Time Entry', model='TimeEntry',
+            add_edit_form='TimeEntryForm', form_container_id=kwargs.get('target'),
+            link_model='Invoice', link_field='invoice',
+            view_config=time_entries_view,
+        )
 
-        expense_fields = [
-            DateInput(name='date', label='Date'),
-            LookupInput(name='staff', label='Staff', model='Staff', text_field='full_name'),
-            LookupInput(model='Activity', name='activity', label='Activity'),
-            MultiLineInput(name='description', label='Description'),
-            NumberInput(name='amount', label='Amount'),
-            NumberInput(name='quantity', label='Quantity'),
-            NumberInput(name='reduction', label='Reduction'),
-            NumberInput(name='total', label='Total'),
-            CheckboxInput(name='billable', label='Billable'),
-            DropdownInput(name='status', label='Status', select='single', options=EXPENSE_STATUS_OPTIONS)
-        ]
-        self.expenses = SubformBase(name='expenses', fields=expense_fields, model='Expense', link_model='Invoice',
-                                    link_field='invoice', save=False)
+        # expense_fields = [
+        #     DateInput(name='date', label='Date'),
+        #     LookupInput(name='staff', label='Staff', model='Staff', text_field='full_name'),
+        #     LookupInput(model='Activity', name='activity', label='Activity'),
+        #     MultiLineInput(name='description', label='Description'),
+        #     NumberInput(name='amount', label='Amount'),
+        #     NumberInput(name='quantity', label='Quantity'),
+        #     NumberInput(name='reduction', label='Reduction'),
+        #     NumberInput(name='total', label='Total'),
+        #     CheckboxInput(name='billable', label='Billable'),
+        #     DropdownInput(name='status', label='Status', select='single', options=EXPENSE_STATUS_OPTIONS)
+        # ]
+        expenses_view = {
+            'model': 'Expense',
+            'columns': [
+                {'name': 'date', 'label': 'Date'},
+                {'name': 'staff.full_name', 'label': 'Staff'},
+                {'name': 'activity.name', 'label': 'Activity'},
+                {'name': 'description', 'label': 'Description'},
+                {'name': 'amount', 'label': 'Amount'},
+                {'name': 'quantity', 'label': 'Quantity'},
+                {'name': 'reduction', 'label': 'Reduction'},
+                {'name': 'total', 'label': 'Total'},
+                {'name': 'billable', 'label': 'Billable'},
+                {'name': 'status', 'label': 'Status'},
+            ],
+        }
+        self.expenses = SubformGrid(
+            name='expenses', model='Expense',
+            link_model='Invoice', link_field='invoice',
+            add_edit_form='ExpenseForm', form_container_id=kwargs.get('target'),
+            view_config=expenses_view,
+        )
 
         adjustment_fields = [
             DropdownInput(name='type', label='Type', options=['Add', 'Discount']),
@@ -80,7 +134,22 @@ class InvoiceForm(FormBase):
             NumberInput(name='adjustment_amount', label='Adjustment $'),
             NumberInput(name='adjustment_percent', label='Adjustment %'),
         ]
-        self.adjustments = SubformBase(name='adjustments', fields=adjustment_fields)
+        adjustments_view = {
+            # 'model': 'Adjustment',
+            # 'columns': [
+            #     {'name': 'type', 'label': 'Type'},
+            #     {'name': 'applied_to', 'label': 'Applied To'},
+            #     {'name': 'description', 'label': 'Description'},
+            #     {'name': 'basis', 'label': 'Basis'},
+            #     {'name': 'adjustment_amount', 'label': 'Adjustment $'},
+            #     {'name': 'adjustment_percent', 'label': 'Adjustment %'},
+            # ],
+            'inline_edit_fields': adjustment_fields,
+        }
+        self.adjustments = SubformGrid(
+            name='adjustments', label='Adjustments',
+            view_config=adjustments_view, edit_mode='inline',
+        )
 
         sections = [
             {'name': '_', 'rows': [
@@ -89,10 +158,10 @@ class InvoiceForm(FormBase):
                 [self.bill_to, self.balance_due],
                 [None, self.status],
             ]},
-            # {'name': 'time_entries', 'label': 'Time Entries', 'rows': [[self.time_entries]]},
-            # {'name': 'expenses', 'label': 'Expenses', 'rows': [[self.expenses]]},
-            # {'name': 'adjustments', 'label': 'Adjustments', 'rows': [[self.adjustments]]},
-            # {'name': 'payments', 'label': 'Payments', 'rows': [[self.payments]]},
+            {'name': 'time_entries', 'label': 'Time Entries', 'rows': [[self.time_entries]]},
+            {'name': 'expenses', 'label': 'Expenses', 'rows': [[self.expenses]]},
+            {'name': 'adjustments', 'label': 'Adjustments', 'rows': [[self.adjustments]]},
+            {'name': 'payments', 'label': 'Payments', 'rows': [[self.payments]]},
         ]
 
         super().__init__(sections=sections, width=POPUP_WIDTH_COL3, **kwargs)
