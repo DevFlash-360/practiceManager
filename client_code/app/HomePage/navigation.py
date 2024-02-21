@@ -409,7 +409,7 @@ class DetailsView:
         form_case = Forms.CaseForm(target="pm-content", next_form=form_invoice)
         
         lead = Lead.get(AppEnv.details_lead_uid)
-        for field in [x for x in form_case.form_fields if not x.is_dependent and x not in form_control.subforms]:
+        for field in [x for x in form_case.form_fields if not x.is_dependent and x not in form_case.subforms]:
             field.show()
             if field.name and getattr(lead, field.name, None):
                 field.value = lead[field.name]
