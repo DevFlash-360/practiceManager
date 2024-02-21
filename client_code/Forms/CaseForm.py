@@ -14,6 +14,7 @@ class CaseForm(FormBase):
 
         print('CaseForm')
         kwargs['model'] = 'Case'
+        self.next_form = kwargs['next_form'] if kwargs['next_form'] else None
         
         self.auto_generate_case_name = CheckboxInput(name='auto_generate_case_name', label='Auto Generate Case Name',
                                                      save=False)
@@ -199,3 +200,7 @@ class CaseForm(FormBase):
                 self.pre_litigation_rate.value = None
                 self.litigation_rate.hide()
                 self.litigation_rate.value = None
+    
+    def form_save(self, args):
+        super().form_save(args)
+        print(f"form_save")
