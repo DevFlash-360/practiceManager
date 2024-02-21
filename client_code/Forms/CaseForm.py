@@ -202,5 +202,5 @@ class CaseForm(FormBase):
                 self.litigation_rate.value = None
     
     def form_save(self, args):
+        print(f"CaseForm/form_save")
         super().form_save(args)
-        print(f"form_save")
