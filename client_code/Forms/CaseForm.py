@@ -10,11 +10,11 @@ FEE_TYPE_LITIGATION = ('Contingency', 'Hybrid Flat/Contingency', 'Hybrid Hourly/
 
 class CaseForm(FormBase):
 
-    def __init__(self, **kwargs):
+    def __init__(self, next_form=None, **kwargs):
 
         print('CaseForm')
         kwargs['model'] = 'Case'
-        self.next_form = kwargs['next_form'] if kwargs['next_form'] else None
+        self.next_form = next_form if next_form else None
         
         self.auto_generate_case_name = CheckboxInput(name='auto_generate_case_name', label='Auto Generate Case Name',
                                                      save=False)
