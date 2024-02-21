@@ -201,6 +201,8 @@ class CaseForm(FormBase):
                 self.litigation_rate.hide()
                 self.litigation_rate.value = None
     
-    # def form_save(self, args):
-    #     print(f"CaseForm/form_save")
-    #     super().form_save(args)
+    def form_save(self, args):
+        super().form_save(args)
+        if self.next_form:
+            print(f"CaseForm/form_save")
+
