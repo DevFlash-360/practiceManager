@@ -204,7 +204,7 @@ class CaseForm(FormBase):
                 self.litigation_rate.value = None
     
     def form_save(self, args):
-        print(f"CaseForm/form_save args = {args}")
+        print(f"CaseForm/form_save self.data = {self.data}")
         super().form_save(args)
         if self.next_form:
             workflow = CaseWorkflow.get()
