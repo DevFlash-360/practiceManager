@@ -209,4 +209,5 @@ class CaseForm(FormBase):
             print("================")
             print(self.data.practice_area.name)
             workflow = CaseWorkflow.get_by("practice_area", self.data.practice_area)
+            print(f"workflow = {workflow}")
             self.next_form.form_show()
