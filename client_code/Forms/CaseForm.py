@@ -1,7 +1,8 @@
 import anvil.server
 from AnvilFusion.components.FormBase import FormBase, POPUP_WIDTH_COL3
 from AnvilFusion.components.FormInputs import *
-from .. import Forms
+
+from ..app.models import CaseWorkflow
 
 
 FEE_TYPE_RETAINER = ('Flat Fee', 'Hourly', 'Hybrid Flat/Hourly', 'Hybrid Flat/Contingency')
@@ -203,8 +204,8 @@ class CaseForm(FormBase):
                 self.litigation_rate.value = None
     
     def form_save(self, args):
-        print(f"CaseForm/form_save next_form = {self.next_form}")
+        print(f"CaseForm/form_save args = {args}")
         super().form_save(args)
         if self.next_form:
+            workflow = CaseWorkflow.get()
             self.next_form.form_show()
-
