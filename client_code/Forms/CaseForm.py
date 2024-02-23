@@ -211,5 +211,7 @@ class CaseForm(FormBase):
             practice_area = PracticeArea.get_by('name', self.data.practice_area.name)
             workflow = CaseWorkflow.get_by("practice_area", practice_area)
             workflow_items = CaseWorkflowItem.search(case_workflow=workflow)
+            for item in workflow_items:
+                print(f"type = {item['type']}")
             print(workflow_items)
             self.next_form.form_show()
