@@ -207,5 +207,6 @@ class CaseForm(FormBase):
         print(f"CaseForm/form_save self.data = {self.data}")
         super().form_save(args)
         if self.next_form:
-            workflow = CaseWorkflow.get()
+            workflow = CaseWorkflow.get(practice_area=self.data.practice_area)
+            print(workflow)
             self.next_form.form_show()
