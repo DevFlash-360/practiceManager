@@ -2,7 +2,8 @@ import anvil.server
 from AnvilFusion.components.FormBase import FormBase, POPUP_WIDTH_COL3
 from AnvilFusion.components.FormInputs import *
 
-from ..app.models import CaseWorkflow, CaseWorkflowItem, PracticeArea
+from AnvilFusion.tools.utils import AppEnv
+from ..app.models import CaseWorkflow, CaseWorkflowItem, PracticeArea, Task, Case
 
 
 FEE_TYPE_RETAINER = ('Flat Fee', 'Hourly', 'Hybrid Flat/Hourly', 'Hybrid Flat/Contingency')
@@ -212,6 +213,16 @@ class CaseForm(FormBase):
             workflow = CaseWorkflow.get_by("practice_area", practice_area)
             workflow_items = CaseWorkflowItem.search(case_workflow=workflow)
             for item in workflow_items:
-                print(f"type = {item['type']}")
+                item_type = item['type']
+                print(f"priority={item['due_date_base']}")
+                # if item_type == 'Task':
+                #     task = Task(
+                #         due_date=
+                #         activity=item['activity'],
+                #         assigned_staff=item['assigned_to'],
+                #         priority=item['priority'],
+                #         notes=item['notes']
+                #     )
+                
             print(workflow_items)
             self.next_form.form_show()
