@@ -214,7 +214,13 @@ class CaseForm(FormBase):
             workflow_items = CaseWorkflowItem.search(case_workflow=workflow)
             for item in workflow_items:
                 item_type = item['type']
-                print(f"priority={item['due_date_base']}")
+                print(f"activity={item['activity']}")
+                print(f"due_date_base={item['due_date_base']}")
+                print(f"duration={item['duration']}")
+                print(f"assigned_to={item['assigned_to']}")
+                print(f"priority={item['priority']}")
+                print(f"notes={item['notes']}")
+                print(f"documents={item['documents']}")
                 # if item_type == 'Task':
                 #     task = Task(
                 #         due_date=
