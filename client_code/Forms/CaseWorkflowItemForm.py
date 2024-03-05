@@ -69,6 +69,7 @@ class CaseWorkflowItemForm(FormBase):
                 print(f"self.data.uid = {self.data.uid}")
                 print("---- 1----- ")
                 self.related_task.data = []
+                print(f"---- self.related_task = {self.related_task}----- ")
                 print(f"---- self.related_task.data = {self.related_task.data}----- ")
                 for x in self.source.grid.dataSource:
                     if x['uid'] != self.data.uid:
