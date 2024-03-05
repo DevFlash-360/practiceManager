@@ -233,7 +233,6 @@ class CaseForm(FormBase):
                         
                         
                     task = Task(
-                        due_date=
                         activity=item['activity'],
                         assigned_staff=item['assigned_to'],
                         priority=item['priority'],
