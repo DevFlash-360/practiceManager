@@ -225,8 +225,8 @@ class CaseForm(FormBase):
                 start_date = None
                 if item['due_date_base'] == 'Case Open Date':
                     start_date = self.data.created_time
-                elif item['due_date_base'] == 'Completion of Previous Task':
-                    
+                # elif item['due_date_base'] == 'Completion of Previous Task':
+
 
                 if item_type == 'Task':
                     due_date = None
