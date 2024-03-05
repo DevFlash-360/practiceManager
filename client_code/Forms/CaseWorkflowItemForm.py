@@ -13,7 +13,7 @@ class CaseWorkflowItemForm(FormBase):
         self.type = RadioButtonInput(name='type', label='Type', options=['Task', 'Event'], value='Task')
         self.activity = LookupInput(name='activity', label='Activity', model='Activity')
         self.related_task = LookupInput(name='related_task', label='Related Task', 
-                                        model='CaseWorkflowItem', text_field='activity',
+                                        model='CaseWorkflowItem', text_field='activity.name',
                                         on_change=self.related_task_selected,
                                         get_data=False)
         self.due_date_base = RadioButtonInput(name='due_date_base', label='Due Date Based On', 
