@@ -43,7 +43,7 @@ class CaseWorkflowItemForm(FormBase):
                 ]
             }
         ]
-        print('data', self.data)
+        
         super().__init__(sections=sections, width=POPUP_WIDTH_COL3, **kwargs)
         
         
@@ -66,17 +66,17 @@ class CaseWorkflowItemForm(FormBase):
         if self.due_date_base.value == 'Completion of Previous Task':
             self.related_task.show()
             if self.source and self.source.grid.dataSource:
-                print(f"self.data.uid = {self.data.uid}")
-                print("---- 1----- ")
-                self.related_task.data = []
-                print(f"---- self.related_task = {self.related_task}----- ")
-                print(f"---- self.related_task.data = {self.related_task.data}----- ")
-                for x in self.source.grid.dataSource:
-                    if x['uid'] != self.data.uid:
-                        print("---- 2----- ")
-                        self.related_task.data.append(x)
-                        print("---- 3----- ")
-                # self.related_task.data = [x for x in self.source.grid.dataSource if x['uid'] != self.data.uid]
+                # print(f"self.data.uid = {self.data.uid}")
+                # print("---- 1----- ")
+                # self.related_task.data = []
+                # print(f"---- self.related_task = {self.related_task}----- ")
+                # print(f"---- self.related_task.data = {self.related_task.data}----- ")
+                # for x in self.source.grid.dataSource:
+                #     if x['uid'] != self.data.uid:
+                #         print("---- 2----- ")
+                #         self.related_task.data.append(x)
+                #         print("---- 3----- ")
+                self.related_task.data = [x for x in self.source.grid.dataSource if x['uid'] != self.data.uid]
 
         elif self.due_date_base.value == 'No Due Date':
             self.related_task.hide()
