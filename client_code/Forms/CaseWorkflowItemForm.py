@@ -67,10 +67,14 @@ class CaseWorkflowItemForm(FormBase):
             self.related_task.show()
             if self.source and self.source.grid.dataSource:
                 print(f"self.data.uid = {self.data.uid}")
+                print("---- 1----- ")
                 self.related_task.data = []
+                print("---- 1----- ")
                 for x in self.source.grid.dataSource:
                     if x['uid'] != self.data.uid:
+                        print("---- 2----- ")
                         self.related_task.data.append(x)
+                        print("---- 3----- ")
                 # self.related_task.data = [x for x in self.source.grid.dataSource if x['uid'] != self.data.uid]
 
         elif self.due_date_base.value == 'No Due Date':
