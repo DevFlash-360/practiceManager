@@ -66,7 +66,10 @@ class CaseWorkflowItemForm(FormBase):
         if self.due_date_base.value == 'Completion of Previous Task':
             self.related_task.show()
             if self.source and self.source.grid.dataSource:
-                self.related_task.data = [x for x in self.source.grid.dataSource if x['uid'] != self.data.uid]
+                print(f"self.data.uid = {self.data.uid}")
+                for x in self.source.grid.dataSource:
+                    print(x)
+                # self.related_task.data = [x for x in self.source.grid.dataSource if x['uid'] != self.data.uid]
 
         elif self.due_date_base.value == 'No Due Date':
             self.related_task.hide()

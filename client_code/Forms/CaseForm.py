@@ -221,14 +221,24 @@ class CaseForm(FormBase):
                 print(f"priority={item['priority']}")
                 print(f"notes={item['notes']}")
                 print(f"documents={item['documents']}")
-                # if item_type == 'Task':
-                #     task = Task(
-                #         due_date=
-                #         activity=item['activity'],
-                #         assigned_staff=item['assigned_to'],
-                #         priority=item['priority'],
-                #         notes=item['notes']
-                #     )
+                
+                start_date = None
+                if item['due_date_base'] == 'Case Open Date':
+                    start_date = self.data.created_time
+                elif item['due_date_base'] == 'Completion of Previous Task':
+                    
+
+                if item_type == 'Task':
+                    due_date = None
+                        
+                        
+                    task = Task(
+                        due_date=
+                        activity=item['activity'],
+                        assigned_staff=item['assigned_to'],
+                        priority=item['priority'],
+                        notes=item['notes']
+                    )
                 
             print(workflow_items)
             self.next_form.form_show()
