@@ -221,6 +221,7 @@ class CaseForm(FormBase):
                 print(f"priority={item['priority']}")
                 print(f"notes={item['notes']}")
                 print(f"documents={item['documents']}")
+                print(f"related_task={item['related_task']}")
                 
                 start_date = None
                 if item['due_date_base'] == 'Case Open Date':
