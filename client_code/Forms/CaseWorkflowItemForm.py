@@ -43,7 +43,7 @@ class CaseWorkflowItemForm(FormBase):
                 ]
             }
         ]
-        
+        print('data', self.data)
         super().__init__(sections=sections, width=POPUP_WIDTH_COL3, **kwargs)
         
         
