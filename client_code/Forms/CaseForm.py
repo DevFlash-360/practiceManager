@@ -218,6 +218,8 @@ class CaseForm(FormBase):
                 if item['due_date_base'] == 'Case Open Date':
                     item_date = self.data.created_time
                     item_date = item_date + timedelta(days=item['duration'])
+                if not item_date:
+                    item_date = datetime.now()
 
                 if item_type == 'Task':
                     task = Task(
@@ -229,13 +231,9 @@ class CaseForm(FormBase):
                     )
                     task.save()
                 elif item_type == 'Event':
-                    start_time = item_date
-                    if not start_time:
-                        start_time = datetime.now()
-
                     event = Event(
-                        start_time = start_time,
-                        end_time=start_time+timedelta(days=1),
+                        start_time = item_date,
+                        end_time=item_date+timedelta(days=1),
                         case=self.data,
                         activity=item['activity'],
                         staff=item['assigned_to']
