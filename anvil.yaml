@@ -310,7 +310,7 @@ db_schema:
       type: link_single
       target: activities
     - name: created_time
-      admin_ui: {width: 200}
+      admin_ui: {order: 3, width: 262}
       type: datetime
     - name: updated_time
       admin_ui: {width: 200}
