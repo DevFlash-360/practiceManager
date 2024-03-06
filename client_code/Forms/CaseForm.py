@@ -221,7 +221,7 @@ class CaseForm(FormBase):
 
                 if item_type == 'Task':
                     task = Task(
-                        due_date=item_date,
+                        due_date=item_date.date(),
                         activity=item['activity'],
                         assigned_staff=item['assigned_to'],
                         priority=item['priority'],
