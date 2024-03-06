@@ -19,7 +19,6 @@ class CaseWorkflowItemForm(FormBase):
         self.due_date_base = RadioButtonInput(name='due_date_base', label='Due Date Based On', 
                                               options=[
                                                   'Case Open Date',
-                                                  'Case Activity',
                                                   'Completion of Previous Task',
                                                   'No Due Date',
                                               ],
