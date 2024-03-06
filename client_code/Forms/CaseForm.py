@@ -1,9 +1,10 @@
 import anvil.server
+from datetime import datetime, timedelta
 from AnvilFusion.components.FormBase import FormBase, POPUP_WIDTH_COL3
 from AnvilFusion.components.FormInputs import *
 
 from AnvilFusion.tools.utils import AppEnv
-from ..app.models import CaseWorkflow, CaseWorkflowItem, PracticeArea, Task, Case
+from ..app.models import CaseWorkflow, CaseWorkflowItem, PracticeArea, Task, Event
 
 
 FEE_TYPE_RETAINER = ('Flat Fee', 'Hourly', 'Hybrid Flat/Hourly', 'Hybrid Flat/Contingency')
@@ -207,38 +208,38 @@ class CaseForm(FormBase):
     def form_save(self, args):
         super().form_save(args)
         if self.next_form:
-            print("================")
-            print(self.data.practice_area.name)
             practice_area = PracticeArea.get_by('name', self.data.practice_area.name)
             workflow = CaseWorkflow.get_by("practice_area", practice_area)
             workflow_items = CaseWorkflowItem.search(case_workflow=workflow)
             for item in workflow_items:
                 item_type = item['type']
-                print(f"activity={item['activity']}")
-                print(f"due_date_base={item['due_date_base']}")
-                print(f"duration={item['duration']}")
-                print(f"assigned_to={item['assigned_to']}")
-                print(f"priority={item['priority']}")
-                print(f"notes={item['notes']}")
-                print(f"documents={item['documents']}")
-                print(f"related_task={item['related_task']}")
-                
-                start_date = None
-                if item['due_date_base'] == 'Case Open Date':
-                    start_date = self.data.created_time
-                # elif item['due_date_base'] == 'Completion of Previous Task':
 
+                item_date = None
+                if item['due_date_base'] == 'Case Open Date':
+                    item_date = self.data.created_time
+                    item_date = item_date + timedelta(days=item['duration'])
 
                 if item_type == 'Task':
-                    due_date = None
-                        
-                        
                     task = Task(
+                        due_date=item_date,
                         activity=item['activity'],
                         assigned_staff=item['assigned_to'],
                         priority=item['priority'],
                         notes=item['notes']
                     )
+                    task.save()
+                elif item_type == 'Event':
+                    start_time = item_date
+                    if not start_time:
+                        start_time = datetime.now()
+
+                    event = Event(
+                        start_time = start_time,
+                        end_time=start_time+timedelta(days=1),
+                        case=self.data,
+                        activity=item['activity'],
+                        staff=item['assigned_to']
+                    )
+                    event.save()
                 
-            print(workflow_items)
             self.next_form.form_show()
