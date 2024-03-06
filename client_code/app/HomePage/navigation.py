@@ -416,6 +416,8 @@ class DetailsView:
         for field in form_case.form_fields:
             if field.on_change is not None:
                 field.on_change({'name': field.name, 'value': field.value})
+        lead.update({'lead_status': 'Won'})
+        lead.save()
 
         form_case.form_show()
     
