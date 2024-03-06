@@ -418,6 +418,7 @@ class DetailsView:
                 field.on_change({'name': field.name, 'value': field.value})
         lead.update({'lead_status': 'Won'})
         lead.save()
+        AppEnv.navigation.content_control.refresh()
 
         form_case.form_show()
     
