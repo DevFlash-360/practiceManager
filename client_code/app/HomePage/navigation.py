@@ -181,7 +181,7 @@ PMAPP_NAV_ITEMS = {
     'finance_ledger': {'model': 'Ledger', 'type': 'view', 'action': 'open', 'props': {}},
     'finance_bank_accounts': {'model': 'BankAccount', 'type': 'view', 'action': 'open', 'config': 'BankAccountView',
                               'props': {}},
-    # 'finance_incentives': {'model': '', 'type': 'view', 'action': 'open', 'props': {}},
+    'finance_incentives': {'model': 'PerformanceIncentives', 'type': 'view', 'action': 'open', 'props': {}},
     # 'finance_timeoff': {'model': '', 'type': 'view', 'action': 'open', 'props': {}},
     # 'finance_reimbursement': {'model': '', 'type': 'view', 'action': 'open', 'props': {}},
     'finance_timesheets': {'model': 'Timesheet', 'type': 'view', 'action': 'open', 'config': 'TimesheetView',

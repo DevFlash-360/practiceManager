@@ -748,6 +748,14 @@ class TypeOfAction:
     name = Attribute(field_type=types.FieldTypes.SINGLE_LINE)
 
 
+class PerformanceIncentives:
+    _title = 'Performance Incentives'
+    
+    staff = Relationship('Staff')
+    incentive = Attribute(field_type=types.FieldTypes.CURRENCY)
+    payment = Relationship('Payment')
+
+
 # Need to add these forms/reports
 # @model_type
 # class Statute:
