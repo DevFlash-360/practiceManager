@@ -51,3 +51,9 @@ class PaymentForm(FormBase):
         ]
 
         super().__init__(sections=sections, width=POPUP_WIDTH_COL2, **kwargs)
+        
+    def form_save(self, args):
+        super().form_save(args)
+
+        # Calculate performance incentives
+        print(self.data)
