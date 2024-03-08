@@ -2,6 +2,7 @@ import anvil.server
 from AnvilFusion.components.FormBase import FormBase, POPUP_WIDTH_COL2
 from AnvilFusion.components.FormInputs import *
 
+from ..app.models import PerformanceIncentive, Staff
 
 # payment method options
 PAYMENT_METHOD_CARD = 'Card'
@@ -56,6 +57,22 @@ class PaymentForm(FormBase):
         super().form_save(args)
 
         # Calculate performance incentives
+        all_staffs = Staff.search()
         staffs = self.data.case.assigned_attorneys
         for staff in staffs:
-            print(staff['first_name'])
+            if staff['enable_performance_incentives'] and staff['intake_performance_incentive']:
+                incentive = PerformanceIncentive(
+                    staff=staff,
+                    amount=staff['intake_performance_incentive']*self.data.amount,
+                    payment=self.data
+                )
+                incentive.save()
+        
+        for staff in all_staffs:
+            if staff['override_incentive']:
+                incentive = PerformanceIncentive(
+                    staff=staff,
+                    amount=staff['override_incentive']*self.data.amount,
+                    payment=self.data
+                )
+                incentive.save()
