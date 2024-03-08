@@ -324,6 +324,9 @@ db_schema:
     - name: updated_by
       admin_ui: {width: 200, order: 7}
       type: string
+    - name: tenant_uid
+      admin_ui: {width: 200, order: 8}
+      type: string
     title: Performance Incentives
   tasks:
     title: Tasks
