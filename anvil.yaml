@@ -281,6 +281,37 @@ db_schema:
     - name: uid
       admin_ui: {}
       type: string
+  performanceincentives:
+    client: none
+    server: full
+    columns:
+    - name: staff
+      admin_ui: {width: 200, order: 0}
+      type: link_single
+      target: staff
+    - name: amount
+      admin_ui: {width: 200, order: 1}
+      type: number
+    - name: payment
+      admin_ui: {width: 200, order: 2}
+      type: link_single
+      target: payments
+    - name: uid
+      admin_ui: {width: 200, order: 3}
+      type: string
+    - name: created_time
+      admin_ui: {width: 200, order: 4}
+      type: datetime
+    - name: updated_time
+      admin_ui: {width: 200, order: 5}
+      type: datetime
+    - name: created_by
+      admin_ui: {width: 200, order: 6}
+      type: string
+    - name: updated_by
+      admin_ui: {width: 200, order: 7}
+      type: string
+    title: PerformanceIncentives
   document_folders:
     title: Document Folders
     client: none
