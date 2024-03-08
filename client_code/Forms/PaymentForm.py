@@ -56,4 +56,6 @@ class PaymentForm(FormBase):
         super().form_save(args)
 
         # Calculate performance incentives
-        print(self.data)
+        staffs = self.data.case.assigned_attorneys
+        for staff in staffs:
+            print(staff['first_name'])
