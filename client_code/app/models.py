@@ -748,6 +748,7 @@ class TypeOfAction:
     name = Attribute(field_type=types.FieldTypes.SINGLE_LINE)
 
 
+@model_type
 class PerformanceIncentives:
     _title = 'Performance Incentives'
     
