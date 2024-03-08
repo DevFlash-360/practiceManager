@@ -749,11 +749,11 @@ class TypeOfAction:
 
 
 @model_type
-class PerformanceIncentives:
+class PerformanceIncentive:
     _title = 'Performance Incentives'
     
     staff = Relationship('Staff')
-    incentive = Attribute(field_type=types.FieldTypes.CURRENCY)
+    amount = Attribute(field_type=types.FieldTypes.CURRENCY)
     payment = Relationship('Payment')
 
 
