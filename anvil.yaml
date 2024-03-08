@@ -281,7 +281,20 @@ db_schema:
     - name: uid
       admin_ui: {}
       type: string
-  performanceincentives:
+  document_folders:
+    title: Document Folders
+    client: none
+    server: full
+    columns:
+    - {name: uid, admin_ui: null, type: string}
+    - {name: case, admin_ui: null, type: link_single, target: cases}
+    - {name: created_by, admin_ui: null, type: string}
+    - {name: name, admin_ui: null, type: string}
+    - {name: tenant_uid, admin_ui: null, type: string}
+    - {name: updated_by, admin_ui: null, type: string}
+    - {name: created_time, admin_ui: null, type: datetime}
+    - {name: updated_time, admin_ui: null, type: datetime}
+  performance_incentives:
     client: none
     server: full
     columns:
@@ -311,20 +324,10 @@ db_schema:
     - name: updated_by
       admin_ui: {width: 200, order: 7}
       type: string
-    title: PerformanceIncentives
-  document_folders:
-    title: Document Folders
-    client: none
-    server: full
-    columns:
-    - {name: uid, admin_ui: null, type: string}
-    - {name: case, admin_ui: null, type: link_single, target: cases}
-    - {name: created_by, admin_ui: null, type: string}
-    - {name: name, admin_ui: null, type: string}
-    - {name: tenant_uid, admin_ui: null, type: string}
-    - {name: updated_by, admin_ui: null, type: string}
-    - {name: created_time, admin_ui: null, type: datetime}
-    - {name: updated_time, admin_ui: null, type: datetime}
+    - name: tenant_uid
+      admin_ui: {width: 200, order: 8}
+      type: string
+    title: Performance Incentives
   tasks:
     title: Tasks
     client: none
