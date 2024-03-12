@@ -59,7 +59,8 @@ class PaymentForm(FormBase):
         # Calculate performance incentives
         assigned_attorneys = self.data.case.assigned_attorneys
         assigned_staffs = self.data.case.staff
-        assigned_members = assigned_attorneys + assigned_staffs
+        assigned_members = set(assigned_attorneys).union(set(assigned_staffs))
+        assigned_members = [member for member in assigned_members]
         assigned_member_ids = [member.uid for member in assigned_members]
         print(f"assigned_member_ids = {assigned_member_ids}")
         all_staffs = Staff.search()
@@ -71,6 +72,7 @@ class PaymentForm(FormBase):
         
         print(f"eligible_cnt = {eligible_cnt}")
         print(f"assigned_attorneys = {len(assigned_attorneys)}")
+        print(f"assigned_staffs = {len(assigned_staffs)}")
         print(f"assigned_staffs = {len(assigned_staffs)}")
         print(f"all_staffs = {len(all_staffs)}")
         
