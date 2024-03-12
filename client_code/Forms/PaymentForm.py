@@ -58,11 +58,9 @@ class PaymentForm(FormBase):
 
         # Calculate performance incentives
         assigned_attorneys = self.data.case.assigned_attorneys
+        assigned_attorney_ids = [member.uid for member in assigned_attorneys]
         assigned_staffs = self.data.case.staff
-        assigned_members = set(assigned_attorneys).union(set(assigned_staffs))
-        assigned_members = [member for member in assigned_members]
-        assigned_member_ids = [member.uid for member in assigned_members]
-        print(f"assigned_member_ids = {assigned_member_ids}")
+        assigned_staff_ids = [member.uid for member in assigned_staffs]
         all_staffs = Staff.search()
         eligible_cnt = len(assigned_staffs)
         
@@ -70,7 +68,7 @@ class PaymentForm(FormBase):
             if staff.staff_group.name == 'Attorney':
                 eligible_cnt = eligible_cnt - 1
         
-        for staff in assigned_members:
+        for staff in assigned_staffs:
             if staff['enable_performance_incentives'] and staff['intake_performance_incentive']:
                 div_cnt = 1 if staff.staff_group.name == 'Attorney' else eligible_cnt
                 incentive = PerformanceIncentive(
@@ -80,9 +78,17 @@ class PaymentForm(FormBase):
                 )
                 incentive.save()
         
+        for staff in assigned_attorneys:
+            if staff['enable_performance_incentives'] and staff['intake_performance_incentive'] and staff.uid not in assigned_staff_ids:
+                incentive = PerformanceIncentive(
+                    staff=staff,
+                    amount=staff['intake_performance_incentive']*self.data.amount,
+                    payment=self.data
+                )
+                incentive.save()
+        
         for staff in all_staffs:
-            print(f"{staff.first_name}.id = {staff.uid}")
-            if staff['override_incentive'] and staff.uid not in assigned_member_ids:
+            if staff['override_incentive'] and staff.uid not in assigned_attorney_ids and staff.uid not in assigned_staff_ids:
                 incentive = PerformanceIncentive(
                     staff=staff,
                     amount=staff['override_incentive']*self.data.amount,
