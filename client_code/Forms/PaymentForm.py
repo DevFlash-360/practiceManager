@@ -57,19 +57,28 @@ class PaymentForm(FormBase):
         super().form_save(args)
 
         # Calculate performance incentives
+        assigned_attorneys = self.data.case.assigned_attorneys
+        assigned_staffs = self.data.case.staff
+        assigned_members = assigned_attorneys + assigned_staffs
         all_staffs = Staff.search()
-        staffs = self.data.case.assigned_attorneys
-        for staff in staffs:
+        eligible_cnt = len(assigned_members)
+        
+        for staff in assigned_staffs:
+            if staff.staff_group.name == 'Attorney':
+                eligible_cnt = eligible_cnt - 1
+        
+        for staff in assigned_members:
             if staff['enable_performance_incentives'] and staff['intake_performance_incentive']:
+                div_cnt = 1 if staff.staff_group.name == 'Attorney' else eligible_cnt
                 incentive = PerformanceIncentive(
                     staff=staff,
-                    amount=staff['intake_performance_incentive']*self.data.amount,
+                    amount=staff['intake_performance_incentive']*self.data.amount/div_cnt,
                     payment=self.data
                 )
                 incentive.save()
         
         for staff in all_staffs:
-            if staff['override_incentive']:
+            if staff['override_incentive'] and staff not in assigned_members:
                 incentive = PerformanceIncentive(
                     staff=staff,
                     amount=staff['override_incentive']*self.data.amount,
