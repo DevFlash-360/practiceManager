@@ -61,6 +61,7 @@ class PaymentForm(FormBase):
         assigned_staffs = self.data.case.staff
         assigned_members = assigned_attorneys + assigned_staffs
         assigned_member_ids = [member.uid for member in assigned_members]
+        print(f"assigned_member_ids = {assigned_member_ids}")
         all_staffs = Staff.search()
         eligible_cnt = len(assigned_staffs)
         
@@ -84,6 +85,7 @@ class PaymentForm(FormBase):
                 incentive.save()
         
         for staff in all_staffs:
+            print(f"{staff.first_name}.id = {staff.uid}")
             if staff['override_incentive'] and staff.uid not in assigned_member_ids:
                 incentive = PerformanceIncentive(
                     staff=staff,
