@@ -67,6 +67,11 @@ class PaymentForm(FormBase):
             if staff.staff_group.name == 'Attorney':
                 eligible_cnt = eligible_cnt - 1
         
+        print(f"eligible_cnt = {eligible_cnt}")
+        print(f"assigned_attorneys = {len(assigned_attorneys)}")
+        print(f"assigned_staffs = {len(assigned_staffs)}")
+        print(f"all_staffs = {len(all_staffs)}")
+        
         for staff in assigned_members:
             if staff['enable_performance_incentives'] and staff['intake_performance_incentive']:
                 div_cnt = 1 if staff.staff_group.name == 'Attorney' else eligible_cnt
