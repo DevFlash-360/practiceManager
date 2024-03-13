@@ -80,10 +80,12 @@ class PaymentForm(FormBase):
                         amount=amount,
                         payment=self.data
                     )
+                    incentive.save()
                 elif self.action == 'edit':
-                    incentive = PerformanceIncentive.get(payment=self.data, staff=staff)
-                    incentive.amount = amount
-                incentive.save()
+                    incentives = PerformanceIncentive.search(payment=self.data, staff=staff)
+                    if incentives:
+                        incentives[0].amount = amount
+                        incentives[0].save()
         
         for staff in assigned_attorneys:
             if staff['enable_performance_incentives'] and staff['intake_performance_incentive'] and staff.uid not in assigned_staff_ids:
@@ -94,10 +96,12 @@ class PaymentForm(FormBase):
                         amount=amount,
                         payment=self.data
                     )
+                    incentive.save()
                 elif self.action == 'edit':
-                    incentive = PerformanceIncentive.get(payment=self.data, staff=staff)
-                    incentive.amount = amount
-                incentive.save()
+                    incentives = PerformanceIncentive.search(payment=self.data, staff=staff)
+                    if incentives:
+                        incentives[0].amount = amount
+                        incentives[0].save()
         
         for staff in all_staffs:
             if staff['override_incentive'] and staff.uid not in assigned_attorney_ids and staff.uid not in assigned_staff_ids:
@@ -108,7 +112,9 @@ class PaymentForm(FormBase):
                         amount=staff['override_incentive']*self.data.amount,
                         payment=self.data
                     )
+                    incentive.save()
                 elif self.action == 'edit':
-                    incentive = PerformanceIncentive.get(payment=self.data, staff=staff)
-                    incentive.amount = amount
-                incentive.save()
+                    incentives = PerformanceIncentive.search(payment=self.data, staff=staff)
+                    if incentives:
+                        incentives[0].amount = amount
+                        incentives[0].save()
