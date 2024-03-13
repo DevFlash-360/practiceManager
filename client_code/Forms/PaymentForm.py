@@ -71,7 +71,7 @@ class PaymentForm(FormBase):
                 eligible_cnt = eligible_cnt - 1
         
         if self.action == 'edit':
-            incentives = PerformanceIncentive.search(payment=self.data.uid)
+            incentives = PerformanceIncentive.search(payment=self.data)
             for incentive in incentives:
                 print(incentive)
 
