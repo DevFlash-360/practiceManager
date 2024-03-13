@@ -56,42 +56,48 @@ class PaymentForm(FormBase):
     def form_save(self, args):
         super().form_save(args)
 
+
+
         # Calculate performance incentives
         assigned_attorneys = self.data.case.assigned_attorneys
         assigned_attorney_ids = [member.uid for member in assigned_attorneys]
         assigned_staffs = self.data.case.staff
         assigned_staff_ids = [member.uid for member in assigned_staffs]
         all_staffs = Staff.search()
-        eligible_cnt = len(assigned_staffs)
         
+        eligible_cnt = len(assigned_staffs)
         for staff in assigned_staffs:
             if staff.staff_group.name == 'Attorney':
                 eligible_cnt = eligible_cnt - 1
         
-        for staff in assigned_staffs:
-            if staff['enable_performance_incentives'] and staff['intake_performance_incentive']:
-                div_cnt = 1 if staff.staff_group.name == 'Attorney' else eligible_cnt
-                incentive = PerformanceIncentive(
-                    staff=staff,
-                    amount=staff['intake_performance_incentive']*self.data.amount/div_cnt,
-                    payment=self.data
-                )
-                incentive.save()
-        
-        for staff in assigned_attorneys:
-            if staff['enable_performance_incentives'] and staff['intake_performance_incentive'] and staff.uid not in assigned_staff_ids:
-                incentive = PerformanceIncentive(
-                    staff=staff,
-                    amount=staff['intake_performance_incentive']*self.data.amount,
-                    payment=self.data
-                )
-                incentive.save()
-        
-        for staff in all_staffs:
-            if staff['override_incentive'] and staff.uid not in assigned_attorney_ids and staff.uid not in assigned_staff_ids:
-                incentive = PerformanceIncentive(
-                    staff=staff,
-                    amount=staff['override_incentive']*self.data.amount,
-                    payment=self.data
-                )
-                incentive.save()
+        if self.action == 'edit':
+            print("Edit")
+
+        elif self.action == 'add':
+            for staff in assigned_staffs:
+                if staff['enable_performance_incentives'] and staff['intake_performance_incentive']:
+                    div_cnt = 1 if staff.staff_group.name == 'Attorney' else eligible_cnt
+                    incentive = PerformanceIncentive(
+                        staff=staff,
+                        amount=staff['intake_performance_incentive']*self.data.amount/div_cnt,
+                        payment=self.data
+                    )
+                    incentive.save()
+            
+            for staff in assigned_attorneys:
+                if staff['enable_performance_incentives'] and staff['intake_performance_incentive'] and staff.uid not in assigned_staff_ids:
+                    incentive = PerformanceIncentive(
+                        staff=staff,
+                        amount=staff['intake_performance_incentive']*self.data.amount,
+                        payment=self.data
+                    )
+                    incentive.save()
+            
+            for staff in all_staffs:
+                if staff['override_incentive'] and staff.uid not in assigned_attorney_ids and staff.uid not in assigned_staff_ids:
+                    incentive = PerformanceIncentive(
+                        staff=staff,
+                        amount=staff['override_incentive']*self.data.amount,
+                        payment=self.data
+                    )
+                    incentive.save()
