@@ -83,9 +83,9 @@ class PaymentForm(FormBase):
                     incentive.save()
                 elif self.action == 'edit':
                     incentives = PerformanceIncentive.search(payment=self.data, staff=staff)
-                    if incentives:
-                        incentives[0].amount = amount
-                        incentives[0].save()
+                    for incentive in incentives:
+                        incentive.amount = amount
+                        incentive.save()
         
         for staff in assigned_attorneys:
             if staff['enable_performance_incentives'] and staff['intake_performance_incentive'] and staff.uid not in assigned_staff_ids:
@@ -99,9 +99,9 @@ class PaymentForm(FormBase):
                     incentive.save()
                 elif self.action == 'edit':
                     incentives = PerformanceIncentive.search(payment=self.data, staff=staff)
-                    if incentives:
-                        incentives[0].amount = amount
-                        incentives[0].save()
+                    for incentive in incentives:
+                        incentive.amount = amount
+                        incentive.save()
         
         for staff in all_staffs:
             if staff['override_incentive'] and staff.uid not in assigned_attorney_ids and staff.uid not in assigned_staff_ids:
@@ -115,6 +115,6 @@ class PaymentForm(FormBase):
                     incentive.save()
                 elif self.action == 'edit':
                     incentives = PerformanceIncentive.search(payment=self.data, staff=staff)
-                    if incentives:
-                        incentives[0].amount = amount
-                        incentives[0].save()
+                    for incentive in incentives:
+                        incentive.amount = amount
+                        incentive.save()
