@@ -72,7 +72,8 @@ class PaymentForm(FormBase):
         
         if self.action == 'edit':
             incentives = PerformanceIncentive.search(payment=self.data)
-            print(incentives)
+            for incentive in incentives:
+                print(incentive)
 
         elif self.action == 'add':
             for staff in assigned_staffs:
