@@ -16,9 +16,15 @@ class DateCalculatorView:
         self.container_id = container_id or AppEnv.content_container_id
         self.container_el = jQuery(f"#{self.container_id}")[0]
 
-        self.date_picker_id = f"date_picker{uuid.uuid4()}"
+        self.date_picker_id = f"date_picker_{uuid.uuid4()}"
+        self.btn_plus_minus_id = f"plus_{uuid.uuid4()}"
+        self.btn_mode_id = f"mode_{uuid.uuid4()}"
+        self.numbers_id = f"numbers_{uuid.uuid4()}"
+        self.output_id = f"output_{uuid.uuid4()}"
 
-        self.date_picker = ej.calendars.DatePicker()
+        self.date_picker = ej.calendars.DatePicker(
+            'placeholder': 'Enter date'
+        )
 
     
     def form_show(self):
@@ -28,7 +34,7 @@ class DateCalculatorView:
                 </div>\
             </div>'
         self.date_picker.appendTo(jQuery(f"#{self.date_picker_id}")[0])
-    
+    u 
     def destroy(self):
         self.date_picker.destroy()
         if self.container_el:
