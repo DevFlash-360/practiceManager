@@ -40,7 +40,8 @@ class DateCalculatorView:
                 <div style="width: 250px; margin-right: 10px;">\
                     <input id="{self.date_picker_id}" type="text"/>\
                 </div>\
-                <div style="width: 250px; margin-right: 10px;">\
+                <div style="width: 60px; margin-right: 10px;">\
+                    <label for="{self.date_picker_id}">Number of Days</label>
                     <input id="{self.numbers_id}"/>\
                 </div>\
                 <button id="{self.btn_plus_minus_id}" style="margin-right: 10px;">ADD</button>\
