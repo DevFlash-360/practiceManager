@@ -20,12 +20,14 @@ class DateCalculatorView:
         self.btn_plus_minus = ej.buttons.Button({
             'cssClass': 'e-primary',
             'iconCss': 'fa fa-plus',
-            'isPrimary': True
+            'isPrimary': True,
+            'isToggle': True
         })
         self.btn_mode = ej.buttons.Button({
             'cssClass': 'e-primary',
             'iconCss': 'fa fa-calendar',
-            'isPrimary': True
+            'isPrimary': True,
+            'isToggle': True
         })
     
     def form_show(self):
