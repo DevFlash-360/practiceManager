@@ -22,17 +22,24 @@ class DateCalculatorView:
             'iconCss': 'fa fa-plus',
             'isPrimary': True
         })
+        self.btn_mode = ej.buttons.Button({
+            'cssClass': 'e-primary',
+            'iconCss': 'fa fa-calendar',
+            'isPrimary': True
+        })
     
     def form_show(self):
         self.container_el.innerHTML = f'\
             <div style="display:flex;">\
-                <div style="width: 250px; margin-left: 10px;">\
+                <div style="width: 250px; margin-right: 10px;">\
                     <input id="{self.date_picker_id}" type="text"/>\
                 </div>\
                 <button id="{self.btn_plus_minus_id}">ADD</button>\
+                <button id="{self.btn_mode_id}">CALENDAR DAYS</button>\
             </div>'
         self.date_picker.appendTo(jQuery(f"#{self.date_picker_id}")[0])
         self.btn_plus_minus.appendTo(jQuery(f"#{self.btn_plus_minus_id}")[0])
+        self.btn_mode.appendTo(jQuery(f"#{self.btn_mode_id}")[0])
 
     def destroy(self):
         self.date_picker.destroy()
