@@ -29,6 +29,10 @@ class DateCalculatorView:
             'isPrimary': True,
             'isToggle': True
         })
+
+        self.numbers = ej.inputs.TextBox({
+            'floatLabelType': 'Auto'
+        })
     
     def form_show(self):
         self.container_el.innerHTML = f'\
@@ -36,12 +40,16 @@ class DateCalculatorView:
                 <div style="width: 250px; margin-right: 10px;">\
                     <input id="{self.date_picker_id}" type="text"/>\
                 </div>\
-                <button id="{self.btn_plus_minus_id}">ADD</button>\
+                <button id="{self.btn_plus_minus_id}" style="margin-right: 10px;">ADD</button>\
                 <button id="{self.btn_mode_id}">CALENDAR DAYS</button>\
+            </div>\
+            <div>\
+                <input id="{self.numbers_id}"/>\
             </div>'
         self.date_picker.appendTo(jQuery(f"#{self.date_picker_id}")[0])
         self.btn_plus_minus.appendTo(jQuery(f"#{self.btn_plus_minus_id}")[0])
         self.btn_mode.appendTo(jQuery(f"#{self.btn_mode_id}")[0])
+        self.numbers.appendTo(jQuery(f"#{self.numbers_id}")[0])
 
     def destroy(self):
         self.date_picker.destroy()
