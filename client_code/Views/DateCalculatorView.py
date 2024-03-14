@@ -25,7 +25,7 @@ class DateCalculatorView:
     
     def form_show(self):
         self.container_el.innerHTML = f'\
-            <div>\
+            <div style="display:flex;">\
                 <input id="{self.date_picker_id}" type="text"/>\
                 <button id="{self.btn_plus_minus_id}">ADD</button>\
             </div>'
