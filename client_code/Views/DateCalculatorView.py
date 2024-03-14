@@ -1,15 +1,36 @@
 import anvil.server
-import anvil.users
-import anvil.tables as tables
-import anvil.tables.query as q
-from anvil.tables import app_tables
-# This is a module.
-# You can define variables and functions here, and use them from any form. For example, in a top-level form:
-#
-#    from .Views import Module1
-#
-#    Module1.say_hello()
-#
+import json
+import uuid
+from anvil.js.window import ej, jQuery, XMLHttpRequest, Date
+from AnvilFusion.tools.utils import datetime_js_to_py
+from DevFusion.components.GridView2 import GridView2
+from datetime import datetime, timedelta
+import anvil.js
+from AnvilFusion.tools.utils import AppEnv
+from ..app.models import Staff, Case, Activity, Event, CaseUpdate
+from ..Forms.EventForm import EventForm
 
-def say_hello():
-  print("Hello, world")
+
+class DateCalculatorView:
+    def __init__(self, container_id, **kwargs):
+        self.container_id = container_id or AppEnv.content_container_id
+        self.container_el = jQuery(f"#{self.container_id}")[0]
+
+        self.date_picker_id = f"date_picker{uuid.uuid4()}"
+
+        self.date_picker = ej.calendars.DatePicker()
+
+    
+    def form_show(self):
+        self.container_el.innerHTML = f'\
+            <div>
+                <div id="{self.date_picker_id}">
+                </div>
+            </div>
+            '
+        self.date_picker.appendTo(jQuery(f"#{self.date_picker_id}")[0])
+    
+    def destroy(self):
+        self.date_picker.destroy()
+        if self.container_el:
+            self.container_el.innerHTML = ''
