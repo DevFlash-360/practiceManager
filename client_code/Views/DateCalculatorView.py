@@ -22,9 +22,9 @@ class DateCalculatorView:
         self.numbers_id = f"numbers_{uuid.uuid4()}"
         self.output_id = f"output_{uuid.uuid4()}"
 
-        self.date_picker = ej.calendars.DatePicker(
+        self.date_picker = ej.calendars.DatePicker({
             'placeholder': 'Enter date'
-        )
+        })
 
     
     def form_show(self):
