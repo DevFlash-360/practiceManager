@@ -19,7 +19,7 @@ class DateCalculatorView:
         self.date_picker = ej.calendars.DatePicker({'placeholder': 'Enter date'})
         self.btn_plus_minus = ej.buttons.Button({
             'cssClass': 'e-flat',
-            'iconCss': 'e-icons e-plus-icon',
+            'iconCss': 'fa fa-plus',
             'isPrimary': True
         })
     
