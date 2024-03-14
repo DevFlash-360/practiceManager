@@ -27,7 +27,7 @@ class DateCalculatorView:
         self.container_el.innerHTML = f'\
             <div>\
                 <input id="{self.date_picker_id}" type="text"/>\
-                <button id="{self.btn_plus_minus_id}">ADD</button>  
+                <button id="{self.btn_plus_minus_id}">ADD</button>\
             </div>'
         self.date_picker.appendTo(jQuery(f"#{self.date_picker_id}")[0])
         self.btn_plus_minus.appendTo(jQuery(f"#{self.btn_plus_minus_id}")[0])
