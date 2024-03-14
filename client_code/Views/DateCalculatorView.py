@@ -23,11 +23,10 @@ class DateCalculatorView:
     
     def form_show(self):
         self.container_el.innerHTML = f'\
-            <div>
-                <div id="{self.date_picker_id}">
-                </div>
-            </div>
-            '
+            <div>\
+                <div id="{self.date_picker_id}">\
+                </div>\
+            </div>'
         self.date_picker.appendTo(jQuery(f"#{self.date_picker_id}")[0])
     
     def destroy(self):
