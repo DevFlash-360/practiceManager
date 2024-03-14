@@ -17,14 +17,20 @@ class DateCalculatorView:
         self.output_id = f"output_{uuid.uuid4()}"
 
         self.date_picker = ej.calendars.DatePicker({'placeholder': 'Enter date'})
-
+        self.btn_plus_minus = ej.buttons.Button({
+            'cssClass': 'e-flat',
+            'iconCss': 'e-icons e-plus-icon',
+            'isPrimary': True
+        })
     
     def form_show(self):
         self.container_el.innerHTML = f'\
             <div>\
                 <input id="{self.date_picker_id}" type="text"/>\
+                <button id="{self.btn_plus_minus_id}">ADD</button>  
             </div>'
         self.date_picker.appendTo(jQuery(f"#{self.date_picker_id}")[0])
+        self.btn_plus_minus.appendTo(jQuery(f"#{self.btn_plus_minus_id}")[0])
 
     def destroy(self):
         self.date_picker.destroy()
