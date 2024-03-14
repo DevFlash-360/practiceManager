@@ -1,14 +1,8 @@
-import anvil.server
-import json
 import uuid
-from anvil.js.window import ej, jQuery, XMLHttpRequest, Date
-from AnvilFusion.tools.utils import datetime_js_to_py
-from DevFusion.components.GridView2 import GridView2
-from datetime import datetime, timedelta
 import anvil.js
+
+from anvil.js.window import ej, jQuery
 from AnvilFusion.tools.utils import AppEnv
-from ..app.models import Staff, Case, Activity, Event, CaseUpdate
-from ..Forms.EventForm import EventForm
 
 
 class DateCalculatorView:
@@ -22,9 +16,7 @@ class DateCalculatorView:
         self.numbers_id = f"numbers_{uuid.uuid4()}"
         self.output_id = f"output_{uuid.uuid4()}"
 
-        self.date_picker = ej.calendars.DatePicker({
-            'placeholder': 'Enter date'
-        })
+        self.date_picker = ej.calendars.DatePicker({'placeholder': 'Enter date'})
 
     
     def form_show(self):
