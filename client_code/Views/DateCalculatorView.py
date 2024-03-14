@@ -40,13 +40,14 @@ class DateCalculatorView:
                 <div style="width: 250px; margin-right: 10px;">\
                     <input id="{self.date_picker_id}" type="text"/>\
                 </div>\
-                <div style="width: 60px; margin-right: 10px;">\
-                    <label for="{self.date_picker_id}" style="display: inline-block; margin-right: 5px;">Number of Days</label>\
+                <div style="display:flex; width: 250px; margin-right: 10px;">\
+                    <label for="{self.date_picker_id}">Number of Days</label>\
                     <input id="{self.numbers_id}"/>\
                 </div>\
                 <button id="{self.btn_plus_minus_id}" style="margin-right: 10px;">ADD</button>\
                 <button id="{self.btn_mode_id}">CALENDAR DAYS</button>\
-            </div>'
+            </div>\
+            <label style="font-size: 16px;">Date: Thursday, March 21, 2024</label>'
         self.date_picker.appendTo(jQuery(f"#{self.date_picker_id}")[0])
         self.btn_plus_minus.appendTo(jQuery(f"#{self.btn_plus_minus_id}")[0])
         self.btn_mode.appendTo(jQuery(f"#{self.btn_mode_id}")[0])
