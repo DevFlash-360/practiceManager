@@ -34,7 +34,7 @@ class DateCalculatorView:
                 </div>\
             </div>'
         self.date_picker.appendTo(jQuery(f"#{self.date_picker_id}")[0])
-    u 
+
     def destroy(self):
         self.date_picker.destroy()
         if self.container_el:
