@@ -49,7 +49,9 @@ class DateCalculatorView:
                 <button id="{self.btn_plus_minus_id}" style="margin-right: 10px;">ADD</button>\
                 <button id="{self.btn_mode_id}">CALENDAR DAYS</button>\
             </div>\
-            <label style="font-size: 16px;">Date: Thursday, March 21, 2024</label>'
+            <div class="e-card">\
+	            <label style="font-size: 16px;">Date: Thursday, March 21, 2024</label>\
+            </div>'
         self.date_picker.appendTo(jQuery(f"#{self.date_picker_id}")[0])
         self.btn_plus_minus.appendTo(jQuery(f"#{self.btn_plus_minus_id}")[0])
         self.btn_mode.appendTo(jQuery(f"#{self.btn_mode_id}")[0])
