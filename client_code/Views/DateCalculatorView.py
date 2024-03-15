@@ -44,6 +44,8 @@ class DateCalculatorView:
                     <label for="{self.date_picker_id}">Number of Days</label>\
                     <input id="{self.numbers_id}"/>\
                 </div>\
+            </div>\
+            <div>\
                 <button id="{self.btn_plus_minus_id}" style="margin-right: 10px;">ADD</button>\
                 <button id="{self.btn_mode_id}">CALENDAR DAYS</button>\
             </div>\
