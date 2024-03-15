@@ -36,16 +36,16 @@ class DateCalculatorView:
     
     def form_show(self):
         self.container_el.innerHTML = f'\
-            <div style="display:flex;">\
-                <div style="width: 250px; margin-right: 10px;">\
+            <div style="display:flex; margin-bottom: 15px;">\
+                <div style="width: 250px; margin-right: 30px;">\
                     <input id="{self.date_picker_id}" type="text"/>\
                 </div>\
-                <div style="display:flex; width: 250px; margin-right: 10px;">\
-                    <label for="{self.date_picker_id}">Number of Days</label>\
+                <div style="display:flex; width: 250px;">\
+                    <label for="{self.date_picker_id}" style="margin-right:10px;">Number of Days</label>\
                     <input id="{self.numbers_id}"/>\
                 </div>\
             </div>\
-            <div>\
+            <div style="margin-bottom: 15px;">\
                 <button id="{self.btn_plus_minus_id}" style="margin-right: 10px;">ADD</button>\
                 <button id="{self.btn_mode_id}">CALENDAR DAYS</button>\
             </div>\
