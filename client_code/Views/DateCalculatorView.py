@@ -34,7 +34,7 @@ class DateCalculatorView:
             'floatLabelType': 'Auto'
         })
         
-        self.btn_plus_minus.addEventListener('click', self.click_plus_minus)
+        self.btn_plus_minus.element.onclick = self.click_plus_minus
     
     def form_show(self):
         self.container_el.innerHTML = f'\
