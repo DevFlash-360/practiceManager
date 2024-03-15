@@ -33,6 +33,8 @@ class DateCalculatorView:
         self.numbers = ej.inputs.TextBox({
             'floatLabelType': 'Auto'
         })
+        
+        self.btn_plus_minus.addEventListener('click', self.click_plus_minus)
     
     def form_show(self):
         self.container_el.innerHTML = f'\
@@ -50,9 +52,9 @@ class DateCalculatorView:
                 <button id="{self.btn_mode_id}">CALENDAR DAYS</button>\
             </div>\
             <div style="display: flex; justify-content: center;">\
-				<div class="e-card" style="width: 400px; align-items: center; padding:15px;">\
-	            	<label style="font-size: 18px;">Date: Thursday, March 21, 2024</label>\
-            	</div>\
+                <div class="e-card" style="width: 400px; align-items: center; padding:15px;">\
+                    <label style="font-size: 18px;">Date: Thursday, March 21, 2024</label>\
+                </div>\
             </div>'
         self.date_picker.appendTo(jQuery(f"#{self.date_picker_id}")[0])
         self.btn_plus_minus.appendTo(jQuery(f"#{self.btn_plus_minus_id}")[0])
@@ -63,3 +65,6 @@ class DateCalculatorView:
         self.date_picker.destroy()
         if self.container_el:
             self.container_el.innerHTML = ''
+
+    def click_plus_minus(self, args):
+        print("click_plus_minus")
