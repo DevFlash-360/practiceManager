@@ -36,21 +36,23 @@ class DateCalculatorView:
     
     def form_show(self):
         self.container_el.innerHTML = f'\
-            <div style="display:flex; margin-bottom: 15px;">\
+            <div style="display:flex; margin-bottom: 15px; justify-content: center;">\
                 <div style="width: 250px; margin-right: 30px;">\
                     <input id="{self.date_picker_id}" type="text"/>\
                 </div>\
-                <div style="display:flex; width: 250px;">\
+                <div style="display:flex; width: 120px;">\
                     <label for="{self.date_picker_id}" style="margin-right:10px;">Number of Days</label>\
                     <input id="{self.numbers_id}"/>\
                 </div>\
             </div>\
-            <div style="margin-bottom: 15px;">\
+            <div style="display: flex; margin-bottom: 15px; justify-content: center;">\
                 <button id="{self.btn_plus_minus_id}" style="margin-right: 10px;">ADD</button>\
                 <button id="{self.btn_mode_id}">CALENDAR DAYS</button>\
             </div>\
-            <div class="e-card" style="width: 400px; align-items: center; padding:15px;">\
-	            <label style="font-size: 18px;">Date: Thursday, March 21, 2024</label>\
+            <div style="display: flex; justify-content: center;">\
+				<div class="e-card" style="width: 400px; align-items: center; padding:15px;">\
+	            	<label style="font-size: 18px;">Date: Thursday, March 21, 2024</label>\
+            	</div>\
             </div>'
         self.date_picker.appendTo(jQuery(f"#{self.date_picker_id}")[0])
         self.btn_plus_minus.appendTo(jQuery(f"#{self.btn_plus_minus_id}")[0])
