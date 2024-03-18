@@ -64,6 +64,7 @@ class DateCalculatorView:
         })
 
         self.output_text = ej.inputs.TextBox({
+            'cssClass': 'e-outline',
             'floatLabelType': 'Auto'
         })
 
@@ -97,7 +98,7 @@ class DateCalculatorView:
             </div>\
             <div style="display: flex; justify-content: center;">\
                 <div class="e-card" style="width: 400px; align-items: center; padding:15px;">\
-                    <input id="date_output"/>\
+                    <input readonly id="date_output"/>\
                 </div>\
             </div>'
         self.date_picker.appendTo(jQuery(f"#{self.date_picker_id}")[0])
