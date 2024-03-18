@@ -121,11 +121,12 @@ class DateCalculatorView:
         self.update_date()
     
     def change_number_days(self, args):
-        print(self.numbers.text)
         self.number_days = int(args['value'])
         self.update_date()
     
     def update_date(self):
         print("update_date")
         date_origin = datetime_js_to_py(self.date_picker.value)
+
+        
         
