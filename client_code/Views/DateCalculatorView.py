@@ -63,6 +63,11 @@ class DateCalculatorView:
             'floatLabelType': 'Auto'
         })
 
+        self.output_text = ej.inputs.TextBox({
+            'cssClass': 'e-outline',
+            'floatLabelType': 'Auto'
+        })
+
         self.date_picker.addEventListener('change', self.change_date)
         self.radio_plus.addEventListener('change', self.change_plus_minus)
         self.radio_minus.addEventListener('change', self.change_plus_minus)
@@ -93,7 +98,7 @@ class DateCalculatorView:
             </div>\
             <div style="display: flex; justify-content: center;">\
                 <div class="e-card" style="width: 400px; align-items: center; padding:15px;">\
-                    <label style="font-size: 18px;">Date: Thursday, March 21, 2024</label>\
+                    <input id="date_output"/>\
                 </div>\
             </div>'
         self.date_picker.appendTo(jQuery(f"#{self.date_picker_id}")[0])
@@ -102,6 +107,7 @@ class DateCalculatorView:
         self.radio_calendar.appendTo(jQuery("#radio_calendar")[0])
         self.radio_business.appendTo(jQuery("#radio_business")[0])
         self.numbers.appendTo(jQuery(f"#{self.numbers_id}")[0])
+        self.output_text.appendTo(jQuery("#date_output")[0])
 
     def destroy(self):
         self.date_picker.destroy()
@@ -121,15 +127,27 @@ class DateCalculatorView:
         self.update_date()
     
     def change_number_days(self, args):
-        self.number_days = int(args['value'])
+        self.number_days = int(args['value'] if args['value'] else '0')
         self.update_date()
     
     def update_date(self):
         print("update_date")
-        print(self.date_picker.value)
 
         date_check_blank = self.date_picker.value is not None
-        date_origin = datetime_js_to_py(self.date_picker.value)
+        button_state_addsub = self.radio_plus.checked
+        button_state_calcbiz = self.radio_calendar.checked
 
-
-        
+        if date_check_blank:
+            date_origin = datetime_js_to_py(self.date_picker.value)
+            date_output = date_origin
+            if button_state_addsub and button_state_calcbiz:
+                date_output = date_origin + timedelta(days=self.number_days)
+            elif button_state_addsub == False and button_state_calcbiz:
+                date_output = date_origin - timedelta(days=self.number_days)
+            elif button_state_addsub and button_state_calcbiz == False:
+                date_output = bizday_calc_func(date_origin, self.number_days)
+            elif button_state_addsub == False and button_state_calcbiz == False:
+                date_output = bizday_calc_func(date_origin, self.number_days*-1)
+            self.output_text.value = f"Date: {date_output.strftime("%A, %B %d, %Y")}"
+        else:
+            self.output_text.value = 'Date: '
