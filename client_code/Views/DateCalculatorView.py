@@ -64,7 +64,6 @@ class DateCalculatorView:
         })
 
         self.output_text = ej.inputs.TextBox({
-            'cssClass': 'e-outline',
             'floatLabelType': 'Auto'
         })
 
