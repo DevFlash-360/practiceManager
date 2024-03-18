@@ -92,7 +92,7 @@ class DateCalculatorView:
             self.container_el.innerHTML = ''
 
     def change_date(self, args):
-        print(self.date_picker.value.strftime("%A, %B %d, %Y"))
+        print(self.date_picker.value)
 
     def change_plus_minus(self, args):
         print(f"plus checked = {self.radio_plus.checked}")
