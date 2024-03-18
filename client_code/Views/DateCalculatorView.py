@@ -2,7 +2,7 @@ import uuid
 import anvil.js
 
 from anvil.js.window import ej, jQuery
-from AnvilFusion.tools.utils import AppEnv
+from AnvilFusion.tools.utils import AppEnv, datetime_js_to_py
 
 
 class DateCalculatorView:
@@ -92,7 +92,7 @@ class DateCalculatorView:
             self.container_el.innerHTML = ''
 
     def change_date(self, args):
-        print(self.date_picker.value)
+        print(datetime_js_to_py(self.date_picker.value))
 
     def change_plus_minus(self, args):
         print(f"plus checked = {self.radio_plus.checked}")
