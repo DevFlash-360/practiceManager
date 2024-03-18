@@ -45,6 +45,12 @@ class DateCalculatorView:
         self.numbers = ej.inputs.TextBox({
             'floatLabelType': 'Auto'
         })
+
+        self.date_picker.addEventListener('change', self.change_date)
+        self.radio_plus.addEventListener('change', self.change_plus_minus)
+        self.radio_minus.addEventListener('change', self.change_plus_minus)
+        self.radio_calendar.addEventListener('change', self.change_day_mode)
+        self.radio_business.addEventListener('change', self.change_day_mode)
         
     def form_show(self):
         self.container_el.innerHTML = f'\
@@ -84,5 +90,11 @@ class DateCalculatorView:
         if self.container_el:
             self.container_el.innerHTML = ''
 
-    def click_plus_minus(self, args):
-        print("click_plus_minus")
+    def change_date(self, args):
+        print(self.date_picker.value)
+
+    def change_plus_minus(self, args):
+        print(f"plus checked = {self.radio_plus.checked}")
+    
+    def change_day_mode(self, args):
+        print(f"calendar checked = {self.radio_calendar.checked}")
