@@ -121,7 +121,7 @@ class DateCalculatorView:
         self.update_date()
     
     def change_number_days(self, args):
-        print(self.number_days.text)
+        print(self.numbers.text)
         self.number_days = int(args['value'])
         self.update_date()
     
