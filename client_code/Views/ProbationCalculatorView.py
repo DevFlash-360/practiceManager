@@ -1,15 +1,17 @@
-import anvil.server
-import anvil.users
-import anvil.tables as tables
-import anvil.tables.query as q
-from anvil.tables import app_tables
-# This is a module.
-# You can define variables and functions here, and use them from any form. For example, in a top-level form:
-#
-#    from .Views import Module1
-#
-#    Module1.say_hello()
-#
+import uuid
+import anvil.js
 
-def say_hello():
-  print("Hello, world")
+from anvil.js.window import ej, jQuery
+from AnvilFusion.tools.utils import AppEnv
+
+
+class ProbationCalculatorView:
+    def __init__(self, container_id, **kwargs):
+        self.container_id = container_id or AppEnv.content_container_id
+        self.container_el = jQuery(f"#{self.container_id}")[0]
+    
+    def form_show(self):
+        self.container_el.innerHTML = f'\
+            <div>\
+                content\
+            </div>'

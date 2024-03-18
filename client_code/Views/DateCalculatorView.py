@@ -3,7 +3,7 @@ import anvil.js
 
 from anvil.js.window import ej, jQuery
 
-from datetime import datetime, timedelta
+from datetime import timedelta
 
 from AnvilFusion.tools.utils import AppEnv, datetime_js_to_py
 
@@ -77,7 +77,7 @@ class DateCalculatorView:
                     <input id="{self.date_picker_id}" type="text"/>\
                 </div>\
                 <div style="display:flex; width: 120px;">\
-                    <label for="{self.date_picker_id}" style="margin-right:10px;">Number of Days</label>\
+                    <label for="{self.numbers_id}" style="margin-right:10px;">Number of Days</label>\
                     <input id="{self.numbers_id}"/>\
                 </div>\
             </div>\
