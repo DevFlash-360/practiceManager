@@ -22,7 +22,6 @@ class ProbationCalculatorView:
                 <input id="{self.datepicker_sentence_date_id}"/>\
             </div>\
             <div style="display: flex; margin-bottom: 15px; justify-content: center;">\
-            
             </div>'
         
         self.datepicker_sentence_date.appendTo(jQuery(f"#{self.datepicker_sentence_date_id}")[0])
