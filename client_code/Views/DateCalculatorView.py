@@ -32,13 +32,13 @@ class DateCalculatorView:
         # })
         
         self.radio_plus = ej.buttons.RadioButton({
-            'label': '+ADD',
+            'label': '+ ADD',
             'name': 'plus_minus',
             'checked': True
         })
         
         self.radio_minus = ej.buttons.RadioButton({
-            'label': '- MINUS',
+            'label': '- SUBTRACT',
             'name': 'plus_minus',
             'checked': False
         })
