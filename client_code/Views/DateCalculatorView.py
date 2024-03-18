@@ -102,7 +102,6 @@ class DateCalculatorView:
         self.radio_calendar.appendTo(jQuery("#radio_calendar")[0])
         self.radio_business.appendTo(jQuery("#radio_business")[0])
         self.numbers.appendTo(jQuery(f"#{self.numbers_id}")[0])
-        self.output_text.appendTo(jQuery("#date_output")[0])
 
     def destroy(self):
         self.date_picker.destroy()
