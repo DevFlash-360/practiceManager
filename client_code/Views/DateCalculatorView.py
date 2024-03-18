@@ -31,8 +31,29 @@ class DateCalculatorView:
         #     'isToggle': True
         # })
         
-        self.btn_plus_minus = Button(text="ADD")
-        self.btn_mode = Button(text="CALENDAR DAYS")
+        self.radio_plus = ej.buttons.RadioButton({
+            'label': '+ADD',
+            'name': 'plus_minus',
+            'checked': True
+        })
+        
+        self.radio_minus = ej.buttons.RadioButton({
+            'label': '- MINUS',
+            'name': 'plus_minus',
+            'checked': False
+        })
+        
+        self.radio_calendar = ej.buttons.RadioButton({
+            'label': 'CALENDAR DAYS',
+            'name': 'day_mode',
+            'checked': True
+        })
+        
+        self.radio_business = ej.buttons.RadioButton({
+            'label': 'BUSINESS DAYS',
+            'name': 'day_mode',
+            'checked': False
+        })
 
         self.numbers = ej.inputs.TextBox({
             'floatLabelType': 'Auto'
@@ -50,8 +71,14 @@ class DateCalculatorView:
                 </div>\
             </div>\
             <div style="display: flex; margin-bottom: 15px; justify-content: center;">\
-                <button id="{self.btn_plus_minus_id}" style="margin-right: 10px;">ADD</button>\
-                <button id="{self.btn_mode_id}">CALENDAR DAYS</button>\
+                <ul>\
+                    <input type="radio" id="radio_plus"/>\
+                    <input type="radio" id="radio_minus"/>\
+                </ul>\
+                <ul>\
+                    <input type="radio" id="radio_calendar"/>\
+                    <input type="radio" id="radio_business"/>\
+                </ul>\
             </div>\
             <div style="display: flex; justify-content: center;">\
                 <div class="e-card" style="width: 400px; align-items: center; padding:15px;">\
@@ -59,8 +86,10 @@ class DateCalculatorView:
                 </div>\
             </div>'
         self.date_picker.appendTo(jQuery(f"#{self.date_picker_id}")[0])
-        self.btn_plus_minus.element.appendTo(jQuery(f"#{self.btn_plus_minus_id}")[0])
-        self.btn_mode.element.appendTo(jQuery(f"#{self.btn_mode_id}")[0])
+        self.radio_plus.appendTo(jQuery("#radio_plus")[0])
+        self.radio_minus.appendTo(jQuery("#radio_minus")[0])
+        self.radio_calendar.appendTo(jQuery("#radio_calendar")[0])
+        self.radio_business.appendTo(jQuery("#radio_business")[0])
         self.numbers.appendTo(jQuery(f"#{self.numbers_id}")[0])
 
     def destroy(self):
