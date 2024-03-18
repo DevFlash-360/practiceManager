@@ -101,4 +101,9 @@ class DateCalculatorView:
         print(f"calendar checked = {self.radio_calendar.checked}")
     
     def change_number_days(self, args):
-        print(f"number of days = {self.numbers.value}")
+        print(args)
+    
+    def update_date(self, args):
+        print("update_date")
+        date_origin = datetime_js_to_py(self.date_picker.value)
+        
