@@ -148,6 +148,6 @@ class DateCalculatorView:
                 date_output = bizday_calc_func(date_origin, self.number_days)
             elif button_state_addsub == False and button_state_calcbiz == False:
                 date_output = bizday_calc_func(date_origin, self.number_days*-1)
-            self.output_text.value = f"Date: {date_output.strftime("%A, %B %d, %Y")}"
+            self.output_text.value = f'Date: {date_output.strftime("%A, %B %d, %Y")}'
         else:
             self.output_text.value = 'Date: '
