@@ -1,5 +1,6 @@
 import uuid
 import anvil.js
+from anvil import *
 
 from anvil.js.window import ej, jQuery
 from AnvilFusion.tools.utils import AppEnv
@@ -17,25 +18,26 @@ class DateCalculatorView:
         self.output_id = f"output_{uuid.uuid4()}"
 
         self.date_picker = ej.calendars.DatePicker({'placeholder': 'Enter date'})
-        self.btn_plus_minus = ej.buttons.Button({
-            'cssClass': 'e-primary',
-            'iconCss': 'fa fa-plus',
-            'isPrimary': True,
-            'isToggle': True
-        })
-        self.btn_mode = ej.buttons.Button({
-            'cssClass': 'e-primary',
-            'iconCss': 'fa fa-calendar',
-            'isPrimary': True,
-            'isToggle': True
-        })
+        # self.btn_plus_minus = ej.buttons.Button({
+        #     'cssClass': 'e-primary',
+        #     'iconCss': 'fa fa-plus',
+        #     'isPrimary': True,
+        #     'isToggle': True
+        # })
+        # self.btn_mode = ej.buttons.Button({
+        #     'cssClass': 'e-primary',
+        #     'iconCss': 'fa fa-calendar',
+        #     'isPrimary': True,
+        #     'isToggle': True
+        # })
+        
+        self.btn_plus_minus = Button(text="ADD")
+        self.btn_mode = Button(text="CALENDAR DAYS")
 
         self.numbers = ej.inputs.TextBox({
             'floatLabelType': 'Auto'
         })
         
-        # self.btn_plus_minus.element.addEventListener('click', self.click_plus_minus)
-    
     def form_show(self):
         self.container_el.innerHTML = f'\
             <div style="display:flex; margin-bottom: 15px; justify-content: center;">\
