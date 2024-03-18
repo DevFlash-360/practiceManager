@@ -59,8 +59,8 @@ class DateCalculatorView:
                 </div>\
             </div>'
         self.date_picker.appendTo(jQuery(f"#{self.date_picker_id}")[0])
-        self.btn_plus_minus.appendTo(jQuery(f"#{self.btn_plus_minus_id}")[0])
-        self.btn_mode.appendTo(jQuery(f"#{self.btn_mode_id}")[0])
+        self.btn_plus_minus.element.appendTo(jQuery(f"#{self.btn_plus_minus_id}")[0])
+        self.btn_mode.element.appendTo(jQuery(f"#{self.btn_mode_id}")[0])
         self.numbers.appendTo(jQuery(f"#{self.numbers_id}")[0])
 
     def destroy(self):
