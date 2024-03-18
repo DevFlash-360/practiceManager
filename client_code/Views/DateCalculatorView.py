@@ -2,8 +2,23 @@ import uuid
 import anvil.js
 
 from anvil.js.window import ej, jQuery
+
+from datetime import datetime, timedelta
+
 from AnvilFusion.tools.utils import AppEnv, datetime_js_to_py
 
+
+def bizday_calc_func(start_date, num_days):
+    my_start_date = start_date
+    my_num_days = abs(num_days)
+    inc = 1 if num_days > 0 else -1
+    while my_num_days > 0:
+      my_start_date += timedelta(days=inc)
+      weekday = my_start_date.weekday()
+      if weekday >= 5:
+        continue
+      my_num_days -= 1
+    return my_start_date
 
 class DateCalculatorView:
     def __init__(self, container_id, **kwargs):
@@ -15,6 +30,8 @@ class DateCalculatorView:
         self.btn_mode_id = f"mode_{uuid.uuid4()}"
         self.numbers_id = f"numbers_{uuid.uuid4()}"
         self.output_id = f"output_{uuid.uuid4()}"
+
+        self.number_days = 0
 
         self.date_picker = ej.calendars.DatePicker({'placeholder': 'Enter date'})
         
@@ -93,18 +110,22 @@ class DateCalculatorView:
 
     def change_date(self, args):
         print(datetime_js_to_py(self.date_picker.value).strftime("%A, %B %d, %Y"))
+        self.update_date()
 
     def change_plus_minus(self, args):
         print(f"plus checked = {self.radio_plus.checked}")
+        self.update_date()
     
     def change_day_mode(self, args):
         print(f"calendar checked = {self.radio_calendar.checked}")
+        self.update_date()
     
     def change_number_days(self, args):
-        print(args['value'])
-        print(self.numbers)
+        print(self.number_days.text)
+        self.number_days = int(args['value'])
+        self.update_date()
     
-    def update_date(self, args):
+    def update_date(self):
         print("update_date")
         date_origin = datetime_js_to_py(self.date_picker.value)
         
