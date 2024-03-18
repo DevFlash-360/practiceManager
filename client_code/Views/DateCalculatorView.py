@@ -63,11 +63,6 @@ class DateCalculatorView:
             'floatLabelType': 'Auto'
         })
 
-        self.output_text = ej.inputs.TextBox({
-            'cssClass': 'e-outline',
-            'floatLabelType': 'Auto'
-        })
-
         self.date_picker.addEventListener('change', self.change_date)
         self.radio_plus.addEventListener('change', self.change_plus_minus)
         self.radio_minus.addEventListener('change', self.change_plus_minus)
@@ -98,7 +93,7 @@ class DateCalculatorView:
             </div>\
             <div style="display: flex; justify-content: center;">\
                 <div class="e-card" style="width: 400px; align-items: center; padding:15px;">\
-                    <input readonly id="date_output"/>\
+                    <label id={self.output_id} style="font-size: 18px;">Date: </label>\
                 </div>\
             </div>'
         self.date_picker.appendTo(jQuery(f"#{self.date_picker_id}")[0])
@@ -137,6 +132,7 @@ class DateCalculatorView:
         button_state_addsub = self.radio_plus.checked
         button_state_calcbiz = self.radio_calendar.checked
 
+        output_text = 'Date: '
         if date_check_blank:
             date_origin = datetime_js_to_py(self.date_picker.value)
             date_output = date_origin
@@ -148,6 +144,6 @@ class DateCalculatorView:
                 date_output = bizday_calc_func(date_origin, self.number_days)
             elif button_state_addsub == False and button_state_calcbiz == False:
                 date_output = bizday_calc_func(date_origin, self.number_days*-1)
-            self.output_text.value = f'Date: {date_output.strftime("%A, %B %d, %Y")}'
-        else:
-            self.output_text.value = 'Date: '
+            output_text = f'Date: {date_output.strftime("%A, %B %d, %Y")}'
+        output_el = jQuery(f"#{self.output_id}")[0]
+        output_el.innerHTML = output_text
