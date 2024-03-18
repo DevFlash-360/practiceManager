@@ -126,7 +126,10 @@ class DateCalculatorView:
     
     def update_date(self):
         print("update_date")
+        print(self.date_picker.value)
+
+        date_check_blank = self.date_picker.value is not None
         date_origin = datetime_js_to_py(self.date_picker.value)
 
-        
+
         
