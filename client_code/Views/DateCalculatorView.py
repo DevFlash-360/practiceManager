@@ -51,7 +51,7 @@ class DateCalculatorView:
         self.radio_minus.addEventListener('change', self.change_plus_minus)
         self.radio_calendar.addEventListener('change', self.change_day_mode)
         self.radio_business.addEventListener('change', self.change_day_mode)
-        self.numbers.addEventListener('change', self.change_number_days)
+        self.numbers.addEventListener('input', self.change_number_days)
         
     def form_show(self):
         self.container_el.innerHTML = f'\
