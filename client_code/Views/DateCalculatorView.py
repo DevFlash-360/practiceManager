@@ -105,6 +105,11 @@ class DateCalculatorView:
 
     def destroy(self):
         self.date_picker.destroy()
+        self.radio_plus.destroy()
+        self.radio_minus.destroy()
+        self.radio_calendar.destroy()
+        self.radio_business.destroy()
+        self.numbers.destroy()
         if self.container_el:
             self.container_el.innerHTML = ''
 
