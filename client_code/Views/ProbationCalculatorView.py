@@ -10,6 +10,8 @@ class ProbationCalculatorView:
     def __init__(self, container_id, **kwargs):
         self.container_id = container_id or AppEnv.content_container_id
         self.container_el = jQuery(f"#{self.container_id}")[0]
+        self.text_sentence = 0
+        self.text_credits = 0
 
         self.datepicker_sentence_date_id = f"sentencing_{uuid.uuid4()}"
         self.textbox_sentence_id = f"sentence_{uuid.uuid4()}"
@@ -92,20 +94,22 @@ class ProbationCalculatorView:
             )
             return calc_output
 
-    def datepicker_sentence_date_change(self, event_args):
+    def datepicker_sentence_date_change(self, args):
         self.update_output()
 
-    def textbox_sentence_change(self, event_args):
+    def textbox_sentence_change(self, args):
+        self.text_sentence = int(args['value'] if args['value'] else '0')
         self.update_output()
 
-    def textbox_credits_change(self, event_args):
+    def textbox_credits_change(self, args):
+        self.text_credits = int(args['value'] if args['value'] else '0')
         self.update_output()
     
     def update_output(self):
         output_el = jQuery(f"#{self.probation_output_id}")[0]
         output_el.innerHTML = self.probation_calc_func(
-            self.datepicker_sentence_date.date,
-            self.textbox_credits.text,
-            self.textbox_sentence.text
+            self.datepicker_sentence_date.value,
+            self.text_credits,
+            self.text_sentence
         )
         print("updated")
