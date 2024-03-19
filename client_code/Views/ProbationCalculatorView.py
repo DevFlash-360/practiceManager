@@ -100,7 +100,8 @@ class ProbationCalculatorView:
         self.update_output()
     
     def update_output(self):
-        self.label_probation_output.text = self.probation_calc_func(
+        output_el = jQuery(f"#{self.probation_output_id}")[0]
+        output_el.innerHTML = self.probation_calc_func(
             self.datepicker_sentence_date.date,
             self.textbox_credits.text,
             self.textbox_sentence.text
