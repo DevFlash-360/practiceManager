@@ -20,7 +20,7 @@ class ProbationCalculatorView:
     
     def form_show(self):
         self.container_el.innerHTML = f'\
-            <div style="display:flex; justify-content: center;">\
+            <div style="display:flex; justify-content: center; margin-bottom: 15px;">\
                 <div style="display: flex; align-items: center;">\
                     <label for="{self.datepicker_sentence_date_id}" style="white-space: nowrap; margin-right:10px;">Select Sentencing Date</label>\
                     <input id="{self.datepicker_sentence_date_id}"/>\
@@ -28,9 +28,9 @@ class ProbationCalculatorView:
             </div>\
             <div style="display: flex; margin-bottom: 15px; justify-content: center;">\
                 <div style="display:flex;">\
-                    <label for="{self.textbox_sentence_id}" style="margin-right:10px;">Probation Sentence (Months)</label>\
+                    <label for="{self.textbox_sentence_id}" style="white-space: nowrap; margin-right:10px;">Probation Sentence (Months)</label>\
                     <input id="{self.textbox_sentence_id}"/>\
-                    <label for="{self.textbox_credits_id}" style="margin-right:10px;">Good-Time Credits/Month (Days)</label>\
+                    <label for="{self.textbox_credits_id}" style="white-space: nowrap; margin-right:10px;">Good-Time Credits/Month (Days)</label>\
                     <input id="{self.textbox_credits_id}"/>\
                 </div>\
             </div>'
