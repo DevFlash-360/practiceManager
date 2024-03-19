@@ -76,9 +76,9 @@ class DateCalculatorView:
                 <div style="width: 250px; margin-right: 30px;">\
                     <input id="{self.date_picker_id}" type="text"/>\
                 </div>\
-                <div style="display:flex; width: 120px;">\
+                <div style="display:flex; align-items: center; ">\
                     <label for="{self.numbers_id}" style="white-space: nowrap; margin-right:10px;">Number of Days</label>\
-                    <input id="{self.numbers_id}"/>\
+                    <input id="{self.numbers_id}" style="width: 50px;"/>\
                 </div>\
             </div>\
             <div style="display: flex; margin-bottom: 15px; justify-content: center;">\
