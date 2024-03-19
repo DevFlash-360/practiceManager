@@ -114,15 +114,12 @@ class DateCalculatorView:
             self.container_el.innerHTML = ''
 
     def change_date(self, args):
-        print(datetime_js_to_py(self.date_picker.value).strftime("%A, %B %d, %Y"))
         self.update_date()
 
     def change_plus_minus(self, args):
-        print(f"plus checked = {self.radio_plus.checked}")
         self.update_date()
     
     def change_day_mode(self, args):
-        print(f"calendar checked = {self.radio_calendar.checked}")
         self.update_date()
     
     def change_number_days(self, args):
@@ -130,8 +127,6 @@ class DateCalculatorView:
         self.update_date()
     
     def update_date(self):
-        print("update_date")
-
         date_check_blank = self.date_picker.value is not None
         button_state_addsub = self.radio_plus.checked
         button_state_calcbiz = self.radio_calendar.checked

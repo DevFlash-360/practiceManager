@@ -34,7 +34,7 @@ class ProbationCalculatorView:
                     <input id="{self.datepicker_sentence_date_id}"/>\
                 </div>\
             </div>\
-            <div style="display: flex; margin-bottom: 15px; justify-content: center;">\
+            <div style="display: flex; margin-bottom: 30px; justify-content: center;">\
                 <div style="display:flex; align-items: center;">\
                     <label for="{self.textbox_sentence_id}" style="white-space: nowrap; margin-right:10px;">Probation Sentence (Months)</label>\
                     <input id="{self.textbox_sentence_id}" style="width: 50px;"/>\
@@ -112,4 +112,3 @@ class ProbationCalculatorView:
             self.text_credits,
             self.text_sentence
         )
-        print("updated")
