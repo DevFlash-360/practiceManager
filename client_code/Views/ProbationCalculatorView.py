@@ -92,13 +92,13 @@ class ProbationCalculatorView:
             )
             return calc_output
 
-    def datepicker_sentence_date_change(self, **event_args):
+    def datepicker_sentence_date_change(self, event_args):
         self.update_output()
 
-    def textbox_sentence_change(self, **event_args):
+    def textbox_sentence_change(self, event_args):
         self.update_output()
 
-    def textbox_credits_change(self, **event_args):
+    def textbox_credits_change(self, event_args):
         self.update_output()
     
     def update_output(self):
