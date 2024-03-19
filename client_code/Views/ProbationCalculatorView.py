@@ -27,10 +27,10 @@ class ProbationCalculatorView:
                 </div>\
             </div>\
             <div style="display: flex; margin-bottom: 15px; justify-content: center;">\
-                <div style="display:flex;">\
+                <div style="display:flex; align-items: center;">\
                     <label for="{self.textbox_sentence_id}" style="white-space: nowrap; margin-right:10px;">Probation Sentence (Months)</label>\
                     <input id="{self.textbox_sentence_id}" style="width: 50px;"/>\
-                    <label for="{self.textbox_credits_id}" style="white-space: nowrap; margin-right:10px;">Good-Time Credits/Month (Days)</label>\
+                    <label for="{self.textbox_credits_id}" style="white-space: nowrap; margin: 0px 10px;">Good-Time Credits/Month (Days)</label>\
                     <input id="{self.textbox_credits_id}" style="width: 50px;"/>\
                 </div>\
             </div>'
