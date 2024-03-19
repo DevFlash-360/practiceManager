@@ -18,7 +18,7 @@ class ProbationCalculatorView:
     def form_show(self):
         self.container_el.innerHTML = f'\
             <div style="display:flex; justify-content: center;">\
-                <div style="display: flex;">\
+                <div style="display: flex; align-items: center;">\
                     <label for="{self.datepicker_sentence_date_id}" style="margin-right:10px;">Select Sentencing Date</label>\
                     <input id="{self.datepicker_sentence_date_id}"/>\
                 </div>\
