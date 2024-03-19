@@ -3,7 +3,7 @@ import anvil.js
 from datetime import datetime, timedelta
 
 from anvil.js.window import ej, jQuery
-from AnvilFusion.tools.utils import AppEnv
+from AnvilFusion.tools.utils import AppEnv, datetime_js_to_py
 
 
 class ProbationCalculatorView:
@@ -108,7 +108,7 @@ class ProbationCalculatorView:
     def update_output(self):
         output_el = jQuery(f"#{self.probation_output_id}")[0]
         output_el.innerHTML = self.probation_calc_func(
-            self.datepicker_sentence_date.value,
+            datetime_js_to_py(self.datepicker_sentence_date.value),
             self.text_credits,
             self.text_sentence
         )
