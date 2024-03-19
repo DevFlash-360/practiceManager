@@ -23,8 +23,8 @@ class ProbationCalculatorView:
         self.textbox_credits = ej.inputs.TextBox({'floatLabelType': 'Auto'})
 
         self.datepicker_sentence_date.addEventListener('change', self.datepicker_sentence_date_change)
-        self.textbox_sentence.addEventListener('change', self.textbox_sentence_change)
-        self.textbox_credits.addEventListener('change', self.textbox_credits_change)
+        self.textbox_sentence.addEventListener('input', self.textbox_sentence_change)
+        self.textbox_credits.addEventListener('input', self.textbox_credits_change)
     
     def form_show(self):
         self.container_el.innerHTML = f'\
