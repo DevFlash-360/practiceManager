@@ -22,6 +22,10 @@ class SettlementCalculatorView:
             <div class="row">\
                 <div class="col-md-3">\
                     <input type="text" id="{self.dropdown_cases_id}" />\
+                    <div class="input-group">\
+                        <input type="number" class="form-control">\
+                        <span class="input-group-addon"><i class="fa-light fa-percent"></i></span>\
+                    </div>\
                 </div>\
                 <div class="col-md-3">\
                     <input type="currency" />\
