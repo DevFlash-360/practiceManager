@@ -35,13 +35,13 @@ class SettlementCalculatorView:
                         <label for="{self.dropdown_cases_id}">Case</label>\
                         <input type="text" id="{self.dropdown_cases_id}" class="form-control"/>\
                     </div>\
+                    <label for="{self.contingency_fee_id}">Contingency Fee</label>\
                     <div class="form-group input-group">\
-                        <label for="{self.contingency_fee_id}">Contingency Fee</label>\
                         <input id="{self.contingency_fee_id}" placeholder="Contingency Fee" type="number" class="form-control">\
                         <span class="input-group-addon"><i class="fa-light fa-percent"></i></span>\
                     </div>\
+                    <label for="{self.settlement_offer_id}">Settlement Offer</label>\
                     <div class="form-group input-group">\
-                        <label for="{self.settlement_offer_id}">Settlement Offer</label>\
                         <input id="{self.settlement_offer_id}" placeholder="Settlement Offer" type="number" class="form-control">\
                         <span class="input-group-addon"><i class="fa-light fa-dollar-sign"></i></span>\
                     </div>\
