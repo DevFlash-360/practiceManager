@@ -24,7 +24,7 @@ class SettlementCalculatorView:
                     <input type="text" id="{self.dropdown_cases_id}" />\
                 </div>\
                 <div class="col-md-3">\
-                    <input type="currency" /> 
+                    <input type="currency" />\
                 </div>\
             </div>'
         
