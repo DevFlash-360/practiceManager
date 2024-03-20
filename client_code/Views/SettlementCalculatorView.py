@@ -15,6 +15,8 @@ class SettlementCalculatorView:
         self.contingency_fee_id = f"contingency_{uuid.uuid4()}"
         self.settlement_offer_id = f"settlement_{uuid.uuid4()}"
         self.treatment_reduction_id = f"treatment_{uuid.uuid4()}"
+        self.client_net_id = f"treatment_{uuid.uuid4()}"
+        self.attorney_net_id = f"treatment_{uuid.uuid4()}"
     
         cases_data = Case.search()
         cases_data_for_dropdown = [{'id': case['uid'], 'text': case['case_name']} for case in cases_data]
@@ -25,6 +27,8 @@ class SettlementCalculatorView:
         self.settlement_offer = ej.inputs.TextBox({'floatLabelType': 'Auto'})
         percentage_list = [f"{i}%" for i in range(0, 101, 5)]
         self.treatment_reduction = ej.dropdowns.DropDownList({'dataSource': percentage_list})
+        self.client_net = ej.inputs.TextBox({'floatLabelType': 'Auto'})
+        self.attorney_net = ej.inputs.TextBox({'floatLabelType': 'Auto'})
         
     def form_show(self):
         self.container_el.innerHTML = f'\
@@ -50,20 +54,30 @@ class SettlementCalculatorView:
                     </div>\
                 </div>\
                 <div class="col-md-3">\
-                    <input type="currency" />\
+                    <div class="form-group input-group">\
+                        <input id="{self.client_net_id}" type="number" class="form-control">\
+                        <span class="input-group-addon"><i class="fa-light fa-dollar-sign"></i></span>\
+                    </div>\
+                    <div class="form-group input-group">\
+                        <input id="{self.attorney_net_id}" type="number" class="form-control">\
+                        <span class="input-group-addon"><i class="fa-light fa-dollar-sign"></i></span>\
+                    </div>\
                 </div>\
             </div>'
         
         self.dropdown_cases.appendTo(jQuery(f"#{self.dropdown_cases_id}")[0])
         self.contingency_fee.appendTo(jQuery(f"#{self.contingency_fee_id}")[0])
         self.settlement_offer.appendTo(jQuery(f"#{self.settlement_offer_id}")[0])
-        self.treatment_reduction.appendTo(jQuery(f"#{self.treatment_reduction_id}")[0])
+        self.client_net.appendTo(jQuery(f"#{self.client_net_id}")[0])
+        self.attorney_net.appendTo(jQuery(f"#{self.attorney_net_id}")[0])
     
     def destroy(self):
         self.dropdown_cases.destroy()
         self.contingency_fee.destroy()
         self.settlement_offer.destroy()
         self.treatment_reduction.destroy()
+        self.client_net.destroy()
+        self.attorney_net.destroy()
 
         if self.container_el:
             self.container_el.innerHTML = ''
