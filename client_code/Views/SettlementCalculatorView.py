@@ -54,10 +54,12 @@ class SettlementCalculatorView:
                     </div>\
                 </div>\
                 <div class="col-md-3">\
+                    <label>Client Net</label>\
                     <div class="form-group input-group">\
                         <input id="{self.client_net_id}" type="number" class="form-control">\
                         <span class="input-group-addon"><i class="fa-light fa-dollar-sign"></i></span>\
                     </div>\
+                    <label>Attorney/Firm Net</label>\
                     <div class="form-group input-group">\
                         <input id="{self.attorney_net_id}" type="number" class="form-control">\
                         <span class="input-group-addon"><i class="fa-light fa-dollar-sign"></i></span>\
