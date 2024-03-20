@@ -70,6 +70,7 @@ class SettlementCalculatorView:
         self.dropdown_cases.appendTo(jQuery(f"#{self.dropdown_cases_id}")[0])
         self.contingency_fee.appendTo(jQuery(f"#{self.contingency_fee_id}")[0])
         self.settlement_offer.appendTo(jQuery(f"#{self.settlement_offer_id}")[0])
+        self.treatment_reduction.appendTo(jQuery(f"#{self.treatment_reduction_id}")[0])
         self.client_net.appendTo(jQuery(f"#{self.client_net_id}")[0])
         self.attorney_net.appendTo(jQuery(f"#{self.attorney_net_id}")[0])
     
