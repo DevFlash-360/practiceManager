@@ -44,7 +44,7 @@ class ProbationCalculatorView:
             </div>\
             <div style="display: flex; justify-content: center;">\
                 <div class="e-card" style="width: 400px; align-items: center; padding:15px;">\
-                    <label id={self.probation_output_id} style="text-align: center; font-size: 18px;"></label>\
+                    <label id={self.probation_output_id} style="text-align: center; font-size: 18px;">Output</label>\
                 </div>\
             </div>'
         

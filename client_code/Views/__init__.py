@@ -10,4 +10,4 @@ from .TimeEntryView import TimeEntryView
 from .ExpenseView import ExpenseView
 from .InvoiceListView import InvoiceListView
 from .DateCalculatorView import DateCalculatorView
-from .ProbationCalculatorView import ProbationCalculatorView
+from .SettlementCalculatorView import SettlementCalculatorView

@@ -145,7 +145,7 @@ PMAPP_NAV_ITEMS = {
 
     'tools_date_calculator': {'class': 'DateCalculatorView', 'type': 'custom', 'action': 'open', 'props': {}},
     'tools_probation_calculator': {'class': 'ProbationCalculatorView', 'type': 'custom', 'action': 'open', 'props': {}},
-    # 'tools_settlement_calculator': {'model': '', 'type': 'view', 'action': 'open', 'props': {}},
+    'tools_settlement_calculator': {'class': 'SettlementCalculatorView', 'type': 'custom', 'action': 'open', 'props': {}},
     # 'tools_statute_search': {'model': '', 'type': 'view', 'action': 'open', 'props': {}},
     # 'tools_warrant_search': {'model': '', 'type': 'view', 'action': 'open', 'props': {}},
     # 'tools_analytics': {'model': '', 'type': 'view', 'action': 'open', 'props': {}},
