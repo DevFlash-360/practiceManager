@@ -64,12 +64,12 @@ class SettlementCalculatorView:
                 <div class="col-md-3">\
                     <label>Client Net</label>\
                     <div class="form-group input-group">\
-                        <input readonly id="{self.client_net_id}" type="number" class="form-control">\
+                        <input disabled id="{self.client_net_id}" type="number" class="form-control">\
                         <span class="input-group-addon"><i class="fa-light fa-dollar-sign"></i></span>\
                     </div>\
                     <label>Attorney/Firm Net</label>\
                     <div class="form-group input-group">\
-                        <input readonly id="{self.attorney_net_id}" type="number" class="form-control">\
+                        <input disabled id="{self.attorney_net_id}" type="number" class="form-control">\
                         <span class="input-group-addon"><i class="fa-light fa-dollar-sign"></i></span>\
                     </div>\
                 </div>\
@@ -79,7 +79,7 @@ class SettlementCalculatorView:
                 <div class="col-md-3">\
                     <label>Total Fees & Costs</label>\
                     <div class="form-group input-group">\
-                        <input readonly id="{self.total_fees_id}" type="number" class="form-control">\
+                        <input disabled id="{self.total_fees_id}" type="number" class="form-control">\
                         <span class="input-group-addon"><i class="fa-light fa-dollar-sign"></i></span>\
                     </div>\
                 </div>\
@@ -89,14 +89,14 @@ class SettlementCalculatorView:
                 <div class="col-md-3">\
                     <label>Total Medical Treatment</label>\
                     <div class="form-group input-group">\
-                        <input readonly id="{self.total_treatment_id}" type="number" class="form-control">\
+                        <input disabled id="{self.total_treatment_id}" type="number" class="form-control">\
                         <span class="input-group-addon"><i class="fa-light fa-dollar-sign"></i></span>\
                     </div>\
                 </div>\
                 <div class="col-md-3">\
                     <label>Reduced Medical Treatment</label>\
                     <div class="form-group input-group">\
-                        <input readonly id="{self.reduced_treatment_id}" type="number" class="form-control">\
+                        <input disabled id="{self.reduced_treatment_id}" type="number" class="form-control">\
                         <span class="input-group-addon"><i class="fa-light fa-dollar-sign"></i></span>\
                     </div>\
                 </div>\
