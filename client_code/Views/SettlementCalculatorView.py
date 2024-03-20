@@ -17,6 +17,8 @@ class SettlementCalculatorView:
         self.treatment_reduction_id = f"treatment_{uuid.uuid4()}"
         self.client_net_id = f"treatment_{uuid.uuid4()}"
         self.attorney_net_id = f"treatment_{uuid.uuid4()}"
+        self.table_fees_id = f"Fee_table_{uuid.uuid4()}"
+        self.table_treatment_id = f"Treatment_table_{uuid.uuid4()}"
     
         cases_data = Case.search()
         cases_data_for_dropdown = [{'id': case['uid'], 'text': case['case_name']} for case in cases_data]
@@ -65,7 +67,8 @@ class SettlementCalculatorView:
                         <span class="input-group-addon"><i class="fa-light fa-dollar-sign"></i></span>\
                     </div>\
                 </div>\
-            </div>'
+            </div>\
+            <table id="{self.table_fees_id}"></table>'
         
         self.dropdown_cases.appendTo(jQuery(f"#{self.dropdown_cases_id}")[0])
         self.contingency_fee.appendTo(jQuery(f"#{self.contingency_fee_id}")[0])
