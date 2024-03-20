@@ -19,7 +19,10 @@ class SettlementCalculatorView:
         
     def form_show(self):
         self.container_el.innerHTML = f'\
-            <input type="text" id="{self.dropdown_cases_id}" />'
+            <fieldset>\
+                <legend>Case</legend>\
+                <input type="text" id="{self.dropdown_cases_id}" />\
+            </fieldset>'
         
         self.dropdown_cases.appendTo(jQuery(f"#{self.dropdown_cases_id}")[0])
     
