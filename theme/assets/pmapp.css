@@ -473,7 +473,7 @@ tr.task-incomplete > td button > span.btn-task-status {
 
 #pm-content .e-input[disabled], .e-input-group .e-input[disabled], .e-input-group.e-control-wrapper .e-input[disabled], .e-input-group.e-disabled, .e-input-group.e-control-wrapper.e-disabled, .e-float-input input[disabled], .e-float-input.e-control-wrapper input[disabled], .e-float-input textarea[disabled], .e-float-input.e-control-wrapper textarea[disabled], .e-float-input.e-disabled, .e-float-input.e-control-wrapper.e-disabled {
     -webkit-text-fill-color: #9ca3af;
-    background: #b9babb;
+    background: #e7e9eb;
     color: #9ca3af;
     border-color: #9ca3af;
 }
