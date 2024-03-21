@@ -41,6 +41,7 @@ class SettlementCalculatorView:
         self.reduced_treatment = ej.inputs.TextBox({'floatLabelType': 'Auto'})
 
         self.dropdown_cases.addEventListener('change', self.dropdown_cases_change)
+        self.dropdown_cases.addEventListener('select', self.dropdown_cases_select)
         
     def form_show(self):
         self.container_el.innerHTML = f'\
@@ -137,3 +138,6 @@ class SettlementCalculatorView:
         self.total_fees.value = "0.00"
         self.attorney_net.value = "0.00"
         self.client_net.value = "0.00"
+    
+    def dropdown_cases_select(self, args):
+        print("dropdown_cases_select")
