@@ -42,6 +42,7 @@ class SettlementCalculatorView:
 
         self.dropdown_cases.addEventListener('change', self.dropdown_cases_change)
         self.dropdown_cases.addEventListener('select', self.dropdown_cases_select)
+        self.dropdown_cases.addEventListener('focus', self.dropdown_cases_focus)
         
     def form_show(self):
         self.container_el.innerHTML = f'\
@@ -141,3 +142,7 @@ class SettlementCalculatorView:
     
     def dropdown_cases_select(self, args):
         print("dropdown_cases_select")
+    
+    def dropdown_cases_focus(self, args):
+        print("dropdown_cases_focus")
+
