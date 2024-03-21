@@ -135,12 +135,13 @@ class SettlementCalculatorView:
         tbl_fee_costs = jQuery(f"#{self.table_fees_id}")[0]
         tbl_treatments = jQuery(f"#{self.table_treatment_id}")[0]
         case_uid = self.dropdown_cases.value
+        case_sel = Case.get(case_uid)
         # tbl_fee_costs.innerText = ""
         # self.total_fees.value = "0.00"
         # self.attorney_net.value = "0.00"
         # self.client_net.value = "0.00"
 
-        case_expenses = Expense.search(case=case_uid)
+        case_expenses = Expense.search(case=case_sel)
         expense_output = ""
         medical_output = ""
         fees = 0.00
