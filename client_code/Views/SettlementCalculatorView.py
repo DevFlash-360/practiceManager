@@ -22,8 +22,9 @@ class SettlementCalculatorView:
         self.table_treatment_id = f"total_treatment_{uuid.uuid4()}"
         self.total_treatment_id = f"total_treatment_{uuid.uuid4()}"
         self.reduced_treatment_id = f"reduced_treatment_{uuid.uuid4()}"
-        # self.table_fees = ""
-        # self.table_treatments = ""
+        
+        self.float_contingency_fee = .0
+        self.float_settlement_offer = .0
     
         cases_data = Case.search()
         cases_data_for_dropdown = [{'id': case['uid'], 'text': case['case_name']} for case in cases_data]
@@ -41,6 +42,8 @@ class SettlementCalculatorView:
         self.reduced_treatment = ej.inputs.TextBox({'floatLabelType': 'Auto'})
 
         self.dropdown_cases.addEventListener('change', self.dropdown_cases_change)
+        self.contingency_fee.addEventListener('input', self.textbox_congingency_change)
+        self.settlement_offer.addEventListener('input', self.textbox_settlement_change)
         
     def form_show(self):
         self.container_el.innerHTML = f'\
@@ -78,7 +81,7 @@ class SettlementCalculatorView:
                     </div>\
                 </div>\
             </div>\
-            <table id="{self.table_fees_id}"></table>\
+            <table id="{self.table_fees_id}" style="margin-bottom: 15px;"></table>\
             <div class="row">\
                 <div class="col-md-3">\
                     <label>Total Fees & Costs</label>\
@@ -88,7 +91,7 @@ class SettlementCalculatorView:
                     </div>\
                 </div>\
             </div>\
-            <table id="{self.table_treatment_id}"></table>\
+            <table id="{self.table_treatment_id}" style="margin-bottom: 15px;"></table>\
             <div class="row">\
                 <div class="col-md-3">\
                     <label>Total Medical Treatment</label>\
@@ -160,3 +163,22 @@ class SettlementCalculatorView:
         self.total_treatment.value = treatment
         tbl_fee_costs.innerHTML = "<html><head><style>.settlement-table{border-collapse: collapse;width: 100%;}.settlement-td, .settlement-th {border: 1px solid #272d83;text-align: left;padding: 5px;}.settlement-tr:nth-child(even) {color: white;background-color: #272d83;}.settlement-tr:nth-child(even):hover {color: white;background-color: #898FDC;}.settlement-tr:nth-child(odd):hover {background-color: #f2f4f5;}</style></head><body><table class='settlement-table'><tr class='settlement-tr'><th class='settlement-th'>Date</th><th class='settlement-th'>Fees & Costs</th><th class='settlement-th'>Quantity</th><th class='settlement-th'>Amount</th><th class='settlement-th'>% Reduction</th><th class='settlement-th'>Total</th></tr>" + expense_output + "</table></body></html>"
         tbl_treatments.innerHTML = "<html><head><style>.settlement-table{border-collapse: collapse;width: 100%;}.settlement-td, .settlement-th {border: 1px solid #272d83;text-align: left;padding: 5px;}.settlement-tr:nth-child(even) {color: white;background-color: #272d83;}.settlement-tr:nth-child(even):hover {color: white;background-color: #898FDC;}.settlement-tr:nth-child(odd):hover {background-color: #f2f4f5;}</style></head><body><table class='settlement-table'><tr class='settlement-tr'><th class='settlement-th'>Date</th><th class='settlement-th'>Medical Treatment</th><th class='settlement-th'>Quantity</th><th class='settlement-th'>Amount</th><th class='settlement-th'>% Reduction</th><th class='settlement-th'>Total</th></tr>" + medical_output + "</table></body></html>"
+
+    def textbox_congingency_change(self, args):
+        self.float_contingency_fee = float(args['value'] if args['value'] else '0')
+        self.update_autovals()
+    
+    def textbox_settlement_change(self, args):
+        self.float_settlement_offer = float(args['value'] if args['value'] else '0')
+        self.update_autovals()
+
+    def update_autovals(self):
+        total_fee_costs = jQuery(f"#{self.total_fees_id}")[0].value
+        print(total_fee_costs)
+        # attorneys_fee = 0.00
+        # client_net = 0.00
+        # contingency_fee_percent = self.float_contingency_fee / 100.0
+        # attorneys_fee = contingency_fee_percent * self.float_settlement_offer
+        # client_net = self.float_settlement_offer - input.Total_Fees_Costs - input.Reduced_Medical_Treatment - attorneys_fee
+        # input.Attorney_Firm_Net = attorneys_fee
+        # input.Client_Net = client_net
