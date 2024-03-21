@@ -150,11 +150,11 @@ class SettlementCalculatorView:
         for expense in case_expenses:
             if expense.activity.name != 'Medical Treatment':
                 fees = fees + expense.total
-                expense_output = expense_output + "<tr class='settlement-tr'><td class='settlement-td'>" + expense.date.strftime("%b %d, %Y") + "</td><td class='settlement-td'>" + expense.activity.name + "</td><td class='settlement-td'>" + expense.quantity + "</td><td class='settlement-td'>" + expense.amount + "</td><td class='settlement-td'>" + expense.reduction + "</td><td class='settlement-td'>" + expense.total + "</td></tr>"
+                expense_output = expense_output + "<tr class='settlement-tr'><td class='settlement-td'>" + expense.date.strftime("%b %d, %Y") + "</td><td class='settlement-td'>" + expense.activity.name + "</td><td class='settlement-td'>" + str(expense.quantity) + "</td><td class='settlement-td'>" + str(expense.amount) + "</td><td class='settlement-td'>" + str(expense.reduction) + "</td><td class='settlement-td'>" + str(expense.total) + "</td></tr>"
             else:
                 treatment = treatment + expense.total
                 reduction_25_default = treatment - treatment * .25
-                medical_output = medical_output + "<tr class='settlement-tr'><td class='settlement-td'>" + expense.date.strftime("%b %d, %Y") + "</td><td class='settlement-td'>" + expense.activity.name + "</td><td class='settlement-td'>" + expense.quantity + "</td><td class='settlement-td'>" + expense.amount + "</td><td class='settlement-td'>" + expense.reduction + "</td><td class='settlement-td'>" + expense.total + "</td></tr>"
+                medical_output = medical_output + "<tr class='settlement-tr'><td class='settlement-td'>" + expense.date.strftime("%b %d, %Y") + "</td><td class='settlement-td'>" + expense.activity.name + "</td><td class='settlement-td'>" + str(expense.quantity) + "</td><td class='settlement-td'>" + str(expense.amount) + "</td><td class='settlement-td'>" + str(expense.reduction) + "</td><td class='settlement-td'>" + str(expense.total) + "</td></tr>"
         self.total_fees.value = fees
         self.treatment_reduction.value = round(reduction_25_default, 2)
         self.total_treatment.value = treatment
