@@ -22,6 +22,8 @@ class SettlementCalculatorView:
         self.table_treatment_id = f"total_treatment_{uuid.uuid4()}"
         self.total_treatment_id = f"total_treatment_{uuid.uuid4()}"
         self.reduced_treatment_id = f"reduced_treatment_{uuid.uuid4()}"
+        self.table_fees = ""
+        self.table_treatments = ""
     
         cases_data = Case.search()
         cases_data_for_dropdown = [{'id': case['uid'], 'text': case['case_name']} for case in cases_data]
@@ -37,6 +39,8 @@ class SettlementCalculatorView:
         self.total_fees = ej.inputs.TextBox({'floatLabelType': 'Auto'})
         self.total_treatment = ej.inputs.TextBox({'floatLabelType': 'Auto'})
         self.reduced_treatment = ej.inputs.TextBox({'floatLabelType': 'Auto'})
+
+        self.dropdown_cases.addEventListener('change', self.dropdown_cases_change)
         
     def form_show(self):
         self.container_el.innerHTML = f'\
@@ -126,3 +130,10 @@ class SettlementCalculatorView:
 
         if self.container_el:
             self.container_el.innerHTML = ''
+    
+    def dropdown_cases_change(self, args):
+        tbl_fee_costs = jQuery(f"#{self.table_fees_id}")[0]
+        tbl_fee_costs.innerText = ""
+        self.total_fees.value = "0.00"
+        self.attorney_net.value = "0.00"
+        self.client_net.value = "0.00"
