@@ -23,9 +23,6 @@ class SettlementCalculatorView:
         self.total_treatment_id = f"total_treatment_{uuid.uuid4()}"
         self.reduced_treatment_id = f"reduced_treatment_{uuid.uuid4()}"
         
-        self.float_contingency_fee = .0
-        self.float_settlement_offer = .0
-    
         cases_data = Case.search()
         cases_data_for_dropdown = [{'id': case['uid'], 'text': case['case_name']} for case in cases_data]
         self.dropdown_cases = ej.dropdowns.DropDownList({
@@ -165,20 +162,25 @@ class SettlementCalculatorView:
         tbl_treatments.innerHTML = "<html><head><style>.settlement-table{border-collapse: collapse;width: 100%;}.settlement-td, .settlement-th {border: 1px solid #272d83;text-align: left;padding: 5px;}.settlement-tr:nth-child(even) {color: white;background-color: #272d83;}.settlement-tr:nth-child(even):hover {color: white;background-color: #898FDC;}.settlement-tr:nth-child(odd):hover {background-color: #f2f4f5;}</style></head><body><table class='settlement-table'><tr class='settlement-tr'><th class='settlement-th'>Date</th><th class='settlement-th'>Medical Treatment</th><th class='settlement-th'>Quantity</th><th class='settlement-th'>Amount</th><th class='settlement-th'>% Reduction</th><th class='settlement-th'>Total</th></tr>" + medical_output + "</table></body></html>"
 
     def textbox_congingency_change(self, args):
-        self.float_contingency_fee = float(args['value'] if args['value'] else '0')
         self.update_autovals()
     
     def textbox_settlement_change(self, args):
-        self.float_settlement_offer = float(args['value'] if args['value'] else '0')
         self.update_autovals()
 
     def update_autovals(self):
+        contingency_fee = jQuery(f"#{self.contingency_fee_id}")[0].value
+        settlement_offer = jQuery(f"#{self.settlement_offer_id}")[0].value
         total_fee_costs = jQuery(f"#{self.total_fees_id}")[0].value
-        print(total_fee_costs)
+        reduced_treatment = jQuery(f"#{self.reduced_treatment_id}")[0].value
+        print(f"contingency_fee = {contingency_fee}")
+        print(f"settlement_offer = {settlement_offer}")
+        print(f"total_fee_costs = {total_fee_costs}")
+        print(f"reduced_treatment = {reduced_treatment}")
+        
         # attorneys_fee = 0.00
         # client_net = 0.00
-        # contingency_fee_percent = self.float_contingency_fee / 100.0
-        # attorneys_fee = contingency_fee_percent * self.float_settlement_offer
-        # client_net = self.float_settlement_offer - input.Total_Fees_Costs - input.Reduced_Medical_Treatment - attorneys_fee
-        # input.Attorney_Firm_Net = attorneys_fee
-        # input.Client_Net = client_net
+        # contingency_fee_percent = contingency_fee / 100
+        # attorneys_fee = contingency_fee_percent * settlement_offer
+        # client_net = settlement_offer - total_fee_costs - reduced_treatment - attorneys_fee
+        # self.attorney_net.value = attorneys_fee
+        # self.client_net.value = client_net
