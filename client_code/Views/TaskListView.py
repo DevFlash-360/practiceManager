@@ -86,7 +86,6 @@ class TaskListView(GridView2):
         activity_data = Activity.search()
         activity_data_for_dropdown = [{'id': row['uid'], 'pid': 'activities', 'text': row['name']} for row in activity_data]
 
-
         dataSource = [
             {'id': 'statuses', 'text': 'Status', 'hasChild': True},
             {'id': 'complete', 'text': 'Complete', 'pid': 'statuses'},
