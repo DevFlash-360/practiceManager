@@ -27,7 +27,7 @@ class SettlementCalculatorView:
     
         cases_data = Case.search()
         cases_data_for_dropdown = [{'id': case['uid'], 'text': case['case_name']} for case in cases_data]
-        self.dropdown_cases = ej.dropdowns.DropDownList({
+        self.dropdown_cases = ej.dropdowns.DropDownTree({
             'dataSource': cases_data_for_dropdown
         })
         self.contingency_fee = ej.inputs.TextBox({'floatLabelType': 'Auto'})
