@@ -168,10 +168,10 @@ class SettlementCalculatorView:
         self.update_attorney_client()
 
     def update_attorney_client(self):
-        contingency_fee = jQuery(f"#{self.contingency_fee_id}")[0].value
-        settlement_offer = jQuery(f"#{self.settlement_offer_id}")[0].value
-        total_fee_costs = jQuery(f"#{self.total_fees_id}")[0].value
-        reduced_treatment = jQuery(f"#{self.reduced_treatment_id}")[0].value
+        contingency_fee = float(jQuery(f"#{self.contingency_fee_id}")[0].value)
+        settlement_offer = float(jQuery(f"#{self.settlement_offer_id}")[0].value)
+        total_fee_costs = float(jQuery(f"#{self.total_fees_id}")[0].value)
+        reduced_treatment = float(jQuery(f"#{self.reduced_treatment_id}")[0].value)
         
         if len(contingency_fee) > 0 and len(settlement_offer) > 0:
             attorneys_fee = 0.00
