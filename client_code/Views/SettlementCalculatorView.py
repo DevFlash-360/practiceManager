@@ -5,7 +5,7 @@ from datetime import datetime, timedelta
 from anvil.js.window import ej, jQuery
 from AnvilFusion.tools.utils import AppEnv, datetime_js_to_py
 
-from ..app.models import Case
+from ..app.models import Case, Expense
 
 class SettlementCalculatorView:
     def __init__(self, container_id, **kwargs):
@@ -22,8 +22,8 @@ class SettlementCalculatorView:
         self.table_treatment_id = f"total_treatment_{uuid.uuid4()}"
         self.total_treatment_id = f"total_treatment_{uuid.uuid4()}"
         self.reduced_treatment_id = f"reduced_treatment_{uuid.uuid4()}"
-        self.table_fees = ""
-        self.table_treatments = ""
+        # self.table_fees = ""
+        # self.table_treatments = ""
     
         cases_data = Case.search()
         cases_data_for_dropdown = [{'id': case['uid'], 'text': case['case_name']} for case in cases_data]
@@ -133,7 +133,29 @@ class SettlementCalculatorView:
     
     def dropdown_cases_change(self, args):
         tbl_fee_costs = jQuery(f"#{self.table_fees_id}")[0]
-        tbl_fee_costs.innerText = ""
-        self.total_fees.value = "0.00"
-        self.attorney_net.value = "0.00"
-        self.client_net.value = "0.00"
+        tbl_treatments = jQuery(f"#{self.table_treatment_id}")[0]
+        case_uid = self.dropdown_cases.value
+        # tbl_fee_costs.innerText = ""
+        # self.total_fees.value = "0.00"
+        # self.attorney_net.value = "0.00"
+        # self.client_net.value = "0.00"
+
+        case_expenses = Expense.search(case=case_uid)
+        expense_output = ""
+        medical_output = ""
+        fees = 0.00
+        treatment = 0.00
+        reduction_25_default = 0.00
+        for expense in case_expenses:
+            if expense.activity.name != 'Medical Treatment':
+                fees = fees + expense.total
+                expense_output = expense_output + "<tr class='settlement-tr'><td class='settlement-td'>" + expense.date.strftime("%b %d, %Y") + "</td><td class='settlement-td'>" + expense.activity.name + "</td><td class='settlement-td'>" + expense.quantity + "</td><td class='settlement-td'>" + expense.amount + "</td><td class='settlement-td'>" + expense.reduction + "</td><td class='settlement-td'>" + expense.total + "</td></tr>"
+            else:
+                treatment = treatment + expense.total
+                reduction_25_default = treatment - treatment * .25
+                medical_output = medical_output + "<tr class='settlement-tr'><td class='settlement-td'>" + expense.date.strftime("%b %d, %Y") + "</td><td class='settlement-td'>" + expense.activity.name + "</td><td class='settlement-td'>" + expense.quantity + "</td><td class='settlement-td'>" + expense.amount + "</td><td class='settlement-td'>" + expense.reduction + "</td><td class='settlement-td'>" + expense.total + "</td></tr>"
+        self.total_fees.value = fees
+        self.treatment_reduction.value = round(reduction_25_default, 2)
+        self.total_treatment.value = treatment
+        tbl_fee_costs.innerHTML = "<html><head><style>.settlement-table{border-collapse: collapse;width: 100%;}.settlement-td, .settlement-th {border: 1px solid #272d83;text-align: left;padding: 5px;}.settlement-tr:nth-child(even) {color: white;background-color: #272d83;}.settlement-tr:nth-child(even):hover {color: white;background-color: #898FDC;}.settlement-tr:nth-child(odd):hover {background-color: #f2f4f5;}</style></head><body><table class='settlement-table'><tr class='settlement-tr'><th class='settlement-th'>Date</th><th class='settlement-th'>Fees & Costs</th><th class='settlement-th'>Quantity</th><th class='settlement-th'>Amount</th><th class='settlement-th'>% Reduction</th><th class='settlement-th'>Total</th></tr>" + expense_output + "</table></body></html>"
+        tbl_treatments.innerHTML = "<html><head><style>.settlement-table{border-collapse: collapse;width: 100%;}.settlement-td, .settlement-th {border: 1px solid #272d83;text-align: left;padding: 5px;}.settlement-tr:nth-child(even) {color: white;background-color: #272d83;}.settlement-tr:nth-child(even):hover {color: white;background-color: #898FDC;}.settlement-tr:nth-child(odd):hover {background-color: #f2f4f5;}</style></head><body><table class='settlement-table'><tr class='settlement-tr'><th class='settlement-th'>Date</th><th class='settlement-th'>Medical Treatment</th><th class='settlement-th'>Quantity</th><th class='settlement-th'>Amount</th><th class='settlement-th'>% Reduction</th><th class='settlement-th'>Total</th></tr>" + medical_output + "</table></body></html>"
