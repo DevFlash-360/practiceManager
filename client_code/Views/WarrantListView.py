@@ -1,17 +1,17 @@
 import anvil.server
-import uuid
-from anvil.js.window import ej, jQuery
-from DevFusion.components.GridView2 import GridView2
-from datetime import datetime, date
-import anvil.js
+from AnvilFusion.components.GridView import GridView
 from AnvilFusion.tools.utils import AppEnv, get_cookie
-from ..app.models import CaseStage, Staff, Case, Task, Activity, User
+import anvil.js
+import uuid
 
 
-class WarrantListView(GridView2):
+class WarrantListView(GridView):
     def __init__(self, **kwargs):
         view_config = {
             'model': 'Case',
             'filter': {'case_stage.name': 'Pre-Charge'}
 		}
         super().__init__(model='Case', view_config=view_config, **kwargs)
+
+    def form_show(self, get_data=True, **args):
+        super().form_show(get_data=get_data, **args)
