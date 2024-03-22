@@ -24,7 +24,7 @@ class SettlementCalculatorView:
         self.reduced_treatment_id = f"reduced_treatment_{uuid.uuid4()}"
         
         cases_data = Case.search()
-        cases_data_for_dropdown = [{'id': case['uid'], 'text': case['case_name']} for case in cases_data]
+        cases_data_for_dropdown = [{'value': case['uid'], 'text': case['case_name']} for case in cases_data]
         self.dropdown_cases = ej.dropdowns.DropDownList({
             'dataSource': cases_data_for_dropdown
         })
