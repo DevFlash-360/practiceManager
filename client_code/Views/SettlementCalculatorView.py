@@ -137,8 +137,7 @@ class SettlementCalculatorView:
         tbl_treatments = jQuery(f"#{self.table_treatment_id}")[0]
         case_uid = args['value']
         case_sel = Case.get(case_uid)
-        print(f"case_uid = {case_uid}")
-        print(f"case_sel = {case_sel}")
+        print(args)
 
         case_expenses = Expense.search(case=case_sel)
         expense_output = ""
