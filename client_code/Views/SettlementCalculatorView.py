@@ -135,9 +135,8 @@ class SettlementCalculatorView:
     def dropdown_cases_change(self, args):
         tbl_fee_costs = jQuery(f"#{self.table_fees_id}")[0]
         tbl_treatments = jQuery(f"#{self.table_treatment_id}")[0]
-        case_uid = args['value']
+        case_uid = args['itemData']['value']
         case_sel = Case.get(case_uid)
-        print(args)
 
         case_expenses = Expense.search(case=case_sel)
         expense_output = ""
@@ -148,7 +147,6 @@ class SettlementCalculatorView:
         for expense in case_expenses:
             if expense.activity.name != 'Medical Treatment':
                 fees = fees + expense.total
-                print(expense['uid'])
                 expense_output = expense_output + "<tr class='settlement-tr'><td class='settlement-td'>" + expense.date.strftime("%b %d, %Y") + "</td><td class='settlement-td'>" + expense.activity.name + "</td><td class='settlement-td'>" + str(expense.quantity) + "</td><td class='settlement-td'>" + str(expense.amount) + "</td><td class='settlement-td'>" + str(expense.reduction) + "</td><td class='settlement-td'>" + str(expense.total) + "</td></tr>"
             else:
                 treatment = treatment + expense.total
