@@ -135,7 +135,7 @@ class SettlementCalculatorView:
     def dropdown_cases_change(self, args):
         tbl_fee_costs = jQuery(f"#{self.table_fees_id}")[0]
         tbl_treatments = jQuery(f"#{self.table_treatment_id}")[0]
-        case_uid = self.dropdown_cases.value
+        case_uid = args['value']
         case_sel = Case.get(case_uid)
         print(f"case_uid = {case_uid}")
         print(f"case_sel = {case_sel}")
