@@ -147,7 +147,7 @@ class SettlementCalculatorView:
         for expense in case_expenses:
             if expense.activity.name != 'Medical Treatment':
                 fees = fees + expense.total
-                print(expense)
+                print(expense['uid'])
                 expense_output = expense_output + "<tr class='settlement-tr'><td class='settlement-td'>" + expense.date.strftime("%b %d, %Y") + "</td><td class='settlement-td'>" + expense.activity.name + "</td><td class='settlement-td'>" + str(expense.quantity) + "</td><td class='settlement-td'>" + str(expense.amount) + "</td><td class='settlement-td'>" + str(expense.reduction) + "</td><td class='settlement-td'>" + str(expense.total) + "</td></tr>"
             else:
                 treatment = treatment + expense.total
