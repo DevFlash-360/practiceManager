@@ -125,6 +125,8 @@ class CaseForm(FormBase):
                 print(f"{field.name} = {self.data[field.name]}")
         try:
             self.next_case_search.hide()
+            if self.action == 'add':
+                self.next_case_search.value = date.today()
             if self.data is None or self.data == {}:
                 self.case_name.enabled = False
                 self.auto_generate_case_name.value = True
@@ -206,11 +208,6 @@ class CaseForm(FormBase):
                 self.litigation_rate.value = None
     
     def form_save(self, args):
-        if self.action == 'add':
-            self.data.next_case_search = date.today()
-            print("======== ==========")
-            print(self.data.next_case_search)
-            print(self.data.incident_date)
         super().form_save(args)
         if self.next_form:
             practice_area = PracticeArea.get_by('name', self.data.practice_area.name)
