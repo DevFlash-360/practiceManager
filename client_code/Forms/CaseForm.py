@@ -87,6 +87,7 @@ class CaseForm(FormBase):
                         self.staff,
                         self.share_case_information_with,
                         self.lead,
+                        self.next_case_search
                     ],
                 ]},
                 {'name': 'case_contacts', 'label': 'Case Contacts', 'rows': [
@@ -119,12 +120,11 @@ class CaseForm(FormBase):
 
     def form_open(self, args):
         super().form_open(args)
-        print('CaseForm.form_open start')
-        print(self.data)
         for field in [x for x in self.form_fields if not x.is_dependent and x not in self.subforms]:
             if field.name and getattr(self.data, field.name, None):
                 print(f"{field.name} = {self.data[field.name]}")
         try:
+            self.next_case_search.hide()
             if self.data is None or self.data == {}:
                 self.case_name.enabled = False
                 self.auto_generate_case_name.value = True
