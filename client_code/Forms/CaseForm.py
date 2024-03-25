@@ -65,7 +65,7 @@ class CaseForm(FormBase):
         self.investigator_budget = NumberInput(name='investigator_budget', label='Investigator Budget')
         self.record_seal_expungement = CheckboxInput(name='record_seal_expungement',
                                                      label='Record Seal/Expungement Included')
-
+        self.next_case_search = DateInput(name='next_case_search', label='Next Search Date')
         tabs = [
             {'name': 'case_details', 'label': 'Case Details', 'sections': [
                 {'name': 'case_info', 'label': 'Case Information', 'rows': [
