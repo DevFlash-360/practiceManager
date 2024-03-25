@@ -207,6 +207,8 @@ class CaseForm(FormBase):
     
     def form_save(self, args):
         super().form_save(args)
+        if self.action == 'add':
+            print(f"Case add data = {self.data}")
         if self.next_form:
             practice_area = PracticeArea.get_by('name', self.data.practice_area.name)
             workflow = CaseWorkflow.get_by("practice_area", practice_area)

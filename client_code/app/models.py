@@ -172,6 +172,7 @@ class Case:
     incident_date = Attribute(field_type=types.FieldTypes.DATE)
     incident_location = Attribute(field_type=types.FieldTypes.ADDRESS)
     case_description = Attribute(field_type=types.FieldTypes.MULTI_LINE)
+    next_case_search = Attribute(field_type=types.FieldTypes.DATE)
     clients = Relationship('Client', with_many=True)
     contacts = Relationship('Contact', with_many=True)
     staff = Relationship('Staff', with_many=True)
