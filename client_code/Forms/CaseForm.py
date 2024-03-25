@@ -209,7 +209,8 @@ class CaseForm(FormBase):
         if self.action == 'add':
             self.data.next_case_search = date.today()
             print("======== ==========")
-            print(self.data)
+            print(self.data.next_case_search)
+            print(self.data.incident_date)
         super().form_save(args)
         if self.next_form:
             practice_area = PracticeArea.get_by('name', self.data.practice_area.name)
