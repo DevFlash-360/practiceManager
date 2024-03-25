@@ -1052,6 +1052,9 @@ db_schema:
       admin_ui: {width: 200}
       type: link_multiple
       target: causes_of_action
+    - name: next_case_search
+      admin_ui: {width: 200}
+      type: date
   timesheets:
     title: Timesheets
     client: none
