@@ -4,7 +4,7 @@ from AnvilFusion.components.FormInputs import *
 
 from AnvilFusion.tools.utils import AppEnv
 from ..app.models import CaseWorkflow, CaseWorkflowItem, PracticeArea, Task, Event
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, date
 
 
 FEE_TYPE_RETAINER = ('Flat Fee', 'Hourly', 'Hybrid Flat/Hourly', 'Hybrid Flat/Contingency')
@@ -206,9 +206,9 @@ class CaseForm(FormBase):
                 self.litigation_rate.value = None
     
     def form_save(self, args):
-        super().form_save(args)
         if self.action == 'add':
-            print(f"Case add data = {self.data}")
+            self.data.next_case_search = date.today()
+        super().form_save(args)
         if self.next_form:
             practice_area = PracticeArea.get_by('name', self.data.practice_area.name)
             workflow = CaseWorkflow.get_by("practice_area", practice_area)
