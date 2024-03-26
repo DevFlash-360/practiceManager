@@ -23,17 +23,11 @@ class WarrantListView(GridView2):
                 {'name': 'contacts.full_name', 'label': 'Contacts'},
             ]
         }
-        if len(self.pre_charge_uids) > 0:
-            filters = {
-                'case_stage': {'uid': self.pre_charge_uids[0]}
-            }
-        else:
-            filters = None
         super().__init__(model='Case', view_config=view_config, **kwargs)
-
+        self.filter_cases()
 
     def form_show(self, get_data=True, **args):
-        self.grid.filterByColumn('uid', 'equal', self.pre_charge_uids)
+        self.grid.filterByColumn('case_stage.uid', 'equal', self.pre_charge_uids)
         super().form_show(get_data=get_data, **args)
     
     def open_dashboard(self, args):
