@@ -1,11 +1,11 @@
 import anvil.server
-from AnvilFusion.components.GridView import GridView
+from DevFusion.components.GridView2 import GridView2
 from AnvilFusion.tools.utils import AppEnv, get_cookie
 import anvil.js
 import uuid
 
 
-class WarrantListView(GridView):
+class WarrantListView(GridView2):
     def __init__(self, **kwargs):
         view_config = {
             'model': 'Case',
