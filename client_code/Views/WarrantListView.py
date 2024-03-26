@@ -10,7 +10,10 @@ class WarrantListView(GridView):
         view_config = {
             'model': 'Case',
             'columns': [
-                
+                {'name': 'next_case_search', 'label': 'Next Case Search'},
+                {'name': 'case_name', 'label': 'Case Name'},
+                {'name': 'incident_location', 'label': 'Incident Location'},
+                {'name': 'contacts.full_name', 'label': 'Contacts'},
 			]
         }
         super().__init__(model='Case', view_config=view_config, **kwargs)
