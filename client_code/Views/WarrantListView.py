@@ -9,11 +9,11 @@ from ..app.models import CaseStage, CaseStatus, Case
 
 class WarrantListView(GridView2):
     def __init__(self, **kwargs):
-        pre_charge_uids = []
+        self.pre_charge_uids = []
         case_stage_pre_charge = CaseStage.search(name='Pre-Charge')
         if case_stage_pre_charge:
             for ele in case_stage_pre_charge:
-                pre_charge_uids.append(ele['uid'])
+                self.pre_charge_uids.append(ele['uid'])
         view_config = {
             'model': 'Case',
             'columns': [
@@ -23,19 +23,19 @@ class WarrantListView(GridView2):
                 {'name': 'contacts.full_name', 'label': 'Contacts'},
             ]
         }
-        if len(pre_charge_uids) > 0:
+        if len(self.pre_charge_uids) > 0:
             filters = {
-                'case_stage': {'uid': pre_charge_uids[0]}
+                'case_stage': {'uid': self.pre_charge_uids[0]}
             }
         else:
             filters = None
         super().__init__(model='Case', view_config=view_config, **kwargs)
 
-        self.grid.filterByColumn('uid', 'equal', pre_charge_uids)
 
     def form_show(self, get_data=True, **args):
         print("WarrantSearch/form_show")
         super().form_show(get_data=get_data, **args)
+        self.grid.filterByColumn('uid', 'equal', self.pre_charge_uids)
     
     def open_dashboard(self, args):
         AppEnv.navigation.show_menu('case_menu', subcomponent='case_dashboard',
