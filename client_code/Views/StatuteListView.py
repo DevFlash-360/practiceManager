@@ -12,5 +12,11 @@ class StatuteListView(GridView2):
     def __init__(self, **kwargs):
         view_config = {
             'model': 'CauseOfAction',
+            'columns': [
+                {'name': 'type_of_action.name', 'label': 'Type'},
+                {'name': 'statute_id', 'label': 'Statute ID'},
+                {'name': 'cause_of_action', 'label': 'Cause of Action'},
+                {'name': 'penalty', 'label': 'Penalty'},
+			]
 		}
         super().__init__(model='Case', view_config=view_config, **kwargs)
