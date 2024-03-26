@@ -25,7 +25,7 @@ class WarrantListView(GridView2):
             ]
         }
         super().__init__(model='Case', view_config=view_config, **kwargs)
-        self.filter_cases()
+        # self.filter_cases()
 
     def form_show(self, get_data=True, **args):
         self.grid.filterByColumn('case_stage__name', 'equal', 'Pre-Charge')
