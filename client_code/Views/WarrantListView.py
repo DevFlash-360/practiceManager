@@ -9,9 +9,11 @@ from ..app.models import CaseStage, CaseStatus
 
 class WarrantListView(GridView2):
     def __init__(self, **kwargs):
+        pre_charge_uids = []
         case_stage_pre_charge = CaseStage.search(name='Pre-Charge')
         if case_stage_pre_charge:
-            case_stage_pre_charge = case_stage_pre_charge.first()
+            for ele in case_stage_pre_charge:
+                pre_charge_uids.append(ele['uid'])
         view_config = {
             'model': 'Case',
             'columns': [
@@ -22,9 +24,8 @@ class WarrantListView(GridView2):
                 {'name': 'contacts.full_name', 'label': 'Contacts'},
             ]
         }
-        # filters = {'case_stage': {'name': 'Pre-Charge'}}
+        filters = {'case_stage': {'uid': pre_charge_uids}} if len(pre_charge_uids)>0 else None
         # filters = {'case_stage': {'name': 'Pre-Charge'}, 'case_status': {'name': 'Open'}}
-        filters = None
         super().__init__(model='Case', view_config=view_config, filters=filters, **kwargs)
 
     def form_show(self, get_data=True, **args):
