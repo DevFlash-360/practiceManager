@@ -31,8 +31,7 @@ class WarrantListView(GridView2):
         # else:
         #     filters = None
         # filters = {'case_stage': {'name': 'Pre-Charge'}, 'case_status': {'name': 'Open'}}
-        filters = None
-        super().__init__(model='Case', view_config=view_config, filters=filters, **kwargs)
+        super().__init__(model='Case', view_config=view_config, **kwargs)
 
     def form_show(self, get_data=True, **args):
         print("WarrantSearch/form_show")
