@@ -34,6 +34,7 @@ class WarrantListView(GridView2):
         super().__init__(model='Case', view_config=view_config, filters=filters, **kwargs)
 
     def form_show(self, get_data=True, **args):
+        print("WarrantSearch/form_show")
         super().form_show(get_data=get_data, **args)
     
     def open_dashboard(self, args):
