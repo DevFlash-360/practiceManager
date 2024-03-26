@@ -15,7 +15,8 @@ class WarrantListView(GridView2):
                 {'name': 'case_name', 'label': 'Case Name'},
                 {'name': 'incident_location', 'label': 'Incident Location'},
                 {'name': 'contacts.full_name', 'label': 'Contacts'},
-            ]
+            ],
+            'filter': {'case_stage.name': 'Pre-Charge', 'case_status.name': 'Open'}
         }
         super().__init__(model='Case', view_config=view_config, **kwargs)
 
