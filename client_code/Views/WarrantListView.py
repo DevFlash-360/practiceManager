@@ -24,7 +24,7 @@ class WarrantListView(GridView2):
                 {'name': 'contacts.full_name', 'label': 'Contacts'},
             ]
         }
-        filters = {'case_stage': {'uid': pre_charge_uids}} if len(pre_charge_uids)>0 else None
+        filters = {'case_stage': {'uid': pre_charge_uids[0]}} if len(pre_charge_uids)>0 else None
         print(filters)
         # filters = {'case_stage': {'name': 'Pre-Charge'}, 'case_status': {'name': 'Open'}}
         super().__init__(model='Case', view_config=view_config, filters=filters, **kwargs)
