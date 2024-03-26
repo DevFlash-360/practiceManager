@@ -25,7 +25,7 @@ class WarrantListView(GridView2):
         }
         if len(pre_charge_uids) > 0:
             filters = {
-                'case_stage': {'uid': pre_charge_uids[0]}
+                'case_stage': {'uid': pre_charge_uids}
             }
         else:
             filters = None
