@@ -11,7 +11,7 @@ class WarrantListView(GridView2):
     def __init__(self, **kwargs):
         case_stage_pre_charge = CaseStage.search(name='Pre-Charge')
         if case_stage_pre_charge:
-            case_stage_pre_charge = case_stage_pre_charge[0]
+            case_stage_pre_charge = case_stage_pre_charge.first()
         view_config = {
             'model': 'Case',
             'columns': [
