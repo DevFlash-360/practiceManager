@@ -25,11 +25,13 @@ class WarrantListView(GridView2):
         }
         if len(pre_charge_uids) > 0:
             filters = {
-                'case_stage': {'uid': pre_charge_uids}
+                'case_stage': {'uid': pre_charge_uids[0]}
             }
         else:
             filters = None
-        super().__init__(model='Case', view_config=view_config, filters=filters, **kwargs)
+        super().__init__(model='Case', view_config=view_config, **kwargs)
+
+        self.grid.filterByColumn('uid', 'equal', pre_charge_uids)
 
     def form_show(self, get_data=True, **args):
         print("WarrantSearch/form_show")
