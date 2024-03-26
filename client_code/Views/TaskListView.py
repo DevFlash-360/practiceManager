@@ -312,6 +312,7 @@ class TaskListView(GridView2):
         super().row_selected(args)
         
     def details_content(self, args):
+        print(args)
         task = args['data']
         item = Task.get(task['uid'])
         created_by = User.get(item['created_by']) if item['created_by'] else None
