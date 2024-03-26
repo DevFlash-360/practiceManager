@@ -22,6 +22,7 @@ class WarrantListView(GridView2):
                 {'name': 'incident_location', 'label': 'Incident Location'},
                 {'name': 'contacts.full_name', 'label': 'Contacts'},
                 {'name': 'case_stage.name', 'label': 'Case Stage', 'visible': False},
+                {'name': 'case_status.name', 'label': 'Case Status', 'visible': False},
             ]
         }
         super().__init__(model='Case', view_config=view_config, **kwargs)
@@ -29,7 +30,9 @@ class WarrantListView(GridView2):
 
     def form_show(self, get_data=True, **args):
         super().form_show(get_data=get_data, **args)
+        self.grid.clearFiltering()
         self.grid.filterByColumn('case_stage__name', 'equal', 'Pre-Charge')
+        self.grid.filterByColumn('case_status__name', 'equal', 'Open')
     
     def open_dashboard(self, args):
         AppEnv.navigation.show_menu('case_menu', subcomponent='case_dashboard',
