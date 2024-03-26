@@ -13,7 +13,7 @@ class StatuteListView(GridView2):
         view_config = {
             'model': 'CauseOfAction',
             'columns': [
-                {'name': 'type_of_action.name', 'label': 'Type'},
+                {'name': 'type_of_action.name', 'label': 'Type', 'width': 150},
                 {'name': 'statute_id', 'label': 'Statute ID', 'width': 100},
                 {'name': 'cause_of_action', 'label': 'Cause of Action'},
                 {'name': 'penalty', 'label': 'Penalty'},
