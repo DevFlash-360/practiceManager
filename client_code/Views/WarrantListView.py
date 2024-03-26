@@ -5,20 +5,26 @@ from AnvilFusion.tools.utils import AppEnv, get_cookie
 import anvil.js
 import uuid
 
+from ..app.models import CaseStage, CaseStatus
 
 class WarrantListView(GridView2):
     def __init__(self, **kwargs):
+        case_stage_pre_charge = CaseStage.search(name='Pre-Charge')
+        if case_stage_pre_charge:
+            case_stage_pre_charge = case_stage_pre_charge[0]
         view_config = {
             'model': 'Case',
             'columns': [
+                {'name': 'uid', 'label': 'uid', 'visible': False},
                 {'name': 'next_case_search', 'label': 'Next Case Search'},
                 {'name': 'case_name', 'label': 'Case Name'},
                 {'name': 'incident_location', 'label': 'Incident Location'},
                 {'name': 'contacts.full_name', 'label': 'Contacts'},
             ]
         }
-        filters = {'case_stage': {'name': 'Pre-Charge'}}
+        # filters = {'case_stage': {'name': 'Pre-Charge'}}
         # filters = {'case_stage': {'name': 'Pre-Charge'}, 'case_status': {'name': 'Open'}}
+        filters = None
         super().__init__(model='Case', view_config=view_config, filters=filters, **kwargs)
 
     def form_show(self, get_data=True, **args):
