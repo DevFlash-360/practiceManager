@@ -33,6 +33,8 @@ class ExpenseView(GridView):
         else:
             filters = None
         
+        print(filters)
+        
         super().__init__(model='Expense', view_config=view_config, filters=filters, **kwargs)
 
     def form_show(self, get_data=True, **args):

@@ -2,6 +2,7 @@ import anvil.server
 from AnvilFusion.components.FormBase import FormBase, POPUP_WIDTH_COL2
 from AnvilFusion.components.FormInputs import *
 
+from ..app.models import PerformanceIncentive, Staff
 
 # payment method options
 PAYMENT_METHOD_CARD = 'Card'
@@ -51,3 +52,69 @@ class PaymentForm(FormBase):
         ]
 
         super().__init__(sections=sections, width=POPUP_WIDTH_COL2, **kwargs)
+        
+    def form_save(self, args):
+        super().form_save(args)
+
+
+
+        # Calculate performance incentives
+        assigned_attorneys = self.data.case.assigned_attorneys
+        assigned_attorney_ids = [member.uid for member in assigned_attorneys]
+        assigned_staffs = self.data.case.staff
+        assigned_staff_ids = [member.uid for member in assigned_staffs]
+        all_staffs = Staff.search()
+        
+        eligible_cnt = len(assigned_staffs)
+        for staff in assigned_staffs:
+            if staff.staff_group.name == 'Attorney':
+                eligible_cnt = eligible_cnt - 1
+
+        for staff in assigned_staffs:
+            if staff['enable_performance_incentives'] and staff['intake_performance_incentive']:
+                div_cnt = 1 if staff.staff_group.name == 'Attorney' else eligible_cnt
+                amount = staff['intake_performance_incentive']*self.data.amount/div_cnt
+                if self.action == 'add':
+                    incentive = PerformanceIncentive(
+                        staff=staff,
+                        amount=amount,
+                        payment=self.data
+                    )
+                    incentive.save()
+                elif self.action == 'edit':
+                    incentives = PerformanceIncentive.search(payment=self.data, staff=staff)
+                    for incentive in incentives:
+                        incentive.amount = amount
+                        incentive.save()
+        
+        for staff in assigned_attorneys:
+            if staff['enable_performance_incentives'] and staff['intake_performance_incentive'] and staff.uid not in assigned_staff_ids:
+                amount = staff['intake_performance_incentive']*self.data.amount
+                if self.action == 'add':
+                    incentive = PerformanceIncentive(
+                        staff=staff,
+                        amount=amount,
+                        payment=self.data
+                    )
+                    incentive.save()
+                elif self.action == 'edit':
+                    incentives = PerformanceIncentive.search(payment=self.data, staff=staff)
+                    for incentive in incentives:
+                        incentive.amount = amount
+                        incentive.save()
+        
+        for staff in all_staffs:
+            if staff['override_incentive'] and staff.uid not in assigned_attorney_ids and staff.uid not in assigned_staff_ids:
+                amount = staff['override_incentive']*self.data.amount
+                if self.action == 'add':
+                    incentive = PerformanceIncentive(
+                        staff=staff,
+                        amount=staff['override_incentive']*self.data.amount,
+                        payment=self.data
+                    )
+                    incentive.save()
+                elif self.action == 'edit':
+                    incentives = PerformanceIncentive.search(payment=self.data, staff=staff)
+                    for incentive in incentives:
+                        incentive.amount = amount
+                        incentive.save()

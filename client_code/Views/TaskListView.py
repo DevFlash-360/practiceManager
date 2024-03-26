@@ -86,7 +86,6 @@ class TaskListView(GridView2):
         activity_data = Activity.search()
         activity_data_for_dropdown = [{'id': row['uid'], 'pid': 'activities', 'text': row['name']} for row in activity_data]
 
-
         dataSource = [
             {'id': 'statuses', 'text': 'Status', 'hasChild': True},
             {'id': 'complete', 'text': 'Complete', 'pid': 'statuses'},
@@ -313,6 +312,7 @@ class TaskListView(GridView2):
         super().row_selected(args)
         
     def details_content(self, args):
+        print(args)
         task = args['data']
         item = Task.get(task['uid'])
         created_by = User.get(item['created_by']) if item['created_by'] else None

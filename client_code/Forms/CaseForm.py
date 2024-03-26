@@ -1,7 +1,10 @@
 import anvil.server
 from AnvilFusion.components.FormBase import FormBase, POPUP_WIDTH_COL3
 from AnvilFusion.components.FormInputs import *
-from .. import Forms
+
+from AnvilFusion.tools.utils import AppEnv
+from ..app.models import CaseWorkflow, CaseWorkflowItem, PracticeArea, Task, Event
+from datetime import datetime, timedelta, date
 
 
 FEE_TYPE_RETAINER = ('Flat Fee', 'Hourly', 'Hybrid Flat/Hourly', 'Hybrid Flat/Contingency')
@@ -10,10 +13,12 @@ FEE_TYPE_LITIGATION = ('Contingency', 'Hybrid Flat/Contingency', 'Hybrid Hourly/
 
 class CaseForm(FormBase):
 
-    def __init__(self, **kwargs):
+    def __init__(self, next_form=None, **kwargs):
 
         print('CaseForm')
         kwargs['model'] = 'Case'
+        self.next_form = next_form if next_form else None
+        print(f"next_form = {self.next_form}")
         
         self.auto_generate_case_name = CheckboxInput(name='auto_generate_case_name', label='Auto Generate Case Name',
                                                      save=False)
@@ -60,7 +65,7 @@ class CaseForm(FormBase):
         self.investigator_budget = NumberInput(name='investigator_budget', label='Investigator Budget')
         self.record_seal_expungement = CheckboxInput(name='record_seal_expungement',
                                                      label='Record Seal/Expungement Included')
-
+        self.next_case_search = DateInput(name='next_case_search', label='Next Search Date')
         tabs = [
             {'name': 'case_details', 'label': 'Case Details', 'sections': [
                 {'name': 'case_info', 'label': 'Case Information', 'rows': [
@@ -82,6 +87,7 @@ class CaseForm(FormBase):
                         self.staff,
                         self.share_case_information_with,
                         self.lead,
+                        self.next_case_search
                     ],
                 ]},
                 {'name': 'case_contacts', 'label': 'Case Contacts', 'rows': [
@@ -114,12 +120,13 @@ class CaseForm(FormBase):
 
     def form_open(self, args):
         super().form_open(args)
-        print('CaseForm.form_open start')
-        print(self.data)
         for field in [x for x in self.form_fields if not x.is_dependent and x not in self.subforms]:
             if field.name and getattr(self.data, field.name, None):
                 print(f"{field.name} = {self.data[field.name]}")
         try:
+            self.next_case_search.hide()
+            if self.action == 'add':
+                self.next_case_search.value = date.today()
             if self.data is None or self.data == {}:
                 self.case_name.enabled = False
                 self.auto_generate_case_name.value = True
@@ -199,3 +206,40 @@ class CaseForm(FormBase):
                 self.pre_litigation_rate.value = None
                 self.litigation_rate.hide()
                 self.litigation_rate.value = None
+    
+    def form_save(self, args):
+        super().form_save(args)
+        if self.next_form:
+            practice_area = PracticeArea.get_by('name', self.data.practice_area.name)
+            workflow = CaseWorkflow.get_by("practice_area", practice_area)
+            workflow_items = CaseWorkflowItem.search(case_workflow=workflow)
+            for item in workflow_items:
+                item_type = item['type']
+
+                item_date = None
+                if item['due_date_base'] == 'Case Open Date':
+                    item_date = self.data.created_time
+                    item_date = item_date + timedelta(days=item['duration'])
+                if not item_date:
+                    item_date = datetime.now()
+
+                if item_type == 'Task':
+                    task = Task(
+                        due_date=item_date.date(),
+                        activity=item['activity'],
+                        assigned_staff=item['assigned_to'],
+                        priority=item['priority'],
+                        notes=item['notes']
+                    )
+                    task.save()
+                elif item_type == 'Event':
+                    event = Event(
+                        start_time = item_date,
+                        end_time=item_date+timedelta(days=1),
+                        case=self.data,
+                        activity=item['activity'],
+                        staff=item['assigned_to']
+                    )
+                    event.save()
+                
+            self.next_form.form_show()

@@ -44,10 +44,8 @@ native_deps: {head_html: "<!-- Material Design icons -->\n<link href=\"https://c
     \ type=\"text/javascript\"></script>\n<script src=\"_/theme/aws-sdk-v3-bundle.js\"\
     \ type=\"text/javascript\"></script>\n\n<link href=\"_/theme/anvil-fusion.css\"\
     \ rel=\"stylesheet\">\n<link href=\"_/theme/pmapp.css\" rel=\"stylesheet\">\n\n\
-    <!-- Custom stylesheets -->\n<!-- <link href=\"https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css\"\
-    \ rel=\"stylesheet\"> -->\n<link href=\"https://cdn.syncfusion.com/ej2/24.1.41/ej2-base/styles/material.css\"\
+    <!-- Custom stylesheets -->\n<!-- <link href=\"https://cdn.syncfusion.com/ej2/24.1.41/ej2-base/styles/material.css\"\
     \ rel=\"stylesheet\">\n<link href=\"https://cdn.syncfusion.com/ej2/24.1.41/ej2-buttons/styles/material.css\"\
-    \ rel=\"stylesheet\">\n<!-- <link href=\"https://cdn.syncfusion.com/ej2/24.1.41/ej2-navigations/styles/material.css\"\
     \ rel=\"stylesheet\"> -->\n\n<!-- Custom scripts -->\n<script src=\"https://cdn.syncfusion.com/ej2/24.1.41/dist/ej2.min.js\"\
     \ type=\"text/javascript\"></script>\n<script src=\"https://cdn.syncfusion.com/ej2/syncfusion-helper.js\"\
     \ type =\"text/javascript\"></script>\n<!-- Packages -->\n<script>\n  ej.base.registerLicense('ORg4AjUWIQA/Gnt2VlhhQlJCfV5AQmBIYVp/TGpJfl96cVxMZVVBJAtUQF1hSn5ad01iX35acXdQQmlc');\n\
@@ -294,6 +292,40 @@ db_schema:
     - {name: updated_by, admin_ui: null, type: string}
     - {name: created_time, admin_ui: null, type: datetime}
     - {name: updated_time, admin_ui: null, type: datetime}
+  performance_incentives:
+    client: none
+    server: full
+    columns:
+    - name: staff
+      admin_ui: {width: 200, order: 0}
+      type: link_single
+      target: staff
+    - name: amount
+      admin_ui: {width: 200, order: 1}
+      type: number
+    - name: payment
+      admin_ui: {width: 200, order: 2}
+      type: link_single
+      target: payments
+    - name: uid
+      admin_ui: {width: 200, order: 3}
+      type: string
+    - name: created_time
+      admin_ui: {width: 200, order: 4}
+      type: datetime
+    - name: updated_time
+      admin_ui: {width: 200, order: 5}
+      type: datetime
+    - name: created_by
+      admin_ui: {width: 200, order: 6}
+      type: string
+    - name: updated_by
+      admin_ui: {width: 200, order: 7}
+      type: string
+    - name: tenant_uid
+      admin_ui: {width: 200, order: 8}
+      type: string
+    title: Performance Incentives
   tasks:
     title: Tasks
     client: none
@@ -310,7 +342,7 @@ db_schema:
       type: link_single
       target: activities
     - name: created_time
-      admin_ui: {width: 200}
+      admin_ui: {order: 3, width: 262}
       type: datetime
     - name: updated_time
       admin_ui: {width: 200}
@@ -1020,6 +1052,9 @@ db_schema:
       admin_ui: {width: 200}
       type: link_multiple
       target: causes_of_action
+    - name: next_case_search
+      admin_ui: {width: 200}
+      type: date
   timesheets:
     title: Timesheets
     client: none

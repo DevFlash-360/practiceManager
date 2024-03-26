@@ -9,3 +9,8 @@ from .CaseAgendaView import CaseAgendaView
 from .TimeEntryView import TimeEntryView
 from .ExpenseView import ExpenseView
 from .InvoiceListView import InvoiceListView
+from .DateCalculatorView import DateCalculatorView
+from .SettlementCalculatorView import SettlementCalculatorView
+from .ProbationCalculatorView import ProbationCalculatorView
+from .WarrantListView import WarrantListView
+from .StatuteListView import StatuteListView

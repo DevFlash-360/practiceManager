@@ -13,13 +13,12 @@ class CaseWorkflowItemForm(FormBase):
         self.type = RadioButtonInput(name='type', label='Type', options=['Task', 'Event'], value='Task')
         self.activity = LookupInput(name='activity', label='Activity', model='Activity')
         self.related_task = LookupInput(name='related_task', label='Related Task', 
-                                        model='CaseWorkflowItem', text_field='activity',
+                                        model='CaseWorkflowItem', text_field='activity.name',
                                         on_change=self.related_task_selected,
                                         get_data=False)
         self.due_date_base = RadioButtonInput(name='due_date_base', label='Due Date Based On', 
                                               options=[
                                                   'Case Open Date',
-                                                  'Case Activity',
                                                   'Completion of Previous Task',
                                                   'No Due Date',
                                               ],
@@ -66,6 +65,16 @@ class CaseWorkflowItemForm(FormBase):
         if self.due_date_base.value == 'Completion of Previous Task':
             self.related_task.show()
             if self.source and self.source.grid.dataSource:
+                # print(f"self.data.uid = {self.data.uid}")
+                # print("---- 1----- ")
+                # self.related_task.data = []
+                # print(f"---- self.related_task = {self.related_task}----- ")
+                # print(f"---- self.related_task.data = {self.related_task.data}----- ")
+                # for x in self.source.grid.dataSource:
+                #     if x['uid'] != self.data.uid:
+                #         print("---- 2----- ")
+                #         self.related_task.data.append(x)
+                #         print("---- 3----- ")
                 self.related_task.data = [x for x in self.source.grid.dataSource if x['uid'] != self.data.uid]
 
         elif self.due_date_base.value == 'No Due Date':

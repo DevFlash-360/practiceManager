@@ -143,11 +143,11 @@ PMAPP_NAV_ITEMS = {
     'intake_leads': {'class': 'LeadListView', 'type': 'custom', 'action': 'open', 'props': {}},
     # 'intake_lead_analytics': {'model': '', 'type': 'page|view|form', 'action': 'open|popup', 'props': {}},
 
-    # 'tools_date_calculator': {'model': '', 'type': 'view', 'action': 'open', 'props': {}},
-    # 'tools_probation_calculator': {'model': '', 'type': 'view', 'action': 'open', 'props': {}},
-    # 'tools_settlement_calculator': {'model': '', 'type': 'view', 'action': 'open', 'props': {}},
-    # 'tools_statute_search': {'model': '', 'type': 'view', 'action': 'open', 'props': {}},
-    # 'tools_warrant_search': {'model': '', 'type': 'view', 'action': 'open', 'props': {}},
+    'tools_date_calculator': {'class': 'DateCalculatorView', 'type': 'custom', 'action': 'open', 'props': {}},
+    'tools_probation_calculator': {'class': 'ProbationCalculatorView', 'type': 'custom', 'action': 'open', 'props': {}},
+    'tools_settlement_calculator': {'class': 'SettlementCalculatorView', 'type': 'custom', 'action': 'open', 'props': {}},
+    'tools_statute_search': {'class': 'StatuteListView', 'type': 'custom', 'action': 'open', 'props': {}},
+    'tools_warrant_search': {'class': 'WarrantListView', 'type': 'custom', 'action': 'open', 'props': {}},
     # 'tools_analytics': {'model': '', 'type': 'view', 'action': 'open', 'props': {}},
     'tools_admin_activity': {'model': 'Activity', 'type': 'view', 'action': 'open', 'props': {}},
     'tools_admin_bank_account_type': {'model': 'BankAccountType', 'type': 'view', 'action': 'open', 'props': {}},
@@ -181,7 +181,7 @@ PMAPP_NAV_ITEMS = {
     'finance_ledger': {'model': 'Ledger', 'type': 'view', 'action': 'open', 'props': {}},
     'finance_bank_accounts': {'model': 'BankAccount', 'type': 'view', 'action': 'open', 'config': 'BankAccountView',
                               'props': {}},
-    # 'finance_incentives': {'model': '', 'type': 'view', 'action': 'open', 'props': {}},
+    'finance_incentives': {'model': 'PerformanceIncentive', 'type': 'view', 'action': 'open', 'props': {}},
     # 'finance_timeoff': {'model': '', 'type': 'view', 'action': 'open', 'props': {}},
     # 'finance_reimbursement': {'model': '', 'type': 'view', 'action': 'open', 'props': {}},
     'finance_timesheets': {'model': 'Timesheet', 'type': 'view', 'action': 'open', 'config': 'TimesheetView',
@@ -213,7 +213,6 @@ class AppbarMenu:
         self.selected_el = args.element
         self.selected_el.classList.add('pm-appbar-menu-selected')
         menu_id = args.item.properties.id
-        print(menu_id)
         self.sidebar.show_menu(menu_id)
 
 
@@ -276,15 +275,12 @@ class Sidebar:
         self.menu_select(None, subcomponent=(subcomponent or PMAPP_DEFAULT_NAV_ITEMS[menu_id]), props=props)
 
     def menu_select(self, args, subcomponent=None, props=None):
-        print(f"navigation/menu_select\n args={args}\nsubcomponent={subcomponent}\nprops={props}\n================")
-
         if subcomponent is None:
             if 'e-level-1' in list(args.node.classList):
                 self.menu.collapseAll()
                 self.menu.expandAll([args.node])
                 self.nav_target_id = None
             menu_item_id = args.nodeData.id
-            print(menu_item_id)
             component = PMAPP_NAV_ITEMS[menu_item_id] if menu_item_id in PMAPP_NAV_ITEMS else None
         else:
             component = PMAPP_NAV_ITEMS[subcomponent]
@@ -330,7 +326,6 @@ class Sidebar:
 
         if hasattr(self.content_control, 'target_id'):
             self.nav_target_id = self.content_control.target_id
-        print(f"self.content_control={self.content_control}\nself.nav_target_id={self.nav_target_id}")
 
         # try:
         # print(component, self.content_control)
@@ -386,11 +381,9 @@ class DetailsView:
         jQuery(f"#btn_details_lost")[0].style.display = 'None'
 
     def show(self):
-        print("details show")
         self.sidebar.show()
     
     def hide(self, args=None):
-        print("details hide")
         self.sidebar.hide()
 
     def show_reopen(self):
@@ -405,17 +398,22 @@ class DetailsView:
     
     def lead_won_handler(self, args):
         print(f"lead_won_handler {AppEnv.details_lead_uid}")
-        form_control = Forms.CaseForm(target="pm-content")
+        form_invoice = Forms.InvoiceForm(target="pm-content")
+        form_case = Forms.CaseForm(target="pm-content", next_form=form_invoice)
+        
         lead = Lead.get(AppEnv.details_lead_uid)
-        for field in [x for x in form_control.form_fields if not x.is_dependent and x not in form_control.subforms]:
+        for field in [x for x in form_case.form_fields if not x.is_dependent and x not in form_case.subforms]:
             field.show()
             if field.name and getattr(lead, field.name, None):
                 field.value = lead[field.name]
-        for field in form_control.form_fields:
+        for field in form_case.form_fields:
             if field.on_change is not None:
                 field.on_change({'name': field.name, 'value': field.value})
+        lead.update({'lead_status': 'Won'})
+        lead.save()
+        AppEnv.navigation.content_control.refresh()
 
-        form_control.form_show()
+        form_case.form_show()
     
     def lead_lost_handler(self, args):
         print(f"lead_lost_handler {AppEnv.details_lead_uid}")

@@ -64,7 +64,6 @@ class LeadLostForm:
             lead = Lead.get(AppEnv.details_lead_uid)
             lead.update({'lead_status': 'Lost'})
             lead.save()
-            print("save")
             for field in self.fields:
                 field.hide()
                 field.value = None
