@@ -24,6 +24,7 @@ class ExpenseView(GridView):
                 {'name': 'staff.full_name', 'label': 'Staff'},
                 {'name': 'case.case_name', 'label': 'Case'},
             ],
+            'filter': {'case': self.filter_case_uid},
         }
         if self.filter_case_uid:
             filters = {
@@ -31,6 +32,8 @@ class ExpenseView(GridView):
             }
         else:
             filters = None
+        
+        print(filters)
         
         super().__init__(model='Expense', view_config=view_config, filters=filters, **kwargs)
 
