@@ -10,17 +10,13 @@ from ..app.models import CaseStage, CaseStatus, Case
 class WarrantListView(GridView2):
     def __init__(self, **kwargs):
         pre_charge_uids = []
-        print("===== 1 ===== ")
         case_stage_pre_charge = CaseStage.search(name='Pre-Charge')
-        print("===== 2 ===== ")
         if case_stage_pre_charge:
             for ele in case_stage_pre_charge:
                 pre_charge_uids.append(ele['uid'])
-        print("===== 3 ===== ")
         view_config = {
             'model': 'Case',
             'columns': [
-                {'name': 'uid', 'label': 'uid', 'visible': False},
                 {'name': 'next_case_search', 'label': 'Next Case Search'},
                 {'name': 'case_name', 'label': 'Case Name'},
                 {'name': 'incident_location', 'label': 'Incident Location'},
