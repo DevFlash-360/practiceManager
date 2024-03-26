@@ -21,13 +21,14 @@ class WarrantListView(GridView2):
                 {'name': 'case_name', 'label': 'Case Name'},
                 {'name': 'incident_location', 'label': 'Incident Location'},
                 {'name': 'contacts.full_name', 'label': 'Contacts'},
+                {'name': 'case_stage.name', 'label': 'Case Stage', 'visible': False},
             ]
         }
         super().__init__(model='Case', view_config=view_config, **kwargs)
         self.filter_cases()
 
     def form_show(self, get_data=True, **args):
-        self.grid.filterByColumn('case_stage.uid', 'equal', self.pre_charge_uids)
+        self.grid.filterByColumn('case_stage__name', 'equal', 'Pre-Charge')
         super().form_show(get_data=get_data, **args)
     
     def open_dashboard(self, args):
