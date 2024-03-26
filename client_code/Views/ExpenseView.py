@@ -24,7 +24,6 @@ class ExpenseView(GridView):
                 {'name': 'staff.full_name', 'label': 'Staff'},
                 {'name': 'case.case_name', 'label': 'Case'},
             ],
-            'filter': {'case': self.filter_case_uid},
         }
         if self.filter_case_uid:
             filters = {
