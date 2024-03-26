@@ -33,9 +33,8 @@ class WarrantListView(GridView2):
 
 
     def form_show(self, get_data=True, **args):
-        print("WarrantSearch/form_show")
-        super().form_show(get_data=get_data, **args)
         self.grid.filterByColumn('uid', 'equal', self.pre_charge_uids)
+        super().form_show(get_data=get_data, **args)
     
     def open_dashboard(self, args):
         AppEnv.navigation.show_menu('case_menu', subcomponent='case_dashboard',
