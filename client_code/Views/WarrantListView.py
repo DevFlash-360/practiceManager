@@ -5,7 +5,7 @@ from AnvilFusion.tools.utils import AppEnv, get_cookie
 import anvil.js
 import uuid
 
-from ..app.models import CaseStage, CaseStatus
+from ..app.models import CaseStage, CaseStatus, Case
 
 class WarrantListView(GridView2):
     def __init__(self, **kwargs):
@@ -24,8 +24,12 @@ class WarrantListView(GridView2):
                 {'name': 'contacts.full_name', 'label': 'Contacts'},
             ]
         }
-        filters = {'case_stage': {'uid': pre_charge_uids[0]}} if len(pre_charge_uids)>0 else None
-        print(filters)
+        if len(pre_charge_uids) > 0:
+            filters = {
+                'case_stage': {'uid': pre_charge_uids[0]}
+            }
+        else:
+            filters = None
         # filters = {'case_stage': {'name': 'Pre-Charge'}, 'case_status': {'name': 'Open'}}
         super().__init__(model='Case', view_config=view_config, filters=filters, **kwargs)
 
