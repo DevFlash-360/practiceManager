@@ -213,7 +213,6 @@ class AppbarMenu:
         self.selected_el = args.element
         self.selected_el.classList.add('pm-appbar-menu-selected')
         menu_id = args.item.properties.id
-        print(menu_id)
         self.sidebar.show_menu(menu_id)
 
 
@@ -282,7 +281,6 @@ class Sidebar:
                 self.menu.expandAll([args.node])
                 self.nav_target_id = None
             menu_item_id = args.nodeData.id
-            print(menu_item_id)
             component = PMAPP_NAV_ITEMS[menu_item_id] if menu_item_id in PMAPP_NAV_ITEMS else None
         else:
             component = PMAPP_NAV_ITEMS[subcomponent]
@@ -328,7 +326,6 @@ class Sidebar:
 
         if hasattr(self.content_control, 'target_id'):
             self.nav_target_id = self.content_control.target_id
-        print(f"self.content_control={self.content_control}\nself.nav_target_id={self.nav_target_id}")
 
         # try:
         # print(component, self.content_control)
@@ -384,11 +381,9 @@ class DetailsView:
         jQuery(f"#btn_details_lost")[0].style.display = 'None'
 
     def show(self):
-        print("details show")
         self.sidebar.show()
     
     def hide(self, args=None):
-        print("details hide")
         self.sidebar.hide()
 
     def show_reopen(self):
