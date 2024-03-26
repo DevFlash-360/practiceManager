@@ -16,6 +16,7 @@ class WarrantListView(GridView2):
                 self.pre_charge_uids.append(ele['uid'])
         view_config = {
             'model': 'Case',
+            'isWarrant': True,
             'columns': [
                 {'name': 'next_case_search', 'label': 'Next Case Search'},
                 {'name': 'case_name', 'label': 'Case Name'},
