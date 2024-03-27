@@ -89,7 +89,7 @@ class HomePage(HomePageTemplate):
             {'text': 'How to', 'iconCss': 'fa-regular fa-file-lines', 'id': 'pm_appbar_help_howto'},
         ]
         self.appbar_help_menu = ej.splitbuttons.DropDownButton({
-            'cssClass': 'e-inherit e-caret-hide pm-menu-font',
+            'cssClass': 'e-inherit e-caret-hide pm-menu-font',p
             'iconCss': 'fa-solid fa-question pm-appbar-menu-icon',
             'items': appbar_help_menu_items,
             'open': self.appbar_menu_popup_open
