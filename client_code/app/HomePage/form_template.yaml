@@ -3,5 +3,6 @@ container:
   properties: {tooltip: '', background: '', foreground: '', border: '', visible: true,
     role: null, html: '@theme:home-page.html'}
   event_bindings: {show: form_show}
+  data_bindings: []
 components: []
 is_package: true
