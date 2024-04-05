@@ -21,6 +21,7 @@ PMAPP_APPBAR_MENU = [
     {'id': 'tools_menu', 'text': 'Tools', 'items': []},
     {'id': 'staff_menu', 'text': 'Staff', 'items': []},
     {'id': 'finance_menu', 'text': 'Finance', 'items': []},
+    # {'id': 'settings_menu', 'text': 'Settings', 'items': []},
 ]
 
 # Sidebar menu item list
@@ -104,6 +105,11 @@ PMAPP_SIDEBAR_MENUS = {
         {'nodeId': 'finance_timesheets', 'nodeText': 'Timesheets', 'nodeChild': []},
         {'nodeId': 'finance_payrolls', 'nodeText': 'Payrolls', 'nodeChild': []},
     ],
+    # 'settings_menu': [
+    #     {'nodeId': 'settings_user', 'nodeText': 'User', 'nodeChild': []},
+    #     {'nodeId': 'settings_security', 'nodeText': 'Security', 'nodeChild': []},
+    #     {'nodeId': 'settings_notification', 'nodeText': 'Notification', 'nodeChild': []},
+    # ]
 }
 
 PMAPP_DEFAULT_NAV_ITEMS = {
@@ -112,6 +118,7 @@ PMAPP_DEFAULT_NAV_ITEMS = {
     'tools_menu': 'tools_date_calculator',
     'staff_menu': 'staff_my_timesheets',
     'finance_menu': 'finance_payments',
+    # 'settings_menu': 'settings_user',
 }
 
 # Navigation items/actions
@@ -187,6 +194,10 @@ PMAPP_NAV_ITEMS = {
     'finance_timesheets': {'model': 'Timesheet', 'type': 'view', 'action': 'open', 'config': 'TimesheetView',
                            'props': {}},
     # 'finance_payrolls': {'model': '', 'type': 'view', 'action': 'open', 'props': {}},
+
+    # 'settings_user': {'class': 'UserSettingsView', 'type': 'custom', 'action': 'open', 'props': {}},
+    # 'settings_security': {'class': 'SecuritySettingsView', 'type':'custom', 'action': 'open', 'props': {}},
+    # 'settings_notification': {'class': 'NotificationSettingsView', 'type': 'custom', 'action': 'open', 'props': {}},
 }
 
 
@@ -454,3 +465,22 @@ def add_item_select(args, content_el_id):
             print(e.args)
             form_control = FormBase(model=item['model'], target=content_el_id)
         form_control.form_show()
+
+PMAPP_APPBAR_USER_ITEM = {
+    'Account': {},
+    'Sign Out': {},
+    'Test': {'model': 'Settings', 'type': 'form'},
+}
+
+def user_item_select(args, content_el_id):
+  print('User item selected')
+  item = PMAPP_APPBAR_USER_ITEM.get(args.item.text)
+  if item and item['type'] == 'form':
+    try:
+      view_class = getattr(AppEnv.views, f"{item['model']}View")
+      # form_class = getattr(AppEnv.pages, f"SettingsPage")
+      view_control = view_class(container_id=content_el_id)
+    except Exception as e:
+      print(e.args)
+      view_control = GridView(model=item['model'], container_id=nav_container_id)
+    view_control.form_show()

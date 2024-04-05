@@ -98,12 +98,14 @@ class HomePage(HomePageTemplate):
             {'text': 'Adam<br>adam@wooldridgelawlv.com', 'disabled': True, 'id': 'pm_appbar_user_account_name'},
             {'text': 'Account', 'iconCss': 'fa-regular fa-user-gear', 'id': 'pm_appbar_user_settings'},
             {'text': 'Sign Out', 'iconCss': 'fa-regular fa-arrow-right-from-bracket', 'id': 'pm_appbar_sign_out'},
+            {'text': 'Test', 'iconCss': 'fa-regular fa-hippo', 'id': 'pm_appbar_sign_out'},
         ]
         self.appbar_user_menu = ej.splitbuttons.DropDownButton({
             'cssClass': 'e-inherit e-caret-hide pm-menu-font',
             'iconCss': 'fa-solid fa-user pm-appbar-menu-icon',
             'items': appbar_user_menu_items,
-            'open': self.appbar_menu_popup_open
+            'open': self.appbar_menu_popup_open,
+            'select': self.appbar_user_item_select,
         })
         self.appbar_assistant_button = ej.buttons.Button({
             'cssClass': 'e-inherit e-caret-hide pm-menu-font',
@@ -158,6 +160,8 @@ class HomePage(HomePageTemplate):
     def appbar_add_item_select(self, args):
         nav.add_item_select(args, self.content_id)
 
+    def appbar_user_item_select(self, args):
+        nav.user_item_select(args, self.content_id)
 
     def appbar_assistant_button_click(self, args):
         print('appbar_assistant_button_click')

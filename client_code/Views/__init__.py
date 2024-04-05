@@ -14,3 +14,4 @@ from .SettlementCalculatorView import SettlementCalculatorView
 from .ProbationCalculatorView import ProbationCalculatorView
 from .WarrantListView import WarrantListView
 from .StatuteListView import StatuteListView
+from .SettingsView import SettingsView
