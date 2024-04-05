@@ -73,7 +73,7 @@ class DateCalculatorView:
     def form_show(self):
         self.container_el.innerHTML = f'\
             <div style="display:flex; margin-bottom: 15px; justify-content: center;">\
-                <div style="width: 250px; margin-right: 30px;">\
+                <div class="e-card" style="width: 250px; margin-right: 30px;">\
                     <input id="{self.date_picker_id}" type="text"/>\
                 </div>\
                 <div style="display:flex; align-items: center; ">\

@@ -563,6 +563,59 @@ class LeadActivity:
 
 
 @model_type
+class Settings:
+    _title = 'case_name'
+
+    """We need Kanban style report for leads - I've separated the
+  fields below based on a 'card view' and 'detail view' on kanban"""
+    """Card View"""
+    case_name = Attribute(field_type=types.FieldTypes.SINGLE_LINE)
+    retainer = Attribute(field_type=types.FieldTypes.CURRENCY)
+    """Detail View"""
+    lead_status = Attribute(field_type=types.FieldTypes.SINGLE_LINE)
+    intake_staff = Relationship('Staff', with_many=True)
+    lead_source = Relationship('LeadSource')
+    referred_by = Relationship('Contact', with_many=True)
+    fee_type = Relationship('FeeType')
+    trial_included = Attribute(field_type=types.FieldTypes.BOOLEAN)
+    retainer_hour_limit = Attribute(field_type=types.FieldTypes.DECIMAL)
+    investigator_budget = Attribute(field_type=types.FieldTypes.CURRENCY)
+    record_seal_expungement_included = Attribute(field_type=types.FieldTypes.BOOLEAN)
+    practice_area = Relationship('PracticeArea')
+    case_stage = Relationship('CaseStage')
+    cause_of_action = Relationship('CauseOfAction', with_many=True)
+    statute_of_limitations = Attribute(field_type=types.FieldTypes.DATE)
+    court = Relationship('Entity')
+    department = Attribute(field_type=types.FieldTypes.SINGLE_LINE)
+    case_number = Attribute(field_type=types.FieldTypes.SINGLE_LINE)
+    incident_date = Attribute(field_type=types.FieldTypes.DATE)
+    incident_location = Attribute(field_type=types.FieldTypes.ADDRESS)
+    case_description = Attribute(field_type=types.FieldTypes.MULTI_LINE)
+    contacts = Relationship('Contact', with_many=True)
+    # billing
+    fee_type = Relationship('FeeType')
+    flat_fee_retainer = Attribute(field_type=types.FieldTypes.CURRENCY)
+    hourly_retainer = Attribute(field_type=types.FieldTypes.CURRENCY)
+    pre_litigation_rate = Attribute(field_type=types.FieldTypes.CURRENCY)
+    litigation_rate = Attribute(field_type=types.FieldTypes.CURRENCY)
+    trial_included = Attribute(field_type=types.FieldTypes.BOOLEAN)
+    retainer_hours_limit = Attribute(field_type=types.FieldTypes.NUMBER)
+    investigator = Attribute(field_type=types.FieldTypes.BOOLEAN)
+    investigator_budget = Attribute(field_type=types.FieldTypes.CURRENCY)
+    record_seal_expungement = Attribute(field_type=types.FieldTypes.BOOLEAN)
+
+
+@model_type
+class SettingsUserlist:
+    _title = 'activity'
+
+    settings = Relationship('Settings')
+    activity = Attribute(field_type=types.FieldTypes.SINGLE_LINE)
+    due_time = Attribute(field_type=types.FieldTypes.DATETIME)
+    status = Attribute(field_type=types.FieldTypes.SINGLE_LINE)
+
+
+@model_type
 class LeadSource:
     _title = 'name'
     name = Attribute(field_type=types.FieldTypes.SINGLE_LINE)
