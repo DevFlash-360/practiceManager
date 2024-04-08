@@ -81,153 +81,96 @@ class SettingsView:
       'floatLabelType': 'Auto'
     })
 
-    # self.user_address = TextInput(name='case_number', label='Case Number')
-  
-    self.date_picker_id = f"date_picker_{uuid.uuid4()}"
-    self.btn_plus_minus_id = f"plus_{uuid.uuid4()}"
-    self.btn_mode_id = f"mode_{uuid.uuid4()}"
-    self.numbers_id = f"numbers_{uuid.uuid4()}"
-    self.output_id = f"output_{uuid.uuid4()}"
+    self.user_password = TextInput(name='user_password', label='Password')
 
-    self.number_days = 0
-
-    self.date_picker = ej.calendars.DatePicker({'placeholder': 'Enter date'})
-    
-    self.radio_plus = ej.buttons.RadioButton({
-      'label': '+ ADD',
-      'name': 'plus_minus',
-      'checked': True
-    })
-    
-    self.radio_minus = ej.buttons.RadioButton({
-      'label': '- SUBTRACT',
-      'name': 'plus_minus',
-      'checked': False
-    })
-    
-    self.radio_calendar = ej.buttons.RadioButton({
-      'label': 'CALENDAR DAYS',
-      'name': 'day_mode',
-      'checked': True
-    })
-    
-    self.radio_business = ej.buttons.RadioButton({
-      'label': 'BUSINESS DAYS',
-      'name': 'day_mode',
-      'checked': False
-    })
-
-    self.numbers = ej.inputs.TextBox({
-      'floatLabelType': 'Auto'
-    })
-
-    self.date_picker.addEventListener('change', self.change_date)
-    self.radio_plus.addEventListener('change', self.change_plus_minus)
-    self.radio_minus.addEventListener('change', self.change_plus_minus)
-    self.radio_calendar.addEventListener('change', self.change_day_mode)
-    self.radio_business.addEventListener('change', self.change_day_mode)
-    self.numbers.addEventListener('input', self.change_number_days)
+    # self.date_picker.addEventListener('change', self.change_date)
+    # self.radio_plus.addEventListener('change', self.change_plus_minus)
+    # self.radio_minus.addEventListener('change', self.change_plus_minus)
+    # self.radio_calendar.addEventListener('change', self.change_day_mode)
+    # self.radio_business.addEventListener('change', self.change_day_mode)
+    # self.numbers.addEventListener('input', self.change_number_days)
     
   def form_show(self):
     self.container_el.innerHTML = f'\
-      <div style="border:1px solid">\
-        <h4>Notification Settings</h4>\
-        <div style="display:flex; margin-bottom: 15px; justify-content: center;">\
-          <div style="width: 250px;">\
-            <input id="{self.in_app_notify_id}" type="checkbox"/>\
-          </div>\
-          <div style="width: 250px;">\
-            <input id="{self.email_notify_id}" type="checkbox"/>\
-          </div>\
+      <h4 class ="col-xs-12" >Notification Settings</h4>\
+      <div class ="col-xs-12" style="display:flex; margin-bottom: 15px;">\
+        <div class="col-xs-6">\
+          <input id="{self.in_app_notify_id}" type="checkbox"/>\
         </div>\
-        \
-        <h4>Case Name syntax settings</h4><br/>\
-        <h4>General user profile settings</h4>\
-        <div style="margin-bottom: 15px; justify-content: center;">\
-          <div style="display:flex; align-items: center; ">\
-            <label for="{self.user_name_id}" style="white-space: nowrap; margin-right:10px;">User Name</label>\
-            <input id="{self.user_name_id}" style="width: 50px;"/>\
-          </div>\
-          <div style="display:flex; align-items: center; ">\
-            <label for="{self.user_address_id}" style="white-space: nowrap; margin-right:10px;">Address</label>\
-            <input id="{self.user_address_id}" style="width: 50px;"/>\
-          </div>\
-          <div style="display:flex; align-items: center; ">\
-            <label for="{self.user_email_id}" style="white-space: nowrap; margin-right:10px;">Email Address</label>\
-            <input id="{self.user_email_id}" style="width: 50px;"/>\
-          </div>\
-          <div style="display:flex; align-items: center; ">\
-            <label for="{self.user_phone_id}" style="white-space: nowrap; margin-right:10px;">Phone Number</label>\
-            <input id="{self.user_phone_id}" style="width: 50px;"/>\
-          </div>\
-          <div style="display:flex; align-items: center; ">\
-            <label for="{self.user_birthday_id}" style="white-space: nowrap; margin-right:10px;">Date of Birth</label>\
-            <input id="{self.user_birthday_id}" style="width: 50px;"/>\
-          </div>\
-          <div style="display:flex; align-items: center; ">\
-            <label for="{self.user_gender_id}" style="white-space: nowrap; margin-right:10px;">Gender</label>\
-            <input id="{self.user_gender_id}" style="width: 50px;"/>\
-          </div>\
+        <div class ="col-xs-6">\
+          <input id="{self.email_notify_id}" type="checkbox"/>\
         </div>\
-        <h4>Admin settings</h4><br/>\
-        <h4>Tenant Settings</h4><br/>\
-        <div style="margin-bottom: 15px; justify-content: center;">\
-          <div style="display:flex; align-items: center; ">\
-            <label for="{self.business_name_id}" style="white-space: nowrap; margin-right:10px;">Business Name</label>\
-            <input id="{self.business_name_id}" style="width: 50px;"/>\
-          </div>\
-          <div style="display:flex; align-items: center; ">\
-            <label for="{self.business_address_id}" style="white-space: nowrap; margin-right:10px;">Business Address</label>\
-            <input id="{self.business_address_id}" style="width: 50px;"/>\
-          </div>\
-          <div style="display:flex; align-items: center; ">\
-            <label for="{self.business_phone_id}" style="white-space: nowrap; margin-right:10px;">Business Phone Number</label>\
-            <input id="{self.business_phone_id}" style="width: 50px;"/>\
-          </div>\
+      </div>\
+      \
+      <h4 class ="col-xs-12" >Case Name syntax settings</h4>\
+      \
+      <h4 class ="col-xs-12" >General user profile settings</h4>\
+      <div class ="col-xs-12" style="margin-bottom: 15px; justify-content: center;">\
+        <div class="col-xs-6" style="align-items: center; ">\
+          <label for="{self.user_name_id}" style="white-space: nowrap;">User Name</label>\
+          <input id="{self.user_name_id}"/>\
         </div>\
-        <h4>Tenant Billing Settings</h4><br/>\
-        <div style="margin-bottom: 15px; justify-content: center;">\
-          <div style="display:flex; align-items: center; ">\
-            <label for="{self.billing_credit_card_id}" style="white-space: nowrap; margin-right:10px;">Business Name</label>\
-            <input id="{self.billing_credit_card_id}" style="width: 50px;"/>\
-          </div>\
-          <div style="display:flex; align-items: center; ">\
-            <label for="{self.billing_address_id}" style="white-space: nowrap; margin-right:10px;">Business Address</label>\
-            <input id="{self.billing_address_id}" style="width: 50px;"/>\
-          </div>\
+        <div class="col-xs-6" style=" align-items: center; ">\
+          <label for="{self.user_email_id}" style="white-space: nowrap; margin-right:10px;">Email Address</label>\
+          <input id="{self.user_email_id}"/>\
         </div>\
-        <div style="display:flex; margin-bottom: 15px; justify-content: center;">\
-          <div class="e-card" style="width: 250px; margin-right: 30px;">\
-            <input id="{self.date_picker_id}" type="text"/>\
-          </div>\
-          <div style="display:flex; align-items: center; ">\
-            <label for="{self.numbers_id}" style="white-space: nowrap; margin-right:10px;">Number of Days</label>\
-            <input id="{self.numbers_id}" style="width: 50px;"/>\
-          </div>\
+      </div>\
+      <div class ="col-xs-12" style="margin-bottom: 15px; justify-content: center;">\
+        <div class="col-xs-6" style="align-items: center; ">\
+          <label for="{self.user_address_id}" style="white-space: nowrap;">Address</label>\
+          <input id="{self.user_address_id}"/>\
         </div>\
-        <div style="display: flex; margin-bottom: 15px; justify-content: center;">\
-          <ul>\
-            <input type="radio" id="radio_plus"/>\
-            <input type="radio" id="radio_minus"/>\
-          </ul>\
-          <ul>\
-            <input type="radio" id="radio_calendar"/>\
-            <input type="radio" id="radio_business"/>\
-          </ul>\
+        <div class="col-xs-6" style="align-items: center; ">\
+          <label for="{self.user_phone_id}" style="white-space: nowrap; margin-right:10px;">Phone Number</label>\
+          <input id="{self.user_phone_id}"/>\
         </div>\
-        <div style="display: flex; justify-content: center;">\
-          <div class="e-card" style="width: 400px; align-items: center; padding:15px;">\
-            <label id={self.output_id} style="font-size: 18px;">Date: </label>\
-          </div>\
+      </div>\
+      <div class ="col-xs-12" style="margin-bottom: 15px; justify-content: center;">\
+        <div class="col-xs-6" style="align-items: center; ">\
+          <label for="{self.user_birthday_id}" style="white-space: nowrap; margin-right:10px;">Date of Birth</label>\
+          <input id="{self.user_birthday_id}"/>\
+        </div>\
+        <div class="col-xs-6" style="align-items: center; ">\
+          <label for="{self.user_gender_id}" style="white-space: nowrap; margin-right:10px;">Gender</label>\
+          <input id="{self.user_gender_id}"/>\
+        </div>\
+      </div>\
+      <div class ="col-xs-12" style="margin-bottom: 15px; justify-content: center;">\
+        <div class="col-xs-6" style="align-items: center; ">\
+          <label for="{self.user_password.el_id}" style="white-space: nowrap; margin-right:10px;">Password</label>\
+          {self.user_password.html}\
+        </div>\
+      </div>\
+      <h4 class ="col-xs-12" >Admin settings</h4>\
+      <h4 class ="col-xs-12" >Tenant Settings</h4>\
+      <div class ="col-xs-12" style="margin-bottom: 15px; justify-content: center;">\
+        <div class="col-xs-6" style="align-items: center; ">\
+          <label for="{self.business_name_id}" style="white-space: nowrap; margin-right:10px;">Business Name</label>\
+          <input id="{self.business_name_id}"/>\
+        </div>\
+      </div>\
+      <div class ="col-xs-12" style="margin-bottom: 15px; justify-content: center;">\
+        <div class="col-xs-6" style="align-items: center; ">\
+          <label for="{self.business_address_id}" style="white-space: nowrap; margin-right:10px;">Business Address</label>\
+          <input id="{self.business_address_id}"/>\
+        </div>\
+        <div class="col-xs-6" style="align-items: center; ">\
+          <label for="{self.business_phone_id}" style="white-space: nowrap; margin-right:10px;">Business Phone Number</label>\
+          <input id="{self.business_phone_id}"/>\
+        </div>\
+      </div>\
+      <h4 class ="col-xs-12">Tenant Billing Settings</h4>\
+      <div class ="col-xs-12" style="margin-bottom: 15px; justify-content: center;">\
+        <div class="col-xs-6" style="align-items: center; ">\
+          <label for="{self.billing_credit_card_id}" style="white-space: nowrap; margin-right:10px;">Business Name</label>\
+          <input id="{self.billing_credit_card_id}"/>\
+        </div>\
+        <div class="col-xs-6" style="align-items: center; ">\
+          <label for="{self.billing_address_id}" style="white-space: nowrap; margin-right:10px;">Business Address</label>\
+          <input id="{self.billing_address_id}"/>\
         </div>\
       </div>'
-    self.date_picker.appendTo(jQuery(f"#{self.date_picker_id}")[0])
-    self.radio_plus.appendTo(jQuery("#radio_plus")[0])
-    self.radio_minus.appendTo(jQuery("#radio_minus")[0])
-    self.radio_calendar.appendTo(jQuery("#radio_calendar")[0])
-    self.radio_business.appendTo(jQuery("#radio_business")[0])
-    self.numbers.appendTo(jQuery(f"#{self.numbers_id}")[0])
-
+    
     self.in_app_notify.appendTo(jQuery(f"#{self.in_app_notify_id}")[0])
     self.email_notify.appendTo(jQuery(f"#{self.email_notify_id}")[0])
     self.user_name.appendTo(jQuery(f"#{self.user_name_id}")[0])
