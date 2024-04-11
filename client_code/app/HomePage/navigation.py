@@ -484,3 +484,18 @@ def user_item_select(args, content_el_id):
       print(e.args)
       view_control = GridView(model=item['model'], container_id=nav_container_id)
     view_control.form_show()
+
+
+
+# def user_item_select(args, content_el_id):
+#   print('User item selected')
+#   item = PMAPP_APPBAR_USER_ITEM.get(args.item.text)
+#   if item and item['type'] == 'form':
+#     try:
+#       view_class = getattr(AppEnv.views, f"{item['model']}View")
+#       # form_class = getattr(AppEnv.pages, f"SettingsPage")
+#       view_control = view_class(target=content_el_id)
+#     except Exception as e:
+#       print(e.args)
+#       view_control = FormBase(model=item['model'], target=content_el_id)
+#     view_control.form_show()
