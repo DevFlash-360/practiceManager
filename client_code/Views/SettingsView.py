@@ -9,18 +9,6 @@ from AnvilFusion.tools.utils import AppEnv, datetime_js_to_py
 from AnvilFusion.components.FormInputs import *
 
 
-def bizday_calc_func(start_date, num_days):
-  my_start_date = start_date
-  my_num_days = abs(num_days)
-  inc = 1 if num_days > 0 else -1
-  while my_num_days > 0:
-    my_start_date += timedelta(days=inc)
-    weekday = my_start_date.weekday()
-    if weekday >= 5:
-      continue
-    my_num_days -= 1
-  return my_start_date
-
 class SettingsView:
   def __init__(self, container_id, **kwargs):
     self.container_id = container_id or AppEnv.content_container_id
@@ -83,65 +71,102 @@ class SettingsView:
 
     self.user_password = TextInput(name='user_password', label='Password')
 
-    # self.date_picker.addEventListener('change', self.change_date)
-    # self.radio_plus.addEventListener('change', self.change_plus_minus)
-    # self.radio_minus.addEventListener('change', self.change_plus_minus)
-    # self.radio_calendar.addEventListener('change', self.change_day_mode)
-    # self.radio_business.addEventListener('change', self.change_day_mode)
-    # self.numbers.addEventListener('input', self.change_number_days)
+    notification_settings_html = self.prepare_notification_settings_html()
+    user_profile_settings_html = self.prepare_user_profile_settings_html()
+    admin_settings_html = self.prepare_admin_settings_html()
+    business_details_settings_html = self.prepare_business_details_settings_html()
+    billing_info_settings_html = self.prepare_billing_info_settings_html()
+    self.userProfileTabInitialized  = False
+    self.adminTabInitialized = False
+    self.businessDetailsTabInitialized = False
+    self.billingInfoTabInitialized = False
+    
+    self.tab = ej.navigations.Tab({
+      'items': [
+        {'header': {'text': 'Notification Settings'}, 'content': notification_settings_html},
+        {'header': {'text': 'User Profile'}, 'content': user_profile_settings_html},
+        {'header': {'text': 'Admin Settings'}, 'content': admin_settings_html},
+        {'header': {'text': 'Business Details'}, 'content': business_details_settings_html},
+        {'header': {'text': 'Billing Information'}, 'content': billing_info_settings_html}
+      ],
+      'selected': self.on_tab_selected
+    })
     
   def form_show(self):
     self.container_el.innerHTML = f'\
-      <h4 class ="col-xs-12" >Notification Settings</h4>\
-      <div class ="col-xs-12" style="display:flex; margin-bottom: 15px;">\
-        <div class="col-xs-6">\
-          <input id="{self.in_app_notify_id}" type="checkbox"/>\
+      <div id="tab-element"></div>'
+    self.tab.appendTo(jQuery("#tab-element")[0])
+    
+    self.in_app_notify.appendTo(jQuery(f"#{self.in_app_notify_id}")[0])
+    self.email_notify.appendTo(jQuery(f"#{self.email_notify_id}")[0])
+
+  def prepare_notification_settings_html(self):
+    return f'''
+      <div class="notification-settings">
+        <h4 class ="col-xs-12" >Notification Settings</h4>\
+        <div class ="col-xs-12" style="display:flex; margin-bottom: 15px;">\
+          <div class="col-xs-6">\
+            <input id="{self.in_app_notify_id}" type="checkbox"/>\
+          </div>\
+          <div class ="col-xs-6">\
+            <input id="{self.email_notify_id}" type="checkbox"/>\
+          </div>\
         </div>\
-        <div class ="col-xs-6">\
-          <input id="{self.email_notify_id}" type="checkbox"/>\
+        \
+        <h4 class ="col-xs-12" >Case Name syntax settings</h4>\
+      </div>
+    '''
+
+  def prepare_user_profile_settings_html(self):
+    return f'''
+      <div>
+        <h4 class ="col-xs-12" >General user profile settings</h4>\
+        <div class ="col-xs-12" style="margin-bottom: 15px; justify-content: center;">\
+          <div class="col-xs-6" style="align-items: center; ">\
+            <label for="{self.user_name_id}" style="white-space: nowrap;">User Name</label>\
+            <input id="{self.user_name_id}"/>\
+          </div>\
+          <div class="col-xs-6" style=" align-items: center; ">\
+            <label for="{self.user_email_id}" style="white-space: nowrap; margin-right:10px;">Email Address</label>\
+            <input id="{self.user_email_id}"/>\
+          </div>\
         </div>\
-      </div>\
-      \
-      <h4 class ="col-xs-12" >Case Name syntax settings</h4>\
-      \
-      <h4 class ="col-xs-12" >General user profile settings</h4>\
-      <div class ="col-xs-12" style="margin-bottom: 15px; justify-content: center;">\
-        <div class="col-xs-6" style="align-items: center; ">\
-          <label for="{self.user_name_id}" style="white-space: nowrap;">User Name</label>\
-          <input id="{self.user_name_id}"/>\
+        <div class ="col-xs-12" style="margin-bottom: 15px; justify-content: center;">\
+          <div class="col-xs-6" style="align-items: center; ">\
+            <label for="{self.user_address_id}" style="white-space: nowrap;">Address</label>\
+            <input id="{self.user_address_id}"/>\
+          </div>\
+          <div class="col-xs-6" style="align-items: center; ">\
+            <label for="{self.user_phone_id}" style="white-space: nowrap; margin-right:10px;">Phone Number</label>\
+            <input id="{self.user_phone_id}"/>\
+          </div>\
         </div>\
-        <div class="col-xs-6" style=" align-items: center; ">\
-          <label for="{self.user_email_id}" style="white-space: nowrap; margin-right:10px;">Email Address</label>\
-          <input id="{self.user_email_id}"/>\
+        <div class ="col-xs-12" style="margin-bottom: 15px; justify-content: center;">\
+          <div class="col-xs-6" style="align-items: center; ">\
+            <label for="{self.user_birthday_id}" style="white-space: nowrap; margin-right:10px;">Date of Birth</label>\
+            <input id="{self.user_birthday_id}"/>\
+          </div>\
+          <div class="col-xs-6" style="align-items: center; ">\
+            <label for="{self.user_gender_id}" style="white-space: nowrap; margin-right:10px;">Gender</label>\
+            <input id="{self.user_gender_id}"/>\
+          </div>\
         </div>\
-      </div>\
-      <div class ="col-xs-12" style="margin-bottom: 15px; justify-content: center;">\
-        <div class="col-xs-6" style="align-items: center; ">\
-          <label for="{self.user_address_id}" style="white-space: nowrap;">Address</label>\
-          <input id="{self.user_address_id}"/>\
+        <div class ="col-xs-12" style="margin-bottom: 15px; justify-content: center;">\
+          <div class="col-xs-6" style="align-items: center; ">\
+            <label for="{self.user_password.el_id}" style="white-space: nowrap; margin-right:10px;">Password</label>\
+            {self.user_password.html}\
+          </div>\
         </div>\
-        <div class="col-xs-6" style="align-items: center; ">\
-          <label for="{self.user_phone_id}" style="white-space: nowrap; margin-right:10px;">Phone Number</label>\
-          <input id="{self.user_phone_id}"/>\
-        </div>\
-      </div>\
-      <div class ="col-xs-12" style="margin-bottom: 15px; justify-content: center;">\
-        <div class="col-xs-6" style="align-items: center; ">\
-          <label for="{self.user_birthday_id}" style="white-space: nowrap; margin-right:10px;">Date of Birth</label>\
-          <input id="{self.user_birthday_id}"/>\
-        </div>\
-        <div class="col-xs-6" style="align-items: center; ">\
-          <label for="{self.user_gender_id}" style="white-space: nowrap; margin-right:10px;">Gender</label>\
-          <input id="{self.user_gender_id}"/>\
-        </div>\
-      </div>\
-      <div class ="col-xs-12" style="margin-bottom: 15px; justify-content: center;">\
-        <div class="col-xs-6" style="align-items: center; ">\
-          <label for="{self.user_password.el_id}" style="white-space: nowrap; margin-right:10px;">Password</label>\
-          {self.user_password.html}\
-        </div>\
-      </div>\
+      </div>
+    '''
+
+  def prepare_admin_settings_html(self):
+    return f'''
       <h4 class ="col-xs-12" >Admin settings</h4>\
+    '''
+
+  def prepare_business_details_settings_html(self):
+    return f'''
       <h4 class ="col-xs-12" >Tenant Settings</h4>\
       <div class ="col-xs-12" style="margin-bottom: 15px; justify-content: center;">\
         <div class="col-xs-6" style="align-items: center; ">\
@@ -159,33 +184,59 @@ class SettingsView:
           <input id="{self.business_phone_id}"/>\
         </div>\
       </div>\
+    '''
+
+  def prepare_billing_info_settings_html(self):
+    return f'''
       <h4 class ="col-xs-12">Tenant Billing Settings</h4>\
       <div class ="col-xs-12" style="margin-bottom: 15px; justify-content: center;">\
         <div class="col-xs-6" style="align-items: center; ">\
-          <label for="{self.billing_credit_card_id}" style="white-space: nowrap; margin-right:10px;">Business Name</label>\
+          <label for="{self.billing_credit_card_id}" style="white-space: nowrap; margin-right:10px;">Credit Card</label>\
           <input id="{self.billing_credit_card_id}"/>\
         </div>\
         <div class="col-xs-6" style="align-items: center; ">\
-          <label for="{self.billing_address_id}" style="white-space: nowrap; margin-right:10px;">Business Address</label>\
+          <label for="{self.billing_address_id}" style="white-space: nowrap; margin-right:10px;">Billing Address</label>\
           <input id="{self.billing_address_id}"/>\
         </div>\
-      </div>'
-    
-    self.in_app_notify.appendTo(jQuery(f"#{self.in_app_notify_id}")[0])
-    self.email_notify.appendTo(jQuery(f"#{self.email_notify_id}")[0])
+      </div>
+    '''
+  
+  def on_tab_selected(self, args):
+    selected_index = args.selectedIndex
+    # print('tab selected', selected_index)
+    if selected_index == 1 and not self.userProfileTabInitialized:
+      self.init_user_profile_tab()
+      self.userProfileTabInitialized = True
+    elif selected_index == 2 and not self.adminTabInitialized:
+      self.init_admin_tab()
+      self.adminTabInitialized = True
+    elif selected_index == 3 and not self.businessDetailsTabInitialized:
+      self.init_business_details_tab()
+      self.businessDetailsTabInitialized = True
+    elif selected_index == 4 and not self.billingInfoTabInitialized:
+      self.init_billing_info_tab()
+      self.billingInfoTabInitialized = True
+
+  def init_user_profile_tab(self):
     self.user_name.appendTo(jQuery(f"#{self.user_name_id}")[0])
     self.user_address.appendTo(jQuery(f"#{self.user_address_id}")[0])
     self.user_email.appendTo(jQuery(f"#{self.user_email_id}")[0])
     self.user_phone.appendTo(jQuery(f"#{self.user_phone_id}")[0])
     self.user_birthday.appendTo(jQuery(f"#{self.user_birthday_id}")[0])
     self.user_gender.appendTo(jQuery(f"#{self.user_gender_id}")[0])
+
+  def init_admin_tab(self):
+    pass
+
+  def init_business_details_tab(self):
     self.business_name.appendTo(jQuery(f"#{self.business_name_id}")[0])
     self.business_address.appendTo(jQuery(f"#{self.business_address_id}")[0])
     self.business_phone.appendTo(jQuery(f"#{self.business_phone_id}")[0])
+
+  def init_billing_info_tab(self):
     self.billing_credit_card.appendTo(jQuery(f"#{self.billing_credit_card_id}")[0])
     self.billing_address.appendTo(jQuery(f"#{self.billing_address_id}")[0])
-
-
+  
   def destroy(self):
     self.date_picker.destroy()
     self.radio_plus.destroy()
@@ -195,37 +246,3 @@ class SettingsView:
     self.numbers.destroy()
     if self.container_el:
       self.container_el.innerHTML = ''
-
-  def change_date(self, args):
-    self.update_date()
-
-  def change_plus_minus(self, args):
-    self.update_date()
-  
-  def change_day_mode(self, args):
-    self.update_date()
-  
-  def change_number_days(self, args):
-    self.number_days = int(args['value'] if args['value'] else '0')
-    self.update_date()
-  
-  def update_date(self):
-    date_check_blank = self.date_picker.value is not None
-    button_state_addsub = self.radio_plus.checked
-    button_state_calcbiz = self.radio_calendar.checked
-
-    output_text = 'Date: '
-    if date_check_blank:
-      date_origin = datetime_js_to_py(self.date_picker.value)
-      date_output = date_origin
-      if button_state_addsub and button_state_calcbiz:
-        date_output = date_origin + timedelta(days=self.number_days)
-      elif button_state_addsub == False and button_state_calcbiz:
-        date_output = date_origin - timedelta(days=self.number_days)
-      elif button_state_addsub and button_state_calcbiz == False:
-        date_output = bizday_calc_func(date_origin, self.number_days)
-      elif button_state_addsub == False and button_state_calcbiz == False:
-        date_output = bizday_calc_func(date_origin, self.number_days*-1)
-      output_text = f'Date: {date_output.strftime("%A, %B %d, %Y")}'
-    output_el = jQuery(f"#{self.output_id}")[0]
-    output_el.innerHTML = output_text
