@@ -27,6 +27,10 @@ class SettingsView:
     self.business_phone_id = f"business_phone_{uuid.uuid4()}"
     self.billing_credit_card_id = f"billing_credit_card_{uuid.uuid4()}"
     self.billing_address_id = f"billing_address_{uuid.uuid4()}"
+    self.admin_new_user_id = f"admin_new_user_{uuid.uuid4()}"
+    self.admin_delete_user_id = f"admin_delete_user_{uuid.uuid4()}"
+    self.admin_user_permissions_id = f"admin_user_permissions_{uuid.uuid4()}"
+    
     self.in_app_notify = ej.buttons.CheckBox({
       'label': 'In App Notification',
       'checked': False
@@ -68,6 +72,15 @@ class SettingsView:
     self.billing_address = ej.inputs.TextBox({
       'floatLabelType': 'Auto'
     })
+    self.admin_new_user = ej.inputs.TextBox({
+      'floatLabelType': 'Auto'
+    })
+    self.admin_delete_user = ej.inputs.TextBox({
+      'floatLabelType': 'Auto'
+    })
+    self.admin_user_permissions = ej.inputs.TextBox({
+      'floatLabelType': 'Auto'
+    })
 
     self.user_password = TextInput(name='user_password', label='Password')
 
@@ -82,6 +95,8 @@ class SettingsView:
     self.billingInfoTabInitialized = False
     
     self.tab = ej.navigations.Tab({
+      # 'heightAdjustMode': 'Auto',
+      # 'overflowMode': 'Popup',
       'items': [
         {'header': {'text': 'Notification Settings'}, 'content': notification_settings_html},
         {'header': {'text': 'User Profile'}, 'content': user_profile_settings_html},
@@ -163,6 +178,23 @@ class SettingsView:
   def prepare_admin_settings_html(self):
     return f'''
       <h4 class ="col-xs-12" >Admin settings</h4>\
+      <div class ="col-xs-12" style="margin-bottom: 15px; justify-content: center;">\
+        <div class="col-xs-6" style="align-items: center; ">\
+          <label for="{self.admin_new_user_id}" style="white-space: nowrap;">Add User</label>\
+          <input id="{self.admin_new_user_id}"/>\
+        </div>\
+        <div class="col-xs-6" style=" align-items: center; ">\
+          <label for="{self.admin_delete_user_id}" style="white-space: nowrap; margin-right:10px;">Delete User</label>\
+          <input id="{self.admin_delete_user_id}"/>\
+        </div>\
+      </div>\
+      <h4 class ="col-xs-12" >User Permissions</h4>\
+      <div class ="col-xs-12" style="margin-bottom: 15px; justify-content: center;">\
+        <div class="col-xs-6" style="align-items: center; ">\
+          <label for="{self.admin_user_permissions_id}" style="white-space: nowrap;">Add User</label>\
+          <input id="{self.admin_user_permissions_id}"/>\
+        </div>\
+      </div>\
     '''
 
   def prepare_business_details_settings_html(self):
@@ -226,7 +258,9 @@ class SettingsView:
     self.user_gender.appendTo(jQuery(f"#{self.user_gender_id}")[0])
 
   def init_admin_tab(self):
-    pass
+    self.admin_new_user.appendTo(jQuery(f"#{self.admin_new_user_id}")[0])
+    self.admin_delete_user.appendTo(jQuery(f"#{self.admin_delete_user_id}")[0])
+    self.admin_user_permissions.appendTo(jQuery(f"#{self.admin_user_permissions_id}")[0])
 
   def init_business_details_tab(self):
     self.business_name.appendTo(jQuery(f"#{self.business_name_id}")[0])
