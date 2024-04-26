@@ -54,6 +54,8 @@ PMAPP_SIDEBAR_MENUS = {
             # {'nodeId': 'case_reports_updates', 'nodeText': 'Updates', 'nodeChild': []},
             # {'nodeId': 'case_reports_requirements', 'nodeText': 'Requirements', 'nodeChild': []},
         ]},
+        {'nodeId': 'case_activity_feed', 'nodeText': 'Activity Feed', 'nodeChild': []},
+        {'nodeId': 'case_analytics', 'nodeText': 'Analytics', 'nodeChild': []},
     ],
     'intake_menu': [
         {'nodeId': 'intake_leads', 'nodeText': 'Leads', 'nodeChild': []},
@@ -124,6 +126,10 @@ PMAPP_DEFAULT_NAV_ITEMS = {
 # Navigation items/actions
 PMAPP_NAV_ITEMS = {
     'case_agenda': {'class': 'CaseAgendaView', 'type': 'custom', 'action': 'open', 'props': {}},
+    'case_activity_feed': {'class': 'CaseActivityFeedView', 'type': 'custom', 'action': 'open', 'props': {}},
+    'case_analytics': {'class': 'AnalyticsView', 'type': 'custom', 'action': 'open', 'props': {}},
+    # 'tools_date_calculator': {'class': 'DateCalculatorView', 'type': 'custom', 'action': 'open', 'props': {}},
+    # 'tools_admin_activity': {'model': 'Activity', 'type': 'view', 'action': 'open', 'props': {}},
 
     'case_dashboard_old': {'name': 'CaseDashboardOldPage', 'type': 'page', 'action': 'open',
                            'subcomponent': 'case_dashboard_events', 'props': {}},
@@ -304,6 +310,7 @@ class Sidebar:
             self.content_control.destroy()
 
         nav_container_id = self.content_id if self.nav_target_id is None else self.nav_target_id
+        print('debug output.')
         if component['type'] == 'custom':
             try:
                 view_class = getattr(AppEnv.views, component['class'])
