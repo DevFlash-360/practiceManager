@@ -6,22 +6,22 @@ import math
 
 # Model list for enumerations
 ENUM_MODEL_LIST = {
-    'Activity': {'model': 'Activity', 'name_field': 'name'},
-    'BankAccount': {'model': 'BankAccount', 'name_field': 'account_type.name'},
-    'BankAccountType': {'model': 'BankAccountType', 'name_field': 'name'},
-    'Branch': {'model': 'Branch', 'name_field': 'name'},
-    'CaseStage': {'model': 'CaseStage', 'name_field': 'name'},
-    'CaseStatus': {'model': 'CaseStatus', 'name_field': 'name'},
-    'CauseOfAction': {'model': 'CauseOfAction', 'name_field': 'cause_of_action'},
-    'ContactGroup': {'model': 'ContactGroup', 'name_field': 'name'},
-    'ContactRole': {'model': 'ContactRole', 'name_field': 'name'},
-    'EntityType': {'model': 'EntityType', 'name_field': 'name'},
-    'FeeType': {'model': 'FeeType', 'name_field': 'name'},
-    'LeadSource': {'model': 'LeadSource', 'name_field': 'name'},
-    'PracticeArea': {'model': 'PracticeArea', 'name_field': 'name'},
-    'StaffGroup': {'model': 'StaffGroup', 'name_field': 'name'},
-    'StaffPayType': {'model': 'StaffPayType', 'name_field': 'name'},
-    'TypeOfAction': {'model': 'TypeOfAction', 'name_field': 'name'},
+    'Activity': {'model': 'Activity', 'text_field': 'name'},
+    'BankAccount': {'model': 'BankAccount', 'text_field': 'account_type.name'},
+    'BankAccountType': {'model': 'BankAccountType', 'text_field': 'name'},
+    'Branch': {'model': 'Branch', 'text_field': 'name'},
+    'CaseStage': {'model': 'CaseStage', 'text_field': 'name'},
+    'CaseStatus': {'model': 'CaseStatus', 'text_field': 'name'},
+    'CauseOfAction': {'model': 'CauseOfAction', 'text_field': 'cause_of_action'},
+    'ContactGroup': {'model': 'ContactGroup', 'text_field': 'name'},
+    'ContactRole': {'model': 'ContactRole', 'text_field': 'name'},
+    'EntityType': {'model': 'EntityType', 'text_field': 'name'},
+    'FeeType': {'model': 'FeeType', 'text_field': 'name'},
+    'LeadSource': {'model': 'LeadSource', 'text_field': 'name'},
+    'PracticeArea': {'model': 'PracticeArea', 'text_field': 'name'},
+    'StaffGroup': {'model': 'StaffGroup', 'text_field': 'name'},
+    'StaffPayType': {'model': 'StaffPayType', 'text_field': 'name'},
+    'TypeOfAction': {'model': 'TypeOfAction', 'text_field': 'name'},
 }
 
 

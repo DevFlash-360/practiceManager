@@ -1760,6 +1760,10 @@ db_schema:
     - name: pay_type
       admin_ui: {width: 200}
       type: string
+    - name: user
+      admin_ui: {width: 200}
+      type: link_single
+      target: users
   app_error_logs:
     title: App Error Logs
     client: none

@@ -8,7 +8,7 @@ from datetime import timedelta
 from AnvilFusion.tools.utils import AppEnv, datetime_js_to_py
 from AnvilFusion.components.FormInputs import *
 
-from ..app.models import Staff, User
+from ..app.models import Staff, User, Contact
 
 PM_BI_COUNTRY = [
     'United States',
@@ -29,40 +29,10 @@ class SettingsView:
     self.container_id = container_id or AppEnv.content_container_id
     self.container_el = jQuery(f"#{self.container_id}")[0]
 
-    # self.in_app_notify_id = f"in_app_notify_{uuid.uuid4()}"
-    # self.email_notify_id = f"email_notify_{uuid.uuid4()}"
-    self.user_name_id = f"user_name_{uuid.uuid4()}"
-    self.user_emergency_address_id = f"user_emergency_address_{uuid.uuid4()}"
-    self.user_email_id = f"user_email_{uuid.uuid4()}"
-    self.user_phone_id = f"user_phone_{uuid.uuid4()}"
-    self.user_birthday_id = f"user_birthday_{uuid.uuid4()}"
-    self.user_gender_id = f"user_gender_{uuid.uuid4()}"
-    # self.business_name_id = f"business_name_{uuid.uuid4()}"
-    # self.business_address_id = f"business_address_{uuid.uuid4()}"
-    # self.business_phone_id = f"business_phone_{uuid.uuid4()}"
-    
     self.admin_new_user_id = f"admin_new_user_{uuid.uuid4()}"
     self.admin_delete_user_id = f"admin_delete_user_{uuid.uuid4()}"
     self.admin_user_permissions_id = f"admin_user_permissions_{uuid.uuid4()}"
     
-    # self.in_app_notify = ej.buttons.CheckBox({
-    #   'label': 'In App Notification',
-    #   'checked': False
-    # })
-    # self.email_notify = ej.buttons.CheckBox({
-    #   'label': 'Email Notification',
-    #   'checked': False
-    # })
-    # self.business_name = ej.inputs.TextBox({
-    #   'floatLabelType': 'Auto'
-    # })
-    # self.business_address = ej.inputs.TextBox({
-    #   'floatLabelType': 'Auto'
-    # })
-    # self.business_phone = ej.inputs.TextBox({
-    #   'floatLabelType': 'Auto'
-    # })
-
     # My Notification Settings
     self.nt_case_1 = CheckboxInput(name='nt_case_1')
     self.nt_case_2 = CheckboxInput(name='nt_case_2')
@@ -199,17 +169,26 @@ class SettingsView:
     self.user_emergency_address = TextInput(name='user_emergency_address', label='Emergency Address')
     
     
-    # Business Details 
-    self.bd_office_name = TextInput(name='bd_office_name')
-    self.bd_primary_office = CheckboxInput(name='bd_primary_office', label='This is our primary office')
-    self.bd_main_phone = TextInput(name='bd_main_phone')
-    self.bd_fax_line = TextInput(name='bd_fax_line')
-    self.bd_address_address1 = TextInput(name='bd_address_address1', label='Address', placeholder="Address")
-    self.bd_address_address2 = TextInput(name='bd_address_address2', label='Address 2')
-    self.bd_address_city = TextInput(name='bd_address_city', label='City')
-    self.bd_address_state = DropdownInput(name='bd_address_state', label='State', options=PM_BI_STATE)
-    self.bd_address_zip = NumberInput(name='bd_address_zip', label='Zip')
-    self.bd_address_country = DropdownInput(name='bd_address_country', label='Country', options=PM_BI_COUNTRY)
+    # Business Details Variables
+    self.bd_first_name = TextInput(name='bd_first_name', label='First Name')
+    self.bd_last_name = TextInput(name='bd_last_name', label='Last Name')
+    self.bd_email = TextInput(name='bd_email', label='Email')
+    self.bd_contact_group = TextInput(name='bd_contact_group', label='Contact Group')
+    self.bd_mobile_phone = TextInput(name='bd_mobile_phone', label='Mobile Phone')
+    self.bd_entity = TextInput(name='bd_entity', label='Entity')
+    self.bd_work_phone = TextInput(name='bd_work_phone', label='Work Phone')
+    self.bd_title_position = TextInput(name='bd_title_position', label='Title / Position')
+    self.bd_department = TextInput(name='bd_department', label='Department')
+    self.bd_courtroom = TextInput(name='bd_courtroom', label='Courtroom')
+    self.bd_dob = TextInput(name='bd_dob', label='Dob')
+    self.bd_ssn = TextInput(name='bd_ssn', label='Ssn')
+    self.bd_country_of_citizenship = TextInput(name='bd_country_of_citizenship', label='Country Of Citizenship')
+    self.bd_native_language = TextInput(name='bd_native_language', label='Native Language')
+    self.bd_address1 = TextInput(name='bd_address1', label='Address Line 1')
+    self.bd_address2 = TextInput(name='bd_address2', label='Address Line 2')
+    self.bd_city_district = TextInput(name='bd_city_district', label='City District')
+    self.bd_state_province = TextInput(name='bd_state_province', label='State Province')
+    self.bd_postal_code = TextInput(name='bd_postal_code', label='Postal Code')
     
 
     # Billing Information
@@ -1003,29 +982,26 @@ class SettingsView:
 
   def prepare_business_details_settings_html(self):
     return f'''
-      <div class ="col-xs-12 p-2" style="justify-content: center;">Offices</div>
-      <div class ="col-xs-2 e-float-text e-label-top" style="justify-content: center;">Office Name</div>
-      <div class ="col-xs-10" style="justify-content: center;">
-        <div class ="col-xs-12 p-2" style="justify-content: center;">{self.bd_office_name.html}</div>
-        <div class ="col-xs-12 p-2" style="justify-content: center;">{self.bd_primary_office.html}</div>
-      </div>
-      <div class ="col-xs-2 e-float-text e-label-top" style="justify-content: center;">Main Phone</div>
-      <div class ="col-xs-10" style="justify-content: center;">
-        <div class ="col-xs-12 p-2" style="justify-content: center;">{self.bd_main_phone.html}</div>
-      </div>
-      <div class ="col-xs-2 e-float-text e-label-top" style="justify-content: center;">Fax Line</div>
-      <div class ="col-xs-10" style="justify-content: center;">
-        <div class ="col-xs-12 p-2" style="justify-content: center;">{self.bd_fax_line.html}</div>
-      </div>
-      <div class ="col-xs-2 e-float-text e-label-top" style="justify-content: center;">Address<span style="font-size: 10px">This address will be displayed on invoices and on merge fields for document templates.</span></div>
-      <div class ="col-xs-10" style="justify-content: center;">
-        <div class ="col-xs-12 p-2" style="justify-content: center;">{self.bd_address_address1.html}</div>
-        <div class ="col-xs-12 p-2" style="justify-content: center;">{self.bd_address_address2.html}</div>
-        <div class ="col-xs-6 p-2" style="justify-content: center;">{self.bd_address_city.html}</div>
-        <div class ="col-xs-2 p-2" style="justify-content: center;">{self.bd_address_state.html}</div>
-        <div class ="col-xs-4 p-2" style="justify-content: center;">{self.bd_address_zip.html}</div>
-        <div class ="col-xs-12 p-2" style="justify-content: center;">{self.bd_address_country.html}</div>
-      </div>
+      <div class ="col-xs-6" style="justify-content: center;">\
+        <h5 class ="col-xs-12" style="padding-right: 0px">Add Contact</h5>
+        <div class="col-xs-12" style="padding-right: 0px; align-items: center; ">
+          {self.bd_email.html}
+          {self.bd_contact_group.html}
+          {self.bd_mobile_phone.html}
+          {self.bd_entity.html}
+          {self.bd_work_phone.html}
+        </div>
+      </div>\
+      <div class ="col-xs-6" style="justify-content: center;">\
+        <h5 class ="col-xs-12" style="padding-left: 0px" >Address</h5>
+        <div class="col-xs-12" style="padding-left: 0px; align-items: center; ">
+          {self.bd_address1.html}
+          {self.bd_address2.html}
+          {self.bd_city_district.html}
+          {self.bd_state_province.html}
+          {self.bd_postal_code.html}
+        </div>
+      </div>\
     '''
 
   def prepare_billing_info_settings_html(self):
@@ -1073,7 +1049,6 @@ class SettingsView:
     if selected_index == 1 and not self.userProfileTabInitialized:
       self.init_user_profile_tab()
       self.userProfileTabInitialized = True
-      self.display_user_profile_info()
     elif selected_index == 2 and not self.adminTabInitialized:
       self.init_admin_tab()
       self.adminTabInitialized = True
@@ -1657,33 +1632,71 @@ class SettingsView:
     self.admin_user_permissions.appendTo(jQuery(f"#{self.admin_user_permissions_id}")[0])
 
   def init_business_details_tab(self):
-    # self.business_name.appendTo(jQuery(f"#{self.business_name_id}")[0])
-    # self.business_address.appendTo(jQuery(f"#{self.business_address_id}")[0])
-    # self.business_phone.appendTo(jQuery(f"#{self.business_phone_id}")[0])
-    self.bd_office_name.create_control()
-    self.bd_office_name.control.appendTo(jQuery(f"#{self.bd_office_name.el_id}")[0])
-    self.bd_primary_office.create_control()
-    self.bd_primary_office.control.appendTo(jQuery(f"#{self.bd_primary_office.el_id}")[0])
-    self.bd_main_phone.create_control()
-    self.bd_main_phone.control.appendTo(jQuery(f"#{self.bd_main_phone.el_id}")[0])
-    self.bd_fax_line.create_control()
-    self.bd_fax_line.control.appendTo(jQuery(f"#{self.bd_fax_line.el_id}")[0])
-    self.bd_address_address1.create_control()
-    self.bd_address_address1.control.appendTo(jQuery(f"#{self.bd_address_address1.el_id}")[0])
-    self.bd_address_address2.create_control()
-    self.bd_address_address2.control.appendTo(jQuery(f"#{self.bd_address_address2.el_id}")[0])
-    self.bd_address_city.create_control()
-    self.bd_address_city.control.appendTo(jQuery(f"#{self.bd_address_city.el_id}")[0])
-    self.bd_address_state.create_control()
-    self.bd_address_state.control.appendTo(jQuery(f"#{self.bd_address_state.el_id}")[0])
-    self.bd_address_zip.create_control()
-    self.bd_address_zip.control.appendTo(jQuery(f"#{self.bd_address_zip.el_id}")[0])
-    self.bd_address_country.create_control()
-    self.bd_address_country.control.appendTo(jQuery(f"#{self.bd_address_country.el_id}")[0])
+    print('init_business_details_tab')
+    self.bd_first_name.create_control()
+    self.bd_last_name.create_control()
+    self.bd_email.create_control()
+    self.bd_contact_group.create_control()
+    self.bd_mobile_phone.create_control()
+    self.bd_entity.create_control()
+    self.bd_work_phone.create_control()
+    self.bd_title_position.create_control()
+    self.bd_department.create_control()
+    self.bd_courtroom.create_control()
+    self.bd_dob.create_control()
+    self.bd_ssn.create_control()
+    self.bd_country_of_citizenship.create_control()
+    self.bd_native_language.create_control()
+    self.bd_address1.create_control()
+    self.bd_address2.create_control()
+    self.bd_city_district.create_control()
+    self.bd_state_province.create_control()
+    self.bd_postal_code.create_control()
+    self.bd_set_attribute()
+    # self.bd_first_name.control.appendTo(jQuery(f"#{self.bd_first_name.el_id}")[0])
+    # self.bd_last_name.control.appendTo(jQuery(f"#{self.bd_last_name.el_id}")[0])
+    self.bd_email.control.appendTo(jQuery(f"#{self.bd_email.el_id}")[0])
+    self.bd_contact_group.control.appendTo(jQuery(f"#{self.bd_contact_group.el_id}")[0])
+    self.bd_mobile_phone.control.appendTo(jQuery(f"#{self.bd_mobile_phone.el_id}")[0])
+    self.bd_entity.control.appendTo(jQuery(f"#{self.bd_entity.el_id}")[0])
+    self.bd_work_phone.control.appendTo(jQuery(f"#{self.bd_work_phone.el_id}")[0])
+    # self.bd_title_position.control.appendTo(jQuery(f"#{self.bd_title_position.el_id}")[0])
+    # self.bd_department.control.appendTo(jQuery(f"#{self.bd_department.el_id}")[0])
+    # self.bd_courtroom.control.appendTo(jQuery(f"#{self.bd_courtroom.el_id}")[0])
+    # self.bd_dob.control.appendTo(jQuery(f"#{self.bd_dob.el_id}")[0])
+    # self.bd_ssn.control.appendTo(jQuery(f"#{self.bd_ssn.el_id}")[0])
+    # self.bd_country_of_citizenship.control.appendTo(jQuery(f"#{self.bd_country_of_citizenship.el_id}")[0])
+    # self.bd_native_language.control.appendTo(jQuery(f"#{self.bd_native_language.el_id}")[0])
+    self.bd_address1.control.appendTo(jQuery(f"#{self.bd_address1.el_id}")[0])
+    self.bd_address2.control.appendTo(jQuery(f"#{self.bd_address2.el_id}")[0])
+    self.bd_city_district.control.appendTo(jQuery(f"#{self.bd_city_district.el_id}")[0])
+    self.bd_state_province.control.appendTo(jQuery(f"#{self.bd_state_province.el_id}")[0])
+    self.bd_postal_code.control.appendTo(jQuery(f"#{self.bd_postal_code.el_id}")[0])
+
+  def bd_set_attribute(self):
+    all_contact = Contact.search()
+    edit_contact = None
+    for contact in all_contact:
+      edit_contact = contact
+      break
+    # self.bd_first_name.value = edit_contact['first_name']
+    # self.bd_last_name.value = edit_contact['last_name']
+    self.bd_email.value = edit_contact['email']
+    self.bd_contact_group.value = edit_contact['contact_group'].name
+    self.bd_mobile_phone.value = edit_contact['mobile_phone']
+    self.bd_entity.value = edit_contact['entity'].name
+    self.bd_work_phone.value = edit_contact['work_phone']
+    # self.bd_title_position.value = edit_contact['title_position']
+    # self.bd_department.value = edit_contact['department']
+    # self.bd_courtroom.value = edit_contact['courtroom']
+    # print(edit_contact['address'])
+    self.bd_address1.value = edit_contact['address']['address_line_1']
+    self.bd_address2.value = edit_contact['address']['address_line_2']
+    self.bd_city_district.value = edit_contact['address']['city_district']
+    self.bd_state_province.value = edit_contact['address']['state_province']
+    self.bd_postal_code.value = edit_contact['address']['postal_code']
 
   def init_billing_info_tab(self):
-    # self.billing_credit_card.appendTo(jQuery(f"#{self.billing_credit_card_id}")[0])
-    # self.billing_address.appendTo(jQuery(f"#{self.billing_address_id}")[0])
     self.bi_card_name.create_control()
     self.bi_card_name.control.appendTo(jQuery(f"#{self.bi_card_name.el_id}")[0])
     self.bi_card_number.create_control()
@@ -2304,16 +2317,6 @@ class SettingsView:
   def save_checkbox_status(self):
     pass
 
-  def display_user_profile_info(self):
-    print('1')
-    print(AppEnv.logged_user.email)
-  
   def destroy(self):
-    # self.date_picker.destroy()
-    # self.radio_plus.destroy()
-    # self.radio_minus.destroy()
-    # self.radio_calendar.destroy()
-    # self.radio_business.destroy()
-    # self.numbers.destroy()
     if self.container_el:
       self.container_el.innerHTML = ''
