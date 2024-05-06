@@ -8,7 +8,7 @@ from datetime import timedelta, datetime
 from AnvilFusion.tools.utils import AppEnv, datetime_js_to_py
 from AnvilFusion.components.FormInputs import *
 
-from ..app.models import Staff, User, Contact, Activity, AppAuditLog, TimeEntry, Expense, Case, Task, Event
+from ..app.models import Staff, User, Contact, Activity, AppAuditLog, TimeEntry, Expense, Case, Task, Event, Payment, Lead, Client
 
 PM_AV_PERIOD = [
   'This Month',
@@ -41,7 +41,6 @@ class AnalyticsView:
     finance_html = self.prepare_finance_html()
     firm_html = self.prepare_firm_html()
     lead_html = self.prepare_lead_html()
-    lead_intake_html = self.prepare_lead_intake_html()
     staff_html = self.prepare_staff_html()
     
     self.billingTabInitialized  = False
@@ -49,7 +48,6 @@ class AnalyticsView:
     self.financeTabInitialized = False
     self.firmTabInitialized = False
     self.leadTabInitialized = False
-    self.lead_intakeTabInitialized = False
     self.staffTabInitialized = False
 
     self.tab = ej.navigations.Tab({
@@ -61,7 +59,6 @@ class AnalyticsView:
         {'header': {'text': 'Finance'}, 'content': finance_html},
         {'header': {'text': 'Firm'}, 'content': firm_html},
         {'header': {'text': 'Lead'}, 'content': lead_html},
-        {'header': {'text': 'Lead_Intake'}, 'content': lead_intake_html},
         {'header': {'text': 'Staff'}, 'content': staff_html},
       ],
       'selected': self.on_tab_selected
@@ -157,8 +154,6 @@ class AnalyticsView:
         </div>
       </div>
     '''
-      # item_uid = activity['uid']
-      # item = Activity.get(item_uid)
       
     return ret_html
 
@@ -236,8 +231,6 @@ class AnalyticsView:
         </div>
       </div>
     '''
-      # item_uid = activity['uid']
-      # item = Activity.get(item_uid)
       
     return ret_html
 
@@ -248,11 +241,11 @@ class AnalyticsView:
         <div class="col-xs-12" style="align-items: center;  padding: 8px; font-size: 1.8rem">Payroll & Expenses</div>
         <div class="col-xs-6" style="align-items: center; padding: 8px; padding-top: 0px">
           <div class="p-3" style="padding: 5px; background-color: white; difsplay: flex; align-items:center; justify-content: center;">
-            <div style="display:flex; align-items:center;">
-              <i class="fa-solid fa-check-double" aria-hidden="true" style="margin-right: 8px; font-size: 2em;"></i>
+            <div style="display:flex; align-items:center; justify-content:center;">
+              <i class="fa-thin fa-money-check-dollar-pen" aria-hidden="true" style="margin-right: 8px; font-size: 2em;"></i>
               <div>
                 <span style="margin-right: 4px">Current Period Payroll</span>
-                <div id="id_finance_current_period_payroll" style="font-weight: bold; font-size: 1.4em;">$ 0.00</div>
+                <div id="id_finance_current_period_payroll" style="font-weight: bold; font-size: 1.4em;">$ </div>
               </div>
             </div>
           </div>
@@ -260,10 +253,10 @@ class AnalyticsView:
         <div class="col-xs-6" style="align-items: center; padding: 8px; padding-top: 0px">
           <div class="p-3" style="padding: 5px; background-color: white; display: flex; align-items:center; justify-content: center;">
             <div style="display:flex; align-items:center;">
-              <i class="fa-solid fa-user" aria-hidden="true" style="margin-right: 8px; font-size: 2em;"></i>
+              <i class="fa-thin fa-money-check-dollar-pen" aria-hidden="true" style="margin-right: 8px; font-size: 2em;"></i>
               <div>
                 <span style="margin-right: 4px">Firm Expenses this Month</span>
-                <div id="id_finance_firm_expenses_this_month" style="font-weight: bold; font-size: 1.4em;">$ 863.50</div>
+                <div id="id_finance_firm_expenses_this_month" style="font-weight: bold; font-size: 1.4em;">$ </div>
               </div>
             </div>
           </div>
@@ -273,18 +266,18 @@ class AnalyticsView:
           <div class="p-3" style="padding: 5px; background-color: rgb(39, 45, 131); display: flex; align-items:center; justify-content: center; color: white;">
             <div style="display:flex; align-items:center;">
               <div>
-                <span style="margin-right: 4px">This Month</span>
-                <div id="id_finance_this_month_revenue" style="font-weight: bold; font-size: 1.4em">$ 0.00</div>
+                <span style="text-align: center">This Month</span>
+                <div id="id_finance_this_month_revenue" style="text-align: center; font-weight: bold; font-size: 1.4em">$ 0.00</div>
               </div>
             </div>
           </div>
         </div>
         <div class="col-xs-4" style="align-items: center; padding: 8px">
-          <div class="p-3" style="padding: 5px; background-color: white; display: flex; align-items:center; justify-content: center">
+          <div class="p-3" style="padding: 5px; background-color: white; display: flex; align-items:center; justify-content: center;">
             <div style="display:flex; align-items:center;">
               <div>
-                <span style="margin-right: 4px">Same Month Last Year</span>
-                <div id="id_finance_same_month_last_year_revenue" style="font-weight: bold; font-size: 1.4em; color: #333">$ 0.00</div>
+                <span style="text-align: center;">Same Month Last Year</span>
+                <div id="id_finance_same_month_last_year_revenue" style="text-align: center; font-weight: bold; font-size: 1.4em; color: #333">$ 0.00</div>
               </div>
             </div>
           </div>
@@ -294,8 +287,8 @@ class AnalyticsView:
           <div class="p-3" style="padding: 5px; background-color: white; display: flex; align-items:center; justify-content: center">
             <div style="display:flex; align-items:center;">
               <div>
-                <span style="margin-right: 4px">Last Month</span>
-                <div id="id_finance_last_month" style="font-weight: bold; font-size: 1.4em; color: #333">$ 0.00</div>
+                <span style="text-align: center;">Last Month</span>
+                <div id="id_finance_last_month" style="text-align: center; font-weight: bold; font-size: 1.4em; color: #333">$ 0.00</div>
               </div>
             </div>
           </div>
@@ -304,8 +297,8 @@ class AnalyticsView:
           <div class="p-3" style="padding: 5px; background-color: white; display: flex; align-items:center; justify-content: center;">
             <div style="display:flex; align-items:center;">
               <div>
-                <span style="margin-right: 4px">Current Month Projection</span>
-                <div id="id_finance_current_month_projection" style="font-weight: bold; font-size: 1.4em;">$ 0.00</div>
+                <span style="text-align: center;">Current Month Projection</span>
+                <div id="id_finance_current_month_projection" style="text-align: center; font-weight: bold; font-size: 1.4em;">$ 0.00</div>
               </div>
             </div>
           </div>
@@ -314,8 +307,8 @@ class AnalyticsView:
           <div class="p-3" style="padding: 5px; background-color: white; display: flex; align-items:center; justify-content: center;">
             <div style="display:flex; align-items:center;">
               <div>
-                <span style="margin-right: 4px">Average Daily Revenur</span>
-                <div id="id_finance_average_daily_revenue" style="font-weight: bold; font-size: 1.4em;">$ 0.00</div>
+                <span style="text-align: center;">Average Daily Revenur</span>
+                <div id="id_finance_average_daily_revenue" style="text-align: center; font-weight: bold; font-size: 1.4em;">$ 0.00</div>
               </div>
             </div>
           </div>
@@ -325,8 +318,8 @@ class AnalyticsView:
           <div class="p-3" style="padding: 5px; background-color: white; display: flex; align-items:center; justify-content: center;">
             <div style="display:flex; align-items:center;">
               <div>
-                <span style="margin-right: 4px">Total Referals</span>
-                <div id="id_finance_total_referals" style="font-weight: bold; font-size: 1.4em;">69</div>
+                <span style="text-align: center;">Total Referals</span>
+                <div id="id_finance_total_referrals" style="text-align: center; font-weight: bold; font-size: 1.4em;">69</div>
               </div>
             </div>
           </div>
@@ -335,8 +328,8 @@ class AnalyticsView:
           <div class="p-3" style="padding: 5px; background-color: white; display: flex; align-items:center; justify-content: center;">
             <div style="display:flex; align-items:center;">
               <div>
-                <span style="margin-right: 4px">Firm Expenses this Month</span>
-                <div id="id_finance_total_minus_referals" style="font-weight: bold; font-size: 1.4em;">0</div>
+                <span style="text-align: center;">Firm Expenses this Month</span>
+                <div id="id_finance_total_minus_referrals" style="text-align: center; font-weight: bold; font-size: 1.4em;">0</div>
               </div>
             </div>
           </div>
@@ -345,8 +338,8 @@ class AnalyticsView:
           <div class="p-3" style="padding: 5px; background-color: white; display: flex; align-items:center; justify-content: center;">
             <div style="display:flex; align-items:center;">
               <div>
-                <span style="margin-right: 4px">New Clients this Month</span>
-                <div id="id_finance_new_clients_this_month" style="font-weight: bold; font-size: 1.4em;">0</div>
+                <span style="text-align: center;">New Clients this Month</span>
+                <div id="id_finance_new_clients_this_month" style="text-align: center; font-weight: bold; font-size: 1.4em;">0</div>
               </div>
             </div>
           </div>
@@ -355,8 +348,8 @@ class AnalyticsView:
           <div class="p-3" style="padding: 5px; background-color: white; display: flex; align-items:center; justify-content: center;">
             <div style="display:flex; align-items:center;">
               <div>
-                <span style="margin-right: 4px">Existing Clients this Month</span>
-                <div id="id_finance_existing_clients_this_month" style="font-weight: bold; font-size: 1.4em;">0</div>
+                <span style="text-align: center;">Existing Clients this Month</span>
+                <div id="id_finance_existing_clients_this_month" style="text-align: center; font-weight: bold; font-size: 1.4em;">0</div>
               </div>
             </div>
           </div>
@@ -385,58 +378,183 @@ class AnalyticsView:
       </div>
     </div>
     '''
-      # item_uid = activity['uid']
-      # item = Activity.get(item_uid)
       
     return ret_html
 
   def prepare_firm_html(self):
-    return '''
-      <div id="da-grid-container" style="height:100%;">
-        <div class="" role="grid" aria-multiselectable="true" style="width: 100%; height: 100%;" tabindex="-1" aria-rowcount="2" aria-colcount="6">
-          <div class="e-gridcontent e-wrap" style="height: calc(100% - 10px);">
-            <div class="e-content" style="height: 100%; overflow-y: scroll; position: relative;">
-              <table class="e-table">
-                <tbody id="id-firm-analytics">
-                </tbody>
-              </table>
+    ret_html = '''
+    <div class ="col-xs-12" style="justify-content: center; padding: 0px;">
+      <div class="col-xs-4" style="align-items: center; padding: 8px;">
+        <div class="p-3" style="padding: 5px; background-color: white; difsplay: flex; align-items:center; justify-content: center;">
+          <div style="display:flex; align-items:center; justify-content:center;">
+            <i class="fa-duotone fa-users" aria-hidden="true" style="margin-right: 8px; font-size: 2em;"></i>
+            <div>
+              <span style="margin-right: 4px">Total Staff</span>
+              <div id="id_firm_total_staff" style="font-weight: bold; font-size: 1.4em;"></div>
             </div>
           </div>
         </div>
       </div>
+      <div class="col-xs-4" style="align-items: center; padding: 8px;">
+        <div class="p-3" style="padding: 5px; background-color: white; display: flex; align-items:center; justify-content: center;">
+          <div style="display:flex; align-items:center;">
+            <i class="fa-thin fa-phone-intercom" aria-hidden="true" style="margin-right: 8px; font-size: 2em;"></i>
+            <div>
+              <span style="margin-right: 4px">Employee Devices</span>
+              <div id="id_firm_employee_devices" style="font-weight: bold; font-size: 1.4em;"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-xs-4" style="align-items: center; padding: 8px;">
+        <div class="p-3" style="padding: 5px; background-color: white; display: flex; align-items:center; justify-content: center;">
+          <div style="display:flex; align-items:center;">
+            <i class="fa-light fa-print" aria-hidden="true" style="margin-right: 8px; font-size: 2em;"></i>
+            <div>
+              <span style="margin-right: 4px">Office Devices</span>
+              <div id="id_firm_office_devices" style="font-weight: bold; font-size: 1.4em;"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-xs-6" style="align-items: center;  padding: 8px; font-size: 1.8rem; margin-bottom: 4px">Staff vs Hourly</div>
+      <div class="col-xs-6" style="align-items: center;  padding: 8px; font-size: 1.8rem; margin-bottom: 4px">Staff vs Salary</div>
+      <div class="col-xs-6" style="align-items: center; padding: 8px;">
+        <div class="p-3" style="padding: 5px; background-color: rgb(39, 45, 131); display: flex; align-items:center; justify-content: center; height: 260px">
+          <div style="color: white" id="id_firm_staff_vs_hourly"></div>
+        </div>
+      </div>
+      <div class="col-xs-6" style="align-items: center; padding: 8px;">
+        <div class="p-3" style="padding: 5px; background-color: white; display: flex; align-items:center; justify-content: center; height: 260px">
+          <div style="background-color: white;" id="id_firm_staff_vs_salary"></div>
+        </div>
+      </div> 
+      <div class="col-xs-6" style="align-items: center;  padding: 8px; margin-bottom: 4px; font-size: 1.8rem">Gender Demographics</div>
+      <div class="col-xs-6" style="align-items: center;  padding: 8px; margin-bottom: 4px; font-size: 1.8rem">Race Demographics</div>
+      <div class="col-xs-6" style="align-items: center; padding: 8px;">
+        <div class="p-3" style="padding: 5px; background-color: white; display: flex; align-items:center; justify-content: center; height: 290px">
+          <div style="background-color: white;" id="id_firm_gender_demographics"></div>
+        </div>
+      </div> 
+      <div class="col-xs-6" style="align-items: center; padding: 8px;">
+        <div class="p-3" style="padding: 5px; background-color: white; display: flex; align-items:center; justify-content: center; height: 290px">
+          <div style="background-color: white;" id="id_firm_race_demographics"></div>
+        </div>
+      </div> 
+    </div>
     '''
+      
+    return ret_html
 
   def prepare_lead_html(self):
-    return '''
-      <div id="da-grid-container" style="height:100%;">
-        <div class="" role="grid" aria-multiselectable="true" style="width: 100%; height: 100%;" tabindex="-1" aria-rowcount="2" aria-colcount="6">
-          <div class="e-gridcontent e-wrap" style="height: calc(100% - 10px);">
-            <div class="e-content" style="height: 100%; overflow-y: scroll; position: relative;">
-              <table class="e-table">
-                <tbody id="id-lead-analytics">
-                </tbody>
-              </table>
+    ret_html = '''
+    <div class ="col-xs-12" style="justify-content: center; padding: 0px;">
+      <div class ="col-xs-6" style="justify-content: center; padding: 0px; padding-top: 34px">
+        <div class="col-xs-12" style="align-items: center; padding: 8px;">
+          <div class="p-3" style="padding: 5px; background-color: rgb(39, 45, 131); color: white; difsplay: flex; align-items:center; justify-content: center;">
+            <div style="display:flex; align-items:center; justify-content:center;">
+              <i class="fa-thin fa-money-check-dollar-pen" aria-hidden="true" style="margin-right: 8px; font-size: 2em;"></i>
+              <div>
+                <span style="margin-right: 4px">Average Value of Open Leads</span>
+                <div id="id_lead_average_value_of_open_leads" style="font-weight: bold; font-size: 1.4em;">$ </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-xs-12" style="align-items: center; padding: 8px;">
+          <div class="p-3" style="padding: 5px; background-color: white; display: flex; align-items:center; justify-content: center;">
+            <div style="display:flex; align-items:center;">
+              <i class="fa-thin fa-money-check-dollar-pen" aria-hidden="true" style="margin-right: 8px; font-size: 2em;"></i>
+              <div>
+                <span style="margin-right: 4px">Average Vlaue of Won Leads</span>
+                <div id="id_lead_average_value_of_won_leads" style="font-weight: bold; font-size: 1.4em;">$ </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-xs-12" style="align-items: center; padding: 8px;">
+          <div class="p-3" style="padding: 5px; background-color: white; display: flex; align-items:center; justify-content: center;">
+            <div style="display:flex; align-items:center;">
+              <i class="fa-thin fa-money-check-dollar-pen" aria-hidden="true" style="margin-right: 8px; font-size: 2em;"></i>
+              <div>
+                <span style="margin-right: 4px">Average Value of Lost Leads</span>
+                <div id="id_average_value_of_lost_leads" style="font-weight: bold; font-size: 1.4em;">$</div>
+              </div>
             </div>
           </div>
         </div>
       </div>
-    '''
-  
-  def prepare_lead_intake_html(self):
-    return '''
-      <div id="da-grid-container" style="height:100%;">
-        <div class="" role="grid" aria-multiselectable="true" style="width: 100%; height: 100%;" tabindex="-1" aria-rowcount="2" aria-colcount="6">
-          <div class="e-gridcontent e-wrap" style="height: calc(100% - 10px);">
-            <div class="e-content" style="height: 100%; overflow-y: scroll; position: relative;">
-              <table class="e-table">
-                <tbody id="id-lead_intake-analytics">
-                </tbody>
-              </table>
-            </div>
+      <div class ="col-xs-6" style="justify-content: center; padding: 0px;">
+        <div class="col-xs-12" style="align-items: center;  padding: 8px; font-size: 1.8rem;">Oepn Deals by Stage</div>
+        <div class="col-xs-12" style="align-items: center; padding: 8px; padding-top: 0px">
+          <div class="p-3" style="padding: 5px; background-color: white; display: flex; align-items:center; justify-content: center; height: 206px">
+            <div style="color: white" id="id_lead_open_deals_by_stage"></div>
           </div>
         </div>
       </div>
+      <div class ="col-xs-8" style="justify-content: center; padding: 0px;">
+        <div class="col-xs-12" style="align-items: center;  padding-left: 8px; font-size: 1.8rem;">Lead Source vs Status</div>
+        <div class="col-xs-12" style="align-items: center; padding: 8px;">
+          <div class="p-3" style="padding: 5px; background-color: white; display: flex; align-items:center; justify-content: center; height: 400px">
+            <div id="id_lead_lead_source_vs_status"></div>
+          </div>
+        </div>
+      </div>
+      <div class ="col-xs-4" style="justify-content: center; padding: 0px;">
+        <div class="col-xs-12" style="align-items: center;  padding-left: 8px; font-size: 1.8rem;">Conversion Rate</div>
+        <div class="col-xs-12" style="align-items: center; padding: 8px;">
+          <div class="p-3" style="padding: 5px; background-color: rgb(39, 45, 131); color: white; sdisplay: flex; align-items:center; justify-content: center; height: 180px">
+            <div style="color: white" id="id_lead_conversion_rate"></div>
+          </div>
+        </div>
+        <div class="col-xs-12" style="align-items: center;  padding-left: 8px; font-size: 1.8rem;">Conversions by Stage</div>
+        <div class="col-xs-12" style="align-items: center; padding: 8px;">
+            <div class="p-3" style="padding: 5px; background-color: white; display: flex; align-items:center; justify-content: center; height: 180px">
+            <div id="id_lead_conversions_by_stage"></div>
+          </div>
+        </div>
+      </div>
+      <div class ="col-xs-4" style="justify-content: center; padding: 0px; padding-top: 26px">
+        <div class="col-xs-6" style="align-items: center; padding: 8px">
+          <div class="p-3" style="padding: 5px; background-color: white; display: flex; align-items:center; justify-content: center;">
+            <div style="display:flex; align-items:center;">
+              <div>
+                <span style="text-align: center;">Total Won Leads</span>
+                <div id="id_finance_existing_clients_this_month" style="text-align: center; font-weight: bold; font-size: 1.4em;">0</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-xs-6" style="align-items: center; padding: 8px">
+          <div class="p-3" style="padding: 5px; background-color: white; display: flex; align-items:center; justify-content: center;">
+            <div style="display:flex; align-items:center;">
+              <div>
+                <span style="text-align: center;">Total Lost Leads</span>
+                <div id="id_finance_existing_clients_this_month" style="text-align: center; font-weight: bold; font-size: 1.4em;">0</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-xs-12" style="align-items: center;  padding-left: 8px; font-size: 1.8rem;">Lost Reasons</div>
+        <div class="col-xs-12" style="align-items: center; padding: 8px;">
+          <div class="p-3" style="padding: 5px; background-color: white; display: flex; align-items:center; justify-content: center; height: 260px">
+            <div id="id_lead_lost_reasons"></div>
+          </div>
+        </div>
+      </div>
+      <div class ="col-xs-8" style="justify-content: center; padding: 0px;">
+        <div class="col-xs-12" style="align-items: center;  padding-left: 8px; font-size: 1.8rem;">Value of Deals Won vs Lost</div>
+        <div class="col-xs-12" style="align-items: center; padding: 8px;">
+          <div class="p-3" style="padding: 5px; background-color: white; display: flex; align-items:center; justify-content: center; height: 360px">
+            <div id="id_lead_value_of_deals_won_vs_lost"></div>
+          </div>
+        </div>
+      </div>
+    </div>
     '''
+      
+    return ret_html
+
 
   def prepare_staff_html(self):
     return '''
@@ -469,10 +587,7 @@ class AnalyticsView:
     elif selected_index == 4 and not self.leadTabInitialized:
       self.init_lead_tab()
       self.leadTabInitialized = True
-    elif selected_index == 5 and not self.lead_intakeTabInitialized:
-      self.init_lead_intake_tab()
-      self.lead_intakeTabInitialized = True
-    elif selected_index == 6 and not self.staffTabInitialized:
+    elif selected_index == 5 and not self.staffTabInitialized:
       self.init_staff_tab()
       self.staffTabInitialized = True
 
@@ -1298,7 +1413,7 @@ class AnalyticsView:
     '''
     jQuery("#id_case_cases_by_pracetice_area").append(ret_case_by_practice_area_html)
 
-  # Contact Map
+    # Contact Map
     contact_maps = ej.maps.Maps({
       'zoomSettings': {
         'enable': True,
@@ -1330,18 +1445,284 @@ class AnalyticsView:
     }, "#id_finance_period")
     
     dropdown_finance_staff_incentives_report_period.addEventListener('change', self.dropdown_finance_staff_incentives_report_period_change)
+    # Current Period Payroll
+    all_payments = Payment.search()
+    total_payroll = 0
+    for temp_payments in all_payments:
+      date = temp_payments['payment_time']
+      current_date = datetime.date.today()
+      print("payroll  ", date.year)
+      if date.year == current_date.year and date.month == current_date.month:
+        total_payroll += temp_payments['amount']
+    float_total_payroll = float(total_payroll)
+    formatted_total_payroll = "{:.2f}".format(float_total_payroll)
+    ret_current_period_payroll_html = f'''
+      {formatted_total_payroll}
+    '''
+    jQuery("#id_finance_current_period_payroll").empty().append(ret_current_period_payroll_html)
+
+    # Firm Expenses this Month
+    all_expenses = Expense.search()
+    total_expenses_this_month = 0
+    for temp_expenses in all_expenses:
+      date = temp_expenses['date']
+      current_date = datetime.date.today()
+      print("expenses  ", date.year)
+      if date.year == current_date.year and date.month == current_date.month:
+        total_expenses_this_month += temp_expenses['total']
+    float_total_expenses_this_month = float(total_expenses_this_month)
+    formatted_total_expenses = "{:.2f}".format(float_total_expenses_this_month)
+    ret_total_expenses_this_month_html = f'''
+      {formatted_total_expenses}
+    '''
+    jQuery("#id_finance_firm_expenses_this_month").empty().append(ret_total_expenses_this_month_html)
+
+    # Revenue Snapshot this month
+
+    # Total Referrals
+    all_leads = Lead.search()
+    total_referrals_count = 0
+    total_minus_referrals_count = 0
+    for temp_leads in all_leads:
+      date = temp_leads['incident_date']
+      current_date = datetime.date.today()
+      if date is not None:
+        if date.year == current_date.year and date.month == current_date.month:
+          if len(temp_leads['referred_by']) == 0:
+            total_minus_referrals_count += 1
+          else:
+            total_referrals_count += 1
+    ret_total_referrals__html = f'''
+      {total_referrals_count}
+    '''
+    jQuery("#id_finance_total_referrals").empty().append(ret_total_referrals__html)    
+    ret_total_minus_referrals_html = f'''
+      {total_minus_referrals_count}
+    '''
+    jQuery("#id_finance_total_minus_referrals").empty().append(ret_total_minus_referrals_html) 
+
+    # Clients
+    all_clients = Client.search()
+    new_clients = []
+    old_clients = []
+    exist_clients_count = 0
+    new_clients_count = 0
+    for temp_clients in all_clients:
+      date = temp_clients['created_time']
+      current_date = datetime.date.today()
+      print("clients  ", date.year)
+      if date.year == current_date.year and date.month == current_date.month:
+        new_clients.append(temp_clients['client_name'])
+      else:
+        old_clients.append(temp_clients['client_name'])
+    for new_client in new_clients:
+      if new_client in old_clients:
+        exist_clients_count += 1
+      else:
+        new_clients_count += 1
+    ret_new_clients_html = f'''
+      {new_clients_count}
+    '''
+    jQuery("#id_finance_new_clients_this_month").append(ret_new_clients_html)
+    ret_exist_clients_html = f'''
+      {exist_clients_count}
+    '''
+    jQuery("#id_finance_existing_clients_this_month").append(ret_exist_clients_html)
+
+
 
   def dropdown_finance_staff_incentives_report_period_change(self, args):
     pass
   
   def init_firm_tab(self):
-    pass
+    # total staff, employee deivces, office devices
+    all_staff = Staff.search()
+    staffs = []
+    employee_devices = []
+    office_devices = []
+    staff_count = 0
+    employee_device_count = 0
+    office_device_count = 0
+    staff_vs_hourly = []
+    staff_vs_salary = []
+    gender_unknown_count = 0
+    gender_male_count = 0
+    gender_female_count = 0
+    gender_other_count = 0
+    race_unknown_count = 0
+    race_caucasian_count = 0
+    race_black_or_african_american_count = 0
+    race_native_hawaiian_or_other_pacific_islander_count = 0
+    race_asian_count = 0
+    race_american_indian_or_alaskan_native_count = 0
+    race_hispanic_or_latino_count = 0
+    
+    for temp_staff in all_staff:
+      staffs_name = temp_staff['first_name'] + temp_staff['last_name']
+      staffs.append(staffs_name)
+      employee_devices.append(temp_staff['personal_phone'])
+      office_devices.append(temp_staff['work_phone'])
+      temp_staff_vs_hourly = {}
+      temp_staff_vs_salary = {}
+      if temp_staff['pay_type'] == 'hourly':
+        temp_staff_vs_hourly['name'] = temp_staff['first_name']
+        temp_staff_vs_hourly['hourly_rate'] = temp_staff['pay_rate']
+        staff_vs_hourly.append(temp_staff_vs_hourly)
+      else:
+        temp_staff_vs_salary['name'] = temp_staff['first_name']
+        temp_staff_vs_salary['salary_rate'] = temp_staff['pay_rate']
+        staff_vs_salary.append(temp_staff_vs_salary)
+      if temp_staff['personal_gender'] is None:
+        gender_unknown_count += 1
+      else:
+        if temp_staff['personal_gender'] == 'male':
+          gender_male_count += 1
+        elif temp_staff['personal_gender'] == 'female':
+          gender_female_count += 1
+        else:
+          gender_other_count += 1
+      if temp_staff['personal_race'] is None:
+        race_unknown_count += 1
+      else:
+        if temp_staff['personal_race'] == 'caucasian':
+          race_caucasian_count += 1
+        elif temp_staff['personal_race'] == 'asian':
+          race_asian_count += 1
+        elif temp_staff['personal_race'] == 'black or african american':
+          race_black_or_african_american_count += 1
+        elif temp_staff['personal_race'] == 'native hawaiian or other pacific islander':
+          race_native_hawaiian_or_other_pacific_islander_count += 1
+        elif temp_staff['personal_race'] == 'american indian or alaskan native':
+          race_american_indian_or_alaskan_native_count += 1
+        else:
+          race_hispanic_or_latino_count += 1
+        
+    
+    
+    unique_staffs = set(staffs)
+    staff_count = len(unique_staffs)
+    unique_employee_devices = set(employee_devices)
+    employee_device_count = len(unique_employee_devices)
+    unique_office_devices = set(office_devices)
+    office_device_count = len(unique_office_devices)
+    ret_total_staff_html = f'''
+      {staff_count}
+    '''
+    jQuery("#id_firm_total_staff").append(ret_total_staff_html)
+    
+    ret_employee_devices_html = f'''
+      {employee_device_count}
+    '''
+    jQuery("#id_firm_employee_devices").append(ret_employee_devices_html)
+    
+    ret_office_device_html = f'''
+      {office_device_count}
+    '''
+    jQuery("#id_firm_office_devices").append(ret_office_device_html)
 
+    # staff vs hourly
+    chart_staff_vs_hourly = ej.charts.Chart({
+      'primaryXAxis': {
+        'valueType': 'Category',
+        'labelStyle': {
+                    'color': '#FFFFFF' 
+        }
+      },
+      'primaryYAxis': {
+        'minimum': 0, 'maximum': 550, 'interval': 50, 
+        'labelStyle': {
+          'color': '#FFFFFF' ,
+          'padding': { 'right': 10 }
+        },
+        'labelFormat': '${value}', 
+      },
+      'series':[{
+        'dataSource': staff_vs_hourly,
+        'xName': 'name', 'yName': 'hourly_rate',
+        'type': 'Column',
+        'fill': '#FFFFFF'
+      }],
+      'isTransposed': True,
+    }, "#id_firm_staff_vs_hourly")
+    ret_firm_staff_vs_hourly_html = f'''
+      {chart_staff_vs_hourly}
+    '''
+    jQuery("#id_firm_staff_vs_hourly").append(ret_firm_staff_vs_hourly_html)
+
+    # staff vs salary
+    chart_staff_vs_salary = ej.charts.Chart({
+      'primaryXAxis': {
+        'valueType': 'Category',
+      },
+      'primaryYAxis': {
+        'minimum': 0, 'maximum': 14000, 'interval': 2000, 'labelFormat': '${value}'
+      },
+      'series':[{
+        'dataSource': staff_vs_salary,
+        'xName': 'name', 'yName': 'salary_rate',
+        'type': 'Column',
+      }],
+      'isTransposed': True,
+    }, "#id_firm_staff_vs_salary")
+    ret_firm_staff_vs_salary_html = f'''
+      {chart_staff_vs_salary}
+    '''
+    jQuery("#id_firm_staff_vs_salary").append(ret_firm_staff_vs_salary_html)
+
+    # Gender Demography
+    chartData_firm_gender_demographics = [
+      {'gender': 'unknown', 'count': gender_unknown_count},
+      {'gender': 'male', 'count': gender_male_count},
+      {'gender': 'female', 'count': gender_female_count},
+      {'gender': 'other', 'count': gender_other_count},
+    ]
+
+    chart_firm_gender_demographics = ej.charts.AccumulationChart({
+    'series': [
+        {
+          'dataSource': chartData_firm_gender_demographics,
+          'innerRadius': '40%',
+          'startAngle': 270,
+          'endAngle': 90,
+          'xName': 'gender',
+          'yName': 'count'
+        }
+      ]
+    }, '#id_firm_gender_demographics')
+    ret_firm_gender_demographics_html = f'''
+      {chart_firm_gender_demographics}
+    '''
+    jQuery("#id_firm_gender_demographics").append(ret_firm_gender_demographics_html)
+    
+    # Race Demography
+    chartData_firm_race_demographics = [
+      {'race': 'unknown', 'count': race_unknown_count},
+      {'race': 'caucasian', 'count': race_caucasian_count},
+      {'race': 'asian', 'count': race_asian_count},
+      {'race': 'black or african american', 'count': race_black_or_african_american_count},
+      {'race': 'native hawaiian or other pacific islander', 'count': race_native_hawaiian_or_other_pacific_islander_count},
+      {'race': 'american indian or alaskan native', 'count': race_american_indian_or_alaskan_native_count},
+      {'race': 'hispanic or latino', 'count': race_hispanic_or_latino_count},
+    ]
+    chart_firm_race_demographics = ej.charts.AccumulationChart({
+      'series': [
+        {
+            'dataSource': chartData_firm_race_demographics, 
+            'innerRadius': '40%',
+            'xName': 'race',
+            'yName': 'count'
+        }
+      ]
+    }, '#id_firm_race_demographics')
+    ret_firm_race_demographics_html = f'''
+      {chart_firm_race_demographics}
+    '''
+    jQuery("#firm_race_demographics").append(ret_firm_race_demographics_html)
+  
+  
   def init_lead_tab(self):
     pass
 
-  def init_lead_intake_tab(self):
-    pass
   
   def init_staff_tab(self):
     pass
