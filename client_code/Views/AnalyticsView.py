@@ -449,14 +449,14 @@ class AnalyticsView:
   def prepare_lead_html(self):
     ret_html = '''
     <div class ="col-xs-12" style="justify-content: center; padding: 0px;">
-      <div class ="col-xs-6" style="justify-content: center; padding: 0px; padding-top: 34px">
+      <div class ="col-xs-6" style="justify-content: center; padding: 0px; padding-top: 42px">
         <div class="col-xs-12" style="align-items: center; padding: 8px;">
           <div class="p-3" style="padding: 5px; background-color: rgb(39, 45, 131); color: white; difsplay: flex; align-items:center; justify-content: center;">
             <div style="display:flex; align-items:center; justify-content:center;">
               <i class="fa-thin fa-money-check-dollar-pen" aria-hidden="true" style="margin-right: 8px; font-size: 2em;"></i>
               <div>
                 <span style="margin-right: 4px">Average Value of Open Leads</span>
-                <div id="id_lead_average_value_of_open_leads" style="font-weight: bold; font-size: 1.4em;">$ </div>
+                <div id="id_lead_average_value_of_open_leads" style="font-weight: bold; font-size: 1.6em;">$ </div>
               </div>
             </div>
           </div>
@@ -467,7 +467,7 @@ class AnalyticsView:
               <i class="fa-thin fa-money-check-dollar-pen" aria-hidden="true" style="margin-right: 8px; font-size: 2em;"></i>
               <div>
                 <span style="margin-right: 4px">Average Vlaue of Won Leads</span>
-                <div id="id_lead_average_value_of_won_leads" style="font-weight: bold; font-size: 1.4em;">$ </div>
+                <div id="id_lead_average_value_of_won_leads" style="font-weight: bold; font-size: 1.6em;">$ </div>
               </div>
             </div>
           </div>
@@ -478,49 +478,49 @@ class AnalyticsView:
               <i class="fa-thin fa-money-check-dollar-pen" aria-hidden="true" style="margin-right: 8px; font-size: 2em;"></i>
               <div>
                 <span style="margin-right: 4px">Average Value of Lost Leads</span>
-                <div id="id_average_value_of_lost_leads" style="font-weight: bold; font-size: 1.4em;">$</div>
+                <div id="id_lead_average_value_of_lost_leads" style="font-weight: bold; font-size: 1.6em;">$</div>
               </div>
             </div>
           </div>
         </div>
       </div>
       <div class ="col-xs-6" style="justify-content: center; padding: 0px;">
-        <div class="col-xs-12" style="align-items: center;  padding: 8px; font-size: 1.8rem;">Oepn Deals by Stage</div>
+        <div class="col-xs-12" style="align-items: center;  padding: 12px; font-size: 1.8rem;">Open Deals by Stage</div>
         <div class="col-xs-12" style="align-items: center; padding: 8px; padding-top: 0px">
-          <div class="p-3" style="padding: 5px; background-color: white; display: flex; align-items:center; justify-content: center; height: 206px">
-            <div style="color: white" id="id_lead_open_deals_by_stage"></div>
+          <div class="p-3" style="padding: 5px; background-color: white; display: flex; align-items:center; justify-content: center; height: 218px">
+            <div id="id_lead_open_deals_by_stage"></div>
           </div>
         </div>
       </div>
       <div class ="col-xs-8" style="justify-content: center; padding: 0px;">
-        <div class="col-xs-12" style="align-items: center;  padding-left: 8px; font-size: 1.8rem;">Lead Source vs Status</div>
+        <div class="col-xs-12" style="align-items: center; padding: 4px; padding-left: 8px; font-size: 1.8rem;">Lead Source vs Status</div>
         <div class="col-xs-12" style="align-items: center; padding: 8px;">
-          <div class="p-3" style="padding: 5px; background-color: white; display: flex; align-items:center; justify-content: center; height: 400px">
+          <div class="p-3" style="padding: 5px; background-color: white; display: flex; align-items:center; justify-content: center; height: 409px">
             <div id="id_lead_lead_source_vs_status"></div>
           </div>
         </div>
       </div>
       <div class ="col-xs-4" style="justify-content: center; padding: 0px;">
-        <div class="col-xs-12" style="align-items: center;  padding-left: 8px; font-size: 1.8rem;">Conversion Rate</div>
+        <div class="col-xs-12" style="align-items: center;  padding: 8px; padding-bottom:0px; padding-top:14px; font-size: 1.4rem;">Total Won Rate</div>
         <div class="col-xs-12" style="align-items: center; padding: 8px;">
-          <div class="p-3" style="padding: 5px; background-color: rgb(39, 45, 131); color: white; sdisplay: flex; align-items:center; justify-content: center; height: 180px">
-            <div style="color: white" id="id_lead_conversion_rate"></div>
+          <div class="p-3" style="padding: 5px; padding-top: 40px; background-color: white; sdisplay: flex; align-items:center; justify-content: center; height: 180px">
+            <div id="id_lead_won_rate"></div>
           </div>
         </div>
-        <div class="col-xs-12" style="align-items: center;  padding-left: 8px; font-size: 1.8rem;">Conversions by Stage</div>
+        <div class="col-xs-12" style="align-items: center; padding: 8px; padding-bottom:0px; padding-top:14px; font-size: 1.4rem;">Won vs Lost by Stage</div>
         <div class="col-xs-12" style="align-items: center; padding: 8px;">
             <div class="p-3" style="padding: 5px; background-color: white; display: flex; align-items:center; justify-content: center; height: 180px">
-            <div id="id_lead_conversions_by_stage"></div>
+            <div id="id_lead_conversion_by_stage"></div>
           </div>
         </div>
       </div>
-      <div class ="col-xs-4" style="justify-content: center; padding: 0px; padding-top: 26px">
+      <div class ="col-xs-4" style="justify-content: center; padding: 0px; padding-top: 34px">
         <div class="col-xs-6" style="align-items: center; padding: 8px">
           <div class="p-3" style="padding: 5px; background-color: white; display: flex; align-items:center; justify-content: center;">
             <div style="display:flex; align-items:center;">
               <div>
                 <span style="text-align: center;">Total Won Leads</span>
-                <div id="id_finance_existing_clients_this_month" style="text-align: center; font-weight: bold; font-size: 1.4em;">0</div>
+                <div id="id_lead_total_won_lead" style="text-align: center; font-weight: bold; font-size: 1.6em;"></div>
               </div>
             </div>
           </div>
@@ -530,12 +530,12 @@ class AnalyticsView:
             <div style="display:flex; align-items:center;">
               <div>
                 <span style="text-align: center;">Total Lost Leads</span>
-                <div id="id_finance_existing_clients_this_month" style="text-align: center; font-weight: bold; font-size: 1.4em;">0</div>
+                <div id="id_lead_total_lost_lead" style="text-align: center; font-weight: bold; font-size: 1.6em;"></div>
               </div>
             </div>
           </div>
         </div>
-        <div class="col-xs-12" style="align-items: center;  padding-left: 8px; font-size: 1.8rem;">Lost Reasons</div>
+        <div class="col-xs-12" style="align-items: center; padding: 4px; padding-left: 8px; font-size: 1.8rem;">Lost Reasons</div>
         <div class="col-xs-12" style="align-items: center; padding: 8px;">
           <div class="p-3" style="padding: 5px; background-color: white; display: flex; align-items:center; justify-content: center; height: 260px">
             <div id="id_lead_lost_reasons"></div>
@@ -543,9 +543,9 @@ class AnalyticsView:
         </div>
       </div>
       <div class ="col-xs-8" style="justify-content: center; padding: 0px;">
-        <div class="col-xs-12" style="align-items: center;  padding-left: 8px; font-size: 1.8rem;">Value of Deals Won vs Lost</div>
+        <div class="col-xs-12" style="align-items: center; padding: 4px; padding-left: 8px; font-size: 1.8rem;">Value of Deals Won vs Lost</div>
         <div class="col-xs-12" style="align-items: center; padding: 8px;">
-          <div class="p-3" style="padding: 5px; background-color: white; display: flex; align-items:center; justify-content: center; height: 360px">
+          <div class="p-3" style="padding: 5px; background-color: white; display: flex; align-items:center; justify-content: center; height: 372px">
             <div id="id_lead_value_of_deals_won_vs_lost"></div>
           </div>
         </div>
@@ -557,20 +557,78 @@ class AnalyticsView:
 
 
   def prepare_staff_html(self):
-    return '''
-      <div id="da-grid-container" style="height:100%;">
-        <div class="" role="grid" aria-multiselectable="true" style="width: 100%; height: 100%;" tabindex="-1" aria-rowcount="2" aria-colcount="6">
-          <div class="e-gridcontent e-wrap" style="height: calc(100% - 10px);">
-            <div class="e-content" style="height: 100%; overflow-y: scroll; position: relative;">
-              <table class="e-table">
-                <tbody id="id-staff-analytics">
-                </tbody>
-              </table>
+    ret_html = '''
+    <div class ="col-xs-12" style="justify-content: center; padding: 0px;">
+      <div class="col-xs-12" style="align-items: center; padding: 8px;">
+        <div class="p-3" style="padding: 5px; background-color: white; difsplay: flex; align-items:center; justify-content: center;">
+          <div style="display:flex; align-items:center; justify-content:center;">
+            <div>
+              <span style="padding-left: 32px; font-weight: bold; font-size: 1.2em">Current Pay Period</span>
+              <div id="id_staff_current_pay_period" style="font-size: 1.3em;">04/08/2024 - 04/21/2024</div>
             </div>
           </div>
         </div>
       </div>
+      <div class="col-xs-6" style="align-items: center; padding: 8px;">
+        <div class="p-3" style="padding: 5px; background-color: white; display: flex; align-items:center; justify-content: center;">
+          <div style="display:flex; align-items:center;">
+            <i class="fa-thin fa-phone-intercom" aria-hidden="true" style="margin-right: 8px; font-size: 2em;"></i>
+            <div>
+              <span style="margin-right: 4px">Current Period Payroll</span>
+              <div id="id_staff_current_period_payroll" style="font-weight: bold; font-size: 1.6em;">0</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-xs-6" style="align-items: center; padding: 8px;">
+        <div class="p-3" style="padding: 5px; background-color: white; display: flex; align-items:center; justify-content: center;">
+          <div style="display:flex; align-items:center;">
+            <i class="fa-light fa-print" aria-hidden="true" style="margin-right: 8px; font-size: 2em;"></i>
+            <div>
+              <span style="margin-right: 4px">Overtime Hours</span>
+              <div id="id_staff_overtime_hours" style="font-weight: bold; font-size: 1.6em;">0</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-xs-6" style="align-items: center; padding: 8px;">
+        <div class="p-3" style="padding: 5px; background-color: white; display: flex; align-items:center; justify-content: center;">
+          <div style="display:flex; align-items:center;">
+            <i class="fa-thin fa-phone-intercom" aria-hidden="true" style="margin-right: 8px; font-size: 2em;"></i>
+            <div>
+              <span style="margin-right: 4px">Incentives</span>
+              <div id="id_staff_incentives" style="font-weight: bold; font-size: 1.6em;">0</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-xs-6" style="align-items: center; padding: 8px;">
+        <div class="p-3" style="padding: 5px; background-color: white; display: flex; align-items:center; justify-content: center;">
+          <div style="display:flex; align-items:center;">
+            <i class="fa-light fa-print" aria-hidden="true" style="margin-right: 8px; font-size: 2em;"></i>
+            <div>
+              <span style="margin-right: 4px">Total(Ex. Taxes)</span>
+              <div id="id_staff_total" style="font-weight: bold; font-size: 1.6em;">0</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-xs-6" style="align-items: center;  padding: 8px; font-size: 1.8rem; font-weight: bold; margin-bottom: 4px">Staff vs Hourly</div>
+      <div class="col-xs-6" style="align-items: center;  padding: 8px; font-size: 1.8rem; font-weight: bold; margin-bottom: 4px">Staff vs Salary</div>
+      <div class="col-xs-6" style="align-items: center; padding: 8px;">
+        <div class="p-3" style="padding: 5px; background-color: rgb(39, 45, 131); display: flex; align-items:center; justify-content: center; height: 260px">
+          <div style="color: white" id=""></div>
+        </div>
+      </div>
+      <div class="col-xs-6" style="align-items: center; padding: 8px;">
+        <div class="p-3" style="padding: 5px; background-color: white; display: flex; align-items:center; justify-content: center; height: 260px">
+          <div style="background-color: white;" id=""></div>
+        </div>
+      </div> 
+    </div>
     '''
+
+    return ret_html
   
   def on_tab_selected(self, args):
     selected_index = args.selectedIndex
@@ -1718,15 +1776,429 @@ class AnalyticsView:
       {chart_firm_race_demographics}
     '''
     jQuery("#firm_race_demographics").append(ret_firm_race_demographics_html)
-  
-  
+      
   def init_lead_tab(self):
-    pass
+    unknown_lead_source_count = 0
+    email_count = 0
+    google_message_count = 0
+    phone_call_count = 0
+    referral_count = 0
+    website_form_count = 0
+    yelp_count = 0
+    unknown_lead_case_stage_open_count = 0
+    unknown_lead_case_stage_won_count = 0
+    unknown_lead_case_stage_lost_count = 0
+    pre_charge_open_count = 0
+    pre_charge_won_count = 0
+    pre_charge_lost_count = 0
+    lower_court_open_count = 0
+    lower_court_won_count = 0
+    lower_court_lost_count = 0
+    upper_court_open_count = 0
+    upper_court_won_count = 0
+    upper_court_lost_count = 0
+    appeals_court_open_count = 0
+    appeals_court_won_count = 0
+    appeals_court_lost_count = 0
+    total_won_lead = 0
+    total_lost_lead = 0
+    total_open_lead = 0
+    total_value_of_won_lead = 0
+    total_value_of_lost_lead = 0
+    total_value_of_open_lead = 0
+    total_won_rate = 0
+    lost_reason_battery_count = 0
+    lost_reason_bigamy_count = 0
+    lost_reason_murder_first_degree_count = 0
+    lost_reason_kidnapping_count = 0
+    unknown_case_stage_open_value = 0
+    pre_charge_open_value = 0
+    lower_court_open_value = 0
+    upper_court_open_value = 0
+    appeals_court_open_value = 0
+    all_leads = Lead.search()
+    value_of_won_vs_lost = []
+    for temp_lead in all_leads:
+      temp_value_of_won_vs_lost = {}
+      formatted_date = temp_lead['updated_time'].strftime("%m/%Y")
+      temp_value_of_won_vs_lost['date'] = formatted_date
+      if temp_lead['lead_status'] == 'Won':
+        if temp_lead['retainer'] is not None:
+          temp_value_of_won_vs_lost['won_value'] = temp_lead['retainer']
+        else:
+          temp_value_of_won_vs_lost['won_value'] = 0
+        temp_value_of_won_vs_lost['lost_value'] = 0
+      elif temp_lead['lead_status'] == 'Lost':
+        if temp_lead['retainer'] is not None:
+          temp_value_of_won_vs_lost['lost_value'] = temp_lead['retainer']
+        else:
+          temp_value_of_won_vs_lost['lost_value'] = 0
+        temp_value_of_won_vs_lost['won_value'] = 0
+      else:
+        temp_value_of_won_vs_lost['won_value'] = 0
+        temp_value_of_won_vs_lost['lost_value'] = 0
+      found = False
+      for item in value_of_won_vs_lost:
+        if item['date'] == temp_value_of_won_vs_lost['date']:
+          item['won_value'] += temp_value_of_won_vs_lost['won_value']
+          item['lost_value'] += temp_value_of_won_vs_lost['lost_value']
+          found = True
+          break
+      if not found:
+        value_of_won_vs_lost.append(temp_value_of_won_vs_lost)  
+        
+      if temp_lead['lead_source'] is None:
+        unknown_lead_source_count += 1
+      elif temp_lead['lead_source'].name == 'Email':
+        email_count += 1
+      elif temp_lead['lead_source'].name == 'Google Messages':
+        google_message_count += 1
+      elif temp_lead['lead_source'].name == 'Phone Call':
+        phone_call_count += 1
+      elif temp_lead['lead_source'].name == 'Referral':
+        referral_count += 1
+      elif temp_lead['lead_source'].name == 'Website Form':
+        website_form_count += 1
+      else:
+        yelp_count += 1
+      if temp_lead['case_stage'] is None:
+        if temp_lead['lead_status'] == 'Open':
+          unknown_lead_case_stage_open_count += 1
+          if temp_lead['retainer'] is not None:
+            unknown_case_stage_open_value += temp_lead['retainer']
+        elif temp_lead['lead_status'] == 'Won':
+          unknown_lead_case_stage_won_count += 1
+        else:
+          unknown_lead_case_stage_lost_count += 1
+      elif temp_lead['case_stage'].name == 'Pre-Charge':
+        if temp_lead['lead_status'] == 'Open':
+          pre_charge_open_count += 1
+          if temp_lead['retainer'] is not None:
+            pre_charge_open_value += temp_lead['retainer']
+        elif temp_lead['lead_status'] == 'Won':
+          pre_charge_won_count += 1
+        else:
+          pre_charge_lost_count += 1
+      elif temp_lead['case_stage'].name == 'Lower Court':
+        if temp_lead['lead_status'] == 'Open':
+          lower_court_open_count += 1
+          if temp_lead['retainer'] is not None:
+            lower_court_open_value += temp_lead['retainer']
+        elif temp_lead['lead_status'] == 'Won':
+          lower_court_won_count += 1
+        else:
+          lower_court_lost_count += 1
+      elif temp_lead['case_stage'].name == 'Upper Court':
+        if temp_lead['lead_status'] == 'Open':
+          upper_court_open_count += 1
+          if temp_lead['retainer'] is not None:
+            upper_court_open_value += temp_lead['retainer']
+        elif temp_lead['lead_status'] == 'Won':
+          upper_court_won_count += 1
+        else:
+          upper_court_lost_count += 1
+      else:
+        if temp_lead['lead_status'] == 'Open':
+          appeals_court_open_count += 1
+          appeals_court_open_value += temp_lead['retainer']
+        elif temp_lead['lead_status'] == 'Won':
+          appeals_court_won_count += 1
+        else:
+          appeals_court_lost_count += 1
+      if temp_lead['lead_status'] == 'Won':
+        if temp_lead['retainer'] is not None:
+          total_value_of_won_lead += temp_lead['retainer']
+        total_won_lead += 1
+      elif temp_lead['lead_status'] == 'Lost':
+        if temp_lead['cause_of_action'] is not None:
+          for temp in temp_lead['cause_of_action']:
+            if temp.cause_of_action == 'Battery':
+              lost_reason_battery_count += 1
+            elif temp.cause_of_action == 'Bigamy':
+              lost_reason_bigamy_count += 1
+            elif temp.cause_of_action == 'Murder, first degree':
+              lost_reason_murder_first_degree_count += 1
+            else:
+              lost_reason_kidnapping_count += 1
+            print(temp.cause_of_action)
+        total_lost_lead += 1
+        if temp_lead['retainer'] is not None:
+          total_value_of_lost_lead += temp_lead['retainer']
+      else:
+        total_open_lead += 1
+        if temp_lead['retainer'] is not None:
+          total_value_of_open_lead += temp_lead['retainer']
+    value_of_won_vs_lost_list = [item for item in value_of_won_vs_lost if not (item['won_value'] == 0 and item['lost_value'] == 0)]
+    
+    total_won_rate = float(total_won_lead / (total_won_lead + total_lost_lead)) * 100
+    formatted_total_won_rate = "{:.2f}".format(total_won_rate)
+    avg_value_of_won_lead = float(total_value_of_won_lead / total_won_lead)
+    formatted_avg_value_of_won_lead = "{:.2f}".format(avg_value_of_won_lead)
+    avg_value_of_lost_lead = float(total_value_of_lost_lead / total_lost_lead)
+    formatted_avg_value_of_lost_lead = "{:.2f}".format(avg_value_of_lost_lead)
+    avg_value_of_open_lead = float(total_value_of_open_lead / total_open_lead)
+    formatted_avg_value_of_open_lead = "{:.2f}".format(avg_value_of_open_lead)
+        
+    # Average Value of Won, Lost and Open Leads
+    ret_avg_value_of_won_lead_html = f'''
+      {formatted_avg_value_of_won_lead}
+    '''
+    jQuery("#id_lead_average_value_of_won_leads").append(ret_avg_value_of_won_lead_html)
+    
+    ret_avg_value_of_lost_lead_html = f'''
+      {formatted_avg_value_of_lost_lead}
+    '''
+    jQuery("#id_lead_average_value_of_lost_leads").append(ret_avg_value_of_lost_lead_html)
+    
+    ret_avg_value_of_open_lead_html = f'''
+      {formatted_avg_value_of_open_lead}
+    '''
+    jQuery("#id_lead_average_value_of_open_leads").append(ret_avg_value_of_open_lead_html)
 
+    # Open Deals by Stage
+    chartdata_open_deal_value = [
+      {'name': 'Unknown', 'value': unknown_case_stage_open_value},
+      {'name': 'Pre-Charge', 'value': pre_charge_open_value},
+      {'name': 'Lower Court', 'value': lower_court_open_value},
+      {'name': 'Upper Court', 'value': upper_court_open_value},
+      {'name': 'Appeals Court', 'value': appeals_court_open_value},
+    ]
+    chart_open_deal_value = ej.charts.Chart({
+      'primaryXAxis': {
+        'valueType': 'Category',
+      },
+      'primaryYAxis': {
+      },
+      'series':[{
+        'dataSource': chartdata_open_deal_value,
+        'xName': 'name', 'yName': 'value',
+        'type': 'Column',
+      }],
+      # 'isTransposed': True,
+    }, "#id_lead_open_deals_by_stage")
+    ret_lead_open_deals_by_stage_html = f'''
+      {chart_open_deal_value}
+    '''
+    jQuery("#id_lead_open_deals_by_stage").append(ret_lead_open_deals_by_stage_html)
+    
+    # Won vs Lost by Stage
+    chartdata_lead_by_case_stage = [
+      {'stagename': 'Unknown', 'woncount': unknown_lead_case_stage_won_count, 'lostcount': unknown_lead_case_stage_lost_count},
+      {'stagename': 'Pre-Charge', 'woncount': pre_charge_won_count, 'lostcount': pre_charge_lost_count},
+      {'stagename': 'Lower Court', 'woncount': lower_court_won_count, 'lostcount': lower_court_lost_count},
+      {'stagename': 'Upper Court', 'woncount': upper_court_won_count, 'lostcount': upper_court_lost_count},
+      {'stagename': 'Appeals Court', 'woncount': appeals_court_won_count, 'lostcount': appeals_court_lost_count}
+    ]
+    print(chartdata_lead_by_case_stage)
+    chart_lead_by_stage = ej.charts.Chart({
+      'width': '450',
+      'primaryXAxis': {
+        'valueType': 'Category',
+        # // label placement as on ticks
+        'labelPlacement': 'OnTicks',
+        # 'title': 'Case Stage'
+      },
+      'primaryYAxis': {
+        'minimum': 0, 'maximum': 5, 'interval': 1,
+        # 'title': 'Count'
+      },
+      'series': [
+        {'dataSource': chartdata_lead_by_case_stage, 'xName': 'stagename', 'yName': 'woncount', 'name': 'Won', 'type': 'Column'},
+        {'dataSource': chartdata_lead_by_case_stage, 'xName': 'stagename', 'yName': 'lostcount', 'name': 'Lost', 'type': 'Column'}
+      ],
+    }, '#id_lead_conversion_by_stage')
+    
+    ret_lead_lead_by_stage_html = f'''
+      {chart_lead_by_stage}
+    '''
+    jQuery("#id_lead_conversion_by_stage").append(ret_lead_lead_by_stage_html)
+
+    # Lead Source
+    chartdata_lead_source = [
+      {'name': 'Unknown', 'count': unknown_lead_source_count},
+      {'name': 'Email', 'count': email_count},
+      {'name': 'Google Messages', 'count': google_message_count},
+      {'name': 'Phone Call', 'count': phone_call_count},
+      {'name': 'Referral', 'count': referral_count},
+      {'name': 'Website Form', 'count': website_form_count},
+      {'name': 'Yelp', 'count': yelp_count},
+    ]
+    chart_lead_source = ej.charts.Chart({
+      'primaryXAxis': {
+        'valueType': 'Category',
+      },
+      'primaryYAxis': {
+        'minimum': 0, 'maximum': 10, 'interval': 1
+      },
+      'series':[{
+        'dataSource': chartdata_lead_source,
+        'xName': 'name', 'yName': 'count',
+        'type': 'Column',
+      }],
+      'isTransposed': True,
+    }, "#id_lead_lead_source_vs_status")
+    ret_lead_lead_source_vs_status_html = f'''
+      {chart_lead_source}
+    '''
+    jQuery("#id_lead_lead_source_vs_status").append(ret_lead_lead_source_vs_status_html)
+
+    # Total Won and Lost
+    ret_total_won_lead_html = f'''
+      {total_won_lead}
+    '''
+    jQuery("#id_lead_total_won_lead").append(ret_total_won_lead_html)
+
+    ret_lead_total_lost_lead_html = f'''
+      {total_lost_lead}
+    '''
+    jQuery("#id_lead_total_lost_lead").append(ret_lead_total_lost_lead_html)
+
+    # Conversion Rate
+    circularGauge_won_rate = ej.circulargauge.CircularGauge({
+      'height': '170',
+      'background': 'transparent',
+      'legendSettings':{
+        'visible':False
+      },
+      'axes': [{
+        'annotations': [{
+            'angle': 165,
+            'radius': '45%',
+            'zIndex':'1',
+            'content':
+                  f'<div style="font-size:14px;margin-left: -10px;margin-top: -12px; color:#00FF00">{formatted_total_won_rate}%</div>',
+        }],
+        'lineStyle': { 'width': 10, 'color': 'transparent' },
+        'labelStyle': {
+          'position': 'Outside', 
+          'useRangeColor': False,
+          'offset': -10,
+          'font': { 
+            'size': '12px', 
+            'color': '#00FF00', 
+            'fontFamily': 'Roboto', 
+            'fontStyle': 'Regular' 
+          }
+        }, 
+        'majorTicks': { 
+            'height': 7, 
+            'color': '#9E9E9E' 
+        }, 
+        'minorTicks': { 'height': 0 },
+        'startAngle': 270, 
+        'endAngle': 90, 
+        'minimum': 0, 
+        'maximum': 100, 
+        'radius': '90',
+        'ranges': [{ 
+            'start': 0, 
+            'end': formatted_total_won_rate, 
+            'startWidth': 17,
+            'endWidth': 17,
+            'color': '#30B32D' 
+        }, 
+        { 
+            'start': formatted_total_won_rate, 
+            'end': 100, 
+            'startWidth': 17,
+            'endWidth': 17,
+            'color': '#FFDD00' 
+        }],
+        'pointers': [{
+            'animation': { 'enable': False },
+            'value': formatted_total_won_rate, 
+            'radius': '60%', 
+            'color': '#757575', 
+            'pointerWidth': 8,
+            'cap': { 
+                'radius': 7, 
+                'color': '#757575' 
+            }, 
+            'needleTail': { 
+                'length': '18%' 
+            }
+        }]
+      }]
+    }, "#id_lead_won_rate");
+    ret_won_rate_html = f'''
+      {circularGauge_won_rate}
+    '''
+    jQuery("#id_lead_won_rate").append(ret_won_rate_html)
+
+    # Lost Reasons
+    chartData_lead_lost_reasons = [
+      {'reason': 'Battery', 'count': lost_reason_battery_count},
+      {'reason': 'Bigamy', 'count': lost_reason_bigamy_count},
+      {'reason': 'Murder, first degree', 'count': lost_reason_murder_first_degree_count},
+      {'reason': 'Kidnapping, first degree, no substantial bodily harm', 'count': lost_reason_kidnapping_count},
+    ]
+    chart_lead_lost_reasons = ej.charts.AccumulationChart({
+      'series': [
+        {
+            'dataSource': chartData_lead_lost_reasons, 
+            'innerRadius': '0%',
+            'xName': 'reason',
+            'yName': 'count'
+        }
+      ]
+    }, '#id_lead_lost_reasons')
+    ret_lead_lost_reasons_html = f'''
+      {chart_lead_lost_reasons}
+    '''
+    jQuery("#id_lead_lost_reasons").append(ret_lead_lost_reasons_html)
+
+    # Value of Deals Won vs Lost
+    
+    chart_lead_value_of_deals_won_vs_lost = ej.charts.Chart({
+      'primaryXAxis': {
+        'valueType': 'Category',
+      },
+      'primaryYAxis': {},
+      'series':[
+        {
+            'type': 'StackingColumn',
+            'dataSource': value_of_won_vs_lost_list,
+            'xName': 'date',
+            'yName': 'won_value',
+            'name': 'Won',
+            'fill': '#00FF00'
+        },
+        {
+            'type': 'StackingColumn',
+            'dataSource': value_of_won_vs_lost_list,
+            'xName': 'date',
+            'yName': 'lost_value',
+            'name': 'Lost',
+            'fill': '#00FFAE'
+        }
+      ],
+      'tooltip': { 'enable': True },
+      'legend': { 'visible': True }
+    }, "#id_lead_value_of_deals_won_vs_lost")
+    ret_lead_value_of_deals_won_vs_lost_html = f'''
+      {chart_lead_value_of_deals_won_vs_lost}
+    '''
+    jQuery("#id_lead_value_of_deals_won_vs_lost").append(ret_lead_value_of_deals_won_vs_lost_html)
   
   def init_staff_tab(self):
-    pass
-
+    # base_pay_period_start = datetime(year=2024, month=4, day=8)
+    # print(base_pay_period_start)
+    # current_date = datetime.date.today()
+    # print(current_date)
+    # days_since_start = (current_date - base_pay_period_start).days
+    # weeks_since_start = days_since_start // 7
+    # flag = weeks_since_start % 2
+    # if flag:
+    #     current_pay_period_start = base_pay_period_start + timedelta(weeks=weeks_since_start - 1)
+    # else:
+    #     current_pay_period_start = base_pay_period_start + timedelta(weeks=weeks_since_start)
+    # current_pay_period_end = current_pay_period_start + timedelta(days=13)
+    # print(current_pay_period_end)
+    # current_pay_period = current_pay_period_start.strftime("%m/%d/%Y") + " - " + current_pay_period_end.strftime("%m/%d/%Y")
+    # ret_staff_current_pay_period_html = f'''
+    #   {current_pay_period}
+    # '''
+    # jQuery("#id_staff_current_pay_period").append(ret_staff_current_pay_period_html)
   
   
   def destroy(self):
