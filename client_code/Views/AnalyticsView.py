@@ -4,11 +4,12 @@ import anvil.js
 from anvil.js.window import ej, jQuery
 
 from datetime import timedelta, datetime
+from collections import defaultdict
 
 from AnvilFusion.tools.utils import AppEnv, datetime_js_to_py
 from AnvilFusion.components.FormInputs import *
 
-from ..app.models import Staff, User, Contact, Activity, AppAuditLog, TimeEntry, Expense, Case, Task, Event, Payment, Lead, Client
+from ..app.models import Staff, User, Contact, Activity, AppAuditLog, TimeEntry, Expense, Case, Task, Event, Payment, Lead, Client, Timesheet, PerformanceIncentive
 
 PM_AV_PERIOD = [
   'This Month',
@@ -245,7 +246,7 @@ class AnalyticsView:
               <i class="fa-thin fa-money-check-dollar-pen" aria-hidden="true" style="margin-right: 8px; font-size: 2em;"></i>
               <div>
                 <span style="margin-right: 4px">Current Period Payroll</span>
-                <div id="id_finance_current_period_payroll" style="font-weight: bold; font-size: 1.4em;">$ </div>
+                <div id="id_finance_current_period_payroll" style="font-weight: bold; font-size: 1.4em;"></div>
               </div>
             </div>
           </div>
@@ -256,7 +257,7 @@ class AnalyticsView:
               <i class="fa-thin fa-money-check-dollar-pen" aria-hidden="true" style="margin-right: 8px; font-size: 2em;"></i>
               <div>
                 <span style="margin-right: 4px">Firm Expenses this Month</span>
-                <div id="id_finance_firm_expenses_this_month" style="font-weight: bold; font-size: 1.4em;">$ </div>
+                <div id="id_finance_firm_expenses_this_month" style="font-weight: bold; font-size: 1.4em;"></div>
               </div>
             </div>
           </div>
@@ -267,7 +268,7 @@ class AnalyticsView:
             <div style="display:flex; align-items:center;">
               <div>
                 <span style="text-align: center">This Month</span>
-                <div id="id_finance_this_month_revenue" style="text-align: center; font-weight: bold; font-size: 1.4em">$ 0.00</div>
+                <div id="id_finance_this_month_revenue" style="text-align: center; font-weight: bold; font-size: 1.4em"></div>
               </div>
             </div>
           </div>
@@ -277,7 +278,7 @@ class AnalyticsView:
             <div style="display:flex; align-items:center;">
               <div>
                 <span style="text-align: center;">Same Month Last Year</span>
-                <div id="id_finance_same_month_last_year_revenue" style="text-align: center; font-weight: bold; font-size: 1.4em; color: #333">$ 0.00</div>
+                <div id="id_finance_same_month_last_year_revenue" style="text-align: center; font-weight: bold; font-size: 1.4em; color: #333"></div>
               </div>
             </div>
           </div>
@@ -288,7 +289,7 @@ class AnalyticsView:
             <div style="display:flex; align-items:center;">
               <div>
                 <span style="text-align: center;">Last Month</span>
-                <div id="id_finance_last_month" style="text-align: center; font-weight: bold; font-size: 1.4em; color: #333">$ 0.00</div>
+                <div id="id_finance_last_month_revenue" style="text-align: center; font-weight: bold; font-size: 1.4em; color: #333"></div>
               </div>
             </div>
           </div>
@@ -298,7 +299,7 @@ class AnalyticsView:
             <div style="display:flex; align-items:center;">
               <div>
                 <span style="text-align: center;">Current Month Projection</span>
-                <div id="id_finance_current_month_projection" style="text-align: center; font-weight: bold; font-size: 1.4em;">$ 0.00</div>
+                <div id="id_finance_current_month_projection" style="text-align: center; font-weight: bold; font-size: 1.4em;"></div>
               </div>
             </div>
           </div>
@@ -307,8 +308,8 @@ class AnalyticsView:
           <div class="p-3" style="padding: 5px; background-color: white; display: flex; align-items:center; justify-content: center;">
             <div style="display:flex; align-items:center;">
               <div>
-                <span style="text-align: center;">Average Daily Revenur</span>
-                <div id="id_finance_average_daily_revenue" style="text-align: center; font-weight: bold; font-size: 1.4em;">$ 0.00</div>
+                <span style="text-align: center;">Average Daily Revenue in this Month</span>
+                <div id="id_finance_average_daily_revenue" style="text-align: center; font-weight: bold; font-size: 1.4em;"></div>
               </div>
             </div>
           </div>
@@ -319,7 +320,7 @@ class AnalyticsView:
             <div style="display:flex; align-items:center;">
               <div>
                 <span style="text-align: center;">Total Referals</span>
-                <div id="id_finance_total_referrals" style="text-align: center; font-weight: bold; font-size: 1.4em;">69</div>
+                <div id="id_finance_total_referrals" style="text-align: center; font-weight: bold; font-size: 1.4em;"></div>
               </div>
             </div>
           </div>
@@ -328,8 +329,8 @@ class AnalyticsView:
           <div class="p-3" style="padding: 5px; background-color: white; display: flex; align-items:center; justify-content: center;">
             <div style="display:flex; align-items:center;">
               <div>
-                <span style="text-align: center;">Firm Expenses this Month</span>
-                <div id="id_finance_total_minus_referrals" style="text-align: center; font-weight: bold; font-size: 1.4em;">0</div>
+                <span style="text-align: center;">Total (-)Referrals</span>
+                <div id="id_finance_total_minus_referrals" style="text-align: center; font-weight: bold; font-size: 1.4em;"></div>
               </div>
             </div>
           </div>
@@ -339,7 +340,7 @@ class AnalyticsView:
             <div style="display:flex; align-items:center;">
               <div>
                 <span style="text-align: center;">New Clients this Month</span>
-                <div id="id_finance_new_clients_this_month" style="text-align: center; font-weight: bold; font-size: 1.4em;">0</div>
+                <div id="id_finance_new_clients_this_month" style="text-align: center; font-weight: bold; font-size: 1.4em;"></div>
               </div>
             </div>
           </div>
@@ -349,7 +350,7 @@ class AnalyticsView:
             <div style="display:flex; align-items:center;">
               <div>
                 <span style="text-align: center;">Existing Clients this Month</span>
-                <div id="id_finance_existing_clients_this_month" style="text-align: center; font-weight: bold; font-size: 1.4em;">0</div>
+                <div id="id_finance_existing_clients_this_month" style="text-align: center; font-weight: bold; font-size: 1.4em;"></div>
               </div>
             </div>
           </div>
@@ -357,11 +358,11 @@ class AnalyticsView:
       </div>
       <div class ="col-xs-4" style="justify-content: center; padding: 0px;">
         <div class="col-xs-12" style="align-items: center; padding: 8px; font-size: 1.8rem;">Staff Incentives Report</div>
-        <div class="col-xs-12" style="align-items: center; background-color: white; margin-bottom: 15px; display: flex;">
-          <div class="col-xs-8" style="align-items: center; margin-bottom: 15px; display: flex; padding-top:15px">
+        <div class="col-xs-12" style="align-items: center; background-color: white; height: 421px">
+          <div class="col-xs-9" style="align-items: center; margin-bottom: 15px; display: flex; padding-top:15px">
             <div id="id_finance_period"></div>
           </div>
-          <div class="col-xs-8" style="align-items: center; background-color: white; margin-bottom: 15px;">
+          <div class="col-xs-9" style="align-items: center; background-color: white; margin-bottom: 15px;">
             <div id="id_finance_staff_incentives_report"></div>
           </div>
         </div>
@@ -370,11 +371,15 @@ class AnalyticsView:
     <div class ="col-xs-12" style="justify-content: center; padding: 0px;">
       <div class="col-xs-6" style="align-items: center;  padding: 8px; padding-top: 2px; font-size: 1.8rem">Current Month Revenue by Day</div>
       <div class="col-xs-6" style="align-items: center;  padding: 8px; padding-top: 2px; font-size: 1.8rem">Revenue by Month</div>
-      <div class="col-xs-6" style="align-items: center;  padding: 8px; padding-top: 2px">
-        <div style="background-color: white;" id="id_finance_current_month_revenue_by_day">Current Month Revenue by Day</div>
+      <div class="col-xs-6" style="align-items: center; padding: 8px; padding-top: 2px;">
+        <div class="p-3" style="padding: 5px; background-color: rgb(39, 45, 131); display: flex; align-items:center; justify-content: center; height: 250px">
+          <div id="id_finance_current_month_revenue_by_day"></div>
+        </div>
       </div>
-      <div class="col-xs-6" style="align-items: center;  padding: 8px; padding-top: 2px">
-        <div style="background-color: white;" id="id_finance_revenue_by_month">Revenue by Month</div>
+      <div class="col-xs-6" style="align-items: center;  padding: 8px; padding-top: 2px;">
+        <div class="p-3" style="padding: 5px; background-color: white; display: flex; align-items:center; justify-content: center; height: 250px">
+          <div id="id_finance_revenue_by_month"></div>
+        </div>
       </div>
     </div>
     '''
@@ -559,12 +564,12 @@ class AnalyticsView:
   def prepare_staff_html(self):
     ret_html = '''
     <div class ="col-xs-12" style="justify-content: center; padding: 0px;">
-      <div class="col-xs-12" style="align-items: center; padding: 8px;">
+      <div class="col-xs-12" style="align-items: center; padding: 8px; padding-top: 30px">
         <div class="p-3" style="padding: 5px; background-color: white; difsplay: flex; align-items:center; justify-content: center;">
           <div style="display:flex; align-items:center; justify-content:center;">
             <div>
-              <span style="padding-left: 32px; font-weight: bold; font-size: 1.2em">Current Pay Period</span>
-              <div id="id_staff_current_pay_period" style="font-size: 1.3em;">04/08/2024 - 04/21/2024</div>
+              <span style="padding-left: 32px; padding-bottom: 5px; font-weight: bold; font-size: 1.4em">Current Pay Period</span>
+              <div id="id_staff_current_pay_period" style="font-size: 1.3em;"></div>
             </div>
           </div>
         </div>
@@ -572,10 +577,10 @@ class AnalyticsView:
       <div class="col-xs-6" style="align-items: center; padding: 8px;">
         <div class="p-3" style="padding: 5px; background-color: white; display: flex; align-items:center; justify-content: center;">
           <div style="display:flex; align-items:center;">
-            <i class="fa-thin fa-phone-intercom" aria-hidden="true" style="margin-right: 8px; font-size: 2em;"></i>
+            <i class="fa-thin fa-money-check-dollar-pen" aria-hidden="true" style="margin-right: 8px; font-size: 2em;"></i>
             <div>
               <span style="margin-right: 4px">Current Period Payroll</span>
-              <div id="id_staff_current_period_payroll" style="font-weight: bold; font-size: 1.6em;">0</div>
+              <div id="id_staff_current_period_payroll" style="font-weight: bold; font-size: 1.6em;">$ </div>
             </div>
           </div>
         </div>
@@ -583,10 +588,10 @@ class AnalyticsView:
       <div class="col-xs-6" style="align-items: center; padding: 8px;">
         <div class="p-3" style="padding: 5px; background-color: white; display: flex; align-items:center; justify-content: center;">
           <div style="display:flex; align-items:center;">
-            <i class="fa-light fa-print" aria-hidden="true" style="margin-right: 8px; font-size: 2em;"></i>
+            <i class="fa-thin fa-money-check-dollar-pen" aria-hidden="true" style="margin-right: 8px; font-size: 2em;"></i>
             <div>
-              <span style="margin-right: 4px">Overtime Hours</span>
-              <div id="id_staff_overtime_hours" style="font-weight: bold; font-size: 1.6em;">0</div>
+              <span style="margin-right: 4px">Total Bonus</span>
+              <div id="id_staff_total_bonus" style="font-weight: bold; font-size: 1.6em;">$ </div>
             </div>
           </div>
         </div>
@@ -594,10 +599,10 @@ class AnalyticsView:
       <div class="col-xs-6" style="align-items: center; padding: 8px;">
         <div class="p-3" style="padding: 5px; background-color: white; display: flex; align-items:center; justify-content: center;">
           <div style="display:flex; align-items:center;">
-            <i class="fa-thin fa-phone-intercom" aria-hidden="true" style="margin-right: 8px; font-size: 2em;"></i>
+            <i class="fa-thin fa-money-check-dollar-pen" aria-hidden="true" style="margin-right: 8px; font-size: 2em;"></i>
             <div>
               <span style="margin-right: 4px">Incentives</span>
-              <div id="id_staff_incentives" style="font-weight: bold; font-size: 1.6em;">0</div>
+              <div id="id_staff_incentives" style="font-weight: bold; font-size: 1.6em;">$ </div>
             </div>
           </div>
         </div>
@@ -605,24 +610,46 @@ class AnalyticsView:
       <div class="col-xs-6" style="align-items: center; padding: 8px;">
         <div class="p-3" style="padding: 5px; background-color: white; display: flex; align-items:center; justify-content: center;">
           <div style="display:flex; align-items:center;">
-            <i class="fa-light fa-print" aria-hidden="true" style="margin-right: 8px; font-size: 2em;"></i>
+            <i class="fa-thin fa-money-check-dollar-pen" aria-hidden="true" style="margin-right: 8px; font-size: 2em;"></i>
             <div>
-              <span style="margin-right: 4px">Total(Ex. Taxes)</span>
-              <div id="id_staff_total" style="font-weight: bold; font-size: 1.6em;">0</div>
+              <span style="margin-right: 4px">Overtime Pay</span>
+              <div id="id_staff_overtime_pay" style="font-weight: bold; font-size: 1.6em;">$ </div>
             </div>
           </div>
         </div>
       </div>
-      <div class="col-xs-6" style="align-items: center;  padding: 8px; font-size: 1.8rem; font-weight: bold; margin-bottom: 4px">Staff vs Hourly</div>
-      <div class="col-xs-6" style="align-items: center;  padding: 8px; font-size: 1.8rem; font-weight: bold; margin-bottom: 4px">Staff vs Salary</div>
       <div class="col-xs-6" style="align-items: center; padding: 8px;">
-        <div class="p-3" style="padding: 5px; background-color: rgb(39, 45, 131); display: flex; align-items:center; justify-content: center; height: 260px">
-          <div style="color: white" id=""></div>
+        <div class="p-3" style="padding: 5px; background-color: white; display: flex; align-items:center; justify-content: center;">
+          <div style="display:flex; align-items:center;">
+            <i class="fa-thin fa-hourglass-clock" aria-hidden="true" style="margin-right: 8px; font-size: 2em;"></i>
+            <div>
+              <span style="margin-right: 4px">Total Hours Worked</span>
+              <div id="id_staff_total_hours_worked" style="font-weight: bold; font-size: 1.6em;"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-xs-6" style="align-items: center; padding: 8px;">
+        <div class="p-3" style="padding: 5px; background-color: white; display: flex; align-items:center; justify-content: center;">
+          <div style="display:flex; align-items:center;">
+            <i class="fa-thin fa-hourglass-clock" aria-hidden="true" style="margin-right: 8px; font-size: 2em;"></i>
+            <div>
+              <span style="margin-right: 4px">Overtime Hours</span>
+              <div id="id_staff_overtime_hours" style="font-weight: bold; font-size: 1.6em;"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-xs-6" style="align-items: center;  padding: 8px; font-size: 1.8rem; font-weight: bold; margin-bottom: 4px">Total Work Hours in Current vs Previous Pay Period</div>
+      <div class="col-xs-6" style="align-items: center;  padding: 8px; font-size: 1.8rem; font-weight: bold; margin-bottom: 4px">Total Payroll in Current vs Previous Pay Period</div>
+      <div class="col-xs-6" style="align-items: center; padding: 8px;">
+        <div class="p-3" style="padding: 5px; background-color: rgb(39, 45, 131); display: flex; align-items:center; justify-content: center; height: 260px; color: white">
+          <div style="color: white" id="id_staff_work_hours_current_vs_previous"></div>
         </div>
       </div>
       <div class="col-xs-6" style="align-items: center; padding: 8px;">
         <div class="p-3" style="padding: 5px; background-color: white; display: flex; align-items:center; justify-content: center; height: 260px">
-          <div style="background-color: white;" id=""></div>
+          <div style="background-color: white;" id="id_staff_payroll_current_vs_previous"></div>
         </div>
       </div> 
     </div>
@@ -1504,18 +1531,17 @@ class AnalyticsView:
     
     dropdown_finance_staff_incentives_report_period.addEventListener('change', self.dropdown_finance_staff_incentives_report_period_change)
     # Current Period Payroll
-    all_payments = Payment.search()
+    all_timesheet = Timesheet.search()
     total_payroll = 0
-    for temp_payments in all_payments:
-      date = temp_payments['payment_time']
+    for temp_timesheet in all_timesheet:
+      date = temp_timesheet['clock_out_time']
       current_date = datetime.date.today()
-      print("payroll  ", date.year)
       if date.year == current_date.year and date.month == current_date.month:
-        total_payroll += temp_payments['amount']
+        total_payroll += temp_timesheet['payroll']
     float_total_payroll = float(total_payroll)
     formatted_total_payroll = "{:.2f}".format(float_total_payroll)
     ret_current_period_payroll_html = f'''
-      {formatted_total_payroll}
+      $ {formatted_total_payroll}
     '''
     jQuery("#id_finance_current_period_payroll").empty().append(ret_current_period_payroll_html)
 
@@ -1525,35 +1551,93 @@ class AnalyticsView:
     for temp_expenses in all_expenses:
       date = temp_expenses['date']
       current_date = datetime.date.today()
-      print("expenses  ", date.year)
       if date.year == current_date.year and date.month == current_date.month:
         total_expenses_this_month += temp_expenses['total']
     float_total_expenses_this_month = float(total_expenses_this_month)
     formatted_total_expenses = "{:.2f}".format(float_total_expenses_this_month)
     ret_total_expenses_this_month_html = f'''
-      {formatted_total_expenses}
+      $ {formatted_total_expenses}
     '''
     jQuery("#id_finance_firm_expenses_this_month").empty().append(ret_total_expenses_this_month_html)
 
     # Revenue Snapshot this month
-
-    # Total Referrals
     all_leads = Lead.search()
+    this_month_revenue = 0
+    same_month_last_year_revenue = 0
+    last_month_revenue = 0
+    days = 1
+    current_month_revenues = []
     total_referrals_count = 0
     total_minus_referrals_count = 0
-    for temp_leads in all_leads:
-      date = temp_leads['incident_date']
+    all_revenues = []
+    for temp_lead in all_leads:
+      current_month_revenue = {}
+      all_revenue = {}
+      date = temp_lead['updated_time'].date()
       current_date = datetime.date.today()
-      if date is not None:
-        if date.year == current_date.year and date.month == current_date.month:
-          if len(temp_leads['referred_by']) == 0:
+      last_month_end = current_date.replace(day=1) - timedelta(days=1)
+      last_month_start = last_month_end.replace(day=1)
+      print("date ", date,"  ", last_month_start, "  ", last_month_end)
+      days = (current_date - last_month_end).days
+      all_revenue['date'] = date
+      if temp_lead['retainer'] is not None:
+        all_revenue['revenue'] = temp_lead['retainer']
+      else:
+        all_revenue['revenue'] = 0
+      all_revenues.append(all_revenue)
+      if date.year == current_date.year and date.month == current_date.month:
+        if len(temp_lead['referred_by']) == 0:
             total_minus_referrals_count += 1
-          else:
-            total_referrals_count += 1
-    ret_total_referrals__html = f'''
+        else:
+          total_referrals_count += 1
+        current_month_revenue['date'] = date
+        if temp_lead['retainer'] is not None:
+          this_month_revenue += temp_lead['retainer']
+          current_month_revenue['revenue'] = temp_lead['retainer']
+        else:
+          this_month_revenue += 0
+          current_month_revenue['revenue'] = 0
+        current_month_revenues.append(current_month_revenue)  
+      if date.year == current_date.year - 1 and date.month == current_date.month:
+        if temp_lead['retainer'] is not None:
+          same_month_last_year_revenue += temp_lead['retainer']
+        else:
+          same_month_last_year_revenue += 0
+        
+      if last_month_start <= date <= last_month_end:
+        if temp_lead['retainer'] is not None:
+          last_month_revenue += temp_lead['retainer']
+        else:
+          last_month_revenue = 0
+    average_revenue_this_month = this_month_revenue / days
+    formatted_this_month_revenue = "{:.2f}".format(this_month_revenue)
+    formatted_same_month_last_year_revenue = "{:.2f}".format(same_month_last_year_revenue)
+    formatted_last_month_revenue = "{:.2f}".format(last_month_revenue)
+    formatted_average_revenue_this_month = "{:.2f}".format(average_revenue_this_month)
+    ret_this_month_revenue_html = f'''
+      $ {formatted_this_month_revenue}
+    '''
+    jQuery("#id_finance_this_month_revenue").empty().append(ret_this_month_revenue_html)
+    ret_same_month_last_year_revenue_html = f'''
+      $ {formatted_same_month_last_year_revenue}
+    '''
+    jQuery("#id_finance_same_month_last_year_revenue").empty().append(ret_same_month_last_year_revenue_html)
+    ret_last_month_revenue_html = f'''
+      $ {formatted_last_month_revenue}
+    '''
+    jQuery("#id_finance_last_month_revenue").empty().append(ret_last_month_revenue_html)
+    ret_average_revenue_this_month_html = f'''
+      $ {formatted_average_revenue_this_month}
+    '''
+    jQuery("#id_finance_average_daily_revenue").empty().append(ret_average_revenue_this_month_html)
+    
+    # Total Referrals
+    all_leads = Lead.search()
+          
+    ret_total_referrals_html = f'''
       {total_referrals_count}
     '''
-    jQuery("#id_finance_total_referrals").empty().append(ret_total_referrals__html)    
+    jQuery("#id_finance_total_referrals").empty().append(ret_total_referrals_html)    
     ret_total_minus_referrals_html = f'''
       {total_minus_referrals_count}
     '''
@@ -1563,6 +1647,7 @@ class AnalyticsView:
     all_clients = Client.search()
     new_clients = []
     old_clients = []
+    
     exist_clients_count = 0
     new_clients_count = 0
     for temp_clients in all_clients:
@@ -1587,7 +1672,80 @@ class AnalyticsView:
     '''
     jQuery("#id_finance_existing_clients_this_month").append(ret_exist_clients_html)
 
+    # Current Month Revenue by Day
+    chart_current_month_revenue = ej.charts.Chart({
+      'primaryXAxis': {
+        'valueType': 'Category',
+        'labelStyle': {
+                    'color': '#FFFFFF' 
+        }
+      },
+      'primaryYAxis': {
+        'labelStyle': {
+                    'color': '#FFFFFF' 
+        }
+      },
+      'series':[{
+        'dataSource': current_month_revenues,
+        'xName': 'date', 'yName': 'revenue',
+        'type': 'Column',
+        'width': 10
+      }],
+      'isTransposed': True,
+    }, "#id_finance_current_month_revenue_by_day")
+    ret_current_month_revenue_by_day_html = f'''
+      {chart_current_month_revenue}
+    '''
+    jQuery("#id_finance_current_month_revenue_by_day").append(ret_current_month_revenue_by_day_html)
 
+    # Revenue By Month
+    grouped_revenues = defaultdict(int)
+
+    for entry in all_revenues:
+        # Extract month and year from the date object
+        month_year = f"{entry['date'].month:02d}/{entry['date'].year}"
+        grouped_revenues[month_year] += entry['revenue']
+
+    combined_revenue_data = [{'date': key, 'revenue': value} for key, value in grouped_revenues.items()]
+    chart_revenue_by_month = ej.charts.Chart({
+      'primaryXAxis': {
+        'valueType': 'Category'
+      },
+      'primaryYAxis': {},
+      'series':[{
+        'dataSource': combined_revenue_data,
+        'xName': 'date', 'yName': 'revenue',
+        'type': 'Column',
+        'width': 30
+      }],
+      # 'isTransposed': True,
+    }, "#id_finance_revenue_by_month")
+    ret_revenue_by_month_html = f'''
+      {chart_revenue_by_month}
+    '''
+    jQuery("#id_finance_revenue_by_month").append(ret_revenue_by_month_html)
+    # Staff Incentives Report
+    staff_incentives = [{'staff': 'Staff', 'total_period':'Period Total'}]
+    all_incentives = PerformanceIncentive.search()
+    for temp_incentives in all_incentives:
+      new_staff_incentive = {}
+      date = temp_incentives['payment_date']
+      current_date = datetime.date.today()
+      if date is not None and date.year == current_date.year and date.month == current_date.month:
+        new_staff_incentive['staff'] = temp_incentives['staff'].first_name
+        new_staff_incentive['total_period'] = temp_incentives['amount']
+        staff_incentives.append(new_staff_incentive)
+    print(staff_incentives)
+    ret_staff_incentive_html = ""
+    ret_staff_incentive_html += """<table style="width: 100%;border-collapse: collapse;table-layout: fixed;">"""
+    for item in staff_incentives:
+      if item['staff'] == "Staff":
+        ret_staff_incentive_html += '''<colgroup><col span="1" style="width:70%"><col span="1" style="width:30%"></colgroup>'''
+        ret_staff_incentive_html += '''<tr style="border: 1px solid #dddddd; text-align: left; padding: 8px;"><th style="border: 1px solid #dddddd; background-color: #f2f2f2; text-align: left; padding: 8px;">'''+item['staff'] + '''</th><th style="border: 1px solid #dddddd; background-color: #f2f2f2; text-align: left; padding: 8px;">''' + str(item['total_period']) + "</th></tr>"
+      else:
+        ret_staff_incentive_html += '''<tr style="border: 1px solid #dddddd; text-align: left; padding: 8px;"><td style="border: 1px solid #dddddd; text-align: left; padding: 8px;">'''+item['staff'] + '''</td><td style="border: 1px solid #dddddd; text-align: left; padding: 8px;">''' + str(item['total_period']) + "</td></tr>"
+    ret_staff_incentive_html += "</table>"
+    jQuery("#id_finance_staff_incentives_report").empty().append(ret_staff_incentive_html)
 
   def dropdown_finance_staff_incentives_report_period_change(self, args):
     pass
@@ -2181,25 +2339,134 @@ class AnalyticsView:
     jQuery("#id_lead_value_of_deals_won_vs_lost").append(ret_lead_value_of_deals_won_vs_lost_html)
   
   def init_staff_tab(self):
-    # base_pay_period_start = datetime(year=2024, month=4, day=8)
-    # print(base_pay_period_start)
-    # current_date = datetime.date.today()
-    # print(current_date)
-    # days_since_start = (current_date - base_pay_period_start).days
-    # weeks_since_start = days_since_start // 7
-    # flag = weeks_since_start % 2
-    # if flag:
-    #     current_pay_period_start = base_pay_period_start + timedelta(weeks=weeks_since_start - 1)
-    # else:
-    #     current_pay_period_start = base_pay_period_start + timedelta(weeks=weeks_since_start)
-    # current_pay_period_end = current_pay_period_start + timedelta(days=13)
-    # print(current_pay_period_end)
-    # current_pay_period = current_pay_period_start.strftime("%m/%d/%Y") + " - " + current_pay_period_end.strftime("%m/%d/%Y")
-    # ret_staff_current_pay_period_html = f'''
-    #   {current_pay_period}
-    # '''
-    # jQuery("#id_staff_current_pay_period").append(ret_staff_current_pay_period_html)
-  
+    # Currend Pay Period
+    base_pay_period_start = datetime.datetime(year=2024, month=4, day=8)
+    current_date = datetime.date.today()
+    print(current_date)
+    days_since_start = (current_date - base_pay_period_start).days
+    weeks_since_start = days_since_start // 7
+    flag = weeks_since_start % 2
+    if flag:
+        current_pay_period_start = base_pay_period_start + timedelta(weeks=weeks_since_start - 1)
+    else:
+        current_pay_period_start = base_pay_period_start + timedelta(weeks=weeks_since_start)
+    current_pay_period_end = current_pay_period_start + timedelta(days=13)
+    print(current_pay_period_end)
+    current_pay_period = current_pay_period_start.strftime("%m/%d/%Y") + " - " + current_pay_period_end.strftime("%m/%d/%Y")
+    ret_staff_current_pay_period_html = f'''
+      {current_pay_period}
+    '''
+    jQuery("#id_staff_current_pay_period").append(ret_staff_current_pay_period_html)
+    # Current Period Payroll
+    logged_user = User.get(AppEnv.logged_user.get('user_uid'))
+    logged_staff = Staff.search(user=logged_user)
+    all_timesheets = Timesheet.search()
+    all_performanceincentives = PerformanceIncentive.search()
+    current_period_payroll = 0
+    overtime_hours = 0
+    incentives = 0
+    overtime_pay = 0
+    total_bonus = 0
+    total_hours_worked = 0
+    previous_period_payroll = 0
+    previous_total_work_hours = 0
+    for staff in logged_staff:
+      for temp_timesheet in all_timesheets:
+        date = temp_timesheet['clock_out_time']
+        if staff['first_name'] == temp_timesheet['staff'].first_name:
+          if current_pay_period_start <= date <= current_pay_period_end:
+            current_period_payroll += temp_timesheet['payroll']
+            overtime_hours += temp_timesheet['hours_worked'] - 8
+            total_hours_worked += temp_timesheet['hours_worked']
+          if current_pay_period_start - 14 <= date <= current_pay_period_end - 14:
+            previous_total_work_hours += temp_timesheet['hours_worked']
+            previous_period_payroll += temp_timesheet['payroll']
+      for temp_performanceincentive in all_performanceincentives:
+        date = temp_performanceincentive['payment_date']
+        if staff['first_name'] == temp_performanceincentive['staff'].first_name:
+          if date is not None and current_pay_period_start <= date <= current_pay_period_end:
+            incentives += temp_performanceincentive['amount']
+      overtime_pay = overtime_hours * staff['overtime_rate']
+    formatted_current_period_payroll = "{:.2f}".format(current_period_payroll)
+    formatted_incentive = "{:.2f}".format(incentives)
+    formatted_overtime_pay = "{:.2f}".format(overtime_pay)
+    formatted_total_bonus = "{:.2f}".format(total_bonus)
+    ret_current_period_payroll_html = f'''
+      {formatted_current_period_payroll}
+    '''
+    jQuery("#id_staff_current_period_payroll").append(ret_current_period_payroll_html)
+    ret_total_bonus_html = f'''
+      {formatted_total_bonus}
+    '''
+    jQuery("#id_staff_total_bonus").append(ret_total_bonus_html)
+    ret_overtime_hours_html = f'''
+      {overtime_hours}
+    '''
+    jQuery("#id_staff_overtime_hours").append(ret_overtime_hours_html)
+    ret_total_hours_worked_html = f'''
+      {total_hours_worked}
+    '''
+    jQuery("#id_staff_total_hours_worked").append(ret_total_hours_worked_html)
+    ret_incentives_html = f'''
+      {formatted_incentive}
+    '''
+    jQuery("#id_staff_incentives").append(ret_incentives_html)
+    ret_overtime_pay_html = f'''
+      {formatted_overtime_pay}
+    '''
+    jQuery("#id_staff_overtime_pay").append(ret_overtime_pay_html)
+
+    total_work_hours_current_vs_previous = [
+      {'period': 'Current', 'hours': total_hours_worked},
+      {'period': 'Previous', 'hours': previous_total_work_hours}
+    ]
+    total_payroll_current_vs_previous = [
+      {'period': 'Current', 'payroll': current_period_payroll},
+      {'period': 'Previous', 'payroll': previous_period_payroll}
+    ]
+    # Work Hours
+    chart_work_hours_current_vs_previous = ej.charts.Chart({
+      'primaryXAxis': {
+        'valueType': 'Category',
+        'labelStyle': {
+                    'color': '#FFFFFF' 
+        }
+      },
+      'primaryYAxis': {
+        'labelStyle': {
+                    'color': '#FFFFFF' 
+        }
+      },
+      'series':[{
+        'dataSource': total_work_hours_current_vs_previous,
+        'xName': 'period', 'yName': 'hours',
+        'type': 'Column',
+        'width': 40
+      }],
+      'isTransposed': True,
+    }, "#id_staff_work_hours_current_vs_previous")
+    ret_work_hours_current_vs_previous_html = f'''
+      {chart_work_hours_current_vs_previous}
+    '''
+    jQuery("#id_staff_work_hours_current_vs_previous").append(ret_work_hours_current_vs_previous_html)
+    # Total Payroll
+    chart_total_payroll_current_vs_previous = ej.charts.Chart({
+      'primaryXAxis': {
+        'valueType': 'Category',
+      },
+      'primaryYAxis': {},
+      'series':[{
+        'dataSource': total_payroll_current_vs_previous,
+        'xName': 'period', 'yName': 'hours',
+        'type': 'Column',
+        'width': 40
+      }],
+      'isTransposed': True,
+    }, "#id_staff_payroll_current_vs_previous")
+    ret_total_payroll_current_vs_previous_html = f'''
+      {chart_total_payroll_current_vs_previous}
+    '''
+    jQuery("#id_staff_payroll_current_vs_previous").append(ret_total_payroll_current_vs_previous_html)
   
   def destroy(self):
     if self.container_el:
