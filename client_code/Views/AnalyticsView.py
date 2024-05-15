@@ -98,7 +98,7 @@ class AnalyticsView:
               <i class="fa-regular fa-clock-three" aria-hidden="true" style="margin-right: 8px; font-size: 2em;"></i>
               <div>
                 <span style="margin-right: 4px">Time Entries this Month</span>
-                <div id="id_time_entry" style="font-weight: bold; font-size: 1.6em; color: #333"></div>
+                <div id="id_billing_time_entry" style="font-weight: bold; font-size: 1.6em; color: #333"></div>
               </div>
             </div>
           </div>
@@ -109,7 +109,7 @@ class AnalyticsView:
               <i class="fa-light fa-square-dollar" aria-hidden="true" style="margin-right: 8px; font-size: 2em;"></i>
               <div>
                 <span style="margin-right: 4px">Case Expenses this Month</span>
-                <div id="id_case_expense" style="font-weight: bold; font-size: 1.6em; color: #333"></div>
+                <div id="id_billing_case_expense" style="font-weight: bold; font-size: 1.6em; color: #333"></div>
               </div>
             </div>
           </div>
@@ -136,22 +136,24 @@ class AnalyticsView:
             </div>
           </div>
         </div>
-        <div class="col-xs-6" style="align-items: center;  padding-right: 7px; margin-bottom: 15px; font-size: 1.8rem">Time vs Staff this Month</div>
-        <div class="col-xs-6" style="align-items: center;  padding-right: 7px; margin-bottom: 15px; font-size: 1.8rem">Time Entries vs Activity</div>
+        <div class="col-xs-6" style="align-items: center;  padding-right: 7px; margin-bottom: 15px; font-size: 1.8rem; font-weight: bold;">Time vs Staff this Month</div>
+        <div class="col-xs-6" style="align-items: center;  padding-right: 7px; margin-bottom: 15px; font-size: 1.8rem; font-weight: bold;">Time Entries vs Activity</div>
         <div class="col-xs-6" style="align-items: center;  padding-right: 7px; margin-bottom: 15px">
-          <div style="background-color: white;" id="id_time_staff"></div>
+          <div style="background-color: white;" id="id_billing_time_staff"></div>
         </div>
         <div class="col-xs-6" style="align-items: center;  padding-left: 7px; margin-bottom: 15px">
-          <div style="background-color: white;" id="id_time_activity"></div>
+          <div style="background-color: white;" id="id_billing_time_activity"></div>
         </div>
       </div>
-      <div class ="col-xs-5" style="justify-content: center; padding: 0px; background-color: white;">
-        <div class="col-xs-12" style="align-items: center;  padding-right: 7px; margin-bottom: 15px; font-size: 1.8rem">Time vs Staff this Month</div>
-        <div class="col-xs-5" style="align-items: center; margin-bottom: 15px; display: flex; padding-top:15px">
-          <div id="id_total_time"></div>
-        </div>
-        <div class="col-xs-10" style="align-items: center; background-color: white; margin-bottom: 15px; display: flex;">
-          <div id="id_case_time"></div>
+      <div class ="col-xs-5" style="justify-content: center; padding: 0px;"> 
+        <div class="col-xs-12" style="align-items: center;  padding: 8px; font-size: 1.8rem; font-weight: bold;">Total Time By Case</div>
+        <div class ="col-xs-12" style="justify-content: center; padding: 0px; background-color: white; overflow-y: scroll; height: 700px;">  
+          <div class="col-xs-5" style="align-items: center; margin-bottom: 15px; display: flex; padding-top:15px">
+            <div id="id_billing_total_time"></div>
+          </div>
+          <div class="col-xs-10" style="align-items: center; margin-bottom: 15px; display: flex;">
+            <div id="id_billing_case_time"></div>
+          </div>
         </div>
       </div>
     '''
@@ -216,8 +218,8 @@ class AnalyticsView:
             </div>
           </div>
         </div>
-        <div class="col-xs-6" style="align-items: center;  padding-right: 7px; margin-bottom: 15px; font-size: 1.8rem">Cases by Stage</div>
-        <div class="col-xs-6" style="align-items: center;  padding-right: 7px; margin-bottom: 15px; font-size: 1.8rem">Cases by Practice Area</div>
+        <div class="col-xs-6" style="align-items: center;  padding-right: 7px; margin-bottom: 15px; font-size: 1.8rem; font-weight: bold;">Cases by Stage</div>
+        <div class="col-xs-6" style="align-items: center;  padding-right: 7px; margin-bottom: 15px; font-size: 1.8rem; font-weight: bold;">Cases by Practice Area</div>
         <div class="col-xs-6" style="align-items: center;  padding-right: 7px; margin-bottom: 15px">
           <div style="background-color: white;" id="id_case_cases_by_stage"></div>
         </div>
@@ -226,7 +228,7 @@ class AnalyticsView:
         </div>
       </div>
       <div class ="col-xs-5" style="justify-content: center; padding: 0px;">
-        <div class="col-xs-12" style="align-items: center; margin-top: 10px; padding: 7px; font-size: 2rem; background-color: rgb(245, 245, 245)">Contacts Map</div>
+        <div class="col-xs-12" style="align-items: center; margin-top: 10px; padding: 7px; font-size: 2rem; background-color: rgb(245, 245, 245); font-weight: bold;">Contacts Map</div>
         <div class="col-xs-12" style="align-items: center; background-color: white; margin-bottom: 15px; display: flex; height: 618px;">
           <div id="id_case_contact_map"></div>
         </div>
@@ -239,7 +241,7 @@ class AnalyticsView:
     ret_html = '''
     <div class ="col-xs-12" style="justify-content: center; padding: 0px;">  
       <div class ="col-xs-8" style="justify-content: center; padding: 0px;">
-        <div class="col-xs-12" style="align-items: center;  padding: 8px; font-size: 1.8rem">Payroll & Expenses</div>
+        <div class="col-xs-12" style="align-items: center;  padding: 8px; font-size: 1.8rem; font-weight: bold;">Payroll & Expenses</div>
         <div class="col-xs-6" style="align-items: center; padding: 8px; padding-top: 0px">
           <div class="p-3" style="padding: 5px; background-color: white; difsplay: flex; align-items:center; justify-content: center;">
             <div style="display:flex; align-items:center; justify-content:center;">
@@ -262,7 +264,7 @@ class AnalyticsView:
             </div>
           </div>
         </div>
-        <div class="col-xs-12" style="align-items: center;  padding: 8px; font-size: 1.8rem">Revenue Snapshot</div>
+        <div class="col-xs-12" style="align-items: center;  padding: 8px; font-size: 1.8rem; font-weight: bold;">Revenue Snapshot</div>
         <div class="col-xs-4" style="align-items: center; padding: 8px">
           <div class="p-3" style="padding: 5px; background-color: rgb(39, 45, 131); display: flex; align-items:center; justify-content: center; color: white;">
             <div style="display:flex; align-items:center;">
@@ -314,7 +316,7 @@ class AnalyticsView:
             </div>
           </div>
         </div>
-        <div class="col-xs-12" style="align-items: center;  padding-right: 8px; font-size: 1.8rem">Current Month Stats</div>
+        <div class="col-xs-12" style="align-items: center;  padding-right: 8px; font-size: 1.8rem; font-weight: bold;">Current Month Stats</div>
         <div class="col-xs-6" style="align-items: center; padding: 8px">
           <div class="p-3" style="padding: 5px; background-color: white; display: flex; align-items:center; justify-content: center;">
             <div style="display:flex; align-items:center;">
@@ -357,26 +359,26 @@ class AnalyticsView:
         </div>
       </div>
       <div class ="col-xs-4" style="justify-content: center; padding: 0px;">
-        <div class="col-xs-12" style="align-items: center; padding: 8px; font-size: 1.8rem;">Staff Incentives Report</div>
-        <div class="col-xs-12" style="align-items: center; background-color: white; height: 421px">
-          <div class="col-xs-9" style="align-items: center; margin-bottom: 15px; display: flex; padding-top:15px">
+        <div class="col-xs-12" style="align-items: center; padding: 8px; font-size: 1.8rem; font-weight: bold;">Staff Incentives Report</div>
+        <div class="col-xs-12" style="align-items: center; background-color: white; height: 421px; overflow-y: scroll;">
+          <div class="col-xs-9" style="align-items: center; margin-bottom: 15px; padding-top:15px; max-height: 100%;">
             <div id="id_finance_period"></div>
           </div>
-          <div class="col-xs-9" style="align-items: center; background-color: white; margin-bottom: 15px;">
+          <div class="col-xs-9" style="align-items: center; background-color: white; margin-bottom: 15px; ">
             <div id="id_finance_staff_incentives_report"></div>
           </div>
         </div>
       </div>
     </div>
     <div class ="col-xs-12" style="justify-content: center; padding: 0px;">
-      <div class="col-xs-6" style="align-items: center;  padding: 8px; padding-top: 2px; font-size: 1.8rem">Current Month Revenue by Day</div>
-      <div class="col-xs-6" style="align-items: center;  padding: 8px; padding-top: 2px; font-size: 1.8rem">Revenue by Month</div>
+      <div class="col-xs-6" style="align-items: center;  padding: 8px; padding-top: 2px; font-size: 1.8rem; font-weight: bold;">Current Month Revenue by Day</div>
+      <div class="col-xs-6" style="align-items: center;  padding: 8px; padding-top: 2px; font-size: 1.8rem; font-weight: bold;">Revenue by Month</div>
       <div class="col-xs-6" style="align-items: center; padding: 8px; padding-top: 2px;">
         <div class="p-3" style="padding: 5px; background-color: rgb(39, 45, 131); display: flex; align-items:center; justify-content: center; height: 250px">
           <div id="id_finance_current_month_revenue_by_day"></div>
         </div>
       </div>
-      <div class="col-xs-6" style="align-items: center;  padding: 8px; padding-top: 2px;">
+      <div class="col-xs-6" style="align-items: center;  padding: 8px; padding-top: 2px; padding-right: 0px;">
         <div class="p-3" style="padding: 5px; background-color: white; display: flex; align-items:center; justify-content: center; height: 250px">
           <div id="id_finance_revenue_by_month"></div>
         </div>
@@ -422,8 +424,8 @@ class AnalyticsView:
           </div>
         </div>
       </div>
-      <div class="col-xs-6" style="align-items: center;  padding: 8px; font-size: 1.8rem; margin-bottom: 4px">Staff vs Hourly</div>
-      <div class="col-xs-6" style="align-items: center;  padding: 8px; font-size: 1.8rem; margin-bottom: 4px">Staff vs Salary</div>
+      <div class="col-xs-6" style="align-items: center;  padding: 8px; font-size: 1.8rem; margin-bottom: 4px; font-weight: bold;">Staff vs Hourly</div>
+      <div class="col-xs-6" style="align-items: center;  padding: 8px; font-size: 1.8rem; margin-bottom: 4px; font-weight: bold;">Staff vs Salary</div>
       <div class="col-xs-6" style="align-items: center; padding: 8px;">
         <div class="p-3" style="padding: 5px; background-color: rgb(39, 45, 131); display: flex; align-items:center; justify-content: center; height: 260px">
           <div style="color: white" id="id_firm_staff_vs_hourly"></div>
@@ -434,8 +436,8 @@ class AnalyticsView:
           <div style="background-color: white;" id="id_firm_staff_vs_salary"></div>
         </div>
       </div> 
-      <div class="col-xs-6" style="align-items: center;  padding: 8px; margin-bottom: 4px; font-size: 1.8rem">Gender Demographics</div>
-      <div class="col-xs-6" style="align-items: center;  padding: 8px; margin-bottom: 4px; font-size: 1.8rem">Race Demographics</div>
+      <div class="col-xs-6" style="align-items: center;  padding: 8px; margin-bottom: 4px; font-size: 1.8rem; font-weight: bold;">Gender Demographics</div>
+      <div class="col-xs-6" style="align-items: center;  padding: 8px; margin-bottom: 4px; font-size: 1.8rem; font-weight: bold;">Race Demographics</div>
       <div class="col-xs-6" style="align-items: center; padding: 8px;">
         <div class="p-3" style="padding: 5px; background-color: white; display: flex; align-items:center; justify-content: center; height: 290px">
           <div style="background-color: white;" id="id_firm_gender_demographics"></div>
@@ -461,7 +463,7 @@ class AnalyticsView:
               <i class="fa-thin fa-money-check-dollar-pen" aria-hidden="true" style="margin-right: 8px; font-size: 2em;"></i>
               <div>
                 <span style="margin-right: 4px">Average Value of Open Leads</span>
-                <div id="id_lead_average_value_of_open_leads" style="font-weight: bold; font-size: 1.6em;">$ </div>
+                <div id="id_lead_average_value_of_open_leads" style="font-weight: bold; font-size: 1.6em;"></div>
               </div>
             </div>
           </div>
@@ -472,7 +474,7 @@ class AnalyticsView:
               <i class="fa-thin fa-money-check-dollar-pen" aria-hidden="true" style="margin-right: 8px; font-size: 2em;"></i>
               <div>
                 <span style="margin-right: 4px">Average Vlaue of Won Leads</span>
-                <div id="id_lead_average_value_of_won_leads" style="font-weight: bold; font-size: 1.6em;">$ </div>
+                <div id="id_lead_average_value_of_won_leads" style="font-weight: bold; font-size: 1.6em;"></div>
               </div>
             </div>
           </div>
@@ -490,7 +492,7 @@ class AnalyticsView:
         </div>
       </div>
       <div class ="col-xs-6" style="justify-content: center; padding: 0px;">
-        <div class="col-xs-12" style="align-items: center;  padding: 12px; font-size: 1.8rem;">Open Deals by Stage</div>
+        <div class="col-xs-12" style="align-items: center;  padding: 12px; font-size: 1.8rem; font-weight: bold;">Open Deals by Stage</div>
         <div class="col-xs-12" style="align-items: center; padding: 8px; padding-top: 0px">
           <div class="p-3" style="padding: 5px; background-color: white; display: flex; align-items:center; justify-content: center; height: 218px">
             <div id="id_lead_open_deals_by_stage"></div>
@@ -498,7 +500,7 @@ class AnalyticsView:
         </div>
       </div>
       <div class ="col-xs-8" style="justify-content: center; padding: 0px;">
-        <div class="col-xs-12" style="align-items: center; padding: 4px; padding-left: 8px; font-size: 1.8rem;">Lead Source vs Status</div>
+        <div class="col-xs-12" style="align-items: center; padding: 4px; padding-left: 8px; font-size: 1.8rem; font-weight: bold;">Lead Source vs Status</div>
         <div class="col-xs-12" style="align-items: center; padding: 8px;">
           <div class="p-3" style="padding: 5px; background-color: white; display: flex; align-items:center; justify-content: center; height: 409px">
             <div id="id_lead_lead_source_vs_status"></div>
@@ -506,13 +508,13 @@ class AnalyticsView:
         </div>
       </div>
       <div class ="col-xs-4" style="justify-content: center; padding: 0px;">
-        <div class="col-xs-12" style="align-items: center;  padding: 8px; padding-bottom:0px; padding-top:14px; font-size: 1.4rem;">Total Won Rate</div>
+        <div class="col-xs-12" style="align-items: center;  padding: 4px; font-size: 1.8rem; font-weight: bold;">Total Won Rate</div>
         <div class="col-xs-12" style="align-items: center; padding: 8px;">
           <div class="p-3" style="padding: 5px; padding-top: 40px; background-color: white; sdisplay: flex; align-items:center; justify-content: center; height: 180px">
             <div id="id_lead_won_rate"></div>
           </div>
         </div>
-        <div class="col-xs-12" style="align-items: center; padding: 8px; padding-bottom:0px; padding-top:14px; font-size: 1.4rem;">Won vs Lost by Stage</div>
+        <div class="col-xs-12" style="align-items: center; padding: 4px; font-size: 1.8rem; font-weight: bold;">Won vs Lost by Stage</div>
         <div class="col-xs-12" style="align-items: center; padding: 8px;">
             <div class="p-3" style="padding: 5px; background-color: white; display: flex; align-items:center; justify-content: center; height: 180px">
             <div id="id_lead_conversion_by_stage"></div>
@@ -540,7 +542,7 @@ class AnalyticsView:
             </div>
           </div>
         </div>
-        <div class="col-xs-12" style="align-items: center; padding: 4px; padding-left: 8px; font-size: 1.8rem;">Lost Reasons</div>
+        <div class="col-xs-12" style="align-items: center; padding: 4px; padding-left: 8px; font-size: 1.8rem;font-weight: bold;">Lost Reasons</div>
         <div class="col-xs-12" style="align-items: center; padding: 8px;">
           <div class="p-3" style="padding: 5px; background-color: white; display: flex; align-items:center; justify-content: center; height: 260px">
             <div id="id_lead_lost_reasons"></div>
@@ -548,7 +550,7 @@ class AnalyticsView:
         </div>
       </div>
       <div class ="col-xs-8" style="justify-content: center; padding: 0px;">
-        <div class="col-xs-12" style="align-items: center; padding: 4px; padding-left: 8px; font-size: 1.8rem;">Value of Deals Won vs Lost</div>
+        <div class="col-xs-12" style="align-items: center; padding: 4px; padding-left: 8px; font-size: 1.8rem; font-weight: bold;">Value of Deals Won vs Lost</div>
         <div class="col-xs-12" style="align-items: center; padding: 8px;">
           <div class="p-3" style="padding: 5px; background-color: white; display: flex; align-items:center; justify-content: center; height: 372px">
             <div id="id_lead_value_of_deals_won_vs_lost"></div>
@@ -580,7 +582,7 @@ class AnalyticsView:
             <i class="fa-thin fa-money-check-dollar-pen" aria-hidden="true" style="margin-right: 8px; font-size: 2em;"></i>
             <div>
               <span style="margin-right: 4px">Current Period Payroll</span>
-              <div id="id_staff_current_period_payroll" style="font-weight: bold; font-size: 1.6em;">$ </div>
+              <div id="id_staff_current_period_payroll" style="font-weight: bold; font-size: 1.6em;"></div>
             </div>
           </div>
         </div>
@@ -602,7 +604,7 @@ class AnalyticsView:
             <i class="fa-thin fa-money-check-dollar-pen" aria-hidden="true" style="margin-right: 8px; font-size: 2em;"></i>
             <div>
               <span style="margin-right: 4px">Incentives</span>
-              <div id="id_staff_incentives" style="font-weight: bold; font-size: 1.6em;">$ </div>
+              <div id="id_staff_incentives" style="font-weight: bold; font-size: 1.6em;"></div>
             </div>
           </div>
         </div>
@@ -613,7 +615,7 @@ class AnalyticsView:
             <i class="fa-thin fa-money-check-dollar-pen" aria-hidden="true" style="margin-right: 8px; font-size: 2em;"></i>
             <div>
               <span style="margin-right: 4px">Overtime Pay</span>
-              <div id="id_staff_overtime_pay" style="font-weight: bold; font-size: 1.6em;">$ </div>
+              <div id="id_staff_overtime_pay" style="font-weight: bold; font-size: 1.6em;"></div>
             </div>
           </div>
         </div>
@@ -677,86 +679,8 @@ class AnalyticsView:
       self.staffTabInitialized = True
 
   def dropdown_period_change(self, args):
-    print(args.value)
     duration = 0
     if args.value == 'This Month':
-      total_time_entry = 0
-      time_entry_activity = []
-      for time_entries in init_time_entry_activity:
-        new_timeentry_activity = {}
-        date = time_entries['date']
-        current_date = datetime.date.today()
-        if date.year == current_date.year and date.month == current_date.month:
-          total_time_entry += time_entries['timeentry']
-          new_timeentry_activity['activity'] = time_entries['activity']
-          new_timeentry_activity['timeentry'] = time_entries['timeentry']
-          time_entry_activity.append(new_timeentry_activity)
-      time_entry = float(total_time_entry)
-      formatted_time_entry = "{:.2f}".format(time_entry)
-      ret_time_entry_html = f'''
-        {formatted_time_entry}
-      '''
-      jQuery("#id_time_entry").empty().append(ret_time_entry_html)
-  
-      Case_Expenses = 0
-      for Expenses in init_expenses:
-        date = Expenses['date']
-        current_date = datetime.date.today()
-        if date.year == current_date.year and date.month == current_date.month:
-          Case_Expenses += Expenses['total']
-      Case_Expense = float(Case_Expenses)
-      formatted_Case_Expense = "{:.2f}".format(Case_Expense)
-      ret_case_expense_html = f'''
-        $ {formatted_Case_Expense}
-      '''
-      jQuery("#id_case_expense").empty().append(ret_case_expense_html)
-      
-      chartData_time_staff = []
-      for staff_time in init_time_staff:
-        new_staff_time = {}
-        new_staff_time['name'] = staff_time['name']
-        new_staff_time['time'] = staff_time['time']
-        chartData_time_staff.append(new_staff_time)
-      print(chartData_time_staff)
-      chart_time_staff = ej.charts.Chart({
-        'primaryXAxis': {
-            'valueType': 'Category'
-        },
-        'primaryYAxis': {
-            'minimum': 0, 'maximum': 0.1, 'interval': 0.02
-        },
-        'series':[{
-            'dataSource': chartData_time_staff,
-            'xName': 'name', 'yName': 'time',
-            'type': 'Column'
-        }],
-        # 'isTransposed': True,
-      }, "#id_time_staff")
-      ret_time_staff_html = f'''
-        {chart_time_staff}
-      '''
-      jQuery("#id_time_staff").append(ret_time_staff_html)
-      
-      chartData_time_activity = []
-      for temp_timeentry_activity in time_entry_activity:
-        new_time_activity = {}
-        new_time_activity['timeentry'] = temp_timeentry_activity['timeentry']
-        new_time_activity['activity'] = temp_timeentry_activity['activity']
-        chartData_time_activity.append(new_time_activity)
-      chart_time_activity = ej.charts.AccumulationChart({
-        'series': [
-          {
-              'dataSource': chartData_time_activity, 
-              'innerRadius': '40%',
-              'xName': 'timeentry',
-              'yName': 'activity'
-          }
-        ]
-      }, '#id_time_activity')
-      ret_time_activity_html = f'''
-        {chart_time_activity}
-      '''
-      jQuery("#id_time_activity").append(ret_time_activity_html)
       
       Case_Timeentry = [{'case': 'Case', 'total_period':'Period Total'}]
       for cases in init_case_timeentry:
@@ -777,86 +701,9 @@ class AnalyticsView:
         else:
           ret_case_time_html += '''<tr style="border: 1px solid #dddddd; text-align: left; padding: 8px;"><td style="border: 1px solid #dddddd; text-align: left; padding: 8px;">'''+item['case'] + '''</td><td style="border: 1px solid #dddddd; text-align: left; padding: 8px;">''' + str(item['total_period']) + "</td></tr>"
       ret_case_time_html += "</table>"
-      jQuery("#id_case_time").empty().append(ret_case_time_html)
+      jQuery("#id_billing_case_time").empty().append(ret_case_time_html)
       
     elif args.value == 'This Year':
-      total_time_entry = 0
-      time_entry_activity = []
-      for time_entries in init_time_entry_activity:
-        new_timeentry_activity = {}
-        date = time_entries['date']
-        current_date = datetime.date.today()
-        if date.year == current_date.year:
-          total_time_entry += time_entries['timeentry']
-          new_timeentry_activity['activity'] = time_entries['activity']
-          new_timeentry_activity['timeentry'] = time_entries['timeentry']
-          time_entry_activity.append(new_timeentry_activity)
-      time_entry = float(total_time_entry)
-      formatted_time_entry = "{:.2f}".format(time_entry)
-      ret_time_entry_html = f'''
-        {formatted_time_entry}
-      '''
-      jQuery("#id_time_entry").empty().append(ret_time_entry_html)
-  
-      Case_Expenses = 0
-      for Expenses in init_expenses:
-        date = Expenses['date']
-        current_date = datetime.date.today()
-        if date.year == current_date.year:
-          Case_Expenses += Expenses['total']
-      Case_Expense = float(Case_Expenses)
-      formatted_Case_Expense = "{:.2f}".format(Case_Expense)
-      ret_case_expense_html = f'''
-        $ {formatted_Case_Expense}
-      '''
-      jQuery("#id_case_expense").empty().append(ret_case_expense_html)
-      
-      chartData_time_staff = []
-      for staff_time in init_time_staff:
-        new_staff_time = {}
-        new_staff_time['name'] = staff_time['name']
-        new_staff_time['time'] = staff_time['time']
-        chartData_time_staff.append(new_staff_time)
-      print(chartData_time_staff)
-      chart_time_staff = ej.charts.Chart({
-        'primaryXAxis': {
-            'valueType': 'Category'
-        },
-        'primaryYAxis': {
-            'minimum': 0, 'maximum': 0.1, 'interval': 0.02
-        },
-        'series':[{
-            'dataSource': chartData_time_staff,
-            'xName': 'name', 'yName': 'time',
-            'type': 'Column'
-        }],
-        # 'isTransposed': True,
-      }, "#id_time_staff")
-      ret_time_staff_html = f'''
-        {chart_time_staff}
-      '''
-      jQuery("#id_time_staff").append(ret_time_staff_html)
-      
-      chartData_time_activity = []
-      for temp_timeentry_activity in time_entry_activity:
-        new_time_activity = {}
-        new_time_activity['timeentry'] = temp_timeentry_activity['timeentry']
-        new_time_activity['activity'] = temp_timeentry_activity['activity']
-        chartData_time_activity.append(new_time_activity)
-      chart_time_activity = ej.charts.AccumulationChart({
-        'series': [
-          {
-              'dataSource': chartData_time_activity, 
-              'innerRadius': '40%',
-              'xName': 'time_entry',
-              'yName': 'activity'
-          }
-        ]
-      }, '#id_time_activity')
-      ret_time_activity_html = f'''
-        {chart_time_activity}
-      '''
-      jQuery("#id_time_activity").append(ret_time_activity_html)
       
       Case_Timeentry = [{'case': 'Case', 'total_period':'Period Total'}]
       for cases in init_case_timeentry:
@@ -877,90 +724,10 @@ class AnalyticsView:
         else:
           ret_case_time_html += '''<tr style="border: 1px solid #dddddd; text-align: left; padding: 8px;"><td style="border: 1px solid #dddddd; text-align: left; padding: 8px;">'''+item['case'] + '''</td><td style="border: 1px solid #dddddd; text-align: left; padding: 8px;">''' + str(item['total_period']) + "</td></tr>"
       ret_case_time_html += "</table>"
-      jQuery("#id_case_time").empty().append(ret_case_time_html)
+      jQuery("#id_billing_case_time").empty().append(ret_case_time_html)
 
     elif args.value == 'Last One Month':
       duration = 30
-      print("Duration", duration)
-      total_time_entry = 0
-      time_entry_activity = []
-      for time_entries in init_time_entry_activity:
-        new_timeentry_activity = {}
-        date = time_entries['date']
-        current_date = datetime.date.today()
-        days = (current_date - date).days
-        if days <= duration:
-          total_time_entry += time_entries['timeentry']
-          new_timeentry_activity['activity'] = time_entries['activity']
-          new_timeentry_activity['timeentry'] = time_entries['timeentry']
-          time_entry_activity.append(new_timeentry_activity)
-      time_entry = float(total_time_entry)
-      formatted_time_entry = "{:.2f}".format(time_entry)
-      ret_time_entry_html = f'''
-        {formatted_time_entry}
-      '''
-      jQuery("#id_time_entry").empty().append(ret_time_entry_html)
-  
-      Case_Expenses = 0
-      for Expenses in init_expenses:
-        date = Expenses['date']
-        current_date = datetime.date.today()
-        days = (current_date - date).days
-        if days <= duration:
-          Case_Expenses += Expenses['total']
-      Case_Expense = float(Case_Expenses)
-      formatted_Case_Expense = "{:.2f}".format(Case_Expense)
-      ret_case_expense_html = f'''
-        $ {formatted_Case_Expense}
-      '''
-      jQuery("#id_case_expense").empty().append(ret_case_expense_html)
-      
-      chartData_time_staff = []
-      for staff_time in init_time_staff:
-        new_staff_time = {}
-        new_staff_time['name'] = staff_time['name']
-        new_staff_time['time'] = staff_time['time']
-        chartData_time_staff.append(new_staff_time)
-      print(chartData_time_staff)
-      chart_time_staff = ej.charts.Chart({
-        'primaryXAxis': {
-            'valueType': 'Category'
-        },
-        'primaryYAxis': {
-            'minimum': 0, 'maximum': 0.1, 'interval': 0.02
-        },
-        'series':[{
-            'dataSource': chartData_time_staff,
-            'xName': 'name', 'yName': 'time',
-            'type': 'Column'
-        }],
-        # 'isTransposed': True,
-      }, "#id_time_staff")
-      ret_time_staff_html = f'''
-        {chart_time_staff}
-      '''
-      jQuery("#id_time_staff").append(ret_time_staff_html)
-      
-      chartData_time_activity = []
-      for temp_timeentry_activity in time_entry_activity:
-        new_time_activity = {}
-        new_time_activity['timeentry'] = temp_timeentry_activity['timeentry']
-        new_time_activity['activity'] = temp_timeentry_activity['activity']
-        chartData_time_activity.append(new_time_activity)
-      chart_time_activity = ej.charts.AccumulationChart({
-        'series': [
-          {
-              'dataSource': chartData_time_activity, 
-              'innerRadius': '40%',
-              'xName': 'time_entry',
-              'yName': 'activity'
-          }
-        ]
-      }, '#id_time_activity')
-      ret_time_activity_html = f'''
-        {chart_time_activity}
-      '''
-      jQuery("#id_time_activity").append(ret_time_activity_html)
       
       Case_Timeentry = [{'case': 'Case', 'total_period':'Period Total'}]
       for cases in init_case_timeentry:
@@ -982,88 +749,10 @@ class AnalyticsView:
         else:
           ret_case_time_html += '''<tr style="border: 1px solid #dddddd; text-align: left; padding: 8px;"><td style="border: 1px solid #dddddd; text-align: left; padding: 8px;">'''+item['case'] + '''</td><td style="border: 1px solid #dddddd; text-align: left; padding: 8px;">''' + str(item['total_period']) + "</td></tr>"
       ret_case_time_html += "</table>"
-      jQuery("#id_case_time").empty().append(ret_case_time_html)
+      jQuery("#id_billing_case_time").empty().append(ret_case_time_html)
+      
     elif args.value == 'Last Three Month':
       duration = 90
-      total_time_entry = 0
-      time_entry_activity = []
-      for time_entries in init_time_entry_activity:
-        new_timeentry_activity = {}
-        date = time_entries['date']
-        current_date = datetime.date.today()
-        days = (current_date - date).days
-        if days <= duration:
-          total_time_entry += time_entries['timeentry']
-          new_timeentry_activity['activity'] = time_entries['activity']
-          new_timeentry_activity['timeentry'] = time_entries['timeentry']
-          time_entry_activity.append(new_timeentry_activity)
-      time_entry = float(total_time_entry)
-      formatted_time_entry = "{:.2f}".format(time_entry)
-      ret_time_entry_html = f'''
-        {formatted_time_entry}
-      '''
-      jQuery("#id_time_entry").empty().append(ret_time_entry_html)
-  
-      Case_Expenses = 0
-      for Expenses in init_expenses:
-        date = Expenses['date']
-        current_date = datetime.date.today()
-        days = (current_date - date).days
-        if days <= duration:
-          Case_Expenses += Expenses['total']
-      Case_Expense = float(Case_Expenses)
-      formatted_Case_Expense = "{:.2f}".format(Case_Expense)
-      ret_case_expense_html = f'''
-        $ {formatted_Case_Expense}
-      '''
-      jQuery("#id_case_expense").empty().append(ret_case_expense_html)
-      
-      chartData_time_staff = []
-      for staff_time in init_time_staff:
-        new_staff_time = {}
-        new_staff_time['name'] = staff_time['name']
-        new_staff_time['time'] = staff_time['time']
-        chartData_time_staff.append(new_staff_time)
-      print(chartData_time_staff)
-      chart_time_staff = ej.charts.Chart({
-        'primaryXAxis': {
-            'valueType': 'Category'
-        },
-        'primaryYAxis': {
-            'minimum': 0, 'maximum': 0.1, 'interval': 0.02
-        },
-        'series':[{
-            'dataSource': chartData_time_staff,
-            'xName': 'name', 'yName': 'time',
-            'type': 'Column'
-        }],
-        # 'isTransposed': True,
-      }, "#id_time_staff")
-      ret_time_staff_html = f'''
-        {chart_time_staff}
-      '''
-      jQuery("#id_time_staff").append(ret_time_staff_html)
-      
-      chartData_time_activity = []
-      for temp_timeentry_activity in time_entry_activity:
-        new_time_activity = {}
-        new_time_activity['timeentry'] = temp_timeentry_activity['timeentry']
-        new_time_activity['activity'] = temp_timeentry_activity['activity']
-        chartData_time_activity.append(new_time_activity)
-      chart_time_activity = ej.charts.AccumulationChart({
-        'series': [
-          {
-              'dataSource': chartData_time_activity, 
-              'innerRadius': '40%',
-              'xName': 'time_entry',
-              'yName': 'activity'
-          }
-        ]
-      }, '#id_time_activity')
-      ret_time_activity_html = f'''
-        {chart_time_activity}
-      '''
-      jQuery("#id_time_activity").append(ret_time_activity_html)
       
       Case_Timeentry = [{'case': 'Case', 'total_period':'Period Total'}]
       for cases in init_case_timeentry:
@@ -1085,88 +774,9 @@ class AnalyticsView:
         else:
           ret_case_time_html += '''<tr style="border: 1px solid #dddddd; text-align: left; padding: 8px;"><td style="border: 1px solid #dddddd; text-align: left; padding: 8px;">'''+item['case'] + '''</td><td style="border: 1px solid #dddddd; text-align: left; padding: 8px;">''' + str(item['total_period']) + "</td></tr>"
       ret_case_time_html += "</table>"
-      jQuery("#id_case_time").empty().append(ret_case_time_html)
+      jQuery("#id_billing_case_time").empty().append(ret_case_time_html)
     else:
       duration = 365
-      total_time_entry = 0
-      time_entry_activity = []
-      for time_entries in init_time_entry_activity:
-        new_timeentry_activity = {}
-        date = time_entries['date']
-        current_date = datetime.date.today()
-        days = (current_date - date).days
-        if days <= duration:
-          total_time_entry += time_entries['timeentry']
-          new_timeentry_activity['activity'] = time_entries['activity']
-          new_timeentry_activity['timeentry'] = time_entries['timeentry']
-          time_entry_activity.append(new_timeentry_activity)
-      time_entry = float(total_time_entry)
-      formatted_time_entry = "{:.2f}".format(time_entry)
-      ret_time_entry_html = f'''
-        {formatted_time_entry}
-      '''
-      jQuery("#id_time_entry").empty().append(ret_time_entry_html)
-  
-      Case_Expenses = 0
-      for Expenses in init_expenses:
-        date = Expenses['date']
-        current_date = datetime.date.today()
-        days = (current_date - date).days
-        if days <= duration:
-          Case_Expenses += Expenses['total']
-      Case_Expense = float(Case_Expenses)
-      formatted_Case_Expense = "{:.2f}".format(Case_Expense)
-      ret_case_expense_html = f'''
-        $ {formatted_Case_Expense}
-      '''
-      jQuery("#id_case_expense").empty().append(ret_case_expense_html)
-      
-      chartData_time_staff = []
-      for staff_time in init_time_staff:
-        new_staff_time = {}
-        new_staff_time['name'] = staff_time['name']
-        new_staff_time['time'] = staff_time['time']
-        chartData_time_staff.append(new_staff_time)
-      print(chartData_time_staff)
-      chart_time_staff = ej.charts.Chart({
-        'primaryXAxis': {
-            'valueType': 'Category'
-        },
-        'primaryYAxis': {
-            'minimum': 0, 'maximum': 0.1, 'interval': 0.02
-        },
-        'series':[{
-            'dataSource': chartData_time_staff,
-            'xName': 'name', 'yName': 'time',
-            'type': 'Column'
-        }],
-        # 'isTransposed': True,
-      }, "#id_time_staff")
-      ret_time_staff_html = f'''
-        {chart_time_staff}
-      '''
-      jQuery("#id_time_staff").append(ret_time_staff_html)
-      
-      chartData_time_activity = []
-      for temp_timeentry_activity in time_entry_activity:
-        new_time_activity = {}
-        new_time_activity['timeentry'] = temp_timeentry_activity['timeentry']
-        new_time_activity['activity'] = temp_timeentry_activity['activity']
-        chartData_time_activity.append(new_time_activity)
-      chart_time_activity = ej.charts.AccumulationChart({
-        'series': [
-          {
-              'dataSource': chartData_time_activity, 
-              'innerRadius': '40%',
-              'xName': 'time_entry',
-              'yName': 'activity'
-          }
-        ]
-      }, '#id_time_activity')
-      ret_time_activity_html = f'''
-        {chart_time_activity}
-      '''
-      jQuery("#id_time_activity").append(ret_time_activity_html)
       
       Case_Timeentry = [{'case': 'Case', 'total_period':'Period Total'}]
       for cases in init_case_timeentry:
@@ -1188,164 +798,173 @@ class AnalyticsView:
         else:
           ret_case_time_html += '''<tr style="border: 1px solid #dddddd; text-align: left; padding: 8px;"><td style="border: 1px solid #dddddd; text-align: left; padding: 8px;">'''+item['case'] + '''</td><td style="border: 1px solid #dddddd; text-align: left; padding: 8px;">''' + str(item['total_period']) + "</td></tr>"
       ret_case_time_html += "</table>"
-      jQuery("#id_case_time").empty().append(ret_case_time_html)
+      jQuery("#id_billing_case_time").empty().append(ret_case_time_html)
 
     
 
   def init_billing_tab(self):
-    # dropdown_period = ej.dropdowns.DropDownList({
-    #   'dataSource': PM_AV_PERIOD,
-    #   'placeholder': "Select a Period",
-    #   'value': "This Month",
-    # }, "#id_total_time")
+    dropdown_period = ej.dropdowns.DropDownList({
+      'dataSource': PM_AV_PERIOD,
+      'placeholder': "Select a Period",
+      'value': "This Month",
+    }, "#id_billing_total_time")
     
-    # dropdown_period.addEventListener('change', self.dropdown_period_change)
+    dropdown_period.addEventListener('change', self.dropdown_period_change)
 
-    # # append time entry data to init_time_entry_activity list
-    # all_time_entries = TimeEntry.search()
-    # for time_entries in all_time_entries:
-    #   new_timeentry_activity = {}
-    #   if time_entries['activity'] is not None:
-    #     new_timeentry_activity['date'] = time_entries['date']
-    #     new_timeentry_activity['activity'] = time_entries['activity'].name
-    #     new_timeentry_activity['timeentry'] = time_entries['duration']
-    #     if time_entries['case'] is not None:
-    #       new_timeentry_activity['case'] = time_entries['case'].case_name
-    #     else:
-    #       new_timeentry_activity['case'] = None
-    #     init_time_entry_activity.append(new_timeentry_activity)
-    # # append expenses data to the init_expenses list
-    # all_Expenses = Expense.search()
-    # for Expenses in all_Expenses:
-    #   new_expenses = {}
-    #   new_expenses['date'] = Expenses['date']
-    #   new_expenses['total'] = Expenses['total']
-    #   init_expenses.append(new_expenses)
-    # # append staff and time data to the init_time_staff
-    # all_staff_time = Staff.search()
-    # for staff_time in all_staff_time:
-    #   new_staff_time = {}
-    #   new_staff_time['name'] = staff_time['first_name']
-    #   new_staff_time['time'] = staff_time['intake_performance_incentive']
-    #   init_time_staff.append(new_staff_time)
-    # # append case and timeentry data to the init_case_timeentry
-    # all_cases = Case.search()
-    # for cases in all_cases:
-    #   new_case = {}
-    #   total_period = 0
-    #   new_case['date'] = cases['incident_date']
-    #   new_case['case'] = cases['case_name']
-    #   for casetimeentry in init_time_entry_activity:
-    #     if casetimeentry['case'] == cases['case_name']:
-    #       if casetimeentry['timeentry'] is not None:
-    #         total_period += casetimeentry['timeentry']
-    #       else:
-    #         total_period += 0
-    #   new_case['total_period'] = total_period
-    #   init_case_timeentry.append(new_case)
+    # append time entry data to init_time_entry_activity list
+    all_time_entries = TimeEntry.search()
+    for time_entries in all_time_entries:
+      new_timeentry_activity = {}
+      if time_entries['activity'] is not None:
+        new_timeentry_activity['date'] = time_entries['date']
+        new_timeentry_activity['activity'] = time_entries['activity'].name
+        new_timeentry_activity['timeentry'] = time_entries['duration']
+        if time_entries['case'] is not None:
+          new_timeentry_activity['case'] = time_entries['case'].case_name
+        else:
+          new_timeentry_activity['case'] = None
+        init_time_entry_activity.append(new_timeentry_activity)
+    # append expenses data to the init_expenses list
+    all_Expenses = Expense.search()
+    for Expenses in all_Expenses:
+      new_expenses = {}
+      new_expenses['date'] = Expenses['date']
+      new_expenses['total'] = Expenses['total']
+      init_expenses.append(new_expenses)
+    # append staff and time data to the init_time_staff
+    all_staff_time = Staff.search()
+    for staff_time in all_staff_time:
+      new_staff_time = {}
+      new_staff_time['name'] = staff_time['first_name']
+      new_staff_time['time'] = staff_time['intake_performance_incentive']
+      init_time_staff.append(new_staff_time)
+    # append case and timeentry data to the init_case_timeentry
+    all_cases = Case.search()
+    for cases in all_cases:
+      new_case = {}
+      total_period = 0
+      new_case['date'] = cases['incident_date']
+      new_case['case'] = cases['case_name']
+      for casetimeentry in init_time_entry_activity:
+        if casetimeentry['case'] == cases['case_name']:
+          if casetimeentry['timeentry'] is not None:
+            total_period += casetimeentry['timeentry']
+          else:
+            total_period += 0
+      new_case['total_period'] = total_period
+      init_case_timeentry.append(new_case)
     
-    # # initialize billing page
-    # total_time_entry = 0
-    # time_entry_activity = []
-    # for time_entries in init_time_entry_activity:
-    #   new_timeentry_activity = {}
-    #   date = time_entries['date']
-    #   current_date = datetime.date.today()
-    #   if date.year == current_date.year and date.month == current_date.month:
-    #     total_time_entry += time_entries['timeentry']
-    #     new_timeentry_activity['activity'] = time_entries['activity']
-    #     new_timeentry_activity['timeentry'] = time_entries['timeentry']
-    #     time_entry_activity.append(new_timeentry_activity)
-    # time_entry = float(total_time_entry)
-    # formatted_time_entry = "{:.2f}".format(time_entry)
-    # ret_time_entry_html = f'''
-    #   {formatted_time_entry}
-    # '''
-    # jQuery("#id_time_entry").empty().append(ret_time_entry_html)
+    # initialize billing page
+    total_time_entry = 0
+    time_entry_activity = []
+    for time_entries in init_time_entry_activity:
+      new_timeentry_activity = {}
+      date = time_entries['date']
+      current_date = datetime.date.today()
+      if date.year == current_date.year and date.month == current_date.month:
+        total_time_entry += time_entries['timeentry']
+        new_timeentry_activity['activity'] = time_entries['activity']
+        new_timeentry_activity['timeentry'] = time_entries['timeentry']
+        time_entry_activity.append(new_timeentry_activity)
+    time_entry = float(total_time_entry)
+    formatted_time_entry = "{:.2f}".format(time_entry)
+    ret_time_entry_html = f'''
+      {formatted_time_entry}
+    '''
+    jQuery("#id_billing_time_entry").empty().append(ret_time_entry_html)
 
-    # Case_Expenses = 0
-    # for Expenses in init_expenses:
-    #   date = Expenses['date']
-    #   current_date = datetime.date.today()
-    #   if date.year == current_date.year and date.month == current_date.month:
-    #     Case_Expenses += Expenses['total']
-    # Case_Expense = float(Case_Expenses)
-    # formatted_Case_Expense = "{:.2f}".format(Case_Expense)
-    # ret_case_expense_html = f'''
-    #   $ {formatted_Case_Expense}
-    # '''
-    # jQuery("#id_case_expense").append(ret_case_expense_html)
+    Case_Expenses = 0
+    for Expenses in init_expenses:
+      date = Expenses['date']
+      current_date = datetime.date.today()
+      if date.year == current_date.year and date.month == current_date.month:
+        Case_Expenses += Expenses['total']
+    Case_Expense = float(Case_Expenses)
+    formatted_Case_Expense = "{:.2f}".format(Case_Expense)
+    ret_case_expense_html = f'''
+      $ {formatted_Case_Expense}
+    '''
+    jQuery("#id_billing_case_expense").append(ret_case_expense_html)
     
-    # chartData_time_staff = []
-    # for staff_time in init_time_staff:
-    #   new_staff_time = {}
-    #   new_staff_time['name'] = staff_time['name']
-    #   new_staff_time['time'] = staff_time['time']
-    #   chartData_time_staff.append(new_staff_time)
-    # print(chartData_time_staff)
-    # chart_time_staff = ej.charts.Chart({
-    #   'primaryXAxis': {
-    #       'valueType': 'Category'
-    #   },
-    #   'primaryYAxis': {
-    #       'minimum': 0, 'maximum': 0.1, 'interval': 0.02
-    #   },
-    #   'series':[{
-    #       'dataSource': chartData_time_staff,
-    #       'xName': 'name', 'yName': 'time',
-    #       'type': 'Column'
-    #   }],
-    #   # 'isTransposed': True,
-    # }, '#id_time_staff')
-    # ret_time_staff_html = f'''
-    #   {chart_time_staff}
-    # '''
-    # jQuery("#id_time_staff").append(ret_time_staff_html)
+    chartData_time_staff = []
+    for staff_time in init_time_staff:
+      new_staff_time = {}
+      new_staff_time['name'] = staff_time['name']
+      new_staff_time['time'] = staff_time['time']
+      chartData_time_staff.append(new_staff_time)
+    print(chartData_time_staff)
+    chart_time_staff = ej.charts.Chart({
+      'primaryXAxis': {
+          'valueType': 'Category'
+      },
+      'primaryYAxis': {
+          'minimum': 0, 'maximum': 0.1, 'interval': 0.02
+      },
+      'series':[{
+          'dataSource': chartData_time_staff,
+          'xName': 'name', 'yName': 'time',
+          'type': 'Column'
+      }],
+      # 'isTransposed': True,
+    }, '#id_billing_time_staff')
+    ret_time_staff_html = f'''
+      {chart_time_staff}
+    '''
+    jQuery("#id_billing_time_staff").append(ret_time_staff_html)
     
-    # chartData_time_activity = []
-    # for temp_timeentry_activity in time_entry_activity:
-    #   new_time_activity = {}
-    #   new_time_activity['timeentry'] = temp_timeentry_activity['timeentry']
-    #   new_time_activity['activity'] = temp_timeentry_activity['activity']
-    #   chartData_time_activity.append(new_time_activity)
-    # chart_time_activity = ej.charts.AccumulationChart({
-    #   'series': [
-    #     {
-    #         'dataSource': chartData_time_activity, 
-    #         'innerRadius': '40%',
-    #         'xName': 'time_entry',
-    #         'yName': 'activity'
-    #     }
-    #   ]
-    # }, '#id_time_activity')
-    # ret_time_activity_html = f'''
-    #   {chart_time_activity}
-    # '''
-    # jQuery("#id_time_activity").append(ret_time_activity_html)
+    chartData_time_activity = []
+    for temp_timeentry_activity in time_entry_activity:
+      new_time_activity = {}
+      new_time_activity['timeentry'] = temp_timeentry_activity['timeentry']
+      new_time_activity['activity'] = temp_timeentry_activity['activity']
+      chartData_time_activity.append(new_time_activity)
+    aggregated = {}
+    for entry in chartData_time_activity:
+      activity = entry['activity']
+      timeentry = entry['timeentry']
+      if activity in aggregated:
+          aggregated[activity] += timeentry
+      else:
+          aggregated[activity] = timeentry
+  
+  # Convert the aggregated dictionary back to a list of dictionaries
+    result_time_activity = [{'activity': activity, 'timeentry': timeentry} for activity, timeentry in aggregated.items()]
+    chart_time_activity = ej.charts.AccumulationChart({
+      'series': [
+        {
+            'dataSource': result_time_activity, 
+            'innerRadius': '40%',
+            'xName': 'timeentry',
+            'yName': 'activity'
+        }
+      ]
+    }, '#id_billing_time_activity')
+    ret_time_activity_html = f'''
+      {chart_time_activity}
+    '''
+    jQuery("#id_billing_time_activity").append(ret_time_activity_html)
     
-    # Case_Timeentry = [{'case': 'Case', 'total_period':'Period Total'}]
-    # for cases in init_case_timeentry:
-    #   new_case = {}
-    #   date = cases['date']
-    #   current_date = datetime.date.today()
-    #   if date.year == current_date.year and date.month == current_date.month:
-    #     new_case['case'] = cases['case']
-    #     new_case['total_period'] = cases['total_period']
-    #     Case_Timeentry.append(new_case)
+    Case_Timeentry = [{'case': 'Case', 'total_period':'Period Total'}]
+    for cases in init_case_timeentry:
+      new_case = {}
+      date = cases['date']
+      current_date = datetime.date.today()
+      if date.year == current_date.year and date.month == current_date.month:
+        new_case['case'] = cases['case']
+        new_case['total_period'] = cases['total_period']
+        Case_Timeentry.append(new_case)
     
-    # ret_case_time_html = ""
-    # ret_case_time_html += """<table style="width: 100%;border-collapse: collapse;table-layout: fixed;">"""
-    # for item in Case_Timeentry:
-    #   if item['case'] == "Case":
-    #     ret_case_time_html += '''<colgroup><col span="1" style="width:80%"><col span="1" style="width:20%"></colgroup>'''
-    #     ret_case_time_html += '''<tr style="border: 1px solid #dddddd; text-align: left; padding: 8px;"><th style="border: 1px solid #dddddd; background-color: #f2f2f2; text-align: left; padding: 8px;">'''+item['case'] + '''</th><th style="border: 1px solid #dddddd; background-color: #f2f2f2; text-align: left; padding: 8px;">''' + str(item['total_period']) + "</th></tr>"
-    #   else:
-    #     ret_case_time_html += '''<tr style="border: 1px solid #dddddd; text-align: left; padding: 8px;"><td style="border: 1px solid #dddddd; text-align: left; padding: 8px;">'''+item['case'] + '''</td><td style="border: 1px solid #dddddd; text-align: left; padding: 8px;">''' + str(item['total_period']) + "</td></tr>"
-    # ret_case_time_html += "</table>"
-    # jQuery("#id_case_time").append(ret_case_time_html)
+    ret_case_time_html = ""
+    ret_case_time_html += """<table style="width: 100%;border-collapse: collapse;table-layout: fixed;">"""
+    for item in Case_Timeentry:
+      if item['case'] == "Case":
+        ret_case_time_html += '''<colgroup><col span="1" style="width:80%"><col span="1" style="width:20%"></colgroup>'''
+        ret_case_time_html += '''<tr style="border: 1px solid #dddddd; text-align: left; padding: 8px;"><th style="border: 1px solid #dddddd; background-color: #f2f2f2; text-align: left; padding: 8px;">'''+item['case'] + '''</th><th style="border: 1px solid #dddddd; background-color: #f2f2f2; text-align: left; padding: 8px;">''' + str(item['total_period']) + "</th></tr>"
+      else:
+        ret_case_time_html += '''<tr style="border: 1px solid #dddddd; text-align: left; padding: 8px;"><td style="border: 1px solid #dddddd; text-align: left; padding: 8px;">'''+item['case'] + '''</td><td style="border: 1px solid #dddddd; text-align: left; padding: 8px;">''' + str(item['total_period']) + "</td></tr>"
+    ret_case_time_html += "</table>"
+    jQuery("#id_billing_case_time").append(ret_case_time_html)
 
-    # <div class="col-xs-12">{activity['address']}</div>
-    pass
   
   def init_case_tab(self):
 
@@ -1439,28 +1058,28 @@ class AnalyticsView:
     ret_open_cases_html = f'''
       {open_case_count}
     '''
-    jQuery("#id_case_open_cases").append(ret_open_cases_html)
+    jQuery("#id_case_open_cases").empty().append(ret_open_cases_html)
     # Closed Cases
     ret_closed_cases_html = f'''
       {closed_case_count}
     '''
-    jQuery("#id_case_closed_cases").append(ret_closed_cases_html)
+    jQuery("#id_case_closed_cases").empty().append(ret_closed_cases_html)
     # Total Clients
     ret_total_clients_html = f'''
       {len(unique_total_client_count)}
     '''
-    jQuery("#id_case_total_clients").append(ret_total_clients_html)
+    jQuery("#id_case_total_clients").empty().append(ret_total_clients_html)
 
     # Open Tasks
     ret_open_tasks_html = f'''
       {open_task_count}
     '''
-    jQuery("#id_case_open_tasks").append(ret_open_tasks_html)
+    jQuery("#id_case_open_tasks").empty().append(ret_open_tasks_html)
     
     ret_open_total_staff_html = f'''
       {staff_count}
     '''
-    jQuery("#id_case_total_staffs").append(ret_open_total_staff_html)
+    jQuery("#id_case_total_staffs").empty().append(ret_open_total_staff_html)
     
     # Cases by Stage Chart Part
     chart_case_stage = ej.charts.Chart({
@@ -1577,7 +1196,6 @@ class AnalyticsView:
       current_date = datetime.date.today()
       last_month_end = current_date.replace(day=1) - timedelta(days=1)
       last_month_start = last_month_end.replace(day=1)
-      print("date ", date,"  ", last_month_start, "  ", last_month_end)
       days = (current_date - last_month_end).days
       all_revenue['date'] = date
       if temp_lead['retainer'] is not None:
@@ -1666,11 +1284,11 @@ class AnalyticsView:
     ret_new_clients_html = f'''
       {new_clients_count}
     '''
-    jQuery("#id_finance_new_clients_this_month").append(ret_new_clients_html)
+    jQuery("#id_finance_new_clients_this_month").empty().append(ret_new_clients_html)
     ret_exist_clients_html = f'''
       {exist_clients_count}
     '''
-    jQuery("#id_finance_existing_clients_this_month").append(ret_exist_clients_html)
+    jQuery("#id_finance_existing_clients_this_month").empty().append(ret_exist_clients_html)
 
     # Current Month Revenue by Day
     chart_current_month_revenue = ej.charts.Chart({
@@ -1729,9 +1347,9 @@ class AnalyticsView:
     all_incentives = PerformanceIncentive.search()
     for temp_incentives in all_incentives:
       new_staff_incentive = {}
-      date = temp_incentives['payment_date']
+      date = temp_incentives['payment'].payment_time
       current_date = datetime.date.today()
-      if date is not None and date.year == current_date.year and date.month == current_date.month:
+      if date.year == current_date.year and date.month == current_date.month:
         new_staff_incentive['staff'] = temp_incentives['staff'].first_name
         new_staff_incentive['total_period'] = temp_incentives['amount']
         staff_incentives.append(new_staff_incentive)
@@ -1743,12 +1361,57 @@ class AnalyticsView:
         ret_staff_incentive_html += '''<colgroup><col span="1" style="width:70%"><col span="1" style="width:30%"></colgroup>'''
         ret_staff_incentive_html += '''<tr style="border: 1px solid #dddddd; text-align: left; padding: 8px;"><th style="border: 1px solid #dddddd; background-color: #f2f2f2; text-align: left; padding: 8px;">'''+item['staff'] + '''</th><th style="border: 1px solid #dddddd; background-color: #f2f2f2; text-align: left; padding: 8px;">''' + str(item['total_period']) + "</th></tr>"
       else:
-        ret_staff_incentive_html += '''<tr style="border: 1px solid #dddddd; text-align: left; padding: 8px;"><td style="border: 1px solid #dddddd; text-align: left; padding: 8px;">'''+item['staff'] + '''</td><td style="border: 1px solid #dddddd; text-align: left; padding: 8px;">''' + str(item['total_period']) + "</td></tr>"
+        ret_staff_incentive_html += '''<tr style="border: 1px solid #dddddd; text-align: left; padding: 8px;"><td style="border: 1px solid #dddddd; text-align: left; padding: 8px;">'''+item['staff'] + '''</td><td style="border: 1px solid #dddddd; text-align: left; padding: 8px;">$ ''' + str(item['total_period']) + "</td></tr>"
     ret_staff_incentive_html += "</table>"
     jQuery("#id_finance_staff_incentives_report").empty().append(ret_staff_incentive_html)
 
   def dropdown_finance_staff_incentives_report_period_change(self, args):
-    pass
+    staff_incentives = [{'staff': 'Staff', 'total_period':'Period Total'}]
+    all_incentives = PerformanceIncentive.search()
+    for temp_incentives in all_incentives:
+      new_staff_incentive = {}
+      date = temp_incentives['payment'].payment_time
+      current_date = datetime.date.today()
+      print(date)
+      if args.value == "This Month":
+        if date.year == current_date.year and date.month == current_date.month:
+          new_staff_incentive['staff'] = temp_incentives['staff'].first_name
+          new_staff_incentive['total_period'] = temp_incentives['amount']
+          staff_incentives.append(new_staff_incentive)
+      elif args.value == "Last Month":
+        last_month_end = current_date.replace(day=1) - timedelta(days=1)
+        last_month_start = last_month_end.replace(day=1)
+        if last_month_start <= date.date() <= last_month_end:
+          new_staff_incentive['staff'] = temp_incentives['staff'].first_name
+          new_staff_incentive['total_period'] = temp_incentives['amount']
+          staff_incentives.append(new_staff_incentive)
+      elif args.value == "Same Month Last Year":
+        if date.year == current_date.year - 1 and date.month == current_date.month:
+          new_staff_incentive['staff'] = temp_incentives['staff'].first_name
+          new_staff_incentive['total_period'] = temp_incentives['amount']
+          staff_incentives.append(new_staff_incentive)
+      elif args.value == "This Year":
+        if date.year == current_date.year:
+          new_staff_incentive['staff'] = temp_incentives['staff'].first_name
+          new_staff_incentive['total_period'] = temp_incentives['amount']
+          staff_incentives.append(new_staff_incentive)
+      else:
+        if date.year == current_date.year - 1:
+          new_staff_incentive['staff'] = temp_incentives['staff'].first_name
+          new_staff_incentive['total_period'] = temp_incentives['amount']
+          staff_incentives.append(new_staff_incentive)
+    print(staff_incentives)
+    ret_staff_incentive_html = ""
+    ret_staff_incentive_html += """<table style="width: 100%;border-collapse: collapse;table-layout: fixed;">"""
+    for item in staff_incentives:
+      if item['staff'] == "Staff":
+        ret_staff_incentive_html += '''<colgroup><col span="1" style="width:70%"><col span="1" style="width:30%"></colgroup>'''
+        ret_staff_incentive_html += '''<tr style="border: 1px solid #dddddd; text-align: left; padding: 8px;"><th style="border: 1px solid #dddddd; background-color: #f2f2f2; text-align: left; padding: 8px;">'''+item['staff'] + '''</th><th style="border: 1px solid #dddddd; background-color: #f2f2f2; text-align: left; padding: 8px;">''' + str(item['total_period']) + "</th></tr>"
+      else:
+        ret_staff_incentive_html += '''<tr style="border: 1px solid #dddddd; text-align: left; padding: 8px;"><td style="border: 1px solid #dddddd; text-align: left; padding: 8px;">'''+item['staff'] + '''</td><td style="border: 1px solid #dddddd; text-align: left; padding: 8px;">$ ''' + str(item['total_period']) + "</td></tr>"
+    ret_staff_incentive_html += "</table>"
+    jQuery("#id_finance_staff_incentives_report").empty().append(ret_staff_incentive_html)
+      
   
   def init_firm_tab(self):
     # total staff, employee deivces, office devices
@@ -1812,9 +1475,7 @@ class AnalyticsView:
           race_american_indian_or_alaskan_native_count += 1
         else:
           race_hispanic_or_latino_count += 1
-        
-    
-    
+
     unique_staffs = set(staffs)
     staff_count = len(unique_staffs)
     unique_employee_devices = set(employee_devices)
@@ -1824,17 +1485,17 @@ class AnalyticsView:
     ret_total_staff_html = f'''
       {staff_count}
     '''
-    jQuery("#id_firm_total_staff").append(ret_total_staff_html)
+    jQuery("#id_firm_total_staff").empty().append(ret_total_staff_html)
     
     ret_employee_devices_html = f'''
       {employee_device_count}
     '''
-    jQuery("#id_firm_employee_devices").append(ret_employee_devices_html)
+    jQuery("#id_firm_employee_devices").empty().append(ret_employee_devices_html)
     
     ret_office_device_html = f'''
       {office_device_count}
     '''
-    jQuery("#id_firm_office_devices").append(ret_office_device_html)
+    jQuery("#id_firm_office_devices").empty().append(ret_office_device_html)
 
     # staff vs hourly
     chart_staff_vs_hourly = ej.charts.Chart({
@@ -2099,19 +1760,19 @@ class AnalyticsView:
         
     # Average Value of Won, Lost and Open Leads
     ret_avg_value_of_won_lead_html = f'''
-      {formatted_avg_value_of_won_lead}
+      $ {formatted_avg_value_of_won_lead}
     '''
-    jQuery("#id_lead_average_value_of_won_leads").append(ret_avg_value_of_won_lead_html)
+    jQuery("#id_lead_average_value_of_won_leads").empty().append(ret_avg_value_of_won_lead_html)
     
     ret_avg_value_of_lost_lead_html = f'''
-      {formatted_avg_value_of_lost_lead}
+      $ {formatted_avg_value_of_lost_lead}
     '''
-    jQuery("#id_lead_average_value_of_lost_leads").append(ret_avg_value_of_lost_lead_html)
+    jQuery("#id_lead_average_value_of_lost_leads").empty().append(ret_avg_value_of_lost_lead_html)
     
     ret_avg_value_of_open_lead_html = f'''
-      {formatted_avg_value_of_open_lead}
+      $ {formatted_avg_value_of_open_lead}
     '''
-    jQuery("#id_lead_average_value_of_open_leads").append(ret_avg_value_of_open_lead_html)
+    jQuery("#id_lead_average_value_of_open_leads").empty().append(ret_avg_value_of_open_lead_html)
 
     # Open Deals by Stage
     chartdata_open_deal_value = [
@@ -2147,7 +1808,7 @@ class AnalyticsView:
       {'stagename': 'Upper Court', 'woncount': upper_court_won_count, 'lostcount': upper_court_lost_count},
       {'stagename': 'Appeals Court', 'woncount': appeals_court_won_count, 'lostcount': appeals_court_lost_count}
     ]
-    print(chartdata_lead_by_case_stage)
+    
     chart_lead_by_stage = ej.charts.Chart({
       'width': '450',
       'primaryXAxis': {
@@ -2342,7 +2003,6 @@ class AnalyticsView:
     # Currend Pay Period
     base_pay_period_start = datetime.datetime(year=2024, month=4, day=8)
     current_date = datetime.date.today()
-    print(current_date)
     days_since_start = (current_date - base_pay_period_start).days
     weeks_since_start = days_since_start // 7
     flag = weeks_since_start % 2
@@ -2396,9 +2056,9 @@ class AnalyticsView:
     '''
     jQuery("#id_staff_current_period_payroll").append(ret_current_period_payroll_html)
     ret_total_bonus_html = f'''
-      {formatted_total_bonus}
+      $ {formatted_total_bonus}
     '''
-    jQuery("#id_staff_total_bonus").append(ret_total_bonus_html)
+    jQuery("#id_staff_total_bonus").empty().append(ret_total_bonus_html)
     ret_overtime_hours_html = f'''
       {overtime_hours}
     '''
@@ -2408,13 +2068,13 @@ class AnalyticsView:
     '''
     jQuery("#id_staff_total_hours_worked").append(ret_total_hours_worked_html)
     ret_incentives_html = f'''
-      {formatted_incentive}
+      $ {formatted_incentive}
     '''
-    jQuery("#id_staff_incentives").append(ret_incentives_html)
+    jQuery("#id_staff_incentives").empty().append(ret_incentives_html)
     ret_overtime_pay_html = f'''
-      {formatted_overtime_pay}
+      $ {formatted_overtime_pay}
     '''
-    jQuery("#id_staff_overtime_pay").append(ret_overtime_pay_html)
+    jQuery("#id_staff_overtime_pay").empty().append(ret_overtime_pay_html)
 
     total_work_hours_current_vs_previous = [
       {'period': 'Current', 'hours': total_hours_worked},
