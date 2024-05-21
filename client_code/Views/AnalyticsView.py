@@ -9,7 +9,7 @@ from collections import defaultdict
 from AnvilFusion.tools.utils import AppEnv, datetime_js_to_py
 from AnvilFusion.components.FormInputs import *
 
-from ..app.models import Staff, User, Contact, Activity, AppAuditLog, TimeEntry, Expense, Case, Task, Event, Payment, Lead, Client, Timesheet, PerformanceIncentive
+from ..app.models import Staff, User, Contact, Activity, AppAuditLog, TimeEntry, Expense, Case, Task, Event, Payment, Lead, Client, Timesheet, PerformanceIncentive, Invoice
 
 PM_AV_PERIOD = [
   'This Month',
@@ -120,7 +120,7 @@ class AnalyticsView:
               <i class="fa-solid fa-ballot-check" aria-hidden="true" style="margin-right: 8px; font-size: 2em;"></i>
               <div>
                 <span style="margin-right: 4px">Overdue Invoices</span>
-                <div style="font-weight: bold; font-size: 1.6em;">2</div>
+                <div id="id_billing_overdue_invoice" style="font-weight: bold; font-size: 1.6em;"></div>
               </div>
             </div>
           </div>
@@ -131,7 +131,7 @@ class AnalyticsView:
               <i class="fa-light fa-ballot-check" aria-hidden="true" style="margin-right: 8px; font-size: 2em;"></i>
               <div>
                 <span style="margin-right: 4px">Partial Invoices</span>
-                <div style="font-weight: bold; font-size: 1.6em;">6</div>
+                <div id="id_billing_partial_invoice" style="font-weight: bold; font-size: 1.6em;"></div>
               </div>
             </div>
           </div>
@@ -300,8 +300,8 @@ class AnalyticsView:
           <div class="p-3" style="padding: 5px; background-color: white; display: flex; align-items:center; justify-content: center;">
             <div style="display:flex; align-items:center;">
               <div>
-                <span style="text-align: center;">Current Month Projection</span>
-                <div id="id_finance_current_month_projection" style="text-align: center; font-weight: bold; font-size: 1.4em;"></div>
+                <span style="text-align: center;">This Year</span>
+                <div id="id_finance_this_year_revenue" style="text-align: center; font-weight: bold; font-size: 1.4em;"></div>
               </div>
             </div>
           </div>
@@ -570,7 +570,7 @@ class AnalyticsView:
         <div class="p-3" style="padding: 5px; background-color: white; difsplay: flex; align-items:center; justify-content: center;">
           <div style="display:flex; align-items:center; justify-content:center;">
             <div>
-              <span style="padding-left: 32px; padding-bottom: 5px; font-weight: bold; font-size: 1.4em">Current Pay Period</span>
+              <span style="padding-left: 28px; padding-bottom: 5px; font-weight: bold; font-size: 1.4em">Current Pay Period</span>
               <div id="id_staff_current_pay_period" style="font-size: 1.3em;"></div>
             </div>
           </div>
@@ -593,7 +593,7 @@ class AnalyticsView:
             <i class="fa-thin fa-money-check-dollar-pen" aria-hidden="true" style="margin-right: 8px; font-size: 2em;"></i>
             <div>
               <span style="margin-right: 4px">Total Bonus</span>
-              <div id="id_staff_total_bonus" style="font-weight: bold; font-size: 1.6em;">$ </div>
+              <div id="id_staff_total_bonus" style="font-weight: bold; font-size: 1.6em;"></div>
             </div>
           </div>
         </div>
@@ -884,7 +884,26 @@ class AnalyticsView:
     ret_case_expense_html = f'''
       $ {formatted_Case_Expense}
     '''
-    jQuery("#id_billing_case_expense").append(ret_case_expense_html)
+    jQuery("#id_billing_case_expense").empty().append(ret_case_expense_html)
+
+    # Invoices
+    partial_invoice_count = 0
+    overdue_invoice_count = 0
+    all_invoices = Invoice.search()
+    for temp_invoice in all_invoices:
+      if temp_invoice['status'] == 'partial':
+        partial_invoice_count += 1
+      elif temp_invoice['status'] == 'overdue':
+        overdue_invoice_count += 1
+    ret_partial_invoice_html = f'''
+      {partial_invoice_count}
+    '''
+    jQuery("#id_billing_partial_invoice").empty().append(ret_partial_invoice_html)
+    ret_overdue_invoice_html = f'''
+      {overdue_invoice_count}
+    '''
+    jQuery("#id_billing_overdue_invoice").empty().append(ret_overdue_invoice_html)
+        
     
     chartData_time_staff = []
     for staff_time in init_time_staff:
@@ -1184,6 +1203,7 @@ class AnalyticsView:
     this_month_revenue = 0
     same_month_last_year_revenue = 0
     last_month_revenue = 0
+    this_year_revenue = 0
     days = 1
     current_month_revenues = []
     total_referrals_count = 0
@@ -1226,11 +1246,17 @@ class AnalyticsView:
         if temp_lead['retainer'] is not None:
           last_month_revenue += temp_lead['retainer']
         else:
-          last_month_revenue = 0
+          last_month_revenue += 0
+      if date.year == current_date.year:
+        if temp_lead['retainer'] is not None:
+          this_year_revenue += temp_lead['retainer']
+        else:
+          this_year_revenue += 0
     average_revenue_this_month = this_month_revenue / days
     formatted_this_month_revenue = "{:.2f}".format(this_month_revenue)
     formatted_same_month_last_year_revenue = "{:.2f}".format(same_month_last_year_revenue)
     formatted_last_month_revenue = "{:.2f}".format(last_month_revenue)
+    formatted_this_year_revenue = "{:.2f}".format(this_year_revenue)
     formatted_average_revenue_this_month = "{:.2f}".format(average_revenue_this_month)
     ret_this_month_revenue_html = f'''
       $ {formatted_this_month_revenue}
@@ -1244,6 +1270,10 @@ class AnalyticsView:
       $ {formatted_last_month_revenue}
     '''
     jQuery("#id_finance_last_month_revenue").empty().append(ret_last_month_revenue_html)
+    ret_this_year_revenue_html = f'''
+      $ {formatted_this_year_revenue}
+    '''
+    jQuery("#id_finance_this_year_revenue").empty().append(ret_this_year_revenue_html)
     ret_average_revenue_this_month_html = f'''
       $ {formatted_average_revenue_this_month}
     '''
