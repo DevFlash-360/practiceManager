@@ -2161,3 +2161,12 @@ class AnalyticsView:
   def destroy(self):
     if self.container_el:
       self.container_el.innerHTML = ''
+
+
+'''
+create a button
+create a pop-up form
+pdf preview & drag-drop e-sign components
+redirect to the pop-up
+# through email
+'''
