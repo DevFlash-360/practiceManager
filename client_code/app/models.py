@@ -420,7 +420,7 @@ class Document:
     reviewed_by = Relationship('Staff')
     notes = Attribute(field_type=types.FieldTypes.MULTI_LINE)
     file = Attribute(field_type=types.FieldTypes.FILE_UPLOAD)
-
+    # button = Attribute(field_type=types.FieldTypes.FILE_UPLOAD)
 
 @model_type
 class DocumentFolder:
