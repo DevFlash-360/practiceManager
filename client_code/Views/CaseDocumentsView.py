@@ -24,6 +24,7 @@ class CaseDocumentsView(GridView):
                 {'name': 'discovery', 'label': 'Discovery'},
                 {'name': 'reviewed_by.full_name', 'label': 'Reviewed By'},
                 {'name': 'notes', 'label': 'Notes'},
+                # {'name': 'button', 'label': 'Button'},
             ],
             'filter': {'document_folder.case': self.filter_case_uid},
         }
