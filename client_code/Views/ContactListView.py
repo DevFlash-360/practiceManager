@@ -36,9 +36,6 @@ class ContactListView(GridView2):
         super().row_selected(args)
 
     def details_content(self, args):
-        print("----------")
-        print(args)
-
         contact = args['data']
         item = Contact.get(contact['uid'])
         created_by = Contact.get(item['created_by']) if item['created_by'] else None
@@ -168,7 +165,7 @@ class ContactListView(GridView2):
             </div>\
             <div class='details_record'>\
                 <div class='details_record_label'>Added Time</div>\
-                <div class='details_record_data'>{item['created_time'].strftime('%m/%d/%Y %I:%M %p')}</div>\
+                <div class='details_record_data'>{item['created_time'].strftime('%b %d, %Y @ %I:%M %p')}</div>\
             </div>\
             <div class='details_record'>\
                 <div class='details_record_label'>Modified User</div>\
@@ -176,7 +173,7 @@ class ContactListView(GridView2):
             </div>\
             <div class='details_record'>\
                 <div class='details_record_label'>Modified Time</div>\
-                <div class='details_record_data'>{item['updated_time'].strftime('%m/%d/%Y %I:%M %p')}</div>\
+                <div class='details_record_data'>{item['updated_time'].strftime('%b %d, %Y @ %I:%M %p')}</div>\
             </div>\
             <div class='details_record'>\
                 <div class='details_record_label'>ID</div>\

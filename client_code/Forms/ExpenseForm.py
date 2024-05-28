@@ -4,20 +4,11 @@ from AnvilFusion.components.FormInputs import *
 import datetime
 
 
-# expense status options
-EXPENSE_STATUS_OPEN = 'Open'
-EXPENSE_STATUS_INVOICED = 'Invoiced'
-EXPENSE_STATUS_OPTIONS = [
-    EXPENSE_STATUS_OPEN,
-    EXPENSE_STATUS_INVOICED,
-]
-
-
 class ExpenseForm(FormBase):
     def __init__(self, **kwargs):
         print('ExpenseForm')
         kwargs['model'] = 'Expense'
-        self.date = DateInput(name='date', label='Date', value=datetime.date.today())
+        self.date = DateInput(name='date', label='Date', value=datetime.date.today(), string_format='MMM dd, yyyy')
         self.activity = LookupInput(model='Activity', name='activity', label='Activity')
         self.description = MultiLineInput(name='description', label='Description')
         self.amount = NumberInput(name='amount', label='Amount', value=0)
@@ -27,8 +18,6 @@ class ExpenseForm(FormBase):
         self.case = LookupInput(name='case', label='Case', model='Case', text_field='case_name')
         self.billable = CheckboxInput(name='billable', label='Billable', value=True)
         self.reduction = NumberInput(name='reduction', label='Reduction')
-        self.status = DropdownInput(name='status', label='Status', select='single', options=EXPENSE_STATUS_OPTIONS,
-                                    value=EXPENSE_STATUS_OPEN, enabled=False)
         self.receipt_invoice = FileUploadInput(name='receipt_invoice', label='Receipt Invoice', save=False)
 
         sections = [
@@ -40,7 +29,7 @@ class ExpenseForm(FormBase):
                 [self.date, self.amount, self.quantity, self.reduction],
                 [self.receipt_invoice],
                 # hidden fields
-                [self.total, self.status],
+                [self.total],
             ]}
         ]
 
@@ -49,7 +38,6 @@ class ExpenseForm(FormBase):
     def form_open(self, args):
         super().form_open(args)
         self.total.hide()
-        self.status.hide()
 
     def form_save(self, args):
         total = self.amount.value * self.quantity.value

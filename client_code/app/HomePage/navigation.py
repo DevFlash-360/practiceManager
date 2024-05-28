@@ -21,6 +21,7 @@ PMAPP_APPBAR_MENU = [
     {'id': 'tools_menu', 'text': 'Tools', 'items': []},
     {'id': 'staff_menu', 'text': 'Staff', 'items': []},
     {'id': 'finance_menu', 'text': 'Finance', 'items': []},
+    {'id': 'admin_menu', 'text': 'Admin', 'items': []},
     # {'id': 'settings_menu', 'text': 'Settings', 'items': []},
 ]
 
@@ -107,6 +108,9 @@ PMAPP_SIDEBAR_MENUS = {
         {'nodeId': 'finance_timesheets', 'nodeText': 'Timesheets', 'nodeChild': []},
         {'nodeId': 'finance_payrolls', 'nodeText': 'Payrolls', 'nodeChild': []},
     ],
+    'admin_menu': [
+        {'nodeId': 'admin_staffs', 'nodeText': 'Manage Staff', 'nodeChild': []},
+    ]
     # 'settings_menu': [
     #     {'nodeId': 'settings_user', 'nodeText': 'User', 'nodeChild': []},
     #     {'nodeId': 'settings_security', 'nodeText': 'Security', 'nodeChild': []},
@@ -120,6 +124,7 @@ PMAPP_DEFAULT_NAV_ITEMS = {
     'tools_menu': 'tools_date_calculator',
     'staff_menu': 'staff_my_timesheets',
     'finance_menu': 'finance_payments',
+    'admin_menu': 'admin_staffs',
     # 'settings_menu': 'settings_user',
 }
 
@@ -141,7 +146,7 @@ PMAPP_NAV_ITEMS = {
     'case_dashboard_expenses': {'class': 'ExpenseView', 'type': 'custom', 'action': 'open', 'props': {'dashboard': True}},
     'case_dashboard_invoices': {'class': 'InvoiceListView', 'type': 'custom', 'action': 'open', 'props': {'dashboard': True}},
     'case_dashboard_contacts': {'model': 'CaseContact', 'type': 'view', 'action': 'open', 'props': {}},
-    'case_dashboard_updates': {'model': 'CaseUpdate', 'type': 'view', 'action': 'open', 'props': {}},
+    'case_dashboard_updates': {'class': 'CaseUpdatesView', 'type': 'custom', 'action': 'open', 'props': {'dashboard': True}},
     'case_dashboard_requirements': {'model': 'CaseRequirement', 'type': 'view', 'action': 'open', 'props': {}},
 
     'case_reports_events': {'class': 'EventScheduleView', 'type': 'custom', 'action': 'open', 'props': {}},
@@ -182,18 +187,23 @@ PMAPP_NAV_ITEMS = {
     'tools_admin_staff_group': {'model': 'StaffGroup', 'type': 'view', 'action': 'open', 'props': {}},
     'tools_admin_staff_pay_type': {'model': 'StaffPayType', 'type': 'view', 'action': 'open', 'props': {}},
 
-    'staff_my_timesheets': {'model': 'Timesheet', 'type': 'view', 'action': 'open', 'config': 'TimesheetView',
-                            'props': {}},
-    # 'staff_my_reimbursement': {'model': '', 'type': 'view', 'action': 'open', 'props': {}},
-    # 'staff_my_timeoff': {'model': '', 'type': 'view', 'action': 'open', 'props': {}},
-    # 'staff_my_incentives': {'model': '', 'type': 'view', 'action': 'open', 'props': {}},
-    'staff_directory': {'model': 'Staff', 'type': 'view', 'action': 'open', 'config': 'StaffView', 'props': {}},
+    'staff_my_timesheets': {'class': 'TimeSheetView', 'type': 'custom', 'action': 'open', 'props': {'only_staff': True}},
+    'staff_my_reimbursement': {'class': 'ReimbursementRequestView', 'type': 'custom', 'action': 'open', 'props': {'only_staff': True}},
+    'staff_my_timeoff': {'class': 'TimeOffRequestView', 'type': 'custom', 'action': 'open', 'props': {'only_staff': True}},
+    'staff_my_incentives': {'class': 'PerformanceIncentiveView', 'type': 'custom', 'action': 'open', 'props': {'only_staff': True}},
+    'staff_directory': {'class': 'StaffDirectoryView', 'type': 'custom', 'action': 'open', 'props': {}},
 
     'finance_checks': {'model': 'Check', 'type': 'view', 'action': 'open', 'config': 'CheckView', 'props': {}},
-    'finance_payments': {'model': 'Payment', 'type': 'view', 'action': 'open', 'config': 'PaymentView', 'props': {}},
+    'finance_payments': {'class': 'PaymentListView', 'type': 'custom', 'action': 'open', 'config': 'PaymentView', 'props': {}},
     'finance_ledger': {'model': 'Ledger', 'type': 'view', 'action': 'open', 'props': {}},
     'finance_bank_accounts': {'model': 'BankAccount', 'type': 'view', 'action': 'open', 'config': 'BankAccountView',
                               'props': {}},
+    'finance_incentives': {'class': 'PerformanceIncentiveView', 'type': 'custom', 'action': 'open', 'props': {}},
+    'finance_timeoff': {'class': 'TimeOffRequestView', 'type': 'custom', 'action': 'open', 'props': {}},
+    'finance_reimbursement': {'class': 'ReimbursementRequestView', 'type': 'custom', 'action': 'open', 'props': {}},
+    'finance_timesheets': {'class': 'TimeSheetView', 'type': 'custom', 'action': 'open', 'props': {}},
+    'finance_payrolls': {'class': 'PayrollView', 'type': 'custom', 'action': 'open', 'props': {}},
+    'admin_staffs': {'class': 'StaffManageView', 'type': 'custom', 'action': 'open', 'props': {}},
     'finance_incentives': {'model': 'PerformanceIncentive', 'type': 'view', 'action': 'open', 'props': {}},
     # 'finance_timeoff': {'model': '', 'type': 'view', 'action': 'open', 'props': {}},
     # 'finance_reimbursement': {'model': '', 'type': 'view', 'action': 'open', 'props': {}},
@@ -403,6 +413,11 @@ class DetailsView:
     
     def hide(self, args=None):
         self.sidebar.hide()
+        
+    def hide_lead_buttons(self):
+        jQuery(f"#btn_details_reopen")[0].style.display = 'None'
+        jQuery(f"#btn_details_won")[0].style.display = 'None'
+        jQuery(f"#btn_details_lost")[0].style.display = 'None'
 
     def show_reopen(self):
         jQuery(f"#btn_details_reopen")[0].style.display = 'block'
@@ -415,7 +430,6 @@ class DetailsView:
         jQuery(f"#btn_details_lost")[0].style.display = 'block'
     
     def lead_won_handler(self, args):
-        print(f"lead_won_handler {AppEnv.details_lead_uid}")
         form_invoice = Forms.InvoiceForm(target="pm-content")
         form_case = Forms.CaseForm(target="pm-content", next_form=form_invoice)
         
@@ -434,12 +448,10 @@ class DetailsView:
         form_case.form_show()
     
     def lead_lost_handler(self, args):
-        print(f"lead_lost_handler {AppEnv.details_lead_uid}")
         form_control = Forms.LeadLostForm(target="pm-content")
         form_control.form_show()
     
     def lead_reopen_handler(self, args):
-        print(f"lead_reopen_handler {AppEnv.details_lead_uid}")
         lead = Lead.get(AppEnv.details_lead_uid)
         lead.update({'lead_status': 'Open'})
         lead.save()
@@ -462,7 +474,6 @@ PMAPP_APPBAR_ADD_ITEM = {
 
 
 def add_item_select(args, content_el_id):
-    print('Add item selected')
     item = PMAPP_APPBAR_ADD_ITEM.get(args.item.text)
     if item and item['type'] == 'form':
         try:

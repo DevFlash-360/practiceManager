@@ -9,6 +9,7 @@ import anvil.js
 from AnvilFusion.tools.utils import AppEnv
 from ..app.models import Staff, Case, Activity, Event, CaseUpdate
 from ..Forms.EventForm import EventForm
+from ..Forms.CaseUpdateForm import CaseUpdateForm
 
 PM_SCHEDULE_HEIGHT_OFFSET = 35
 PM_AGENDA_SCHEDULE_DEFAULT_VIEWS = [
@@ -18,7 +19,7 @@ PM_AGENDA_SCHEDULE_DEFAULT_VIEWS = [
             <a class="e-subject">${subject}</a>\
             <div class="e-date-time">\
                 <i class="fa-regular fa-clock pr-1"></i>\
-                ${start_time_time} - ${end_time_time}$\
+                ${start_time_time} - ${end_time_time}\
             </div>\
             ${if(staff_name)}\
                 <div><i class="fa-light fa-user pr-1"></i>${staff_name}</div>\
@@ -51,7 +52,7 @@ PM_AGENDA_SCHEDULE_POPUP = {
     'content': '<div style="font-size: 14px;">\
         <div>\
             <i class="fa-regular fa-clock pr-1"></i>\
-            ${if(event_type==="event")}${start_time_time} - ${end_time_time}${/if}\
+            ${start_time_time} - ${end_time_time}\
         </div>\
         ${if(staff_name)}\
             <div style="padding-top:12px;"><i class="fa-regular fa-user pr-1"></i>${staff_name}</div>\
@@ -63,6 +64,10 @@ PM_AGENDA_SCHEDULE_POPUP = {
             <div style="padding-top:12px;"><i class="fa-regular fa-building pr-1"></i>${department}</div>\
         ${/if}\
         ${if(client_attendance_required===true)}<i class="fa-solid fa-check pr-1"></i>Client attendance required${/if}'
+}
+
+PM_AGENDA_UPDATES_POPUP = {
+    'content': 'Gorilla'
 }
 
 
@@ -262,7 +267,6 @@ class AgendaEventView:
 
         # delete event(s)
         if args.requestType == 'eventRemove':
-            print(f"action_begin / eventRemove {args}")
             for removed in args.data:
                 event = Event.get(removed.uid)
                 event.delete()
@@ -281,13 +285,12 @@ class AgendaEventView:
             item['uid'] = event['uid']
             item['start_time'] = event['start_time'].strftime('%Y-%m-%d %H:%M:%S')
             item['end_time'] = event['end_time'].strftime('%Y-%m-%d %H:%M:%S')
-            # item['event_type'] = PM_SCHEDULE_TYPE_EVENT
             item['subject'] = event['activity']['name']
             item['description'] = event['notes']
             if event['case'] and event['case']['case_name']:
                 item['subject'] = f"{item['subject']}: {event['case']['case_name']}"
-            item['start_time_time'] = event['start_time'].strftime('%H:%M')
-            item['end_time_time'] = event['end_time'].strftime('%H:%M')
+            item['start_time_time'] = event['start_time'].strftime('%I:%M %p')
+            item['end_time_time'] = event['end_time'].strftime('%I:%M %p')
             item['staff_name'] = ' '.join([f"{staff['first_name']} {staff['last_name']}" for staff in event['staff']])
             item['location_name'] = event['location']['name'] if event['location'] and event['location']['name'] else ''
             item['department'] = ""
@@ -352,11 +355,13 @@ class AgendaCaseUpdatesView:
                 'dataSource': self.data_manager,
                 'fields': update_fields,
             },
-            # 'popupOpen': self.popup_open,
-            # 'actionBegin': self.action_begin,
+            'popupOpen': self.popup_open,
+            'actionBegin': self.action_begin,
             # 'hover': self.hover_event,
+            'eventClick': self.event_click,
             'cssClass': 'pm-schedule-cell-width pm-schedule-cell-height e-hide-spinner',
             # 'renderCell': self.render_cell,
+            # 'quickInfoTemplates': PM_AGENDA_UPDATES_POPUP,
         }
         self.schedule = ej.schedule.Schedule(schedule_config)
 
@@ -377,13 +382,40 @@ class AgendaCaseUpdatesView:
             self.container_el.innerHTML = ''
 
     def popup_open(self, args):
-        print("Case Updates popup_open")
+        if args.type == 'Editor':
+            args.cancel = True
+            uid = args.data.get('uid', None)
+            if uid:
+                action = 'edit'
+                case_update = CaseUpdate.get(uid)
+            else:
+                action = 'add'
+                next_date = datetime_js_to_py(args.data.start_time)
+                case_update = CaseUpdate(next_date=next_date)
+            editor = CaseUpdateForm(data=case_update, action=action, target=self.container_id, update_source=self.update_schedule)
+            editor.form_show()
+        # elif args.type == 'QuickInfo':
+        #     if 'subject' not in args.data.keys():
+        #         args.cancel = True
+        #     args.data['location'] = 'LOCATION'
     
     def update_schedule(self, data, add_new):
         self.schedule.refreshEvents()
 
     def action_begin(self, args):
-        print("Case Updates action_begin")
+        if args.requestType == 'eventChange':
+            changed_event = args.data
+            case_update = CaseUpdate.get(changed_event.uid)
+            case_update['next_update'] = datetime_js_to_py(changed_event.start_time)
+            case_update.save()
+            self.schedule.refreshEvents()
+
+        # delete event(s)
+        if args.requestType == 'eventRemove':
+            for removed in args.data:
+                case_update = CaseUpdate.get(removed.uid)
+                case_update.delete()
+            self.schedule.refreshEvents()
 
     def get_case_updates(self):
         # case_updates = anvil.server.call('get_case_updates', start_time)
@@ -392,10 +424,9 @@ class AgendaCaseUpdatesView:
         for update in case_updates:
             item = {}
             item['uid'] = update['uid']
-            item['update_time'] = update['next_date'].strftime("%m/%d/%Y @ %I:%M %p")
-            item['start_time'] = update['next_date'].strftime("%m/%d/%Y @ %I:%M %p")
-            print(item['start_time'])
-            item['end_time'] = (update['next_date'] + timedelta(minutes=1)).strftime("%m/%d/%Y @ %I:%M %p")
+            item['update_time'] = update['next_date'].strftime("%b %d, %Y @ %I:%M %p")
+            item['start_time'] = update['next_date'].strftime("%b %d, %Y @ %I:%M %p")
+            item['end_time'] = (update['next_date'] + timedelta(minutes=1)).strftime("%b %d, %Y @ %I:%M %p")
             item['isAllDay'] = True
             item['todays_update'] = update['todays_update']
             item['activity'] = update['next_activity']['name']
@@ -419,3 +450,8 @@ class AgendaCaseUpdatesView:
 
     def data_adaptor_record(self, query):
         print('record', query)
+    
+    def event_click(self, args):
+        event = self.schedule.getEventDetails(args.element)
+        if event:
+            self.schedule.openQuickInfoPopup(event)

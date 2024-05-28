@@ -20,7 +20,7 @@ class TaskForm(FormBase):
         self.case = LookupInput(name='case', label='Case', select='single',
                                 model='Case', text_field='case_name')
         self.documents = FileUploadInput(name='documents', label='Documents', float_label=True, save=False)
-        self.due_date = DateInput(name='due_date', label='Due Date', value=datetime.date.today())
+        self.due_date = DateInput(name='due_date', label='Due Date', value=datetime.date.today(), string_format='MMM dd, yyyy')
         self.no_due_date = CheckboxInput(name='no_due_date', label='No due date', save=False,
                                          on_change=self.no_due_date_toggle)
         self.no_case = CheckboxInput(name='no_case', label='Task is not related to case', save=False,

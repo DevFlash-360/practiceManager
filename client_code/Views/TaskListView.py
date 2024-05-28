@@ -19,7 +19,7 @@ class TaskListView(GridView2):
                 {'name': 'completed', 'label': 'Completed', 'visible': False, 'width': 100},
                 {'name': 'due_date_days', 'label': 'Due Date'},
                 {'name': 'due_date_view', 'label': 'Due Date', 'visible': False},
-                {'name': 'due_date', 'label': 'Due Date'},
+                {'name': 'due_date', 'label': 'Due Date', 'format': 'MMM dd, yyyy'},
                 {'name': 'case.case_name', 'label': 'Case'},
                 {'name': 'activity.name', 'label': 'Activity'},
                 {'name': 'priority', 'label': 'Priority'},
@@ -302,18 +302,20 @@ class TaskListView(GridView2):
         return grid_row
     
     def commandClick(self, args):
+        print("commandClick")
         obj = Task.get(args['rowData']['uid'])
         obj.update({'completed': not obj['completed']})
         obj.save()
         self.update_grid(obj, False)
 
     def row_selected(self, args):
-        jQuery(f"#details_content")[0].innerHTML = self.details_content(args)
         super().row_selected(args)
+        if type(args['data']).__name__ == 'Proxy':
+            jQuery(f"#details_content")[0].innerHTML = self.details_content(args['data'])
+        elif type(args['data']).__name__ == 'ProxyList':
+            jQuery(f"#details_content")[0].innerHTML = self.details_content(args['data'][0])
         
-    def details_content(self, args):
-        print(args)
-        task = args['data']
+    def details_content(self, task):
         item = Task.get(task['uid'])
         created_by = User.get(item['created_by']) if item['created_by'] else None
         if created_by:
@@ -343,7 +345,7 @@ class TaskListView(GridView2):
         content += f"<div class='details_table'>\
             <div class='details_record'>\
                 <div class='details_record_label'>Case</div>\
-                <div class='details_record_data'>{task['case__case_name']}</div>\
+                <div class='details_record_data'>{task['case__case_name'] if item['case'] else 'None'}</div>\
             </div>\
             <div class='details_record'>\
                 <div class='details_record_label'>Assigned Staff</div>\
@@ -363,7 +365,7 @@ class TaskListView(GridView2):
             </div>\
             <div class='details_record'>\
                 <div class='details_record_label'>Added Time</div>\
-                <div class='details_record_data'>{item['created_time'].strftime('%m/%d/%Y %I:%M %p')}</div>\
+                <div class='details_record_data'>{item['created_time'].strftime('%b %d, %Y @ %I:%M %p')}</div>\
             </div>\
             <div class='details_record'>\
                 <div class='details_record_label'>Modified User</div>\
@@ -371,7 +373,7 @@ class TaskListView(GridView2):
             </div>\
             <div class='details_record'>\
                 <div class='details_record_label'>Modified Time</div>\
-                <div class='details_record_data'>{item['updated_time'].strftime('%m/%d/%Y %I:%M %p')}</div>\
+                <div class='details_record_data'>{item['updated_time'].strftime('%b %d, %Y @ %I:%M %p')}</div>\
             </div>\
             <div class='details_record'>\
                 <div class='details_record_label'>ID</div>\

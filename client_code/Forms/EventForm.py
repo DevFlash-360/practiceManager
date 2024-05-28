@@ -17,8 +17,8 @@ class EventForm(FormBase):
         self.activity = LookupInput(model='Activity', name='activity', label='Event Type')
         self.notes = MultiLineInput(name='notes', label='Notes', rows=4)
         self.documents = FileUploadInput(name='documents', label='Documents', save=False)
-        self.start_time = DateTimeInput(name='start_time', label='Start Date', on_change=self.update_time)
-        self.end_time = DateTimeInput(name='end_time', label='End Date', on_change=self.update_time)
+        self.start_time = DateTimeInput(name='start_time', label='Start Date', on_change=self.update_time, string_format='MMM dd, yyyy hh:mm a')
+        self.end_time = DateTimeInput(name='end_time', label='End Date', on_change=self.update_time, string_format='MMM dd, yyyy hh:mm a')
         self.staff = LookupInput(name='staff', label='Staff', model='Staff', text_field='full_name', select='multi')
         self.contact = LookupInput(name='contact', label='Contact', model='Contact', text_field='full_name',
                                    select='multi')

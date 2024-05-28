@@ -1,6 +1,7 @@
 import anvil.server
 from AnvilFusion.components.GridView import GridView
 from AnvilFusion.tools.utils import AppEnv, get_cookie
+from anvil.js.window import ej, jQuery
 import anvil.js
 import uuid
 
@@ -12,7 +13,6 @@ class CaseDocumentsView(GridView):
         is_dashboard = kwargs.pop('dashboard', None)
         if is_dashboard:
             self.filter_case_uid = get_cookie('case_uid')
-        print(f"self.filter_case_uid={self.filter_case_uid}")
 
         view_config = {
             'model': 'Document',
@@ -57,8 +57,31 @@ class CaseDocumentsView(GridView):
 
 
     def collapse_all(self, args):
-        print("collapse_all")
         if self.first_load:
-            print(self.grid.groupModule)
             self.grid.groupModule.collapseAll()
             self.first_load = False
+
+    
+    def open_dashboard(self, args):
+        AppEnv.navigation.show_menu('case_menu', subcomponent='case_dashboard',
+                                    props={'case_uid': args.rowData.uid})
+        # Expand AppSidebar Case Dashboard
+        jQuery('#pm-sidebar-menu li.e-level-1').removeClass('e-active')
+        jQuery('#pm-sidebar-menu li[data-uid="case_dashboard"]').addClass('e-active')
+        jQuery('#pm-sidebar-menu li[data-uid="case_dashboard"] div.e-icon-wrapper div.e-icons').removeClass('e-icon-expandable')
+        jQuery('#pm-sidebar-menu li[data-uid="case_dashboard"] div.e-icon-wrapper div.e-icons').addClass('e-icon-collapsible')
+        jQuery('#pm-sidebar-menu li[data-uid="case_dashboard"] ul')[0].style.display = "block"
+
+
+# add button in this page, maybe
+# look at CaseListView
+# don't change the app.models
+# sheet
+# doing some research about e-sign component
+# castListview don't have button implement part
+# FIGURE OUT THAT OPEN_DASHBOARD HAVE SOME MAGIC IN IT
+# need pick out where pm-sidebar-menu is from, need understand 5 lines starting with jQuery properly.
+# AppEnv.navigation.show_menu : how it works?
+# delete jQuery from CaseListView and see if it works or not
+# open_dashboard method was not the point(issue)
+# check view_config in the CaseList

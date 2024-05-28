@@ -18,7 +18,7 @@ class ProbationCalculatorView:
         self.textbox_credits_id = f"credits_{uuid.uuid4()}"
         self.probation_output_id = f"probation_output_{uuid.uuid4()}"
 
-        self.datepicker_sentence_date = ej.calendars.DatePicker({})
+        self.datepicker_sentence_date = ej.calendars.DatePicker({'format': 'MMM dd, yyyy'})
         self.textbox_sentence = ej.inputs.TextBox({'floatLabelType': 'Auto'})
         self.textbox_credits = ej.inputs.TextBox({'floatLabelType': 'Auto'})
 

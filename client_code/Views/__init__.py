@@ -14,6 +14,16 @@ from .SettlementCalculatorView import SettlementCalculatorView
 from .ProbationCalculatorView import ProbationCalculatorView
 from .WarrantListView import WarrantListView
 from .StatuteListView import StatuteListView
+from .TimeSheetView import TimeSheetView
+from .ReimbursementRequestView import ReimbursementRequestView
+from .TimeOffRequestView import TimeOffRequestView
+from .PerformanceIncentiveView import PerformanceIncentiveView
+from .StaffDirectoryView import StaffDirectoryView
+from .StaffManageView import StaffManageView
+from .PayrollView import PayrollView
 from .SettingsView import SettingsView
 from .CaseActivityFeedView import CaseActivityFeedView
 from .AnalyticsView import AnalyticsView
+from .CaseUpdatesView import CaseUpdatesView
+from .PaymentListView import PaymentListView
+from .CheckListView import CheckListView

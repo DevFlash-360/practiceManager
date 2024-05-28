@@ -18,12 +18,12 @@ class LeadListView(GridView2):
         super().__init__(model='Lead', view_config=view_config, **kwargs)
         
     def row_selected(self, args):
+        super().row_selected(args)
         if isinstance(args['data'], list):
             AppEnv.details_lead_uid = args['data'][0]['uid']
         else:
             AppEnv.details_lead_uid = args['data']['uid']
         jQuery(f"#details_content")[0].innerHTML = self.details_content(args)
-        super().row_selected(args)
 
     def details_content(self, args):
         if isinstance(args['data'], list):
@@ -45,6 +45,7 @@ class LeadListView(GridView2):
         if updated_by:
             updated_by = updated_by['email']
             
+        incident_date = item['incident_date'].strftime('%b %d, %Y') if item['incident_date'] else ''
         if item['lead_status'] is "Open":
             AppEnv.details.hide_reopen()
         else:
@@ -109,7 +110,7 @@ class LeadListView(GridView2):
         content += f"<div class='details_table'>\
             <div class='details_record'>\
                 <div class='details_record_label'>Incident Date</div>\
-                <div class='details_record_data'>{item['incident_date']}</div>\
+                <div class='details_record_data'>{incident_date}</div>\
             </div>\
             <div class='details_record'>\
                 <div class='details_record_label'>Incident Location</div>\
@@ -174,7 +175,7 @@ class LeadListView(GridView2):
             </div>\
             <div class='details_record'>\
                 <div class='details_record_label'>Added Time</div>\
-                <div class='details_record_data'>{item['created_time'].strftime('%m/%d/%Y %I:%M %p')}</div>\
+                <div class='details_record_data'>{item['created_time'].strftime('%b %d, %Y @ %I:%M %p')}</div>\
             </div>\
             <div class='details_record'>\
                 <div class='details_record_label'>Modified User</div>\
@@ -182,7 +183,7 @@ class LeadListView(GridView2):
             </div>\
             <div class='details_record'>\
                 <div class='details_record_label'>Modified Time</div>\
-                <div class='details_record_data'>{item['updated_time'].strftime('%m/%d/%Y %I:%M %p')}</div>\
+                <div class='details_record_data'>{item['updated_time'].strftime('%b %d, %Y @ %I:%M %p')}</div>\
             </div>\
             <div class='details_record'>\
                 <div class='details_record_label'>ID</div>\
