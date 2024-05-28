@@ -316,15 +316,15 @@ class EventScheduleView:
         for event in events:
             item = {}
             item['uid'] = event['uid']
-            item['start_time'] = event['start_time'].strftime('%Y-%m-%d %H:%M:%S')
-            item['end_time'] = event['end_time'].strftime('%Y-%m-%d %H:%M:%S')
+            item['start_time'] = event['start_time'].strftime('%b %d, %Y @ %I:%M %p')
+            item['end_time'] = event['end_time'].strftime('%b %d, %Y @ %I:%M %p')
             item['event_type'] = PM_SCHEDULE_TYPE_EVENT
             item['subject'] = event['activity']['name']
             item['description'] = event['notes']
             if event['case'] and event['case']['case_name']:
                 item['subject'] = f"{item['subject']}: {event['case']['case_name']}"
-            item['start_time_time'] = event['start_time'].strftime('%H:%M')
-            item['end_time_time'] = event['end_time'].strftime('%H:%M')
+            item['start_time_time'] = event['start_time'].strftime('%I:%M %p')
+            item['end_time_time'] = event['end_time'].strftime('%I:%M %p')
             item['staff_name'] = ' '.join([f"{staff['first_name']} {staff['last_name']}" for staff in event['staff']])
             item['location_name'] = event['location']['name'] if event['location'] and event['location']['name'] else ''
             item['department'] = ""
@@ -340,9 +340,9 @@ class EventScheduleView:
             item = {}
             item['event_type'] = PM_SCHEDULE_TYPE_TASK
             item['uid'] = task['uid']
-            item['start_time'] = task['due_date'].strftime('%Y-%m-%d %H:%M:%S')
-            item['end_time'] = (task['due_date'] + timedelta(days=1)).strftime('%Y-%m-%d %H:%M:%S')
-            item['start_time_time'] = task['due_date'].strftime('%H:%M')
+            item['start_time'] = task['due_date'].strftime('%b %d, %Y @ %I:%M %p')
+            item['end_time'] = (task['due_date'] + timedelta(days=1)).strftime('%b %d, %Y @ %I:%M %p')
+            item['start_time_time'] = task['due_date'].strftime('%I:%M %p')
             item['end_time_time'] = item['start_time_time']
             item['isAllDay'] = True
             item['subject'] = task['activity']['name']

@@ -49,6 +49,10 @@ html body {
     content: "\f155";
 }
 
+.top_menu li:nth-child(6)::before {
+    content: "\f1de";
+}
+
 .top_menu {
     padding-left: 5px !important;
     padding-right: 5px !important;
@@ -416,6 +420,26 @@ tr.task-incomplete > td button > span.btn-task-status {
 
 .details_table {
 	border: 1px solid #eaeaea;
+}
+
+.details-grid-6 {
+	display: grid;
+	grid-template-columns: repeat(6, 1fr);
+	grid-gap: 0px;
+}
+  
+.details-grid-header {
+	background-color: #f9fafa;
+	font-weight: bold;
+	padding: 10px;
+	border-right: 1px solid #ededee;
+	border-bottom: 1px solid #ededee;
+}
+
+.details-grid-cell {
+	padding: 10px;
+	border-right: 1px solid #ededee;
+	border-bottom: 1px solid #ededee;
 }
 
 .details_record {

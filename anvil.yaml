@@ -240,9 +240,6 @@ db_schema:
     - name: total
       admin_ui: {width: 200}
       type: number
-    - name: status
-      admin_ui: {width: 200}
-      type: string
     - name: case
       admin_ui: {width: 200}
       type: link_single
@@ -253,6 +250,7 @@ db_schema:
     - name: created_by
       admin_ui: {width: 200}
       type: string
+    - {name: status, admin_ui: null, type: unresolved}
   case_stages:
     title: Case Stages
     client: none
@@ -325,6 +323,13 @@ db_schema:
     - name: tenant_uid
       admin_ui: {width: 200, order: 8}
       type: string
+    - name: payment_date
+      admin_ui: {width: 200, order: 9}
+      type: datetime
+    - name: payroll
+      admin_ui: {width: 200, order: 10}
+      type: link_single
+      target: payrolls
     title: Performance Incentives
   tasks:
     title: Tasks
@@ -847,6 +852,52 @@ db_schema:
     - {name: case, admin_ui: null, type: link_single, target: cases}
     - {name: uid, admin_ui: null, type: string}
     - {name: created_by, admin_ui: null, type: string}
+  payroll_totals:
+    title: Payroll Totals
+    client: none
+    server: full
+    columns:
+    - name: uid
+      admin_ui: {width: 200}
+      type: string
+    - name: created_by
+      admin_ui: {width: 200}
+      type: string
+    - name: updated_by
+      admin_ui: {width: 200}
+      type: string
+    - name: tenant_uid
+      admin_ui: {width: 200}
+      type: string
+    - name: created_time
+      admin_ui: {width: 200}
+      type: datetime
+    - name: updated_time
+      admin_ui: {width: 200}
+      type: datetime
+    - name: payroll
+      admin_ui: {width: 200}
+      type: link_single
+      target: payrolls
+    - name: total_base_pay
+      admin_ui: {width: 200}
+      type: number
+    - name: total_overtime_pay
+      admin_ui: {width: 200}
+      type: number
+    - name: total_incentive_pay
+      admin_ui: {width: 200}
+      type: number
+    - name: total_reimbursement_pay
+      admin_ui: {width: 200}
+      type: number
+    - name: total_pay
+      admin_ui: {width: 200}
+      type: number
+    - name: staff
+      admin_ui: {width: 200, order: 13}
+      type: link_single
+      target: staff
   users:
     title: Users
     client: none
@@ -1080,9 +1131,6 @@ db_schema:
     - name: created_time
       admin_ui: {width: 200}
       type: datetime
-    - name: approved
-      admin_ui: {width: 200}
-      type: bool
     - name: updated_time
       admin_ui: {width: 200}
       type: datetime
@@ -1101,6 +1149,10 @@ db_schema:
     - name: created_by
       admin_ui: {width: 200}
       type: string
+    - name: payroll
+      admin_ui: {width: 200, order: 14}
+      type: link_single
+      target: payrolls
   events:
     title: Events
     client: none
@@ -1216,9 +1268,6 @@ db_schema:
     - name: total
       admin_ui: {width: 200}
       type: number
-    - name: status
-      admin_ui: {width: 200}
-      type: string
     - name: case
       admin_ui: {width: 200}
       type: link_single
@@ -1483,7 +1532,6 @@ db_schema:
     server: full
     columns:
     - {name: staff, admin_ui: null, type: link_single, target: staff}
-    - {name: status, admin_ui: null, type: string}
     - {name: quantity, admin_ui: null, type: number}
     - {name: created_by, admin_ui: null, type: string}
     - {name: total, admin_ui: null, type: number}
@@ -1499,6 +1547,14 @@ db_schema:
     - {name: receipt_invoice, admin_ui: null, type: simpleObject}
     - {name: updated_by, admin_ui: null, type: string}
     - {name: updated_time, admin_ui: null, type: datetime}
+    - name: approved_by
+      admin_ui: {width: 200, order: 1}
+      type: link_single
+      target: staff
+    - name: payroll
+      admin_ui: {width: 200, order: 2}
+      type: link_single
+      target: payrolls
   case_requirements:
     client: none
     server: full
@@ -1969,6 +2025,42 @@ db_schema:
     - name: uid
       admin_ui: {}
       type: string
+  payrolls:
+    client: none
+    server: full
+    columns:
+    - name: uid
+      admin_ui: {width: 200, order: 0}
+      type: string
+    - name: created_by
+      admin_ui: {width: 200, order: 1}
+      type: string
+    - name: updated_by
+      admin_ui: {width: 200, order: 2}
+      type: string
+    - name: tenant_uid
+      admin_ui: {width: 200, order: 3}
+      type: string
+    - name: created_time
+      admin_ui: {width: 200, order: 4}
+      type: datetime
+    - name: updated_time
+      admin_ui: {width: 200, order: 5}
+      type: datetime
+    - name: start
+      admin_ui: {width: 200, order: 6}
+      type: date
+    - name: end
+      admin_ui: {width: 200, order: 7}
+      type: date
+    - name: staffs
+      admin_ui: {order: 8, width: 200}
+      type: link_multiple
+      target: staff
+    - name: total_payroll
+      admin_ui: {width: 200, order: 9}
+      type: number
+    title: Payrolls
   types_of_action:
     title: Types Of Action
     client: none

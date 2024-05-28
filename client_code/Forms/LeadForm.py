@@ -61,7 +61,7 @@ class LeadForm(FormBase):
         self.add_statute_of_limitations = CheckboxInput(label='Add Statute of Limitations', save=False,
                                                         on_change=self.add_sol)
 
-        self.incident_date = DateInput(name='incident_date', label='Incident Date')
+        self.incident_date = DateInput(name='incident_date', label='Incident Date', string_format='MMM dd, yyyy')
         self.incident_location = TextInput(name='incident_location', label='Incident Location')
         self.case_description = MultiLineInput(name='case_description', label='Case Description', rows=4)
 
@@ -227,7 +227,7 @@ class LeadActivityForm(FormBase):
         kwargs['model'] = 'LeadActivity'
 
         self.activity = TextInput(name='activity', label='Activity')
-        self.due_time = DateTimeInput(name='due_time', label='Due Time')
+        self.due_time = DateTimeInput(name='due_time', label='Due Time', string_format='MMM dd, yyyy hh:mm a')
         self.status = TextInput(name='status', label='Status')
         self.completed = CheckboxInput(name='completed', label='Completed', save=False)
 

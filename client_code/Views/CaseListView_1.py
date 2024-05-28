@@ -18,8 +18,6 @@ class CaseListView(GridView2):
                 {'name': 'case_stage.name', 'label': 'Case Stage'},
                 {'name': 'cause_of_action.cause_of_action', 'label': 'Causes) of Action'},
                 {'name': 'close_date', 'label': 'Close Date'},
-                {'name': 'close_date', 'label': 'Close Date', 'format': 'MMM dd, yyyy'},
-
             ]
         }
         super().__init__(model='Case', view_config=view_config, **kwargs)
@@ -35,9 +33,6 @@ class CaseListView(GridView2):
         jQuery('#pm-sidebar-menu li[data-uid="case_dashboard"] div.e-icon-wrapper div.e-icons').addClass('e-icon-collapsible')
         jQuery('#pm-sidebar-menu li[data-uid="case_dashboard"] ul')[0].style.display = "block"
 
-    def row_selected(self, args):
-        super().row_selected(args)
-        jQuery(f"#details_content")[0].innerHTML = self.details_content(args)
     # def row_selected(self, args):
     #     jQuery(f"#details_content")[0].innerHTML = self.details_content(args)
     #     super().row_selected(args)
@@ -59,9 +54,6 @@ class CaseListView(GridView2):
         court = f"{item['court']} - {item['department']}"
         clients = ', '.join([client['client_name'] for client in item['clients']])
         contacts = ', '.join([contact['full_name'] for contact in item['contacts']])
-        close_date = item['close_date'].strftime('%b %d, %Y') if item['close_date'] else ''
-        incident_date = item['incident_date'].strftime('%b %d, %Y') if item['incident_date'] else ''
-
         content = "<div class='details_title'>Overview</div>"
         content += f"<div class='details_table'>\
             <div class='details_record'>\
@@ -98,7 +90,7 @@ class CaseListView(GridView2):
             </div>\
             <div class='details_record'>\
                 <div class='details_record_label'>Close Date</div>\
-                <div class='details_record_data'>{close_date}</div>\
+                <div class='details_record_data'>{item['close_date']}</div>\
             </div>\
             <div class='details_record'>\
                 <div class='details_record_label'>Statue of Limitations</div>\
@@ -106,7 +98,7 @@ class CaseListView(GridView2):
             </div>\
             <div class='details_record'>\
                 <div class='details_record_label'>Incident Date</div>\
-                <div class='details_record_data'>{incident_date}</div>\
+                <div class='details_record_data'>{item['incident_date']}</div>\
             </div>\
             <div class='details_record'>\
                 <div class='details_record_label'>Incident Location</div>\
@@ -138,7 +130,7 @@ class CaseListView(GridView2):
             </div>\
             <div class='details_record'>\
                 <div class='details_record_label'>Added Time</div>\
-                <div class='details_record_data'>{item['created_time'].strftime('%b %d, %Y @ %I:%M %p')}</div>\
+                <div class='details_record_data'>{item['created_time'].strftime('%m/%d/%Y %I:%M %p')}</div>\
             </div>\
             <div class='details_record'>\
                 <div class='details_record_label'>Modified User</div>\
@@ -146,7 +138,7 @@ class CaseListView(GridView2):
             </div>\
             <div class='details_record'>\
                 <div class='details_record_label'>Modified Time</div>\
-                <div class='details_record_data'>{item['updated_time'].strftime('%b %d, %Y @ %I:%M %p')}</div>\
+                <div class='details_record_data'>{item['updated_time'].strftime('%m/%d/%Y %I:%M %p')}</div>\
             </div>\
             <div class='details_record'>\
                 <div class='details_record_label'>ID</div>\

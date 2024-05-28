@@ -6,19 +6,8 @@ from anvil.js.window import ej, jQuery
 from datetime import timedelta
 
 from AnvilFusion.tools.utils import AppEnv, datetime_js_to_py
+from DevFusion.tools.utils import bizday_calc_func
 
-
-def bizday_calc_func(start_date, num_days):
-    my_start_date = start_date
-    my_num_days = abs(num_days)
-    inc = 1 if num_days > 0 else -1
-    while my_num_days > 0:
-      my_start_date += timedelta(days=inc)
-      weekday = my_start_date.weekday()
-      if weekday >= 5:
-        continue
-      my_num_days -= 1
-    return my_start_date
 
 class DateCalculatorView:
     def __init__(self, container_id, **kwargs):
@@ -33,7 +22,10 @@ class DateCalculatorView:
 
         self.number_days = 0
 
-        self.date_picker = ej.calendars.DatePicker({'placeholder': 'Enter date'})
+        self.date_picker = ej.calendars.DatePicker({
+            'placeholder': 'Enter date',
+            'format': 'MMM dd, yyyy'
+        })
         
         self.radio_plus = ej.buttons.RadioButton({
             'label': '+ ADD',

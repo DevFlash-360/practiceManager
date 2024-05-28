@@ -485,8 +485,19 @@ class Expense:
     """Hidden Fields and or detail view"""
     billable = Attribute(field_type=types.FieldTypes.BOOLEAN)
     reduction = Attribute(field_type=types.FieldTypes.NUMBER)
-    status = Attribute(field_type=types.FieldTypes.SINGLE_LINE)
     receipt_invoice = Attribute(field_type=types.FieldTypes.FILE_UPLOAD)
+    
+    @staticmethod
+    def get_status(args):
+        try:
+            if args['invoice']['uid']:
+                status = 'Invoiced'
+            else:
+                status = 'Open'
+        except Exception:
+            status = 'Open'
+        return status
+    status = Computed(['invoice'], 'get_status')
 
 
 @model_type
@@ -652,6 +663,7 @@ class Staff:
     _title = 'full_name'
     _table_name = 'staff'
 
+    user = Relationship('User')
     branch = Relationship('Branch')
     first_name = Attribute(field_type=types.FieldTypes.SINGLE_LINE)
     last_name = Attribute(field_type=types.FieldTypes.SINGLE_LINE)
@@ -776,7 +788,17 @@ class TimeEntry:
     """Detail View"""
     billable = Attribute(field_type=types.FieldTypes.BOOLEAN)
     rate_type = Attribute(field_type=types.FieldTypes.SINGLE_LINE)
-    status = Attribute(field_type=types.FieldTypes.SINGLE_LINE)
+    @staticmethod
+    def get_status(args):
+        try:
+            if args['invoice']['uid']:
+                status = 'Invoiced'
+            else:
+                status = 'Open'
+        except Exception:
+            status = 'Open'
+        return status
+    status = Computed(['invoice'], 'get_status')
 
 
 @model_type
@@ -786,13 +808,22 @@ class Timesheet:
     staff = Relationship('Staff')
     clock_in_time = Attribute(field_type=types.FieldTypes.DATETIME)
     clock_out_time = Attribute(field_type=types.FieldTypes.DATETIME)
-    hours_worked = Attribute(field_type=types.FieldTypes.CURRENCY)
+    hours_worked = Attribute(field_type=types.FieldTypes.DECIMAL)
     earned_pay = Attribute(field_type=types.FieldTypes.CURRENCY)
-    approved = Attribute(field_type=types.FieldTypes.BOOLEAN)
-    """Detail View"""
     approved_by = Relationship('Staff')
-    """Need to add Payroll class at some point"""
-    # payroll_record = Relationship('Payroll')
+    payroll = Relationship('Payroll')
+    
+    @staticmethod
+    def get_status(args):
+        try:
+            if args['payroll']['uid']:
+                status = 'Invoiced'
+            else:
+                status = 'Open'
+        except Exception:
+            status = 'Open'
+        return status
+    status = Computed(['payroll'], 'get_status')
 
 
 @model_type
@@ -809,17 +840,82 @@ class PerformanceIncentive:
     staff = Relationship('Staff')
     amount = Attribute(field_type=types.FieldTypes.CURRENCY)
     payment = Relationship('Payment')
+    payment_date = Attribute(field_type=types.FieldTypes.DATETIME)
+    payroll = Relationship('Payroll')
+
+    @staticmethod
+    def get_status(args):
+        try:
+            if args['payroll']['uid']:
+                status = 'Invoiced'
+            else:
+                status = 'Open'
+        except Exception:
+            status = 'Open'
+        return status
+    status = Computed(['payroll'], 'get_status')
 
 
-# Need to add these forms/reports
-# @model_type
-# class Statute:
+@model_type
+class ReimbursementRequest:
+    _title = 'Request Reimbursement'
 
-# @model_type
-# class ReimbursementRequest:
+    staff = Relationship('Staff')
+    quantity = Attribute(field_type=types.FieldTypes.NUMBER)
+    amount = Attribute(field_type=types.FieldTypes.CURRENCY)
+    total = Attribute(field_type=types.FieldTypes.CURRENCY)
+    description = Attribute(field_type=types.FieldTypes.MULTI_LINE)
+    add_to_case = Attribute(field_type=types.FieldTypes.BOOLEAN)
+    date = Attribute(field_type=types.FieldTypes.DATE)
+    activity = Relationship('Activity')
+    case = Relationship('Case')
+    receipt_invoice = Relationship('Invoice')
+    approved_by = Relationship('Staff')
+    payroll = Relationship('Payroll')
 
-# @model_type
-# class TimeOffRequest:
+    @staticmethod
+    def get_status(args):
+        try:
+            if args['payroll']['uid']:
+                status = 'Invoiced'
+            else:
+                status = 'Open'
+        except Exception:
+            status = 'Open'
+        return status
+    status = Computed(['payroll'], 'get_status')
 
-# @model_type
-# class Payroll:
+
+@model_type
+class TimeOffRequest:
+    _title = 'Time-Off Request'
+    
+    staff = Relationship('Staff')
+    reason = Attribute(field_type=types.FieldTypes.SINGLE_LINE)
+    date_of_return = Attribute(field_type=types.FieldTypes.DATE)
+    date_of_leave = Attribute(field_type=types.FieldTypes.DATE)
+    status = Attribute(field_type=types.FieldTypes.SINGLE_LINE)
+    notes = Attribute(field_type=types.FieldTypes.MULTI_LINE)
+
+    
+@model_type
+class Payroll:
+    _title = 'staff'
+
+    start = Attribute(field_type=types.FieldTypes.DATE)
+    end = Attribute(field_type=types.FieldTypes.DATE)
+    staffs = Relationship('Staff', with_many=True)
+    total_payroll = Attribute(field_type=types.FieldTypes.CURRENCY)
+
+
+@model_type
+class PayrollTotal:
+    _title = 'Payroll Total'
+
+    payroll = Relationship('Payroll')
+    staff = Relationship('Staff')
+    total_base_pay = Attribute(field_type=types.FieldTypes.CURRENCY)
+    total_overtime_pay = Attribute(field_type=types.FieldTypes.CURRENCY)
+    total_incentive_pay = Attribute(field_type=types.FieldTypes.CURRENCY)
+    total_reimbursement_pay = Attribute(field_type=types.FieldTypes.CURRENCY)
+    total_pay = Attribute(field_type=types.FieldTypes.CURRENCY)

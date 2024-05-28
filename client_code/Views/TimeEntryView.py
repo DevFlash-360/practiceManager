@@ -15,7 +15,7 @@ class TimeEntryView(GridView):
         view_config = {
             'model': 'TimeEntry',
             'columns': [
-                {'name': 'date', 'label': 'Entry Date'},
+                {'name': 'date', 'label': 'Entry Date', 'format': 'MMM dd, yyyy'},
                 {'name': 'activity.name', 'label': 'Activity'},
                 {'name': 'duration', 'label': 'Duration'},
                 {'name': 'description', 'label': 'Description'},
@@ -23,6 +23,7 @@ class TimeEntryView(GridView):
                 {'name': 'total', 'label': 'Total'},
                 {'name': 'staff.full_name', 'label': 'Staff'},
                 {'name': 'case.case_name', 'label': 'Case'},
+                {'name': 'status', 'label': 'Status'},
             ],
             'filter': {'case': self.filter_case_uid},
         }

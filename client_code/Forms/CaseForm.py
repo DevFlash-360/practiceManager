@@ -18,7 +18,6 @@ class CaseForm(FormBase):
         print('CaseForm')
         kwargs['model'] = 'Case'
         self.next_form = next_form if next_form else None
-        print(f"next_form = {self.next_form}")
         
         self.auto_generate_case_name = CheckboxInput(name='auto_generate_case_name', label='Auto Generate Case Name',
                                                      save=False)
@@ -36,7 +35,7 @@ class CaseForm(FormBase):
         self.court = LookupInput(name='court', label='Court', model='Entity', text_field='name')
         self.department = LookupInput(name='department', label='Department', model='Contact', text_field='entity.name')
         self.case_number = TextInput(name='case_number', label='Case Number')
-        self.incident_date = DateInput(name='incident_date', label='Incident Date')
+        self.incident_date = DateInput(name='incident_date', label='Incident Date', string_format='MMM dd, yyyy')
         self.incident_location = TextInput(name='incident_location', label='Incident Location')
         self.case_description = MultiLineInput(name='case_description', label='Case Description', rows=5)
         self.clients = LookupInput(name='clients', label='Client(s)', model='Client', text_field='client_name',
@@ -120,9 +119,6 @@ class CaseForm(FormBase):
 
     def form_open(self, args):
         super().form_open(args)
-        for field in [x for x in self.form_fields if not x.is_dependent and x not in self.subforms]:
-            if field.name and getattr(self.data, field.name, None):
-                print(f"{field.name} = {self.data[field.name]}")
         try:
             self.next_case_search.hide()
             if self.action == 'add':

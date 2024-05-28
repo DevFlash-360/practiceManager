@@ -54,12 +54,10 @@ class LeadLostForm:
         self.form.show()
 
     def form_open(self, args):
-        print("form_open")
         for field in self.fields:
             field.show()
 
     def form_save(self, args):
-        print("form_save")
         if self.lost_reason.value is not None:
             lead = Lead.get(AppEnv.details_lead_uid)
             lead.update({'lead_status': 'Lost'})
@@ -71,10 +69,8 @@ class LeadLostForm:
             AppEnv.navigation.content_control.refresh()
         else:
             args.cancel = True
-            print("cancel")
     
     def form_cancel(self, args):
-        print("form_cancel")
         for field in self.fields:
             field.value = None
             field.hide()

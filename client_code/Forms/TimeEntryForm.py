@@ -17,7 +17,7 @@ class TimeEntryForm(FormBase):
         self.billable = CheckboxInput(name='billable', label='This time entry is billable', label_position='After',
                                       value=True)
         self.description = MultiLineInput(name='description', label='Description')
-        self.date = DateInput(name='date', label='Entry Date', value=date.today())
+        self.date = DateInput(name='date', label='Entry Date', value=date.today(), string_format='MMM dd, yyyy')
         self.rate = NumberInput(name='rate', label='Rate', on_change=self.total_calc)
         self.rate_type = RadioButtonInput(name='rate_type', direction='horizontal',
                                           options=[{'value': 'Per hour'}, {'value': 'Flat'}],
@@ -47,6 +47,9 @@ class TimeEntryForm(FormBase):
             self.rate.value = logged_staff.pay_rate
             self.rate_type.value = logged_staff.pay_type
         self.total.hide()
+    
+    def form_save(self, args):
+        super().form_save(args)
 
     def total_calc(self, args):
         if args['name'] == 'rate_type':

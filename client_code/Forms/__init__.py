@@ -22,3 +22,7 @@ from .CaseUpdateForm import CaseUpdateForm
 from .CaseRequirementForm import CaseRequirementForm
 from .LeadLostForm import LeadLostForm
 from .LeadWonForm import LeadWonForm
+from .ReimbursementRequestForm import ReimbursementRequestForm
+from .PayrollForm import PayrollForm
+from .PerformanceIncentiveForm import PerformanceIncentiveForm
+from .TimeOffRequestForm import TimeOffRequestForm

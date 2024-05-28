@@ -39,7 +39,7 @@ class PaymentForm(FormBase):
         self.amount = NumberInput(name='amount', label='Amount')
         self.payment_method = DropdownInput(name='payment_method', label='Payment Method', select='single',
                                             options=PAYMENT_METHOD_OPTIONS)
-        self.payment_time = DateTimeInput(name='payment_time', label='Payment Time')
+        self.payment_time = DateTimeInput(name='payment_time', label='Payment Time', string_format='MMM dd, yyyy hh:mm a')
         self.status = DropdownInput(name='status', label='Status', select='single', options=PAYMENT_STATUS_OPTIONS)
 
         sections = [
@@ -78,7 +78,8 @@ class PaymentForm(FormBase):
                     incentive = PerformanceIncentive(
                         staff=staff,
                         amount=amount,
-                        payment=self.data
+                        payment=self.data,
+                        payment_date=self.data.payment_time
                     )
                     incentive.save()
                 elif self.action == 'edit':
@@ -94,7 +95,8 @@ class PaymentForm(FormBase):
                     incentive = PerformanceIncentive(
                         staff=staff,
                         amount=amount,
-                        payment=self.data
+                        payment=self.data,
+                        payment_date=self.data.payment_time
                     )
                     incentive.save()
                 elif self.action == 'edit':
@@ -110,7 +112,8 @@ class PaymentForm(FormBase):
                     incentive = PerformanceIncentive(
                         staff=staff,
                         amount=staff['override_incentive']*self.data.amount,
-                        payment=self.data
+                        payment=self.data,
+                        payment_date=self.data.payment_time
                     )
                     incentive.save()
                 elif self.action == 'edit':
