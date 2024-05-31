@@ -302,6 +302,7 @@ class Sidebar:
         self.menu_select(None, subcomponent=(subcomponent or PMAPP_DEFAULT_NAV_ITEMS[menu_id]), props=props)
 
     def menu_select(self, args, subcomponent=None, props=None):
+        # print('menu selected !!!!!!!')
         if subcomponent is None:
             if 'e-level-1' in list(args.node.classList):
                 self.menu.collapseAll()
@@ -322,6 +323,7 @@ class Sidebar:
         nav_container_id = self.content_id if self.nav_target_id is None else self.nav_target_id
         print('debug output.')
         if component['type'] == 'custom':
+            print('this is custom component!!!!!!!')
             try:
                 view_class = getattr(AppEnv.views, component['class'])
                 self.content_control = view_class(container_id=nav_container_id, **component['props'])
@@ -354,6 +356,7 @@ class Sidebar:
 
         if hasattr(self.content_control, 'target_id'):
             self.nav_target_id = self.content_control.target_id
+            # print('check for sth..')
 
         # try:
         # print(component, self.content_control)
@@ -366,6 +369,7 @@ class Sidebar:
             self.control.toggle()
 
         if 'subcomponent' in component:
+            # print("check if it's wrapped component")
             time.sleep(0.5)
             self.menu_select(None, subcomponent=component['subcomponent'])
 

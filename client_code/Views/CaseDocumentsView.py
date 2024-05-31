@@ -27,6 +27,17 @@ class CaseDocumentsView(GridView):
                 # {'name': 'button', 'label': 'Button'},
             ],
             'filter': {'document_folder.case': self.filter_case_uid},
+            # 'model': 'Case',
+            # 'columns': [
+            #     {'name': 'case_name', 'label': 'Case Name'},
+            #     {'name': 'assigned_attorneys.full_name', 'label': 'Assigned Attorneys'},
+            #     {'name': 'practice_area.name', 'label': 'Practice Area'},
+            #     {'name': 'case_stage.name', 'label': 'Case Stage'},
+            #     {'name': 'cause_of_action.cause_of_action', 'label': 'Causes) of Action'},
+            #     {'name': 'close_date', 'label': 'Close Date'},
+            #     {'name': 'close_date', 'label': 'Close Date', 'format': 'MMM dd, yyyy'},
+
+            # ]
         }
         if self.filter_case_uid:
             filters = {
@@ -85,3 +96,8 @@ class CaseDocumentsView(GridView):
 # delete jQuery from CaseListView and see if it works or not
 # open_dashboard method was not the point(issue)
 # check view_config in the CaseList
+# insert the view_config to the CaseListView and see what happens.
+# insert view_config of CaseListView to Document and checked
+# Need to find a code-part where called DocumentView and CaseListView, there might be issue
+# check the navigation and handle method
+# nagivation/menu_select has nothing strange in it.
