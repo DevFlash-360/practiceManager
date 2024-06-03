@@ -19,20 +19,7 @@ class CaseListView(GridView2):
                 {'name': 'cause_of_action.cause_of_action', 'label': 'Causes) of Action'},
                 {'name': 'close_date', 'label': 'Close Date'},
                 {'name': 'close_date', 'label': 'Close Date', 'format': 'MMM dd, yyyy'},
-
             ]
-            # 'model': 'Document',
-            # 'columns': [
-            #     {'name': 'folder.name', 'label': 'Folder'},
-            #     {'name': 'title', 'label': 'Document Title'},
-            #     {'name': 'file.name', 'label': 'File Name'},
-            #     {'name': 'type', 'label': 'Type'},
-            #     {'name': 'discovery', 'label': 'Discovery'},
-            #     {'name': 'reviewed_by.full_name', 'label': 'Reviewed By'},
-            #     {'name': 'notes', 'label': 'Notes'},
-            #     # {'name': 'button', 'label': 'Button'},
-            # ],
-            # 'filter': {'document_folder.case': self.filter_case_uid},
         }
         super().__init__(model='Case', view_config=view_config, **kwargs)
 
