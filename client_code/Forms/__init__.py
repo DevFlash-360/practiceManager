@@ -26,3 +26,4 @@ from .ReimbursementRequestForm import ReimbursementRequestForm
 from .PayrollForm import PayrollForm
 from .PerformanceIncentiveForm import PerformanceIncentiveForm
 from .TimeOffRequestForm import TimeOffRequestForm
+from .ESignSettingsForm import ESignSettingsForm

@@ -490,15 +490,15 @@ def add_item_select(args, content_el_id):
         form_control.form_show()
 
 PMAPP_APPBAR_USER_ITEM = {
-    'Account': {},
+    'Account': {'model': 'Settings', 'type': 'view'},
     'Sign Out': {},
-    'Test': {'model': 'Settings', 'type': 'form'},
+    'Test': {'model': 'ESignSettings', 'type': 'form'},
 }
 
 def user_item_select(args, content_el_id):
   print('User item selected')
   item = PMAPP_APPBAR_USER_ITEM.get(args.item.text)
-  if item and item['type'] == 'form':
+  if item and item['type'] == 'view':
     try:
       view_class = getattr(AppEnv.views, f"{item['model']}View")
       # form_class = getattr(AppEnv.pages, f"SettingsPage")
@@ -507,6 +507,15 @@ def user_item_select(args, content_el_id):
       print(e.args)
       view_control = GridView(model=item['model'], container_id=nav_container_id)
     view_control.form_show()
+  if item and item['type'] == 'form':
+    try:
+      form_class = getattr(AppEnv.forms, f"{item['model']}Form")
+      form_control = form_class(target = content_el_id)
+    except Exception as e:
+        print(e.args)
+        form_control = FormBase(model=item['model'], target=content_el_id)
+    form_control.form_show()
+
 
 
 
