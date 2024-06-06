@@ -5,35 +5,54 @@ from AnvilFusion.tools.utils import AppEnv
 from ..app.models import Staff
 from datetime import datetime, date
 
+import uuid
+import anvil.js
+from anvil.js.window import ej, jQuery
 
 class ESignSettingsForm(FormBase):
 
     def __init__(self, **kwargs):
         kwargs['model'] = 'TimeEntry'
 
-        self.case = LookupInput(name='case', label='Case', model='Case', text_field='case_name')
-        self.staff = LookupInput(name='staff', label='Staff', model='Staff', text_field='full_name')
-        self.activity = LookupInput(model='Activity', name='activity', label='Activity')
-        self.billable = CheckboxInput(name='billable', label='This time entry is billable', label_position='After',
-                                      value=True)
-        self.description = MultiLineInput(name='description', label='Description')
-        self.date = DateInput(name='date', label='Entry Date', value=date.today(), string_format='MMM dd, yyyy')
-        self.rate = NumberInput(name='rate', label='Rate', on_change=self.total_calc)
-        self.rate_type = RadioButtonInput(name='rate_type', direction='horizontal',
-                                          options=[{'value': 'Per hour'}, {'value': 'Flat'}],
-                                          value='Per hour', on_change=self.total_calc)
-        self.duration = NumberInput(name='duration', label='Duration (hours)', on_change=self.total_calc)
-        self.total = NumberInput(name='total', label='Total', float_label=True)
-
+        self.doc_name = TextInput(name='doc_name', label='Document', value='Agreement.pdf', enabled = False)
+        # self.sign_label = InlineMessage(content='Who needs to sign?')
+        self.sign_label = InlineMessage(content='''
+          <hr class="mt-0"/>
+          <p style='font-size: 20px'>Who needs to sign?</p>
+        ''')
+        self.sign_name = DropdownInput(name='sign_name', options=['Adam Plumer', 'Alex', 'Dmytro', 'Vlad'])
+        self.sign_email = TextInput(name='sign_email')
+        self.add_signer = Button(content='+ Add another signer')
+        self.priority = DropdownInput(name='priority', label='Priority', options=['Normal', 'High'])
+        self.countersignature = CheckboxInput(name='countersignature', label='This document needs a countersignature', label_position='After', value=False)
+        self.drawnsignature = CheckboxInput(name='drawnsignature', label='Require drawn signatures for all signers', label_position='After', value=False)
+        self.btn_prepare = Button(content='Prepare document for signing')
+        self.message_label = InlineMessage(content='''
+          <hr/>
+          <p style='font-size: 20px'>Message for signers</p>
+        ''')
+        # InlineMessage can show any text or html
+        self.subject = TextInput(name='subject', label='Subject', value='Signature requested from Wooldridge Law Ltd.')
+        self.message = MultiLineInput(name='message', label='Message', value='Please review and sign this document at your earliest convenience.', rows=3)
+        # InlineMessage() can store html
+        self.msg_txt = InlineMessage(content='''
+          <p style='font-size: 12px; opacity: 0.5'>Your email will include a button to access the document for signature</p>
+        ''')
+        
+      
         sections = [
             {'name': '_', 'rows': [
-                [self.case],
-                [self.activity, self.staff],
-                # [self.activity],
-                [self.description],
-                [self.billable],
-                [self.date, self.rate, self.rate_type, self.duration],
-                [self.total],
+                [self.doc_name],
+                [self.sign_label],
+                [self.sign_name, self.sign_email],
+                [self.add_signer],
+                [self.countersignature],
+                [self.drawnsignature],
+                [self.btn_prepare],
+                [self.message_label],
+                [self.subject],
+                [self.message],
+                [self.msg_txt],
             ]}
         ]
 
@@ -41,13 +60,12 @@ class ESignSettingsForm(FormBase):
 
     def form_open(self, args):
         super().form_open(args)
-        logged_staff = Staff.get_by('work_email', AppEnv.logged_user.get('email')) if AppEnv.logged_user else None
-        if logged_staff:
-            self.staff.value = logged_staff
-            self.rate.value = logged_staff.pay_rate
-            self.rate_type.value = logged_staff.pay_type
-        self.total.hide()
-    
+
+    # def form_show(self):
+    #     self.container_el.innerHTML = '''
+    #       <h1>Oh my god!</h1>
+    #     '''
+  
     def form_save(self, args):
         super().form_save(args)
 
