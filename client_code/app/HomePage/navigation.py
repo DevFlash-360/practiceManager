@@ -497,6 +497,9 @@ PMAPP_APPBAR_USER_ITEM = {
 
 def user_item_select(args, content_el_id):
   print('User item selected')
+  print('content id:')
+  print(content_el_id)
+  print('----')
   item = PMAPP_APPBAR_USER_ITEM.get(args.item.text)
   if item and item['type'] == 'view':
     try:
