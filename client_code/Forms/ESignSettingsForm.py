@@ -23,10 +23,18 @@ class ESignSettingsForm(FormBase):
         self.sign_name = DropdownInput(name='sign_name', options=['Adam Plumer', 'Alex', 'Dmytro', 'Vlad'])
         self.sign_email = TextInput(name='sign_email')
         self.add_signer = Button(content='+ Add another signer')
-        self.priority = DropdownInput(name='priority', label='Priority', options=['Normal', 'High'])
+        self.line_gap_1 = InlineMessage(content='''
+          <div><div>
+        ''')
         self.countersignature = CheckboxInput(name='countersignature', label='This document needs a countersignature', label_position='After', value=False)
+        self.line_gap_2 = InlineMessage(content='''
+          <div><div>
+        ''')
         self.drawnsignature = CheckboxInput(name='drawnsignature', label='Require drawn signatures for all signers', label_position='After', value=False)
-        self.btn_prepare = Button(content='Prepare document for signing')
+        self.line_gap_3 = InlineMessage(content='''
+          <div><div>
+        ''')
+        self.btn_prepare = Button(content='Prepare document for signing', action=self.on_btn_prepare_click)
         self.message_label = InlineMessage(content='''
           <hr/>
           <p style='font-size: 20px'>Message for signers</p>
@@ -46,8 +54,11 @@ class ESignSettingsForm(FormBase):
                 [self.sign_label],
                 [self.sign_name, self.sign_email],
                 [self.add_signer],
+                [self.line_gap_1],
                 [self.countersignature],
+                [self.line_gap_2],
                 [self.drawnsignature],
+                [self.line_gap_3],
                 [self.btn_prepare],
                 [self.message_label],
                 [self.subject],
@@ -93,3 +104,17 @@ class ESignSettingsForm(FormBase):
                     self.total.value = round((self.rate.value * self.duration.value), 2)
             else:
                 self.total.value = self.rate.value
+
+    def on_btn_prepare_click(self, args):
+      print('the prepare button is clicked!')
+    # def open_settings_dlg(self, args):
+    #   print('Wow I handled this!!!!!!')
+
+# need to change the "save" button as "Send" button -> change the FormBase ? I don't know..
+# If i change the lable in FormBase, the buttons in all pop-ups will change. How to handle this?
+## need to change the code in DevFusion in order to connect the step1 and step 2
+# button click handle method in DevFusion
+# make onClick handler to button_prepare
+# in DevFusion, in the button adding part, there's a method calling line: open_dashboard
+# called open_settings_dlg in DevFusion
+# open_settings_dlg should be in the CaseDocumentView
