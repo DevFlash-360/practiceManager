@@ -1,0 +1,21 @@
+is_package: true
+container:
+  type: HtmlTemplate
+  properties: {html: '@theme:pdfviewer.html'}
+  event_bindings: {show: form_show}
+components:
+- type: ColumnPanel
+  properties: {spacing_above: small}
+  name: content_panel
+  layout_properties: {slot: default}
+  components:
+  - name: drop_down_signs
+    properties: {include_placeholder: true, placeholder: Select a signature}
+    type: DropDown
+    layout_properties: {grid_position: 'ICFQQP,SAWRDJ'}
+    event_bindings: {change: drop_down_signs_change}
+  - name: Confirm
+    properties: {text: Confirm}
+    type: Button
+    layout_properties: {grid_position: 'DZYZNQ,DDYPUG'}
+    event_bindings: {click: Confirm_click}

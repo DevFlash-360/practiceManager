@@ -1,3 +1,4 @@
+from anvil import alert
 import anvil.server
 from ._anvil_designer import HomePageTemplate
 from anvil.js.window import ej, jQuery
@@ -138,6 +139,12 @@ class HomePage(HomePageTemplate):
 
         # Show sidebar menu
         self.sidebar.show(AppEnv.start_menu)
+        
+        # Temporary
+        # form_control = Forms.TestForm1(target="pm-content")
+        # form_control.form_show()
+        form_control = Forms.TestForm3(target="pm-content")
+        # alert(content=form_control, title="E-Sign", large=True, buttons=[], dismissible=False)
 
     # Sidebar toggle event handler
     def sidebar_toggle(self, args):

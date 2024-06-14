@@ -1,0 +1,141 @@
+<html dir="ltr">
+<head>
+<meta charset="utf-8">
+</head>
+<body>
+<div id="sign-container">
+	<button id="prev">Previous</button>
+	<button id="next">Next</button>
+	&nbsp; &nbsp;
+	<span>Page: <span id="page_num"></span> / <span id="page_count"></span></span>
+</div>
+<canvas id="the-canvas"></canvas>
+<script>
+
+  // Loaded via <script> tag, create shortcut to access PDF.js exports.
+  var { pdfjsLib } = globalThis;
+
+  // The workerSrc property shall be specified.
+  pdfjsLib.GlobalWorkerOptions.workerSrc = '//mozilla.github.io/pdf.js/build/pdf.worker.mjs';
+
+  var pdfDoc = null,
+      pageNum = 1,
+      pageRendering = false,
+      pageNumPending = null,
+      scale = 1,
+      sign_container = document.getElementById('sign-container'),
+      sign_x = 0,
+      sign_y = 0,
+      canvas = document.getElementById('the-canvas'),
+      ctx = canvas.getContext('2d');
+
+  /**
+   * Get page info from document, resize canvas accordingly, and render page.
+   * @param num Page number.
+   */
+  function renderPage(num) {
+    pageRendering = true;
+    // Using promise to fetch the page
+    pdfDoc.getPage(num).then(function(page) {
+      var viewport = page.getViewport({scale: scale});
+      canvas.height = viewport.height;
+      canvas.width = viewport.width;
+	  console.log("canvas.width = " + canvas.width);
+	  console.log("canvas.height = " + canvas.height);
+
+      // Render PDF page into canvas context
+      var renderContext = {
+        canvasContext: ctx,
+        viewport: viewport
+      };
+      var renderTask = page.render(renderContext);
+
+      // Wait for rendering to finish
+      renderTask.promise.then(function() {
+        pageRendering = false;
+        if (pageNumPending !== null) {
+          // New page rendering is pending
+          renderPage(pageNumPending);
+          pageNumPending = null;
+        }
+        var initialCanvasImg = ctx.getImageData(0, 0, canvas.width, canvas.height);
+        // Set click event here
+        canvas.addEventListener('click', function(event) {
+          var rect = canvas.getBoundingClientRect();
+          sign_x = event.clientX - rect.left;
+          sign_y = event.clientY - rect.top;
+          console.log('Clicked position on PDF: x = ' + sign_x + ', y = ' + sign_y);
+          // Add the logic for placing the e-signature here.
+          ctx.putImageData(initialCanvasImg, 0, 0);
+          anvil.call(sign_container, 'get_sign_url').then(function (url) {
+            var img = new Image();
+            console.log(url);
+            img.src = url;
+            img.onload = function() {
+              ctx.drawImage(img, sign_x, sign_y, img.width, img.height);
+            }
+          });
+        });
+      });
+    });
+    // Update page counters
+    document.getElementById('page_num').textContent = num;
+  }
+
+  /**
+   * If another page rendering in progress, waits until the rendering is
+   * finised. Otherwise, executes rendering immediately.
+   */
+  function queueRenderPage(num) {
+    if (pageRendering) {
+      pageNumPending = num;
+    } else {
+      renderPage(num);
+    }
+  }
+
+  function get_sign_pos() {
+    return {sign_x, sign_y};
+  }
+  function get_pageInfo() {
+    return [canvas.width, canvas.height, pageNum];
+  }
+  
+  function init(url) {
+	pdfjsLib.getDocument(url).promise.then(function(pdfDoc_) {
+    pdfDoc = pdfDoc_;
+    document.getElementById('page_count').textContent = pdfDoc.numPages;
+
+    // Initial/first page rendering
+    renderPage(pageNum);
+  });
+  }
+
+  /**
+   * Displays previous page.
+   */
+  function onPrevPage() {
+    if (pageNum <= 1) {
+      return;
+    }
+    pageNum--;
+    queueRenderPage(pageNum);
+  }
+  document.getElementById('prev').addEventListener('click', onPrevPage);
+
+  /**
+   * Displays next page.
+   */
+  function onNextPage() {
+    if (pageNum >= pdfDoc.numPages) {
+      return;
+    }
+    pageNum++;
+    queueRenderPage(pageNum);
+  }
+
+  document.getElementById('next').addEventListener('click', onNextPage);
+
+</script>
+</body>
+</html>
