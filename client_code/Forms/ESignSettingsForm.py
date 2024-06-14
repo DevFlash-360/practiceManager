@@ -118,3 +118,6 @@ class ESignSettingsForm(FormBase):
 # in DevFusion, in the button adding part, there's a method calling line: open_dashboard
 # called open_settings_dlg in DevFusion
 # open_settings_dlg should be in the CaseDocumentView
+
+# clean the code, dynamic data to pop-up
+# doc_name and some other infos should be in a store so that they can be shown in a pop-up

@@ -11,8 +11,7 @@ services:
   client_config: {enable_v2: true}
   server_config: {auto_create_missing_columns: true}
 - source: /runtime/services/anvil/users.yml
-  client_config: {allow_signup: true, enable_automatically: true, use_email: true,
-    confirm_email: true, allow_remember_me: true, remember_me_days: 365}
+  client_config: {allow_signup: true, enable_automatically: true, use_email: true, confirm_email: true, allow_remember_me: true, remember_me_days: 365}
   server_config: {user_table: users}
 - source: /runtime/services/anvil/email.yml
   client_config: {}
@@ -33,1291 +32,94 @@ runtime_options:
   server_spec_disabled: {base: python310-minimal, requirements: prodict}
 metadata: {title: practiceMANAGER}
 startup_form: null
-native_deps: {head_html: "<!-- Material Design icons -->\n<link href=\"https://cdn.jsdelivr.net/npm/@mdi/font@6.5.95/css/materialdesignicons.min.css\"\
-    \ rel=\"stylesheet\" type=\"text/css\"/>\n<link href=\"https://fonts.googleapis.com/css2?family=Lora&display=swap\"\
-    \ rel=\"stylesheet\">\n<link href=\"https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap\"\
-    \ rel=\"stylesheet\">\n\n<!--Fontawsome library -->\n<!-- <script src=\"https://kit.fontawesome.com/1466988a10.js\"\
-    \ crossorigin=\"anonymous\"></script> -->\n<link rel=\"canonical\" href=\"https://fontawesome.com\"\
-    >\n<link rel=\"stylesheet\" href=\"https://site-assets.fontawesome.com/releases/v6.5.1/css/all.css\"\
-    >\n<!-- Essential JS 2 styles and scripts -->\n<link href=\"https://cdn.syncfusion.com/ej2/23.1.36/tailwind.css\"\
-    \ rel=\"stylesheet\">\n<script src=\"https://cdn.syncfusion.com/ej2/23.1.36/dist/ej2.min.js\"\
-    \ type=\"text/javascript\"></script>\n<script src=\"_/theme/aws-sdk-v3-bundle.js\"\
-    \ type=\"text/javascript\"></script>\n\n<link href=\"_/theme/anvil-fusion.css\"\
-    \ rel=\"stylesheet\">\n<link href=\"_/theme/pmapp.css\" rel=\"stylesheet\">\n\n\
-    <!-- Custom stylesheets -->\n<!-- <link href=\"https://cdn.syncfusion.com/ej2/24.1.41/ej2-base/styles/material.css\"\
-    \ rel=\"stylesheet\">\n<link href=\"https://cdn.syncfusion.com/ej2/24.1.41/ej2-buttons/styles/material.css\"\
-    \ rel=\"stylesheet\"> -->\n\n<!-- Custom scripts -->\n<script src=\"https://cdn.syncfusion.com/ej2/24.1.41/dist/ej2.min.js\"\
-    \ type=\"text/javascript\"></script>\n<script src=\"https://cdn.syncfusion.com/ej2/syncfusion-helper.js\"\
-    \ type =\"text/javascript\"></script>\n<!-- Packages -->\n<script>\n  ej.base.registerLicense('ORg4AjUWIQA/Gnt2VlhhQlJCfV5AQmBIYVp/TGpJfl96cVxMZVVBJAtUQF1hSn5ad01iX35acXdQQmlc');\n\
-    \  ej.schedule.Schedule.inject(ej.schedule.DragAndDrop, ej.schedule.Resize)\n\
-    </script>\n\n<!-- UnoCSS -->\n<script src=\"https://cdn.jsdelivr.net/npm/@unocss/runtime\"\
-    ></script>\n<script>\n// pass unocss options\nwindow.__unocss = {\n  rules: [\n\
-    \    // custom rules...\n  ],\n  presets: [\n    presetUno(),\n    presetAttributify(),\n\
-    \    presetTagify(),\n    presetIcons(),\n    presetWebFonts(),\n    presetTypography(),\n\
-    \  ],\n  // ...\n}\n</script>"}
+native_deps:
+  head_html: |-
+    <!-- Material Design icons -->
+    <link href="https://cdn.jsdelivr.net/npm/@mdi/font@6.5.95/css/materialdesignicons.min.css" rel="stylesheet" type="text/css"/>
+    <link href="https://fonts.googleapis.com/css2?family=Lora&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!--Fontawsome library -->
+    <!-- <script src="https://kit.fontawesome.com/1466988a10.js" crossorigin="anonymous"></script> -->
+    <link rel="canonical" href="https://fontawesome.com">
+    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.5.1/css/all.css">
+    <!-- Essential JS 2 styles and scripts -->
+    <link href="https://cdn.syncfusion.com/ej2/23.1.36/tailwind.css" rel="stylesheet">
+    <script src="https://cdn.syncfusion.com/ej2/23.1.36/dist/ej2.min.js" type="text/javascript"></script>
+    <script src="_/theme/aws-sdk-v3-bundle.js" type="text/javascript"></script>
+
+    <link href="_/theme/anvil-fusion.css" rel="stylesheet">
+    <link href="_/theme/pmapp.css" rel="stylesheet">
+
+    <!-- PDF.js -->
+    <script src="//mozilla.github.io/pdf.js/build/pdf.mjs" type="module"></script>
+
+    <!-- Custom stylesheets -->
+    <!-- <link href="https://cdn.syncfusion.com/ej2/24.1.41/ej2-base/styles/material.css" rel="stylesheet">
+    <link href="https://cdn.syncfusion.com/ej2/24.1.41/ej2-buttons/styles/material.css" rel="stylesheet"> -->
+
+    <!-- Custom scripts -->
+    <script src="https://cdn.syncfusion.com/ej2/24.1.41/dist/ej2.min.js" type="text/javascript"></script>
+    <script src="https://cdn.syncfusion.com/ej2/syncfusion-helper.js" type ="text/javascript"></script>
+    <!-- Packages -->
+    <script>
+      ej.base.registerLicense('ORg4AjUWIQA/Gnt2VlhhQlJCfV5AQmBIYVp/TGpJfl96cVxMZVVBJAtUQF1hSn5ad01iX35acXdQQmlc');
+      ej.schedule.Schedule.inject(ej.schedule.DragAndDrop, ej.schedule.Resize)
+    </script>
+
+    <!-- UnoCSS -->
+    <script src="https://cdn.jsdelivr.net/npm/@unocss/runtime"></script>
+    <script>
+    // pass unocss options
+    window.__unocss = {
+      rules: [
+        // custom rules...
+      ],
+      presets: [
+        presetUno(),
+        presetAttributify(),
+        presetTagify(),
+        presetIcons(),
+        presetWebFonts(),
+        presetTypography(),
+      ],
+      // ...
+    }
+    </script>
 db_schema:
-  staff_pay_types:
-    title: Staff Pay Types
+  invoices:
+    title: Invoices
     client: none
     server: full
     columns:
-    - name: uid
-      admin_ui: {width: 200}
-      type: string
-    - name: name
-      admin_ui: {width: 200}
-      type: string
-    - name: tenant_uid
-      admin_ui: {width: 200}
-      type: string
-    - name: created_time
-      admin_ui: {width: 200}
-      type: datetime
-    - name: created_by
-      admin_ui: {width: 200}
-      type: string
-    - name: updated_time
-      admin_ui: {width: 200}
-      type: datetime
-    - name: updated_by
-      admin_ui: {width: 200}
-      type: string
-  branches:
-    title: Branches
-    client: none
-    server: full
-    columns:
-    - name: address
-      admin_ui: {width: 200}
-      type: string
-    - name: email
-      admin_ui: {width: 200}
-      type: string
-    - name: phone
-      admin_ui: {width: 200}
-      type: string
-    - name: uid
-      admin_ui: {width: 200}
-      type: string
-    - name: name
-      admin_ui: {width: 200}
-      type: string
-    - name: created_time
-      admin_ui: {width: 200}
-      type: datetime
-    - name: updated_time
-      admin_ui: {width: 200}
-      type: datetime
-    - name: tenant_uid
-      admin_ui: {width: 200}
-      type: string
-    - name: updated_by
-      admin_ui: {width: 200}
-      type: string
-    - name: created_by
-      admin_ui: {width: 200}
-      type: string
-  contacts:
-    title: Contacts
-    client: none
-    server: full
-    columns:
-    - name: email
-      admin_ui: {width: 200}
-      type: string
-    - name: uid
-      admin_ui: {width: 200}
-      type: string
-    - name: work_phone
-      admin_ui: {width: 200}
-      type: string
-    - name: created_time
-      admin_ui: {width: 200}
-      type: datetime
-    - name: updated_time
-      admin_ui: {width: 200}
-      type: datetime
-    - name: tenant_uid
-      admin_ui: {width: 200}
-      type: string
-    - name: updated_by
-      admin_ui: {width: 200}
-      type: string
-    - name: mobile_phone
-      admin_ui: {width: 200}
-      type: string
-    - name: first_name
-      admin_ui: {}
-      type: string
-    - name: last_name
-      admin_ui: {}
-      type: string
-    - name: created_by
-      admin_ui: {width: 200}
-      type: string
-    - name: contact_group
+    - name: bill_to
       admin_ui: {width: 200}
       type: link_single
-      target: contact_groups
-    - name: personal_details
-      admin_ui: {}
-      type: simpleObject
-    - name: entity
-      admin_ui: {width: 200}
-      type: link_single
-      target: entities
-    - name: title_position
-      admin_ui: {width: 200}
-      type: string
-    - name: employment
-      admin_ui: {}
-      type: simpleObject
-    - name: criminal_history
-      admin_ui: {}
-      type: simpleObject
-    - name: alternate_phone
-      admin_ui: {}
-      type: string
-    - name: address
-      admin_ui: {}
-      type: simpleObject
-    - name: additional_info
-      admin_ui: {}
-      type: simpleObject
-    - name: department
-      admin_ui: {width: 200}
-      type: string
-    - name: courtroom
-      admin_ui: {width: 200}
-      type: string
-  time_entries:
-    title: Time Entries
-    client: none
-    server: full
-    columns:
-    - name: description
-      admin_ui: {width: 200}
-      type: string
-    - name: staff
-      admin_ui: {width: 200}
-      type: link_single
-      target: staff
-    - name: date
-      admin_ui: {width: 200}
-      type: date
-    - name: uid
-      admin_ui: {width: 200}
-      type: string
-    - name: created_time
-      admin_ui: {width: 200}
-      type: datetime
-    - name: billable
-      admin_ui: {width: 200}
-      type: bool
-    - name: duration
+      target: contacts
+    - name: balance_due
       admin_ui: {width: 200}
       type: number
+    - name: uid
+      admin_ui: {width: 200}
+      type: string
+    - name: created_time
+      admin_ui: {width: 200}
+      type: datetime
+    - name: invoice_number
+      admin_ui: {width: 200}
+      type: string
     - name: updated_time
       admin_ui: {width: 200}
       type: datetime
-    - name: rate
-      admin_ui: {width: 200}
-      type: number
     - name: tenant_uid
       admin_ui: {width: 200}
       type: string
-    - name: rate_type
+    - name: adjustments
       admin_ui: {width: 200}
-      type: string
-    - name: invoice
-      admin_ui: {width: 200}
-      type: link_single
-      target: invoices
-    - name: activity
-      admin_ui: {width: 200}
-      type: link_single
-      target: activities
+      type: simpleObject
     - name: total
       admin_ui: {width: 200}
       type: number
-    - name: case
-      admin_ui: {width: 200}
-      type: link_single
-      target: cases
-    - name: updated_by
-      admin_ui: {width: 200}
-      type: string
-    - name: created_by
-      admin_ui: {width: 200}
-      type: string
-    - {name: status, admin_ui: null, type: unresolved}
-  case_stages:
-    title: Case Stages
-    client: none
-    server: full
-    columns:
-    - name: updated_by
-      admin_ui: {}
-      type: string
-    - name: created_time
-      admin_ui: {}
-      type: datetime
-    - name: updated_time
-      admin_ui: {}
-      type: datetime
-    - name: created_by
-      admin_ui: {}
-      type: string
-    - name: name
-      admin_ui: {}
-      type: string
-    - name: tenant_uid
-      admin_ui: {}
-      type: string
-    - name: uid
-      admin_ui: {}
-      type: string
-  document_folders:
-    title: Document Folders
-    client: none
-    server: full
-    columns:
-    - {name: uid, admin_ui: null, type: string}
-    - {name: case, admin_ui: null, type: link_single, target: cases}
-    - {name: created_by, admin_ui: null, type: string}
-    - {name: name, admin_ui: null, type: string}
-    - {name: tenant_uid, admin_ui: null, type: string}
-    - {name: updated_by, admin_ui: null, type: string}
-    - {name: created_time, admin_ui: null, type: datetime}
-    - {name: updated_time, admin_ui: null, type: datetime}
-  performance_incentives:
-    client: none
-    server: full
-    columns:
-    - name: staff
-      admin_ui: {width: 200, order: 0}
-      type: link_single
-      target: staff
-    - name: amount
-      admin_ui: {width: 200, order: 1}
-      type: number
-    - name: payment
-      admin_ui: {width: 200, order: 2}
-      type: link_single
-      target: payments
-    - name: uid
-      admin_ui: {width: 200, order: 3}
-      type: string
-    - name: created_time
-      admin_ui: {width: 200, order: 4}
-      type: datetime
-    - name: updated_time
-      admin_ui: {width: 200, order: 5}
-      type: datetime
-    - name: created_by
-      admin_ui: {width: 200, order: 6}
-      type: string
-    - name: updated_by
-      admin_ui: {width: 200, order: 7}
-      type: string
-    - name: tenant_uid
-      admin_ui: {width: 200, order: 8}
-      type: string
-    - name: payment_date
-      admin_ui: {width: 200, order: 9}
-      type: datetime
-    - name: payroll
-      admin_ui: {width: 200, order: 10}
-      type: link_single
-      target: payrolls
-    title: Performance Incentives
-  tasks:
-    title: Tasks
-    client: none
-    server: full
-    columns:
-    - name: due_date
-      admin_ui: {width: 200}
-      type: date
-    - name: uid
-      admin_ui: {width: 200}
-      type: string
-    - name: activity
-      admin_ui: {width: 200}
-      type: link_single
-      target: activities
-    - name: created_time
-      admin_ui: {order: 3, width: 262}
-      type: datetime
-    - name: updated_time
-      admin_ui: {width: 200}
-      type: datetime
-    - name: tenant_uid
-      admin_ui: {width: 200}
-      type: string
-    - name: documents
-      admin_ui: {width: 200}
-      type: simpleObject
-    - name: priority
-      admin_ui: {width: 200}
-      type: string
-    - name: case
-      admin_ui: {width: 200}
-      type: link_single
-      target: cases
-    - name: notes
-      admin_ui: {width: 200}
-      type: string
-    - name: updated_by
-      admin_ui: {width: 200}
-      type: string
-    - name: created_by
-      admin_ui: {order: 11, width: 123}
-      type: string
-    - name: assigned_staff
-      admin_ui: {width: 200}
-      type: link_multiple
-      target: staff
-    - name: completed
-      admin_ui: {width: 200}
-      type: bool
-  causes_of_action:
-    title: Causes Of Action
-    client: none
-    server: full
-    columns:
-    - name: type_of_action
-      admin_ui: {width: 200}
-      type: link_single
-      target: types_of_action
-    - name: statute_id
-      admin_ui: {width: 200}
-      type: string
-    - name: penalty
-      admin_ui: {width: 200}
-      type: string
-    - name: cause_of_action
-      admin_ui: {width: 200}
-      type: string
-    - name: uid
-      admin_ui: {width: 200}
-      type: string
-    - name: tenant_uid
-      admin_ui: {width: 200}
-      type: string
-    - name: created_time
-      admin_ui: {width: 200}
-      type: datetime
-    - name: created_by
-      admin_ui: {width: 200}
-      type: string
-    - name: updated_time
-      admin_ui: {width: 200}
-      type: datetime
-    - name: updated_by
-      admin_ui: {width: 200}
-      type: string
-  checks:
-    title: Checks
-    client: none
-    server: full
-    columns:
-    - name: amount
-      admin_ui: {width: 200}
-      type: number
-    - name: date
-      admin_ui: {width: 200}
-      type: date
-    - name: uid
-      admin_ui: {width: 200}
-      type: string
-    - name: created_time
-      admin_ui: {width: 200}
-      type: datetime
-    - name: updated_time
-      admin_ui: {width: 200}
-      type: datetime
-    - name: tenant_uid
-      admin_ui: {width: 200}
-      type: string
-    - name: bank_account
-      admin_ui: {width: 200}
-      type: link_single
-      target: bank_accounts
-    - name: reference
-      admin_ui: {width: 200}
-      type: string
-    - name: payee
-      admin_ui: {width: 200}
-      type: link_single
-      target: contacts
-    - name: updated_by
-      admin_ui: {width: 200}
-      type: string
-    - name: created_by
-      admin_ui: {width: 200}
-      type: string
-    - name: memo
-      admin_ui: {width: 200}
-      type: string
-    - name: check_number
-      admin_ui: {width: 200}
-      type: string
-  fee_types:
-    title: Fee Types
-    client: none
-    server: full
-    columns:
-    - name: uid
-      admin_ui: {}
-      type: string
-    - name: created_by
-      admin_ui: {}
-      type: string
-    - name: name
-      admin_ui: {}
-      type: string
-    - name: updated_time
-      admin_ui: {}
-      type: datetime
-    - name: tenant_uid
-      admin_ui: {}
-      type: string
-    - name: created_time
-      admin_ui: {}
-      type: datetime
-    - name: updated_by
-      admin_ui: {}
-      type: string
-  case_contacts:
-    title: Case Contacts
-    client: none
-    server: full
-    columns:
-    - name: case
-      admin_ui: {width: 200}
-      type: link_single
-      target: cases
-    - name: contact
-      admin_ui: {width: 200}
-      type: link_single
-      target: contacts
-    - name: role
-      admin_ui: {width: 200}
-      type: string
-    - name: uid
-      admin_ui: {width: 200}
-      type: string
-    - name: tenant_uid
-      admin_ui: {width: 200}
-      type: string
-    - name: created_time
-      admin_ui: {width: 200}
-      type: datetime
-    - name: created_by
-      admin_ui: {width: 200}
-      type: string
-    - name: updated_time
-      admin_ui: {width: 200}
-      type: datetime
-    - name: updated_by
-      admin_ui: {width: 200}
-      type: string
-  lead_activities:
-    title: Lead Activities
-    client: none
-    server: full
-    columns:
-    - name: due_time
-      admin_ui: {width: 200}
-      type: datetime
-    - name: uid
-      admin_ui: {width: 200}
-      type: string
-    - name: created_time
-      admin_ui: {width: 200}
-      type: datetime
-    - name: updated_time
-      admin_ui: {width: 200}
-      type: datetime
-    - name: tenant_uid
-      admin_ui: {width: 200}
-      type: string
-    - name: activity
-      admin_ui: {width: 200}
-      type: string
-    - name: status
-      admin_ui: {width: 200}
-      type: string
-    - name: updated_by
-      admin_ui: {width: 200}
-      type: string
-    - name: lead
-      admin_ui: {width: 200}
-      type: link_single
-      target: leads
-    - name: created_by
-      admin_ui: {width: 200}
-      type: string
-  files:
-    title: Files
-    client: none
-    server: full
-    columns:
-    - name: link_name
-      admin_ui: {width: 200}
-      type: string
-    - name: mime_type
-      admin_ui: {width: 200}
-      type: string
-    - name: content
-      admin_ui: {width: 200}
-      type: media
-    - name: uid
-      admin_ui: {width: 200}
-      type: string
-    - name: name
-      admin_ui: {width: 200}
-      type: string
-    - name: created_time
-      admin_ui: {width: 200}
-      type: datetime
-    - name: updated_time
-      admin_ui: {width: 200}
-      type: datetime
-    - name: tenant_uid
-      admin_ui: {width: 200}
-      type: string
-    - name: size
-      admin_ui: {width: 200}
-      type: number
-    - name: case_uid
-      admin_ui: {width: 200}
-      type: string
-    - name: link_uid
-      admin_ui: {width: 200}
-      type: string
-    - name: meta_info
-      admin_ui: {width: 200}
-      type: simpleObject
-    - name: updated_by
-      admin_ui: {width: 200}
-      type: string
-    - name: created_by
-      admin_ui: {width: 200}
-      type: string
-    - name: path
-      admin_ui: {width: 200}
-      type: string
-    - name: file_version
-      admin_ui: {width: 200}
-      type: string
-    - name: file
-      admin_ui: {width: 200}
-      type: media
-  lead_sources:
-    title: Lead Sources
-    client: none
-    server: full
-    columns:
-    - name: uid
-      admin_ui: {width: 200}
-      type: string
-    - name: name
-      admin_ui: {width: 200}
-      type: string
-    - name: tenant_uid
-      admin_ui: {width: 200}
-      type: string
-    - name: created_time
-      admin_ui: {width: 200}
-      type: datetime
-    - name: created_by
-      admin_ui: {width: 200}
-      type: string
-    - name: updated_time
-      admin_ui: {width: 200}
-      type: datetime
-    - name: updated_by
-      admin_ui: {width: 200}
-      type: string
-  case_workflow_items:
-    client: none
-    server: full
-    columns:
-    - name: updated_time
-      admin_ui: {}
-      type: datetime
-    - name: updated_by
-      admin_ui: {}
-      type: string
-    - name: uid
-      admin_ui: {}
-      type: string
-    - name: type
-      admin_ui: {}
-      type: string
-    - name: tenant_uid
-      admin_ui: {}
-      type: string
-    - name: related_task
-      admin_ui: {}
-      type: link_single
-      target: case_workflow_items
-    - name: priority
-      admin_ui: {}
-      type: string
-    - name: notes
-      admin_ui: {}
-      type: string
-    - name: duration
-      admin_ui: {}
-      type: number
-    - name: due_date_base
-      admin_ui: {}
-      type: string
-    - name: documents
-      admin_ui: {}
-      type: simpleObject
-    - name: created_time
-      admin_ui: {}
-      type: datetime
-    - name: created_by
-      admin_ui: {}
-      type: string
-    - name: assigned_to
-      admin_ui: {}
-      type: link_multiple
-      target: staff
-    - name: activity
-      admin_ui: {}
-      type: link_single
-      target: activities
-    - name: case_workflow
-      admin_ui: {}
-      type: link_single
-      target: case_workflows
-    title: Case Workflow Items
-  bank_account_types:
-    title: Bank Account Types
-    client: none
-    server: full
-    columns:
-    - name: created_by
-      admin_ui: {}
-      type: string
-    - name: updated_by
-      admin_ui: {}
-      type: string
-    - name: uid
-      admin_ui: {}
-      type: string
-    - name: name
-      admin_ui: {}
-      type: string
-    - name: created_time
-      admin_ui: {}
-      type: datetime
-    - name: updated_time
-      admin_ui: {}
-      type: datetime
-    - name: tenant_uid
-      admin_ui: {}
-      type: string
-  clients:
-    title: Clients
-    client: none
-    server: full
-    columns:
-    - name: uid
-      admin_ui: {width: 200}
-      type: string
-    - name: client_name
-      admin_ui: {width: 200}
-      type: string
-    - name: is_individual
-      admin_ui: {width: 200}
-      type: bool
-    - name: tenant_uid
-      admin_ui: {width: 200}
-      type: string
-    - name: created_time
-      admin_ui: {width: 200}
-      type: datetime
-    - name: created_by
-      admin_ui: {width: 200}
-      type: string
-    - name: updated_time
-      admin_ui: {width: 200}
-      type: datetime
-    - name: updated_by
-      admin_ui: {width: 200}
-      type: string
-    - name: entity
-      admin_ui: {width: 200}
-      type: link_single
-      target: entities
-    - name: contact
-      admin_ui: {width: 200}
-      type: link_single
-      target: contacts
-  staff_groups:
-    title: Staff Groups
-    client: none
-    server: full
-    columns:
-    - name: uid
-      admin_ui: {width: 200}
-      type: string
-    - name: name
-      admin_ui: {width: 200}
-      type: string
-    - name: tenant_uid
-      admin_ui: {width: 200}
-      type: string
-    - name: created_time
-      admin_ui: {width: 200}
-      type: datetime
-    - name: created_by
-      admin_ui: {width: 200}
-      type: string
-    - name: updated_time
-      admin_ui: {width: 200}
-      type: datetime
-    - name: updated_by
-      admin_ui: {width: 200}
-      type: string
-  bank_accounts:
-    title: Bank Accounts
-    client: none
-    server: full
-    columns:
-    - name: account_type
-      admin_ui: {width: 200}
-      type: link_single
-      target: bank_account_types
-    - name: uid
-      admin_ui: {width: 200}
-      type: string
-    - name: account_balance
-      admin_ui: {width: 200}
-      type: number
-    - name: created_time
-      admin_ui: {width: 200}
-      type: datetime
-    - name: bank_name
-      admin_ui: {width: 200}
-      type: string
-    - name: check_start_number
-      admin_ui: {width: 200}
-      type: string
-    - name: fractional_routing_number
-      admin_ui: {width: 200}
-      type: string
-    - name: updated_time
-      admin_ui: {width: 200}
-      type: datetime
-    - name: tenant_uid
-      admin_ui: {width: 200}
-      type: string
-    - name: routing_number
-      admin_ui: {width: 200}
-      type: string
-    - name: account_number
-      admin_ui: {width: 200}
-      type: string
-    - name: payment_link
-      admin_ui: {width: 200}
-      type: string
-    - name: updated_by
-      admin_ui: {width: 200}
-      type: string
-    - name: created_by
-      admin_ui: {width: 200}
-      type: string
-  case_updates:
-    title: Case Updates
-    client: none
-    server: full
-    columns:
-    - {name: created_time, admin_ui: null, type: datetime}
-    - {name: client_attendance_required, admin_ui: null, type: bool}
-    - {name: todays_update, admin_ui: null, type: string}
-    - {name: client_update, admin_ui: null, type: bool}
-    - {name: next_activity, admin_ui: null, type: link_single, target: activities}
-    - {name: tenant_uid, admin_ui: null, type: string}
-    - {name: next_date, admin_ui: null, type: datetime}
-    - {name: updated_time, admin_ui: null, type: datetime}
-    - {name: updated_by, admin_ui: null, type: string}
-    - {name: case, admin_ui: null, type: link_single, target: cases}
-    - {name: uid, admin_ui: null, type: string}
-    - {name: created_by, admin_ui: null, type: string}
-  payroll_totals:
-    title: Payroll Totals
-    client: none
-    server: full
-    columns:
-    - name: uid
-      admin_ui: {width: 200}
-      type: string
-    - name: created_by
-      admin_ui: {width: 200}
-      type: string
-    - name: updated_by
-      admin_ui: {width: 200}
-      type: string
-    - name: tenant_uid
-      admin_ui: {width: 200}
-      type: string
-    - name: created_time
-      admin_ui: {width: 200}
-      type: datetime
-    - name: updated_time
-      admin_ui: {width: 200}
-      type: datetime
-    - name: payroll
-      admin_ui: {width: 200}
-      type: link_single
-      target: payrolls
-    - name: total_base_pay
-      admin_ui: {width: 200}
-      type: number
-    - name: total_overtime_pay
-      admin_ui: {width: 200}
-      type: number
-    - name: total_incentive_pay
-      admin_ui: {width: 200}
-      type: number
-    - name: total_reimbursement_pay
-      admin_ui: {width: 200}
-      type: number
-    - name: total_pay
-      admin_ui: {width: 200}
-      type: number
-    - name: staff
-      admin_ui: {width: 200, order: 13}
-      type: link_single
-      target: staff
-  users:
-    title: Users
-    client: none
-    server: full
-    columns:
-    - name: email
-      admin_ui: {width: 200}
-      type: string
-    - name: enabled
-      admin_ui: {width: 200}
-      type: bool
-    - name: timezone
-      admin_ui: {width: 200}
-      type: string
-    - name: last_login
-      admin_ui: {width: 200}
-      type: datetime
-    - name: password_hash
-      admin_ui: {width: 200}
-      type: string
-    - name: n_password_failures
-      admin_ui: {width: 200}
-      type: number
-    - name: confirmed_email
-      admin_ui: {width: 200}
-      type: bool
-    - name: signed_up
-      admin_ui: {width: 200}
-      type: datetime
-    - name: uid
-      admin_ui: {width: 200}
-      type: string
-    - name: tenant_uid
-      admin_ui: {width: 200}
-      type: string
-    - name: email_confirmation_key
-      admin_ui: {}
-      type: string
-    - name: remembered_logins
-      admin_ui: {width: 200}
-      type: simpleObject
-    - name: permissions
-      admin_ui: {width: 200}
-      type: simpleObject
-    - {name: created_by, admin_ui: null, type: string}
-    - {name: created_time, admin_ui: null, type: datetime}
-    - {name: updated_by, admin_ui: null, type: string}
-    - {name: updated_time, admin_ui: null, type: datetime}
-  case_workflows:
-    client: none
-    server: full
-    columns:
-    - name: created_by
-      admin_ui: {}
-      type: string
-    - name: created_time
-      admin_ui: {}
-      type: datetime
-    - name: items
-      admin_ui: {}
-      type: link_multiple
-      target: case_workflow_items
-    - name: name
-      admin_ui: {}
-      type: string
-    - name: practice_area
-      admin_ui: {}
-      type: link_single
-      target: practice_areas
-    - name: tenant_uid
-      admin_ui: {}
-      type: string
-    - name: uid
-      admin_ui: {}
-      type: string
-    - name: updated_by
-      admin_ui: {}
-      type: string
-    - name: updated_time
-      admin_ui: {}
-      type: datetime
-    title: Case Workflows
-  cases:
-    title: Cases
-    client: none
-    server: full
-    columns:
-    - name: incident_location
-      admin_ui: {width: 200}
-      type: simpleObject
-    - name: assigned_attorneys
-      admin_ui: {width: 200}
-      type: link_multiple
-      target: staff
-    - name: litigation_rate
-      admin_ui: {width: 200}
-      type: number
-    - name: staff
-      admin_ui: {width: 200}
-      type: link_multiple
-      target: staff
-    - name: incident_date
-      admin_ui: {width: 200}
-      type: date
-    - name: department
-      admin_ui: {width: 200}
-      type: link_single
-      target: contacts
-    - name: investigator_budget
-      admin_ui: {width: 200}
-      type: number
-    - name: court
-      admin_ui: {width: 200}
-      type: link_single
-      target: entities
-    - name: fee_type
-      admin_ui: {width: 200}
-      type: link_single
-      target: fee_types
-    - name: contacts
-      admin_ui: {width: 200}
-      type: link_multiple
-      target: contacts
-    - name: case_name
-      admin_ui: {width: 200}
-      type: string
-    - name: practice_area
-      admin_ui: {width: 200}
-      type: link_single
-      target: practice_areas
-    - name: close_date
-      admin_ui: {width: 200}
-      type: date
-    - name: uid
-      admin_ui: {width: 200}
-      type: string
-    - name: record_seal_expungement
-      admin_ui: {width: 200}
-      type: bool
-    - name: pre_litigation_rate
-      admin_ui: {width: 200}
-      type: number
-    - name: clients
-      admin_ui: {width: 200}
-      type: link_multiple
-      target: clients
-    - name: created_time
-      admin_ui: {width: 200}
-      type: datetime
-    - name: investigator
-      admin_ui: {width: 200}
-      type: bool
-    - name: trial_included
-      admin_ui: {width: 200}
-      type: bool
-    - name: case_stage
-      admin_ui: {width: 200}
-      type: link_single
-      target: case_stages
-    - name: updated_time
-      admin_ui: {width: 200}
-      type: datetime
-    - name: case_description
-      admin_ui: {width: 200}
-      type: string
-    - name: tenant_uid
-      admin_ui: {width: 200}
-      type: string
-    - name: flat_fee_retainer
-      admin_ui: {width: 200}
-      type: number
-    - name: case_status
-      admin_ui: {width: 200}
-      type: link_single
-      target: case_statuses
-    - name: case_number
-      admin_ui: {width: 200}
-      type: string
-    - name: statute_of_limitations
-      admin_ui: {width: 200}
-      type: date
-    - name: hourly_retainer
-      admin_ui: {width: 200}
-      type: number
-    - name: updated_by
-      admin_ui: {width: 200}
-      type: string
-    - name: lead
-      admin_ui: {width: 200}
-      type: link_single
-      target: leads
-    - name: retainer_hours_limit
-      admin_ui: {width: 200}
-      type: number
-    - name: created_by
-      admin_ui: {width: 200}
-      type: string
-    - name: share_case_information_with
-      admin_ui: {width: 200}
-      type: link_single
-      target: contacts
-    - name: cause_of_action
-      admin_ui: {width: 200}
-      type: link_multiple
-      target: causes_of_action
-    - name: next_case_search
-      admin_ui: {width: 200}
-      type: date
-  timesheets:
-    title: Timesheets
-    client: none
-    server: full
-    columns:
-    - name: staff
-      admin_ui: {width: 200}
-      type: link_single
-      target: staff
-    - name: earned_pay
-      admin_ui: {width: 200}
-      type: number
-    - name: uid
-      admin_ui: {width: 200}
-      type: string
-    - name: clock_out_time
-      admin_ui: {width: 200}
-      type: datetime
-    - name: approved_by
-      admin_ui: {width: 200}
-      type: link_single
-      target: staff
-    - name: created_time
-      admin_ui: {width: 200}
-      type: datetime
-    - name: updated_time
-      admin_ui: {width: 200}
-      type: datetime
-    - name: tenant_uid
-      admin_ui: {width: 200}
-      type: string
-    - name: clock_in_time
-      admin_ui: {width: 200}
-      type: datetime
-    - name: updated_by
-      admin_ui: {width: 200}
-      type: string
-    - name: hours_worked
-      admin_ui: {width: 200}
-      type: number
-    - name: created_by
-      admin_ui: {width: 200}
-      type: string
-    - name: payroll
-      admin_ui: {width: 200, order: 14}
-      type: link_single
-      target: payrolls
-  events:
-    title: Events
-    client: none
-    server: full
-    columns:
-    - name: staff
-      admin_ui: {width: 200}
-      type: link_multiple
-      target: staff
-    - name: client_update
-      admin_ui: {width: 200}
-      type: bool
-    - name: uid
-      admin_ui: {width: 200}
-      type: string
-    - name: start_time
-      admin_ui: {width: 200}
-      type: datetime
-    - name: created_time
-      admin_ui: {width: 200}
-      type: datetime
-    - name: updated_time
-      admin_ui: {width: 200}
-      type: datetime
-    - name: tenant_uid
-      admin_ui: {width: 200}
-      type: string
-    - name: no_case
-      admin_ui: {width: 200}
-      type: bool
-    - name: end_time
-      admin_ui: {width: 200}
-      type: datetime
-    - name: documents
-      admin_ui: {width: 200}
-      type: simpleObject
-    - name: client_attendance_required
-      admin_ui: {width: 200}
-      type: bool
-    - name: case
-      admin_ui: {width: 200}
-      type: link_single
-      target: cases
-    - name: notes
-      admin_ui: {width: 200}
-      type: string
-    - name: updated_by
-      admin_ui: {width: 200}
-      type: string
-    - name: location
-      admin_ui: {width: 200}
-      type: link_single
-      target: entities
-    - name: contact
-      admin_ui: {width: 200}
-      type: link_multiple
-      target: contacts
-    - name: created_by
-      admin_ui: {width: 200}
-      type: string
-    - name: activity
-      admin_ui: {width: 200}
-      type: link_single
-      target: activities
-    - name: department
-      admin_ui: {width: 200}
-      type: link_single
-      target: contacts
-  expenses:
-    title: Expenses
-    client: none
-    server: full
-    columns:
-    - name: description
-      admin_ui: {width: 200}
-      type: string
-    - name: staff
-      admin_ui: {width: 200}
-      type: link_single
-      target: staff
-    - name: amount
-      admin_ui: {width: 200}
-      type: number
-    - name: date
-      admin_ui: {width: 200}
-      type: date
-    - name: uid
-      admin_ui: {width: 200}
-      type: string
-    - name: created_time
-      admin_ui: {width: 200}
-      type: datetime
-    - name: billable
-      admin_ui: {width: 200}
-      type: bool
-    - name: updated_time
-      admin_ui: {width: 200}
-      type: datetime
-    - name: receipt_invoice
-      admin_ui: {width: 200}
-      type: simpleObject
-    - name: tenant_uid
-      admin_ui: {width: 200}
-      type: string
-    - name: invoice
-      admin_ui: {width: 200}
-      type: link_single
-      target: invoices
-    - name: activity
-      admin_ui: {width: 200}
-      type: link_single
-      target: activities
-    - name: total
-      admin_ui: {width: 200}
-      type: number
-    - name: case
-      admin_ui: {width: 200}
-      type: link_single
-      target: cases
-    - name: updated_by
-      admin_ui: {width: 200}
-      type: string
-    - name: quantity
-      admin_ui: {width: 200}
-      type: number
-    - name: created_by
-      admin_ui: {width: 200}
-      type: string
-    - name: reduction
-      admin_ui: {width: 200}
-      type: number
-  payments:
-    title: Payments
-    client: none
-    server: full
-    columns:
-    - name: amount
-      admin_ui: {width: 200}
-      type: number
-    - name: payment_method
-      admin_ui: {width: 200}
-      type: string
-    - name: uid
-      admin_ui: {width: 200}
-      type: string
-    - name: payment_time
-      admin_ui: {width: 200}
-      type: datetime
-    - name: created_time
-      admin_ui: {width: 200}
-      type: datetime
-    - name: updated_time
-      admin_ui: {width: 200}
-      type: datetime
-    - name: tenant_uid
-      admin_ui: {width: 200}
-      type: string
-    - name: bank_account
-      admin_ui: {width: 200}
-      type: link_single
-      target: bank_accounts
-    - name: invoice
-      admin_ui: {width: 200}
-      type: link_single
-      target: invoices
     - name: status
       admin_ui: {width: 200}
       type: string
@@ -1331,336 +133,6 @@ db_schema:
     - name: created_by
       admin_ui: {width: 200}
       type: string
-  entity_types:
-    title: Entity Types
-    client: none
-    server: full
-    columns:
-    - name: uid
-      admin_ui: {width: 200}
-      type: string
-    - name: name
-      admin_ui: {width: 200}
-      type: string
-    - name: tenant_uid
-      admin_ui: {width: 200}
-      type: string
-    - name: created_time
-      admin_ui: {width: 200}
-      type: datetime
-    - name: created_by
-      admin_ui: {width: 200}
-      type: string
-    - name: updated_time
-      admin_ui: {width: 200}
-      type: datetime
-    - name: updated_by
-      admin_ui: {width: 200}
-      type: string
-  time_off_requests:
-    title: Time Off Requests
-    client: none
-    server: full
-    columns:
-    - {name: date_of_return, admin_ui: null, type: date}
-    - {name: reason, admin_ui: null, type: string}
-    - {name: uid, admin_ui: null, type: string}
-    - {name: staff, admin_ui: null, type: link_single, target: staff}
-    - {name: date_of_leave, admin_ui: null, type: date}
-    - {name: updated_by, admin_ui: null, type: string}
-    - {name: tenant_uid, admin_ui: null, type: string}
-    - {name: created_time, admin_ui: null, type: datetime}
-    - {name: status, admin_ui: null, type: string}
-    - {name: updated_time, admin_ui: null, type: datetime}
-    - {name: notes, admin_ui: null, type: string}
-    - {name: created_by, admin_ui: null, type: string}
-  documents:
-    client: none
-    server: full
-    columns:
-    - {name: case, admin_ui: null, type: link_single, target: cases}
-    - {name: created_by, admin_ui: null, type: string}
-    - {name: created_time, admin_ui: null, type: datetime}
-    - {name: discovery, admin_ui: null, type: bool}
-    - {name: file, admin_ui: null, type: simpleObject}
-    - {name: folder, admin_ui: null, type: link_single, target: document_folders}
-    - {name: title, type: string}
-    - {name: notes, admin_ui: null, type: string}
-    - {name: reviewed_by, admin_ui: null, type: link_single, target: staff}
-    - {name: tenant_uid, admin_ui: null, type: string}
-    - {name: type, admin_ui: null, type: string}
-    - {name: uid, admin_ui: null, type: string}
-    - {name: updated_by, admin_ui: null, type: string}
-    - {name: updated_time, admin_ui: null, type: datetime}
-    title: Documents
-  activities:
-    title: Activities
-    client: none
-    server: full
-    columns:
-    - name: name
-      admin_ui: {}
-      type: string
-    - name: uid
-      admin_ui: {}
-      type: string
-    - name: tenant_uid
-      admin_ui: {}
-      type: string
-    - name: created_time
-      admin_ui: {}
-      type: datetime
-    - name: created_by
-      admin_ui: {}
-      type: string
-    - name: updated_by
-      admin_ui: {}
-      type: string
-    - name: updated_time
-      admin_ui: {}
-      type: datetime
-  tenants:
-    title: Tenants
-    client: none
-    server: full
-    columns:
-    - name: name
-      admin_ui: {width: 200}
-      type: string
-    - name: uid
-      admin_ui: {width: 200}
-      type: string
-    - {name: created_by, admin_ui: null, type: string}
-    - {name: created_time, admin_ui: null, type: datetime}
-    - {name: tenant_uid, admin_ui: null, type: string}
-    - {name: updated_by, admin_ui: null, type: string}
-    - {name: updated_time, admin_ui: null, type: datetime}
-  user_profiles:
-    title: User Profiles
-    client: none
-    server: full
-    columns:
-    - name: name
-      admin_ui: {}
-      type: string
-    - name: title
-      admin_ui: {}
-      type: string
-    - name: created_by
-      admin_ui: {}
-      type: string
-    - name: updated_time
-      admin_ui: {}
-      type: datetime
-    - name: tenant_uid
-      admin_ui: {}
-      type: string
-    - name: created_time
-      admin_ui: {}
-      type: datetime
-    - name: updated_by
-      admin_ui: {}
-      type: string
-    - name: uid
-      admin_ui: {}
-      type: string
-  app_audit_logs:
-    title: App Audit Logs
-    client: none
-    server: full
-    columns:
-    - name: table_name
-      admin_ui: {width: 200}
-      type: string
-    - name: record_uid
-      admin_ui: {width: 200}
-      type: string
-    - name: action_type
-      admin_ui: {width: 200}
-      type: string
-    - name: action_time
-      admin_ui: {width: 200}
-      type: datetime
-    - name: action_by
-      admin_ui: {width: 200}
-      type: string
-    - name: previous_state
-      admin_ui: {width: 200}
-      type: simpleObject
-    - name: new_state
-      admin_ui: {width: 200}
-      type: simpleObject
-    - name: uid
-      admin_ui: {width: 200}
-      type: string
-    - name: tenant_uid
-      admin_ui: {width: 200}
-      type: string
-    - {name: created_by, admin_ui: null, type: string}
-    - {name: created_time, admin_ui: null, type: datetime}
-    - {name: updated_by, admin_ui: null, type: string}
-    - {name: updated_time, admin_ui: null, type: datetime}
-  contact_groups:
-    title: Contact Groups
-    client: none
-    server: full
-    columns:
-    - name: uid
-      admin_ui: {width: 200}
-      type: string
-    - name: name
-      admin_ui: {width: 200}
-      type: string
-    - name: tenant_uid
-      admin_ui: {width: 200}
-      type: string
-    - name: created_time
-      admin_ui: {width: 200}
-      type: datetime
-    - name: created_by
-      admin_ui: {width: 200}
-      type: string
-    - name: updated_time
-      admin_ui: {width: 200}
-      type: datetime
-    - name: updated_by
-      admin_ui: {width: 200}
-      type: string
-  reimbursement_requests:
-    title: Reimbursement Requests
-    client: none
-    server: full
-    columns:
-    - {name: staff, admin_ui: null, type: link_single, target: staff}
-    - {name: quantity, admin_ui: null, type: number}
-    - {name: created_by, admin_ui: null, type: string}
-    - {name: total, admin_ui: null, type: number}
-    - {name: created_time, admin_ui: null, type: datetime}
-    - {name: tenant_uid, admin_ui: null, type: string}
-    - {name: description, admin_ui: null, type: string}
-    - {name: amount, admin_ui: null, type: number}
-    - {name: add_to_case, admin_ui: null, type: bool}
-    - {name: activity, admin_ui: null, type: link_single, target: activities}
-    - {name: date, admin_ui: null, type: date}
-    - {name: case, admin_ui: null, type: link_single, target: cases}
-    - {name: uid, admin_ui: null, type: string}
-    - {name: receipt_invoice, admin_ui: null, type: simpleObject}
-    - {name: updated_by, admin_ui: null, type: string}
-    - {name: updated_time, admin_ui: null, type: datetime}
-    - name: approved_by
-      admin_ui: {width: 200, order: 1}
-      type: link_single
-      target: staff
-    - name: payroll
-      admin_ui: {width: 200, order: 2}
-      type: link_single
-      target: payrolls
-  case_requirements:
-    client: none
-    server: full
-    columns:
-    - {name: case, admin_ui: null, type: link_single, target: cases}
-    - {name: completed, admin_ui: null, type: bool}
-    - {name: created_by, admin_ui: null, type: string}
-    - {name: created_time, admin_ui: null, type: datetime}
-    - {name: due_date, admin_ui: null, type: date}
-    - {name: name, admin_ui: null, type: string}
-    - {name: notes, admin_ui: null, type: string}
-    - {name: tenant_uid, admin_ui: null, type: string}
-    - {name: uid, admin_ui: null, type: string}
-    - {name: updated_by, admin_ui: null, type: string}
-    - {name: updated_time, admin_ui: null, type: datetime}
-    - {name: url, admin_ui: null, type: simpleObject}
-    title: Case Requirements
-  contact_roles:
-    title: Contact Roles
-    client: none
-    server: full
-    columns:
-    - name: uid
-      admin_ui: {width: 200}
-      type: string
-    - name: name
-      admin_ui: {width: 200}
-      type: string
-    - name: tenant_uid
-      admin_ui: {width: 200}
-      type: string
-    - name: created_time
-      admin_ui: {width: 200}
-      type: datetime
-    - name: created_by
-      admin_ui: {width: 200}
-      type: string
-    - name: updated_time
-      admin_ui: {width: 200}
-      type: datetime
-    - name: updated_by
-      admin_ui: {width: 200}
-      type: string
-  case_statuses:
-    title: Case Statuses
-    client: none
-    server: full
-    columns:
-    - name: uid
-      admin_ui: {width: 200}
-      type: string
-    - name: name
-      admin_ui: {width: 200}
-      type: string
-    - name: tenant_uid
-      admin_ui: {width: 200}
-      type: string
-    - name: created_time
-      admin_ui: {width: 200}
-      type: datetime
-    - name: created_by
-      admin_ui: {width: 200}
-      type: string
-    - name: updated_time
-      admin_ui: {width: 200}
-      type: datetime
-    - name: updated_by
-      admin_ui: {width: 200}
-      type: string
-  app_grid_views:
-    title: App Grid Views
-    client: none
-    server: full
-    columns:
-    - name: permissions
-      admin_ui: {width: 200}
-      type: simpleObject
-    - name: config
-      admin_ui: {width: 200}
-      type: simpleObject
-    - name: uid
-      admin_ui: {width: 200}
-      type: string
-    - name: name
-      admin_ui: {width: 200}
-      type: string
-    - name: created_time
-      admin_ui: {width: 200}
-      type: datetime
-    - name: updated_time
-      admin_ui: {width: 200}
-      type: datetime
-    - name: tenant_uid
-      admin_ui: {width: 200}
-      type: string
-    - name: updated_by
-      admin_ui: {width: 200}
-      type: string
-    - name: created_by
-      admin_ui: {width: 200}
-      type: string
-    - name: columns
-      admin_ui: {order: 0.5}
-      type: simpleObject
-    - {name: model, admin_ui: null, type: string}
-    - {name: owner, admin_ui: null, type: string}
   staff:
     title: Staff
     client: none
@@ -1820,67 +292,103 @@ db_schema:
       admin_ui: {width: 200}
       type: link_single
       target: users
-  app_error_logs:
-    title: App Error Logs
+  case_workflows:
     client: none
     server: full
     columns:
-    - name: uid
-      admin_ui: {width: 200}
+    - name: created_by
+      admin_ui: {}
       type: string
-    - name: component
-      admin_ui: {width: 200}
-      type: string
-    - name: action
-      admin_ui: {width: 200}
-      type: string
-    - name: error_message
-      admin_ui: {width: 200}
-      type: string
-    - name: error_time
-      admin_ui: {width: 200}
+    - name: created_time
+      admin_ui: {}
       type: datetime
-    - name: user_uid
-      admin_ui: {width: 200}
+    - name: items
+      admin_ui: {}
+      type: link_multiple
+      target: case_workflow_items
+    - name: name
+      admin_ui: {}
       type: string
+    - name: practice_area
+      admin_ui: {}
+      type: link_single
+      target: practice_areas
+    - name: tenant_uid
+      admin_ui: {}
+      type: string
+    - name: uid
+      admin_ui: {}
+      type: string
+    - name: updated_by
+      admin_ui: {}
+      type: string
+    - name: updated_time
+      admin_ui: {}
+      type: datetime
+    title: Case Workflows
+  reimbursement_requests:
+    title: Reimbursement Requests
+    client: none
+    server: full
+    columns:
+    - {name: staff, admin_ui: null, type: link_single, target: staff}
+    - {name: quantity, admin_ui: null, type: number}
     - {name: created_by, admin_ui: null, type: string}
+    - {name: total, admin_ui: null, type: number}
     - {name: created_time, admin_ui: null, type: datetime}
     - {name: tenant_uid, admin_ui: null, type: string}
+    - {name: description, admin_ui: null, type: string}
+    - {name: amount, admin_ui: null, type: number}
+    - {name: add_to_case, admin_ui: null, type: bool}
+    - {name: activity, admin_ui: null, type: link_single, target: activities}
+    - {name: date, admin_ui: null, type: date}
+    - {name: case, admin_ui: null, type: link_single, target: cases}
+    - {name: uid, admin_ui: null, type: string}
+    - {name: receipt_invoice, admin_ui: null, type: simpleObject}
     - {name: updated_by, admin_ui: null, type: string}
     - {name: updated_time, admin_ui: null, type: datetime}
-  invoices:
-    title: Invoices
+    - name: approved_by
+      admin_ui: {width: 200, order: 1}
+      type: link_single
+      target: staff
+    - name: payroll
+      admin_ui: {width: 200, order: 2}
+      type: link_single
+      target: payrolls
+  payments:
+    title: Payments
     client: none
     server: full
     columns:
-    - name: bill_to
-      admin_ui: {width: 200}
-      type: link_single
-      target: contacts
-    - name: balance_due
+    - name: amount
       admin_ui: {width: 200}
       type: number
+    - name: payment_method
+      admin_ui: {width: 200}
+      type: string
     - name: uid
       admin_ui: {width: 200}
       type: string
+    - name: payment_time
+      admin_ui: {width: 200}
+      type: datetime
     - name: created_time
       admin_ui: {width: 200}
       type: datetime
-    - name: invoice_number
-      admin_ui: {width: 200}
-      type: string
     - name: updated_time
       admin_ui: {width: 200}
       type: datetime
     - name: tenant_uid
       admin_ui: {width: 200}
       type: string
-    - name: adjustments
+    - name: bank_account
       admin_ui: {width: 200}
-      type: simpleObject
-    - name: total
+      type: link_single
+      target: bank_accounts
+    - name: invoice
       admin_ui: {width: 200}
-      type: number
+      type: link_single
+      target: invoices
     - name: status
       admin_ui: {width: 200}
       type: string
@@ -1894,6 +402,860 @@ db_schema:
     - name: created_by
       admin_ui: {width: 200}
       type: string
+  ledger:
+    title: Ledger
+    client: none
+    server: full
+    columns:
+    - name: updated_by
+      admin_ui: {}
+      type: string
+    - name: created_time
+      admin_ui: {}
+      type: datetime
+    - name: transaction_time
+      admin_ui: {}
+      type: datetime
+    - name: created_by
+      admin_ui: {}
+      type: string
+    - name: updated_time
+      admin_ui: {}
+      type: datetime
+    - name: tenant_uid
+      admin_ui: {}
+      type: string
+    - name: uid
+      admin_ui: {}
+      type: string
+  case_contacts:
+    title: Case Contacts
+    client: none
+    server: full
+    columns:
+    - name: case
+      admin_ui: {width: 200}
+      type: link_single
+      target: cases
+    - name: contact
+      admin_ui: {width: 200}
+      type: link_single
+      target: contacts
+    - name: role
+      admin_ui: {width: 200}
+      type: string
+    - name: uid
+      admin_ui: {width: 200}
+      type: string
+    - name: tenant_uid
+      admin_ui: {width: 200}
+      type: string
+    - name: created_time
+      admin_ui: {width: 200}
+      type: datetime
+    - name: created_by
+      admin_ui: {width: 200}
+      type: string
+    - name: updated_time
+      admin_ui: {width: 200}
+      type: datetime
+    - name: updated_by
+      admin_ui: {width: 200}
+      type: string
+  contacts:
+    title: Contacts
+    client: none
+    server: full
+    columns:
+    - name: email
+      admin_ui: {width: 200}
+      type: string
+    - name: uid
+      admin_ui: {width: 200}
+      type: string
+    - name: work_phone
+      admin_ui: {width: 200}
+      type: string
+    - name: created_time
+      admin_ui: {width: 200}
+      type: datetime
+    - name: updated_time
+      admin_ui: {width: 200}
+      type: datetime
+    - name: tenant_uid
+      admin_ui: {width: 200}
+      type: string
+    - name: updated_by
+      admin_ui: {width: 200}
+      type: string
+    - name: mobile_phone
+      admin_ui: {width: 200}
+      type: string
+    - name: first_name
+      admin_ui: {}
+      type: string
+    - name: last_name
+      admin_ui: {}
+      type: string
+    - name: created_by
+      admin_ui: {width: 200}
+      type: string
+    - name: contact_group
+      admin_ui: {width: 200}
+      type: link_single
+      target: contact_groups
+    - name: personal_details
+      admin_ui: {}
+      type: simpleObject
+    - name: entity
+      admin_ui: {width: 200}
+      type: link_single
+      target: entities
+    - name: title_position
+      admin_ui: {width: 200}
+      type: string
+    - name: employment
+      admin_ui: {}
+      type: simpleObject
+    - name: criminal_history
+      admin_ui: {}
+      type: simpleObject
+    - name: alternate_phone
+      admin_ui: {}
+      type: string
+    - name: address
+      admin_ui: {}
+      type: simpleObject
+    - name: additional_info
+      admin_ui: {}
+      type: simpleObject
+    - name: department
+      admin_ui: {width: 200}
+      type: string
+    - name: courtroom
+      admin_ui: {width: 200}
+      type: string
+  document_folders:
+    title: Document Folders
+    client: none
+    server: full
+    columns:
+    - {name: uid, admin_ui: null, type: string}
+    - {name: case, admin_ui: null, type: link_single, target: cases}
+    - {name: created_by, admin_ui: null, type: string}
+    - {name: name, admin_ui: null, type: string}
+    - {name: tenant_uid, admin_ui: null, type: string}
+    - {name: updated_by, admin_ui: null, type: string}
+    - {name: created_time, admin_ui: null, type: datetime}
+    - {name: updated_time, admin_ui: null, type: datetime}
+  app_grid_views:
+    title: App Grid Views
+    client: none
+    server: full
+    columns:
+    - name: permissions
+      admin_ui: {width: 200}
+      type: simpleObject
+    - name: config
+      admin_ui: {width: 200}
+      type: simpleObject
+    - name: uid
+      admin_ui: {width: 200}
+      type: string
+    - name: name
+      admin_ui: {width: 200}
+      type: string
+    - name: created_time
+      admin_ui: {width: 200}
+      type: datetime
+    - name: updated_time
+      admin_ui: {width: 200}
+      type: datetime
+    - name: tenant_uid
+      admin_ui: {width: 200}
+      type: string
+    - name: updated_by
+      admin_ui: {width: 200}
+      type: string
+    - name: created_by
+      admin_ui: {width: 200}
+      type: string
+    - name: columns
+      admin_ui: {order: 0.5}
+      type: simpleObject
+    - {name: model, admin_ui: null, type: string}
+    - {name: owner, admin_ui: null, type: string}
+  causes_of_action:
+    title: Causes Of Action
+    client: none
+    server: full
+    columns:
+    - name: type_of_action
+      admin_ui: {width: 200}
+      type: link_single
+      target: types_of_action
+    - name: statute_id
+      admin_ui: {width: 200}
+      type: string
+    - name: penalty
+      admin_ui: {width: 200}
+      type: string
+    - name: cause_of_action
+      admin_ui: {width: 200}
+      type: string
+    - name: uid
+      admin_ui: {width: 200}
+      type: string
+    - name: tenant_uid
+      admin_ui: {width: 200}
+      type: string
+    - name: created_time
+      admin_ui: {width: 200}
+      type: datetime
+    - name: created_by
+      admin_ui: {width: 200}
+      type: string
+    - name: updated_time
+      admin_ui: {width: 200}
+      type: datetime
+    - name: updated_by
+      admin_ui: {width: 200}
+      type: string
+  types_of_action:
+    title: Types Of Action
+    client: none
+    server: full
+    columns:
+    - name: name
+      admin_ui: {}
+      type: string
+    - name: updated_time
+      admin_ui: {}
+      type: datetime
+    - name: created_time
+      admin_ui: {}
+      type: datetime
+    - name: created_by
+      admin_ui: {}
+      type: string
+    - name: updated_by
+      admin_ui: {}
+      type: string
+    - name: uid
+      admin_ui: {}
+      type: string
+    - name: tenant_uid
+      admin_ui: {}
+      type: string
+  timesheets:
+    title: Timesheets
+    client: none
+    server: full
+    columns:
+    - name: staff
+      admin_ui: {width: 200}
+      type: link_single
+      target: staff
+    - name: earned_pay
+      admin_ui: {width: 200}
+      type: number
+    - name: uid
+      admin_ui: {width: 200}
+      type: string
+    - name: clock_out_time
+      admin_ui: {width: 200}
+      type: datetime
+    - name: approved_by
+      admin_ui: {width: 200}
+      type: link_single
+      target: staff
+    - name: created_time
+      admin_ui: {width: 200}
+      type: datetime
+    - name: updated_time
+      admin_ui: {width: 200}
+      type: datetime
+    - name: tenant_uid
+      admin_ui: {width: 200}
+      type: string
+    - name: clock_in_time
+      admin_ui: {width: 200}
+      type: datetime
+    - name: updated_by
+      admin_ui: {width: 200}
+      type: string
+    - name: hours_worked
+      admin_ui: {width: 200}
+      type: number
+    - name: created_by
+      admin_ui: {width: 200}
+      type: string
+    - name: payroll
+      admin_ui: {width: 200, order: 14}
+      type: link_single
+      target: payrolls
+  contact_roles:
+    title: Contact Roles
+    client: none
+    server: full
+    columns:
+    - name: uid
+      admin_ui: {width: 200}
+      type: string
+    - name: name
+      admin_ui: {width: 200}
+      type: string
+    - name: tenant_uid
+      admin_ui: {width: 200}
+      type: string
+    - name: created_time
+      admin_ui: {width: 200}
+      type: datetime
+    - name: created_by
+      admin_ui: {width: 200}
+      type: string
+    - name: updated_time
+      admin_ui: {width: 200}
+      type: datetime
+    - name: updated_by
+      admin_ui: {width: 200}
+      type: string
+  events:
+    title: Events
+    client: none
+    server: full
+    columns:
+    - name: staff
+      admin_ui: {width: 200}
+      type: link_multiple
+      target: staff
+    - name: client_update
+      admin_ui: {width: 200}
+      type: bool
+    - name: uid
+      admin_ui: {width: 200}
+      type: string
+    - name: start_time
+      admin_ui: {width: 200}
+      type: datetime
+    - name: created_time
+      admin_ui: {width: 200}
+      type: datetime
+    - name: updated_time
+      admin_ui: {width: 200}
+      type: datetime
+    - name: tenant_uid
+      admin_ui: {width: 200}
+      type: string
+    - name: no_case
+      admin_ui: {width: 200}
+      type: bool
+    - name: end_time
+      admin_ui: {width: 200}
+      type: datetime
+    - name: documents
+      admin_ui: {width: 200}
+      type: simpleObject
+    - name: client_attendance_required
+      admin_ui: {width: 200}
+      type: bool
+    - name: case
+      admin_ui: {width: 200}
+      type: link_single
+      target: cases
+    - name: notes
+      admin_ui: {width: 200}
+      type: string
+    - name: updated_by
+      admin_ui: {width: 200}
+      type: string
+    - name: location
+      admin_ui: {width: 200}
+      type: link_single
+      target: entities
+    - name: contact
+      admin_ui: {width: 200}
+      type: link_multiple
+      target: contacts
+    - name: created_by
+      admin_ui: {width: 200}
+      type: string
+    - name: activity
+      admin_ui: {width: 200}
+      type: link_single
+      target: activities
+    - name: department
+      admin_ui: {width: 200}
+      type: link_single
+      target: contacts
+  expenses:
+    title: Expenses
+    client: none
+    server: full
+    columns:
+    - name: description
+      admin_ui: {width: 200}
+      type: string
+    - name: staff
+      admin_ui: {width: 200}
+      type: link_single
+      target: staff
+    - name: amount
+      admin_ui: {width: 200}
+      type: number
+    - name: date
+      admin_ui: {width: 200}
+      type: date
+    - name: uid
+      admin_ui: {width: 200}
+      type: string
+    - name: created_time
+      admin_ui: {width: 200}
+      type: datetime
+    - name: billable
+      admin_ui: {width: 200}
+      type: bool
+    - name: updated_time
+      admin_ui: {width: 200}
+      type: datetime
+    - name: receipt_invoice
+      admin_ui: {width: 200}
+      type: simpleObject
+    - name: tenant_uid
+      admin_ui: {width: 200}
+      type: string
+    - name: invoice
+      admin_ui: {width: 200}
+      type: link_single
+      target: invoices
+    - name: activity
+      admin_ui: {width: 200}
+      type: link_single
+      target: activities
+    - name: total
+      admin_ui: {width: 200}
+      type: number
+    - name: case
+      admin_ui: {width: 200}
+      type: link_single
+      target: cases
+    - name: updated_by
+      admin_ui: {width: 200}
+      type: string
+    - name: quantity
+      admin_ui: {width: 200}
+      type: number
+    - name: created_by
+      admin_ui: {width: 200}
+      type: string
+    - name: reduction
+      admin_ui: {width: 200}
+      type: number
+  performance_incentives:
+    client: none
+    server: full
+    columns:
+    - name: staff
+      admin_ui: {width: 200, order: 0}
+      type: link_single
+      target: staff
+    - name: amount
+      admin_ui: {width: 200, order: 1}
+      type: number
+    - name: payment
+      admin_ui: {width: 200, order: 2}
+      type: link_single
+      target: payments
+    - name: uid
+      admin_ui: {width: 200, order: 3}
+      type: string
+    - name: created_time
+      admin_ui: {width: 200, order: 4}
+      type: datetime
+    - name: updated_time
+      admin_ui: {width: 200, order: 5}
+      type: datetime
+    - name: created_by
+      admin_ui: {width: 200, order: 6}
+      type: string
+    - name: updated_by
+      admin_ui: {width: 200, order: 7}
+      type: string
+    - name: tenant_uid
+      admin_ui: {width: 200, order: 8}
+      type: string
+    - name: payment_date
+      admin_ui: {width: 200, order: 9}
+      type: datetime
+    - name: payroll
+      admin_ui: {width: 200, order: 10}
+      type: link_single
+      target: payrolls
+    title: Performance Incentives
+  signature:
+    client: search
+    server: full
+    columns:
+    - name: name
+      admin_ui: {width: 200, order: 0}
+      type: string
+    - name: file
+      admin_ui: {width: 200, order: 1}
+      type: media
+    title: Signature
+  clients:
+    title: Clients
+    client: none
+    server: full
+    columns:
+    - name: uid
+      admin_ui: {width: 200}
+      type: string
+    - name: client_name
+      admin_ui: {width: 200}
+      type: string
+    - name: is_individual
+      admin_ui: {width: 200}
+      type: bool
+    - name: tenant_uid
+      admin_ui: {width: 200}
+      type: string
+    - name: created_time
+      admin_ui: {width: 200}
+      type: datetime
+    - name: created_by
+      admin_ui: {width: 200}
+      type: string
+    - name: updated_time
+      admin_ui: {width: 200}
+      type: datetime
+    - name: updated_by
+      admin_ui: {width: 200}
+      type: string
+    - name: entity
+      admin_ui: {width: 200}
+      type: link_single
+      target: entities
+    - name: contact
+      admin_ui: {width: 200}
+      type: link_single
+      target: contacts
+  staff_pay_types:
+    title: Staff Pay Types
+    client: none
+    server: full
+    columns:
+    - name: uid
+      admin_ui: {width: 200}
+      type: string
+    - name: name
+      admin_ui: {width: 200}
+      type: string
+    - name: tenant_uid
+      admin_ui: {width: 200}
+      type: string
+    - name: created_time
+      admin_ui: {width: 200}
+      type: datetime
+    - name: created_by
+      admin_ui: {width: 200}
+      type: string
+    - name: updated_time
+      admin_ui: {width: 200}
+      type: datetime
+    - name: updated_by
+      admin_ui: {width: 200}
+      type: string
+  case_statuses:
+    title: Case Statuses
+    client: none
+    server: full
+    columns:
+    - name: uid
+      admin_ui: {width: 200}
+      type: string
+    - name: name
+      admin_ui: {width: 200}
+      type: string
+    - name: tenant_uid
+      admin_ui: {width: 200}
+      type: string
+    - name: created_time
+      admin_ui: {width: 200}
+      type: datetime
+    - name: created_by
+      admin_ui: {width: 200}
+      type: string
+    - name: updated_time
+      admin_ui: {width: 200}
+      type: datetime
+    - name: updated_by
+      admin_ui: {width: 200}
+      type: string
+  entities:
+    title: Entities
+    client: none
+    server: full
+    columns:
+    - name: address
+      admin_ui: {width: 200}
+      type: string
+    - name: phone
+      admin_ui: {width: 200}
+      type: string
+    - name: uid
+      admin_ui: {width: 200}
+      type: string
+    - name: name
+      admin_ui: {width: 200}
+      type: string
+    - name: created_time
+      admin_ui: {width: 200}
+      type: datetime
+    - name: updated_time
+      admin_ui: {width: 200}
+      type: datetime
+    - name: tenant_uid
+      admin_ui: {width: 200}
+      type: string
+    - name: website
+      admin_ui: {width: 200}
+      type: string
+    - name: updated_by
+      admin_ui: {width: 200}
+      type: string
+    - name: created_by
+      admin_ui: {width: 200}
+      type: string
+    - name: entity_type
+      admin_ui: {width: 200}
+      type: link_single
+      target: entity_types
+    - name: primary_contact
+      admin_ui: {width: 200}
+      type: link_single
+      target: contacts
+    - name: email
+      admin_ui: {width: 200}
+      type: string
+  branches:
+    title: Branches
+    client: none
+    server: full
+    columns:
+    - name: address
+      admin_ui: {width: 200}
+      type: string
+    - name: email
+      admin_ui: {width: 200}
+      type: string
+    - name: phone
+      admin_ui: {width: 200}
+      type: string
+    - name: uid
+      admin_ui: {width: 200}
+      type: string
+    - name: name
+      admin_ui: {width: 200}
+      type: string
+    - name: created_time
+      admin_ui: {width: 200}
+      type: datetime
+    - name: updated_time
+      admin_ui: {width: 200}
+      type: datetime
+    - name: tenant_uid
+      admin_ui: {width: 200}
+      type: string
+    - name: updated_by
+      admin_ui: {width: 200}
+      type: string
+    - name: created_by
+      admin_ui: {width: 200}
+      type: string
+  practice_areas:
+    title: Practice Areas
+    client: none
+    server: full
+    columns:
+    - name: name
+      admin_ui: {}
+      type: string
+    - name: updated_by
+      admin_ui: {}
+      type: string
+    - name: tenant_uid
+      admin_ui: {}
+      type: string
+    - name: created_by
+      admin_ui: {}
+      type: string
+    - name: created_time
+      admin_ui: {}
+      type: datetime
+    - name: uid
+      admin_ui: {}
+      type: string
+    - name: updated_time
+      admin_ui: {}
+      type: datetime
+  checks:
+    title: Checks
+    client: none
+    server: full
+    columns:
+    - name: amount
+      admin_ui: {width: 200}
+      type: number
+    - name: date
+      admin_ui: {width: 200}
+      type: date
+    - name: uid
+      admin_ui: {width: 200}
+      type: string
+    - name: created_time
+      admin_ui: {width: 200}
+      type: datetime
+    - name: updated_time
+      admin_ui: {width: 200}
+      type: datetime
+    - name: tenant_uid
+      admin_ui: {width: 200}
+      type: string
+    - name: bank_account
+      admin_ui: {width: 200}
+      type: link_single
+      target: bank_accounts
+    - name: reference
+      admin_ui: {width: 200}
+      type: string
+    - name: payee
+      admin_ui: {width: 200}
+      type: link_single
+      target: contacts
+    - name: updated_by
+      admin_ui: {width: 200}
+      type: string
+    - name: created_by
+      admin_ui: {width: 200}
+      type: string
+    - name: memo
+      admin_ui: {width: 200}
+      type: string
+    - name: check_number
+      admin_ui: {width: 200}
+      type: string
+  time_entries:
+    title: Time Entries
+    client: none
+    server: full
+    columns:
+    - name: description
+      admin_ui: {width: 200}
+      type: string
+    - name: staff
+      admin_ui: {width: 200}
+      type: link_single
+      target: staff
+    - name: date
+      admin_ui: {width: 200}
+      type: date
+    - name: uid
+      admin_ui: {width: 200}
+      type: string
+    - name: created_time
+      admin_ui: {width: 200}
+      type: datetime
+    - name: billable
+      admin_ui: {width: 200}
+      type: bool
+    - name: duration
+      admin_ui: {width: 200}
+      type: number
+    - name: updated_time
+      admin_ui: {width: 200}
+      type: datetime
+    - name: rate
+      admin_ui: {width: 200}
+      type: number
+    - name: tenant_uid
+      admin_ui: {width: 200}
+      type: string
+    - name: rate_type
+      admin_ui: {width: 200}
+      type: string
+    - name: invoice
+      admin_ui: {width: 200}
+      type: link_single
+      target: invoices
+    - name: activity
+      admin_ui: {width: 200}
+      type: link_single
+      target: activities
+    - name: total
+      admin_ui: {width: 200}
+      type: number
+    - name: case
+      admin_ui: {width: 200}
+      type: link_single
+      target: cases
+    - name: updated_by
+      admin_ui: {width: 200}
+      type: string
+    - name: created_by
+      admin_ui: {width: 200}
+      type: string
+    - {name: status, admin_ui: null, type: unresolved}
+  tasks:
+    title: Tasks
+    client: none
+    server: full
+    columns:
+    - name: due_date
+      admin_ui: {width: 200}
+      type: date
+    - name: uid
+      admin_ui: {width: 200}
+      type: string
+    - name: activity
+      admin_ui: {width: 200}
+      type: link_single
+      target: activities
+    - name: created_time
+      admin_ui: {order: 3, width: 262}
+      type: datetime
+    - name: updated_time
+      admin_ui: {width: 200}
+      type: datetime
+    - name: tenant_uid
+      admin_ui: {width: 200}
+      type: string
+    - name: documents
+      admin_ui: {width: 200}
+      type: simpleObject
+    - name: priority
+      admin_ui: {width: 200}
+      type: string
+    - name: case
+      admin_ui: {width: 200}
+      type: link_single
+      target: cases
+    - name: notes
+      admin_ui: {width: 200}
+      type: string
+    - name: updated_by
+      admin_ui: {width: 200}
+      type: string
+    - name: created_by
+      admin_ui: {order: 11, width: 123}
+      type: string
+    - name: assigned_staff
+      admin_ui: {width: 200}
+      type: link_multiple
+      target: staff
+    - name: completed
+      admin_ui: {width: 200}
+      type: bool
   leads:
     title: Leads
     client: none
@@ -1999,31 +1361,53 @@ db_schema:
     - {name: investigator, admin_ui: null, type: unresolved}
     - {name: hourly_retainer, admin_ui: null, type: unresolved}
     - {name: flat_fee_retainer, admin_ui: null, type: unresolved}
-  ledger:
-    title: Ledger
+  documents:
     client: none
     server: full
     columns:
-    - name: updated_by
-      admin_ui: {}
+    - {name: case, admin_ui: null, type: link_single, target: cases}
+    - {name: created_by, admin_ui: null, type: string}
+    - {name: created_time, admin_ui: null, type: datetime}
+    - {name: discovery, admin_ui: null, type: bool}
+    - {name: file, admin_ui: null, type: simpleObject}
+    - {name: folder, admin_ui: null, type: link_single, target: document_folders}
+    - {name: title, type: string}
+    - {name: notes, admin_ui: null, type: string}
+    - {name: reviewed_by, admin_ui: null, type: link_single, target: staff}
+    - {name: tenant_uid, admin_ui: null, type: string}
+    - {name: type, admin_ui: null, type: string}
+    - {name: uid, admin_ui: null, type: string}
+    - {name: updated_by, admin_ui: null, type: string}
+    - {name: updated_time, admin_ui: null, type: datetime}
+    - name: media
+      admin_ui: {width: 200, order: 1}
+      type: media
+    title: Documents
+  entity_types:
+    title: Entity Types
+    client: none
+    server: full
+    columns:
+    - name: uid
+      admin_ui: {width: 200}
+      type: string
+    - name: name
+      admin_ui: {width: 200}
+      type: string
+    - name: tenant_uid
+      admin_ui: {width: 200}
       type: string
     - name: created_time
-      admin_ui: {}
-      type: datetime
-    - name: transaction_time
-      admin_ui: {}
+      admin_ui: {width: 200}
       type: datetime
     - name: created_by
-      admin_ui: {}
+      admin_ui: {width: 200}
       type: string
     - name: updated_time
-      admin_ui: {}
+      admin_ui: {width: 200}
       type: datetime
-    - name: tenant_uid
-      admin_ui: {}
-      type: string
-    - name: uid
-      admin_ui: {}
+    - name: updated_by
+      admin_ui: {width: 200}
       type: string
   payrolls:
     client: none
@@ -2061,69 +1445,139 @@ db_schema:
       admin_ui: {width: 200, order: 9}
       type: number
     title: Payrolls
-  types_of_action:
-    title: Types Of Action
+  case_workflow_items:
     client: none
     server: full
     columns:
-    - name: name
-      admin_ui: {}
-      type: string
     - name: updated_time
       admin_ui: {}
       type: datetime
-    - name: created_time
-      admin_ui: {}
-      type: datetime
-    - name: created_by
-      admin_ui: {}
-      type: string
     - name: updated_by
       admin_ui: {}
       type: string
     - name: uid
       admin_ui: {}
       type: string
-    - name: tenant_uid
-      admin_ui: {}
-      type: string
-  practice_areas:
-    title: Practice Areas
-    client: none
-    server: full
-    columns:
-    - name: name
-      admin_ui: {}
-      type: string
-    - name: updated_by
+    - name: type
       admin_ui: {}
       type: string
     - name: tenant_uid
       admin_ui: {}
       type: string
-    - name: created_by
+    - name: related_task
+      admin_ui: {}
+      type: link_single
+      target: case_workflow_items
+    - name: priority
       admin_ui: {}
       type: string
+    - name: notes
+      admin_ui: {}
+      type: string
+    - name: duration
+      admin_ui: {}
+      type: number
+    - name: due_date_base
+      admin_ui: {}
+      type: string
+    - name: documents
+      admin_ui: {}
+      type: simpleObject
     - name: created_time
       admin_ui: {}
       type: datetime
-    - name: uid
+    - name: created_by
       admin_ui: {}
       type: string
-    - name: updated_time
+    - name: assigned_to
       admin_ui: {}
-      type: datetime
-  entities:
-    title: Entities
+      type: link_multiple
+      target: staff
+    - name: activity
+      admin_ui: {}
+      type: link_single
+      target: activities
+    - name: case_workflow
+      admin_ui: {}
+      type: link_single
+      target: case_workflows
+    title: Case Workflow Items
+  lead_sources:
+    title: Lead Sources
     client: none
     server: full
     columns:
-    - name: address
+    - name: uid
       admin_ui: {width: 200}
       type: string
-    - name: phone
+    - name: name
       admin_ui: {width: 200}
       type: string
+    - name: tenant_uid
+      admin_ui: {width: 200}
+      type: string
+    - name: created_time
+      admin_ui: {width: 200}
+      type: datetime
+    - name: created_by
+      admin_ui: {width: 200}
+      type: string
+    - name: updated_time
+      admin_ui: {width: 200}
+      type: datetime
+    - name: updated_by
+      admin_ui: {width: 200}
+      type: string
+  app_audit_logs:
+    title: App Audit Logs
+    client: none
+    server: full
+    columns:
+    - name: table_name
+      admin_ui: {width: 200}
+      type: string
+    - name: record_uid
+      admin_ui: {width: 200}
+      type: string
+    - name: action_type
+      admin_ui: {width: 200}
+      type: string
+    - name: action_time
+      admin_ui: {width: 200}
+      type: datetime
+    - name: action_by
+      admin_ui: {width: 200}
+      type: string
+    - name: previous_state
+      admin_ui: {width: 200}
+      type: simpleObject
+    - name: new_state
+      admin_ui: {width: 200}
+      type: simpleObject
+    - name: uid
+      admin_ui: {width: 200}
+      type: string
+    - name: tenant_uid
+      admin_ui: {width: 200}
+      type: string
+    - {name: created_by, admin_ui: null, type: string}
+    - {name: created_time, admin_ui: null, type: datetime}
+    - {name: updated_by, admin_ui: null, type: string}
+    - {name: updated_time, admin_ui: null, type: datetime}
+  files:
+    title: Files
+    client: none
+    server: full
+    columns:
+    - name: link_name
+      admin_ui: {width: 200}
+      type: string
+    - name: mime_type
+      admin_ui: {width: 200}
+      type: string
+    - name: content
+      admin_ui: {width: 200}
+      type: media
     - name: uid
       admin_ui: {width: 200}
       type: string
@@ -2139,26 +1593,617 @@ db_schema:
     - name: tenant_uid
       admin_ui: {width: 200}
       type: string
-    - name: website
+    - name: size
+      admin_ui: {width: 200}
+      type: number
+    - name: case_uid
       admin_ui: {width: 200}
       type: string
+    - name: link_uid
+      admin_ui: {width: 200}
+      type: string
+    - name: meta_info
+      admin_ui: {width: 200}
+      type: simpleObject
     - name: updated_by
       admin_ui: {width: 200}
       type: string
     - name: created_by
       admin_ui: {width: 200}
       type: string
-    - name: entity_type
+    - name: path
+      admin_ui: {width: 200}
+      type: string
+    - name: file_version
+      admin_ui: {width: 200}
+      type: string
+    - name: file
+      admin_ui: {width: 200}
+      type: media
+  lead_activities:
+    title: Lead Activities
+    client: none
+    server: full
+    columns:
+    - name: due_time
+      admin_ui: {width: 200}
+      type: datetime
+    - name: uid
+      admin_ui: {width: 200}
+      type: string
+    - name: created_time
+      admin_ui: {width: 200}
+      type: datetime
+    - name: updated_time
+      admin_ui: {width: 200}
+      type: datetime
+    - name: tenant_uid
+      admin_ui: {width: 200}
+      type: string
+    - name: activity
+      admin_ui: {width: 200}
+      type: string
+    - name: status
+      admin_ui: {width: 200}
+      type: string
+    - name: updated_by
+      admin_ui: {width: 200}
+      type: string
+    - name: lead
       admin_ui: {width: 200}
       type: link_single
-      target: entity_types
-    - name: primary_contact
+      target: leads
+    - name: created_by
+      admin_ui: {width: 200}
+      type: string
+  bank_account_types:
+    title: Bank Account Types
+    client: none
+    server: full
+    columns:
+    - name: created_by
+      admin_ui: {}
+      type: string
+    - name: updated_by
+      admin_ui: {}
+      type: string
+    - name: uid
+      admin_ui: {}
+      type: string
+    - name: name
+      admin_ui: {}
+      type: string
+    - name: created_time
+      admin_ui: {}
+      type: datetime
+    - name: updated_time
+      admin_ui: {}
+      type: datetime
+    - name: tenant_uid
+      admin_ui: {}
+      type: string
+  case_requirements:
+    client: none
+    server: full
+    columns:
+    - {name: case, admin_ui: null, type: link_single, target: cases}
+    - {name: completed, admin_ui: null, type: bool}
+    - {name: created_by, admin_ui: null, type: string}
+    - {name: created_time, admin_ui: null, type: datetime}
+    - {name: due_date, admin_ui: null, type: date}
+    - {name: name, admin_ui: null, type: string}
+    - {name: notes, admin_ui: null, type: string}
+    - {name: tenant_uid, admin_ui: null, type: string}
+    - {name: uid, admin_ui: null, type: string}
+    - {name: updated_by, admin_ui: null, type: string}
+    - {name: updated_time, admin_ui: null, type: datetime}
+    - {name: url, admin_ui: null, type: simpleObject}
+    title: Case Requirements
+  cases:
+    title: Cases
+    client: none
+    server: full
+    columns:
+    - name: incident_location
+      admin_ui: {width: 200}
+      type: simpleObject
+    - name: assigned_attorneys
+      admin_ui: {width: 200}
+      type: link_multiple
+      target: staff
+    - name: litigation_rate
+      admin_ui: {width: 200}
+      type: number
+    - name: staff
+      admin_ui: {width: 200}
+      type: link_multiple
+      target: staff
+    - name: incident_date
+      admin_ui: {width: 200}
+      type: date
+    - name: department
       admin_ui: {width: 200}
       type: link_single
       target: contacts
+    - name: investigator_budget
+      admin_ui: {width: 200}
+      type: number
+    - name: court
+      admin_ui: {width: 200}
+      type: link_single
+      target: entities
+    - name: fee_type
+      admin_ui: {width: 200}
+      type: link_single
+      target: fee_types
+    - name: contacts
+      admin_ui: {width: 200}
+      type: link_multiple
+      target: contacts
+    - name: case_name
+      admin_ui: {width: 200}
+      type: string
+    - name: practice_area
+      admin_ui: {width: 200}
+      type: link_single
+      target: practice_areas
+    - name: close_date
+      admin_ui: {width: 200}
+      type: date
+    - name: uid
+      admin_ui: {width: 200}
+      type: string
+    - name: record_seal_expungement
+      admin_ui: {width: 200}
+      type: bool
+    - name: pre_litigation_rate
+      admin_ui: {width: 200}
+      type: number
+    - name: clients
+      admin_ui: {width: 200}
+      type: link_multiple
+      target: clients
+    - name: created_time
+      admin_ui: {width: 200}
+      type: datetime
+    - name: investigator
+      admin_ui: {width: 200}
+      type: bool
+    - name: trial_included
+      admin_ui: {width: 200}
+      type: bool
+    - name: case_stage
+      admin_ui: {width: 200}
+      type: link_single
+      target: case_stages
+    - name: updated_time
+      admin_ui: {width: 200}
+      type: datetime
+    - name: case_description
+      admin_ui: {width: 200}
+      type: string
+    - name: tenant_uid
+      admin_ui: {width: 200}
+      type: string
+    - name: flat_fee_retainer
+      admin_ui: {width: 200}
+      type: number
+    - name: case_status
+      admin_ui: {width: 200}
+      type: link_single
+      target: case_statuses
+    - name: case_number
+      admin_ui: {width: 200}
+      type: string
+    - name: statute_of_limitations
+      admin_ui: {width: 200}
+      type: date
+    - name: hourly_retainer
+      admin_ui: {width: 200}
+      type: number
+    - name: updated_by
+      admin_ui: {width: 200}
+      type: string
+    - name: lead
+      admin_ui: {width: 200}
+      type: link_single
+      target: leads
+    - name: retainer_hours_limit
+      admin_ui: {width: 200}
+      type: number
+    - name: created_by
+      admin_ui: {width: 200}
+      type: string
+    - name: share_case_information_with
+      admin_ui: {width: 200}
+      type: link_single
+      target: contacts
+    - name: cause_of_action
+      admin_ui: {width: 200}
+      type: link_multiple
+      target: causes_of_action
+    - name: next_case_search
+      admin_ui: {width: 200}
+      type: date
+  fee_types:
+    title: Fee Types
+    client: none
+    server: full
+    columns:
+    - name: uid
+      admin_ui: {}
+      type: string
+    - name: created_by
+      admin_ui: {}
+      type: string
+    - name: name
+      admin_ui: {}
+      type: string
+    - name: updated_time
+      admin_ui: {}
+      type: datetime
+    - name: tenant_uid
+      admin_ui: {}
+      type: string
+    - name: created_time
+      admin_ui: {}
+      type: datetime
+    - name: updated_by
+      admin_ui: {}
+      type: string
+  time_off_requests:
+    title: Time Off Requests
+    client: none
+    server: full
+    columns:
+    - {name: date_of_return, admin_ui: null, type: date}
+    - {name: reason, admin_ui: null, type: string}
+    - {name: uid, admin_ui: null, type: string}
+    - {name: staff, admin_ui: null, type: link_single, target: staff}
+    - {name: date_of_leave, admin_ui: null, type: date}
+    - {name: updated_by, admin_ui: null, type: string}
+    - {name: tenant_uid, admin_ui: null, type: string}
+    - {name: created_time, admin_ui: null, type: datetime}
+    - {name: status, admin_ui: null, type: string}
+    - {name: updated_time, admin_ui: null, type: datetime}
+    - {name: notes, admin_ui: null, type: string}
+    - {name: created_by, admin_ui: null, type: string}
+  staff_groups:
+    title: Staff Groups
+    client: none
+    server: full
+    columns:
+    - name: uid
+      admin_ui: {width: 200}
+      type: string
+    - name: name
+      admin_ui: {width: 200}
+      type: string
+    - name: tenant_uid
+      admin_ui: {width: 200}
+      type: string
+    - name: created_time
+      admin_ui: {width: 200}
+      type: datetime
+    - name: created_by
+      admin_ui: {width: 200}
+      type: string
+    - name: updated_time
+      admin_ui: {width: 200}
+      type: datetime
+    - name: updated_by
+      admin_ui: {width: 200}
+      type: string
+  activities:
+    title: Activities
+    client: none
+    server: full
+    columns:
+    - name: name
+      admin_ui: {}
+      type: string
+    - name: uid
+      admin_ui: {}
+      type: string
+    - name: tenant_uid
+      admin_ui: {}
+      type: string
+    - name: created_time
+      admin_ui: {}
+      type: datetime
+    - name: created_by
+      admin_ui: {}
+      type: string
+    - name: updated_by
+      admin_ui: {}
+      type: string
+    - name: updated_time
+      admin_ui: {}
+      type: datetime
+  case_stages:
+    title: Case Stages
+    client: none
+    server: full
+    columns:
+    - name: updated_by
+      admin_ui: {}
+      type: string
+    - name: created_time
+      admin_ui: {}
+      type: datetime
+    - name: updated_time
+      admin_ui: {}
+      type: datetime
+    - name: created_by
+      admin_ui: {}
+      type: string
+    - name: name
+      admin_ui: {}
+      type: string
+    - name: tenant_uid
+      admin_ui: {}
+      type: string
+    - name: uid
+      admin_ui: {}
+      type: string
+  payroll_totals:
+    title: Payroll Totals
+    client: none
+    server: full
+    columns:
+    - name: uid
+      admin_ui: {width: 200}
+      type: string
+    - name: created_by
+      admin_ui: {width: 200}
+      type: string
+    - name: updated_by
+      admin_ui: {width: 200}
+      type: string
+    - name: tenant_uid
+      admin_ui: {width: 200}
+      type: string
+    - name: created_time
+      admin_ui: {width: 200}
+      type: datetime
+    - name: updated_time
+      admin_ui: {width: 200}
+      type: datetime
+    - name: payroll
+      admin_ui: {width: 200}
+      type: link_single
+      target: payrolls
+    - name: total_base_pay
+      admin_ui: {width: 200}
+      type: number
+    - name: total_overtime_pay
+      admin_ui: {width: 200}
+      type: number
+    - name: total_incentive_pay
+      admin_ui: {width: 200}
+      type: number
+    - name: total_reimbursement_pay
+      admin_ui: {width: 200}
+      type: number
+    - name: total_pay
+      admin_ui: {width: 200}
+      type: number
+    - name: staff
+      admin_ui: {width: 200, order: 13}
+      type: link_single
+      target: staff
+  case_updates:
+    title: Case Updates
+    client: none
+    server: full
+    columns:
+    - {name: created_time, admin_ui: null, type: datetime}
+    - {name: client_attendance_required, admin_ui: null, type: bool}
+    - {name: todays_update, admin_ui: null, type: string}
+    - {name: client_update, admin_ui: null, type: bool}
+    - {name: next_activity, admin_ui: null, type: link_single, target: activities}
+    - {name: tenant_uid, admin_ui: null, type: string}
+    - {name: next_date, admin_ui: null, type: datetime}
+    - {name: updated_time, admin_ui: null, type: datetime}
+    - {name: updated_by, admin_ui: null, type: string}
+    - {name: case, admin_ui: null, type: link_single, target: cases}
+    - {name: uid, admin_ui: null, type: string}
+    - {name: created_by, admin_ui: null, type: string}
+  app_error_logs:
+    title: App Error Logs
+    client: none
+    server: full
+    columns:
+    - name: uid
+      admin_ui: {width: 200}
+      type: string
+    - name: component
+      admin_ui: {width: 200}
+      type: string
+    - name: action
+      admin_ui: {width: 200}
+      type: string
+    - name: error_message
+      admin_ui: {width: 200}
+      type: string
+    - name: error_time
+      admin_ui: {width: 200}
+      type: datetime
+    - name: user_uid
+      admin_ui: {width: 200}
+      type: string
+    - {name: created_by, admin_ui: null, type: string}
+    - {name: created_time, admin_ui: null, type: datetime}
+    - {name: tenant_uid, admin_ui: null, type: string}
+    - {name: updated_by, admin_ui: null, type: string}
+    - {name: updated_time, admin_ui: null, type: datetime}
+  bank_accounts:
+    title: Bank Accounts
+    client: none
+    server: full
+    columns:
+    - name: account_type
+      admin_ui: {width: 200}
+      type: link_single
+      target: bank_account_types
+    - name: uid
+      admin_ui: {width: 200}
+      type: string
+    - name: account_balance
+      admin_ui: {width: 200}
+      type: number
+    - name: created_time
+      admin_ui: {width: 200}
+      type: datetime
+    - name: bank_name
+      admin_ui: {width: 200}
+      type: string
+    - name: check_start_number
+      admin_ui: {width: 200}
+      type: string
+    - name: fractional_routing_number
+      admin_ui: {width: 200}
+      type: string
+    - name: updated_time
+      admin_ui: {width: 200}
+      type: datetime
+    - name: tenant_uid
+      admin_ui: {width: 200}
+      type: string
+    - name: routing_number
+      admin_ui: {width: 200}
+      type: string
+    - name: account_number
+      admin_ui: {width: 200}
+      type: string
+    - name: payment_link
+      admin_ui: {width: 200}
+      type: string
+    - name: updated_by
+      admin_ui: {width: 200}
+      type: string
+    - name: created_by
+      admin_ui: {width: 200}
+      type: string
+  user_profiles:
+    title: User Profiles
+    client: none
+    server: full
+    columns:
+    - name: name
+      admin_ui: {}
+      type: string
+    - name: title
+      admin_ui: {}
+      type: string
+    - name: created_by
+      admin_ui: {}
+      type: string
+    - name: updated_time
+      admin_ui: {}
+      type: datetime
+    - name: tenant_uid
+      admin_ui: {}
+      type: string
+    - name: created_time
+      admin_ui: {}
+      type: datetime
+    - name: updated_by
+      admin_ui: {}
+      type: string
+    - name: uid
+      admin_ui: {}
+      type: string
+  tenants:
+    title: Tenants
+    client: none
+    server: full
+    columns:
+    - name: name
+      admin_ui: {width: 200}
+      type: string
+    - name: uid
+      admin_ui: {width: 200}
+      type: string
+    - {name: created_by, admin_ui: null, type: string}
+    - {name: created_time, admin_ui: null, type: datetime}
+    - {name: tenant_uid, admin_ui: null, type: string}
+    - {name: updated_by, admin_ui: null, type: string}
+    - {name: updated_time, admin_ui: null, type: datetime}
+  contact_groups:
+    title: Contact Groups
+    client: none
+    server: full
+    columns:
+    - name: uid
+      admin_ui: {width: 200}
+      type: string
+    - name: name
+      admin_ui: {width: 200}
+      type: string
+    - name: tenant_uid
+      admin_ui: {width: 200}
+      type: string
+    - name: created_time
+      admin_ui: {width: 200}
+      type: datetime
+    - name: created_by
+      admin_ui: {width: 200}
+      type: string
+    - name: updated_time
+      admin_ui: {width: 200}
+      type: datetime
+    - name: updated_by
+      admin_ui: {width: 200}
+      type: string
+  users:
+    title: Users
+    client: none
+    server: full
+    columns:
     - name: email
       admin_ui: {width: 200}
       type: string
+    - name: enabled
+      admin_ui: {width: 200}
+      type: bool
+    - name: timezone
+      admin_ui: {width: 200}
+      type: string
+    - name: last_login
+      admin_ui: {width: 200}
+      type: datetime
+    - name: password_hash
+      admin_ui: {width: 200}
+      type: string
+    - name: n_password_failures
+      admin_ui: {width: 200}
+      type: number
+    - name: confirmed_email
+      admin_ui: {width: 200}
+      type: bool
+    - name: signed_up
+      admin_ui: {width: 200}
+      type: datetime
+    - name: uid
+      admin_ui: {width: 200}
+      type: string
+    - name: tenant_uid
+      admin_ui: {width: 200}
+      type: string
+    - name: email_confirmation_key
+      admin_ui: {}
+      type: string
+    - name: remembered_logins
+      admin_ui: {width: 200}
+      type: simpleObject
+    - name: permissions
+      admin_ui: {width: 200}
+      type: simpleObject
+    - {name: created_by, admin_ui: null, type: string}
+    - {name: created_time, admin_ui: null, type: datetime}
+    - {name: updated_by, admin_ui: null, type: string}
+    - {name: updated_time, admin_ui: null, type: datetime}
 secrets:
   aws_cognito_identity_pool_id:
     value: {DD2SCIDO6VQPF3XB: mcSMJz5Dv3ZMA5080ZSHjPHMC8heLHKZLPMtDvk5hyN1VO7DbKCxL9NSRgf7Uo4BAjUWfgLoN41gJJCBAgnv9BMpfNlN2hd1fiV4Xd1o+wtyIA7qWMAnUhvWBTjmFGm1GuaJFIumuywAGgab2+kYeHDWzTEZ4is3cJR08eSrO50MP99wg0fA7m/Sz2Eh}
